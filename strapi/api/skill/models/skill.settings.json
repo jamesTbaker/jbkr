@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skills",
+  "info": {
+    "name": "Skill",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "SkillName": {
+      "type": "string",
+      "required": true
+    },
+    "PercentageExpertise": {
+      "type": "integer",
+      "required": false,
+      "default": 50,
+      "max": 100,
+      "min": 1
+    },
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "Technical",
+        "Business",
+        "Design"
+      ],
+      "required": true
+    },
+    "Featured": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

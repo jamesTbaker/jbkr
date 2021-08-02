@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "name": "Post",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Subtitle": {
+      "type": "string"
+    },
+    "Tagline": {
+      "type": "richtext"
+    },
+    "Snippet": {
+      "type": "richtext",
+      "required": true
+    },
+    "PublicationDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "Body": {
+      "type": "richtext",
+      "required": true
+    },
+    "Slug": {
+      "type": "string",
+      "required": true
+    },
+    "Authors": {
+      "via": "Posts",
+      "collection": "author",
+      "dominant": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+	"name": "style",
+	"version": "0.0.1",
+	"description": "Miscellaneous functions.",
+	"main": "build/index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"type": "module",
+	"dependencies": {
+		"typescript": "^4.3.5"
+	}
+}
