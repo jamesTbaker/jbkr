@@ -1,0 +1,34 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "utilities",
+			"type": "pwa-node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/modules/utilities/src/_para/debug.ts",
+			"outFiles": [
+				"${workspaceFolder}/**/*.js"
+			],
+			"preLaunchTask": "build-utilities"
+		},
+		{
+			"name": "style",
+			"type": "pwa-node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/modules/style/src/_para/debug.ts",
+			"outFiles": [
+				"${workspaceFolder}/**/*.js"
+			],
+			"preLaunchTask": "build-style"
+		}
+	]
+}

@@ -1,8 +1,5 @@
 # misc
 meta/assets-raw
-__strapi
-__fodder
-__mosFE
 
 # Logs
 logs
@@ -104,9 +101,6 @@ out-tsc
 
 # Serverless directories
 .serverless/
-
-# VSCode
-.vscode
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
