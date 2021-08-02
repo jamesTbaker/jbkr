@@ -1,6 +1,5 @@
 import {
-	ReturnNumberRoundedUpToMultiple,
-	ReturnHSLValuesFromRBGPercents
-} from '../index.js';
+	fetchFigmaStyleObjects,
+} from '../lib/extraction.js';
 
-ReturnNumberRoundedUpToMultiple(61, 8);
+fetchFigmaStyleObjects();

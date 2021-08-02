@@ -1,3 +1,3 @@
-import { ReturnNumberRoundedUpToMultiple } from '../index.js';
-ReturnNumberRoundedUpToMultiple(61, 8);
+import { fetchFigmaStyleObjects, } from '../lib/extraction.js';
+fetchFigmaStyleObjects();
 //# sourceMappingURL=debug.js.map
