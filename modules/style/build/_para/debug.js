@@ -1,3 +1,3 @@
-import { storeFigmaStyleObjects, } from '../lib/extraction.js';
-storeFigmaStyleObjects();
+import { returnStoredFigmaStylePages } from '../lib/extraction.js';
+returnStoredFigmaStylePages();
 //# sourceMappingURL=debug.js.map

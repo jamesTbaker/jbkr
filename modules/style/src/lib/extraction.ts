@@ -48,14 +48,14 @@ export const fetchFigmaStylePages =
 							typeof (figmaStylePages) === 'object' &&
 							Object.keys(figmaStylePages).length > 0
 						) {
-						// then resolve this promise with the result
+							// then resolve this promise with the result
 							resolve(figmaStylePages);
 						} else {
-						// reject this promise with the error
+							// reject this promise with the error
 							reject(new Error('fetchFigmaStylePages: Did not extract object with at least one property'));
 						}
 					} else {
-					// reject this promise with the error
+						// reject this promise with the error
 						reject(new Error('fetchFigmaStylePages: Returned value does not conform to expected architecture'));
 					}
 				})
@@ -94,8 +94,7 @@ export const storeFigmaStylePages = ():Promise<{ error: boolean }> =>
 				reject(error);
 			});
 	});
-/*
-export const returnStoredFigmaStylePages = () =>
+export const returnStoredFigmaStylePages = ():Promise<FigmaPage[]> =>
 	// return a new promise
 	new Promise((resolve, reject) => {
 		fs.readFile(
@@ -105,10 +104,8 @@ export const returnStoredFigmaStylePages = () =>
 				if (error) {
 					reject(error);
 				}
-				resolve({
-					error: false,
-					figmaStyleObjects: JSON.parse(jsonString),
-				});
+				const storedFigmaStylePages:FigmaPage[] = JSON.parse(jsonString);
+				resolve(storedFigmaStylePages);
 			},
 		);
-	}); */
+	});
