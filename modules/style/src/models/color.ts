@@ -19,18 +19,52 @@ export interface BrandColors {
 	Peony: RangeOfColorLevels;
 }
 export interface AccentColors {
-	[background: string]: {
-		[rank: string]: {
+	OnDark: {
+		Primary: {
+			[hue: string]: HSLAColor;
+		}
+		Secondary: {
+			[hue: string]: HSLAColor;
+		}
+		Tertiary: {
+			[hue: string]: HSLAColor;
+		}
+		Quarternary: {
+			[hue: string]: HSLAColor;
+		}
+	}
+	OnMedium: {
+		Primary: {
+			[hue: string]: HSLAColor;
+		}
+		Tertiary: {
+			[hue: string]: HSLAColor;
+		}
+		Quarternary: {
+			[hue: string]: HSLAColor;
+		}
+	}
+	OnLight: {
+		Primary: {
+			[hue: string]: HSLAColor;
+		}
+		Secondary: {
+			[hue: string]: HSLAColor;
+		}
+		Quarternary: {
 			[hue: string]: HSLAColor;
 		}
 	}
 }
 export interface StateColors {
-	[tone: string]: RangeOfColorLevels;
+	Positive: RangeOfColorLevels;
+	Warning: RangeOfColorLevels;
+	Negative: RangeOfColorLevels;
+	Neutral: RangeOfColorLevels;
 }
 export interface LightColors {
-	'On-Light': RangeOfColorLevels;
-	'On-Dark': RangeOfColorLevels;
+	OnLight: RangeOfColorLevels;
+	OnDark: RangeOfColorLevels;
 }
 export interface ColorTokenObject {
 	Neutral: NeutralColors;
