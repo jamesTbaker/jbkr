@@ -1,3 +1,3 @@
-import { fetchFigmaStyleObjects, } from '../lib/extraction.js';
-fetchFigmaStyleObjects();
+import { storeFigmaStyleObjects, } from '../lib/extraction.js';
+storeFigmaStyleObjects();
 //# sourceMappingURL=debug.js.map

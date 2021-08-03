@@ -1,5 +1,6 @@
 import {
-	fetchFigmaStyleObjects,
+	fetchFigmaStylePages,
+	storeFigmaStyleObjects,
 } from '../lib/extraction.js';
 
-fetchFigmaStyleObjects();
+storeFigmaStyleObjects();

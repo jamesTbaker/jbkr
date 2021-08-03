@@ -5,7 +5,7 @@
  */
 export const styleDefinition = {
     storage: {
-        path: './libs/style/src/lib/storage/',
+        path: './modules/style/src/store/',
         names: {
             figma: 'figmaObjects.json',
             color: 'color.js',
