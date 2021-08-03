@@ -1,7 +1,8 @@
 /**
- * @name Style Definition
- * @description Specify some styles in full, and specify settings for
+ * Specify some styles in full, and specify settings for
  * generating other styles.
+ *
+ * @internal
  */
 export const styleDefinition = {
     storage: {

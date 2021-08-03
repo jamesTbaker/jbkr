@@ -1,6 +1,7 @@
 /**
- * @name Styles Extraction
- * @description Extract styles data from Figma and store it locally.
+ * Extract styles data from Figma and store it locally.
+ *
+ * @internal
  */
 import axios from 'axios';
 import { config as dotenvConfig } from 'dotenv';
@@ -8,13 +9,24 @@ import * as fs from 'fs';
 import { styleDefinition } from './definition.js';
 // get environment vars
 dotenvConfig();
+/**
+ * Get the specified file from the Figma API. Extract and return only
+ * the pages specified in {@link definition}.
+ *
+ * @remarks
+ * Figma file ID and api access token are environment variables.
+ *
+ * @returns An array of Figma page objects.
+ *
+ * @internal
+ */
 export const fetchFigmaStylePages = () => 
 // return a new promise
 new Promise((resolve, reject) => {
-    // get a promise to retrieve the Figma file
+    // get a promise to retrieve file from the Figma API
     axios({
         method: 'get',
-        url: 'https://api.figma.com/v1/files/OHRLg3ooz9FCKPjF1xpShW',
+        url: `https://api.figma.com/v1/files/${process.env.figmaFileID}`,
         timeout: 10000,
         headers: {
             'X-Figma-Token': process.env.figmaAccessToken,

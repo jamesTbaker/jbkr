@@ -11,7 +11,8 @@
 		"plugin:promise/recommended",
 		"airbnb-typescript",
 		"next",
-		"next/core-web-vitals"
+		"next/core-web-vitals",
+		"plugin:@typescript-eslint/recommended"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -24,7 +25,8 @@
 	"plugins": [
 		"react",
 		"@typescript-eslint",
-		"promise"
+		"promise",
+		"eslint-plugin-tsdoc"
 	],
 	"settings": {
 		"import/extensions": [
@@ -64,6 +66,7 @@
 		"no-trailing-spaces": "off",
 		"implicit-arrow-linebreak": 0,
 		"import/prefer-default-export": "off",
-		"promise/always-return": "off"
+		"promise/always-return": "off",
+		"tsdoc/syntax": "warn"
 	}
 }

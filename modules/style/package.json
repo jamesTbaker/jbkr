@@ -10,9 +10,8 @@
 		"@types/node": "^16.4.10",
 		"axios": "^0.21.1",
 		"dotenv": "^10.0.0",
-		"models": "file:../models/build/index.js",
 		"typescript": "^4.3.5",
-		"utilities": "file:../utilities/build/index.js"
+		"utilities": "file:../utilities"
 	},
 	"devDependencies": {}
 }

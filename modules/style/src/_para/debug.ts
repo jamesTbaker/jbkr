@@ -4,4 +4,4 @@ import {
 	returnStoredFigmaStylePages
 } from '../lib/extraction.js';
 
-returnStoredFigmaStylePages();
+fetchFigmaStylePages();
