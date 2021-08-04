@@ -69,7 +69,7 @@ export interface LightColors {
 export interface ColorTokenObject {
 	Neutral: NeutralColors;
 	Brand: BrandColors;
-	Accents: AccentColors;
+	Accent: AccentColors;
 	State: StateColors;
 	Light: LightColors;
 }

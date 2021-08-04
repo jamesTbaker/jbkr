@@ -1,3 +1,3 @@
-import { fetchFigmaStylePages } from '../lib/extraction.js';
-fetchFigmaStylePages();
+import { returnJBKRColorsFromStoredObjects } from '../lib/calculation.js';
+returnJBKRColorsFromStoredObjects();
 //# sourceMappingURL=debug.js.map
