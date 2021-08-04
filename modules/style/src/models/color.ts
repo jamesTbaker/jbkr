@@ -66,6 +66,15 @@ export interface LightColors {
 	OnLight: RangeOfColorLevels;
 	OnDark: RangeOfColorLevels;
 }
+export interface JBKRColorSet {
+	Neutral: NeutralColors;
+	Brand: BrandColors;
+	Accent: AccentColors;
+	State: StateColors;
+}
+export interface LightColorSet {
+	Light: LightColors;
+}
 export interface ColorTokenObject {
 	Neutral: NeutralColors;
 	Brand: BrandColors;
