@@ -1,3 +1,6 @@
-import { ReturnNumberRoundedUpToMultiple } from '../index.js';
-ReturnNumberRoundedUpToMultiple(61, 8);
+import { returnNumberRoundedUpToMultiple, } from '../index.js';
+returnNumberRoundedUpToMultiple({
+    number: 61,
+    multiple: 8
+});
 //# sourceMappingURL=debug.js.map

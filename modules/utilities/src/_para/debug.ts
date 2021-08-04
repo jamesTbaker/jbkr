@@ -1,6 +1,10 @@
 import {
-	ReturnNumberRoundedUpToMultiple,
-	ReturnHSLValuesFromRBGPercents
+	returnNumberRoundedUpToMultiple,
+	returnHSLValuesFromRBGPercents,
+	returnCopyOfObjectWithStringKeys,
 } from '../index.js';
 
-ReturnNumberRoundedUpToMultiple(61, 8);
+returnNumberRoundedUpToMultiple({
+	number: 61,
+	multiple: 8
+});

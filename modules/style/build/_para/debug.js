@@ -1,3 +1,3 @@
-import { returnColorSystem } from '../lib/calculation.js';
-returnColorSystem('jbkr');
+import { buildColorTokens, } from '../lib/calculation.js';
+buildColorTokens();
 //# sourceMappingURL=debug.js.map

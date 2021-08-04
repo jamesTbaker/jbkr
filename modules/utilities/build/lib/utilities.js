@@ -1,5 +1,5 @@
-export const ReturnNumberRoundedUpToMultiple = (number, multiple) => Math.ceil(number / multiple) * multiple;
-export const ReturnHSLValuesFromRBGPercents = ({ r, g, b }) => {
+export const returnNumberRoundedUpToMultiple = ({ number, multiple }) => Math.ceil(number / multiple) * multiple;
+export const returnHSLValuesFromRBGPercents = ({ r, g, b }) => {
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
     let h;
@@ -31,5 +31,30 @@ export const ReturnHSLValuesFromRBGPercents = ({ r, g, b }) => {
         s: Math.round(s * 100),
         l: Math.round(l * 100),
     };
+};
+export const returnCopyOfObjectWithStringKeys = ({ incoming }) => {
+    // try...
+    try {
+        // ...to get a parsed object
+        const result = JSON.parse(JSON.stringify(incoming));
+        // Parsing a boolean or a number will not throw an error, so we
+        // must check that type is object. However, null is also of type
+        // object, so we must also test for truthiness.
+        // if type is object and value is truthy
+        if (result && typeof result === 'object') {
+            // return it
+            return result;
+            // if either type is not object or value is not truthy
+        }
+        else {
+            // return custom error
+            return new Error('returnCopyOfObjectWithStringKeys - result not successful');
+        }
+        // if attempt to get an object resulted in an error
+    }
+    catch (error) {
+        // return the error
+        return error;
+    }
 };
 //# sourceMappingURL=utilities.js.map

@@ -1,19 +1,25 @@
+/**
+ * Extract styles data from Figma and store it locally.
+ *
+ * @internal
+ */
+import * as fs from 'fs';
 import { ReturnHSLValuesFromRBGPercents } from 'utilities';
 import { styleDefinition } from './definition.js';
 import { returnStoredFigmaStylePages } from './extraction.js';
 /**
- * Get a set of colors from the stored Figma pages. Color set will either
- * be the jbkr colors or the colors representing light shining on surfaces.
+ * Get all colors from the stored Figma pages. This includes the colors
+ * assigned to the jbkr brand and the colors representing
+ * light shining on surfaces.
  *
  * @remarks
  * Depends on the page titles specified in [[`definition`]].
  *
- * @param colorSet - the color set to return
  * @returns An array of Figma page objects, or an `Error`.
  *
  * @internal
  */
-export const returnColorSystem = (colorSet) => 
+export const returnColors = () => 
 // return a new, main promise
 new Promise((resolve, reject) => {
     // get a promise to get the figma style pages
@@ -22,7 +28,7 @@ new Promise((resolve, reject) => {
         .then((figmaPages) => {
         // set up containers; colors is what we'll return,
         // and it will become either jbkrColors or lightColors
-        const jbkrColors = {
+        const allColors = {
             Neutral: {
                 Finch: {},
                 Sky: {},
@@ -58,24 +64,28 @@ new Promise((resolve, reject) => {
                 Negative: {},
                 Neutral: {},
             },
-        };
-        const lightColors = {
             Light: {
                 OnLight: {},
                 OnDark: {},
             },
         };
-        // extract the relevant Figma page
-        const relevantPageTitle = colorSet === 'jbkr' ?
-            styleDefinition.figma.pageTitles.colorJBKR :
-            styleDefinition.figma.pageTitles.light;
-        const relevantFigmaPage = figmaPages
-            .filter((figmaPage) => figmaPage.name === relevantPageTitle);
+        // extract the relevant Figma pages
+        const jbkrColorsFigmaPage = figmaPages
+            .filter((figmaPage) => figmaPage.name === styleDefinition
+            .figma.pageTitles.colorJBKR);
+        const lightColorsFigmaPage = figmaPages
+            .filter((figmaPage) => figmaPage.name === styleDefinition
+            .figma.pageTitles.light);
         // extract the StyleObjects frame in the page
-        const styleObjectsFrame = relevantFigmaPage[0].children[0]
+        const jbkrStyleObjectsFrame = jbkrColorsFigmaPage[0].children[0]
+            .children.filter((child) => child.name === 'StyleObjects');
+        const lightStyleObjectsFrame = lightColorsFigmaPage[0].children[0]
             .children.filter((child) => child.name === 'StyleObjects');
         // extract the style objects from the frame
-        const styleObjects = styleObjectsFrame[0].children;
+        const styleObjects = [
+            ...jbkrStyleObjectsFrame[0].children,
+            ...lightStyleObjectsFrame[0].children,
+        ];
         // for each style object
         styleObjects.forEach((styleObject) => {
             // get array of properties describing this style
@@ -95,92 +105,92 @@ new Promise((resolve, reject) => {
                 l: thisColorHSL.l,
                 a: thisColorRGBA.a,
             };
-            if (colorSet === 'jbkr') {
+            if (propertiesArray[2] === 'jbkr') {
                 if (propertiesArray[3] === 'Neutral') {
                     if (propertiesArray[4] === 'Finch') {
-                        jbkrColors.Neutral.Finch[propertiesArray[6]] =
+                        allColors.Neutral.Finch[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Sky') {
-                        jbkrColors.Neutral.Sky[propertiesArray[6]] =
+                        allColors.Neutral.Sky[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Spruce') {
-                        jbkrColors.Neutral.Spruce[propertiesArray[6]] =
+                        allColors.Neutral.Spruce[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Seafoam') {
-                        jbkrColors.Neutral.Seafoam[propertiesArray[6]] =
+                        allColors.Neutral.Seafoam[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                 }
                 if (propertiesArray[3] === 'Brand') {
                     if (propertiesArray[4] === 'Finch') {
-                        jbkrColors.Brand.Finch[propertiesArray[6]] =
+                        allColors.Brand.Finch[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Spruce') {
-                        jbkrColors.Brand.Spruce[propertiesArray[6]] =
+                        allColors.Brand.Spruce[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Peony') {
-                        jbkrColors.Brand.Peony[propertiesArray[6]] =
+                        allColors.Brand.Peony[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                 }
                 if (propertiesArray[3] === 'Accent') {
                     if (propertiesArray[4] === 'OnDark') {
                         if (propertiesArray[5] === 'Primary') {
-                            jbkrColors.Accent.OnDark
+                            allColors.Accent.OnDark
                                 .Primary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Secondary') {
-                            jbkrColors.Accent.OnDark
+                            allColors.Accent.OnDark
                                 .Secondary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Tertiary') {
-                            jbkrColors.Accent.OnDark
+                            allColors.Accent.OnDark
                                 .Tertiary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Quarternary') {
-                            jbkrColors.Accent.OnDark
+                            allColors.Accent.OnDark
                                 .Quarternary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                     }
                     if (propertiesArray[4] === 'OnMedium') {
                         if (propertiesArray[5] === 'Primary') {
-                            jbkrColors.Accent.OnMedium
+                            allColors.Accent.OnMedium
                                 .Primary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Tertiary') {
-                            jbkrColors.Accent.OnMedium
+                            allColors.Accent.OnMedium
                                 .Tertiary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Quarternary') {
-                            jbkrColors.Accent.OnMedium
+                            allColors.Accent.OnMedium
                                 .Quarternary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                     }
                     if (propertiesArray[4] === 'OnLight') {
                         if (propertiesArray[5] === 'Primary') {
-                            jbkrColors.Accent.OnLight
+                            allColors.Accent.OnLight
                                 .Primary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Secondary') {
-                            jbkrColors.Accent.OnLight
+                            allColors.Accent.OnLight
                                 .Secondary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
                         if (propertiesArray[5] === 'Quarternary') {
-                            jbkrColors.Accent.OnLight
+                            allColors.Accent.OnLight
                                 .Quarternary[propertiesArray[6]] =
                                 thisColorHSLA;
                         }
@@ -188,43 +198,62 @@ new Promise((resolve, reject) => {
                 }
                 if (propertiesArray[3] === 'State') {
                     if (propertiesArray[4] === 'Positive') {
-                        jbkrColors.State.Positive[propertiesArray[6]] =
+                        allColors.State.Positive[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Warning') {
-                        jbkrColors.State.Warning[propertiesArray[6]] =
+                        allColors.State.Warning[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Negative') {
-                        jbkrColors.State.Negative[propertiesArray[6]] =
+                        allColors.State.Negative[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                     if (propertiesArray[4] === 'Neutral') {
-                        jbkrColors.State.Neutral[propertiesArray[6]] =
+                        allColors.State.Neutral[propertiesArray[6]] =
                             thisColorHSLA;
                     }
                 }
             }
-            if (colorSet === 'light') {
+            if (propertiesArray[2] === 'Light') {
                 if (propertiesArray[3] === 'OnLight') {
-                    lightColors.Light.OnLight[propertiesArray[6]] =
+                    allColors.Light.OnLight[propertiesArray[6]] =
                         thisColorHSLA;
                 }
                 if (propertiesArray[3] === 'OnDark') {
-                    lightColors.Light.OnDark[propertiesArray[6]] =
+                    allColors.Light.OnDark[propertiesArray[6]] =
                         thisColorHSLA;
                 }
             }
         });
-        // create the value to return and set it to one
-        // color set or the other
-        const colors = colorSet === 'jbkr' ? jbkrColors : lightColors;
         // then resolve the main promise with the return value
-        resolve(colors);
+        resolve(allColors);
     })
         // if the  promise is rejected with an error
         .catch((error) => {
         // reject the main promise with the error
+        reject(error);
+    });
+});
+export const buildColorTokens = () => 
+// return a new, main promise
+new Promise((resolve, reject) => {
+    // get a promise to both sets of colors
+    returnColors()
+        // if the promise is resolved with a result
+        .then((colorsResults) => {
+        // extract and format the objects data for convenience
+        const colorsString = `export const color = ${JSON.stringify(colorsResults)};`;
+        // write data to file
+        fs.writeFileSync(`${styleDefinition.storage.path}${styleDefinition.storage.names.color}`, colorsString);
+        // then resolve this promise with the result
+        resolve({
+            error: false,
+        });
+    })
+        // if the promise is rejected with an error
+        .catch((error) => {
+        // reject this promise with the error
         reject(error);
     });
 });

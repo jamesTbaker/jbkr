@@ -4,9 +4,8 @@ import {
 	returnStoredFigmaStylePages
 } from '../lib/extraction.js';
 import {
-	returnColorSystem
+	returnColors,
+	buildColorTokens,
 } from '../lib/calculation.js';
 
-
-
-returnColorSystem('jbkr');
+buildColorTokens();

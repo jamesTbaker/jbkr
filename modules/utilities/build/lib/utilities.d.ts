@@ -1,5 +1,8 @@
-export declare const ReturnNumberRoundedUpToMultiple: (number: number, multiple: number) => number;
-export declare const ReturnHSLValuesFromRBGPercents: ({ r, g, b }: {
+export declare const returnNumberRoundedUpToMultiple: ({ number, multiple }: {
+    number: number;
+    multiple: number;
+}) => number;
+export declare const returnHSLValuesFromRBGPercents: ({ r, g, b }: {
     r: number;
     g: number;
     b: number;
@@ -7,4 +10,11 @@ export declare const ReturnHSLValuesFromRBGPercents: ({ r, g, b }: {
     h: number;
     s: number;
     l: number;
+};
+export declare const returnCopyOfObjectWithStringKeys: ({ incoming }: {
+    incoming: {
+        [key: string]: any;
+    };
+}) => {
+    [key: string]: any;
 };
