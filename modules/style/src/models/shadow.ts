@@ -6,3 +6,7 @@ export interface Shadow {
 	'blur-radius': number;
 	color: HSLAColor;
 };
+export type ShadowSet = Shadow[];
+export interface ShadowTokenObject {
+	[key: string]: ShadowSet;
+};

@@ -16,7 +16,7 @@ import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
 	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
 	TypeStyleToken
 } from '../models/type';
-import { Shadow } from '../models/shadow';
+import { Shadow, ShadowSet, ShadowTokenObject } from '../models/shadow';
 // lib predecessors
 import { styleDefinition } from './definition.js';
 import { returnStoredFigmaStylePages } from './extraction.js';
@@ -43,9 +43,9 @@ import * as fs from 'fs';
 export const returnColors = ():Promise<ColorTokenObject> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
-		// get a promise to get the figma style pages
+		// get a promise to retrieve the figma style pages
 		returnStoredFigmaStylePages()
-			// if the  promise is resolved with a result
+			// if the retrieval promise is resolved with a result
 			.then((figmaPages:FigmaPage[]) => {
 				// set up container
 				const allColors:ColorTokenObject = {
@@ -264,7 +264,7 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 				// then resolve the main promise with the return value
 				resolve(allColors);
 			})
-			// if the  promise is rejected with an error
+			// if the retrieval promise is rejected with an error
 			.catch((error) => {
 				// reject the main promise with the error
 				reject(error);
@@ -492,17 +492,15 @@ export const buildTypeTokens = ():Promise<{ error: boolean }> =>
 			);
 			resolve({ error: false });
 	});
-export const returnShadowStyles = (): =>
+export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
-		// get a promise to get the figma style pages
+		// get a promise to retrieve the figma style pages
 		returnStoredFigmaStylePages()
-			// if the  promise is resolved with a result
+			// if the retrieval promise is resolved with a result
 			.then((figmaPages:FigmaPage[]) => {
 				// set up container
-				const shadows:{
-					[key: string]: Shadow[];
-				} = {};
+				const shadows:ShadowTokenObject = {};
 				// extract the relevant Figma page
 				const shadowsFigmaPage = figmaPages
 					.filter(
@@ -511,20 +509,44 @@ export const returnShadowStyles = (): =>
 								.figma.pageTitles.shadow,
 					);
 				// extract the StyleObjects frame in the page
-				const jbkrStyleObjectsFrame =
-					jbkrColorsFigmaPage[0].children[0]
+				const shadowsStyleObjectsFrame =
+					shadowsFigmaPage[0].children[0]
 						.children.filter(
 							(child) => child.name === 'StyleObjects',
 						);
-
-
-
-
-
-				// then resolve the main promise with the result
-				resolve(result);
+				// extract the style objects from the frame
+				const styleObjects = shadowsStyleObjectsFrame[0].children;
+				// for each style object
+				styleObjects.forEach((styleObject) => {
+					const thisShadowSet:ShadowSet = [];
+					styleObject.effects.forEach((effect) => {
+						if (effect.type === 'DROP_SHADOW') {
+							const thisColorHSL = returnHSLValuesFromRBGPercents({
+									r: effect.color.r,
+									g: effect.color.g,
+									b: effect.color.b,
+								});
+							const thisColorHSLA = {
+								h: thisColorHSL.h,
+								s: thisColorHSL.s,
+								l: thisColorHSL.l,
+								a: effect.color.a,
+							};
+							thisShadowSet.push({
+								'offset-x': effect.offset.x / styleDefinition.gridBase,
+								'offset-y': effect.offset.y / styleDefinition.gridBase,
+								'blur-radius': effect.radius / styleDefinition.gridBase,
+								color: thisColorHSLA,
+							});
+						}
+					});
+					shadows[styleObject.name.split(' / ')[1]] =
+						thisShadowSet;
+				});
+				// then resolve the main promise with the populated container
+				resolve(shadows);
 			})
-			// if the  promise is rejected with an error
+			// if the retrieval promise is rejected with an error
 			.catch((error) => {
 				// reject the main promise with the error
 				reject(error);
