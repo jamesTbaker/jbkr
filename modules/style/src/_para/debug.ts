@@ -6,6 +6,13 @@ import {
 import {
 	returnColors,
 	buildColorTokens,
+	returnBaseTypeSize,
+	returnScaledTypeSize,
+	returnTypeWeight,
+	returnTypeLineHeight,
+	returnTypeSpacing,
+	returnTypeStyle,
+	buildTypeTokens,
 } from '../lib/calculation.js';
 
-buildColorTokens();
+buildTypeTokens();

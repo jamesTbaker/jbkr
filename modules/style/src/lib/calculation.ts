@@ -3,24 +3,30 @@
  *
  * @internal
  */
-import * as fs from 'fs';
-import {
-	returnHSLValuesFromRBGPercents,
-	returnNumberRoundedUpToMultiple,
-	returnCopyOfObjectWithStringKeys,
-} from 'utilities';
-import { styleDefinition } from './definition.js';
-import { returnStoredFigmaStylePages } from './extraction.js';
-import { DeviceWidthToken, DeviceWidthTokens }
-	from '../models/device';
-import { TypeSizeToken, TypeSizeValue, TypeWeightToken, TypeWeightValue, TypeUsageToken, TypeSlantToken, TypeStyleToken }
-	from '../models/type';
+// models
 import { FigmaDocument, FigmaPage, FigmaStyleObject }
 	from '../models/figma';
 import {
 	HSLAColor, RangeOfColorLevels, NeutralColors, BrandColors,
 	AccentColors, StateColors, LightColors, JBKRColorSet, LightColorSet, ColorTokenObject
 } from '../models/color';
+import { DeviceWidthToken, DeviceWidthTokens }
+	from '../models/device';
+import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
+	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
+	TypeStyleToken
+} from '../models/type';
+import { Shadow } from '../models/shadow';
+// lib predecessors
+import { styleDefinition } from './definition.js';
+import { returnStoredFigmaStylePages } from './extraction.js';
+// modules
+import {
+	returnHSLValuesFromRBGPercents,
+	returnNumberRoundedUpToMultiple,
+	returnCopyOfObjectWithStringKeys,
+} from 'utilities';
+import * as fs from 'fs';
 
 /**
  * Get all colors from the stored Figma pages. This includes the colors
@@ -41,8 +47,7 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 		returnStoredFigmaStylePages()
 			// if the  promise is resolved with a result
 			.then((figmaPages:FigmaPage[]) => {
-				// set up containers; colors is what we'll return,
-				// and it will become either jbkrColors or lightColors
+				// set up container
 				const allColors:ColorTokenObject = {
 						Neutral: {
 							Finch: {},
@@ -377,10 +382,9 @@ export const returnTypeWeight = ({
 	}
 	return scaledWeight;
 };
-export const returnTypeLineHeight = ({ size, usage }:{ size: TypeSizeValue, usage: TypeUsageToken }):number => {
-	// const usageClone = usage === 'display' ? 'display' : 'body';
+export const returnTypeLineHeight = ({ size, lineHeight }:{ size: TypeSizeValue, lineHeight: TypeLineHeightToken }):number => {
 	const scaleMultipliersThisUse = styleDefinition.type.lineHeight
-		.scalingMultipliers[usage];
+		.scalingMultipliers[lineHeight];
 	const naturalHeight = size > scaleMultipliersThisUse.highestLowSize ?
 		size * scaleMultipliersThisUse.high :
 		size * scaleMultipliersThisUse.low;
@@ -401,7 +405,7 @@ export const returnTypeStyle = ({
 		size,
 		weight,
 		slant,
-		usage,
+		lineHeight,
 	},
 }:{
 	deviceWidth: DeviceWidthToken,
@@ -409,7 +413,7 @@ export const returnTypeStyle = ({
 		size: TypeSizeToken,
 		weight: TypeWeightToken,
 		slant: TypeSlantToken,
-		usage: TypeUsageToken,
+		lineHeight: TypeLineHeightToken,
 	},
 }):TypeStyleToken => {
 		const baseTypeSize = returnBaseTypeSize({
@@ -432,7 +436,7 @@ export const returnTypeStyle = ({
 			height: returnTypeLineHeight({
 				size: scaledTypeSize *
 					styleDefinition.gridBase,
-				usage,
+				lineHeight,
 			}),
 			spacing: returnTypeSpacing({
 				size: scaledTypeSize * styleDefinition.gridBase,
@@ -466,13 +470,13 @@ export const buildTypeTokens = ():Promise<{ error: boolean }> =>
 											typeStyles[deviceWidthToken][
 												typeSizeToken][typeWeightToken][
 												typeSlantToken][typeLineHeightoken] =
-												module.exports.ReturnTypeStyle({
-													deviceWidth: deviceWidthToken,
+												returnTypeStyle({
+													deviceWidth: deviceWidthToken as DeviceWidthToken,
 													type: {
-														size: typeSizeToken,
-														weight: typeWeightToken,
-														slant: typeSlantToken,
-														usage: typeLineHeightoken,
+														size: typeSizeToken as TypeSizeToken,
+														weight: typeWeightToken as TypeWeightToken,
+														slant: typeSlantToken as TypeSlantToken,
+														lineHeight: typeLineHeightoken as TypeLineHeightToken,
 													},
 												});
 										});
@@ -480,11 +484,49 @@ export const buildTypeTokens = ():Promise<{ error: boolean }> =>
 						});
 				});
 			});
-			const typeStylesString = JSON.stringify(typeStyles);
+			const typeStylesString = `export const type = ${JSON.stringify(typeStyles)};`;
 			// write data to file
 			fs.writeFileSync(
 				`${styleDefinition.storage.path}${styleDefinition.storage.names.type}`,
 				typeStylesString,
 			);
 			resolve({ error: false });
+	});
+export const returnShadowStyles = (): =>
+	// return a new, main promise
+	new Promise((resolve, reject) => {
+		// get a promise to get the figma style pages
+		returnStoredFigmaStylePages()
+			// if the  promise is resolved with a result
+			.then((figmaPages:FigmaPage[]) => {
+				// set up container
+				const shadows:{
+					[key: string]: Shadow[];
+				} = {};
+				// extract the relevant Figma page
+				const shadowsFigmaPage = figmaPages
+					.filter(
+						(figmaPage) =>
+							figmaPage.name === styleDefinition
+								.figma.pageTitles.shadow,
+					);
+				// extract the StyleObjects frame in the page
+				const jbkrStyleObjectsFrame =
+					jbkrColorsFigmaPage[0].children[0]
+						.children.filter(
+							(child) => child.name === 'StyleObjects',
+						);
+
+
+
+
+
+				// then resolve the main promise with the result
+				resolve(result);
+			})
+			// if the  promise is rejected with an error
+			.catch((error) => {
+				// reject the main promise with the error
+				reject(error);
+			});
 	});

@@ -1,3 +1,3 @@
-import { buildColorTokens, } from '../lib/calculation.js';
-buildColorTokens();
+import { buildTypeTokens, } from '../lib/calculation.js';
+buildTypeTokens();
 //# sourceMappingURL=debug.js.map

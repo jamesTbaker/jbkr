@@ -4,7 +4,7 @@
  * @internal
  */
 import * as fs from 'fs';
-import { ReturnHSLValuesFromRBGPercents } from 'utilities';
+import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, } from 'utilities';
 import { styleDefinition } from './definition.js';
 import { returnStoredFigmaStylePages } from './extraction.js';
 /**
@@ -93,7 +93,7 @@ new Promise((resolve, reject) => {
             // get this style object's fill color as RGBA
             const thisColorRGBA = styleObject.fills[0].color;
             // get HSL equivalent to RGB portion of RGBA
-            const thisColorHSL = ReturnHSLValuesFromRBGPercents({
+            const thisColorHSL = returnHSLValuesFromRBGPercents({
                 r: thisColorRGBA.r,
                 g: thisColorRGBA.g,
                 b: thisColorRGBA.b,
@@ -256,5 +256,139 @@ new Promise((resolve, reject) => {
         // reject this promise with the error
         reject(error);
     });
+});
+export const returnBaseTypeSize = ({ deviceWidth }) => {
+    return styleDefinition.gridBase * styleDefinition.type.size
+        .baseMultipliersByDeviceWidth[deviceWidth];
+};
+export const returnScaledTypeSize = ({ deviceWidth, baseTypeSize, scalingSteps, }) => {
+    const scaleMultipliersThisDeviceWidth = styleDefinition.type.size
+        .scalingMultipliersByDeviceWidth[deviceWidth];
+    const scaleMultiplierThisTypeSizeThisDeviceWidth = scalingSteps < 0
+        ? scaleMultipliersThisDeviceWidth.low
+        : scaleMultipliersThisDeviceWidth.high;
+    let scaledTypeSize = baseTypeSize;
+    if (scalingSteps > 0) {
+        for (let scalingStepsPerformed = 0; scalingStepsPerformed < scalingSteps; scalingStepsPerformed += 1) {
+            scaledTypeSize *= scaleMultiplierThisTypeSizeThisDeviceWidth;
+        }
+        scaledTypeSize = Math.ceil(scaledTypeSize);
+    }
+    if (scalingSteps < 0) {
+        for (let scalingStepsPerformed = 0; scalingStepsPerformed > scalingSteps; scalingStepsPerformed -= 1) {
+            scaledTypeSize *= (1 / scaleMultiplierThisTypeSizeThisDeviceWidth);
+        }
+        scaledTypeSize = Math.floor(scaledTypeSize);
+    }
+    return scaledTypeSize / styleDefinition.gridBase;
+};
+export const returnTypeWeight = ({ baseTypeSize, scalingSteps, weight, }) => {
+    const baseMultiplierThisWeight = styleDefinition.type.weight
+        .baseMultipliersByWeight[weight];
+    const scaleMultipliersThisWeight = styleDefinition.type.weight
+        .scalingMultipliersByWeight[weight];
+    const baseWeight = baseTypeSize * baseMultiplierThisWeight;
+    const minimumWeight = baseWeight - scaleMultipliersThisWeight.maxSubtraction;
+    const maximumWeight = baseWeight + scaleMultipliersThisWeight.maxAddition;
+    let naturallyScaledWeight = baseWeight;
+    if (scalingSteps > 0) {
+        for (let scalingStepsPerformed = 0; scalingStepsPerformed < scalingSteps; scalingStepsPerformed += 1) {
+            naturallyScaledWeight *= scaleMultipliersThisWeight.natural;
+        }
+        naturallyScaledWeight = Math.ceil(naturallyScaledWeight);
+    }
+    if (scalingSteps < 0) {
+        for (let scalingStepsPerformed = 0; scalingStepsPerformed > scalingSteps; scalingStepsPerformed -= 1) {
+            naturallyScaledWeight *= (1 / scaleMultipliersThisWeight.natural);
+        }
+        naturallyScaledWeight = Math.floor(naturallyScaledWeight);
+    }
+    let scaledWeight = naturallyScaledWeight;
+    if (naturallyScaledWeight > maximumWeight) {
+        scaledWeight = maximumWeight;
+    }
+    if (naturallyScaledWeight < minimumWeight) {
+        scaledWeight = minimumWeight;
+    }
+    return scaledWeight;
+};
+export const returnTypeLineHeight = ({ size, usage }) => {
+    // const usageClone = usage === 'display' ? 'display' : 'body';
+    const scaleMultipliersThisUse = styleDefinition.type.lineHeight
+        .scalingMultipliers[usage];
+    const naturalHeight = size > scaleMultipliersThisUse.highestLowSize ?
+        size * scaleMultipliersThisUse.high :
+        size * scaleMultipliersThisUse.low;
+    return returnNumberRoundedUpToMultiple({
+        number: naturalHeight,
+        multiple: styleDefinition.gridBase,
+    }) / styleDefinition.gridBase;
+};
+export const returnTypeSpacing = ({ size }) => ((Math.pow((size / styleDefinition.gridBase), 2) * styleDefinition
+    .type.spacing.multiplier) / styleDefinition.gridBase);
+export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, usage, }, }) => {
+    const baseTypeSize = returnBaseTypeSize({
+        deviceWidth,
+    });
+    const scalingSteps = styleDefinition.type.size.scalingSteps[size];
+    const scaledTypeSize = returnScaledTypeSize({
+        deviceWidth,
+        baseTypeSize,
+        scalingSteps,
+    });
+    const typeStyle = {
+        size: scaledTypeSize,
+        style: slant === 'italic' ? 'italic' : 'normal',
+        weight: returnTypeWeight({
+            baseTypeSize,
+            scalingSteps,
+            weight,
+        }),
+        height: returnTypeLineHeight({
+            size: scaledTypeSize *
+                styleDefinition.gridBase,
+            usage,
+        }),
+        spacing: returnTypeSpacing({
+            size: scaledTypeSize * styleDefinition.gridBase,
+        }),
+    };
+    return typeStyle;
+};
+export const buildTypeTokens = () => 
+// return a new, main promise
+new Promise((resolve, reject) => {
+    const typeStyles = {};
+    styleDefinition.device.widths.tokens.forEach((deviceWidthToken) => {
+        typeStyles[deviceWidthToken] = {};
+        styleDefinition.type.size.tokens.forEach((typeSizeToken) => {
+            typeStyles[deviceWidthToken][typeSizeToken] = {};
+            styleDefinition.type.weight.tokens
+                .forEach((typeWeightToken) => {
+                typeStyles[deviceWidthToken][typeSizeToken][typeWeightToken] = {};
+                styleDefinition.type.slant.tokens
+                    .forEach((typeSlantToken) => {
+                    typeStyles[deviceWidthToken][typeSizeToken][typeWeightToken][typeSlantToken] = {};
+                    styleDefinition.type.lineHeight.tokens
+                        .forEach((typeLineHeightoken) => {
+                        typeStyles[deviceWidthToken][typeSizeToken][typeWeightToken][typeSlantToken][typeLineHeightoken] =
+                            returnTypeStyle({
+                                deviceWidth: deviceWidthToken,
+                                type: {
+                                    size: typeSizeToken,
+                                    weight: typeWeightToken,
+                                    slant: typeSlantToken,
+                                    usage: typeLineHeightoken,
+                                },
+                            });
+                    });
+                });
+            });
+        });
+    });
+    const typeStylesString = `export const type = ${JSON.stringify(typeStyles)};`;
+    // write data to file
+    fs.writeFileSync(`${styleDefinition.storage.path}${styleDefinition.storage.names.type}`, typeStylesString);
+    resolve({ error: false });
 });
 //# sourceMappingURL=calculation.js.map
