@@ -1,3 +1,6 @@
+import { DeviceWidthToken } from './device';
+
+
 export type  TypeSizeToken = '3xs' | '2xs' | '1xs' |
 	's' | 'm' | 'l' | '1xl' | '2xl' | '3xl' | '4xl' | '5xl';
 export type TypeSizeValue = number;
@@ -20,7 +23,37 @@ export interface TypeStyleToken {
 	height: TypeLineHeightValue;
 	spacing: TypeSpacingValue;
 };
-
+export interface TypeLineHeightTokenSet {
+	display: TypeStyleToken;
+	body: TypeStyleToken;
+};
+export interface TypeSlantTokenSet {
+	normal: TypeLineHeightTokenSet;
+	italic: TypeLineHeightTokenSet;
+};
+export interface TypeWeightTokenSet {
+	regular: TypeSlantTokenSet;
+	bold: TypeSlantTokenSet;
+};
+export interface TypeSizeTokenSet {
+	'3xs': TypeWeightTokenSet;
+	'2xs': TypeWeightTokenSet;
+	'1xs': TypeWeightTokenSet;
+	's': TypeWeightTokenSet;
+	'm': TypeWeightTokenSet;
+	'l': TypeWeightTokenSet;
+	'1xl': TypeWeightTokenSet;
+	'2xl': TypeWeightTokenSet;
+	'3xl': TypeWeightTokenSet;
+	'4xl': TypeWeightTokenSet;
+	'5xl': TypeWeightTokenSet;
+}
+export interface TypeDeviceWidthTokenSet {
+	's': TypeSizeTokenSet;
+	'm': TypeSizeTokenSet;
+	'l': TypeSizeTokenSet;
+}
+export type TypeStylesTokenSet = TypeDeviceWidthTokenSet;
 
 
 /* export type TypeSizeTokenArrays = TypeSizeToken[];

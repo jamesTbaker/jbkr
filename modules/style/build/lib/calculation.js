@@ -1,12 +1,9 @@
-/**
- * Extract styles data from Figma and store it locally.
- *
- * @internal
- */
-import * as fs from 'fs';
-import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, } from 'utilities';
+// lib predecessors
 import { styleDefinition } from './definition.js';
-import { returnStoredFigmaStylePages } from './extraction.js';
+import { storeFigmaStylePages, returnStoredFigmaStylePages } from './extraction.js';
+// modules
+import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, } from 'utilities';
+import * as fs from 'fs';
 /**
  * Get all colors from the stored Figma pages. This includes the colors
  * assigned to the jbkr brand and the colors representing
@@ -22,12 +19,11 @@ import { returnStoredFigmaStylePages } from './extraction.js';
 export const returnColors = () => 
 // return a new, main promise
 new Promise((resolve, reject) => {
-    // get a promise to get the figma style pages
+    // get a promise to retrieve the figma style pages
     returnStoredFigmaStylePages()
-        // if the  promise is resolved with a result
+        // if the retrieval promise is resolved with a result
         .then((figmaPages) => {
-        // set up containers; colors is what we'll return,
-        // and it will become either jbkrColors or lightColors
+        // set up container
         const allColors = {
             Neutral: {
                 Finch: {},
@@ -229,31 +225,9 @@ new Promise((resolve, reject) => {
         // then resolve the main promise with the return value
         resolve(allColors);
     })
-        // if the  promise is rejected with an error
+        // if the retrieval promise is rejected with an error
         .catch((error) => {
         // reject the main promise with the error
-        reject(error);
-    });
-});
-export const buildColorTokens = () => 
-// return a new, main promise
-new Promise((resolve, reject) => {
-    // get a promise to both sets of colors
-    returnColors()
-        // if the promise is resolved with a result
-        .then((colorsResults) => {
-        // extract and format the objects data for convenience
-        const colorsString = `export const color = ${JSON.stringify(colorsResults)};`;
-        // write data to file
-        fs.writeFileSync(`${styleDefinition.storage.path}${styleDefinition.storage.names.color}`, colorsString);
-        // then resolve this promise with the result
-        resolve({
-            error: false,
-        });
-    })
-        // if the promise is rejected with an error
-        .catch((error) => {
-        // reject this promise with the error
         reject(error);
     });
 });
@@ -312,10 +286,9 @@ export const returnTypeWeight = ({ baseTypeSize, scalingSteps, weight, }) => {
     }
     return scaledWeight;
 };
-export const returnTypeLineHeight = ({ size, usage }) => {
-    // const usageClone = usage === 'display' ? 'display' : 'body';
+export const returnTypeLineHeight = ({ size, lineHeight }) => {
     const scaleMultipliersThisUse = styleDefinition.type.lineHeight
-        .scalingMultipliers[usage];
+        .scalingMultipliers[lineHeight];
     const naturalHeight = size > scaleMultipliersThisUse.highestLowSize ?
         size * scaleMultipliersThisUse.high :
         size * scaleMultipliersThisUse.low;
@@ -326,7 +299,7 @@ export const returnTypeLineHeight = ({ size, usage }) => {
 };
 export const returnTypeSpacing = ({ size }) => ((Math.pow((size / styleDefinition.gridBase), 2) * styleDefinition
     .type.spacing.multiplier) / styleDefinition.gridBase);
-export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, usage, }, }) => {
+export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, lineHeight, }, }) => {
     const baseTypeSize = returnBaseTypeSize({
         deviceWidth,
     });
@@ -347,7 +320,7 @@ export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, usag
         height: returnTypeLineHeight({
             size: scaledTypeSize *
                 styleDefinition.gridBase,
-            usage,
+            lineHeight,
         }),
         spacing: returnTypeSpacing({
             size: scaledTypeSize * styleDefinition.gridBase,
@@ -355,11 +328,11 @@ export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, usag
     };
     return typeStyle;
 };
-export const buildTypeTokens = () => 
+export const returnTypeStyles = () => 
 // return a new, main promise
 new Promise((resolve, reject) => {
     const typeStyles = {};
-    styleDefinition.device.widths.tokens.forEach((deviceWidthToken) => {
+    Object.keys(styleDefinition.device.widths).forEach((deviceWidthToken) => {
         typeStyles[deviceWidthToken] = {};
         styleDefinition.type.size.tokens.forEach((typeSizeToken) => {
             typeStyles[deviceWidthToken][typeSizeToken] = {};
@@ -378,7 +351,7 @@ new Promise((resolve, reject) => {
                                     size: typeSizeToken,
                                     weight: typeWeightToken,
                                     slant: typeSlantToken,
-                                    usage: typeLineHeightoken,
+                                    lineHeight: typeLineHeightoken,
                                 },
                             });
                     });
@@ -386,9 +359,129 @@ new Promise((resolve, reject) => {
             });
         });
     });
-    const typeStylesString = `export const type = ${JSON.stringify(typeStyles)};`;
-    // write data to file
-    fs.writeFileSync(`${styleDefinition.storage.path}${styleDefinition.storage.names.type}`, typeStylesString);
-    resolve({ error: false });
+    resolve(typeStyles);
+});
+export const returnShadowStyles = () => 
+// return a new, main promise
+new Promise((resolve, reject) => {
+    // get a promise to retrieve the figma style pages
+    returnStoredFigmaStylePages()
+        // if the retrieval promise is resolved with a result
+        .then((figmaPages) => {
+        // set up container
+        const shadows = {};
+        // extract the relevant Figma page
+        const shadowsFigmaPage = figmaPages
+            .filter((figmaPage) => figmaPage.name === styleDefinition
+            .figma.pageTitles.shadow);
+        // extract the StyleObjects frame in the page
+        const shadowsStyleObjectsFrame = shadowsFigmaPage[0].children[0]
+            .children.filter((child) => child.name === 'StyleObjects');
+        // extract the style objects from the frame
+        const styleObjects = shadowsStyleObjectsFrame[0].children;
+        // for each style object
+        styleObjects.forEach((styleObject) => {
+            const thisShadowSet = [];
+            styleObject.effects.forEach((effect) => {
+                if (effect.type === 'DROP_SHADOW') {
+                    const thisColorHSL = returnHSLValuesFromRBGPercents({
+                        r: effect.color.r,
+                        g: effect.color.g,
+                        b: effect.color.b,
+                    });
+                    const thisColorHSLA = {
+                        h: thisColorHSL.h,
+                        s: thisColorHSL.s,
+                        l: thisColorHSL.l,
+                        a: effect.color.a,
+                    };
+                    thisShadowSet.push({
+                        'offset-x': effect.offset.x / styleDefinition.gridBase,
+                        'offset-y': effect.offset.y / styleDefinition.gridBase,
+                        'blur-radius': effect.radius / styleDefinition.gridBase,
+                        color: thisColorHSLA,
+                    });
+                }
+            });
+            shadows[styleObject.name.split(' / ')[1]] =
+                thisShadowSet;
+        });
+        // then resolve the main promise with the populated container
+        resolve(shadows);
+    })
+        // if the retrieval promise is rejected with an error
+        .catch((error) => {
+        // reject the main promise with the error
+        reject(error);
+    });
+});
+export const buildTokenSet = ({ tokenSet }) => 
+// return a new, main promise
+new Promise((resolve, reject) => {
+    let tokenSetFunction;
+    if (tokenSet === 'color') {
+        tokenSetFunction = returnColors;
+    }
+    else if (tokenSet === 'type') {
+        tokenSetFunction = returnTypeStyles;
+    }
+    else if (tokenSet === 'shadow') {
+        tokenSetFunction = returnShadowStyles;
+    }
+    // const tokenSetFunction = tokenSet === 'color' ? buildColorTokens
+    // 	: tokenSet === 'type' ? buildTypeTokens
+    if (tokenSetFunction) {
+        // get a promise to retrieve the shadow styles
+        tokenSetFunction()
+            // if the retrieval promise is resolved with a result
+            .then((result) => {
+            // extract and format the objects data for convenience
+            const tokenObjectString = `export const ${tokenSet} = ${JSON.stringify(result)};`;
+            // write data to file
+            fs.writeFileSync(`${styleDefinition.storage.path}${styleDefinition.storage.names[tokenSet]}`, tokenObjectString);
+            // then resolve the main promise with the result
+            resolve({
+                error: false,
+            });
+        })
+            // if the retrieval promise is rejected with an error
+            .catch((error) => {
+            // reject the main promise with the error
+            reject(error);
+        });
+    }
+    else {
+        reject(new Error('buildTokenSet - could not find appropriate function'));
+    }
+});
+export const buildAllTokenSets = () => 
+// return a new, main promise
+new Promise((resolve, reject) => {
+    // get a promise to store a fresh copy of the Figma style pages
+    storeFigmaStylePages()
+        // if the storage promise is resolved with a result
+        .then(() => {
+        // get promises to build each token set
+        Promise.all([
+            buildTokenSet({ tokenSet: 'color' }),
+            buildTokenSet({ tokenSet: 'type' }),
+            buildTokenSet({ tokenSet: 'shadow' }),
+        ])
+            // if the build promises are resolved with a result
+            .then((result) => {
+            // then resolve the main promise with a message
+            resolve({ error: false });
+        })
+            // if the build promises are rejected with an error
+            .catch((error) => {
+            // reject the main promise with the error
+            reject(error);
+        });
+    })
+        // if the storage promises are rejected with an error
+        .catch((error) => {
+        // reject the main promise with the error
+        reject(error);
+    });
 });
 //# sourceMappingURL=calculation.js.map

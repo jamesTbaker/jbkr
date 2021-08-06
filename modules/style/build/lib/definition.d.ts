@@ -17,20 +17,17 @@ export declare const styleDefinition: {
     gridBase: number;
     device: {
         widths: {
-            tokens: string[];
-            specs: {
-                s: {
-                    minimum: number;
-                    maximum: number;
-                };
-                m: {
-                    minimum: number;
-                    maximum: number;
-                };
-                l: {
-                    minimum: number;
-                    maximum: undefined;
-                };
+            s: {
+                minimum: number;
+                maximum: number;
+            };
+            m: {
+                minimum: number;
+                maximum: number;
+            };
+            l: {
+                minimum: number;
+                maximum: undefined;
             };
         };
     };

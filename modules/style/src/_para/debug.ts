@@ -5,14 +5,18 @@ import {
 } from '../lib/extraction.js';
 import {
 	returnColors,
-	buildColorTokens,
 	returnBaseTypeSize,
 	returnScaledTypeSize,
 	returnTypeWeight,
 	returnTypeLineHeight,
 	returnTypeSpacing,
 	returnTypeStyle,
-	buildTypeTokens,
+	buildAllTokenSets,
 } from '../lib/calculation.js';
+import { style } from '../lib/api.js';
 
-buildTypeTokens();
+// style.type.family();
+style.type.family({
+	deviceWidth: 's',
+	size: 's',
+});

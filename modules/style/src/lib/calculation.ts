@@ -14,12 +14,12 @@ import { DeviceWidthToken, DeviceWidthTokens }
 	from '../models/device';
 import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
 	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
-	TypeStyleToken
+	TypeStyleToken, TypeStylesTokenSet
 } from '../models/type';
 import { Shadow, ShadowSet, ShadowTokenObject } from '../models/shadow';
 // lib predecessors
 import { styleDefinition } from './definition.js';
-import { returnStoredFigmaStylePages } from './extraction.js';
+import { storeFigmaStylePages, returnStoredFigmaStylePages } from './extraction.js';
 // modules
 import {
 	returnHSLValuesFromRBGPercents,
@@ -270,34 +270,6 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 				reject(error);
 			});
 	});
-
-export const buildColorTokens = ():Promise<{ error: boolean }> =>
-	// return a new, main promise
-	new Promise((resolve, reject) => {
-		// get a promise to both sets of colors
-		returnColors()
-			// if the promise is resolved with a result
-			.then((colorsResults) => {
-				// extract and format the objects data for convenience
-				const colorsString = `export const color = ${JSON.stringify(colorsResults)};`;
-				// write data to file
-				fs.writeFileSync(
-					`${styleDefinition.storage.path}${styleDefinition.storage.names.color}`,
-					colorsString,
-				);
-				// then resolve this promise with the result
-				resolve({
-					error: false,
-				});
-			})
-			// if the promise is rejected with an error
-			.catch((error) => {
-				// reject this promise with the error
-				reject(error);
-			});
-	});
-
-
 export const returnBaseTypeSize =
 	({ deviceWidth }:{ deviceWidth: DeviceWidthToken}):TypeSizeValue => {
 	return styleDefinition.gridBase * styleDefinition.type.size
@@ -445,52 +417,45 @@ export const returnTypeStyle = ({
 
 		return typeStyle;
 };
-
-export const buildTypeTokens = ():Promise<{ error: boolean }> =>
+export const returnTypeStyles = ():Promise<TypeStylesTokenSet> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
-			const typeStyles:{
-				[key: string]: any;
-			} = {};
-			styleDefinition.device.widths.tokens.forEach((deviceWidthToken) => {
-				typeStyles[deviceWidthToken] = {};
-				styleDefinition.type.size.tokens.forEach((typeSizeToken) => {
-					typeStyles[deviceWidthToken][typeSizeToken] = {};
-					styleDefinition.type.weight.tokens
-						.forEach((typeWeightToken) => {
-							typeStyles[deviceWidthToken][typeSizeToken][
-								typeWeightToken] = {};
-							styleDefinition.type.slant.tokens
-								.forEach((typeSlantToken) => {
-									typeStyles[deviceWidthToken][
-										typeSizeToken][typeWeightToken][
-										typeSlantToken] = {};
-									styleDefinition.type.lineHeight.tokens
-										.forEach((typeLineHeightoken) => {
-											typeStyles[deviceWidthToken][
-												typeSizeToken][typeWeightToken][
-												typeSlantToken][typeLineHeightoken] =
-												returnTypeStyle({
-													deviceWidth: deviceWidthToken as DeviceWidthToken,
-													type: {
-														size: typeSizeToken as TypeSizeToken,
-														weight: typeWeightToken as TypeWeightToken,
-														slant: typeSlantToken as TypeSlantToken,
-														lineHeight: typeLineHeightoken as TypeLineHeightToken,
-													},
-												});
-										});
-								});
-						});
-				});
+		const typeStyles:{
+			[key: string]: any;
+		} = {};
+		Object.keys(styleDefinition.device.widths).forEach((deviceWidthToken) => {
+			typeStyles[deviceWidthToken] = {};
+			styleDefinition.type.size.tokens.forEach((typeSizeToken) => {
+				typeStyles[deviceWidthToken][typeSizeToken] = {};
+				styleDefinition.type.weight.tokens
+					.forEach((typeWeightToken) => {
+						typeStyles[deviceWidthToken][typeSizeToken][
+							typeWeightToken] = {};
+						styleDefinition.type.slant.tokens
+							.forEach((typeSlantToken) => {
+								typeStyles[deviceWidthToken][
+									typeSizeToken][typeWeightToken][
+									typeSlantToken] = {};
+								styleDefinition.type.lineHeight.tokens
+									.forEach((typeLineHeightoken) => {
+										typeStyles[deviceWidthToken][
+											typeSizeToken][typeWeightToken][
+											typeSlantToken][typeLineHeightoken] =
+											returnTypeStyle({
+												deviceWidth: deviceWidthToken as DeviceWidthToken,
+												type: {
+													size: typeSizeToken as TypeSizeToken,
+													weight: typeWeightToken as TypeWeightToken,
+													slant: typeSlantToken as TypeSlantToken,
+													lineHeight: typeLineHeightoken as TypeLineHeightToken,
+												},
+											});
+									});
+							});
+					});
 			});
-			const typeStylesString = `export const type = ${JSON.stringify(typeStyles)};`;
-			// write data to file
-			fs.writeFileSync(
-				`${styleDefinition.storage.path}${styleDefinition.storage.names.type}`,
-				typeStylesString,
-			);
-			resolve({ error: false });
+		});
+		resolve(typeStyles as TypeStylesTokenSet);
 	});
 export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
 	// return a new, main promise
@@ -547,6 +512,80 @@ export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
 				resolve(shadows);
 			})
 			// if the retrieval promise is rejected with an error
+			.catch((error) => {
+				// reject the main promise with the error
+				reject(error);
+			});
+	});
+export const buildTokenSet = (
+	{ tokenSet }:
+	{ tokenSet: 'color' | 'type' | 'shadow'}
+):Promise<{ error: boolean }> =>
+	// return a new, main promise
+	new Promise((resolve, reject) => {
+		let tokenSetFunction;
+		if (tokenSet === 'color') {
+			tokenSetFunction = returnColors;
+		} else if (tokenSet === 'type') {
+			tokenSetFunction = returnTypeStyles;
+		} else if (tokenSet === 'shadow') {
+			tokenSetFunction = returnShadowStyles;
+		}
+		// const tokenSetFunction = tokenSet === 'color' ? buildColorTokens
+		// 	: tokenSet === 'type' ? buildTypeTokens
+		if (tokenSetFunction) {
+			// get a promise to retrieve the shadow styles
+			tokenSetFunction()
+				// if the retrieval promise is resolved with a result
+				.then((result:ColorTokenObject | TypeStylesTokenSet | ShadowTokenObject) => {
+					// extract and format the objects data for convenience
+					const tokenObjectString = `export const ${tokenSet} = ${JSON.stringify(result)};`;
+					// write data to file
+					fs.writeFileSync(
+						`${styleDefinition.storage.path}${styleDefinition.storage.names[tokenSet]}`,
+						tokenObjectString,
+					);
+					// then resolve the main promise with the result
+					resolve({
+						error: false,
+					});
+				})
+				// if the retrieval promise is rejected with an error
+				.catch((error) => {
+					// reject the main promise with the error
+					reject(error);
+				});
+		} else {
+			reject(new Error(
+				'buildTokenSet - could not find appropriate function'
+			));
+		}
+	});
+export const buildAllTokenSets = ():Promise<{ error: boolean }> =>
+	// return a new, main promise
+	new Promise((resolve, reject) => {
+		// get a promise to store a fresh copy of the Figma style pages
+		storeFigmaStylePages()
+			// if the storage promise is resolved with a result
+			.then(() => {
+				// get promises to build each token set
+				Promise.all([
+					buildTokenSet({ tokenSet: 'color'}),
+					buildTokenSet({ tokenSet: 'type'}),
+					buildTokenSet({ tokenSet: 'shadow'}),
+				])
+					// if the build promises are resolved with a result
+					.then((result) => {
+						// then resolve the main promise with a message
+						resolve({ error: false });
+					})
+					// if the build promises are rejected with an error
+					.catch((error) => {
+						// reject the main promise with the error
+						reject(error);
+					});
+			})
+			// if the storage promises are rejected with an error
 			.catch((error) => {
 				// reject the main promise with the error
 				reject(error);

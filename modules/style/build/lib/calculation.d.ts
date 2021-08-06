@@ -1,6 +1,7 @@
-import { DeviceWidthToken } from '../models/device';
-import { TypeSizeToken, TypeSizeValue, TypeWeightToken, TypeWeightValue, TypeUsageToken, TypeSlantToken, TypeStyleToken } from '../models/type';
 import { ColorTokenObject } from '../models/color';
+import { DeviceWidthToken } from '../models/device';
+import { TypeSizeToken, TypeSizeValue, TypeWeightToken, TypeWeightValue, TypeLineHeightToken, TypeSlantToken, TypeStyleToken, TypeStylesTokenSet } from '../models/type';
+import { ShadowTokenObject } from '../models/shadow';
 /**
  * Get all colors from the stored Figma pages. This includes the colors
  * assigned to the jbkr brand and the colors representing
@@ -14,9 +15,6 @@ import { ColorTokenObject } from '../models/color';
  * @internal
  */
 export declare const returnColors: () => Promise<ColorTokenObject>;
-export declare const buildColorTokens: () => Promise<{
-    error: boolean;
-}>;
 export declare const returnBaseTypeSize: ({ deviceWidth }: {
     deviceWidth: DeviceWidthToken;
 }) => TypeSizeValue;
@@ -30,22 +28,29 @@ export declare const returnTypeWeight: ({ baseTypeSize, scalingSteps, weight, }:
     scalingSteps: number;
     weight: TypeWeightToken;
 }) => TypeWeightValue;
-export declare const returnTypeLineHeight: ({ size, usage }: {
+export declare const returnTypeLineHeight: ({ size, lineHeight }: {
     size: TypeSizeValue;
-    usage: TypeUsageToken;
+    lineHeight: TypeLineHeightToken;
 }) => number;
 export declare const returnTypeSpacing: ({ size }: {
     size: TypeSizeValue;
 }) => number;
-export declare const returnTypeStyle: ({ deviceWidth, type: { size, weight, slant, usage, }, }: {
+export declare const returnTypeStyle: ({ deviceWidth, type: { size, weight, slant, lineHeight, }, }: {
     deviceWidth: DeviceWidthToken;
     type: {
         size: TypeSizeToken;
         weight: TypeWeightToken;
         slant: TypeSlantToken;
-        usage: TypeUsageToken;
+        lineHeight: TypeLineHeightToken;
     };
 }) => TypeStyleToken;
-export declare const buildTypeTokens: () => Promise<{
+export declare const returnTypeStyles: () => Promise<TypeStylesTokenSet>;
+export declare const returnShadowStyles: () => Promise<ShadowTokenObject>;
+export declare const buildTokenSet: ({ tokenSet }: {
+    tokenSet: 'color' | 'type' | 'shadow';
+}) => Promise<{
+    error: boolean;
+}>;
+export declare const buildAllTokenSets: () => Promise<{
     error: boolean;
 }>;

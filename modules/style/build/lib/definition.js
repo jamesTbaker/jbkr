@@ -17,58 +17,17 @@ export const styleDefinition = {
     gridBase: 8,
     device: {
         widths: {
-            /* tokens: [
-                '1xs',
-                's',
-                'm',
-                'l',
-                '1xl',
-                '2xl',
-            ],
-            specs: {
-                '1xs': {
-                    minimum: 0,
-                    maximum: 320,
-                },
-                s: {
-                    minimum: 321,
-                    maximum: 375,
-                },
-                m: {
-                    minimum: 376,
-                    maximum: 768,
-                },
-                l: {
-                    minimum: 769,
-                    maximum: 1024,
-                },
-                '1xl': {
-                    minimum: 1025,
-                    maximum: 1440,
-                },
-                '2xl': {
-                    minimum: 1441,
-                    maximum: undefined,
-                },
-            }, */
-            tokens: [
-                's',
-                'm',
-                'l',
-            ],
-            specs: {
-                s: {
-                    minimum: 0,
-                    maximum: 414,
-                },
-                m: {
-                    minimum: 415,
-                    maximum: 1024,
-                },
-                l: {
-                    minimum: 1025,
-                    maximum: undefined,
-                },
+            s: {
+                minimum: 0,
+                maximum: 414,
+            },
+            m: {
+                minimum: 415,
+                maximum: 1024,
+            },
+            l: {
+                minimum: 1025,
+                maximum: undefined,
             },
         },
     },

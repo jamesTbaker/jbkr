@@ -15,7 +15,8 @@
 			"outFiles": [
 				"${workspaceFolder}/**/*.js"
 			],
-			"preLaunchTask": "build-utilities"
+			"preLaunchTask": "build-utilities",
+			// "console": "integratedTerminal"
 		},
 		{
 			"name": "style",
@@ -28,7 +29,8 @@
 			"outFiles": [
 				"${workspaceFolder}/**/*.js"
 			],
-			"preLaunchTask": "build-style"
+			"preLaunchTask": "build-style",
+			// "console": "integratedTerminal"
 		}
 	]
 }

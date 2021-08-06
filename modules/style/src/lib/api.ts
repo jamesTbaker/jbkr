@@ -1,44 +1,92 @@
-export const ReturnNumberRoundedUpToMultiple =
-	(number: number, multiple: number): number =>
-		Math.ceil(number / multiple) * multiple;
+import { FigmaDocument, FigmaPage, FigmaStyleObject }
+	from '../models/figma';
+import {
+	HSLAColor, RangeOfColorLevels, NeutralColors, BrandColors,
+	AccentColors, StateColors, LightColors, JBKRColorSet, LightColorSet, ColorTokenObject
+} from '../models/color';
+import { DeviceWidthToken, DeviceWidthTokens, DeviceTokenObject }
+	from '../models/device';
+import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
+	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
+	TypeStyleToken, TypeStylesTokenSet
+} from '../models/type';
+import { Shadow, ShadowSet, ShadowTokenObject } from '../models/shadow';
+// lib predecessors
+import { styleDefinition } from './definition.js';
+// storage
+import { color } from '../store/color.js';
+import { type } from '../store/type.js';
+import { shadow } from '../store/shadow.js';
 
-export const ReturnHSLValuesFromRBGPercents =
-	({ r, g, b }:{
-		r: number,
-		g: number,
-		b: number,
-	}):{
-		h: number,
-		s: number,
-		l: number,
-	} => {
-		const max = Math.max(r, g, b);
-		const min = Math.min(r, g, b);
-		let h; let s; const
-			l = (max + min) / 2;
-		if (max === min) {
-			h = 0; // achromatic
-			s = 0; // achromatic
-		} else {
-			const d = max - min;
-			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-			switch (max) {
-				case r:
-					h = (g - b) / d + (g < b ? 6 : 0);
-					break;
-				case g:
-					h = (b - r) / d + 2;
-					break;
-				case b:
-				default:
-					h = (r - g) / d + 4;
-					break;
-			}
-			h /= 6;
+
+
+export { buildTokenSet, buildAllTokenSets } from './calculation.js';
+
+export const style: {[key:string]: any} = {
+	gridBase: () => styleDefinition.gridBase as number,
+	device: () => styleDefinition.device as DeviceTokenObject,
+	type: {
+		family: () => styleDefinition.type.family as string,
+		style: ({
+			deviceWidth,
+			size,
+			weight,
+			slant,
+			usage,
+		}:{
+			deviceWidth: DeviceWidthToken,
+			size: TypeSizeToken,
+			weight?: TypeWeightToken,
+			slant?: TypeSlantToken,
+			usage?: TypeLineHeightToken,
+		}) => {
+			const paramsClone = {
+				deviceWidth,
+				size,
+				weight: weight || 'regular',
+				slant: slant || 'normal',
+				usage: usage || 'body',
+			};
+			const typeObject = type[paramsClone.deviceWidth][
+				paramsClone.size][paramsClone.weight][paramsClone.slant][
+				paramsClone.usage];
+			return `
+				font-size: ${typeObject.size}rem;
+				font-weight: ${typeObject.weight};
+				font-style: ${typeObject.style};
+				line-height: ${typeObject.height}rem;
+				letter-spacing: ${typeObject.spacing}rem;
+			`;
 		}
-		return {
-			h: Math.round(h * 360),
-			s: Math.round(s * 100),
-			l: Math.round(l * 100),
-		};
-	};
+	},
+	/* position: {
+		verticalAlignMiddle: () => styleDefinition
+			.position.verticalAlignMiddle,
+		zIndexNumber: () => styleDefinition
+			.position.zIndexes,
+		shadow: ({ level }: { level?: number }) => {
+			const levelClone = level ? level.toString() : '06';
+			const shadowObject = shadow[10]// shadow[levelClone];
+			return `box-shadow:
+				${shadowObject[0]['offset-x']}rem ${shadowObject[0]['offset-y']}rem ${shadowObject[0]['blur-radius']}rem hsla(${shadowObject[0].color.h}, ${shadowObject[0].color.s}%, ${shadowObject[0].color.l}%, ${shadowObject[0].color.a}),
+				${shadowObject[1]['offset-x']}rem ${shadowObject[1]['offset-y']}rem ${shadowObject[1]['blur-radius']}rem hsla(${shadowObject[1].color.h}, ${shadowObject[1].color.s}%, ${shadowObject[1].color.l}%, ${shadowObject[1].color.a});`;
+		},
+	},
+	visibility: {
+		hiddenBlock: () => styleDefinition.visibility.blockHidden,
+		overrideHidingBlock: () => styleDefinition
+			.visibility.overrideBlockHidden,
+		hiddenInline: () => styleDefinition
+			.visibility.inlineHidden,
+		hiddenTableColumn: () => styleDefinition
+			.visibility.tableColumnHidden,
+	},
+	shape: {
+		standardCorners: () => styleDefinition.shape.standardCorners,
+		straightCorners: () => styleDefinition.shape.straightCorners,
+		circular: () => styleDefinition.shape.circular,
+	},
+	motion: {
+		standardTime: styleDefinition.motion.standardTime,
+	}, */
+};
