@@ -15,8 +15,9 @@ import {
 } from '../lib/calculation.js';
 import { style } from '../lib/api.js';
 
-// style.type.family();
-style.type.family({
-	deviceWidth: 's',
-	size: 's',
-});
+// style.type.style({
+// 	deviceWidth: 's',
+// 	size: 's',
+// });
+// style.position.shadow('08');
+buildAllTokenSets();

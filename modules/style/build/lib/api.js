@@ -1,7 +1,9 @@
 // lib predecessors
 import { styleDefinition } from './definition.js';
 import { type } from '../store/type.js';
+import { shadow } from '../store/shadow.js';
 export { buildTokenSet, buildAllTokenSets } from './calculation.js';
+const returnHSLAStringFromHSLAObject = ({ hslaObject }) => `hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;
 export const style = {
     gridBase: () => styleDefinition.gridBase,
     device: () => styleDefinition.device,
@@ -25,17 +27,16 @@ export const style = {
 			`;
         }
     },
-    /* position: {
+    position: {
         verticalAlignMiddle: () => styleDefinition
             .position.verticalAlignMiddle,
         zIndexNumber: () => styleDefinition
             .position.zIndexes,
-        shadow: ({ level }: { level?: number }) => {
-            const levelClone = level ? level.toString() : '06';
-            const shadowObject = shadow[10]// shadow[levelClone];
+        shadow: ({ level = '06' }) => {
+            const shadowObject = shadow[level];
             return `box-shadow:
-                ${shadowObject[0]['offset-x']}rem ${shadowObject[0]['offset-y']}rem ${shadowObject[0]['blur-radius']}rem hsla(${shadowObject[0].color.h}, ${shadowObject[0].color.s}%, ${shadowObject[0].color.l}%, ${shadowObject[0].color.a}),
-                ${shadowObject[1]['offset-x']}rem ${shadowObject[1]['offset-y']}rem ${shadowObject[1]['blur-radius']}rem hsla(${shadowObject[1].color.h}, ${shadowObject[1].color.s}%, ${shadowObject[1].color.l}%, ${shadowObject[1].color.a});`;
+				${shadowObject[0]['offset-x']}rem ${shadowObject[0]['offset-y']}rem ${shadowObject[0]['blur-radius']}rem hsla(${shadowObject[0].color.h}, ${shadowObject[0].color.s}%, ${shadowObject[0].color.l}%, ${shadowObject[0].color.a}),
+				${shadowObject[1]['offset-x']}rem ${shadowObject[1]['offset-y']}rem ${shadowObject[1]['blur-radius']}rem hsla(${shadowObject[1].color.h}, ${shadowObject[1].color.s}%, ${shadowObject[1].color.l}%, ${shadowObject[1].color.a});`;
         },
     },
     visibility: {
@@ -54,6 +55,16 @@ export const style = {
     },
     motion: {
         standardTime: styleDefinition.motion.standardTime,
-    }, */
+    },
+    /* color: {
+        neutral: ({ hue, level }:{ hue: NeutralColorsKeys, level: NeutralColorsLevels }) => (
+            color && color.Neutral && color.Neutral[hue]
+                && color.Neutral[hue][level] ?
+                returnHSLAStringFromHSLAObject({
+                    colorObject: color.Neutral[hue][level],
+                }) :
+                ''
+        ),
+    } */
 };
 //# sourceMappingURL=api.js.map

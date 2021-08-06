@@ -143,33 +143,33 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 					if (propertiesArray[2] === 'jbkr') {
 						if (propertiesArray[3] === 'Neutral') {
 							if (propertiesArray[4] === 'Finch') {
-								allColors.Neutral.Finch[propertiesArray[6]] =
+								allColors.Neutral.Finch[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Sky') {
-								allColors.Neutral.Sky[propertiesArray[6]] =
+								allColors.Neutral.Sky[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Spruce') {
-								allColors.Neutral.Spruce[propertiesArray[6]] =
+								allColors.Neutral.Spruce[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Seafoam') {
-								allColors.Neutral.Seafoam[propertiesArray[6]] =
+								allColors.Neutral.Seafoam[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 						}
 						if (propertiesArray[3] === 'Brand') {
 							if (propertiesArray[4] === 'Finch') {
-								allColors.Brand.Finch[propertiesArray[6]] =
+								allColors.Brand.Finch[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Spruce') {
-								allColors.Brand.Spruce[propertiesArray[6]] =
+								allColors.Brand.Spruce[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Peony') {
-								allColors.Brand.Peony[propertiesArray[6]] =
+								allColors.Brand.Peony[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 						}
@@ -233,30 +233,30 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 						}
 						if (propertiesArray[3] === 'State') {
 							if (propertiesArray[4] === 'Positive') {
-								allColors.State.Positive[propertiesArray[6]] =
+								allColors.State.Positive[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Warning') {
-								allColors.State.Warning[propertiesArray[6]] =
+								allColors.State.Warning[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Negative') {
-								allColors.State.Negative[propertiesArray[6]] =
+								allColors.State.Negative[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 							if (propertiesArray[4] === 'Neutral') {
-								allColors.State.Neutral[propertiesArray[6]] =
+								allColors.State.Neutral[propertiesArray[5]] =
 									thisColorHSLA;
 							}
 						}
 					}
 					if (propertiesArray[2] === 'Light') {
 						if (propertiesArray[3] === 'OnLight') {
-							allColors.Light.OnLight[propertiesArray[6]] =
+							allColors.Light.OnLight[propertiesArray[4]] =
 								thisColorHSLA;
 						}
 						if (propertiesArray[3] === 'OnDark') {
-							allColors.Light.OnDark[propertiesArray[6]] =
+							allColors.Light.OnDark[propertiesArray[4]] =
 								thisColorHSLA;
 						}
 					}

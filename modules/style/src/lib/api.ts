@@ -2,7 +2,7 @@ import { FigmaDocument, FigmaPage, FigmaStyleObject }
 	from '../models/figma';
 import {
 	HSLAColor, RangeOfColorLevels, NeutralColors, BrandColors,
-	AccentColors, StateColors, LightColors, JBKRColorSet, LightColorSet, ColorTokenObject
+	AccentColors, StateColors, LightColors, JBKRColorSet, LightColorSet, ColorTokenObject, NeutralColorsKeys, NeutralColorsLevels
 } from '../models/color';
 import { DeviceWidthToken, DeviceWidthTokens, DeviceTokenObject }
 	from '../models/device';
@@ -10,7 +10,7 @@ import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
 	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
 	TypeStyleToken, TypeStylesTokenSet
 } from '../models/type';
-import { Shadow, ShadowSet, ShadowTokenObject } from '../models/shadow';
+import { Shadow, ShadowLevel, ShadowSet, ShadowTokenObject } from '../models/shadow';
 // lib predecessors
 import { styleDefinition } from './definition.js';
 // storage
@@ -21,6 +21,10 @@ import { shadow } from '../store/shadow.js';
 
 
 export { buildTokenSet, buildAllTokenSets } from './calculation.js';
+
+const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: HSLAColor}) =>
+			`hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;
+
 
 export const style: {[key:string]: any} = {
 	gridBase: () => styleDefinition.gridBase as number,
@@ -59,14 +63,13 @@ export const style: {[key:string]: any} = {
 			`;
 		}
 	},
-	/* position: {
+	position: {
 		verticalAlignMiddle: () => styleDefinition
 			.position.verticalAlignMiddle,
 		zIndexNumber: () => styleDefinition
 			.position.zIndexes,
-		shadow: ({ level }: { level?: number }) => {
-			const levelClone = level ? level.toString() : '06';
-			const shadowObject = shadow[10]// shadow[levelClone];
+		shadow: ({ level = '06' }: { level?: ShadowLevel }) => {
+			const shadowObject = shadow[level];
 			return `box-shadow:
 				${shadowObject[0]['offset-x']}rem ${shadowObject[0]['offset-y']}rem ${shadowObject[0]['blur-radius']}rem hsla(${shadowObject[0].color.h}, ${shadowObject[0].color.s}%, ${shadowObject[0].color.l}%, ${shadowObject[0].color.a}),
 				${shadowObject[1]['offset-x']}rem ${shadowObject[1]['offset-y']}rem ${shadowObject[1]['blur-radius']}rem hsla(${shadowObject[1].color.h}, ${shadowObject[1].color.s}%, ${shadowObject[1].color.l}%, ${shadowObject[1].color.a});`;
@@ -88,5 +91,17 @@ export const style: {[key:string]: any} = {
 	},
 	motion: {
 		standardTime: styleDefinition.motion.standardTime,
-	}, */
+	},
+	color: {
+		neutral: ({ hue, level }:{ hue: string, level: NeutralColorsLevels }) => {
+			const colorObject = color.Neutral[hue][level];
+			// color && color.Neutral && color.Neutral[hue]
+			// 	&& color.Neutral[hue][level] ?
+				returnHSLAStringFromHSLAObject({
+					colorObject: color.Neutral[hue][level],
+				})
+				//  :
+				// ''
+			},
+	}
 };

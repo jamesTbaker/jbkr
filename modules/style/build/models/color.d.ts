@@ -7,11 +7,21 @@ export interface HSLAColor {
 export interface RangeOfColorLevels {
     [level: string]: HSLAColor;
 }
+export declare type NeutralColorsKeys = 'Finch' | 'Sky' | 'Spruce' | 'Seafoam';
+export declare type NeutralColorsLevels = '01' | '02' | '03' | '04';
 export interface NeutralColors {
-    Finch: RangeOfColorLevels;
-    Sky: RangeOfColorLevels;
-    Spruce: RangeOfColorLevels;
-    Seafoam: RangeOfColorLevels;
+    Finch: {
+        [level: string]: HSLAColor;
+    };
+    Sky: {
+        [level: string]: HSLAColor;
+    };
+    Spruce: {
+        [level: string]: HSLAColor;
+    };
+    Seafoam: {
+        [level: string]: HSLAColor;
+    };
 }
 export interface BrandColors {
     Finch: RangeOfColorLevels;
