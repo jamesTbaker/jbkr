@@ -1,9 +1,12 @@
 import { FigmaDocument, FigmaPage, FigmaStyleObject }
 	from '../models/figma';
 import {
-	HSLAColor, LevelKeys1, LevelKeys3, LevelKeys9, LevelKeys41,
+	HSLAColor, LevelKeys1, LevelKeys3, LevelKeys5, LevelKeys9, LevelKeys17, LevelKeys41, StateToneKeys, LightSurfaceKeys,
 	AccentOnDarkPrimaryHuesKeys, AccentOnDarkSecondaryHuesKeys,
-	AccentOnDarkTertiaryHuesKeys, AccentOnDarkQuarternaryHuesKeys
+	AccentOnDarkTertiaryHuesKeys, AccentOnDarkQuarternaryHuesKeys,
+	AccentOnMediumPrimaryHuesKeys, AccentOnMediumTertiaryHuesKeys,
+	AccentOnMediumQuarternaryHuesKeys, AccentOnLightPrimaryHuesKeys,
+	AccentOnLightSecondaryHuesKeys, AccentOnLightQuarternaryHuesKeys,
 } from '../models/color';
 import { DeviceWidthToken, DeviceWidthTokens, DeviceTokenObject }
 	from '../models/device';
@@ -25,13 +28,6 @@ export { buildTokenSet, buildAllTokenSets } from './calculation.js';
 
 const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: HSLAColor}) =>
 			`hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;
-
-/* const returnColorLevelFromRange = (
-	{ level, range }:
-	{ level: string, range: RangeOfColorLevels }
-):HSLAColor => {
-
-}; */
 
 export const style: {[key:string]: any} = {
 	gridBase: () => styleDefinition.gridBase as number,
@@ -166,8 +162,127 @@ export const style: {[key:string]: any} = {
 						{ hslaObject: color.Accent.OnDark.Tertiary[hue] }
 					) : ''
 				),
-			}
-		}
+				quarternary: (
+					{ hue }:
+					{ hue: AccentOnDarkQuarternaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnDark' in color.Accent
+					&& 'Quarternary' in color.Accent.OnDark
+					&& hue in color.Accent.OnDark.Quarternary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnDark.Quarternary[hue] }
+					) : ''
+				),
+			},
+			onMedium: {
+				primary: (
+					{ hue }:
+					{ hue: AccentOnMediumPrimaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnMedium' in color.Accent
+					&& 'Primary' in color.Accent.OnMedium
+					&& hue in color.Accent.OnMedium.Primary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnMedium.Primary[hue] }
+					) : ''
+				),
+				tertiary: (
+					{ hue }:
+					{ hue: AccentOnMediumTertiaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnMedium' in color.Accent
+					&& 'Tertiary' in color.Accent.OnMedium
+					&& hue in color.Accent.OnMedium.Tertiary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnMedium.Tertiary[hue] }
+					) : ''
+				),
+				quarternary: (
+					{ hue }:
+					{ hue: AccentOnMediumQuarternaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnMedium' in color.Accent
+					&& 'Quarternary' in color.Accent.OnMedium
+					&& hue in color.Accent.OnMedium.Quarternary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnMedium.Quarternary[hue] }
+					) : ''
+				),
+			},
+			onLight: {
+				primary: (
+					{ hue }:
+					{ hue: AccentOnLightPrimaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnLight' in color.Accent
+					&& 'Primary' in color.Accent.OnLight
+					&& hue in color.Accent.OnLight.Primary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnLight.Primary[hue] }
+					) : ''
+				),
+				secondary: (
+					{ hue }:
+					{ hue: AccentOnLightSecondaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnLight' in color.Accent
+					&& 'Secondary' in color.Accent.OnLight
+					&& hue in color.Accent.OnLight.Secondary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnLight.Secondary[hue] }
+					) : ''
+				),
+				quarternary: (
+					{ hue }:
+					{ hue: AccentOnLightQuarternaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnLight' in color.Accent
+					&& 'Quarternary' in color.Accent.OnLight
+					&& hue in color.Accent.OnLight.Quarternary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnLight.Quarternary[hue] }
+					) : ''
+				),
+			},
+		},
+		state:(
+				{ tone, level }:
+				{ tone: StateToneKeys, level: LevelKeys5 }
+			):string => (
+				color
+				&& 'State' in color
+				&& tone in color.State
+				&& level in color.State[tone] ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.State[tone][level] }
+				) : ''
+			),
+		light:(
+				{ surface, level }:
+				{ surface: LightSurfaceKeys, level: LevelKeys5 }
+			):string => (
+				color
+				&& 'Light' in color
+				&& surface in color.Light
+				&& level in color.Light[surface] ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Light[surface][level] }
+				) : ''
+			),
 	},
 	type: {
 		family: () => styleDefinition.type.family as string,
