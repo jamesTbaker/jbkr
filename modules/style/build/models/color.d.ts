@@ -8,7 +8,8 @@ export interface RangeOfColorLevels {
     [level: string]: HSLAColor;
 }
 export declare type NeutralColorsKeys = 'Finch' | 'Sky' | 'Spruce' | 'Seafoam';
-export declare type NeutralColorsLevels = '01' | '02' | '03' | '04';
+export declare type NeutralColorsLevelsPrimary = '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '09' | '10';
+export declare type NeutralColorsLevelsSecondary = '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '09';
 export interface NeutralColors {
     Finch: {
         [level: string]: HSLAColor;

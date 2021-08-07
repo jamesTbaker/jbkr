@@ -13,8 +13,8 @@ import {
 import { DeviceWidthToken, DeviceWidthTokens }
 	from '../models/device';
 import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
-	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
-	TypeStyleToken, TypeStylesTokenSet
+	TypeWeightValue, TypeLineHeightToken, TypeLineHeightValue, TypeSlantToken,
+	TypeSpacingValue, TypeStyleToken, TypeStylesTokenSet
 } from '../models/type';
 import { Shadow, ShadowSet, ShadowTokenObject } from '../models/shadow';
 // lib predecessors
@@ -40,7 +40,7 @@ import * as fs from 'fs';
  *
  * @internal
  */
-export const returnColors = ():Promise<ColorTokenObject> =>
+/* export const returnColors = ():Promise<ColorTokenObject> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve the figma style pages
@@ -269,21 +269,133 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 				// reject the main promise with the error
 				reject(error);
 			});
+	}); */
+
+export const returnColors = ():Promise<ColorTokenObject> =>
+	// return a new, main promise
+	new Promise((resolve, reject) => {
+		// get a promise to retrieve the figma style pages
+		returnStoredFigmaStylePages()
+			// if the retrieval promise is resolved with a result
+			.then((figmaPages:FigmaPage[]) => {
+				// set up container
+				const allColors:{
+					[key: string]: any;
+				} = {};
+				// extract the relevant Figma pages
+				const jbkrColorsFigmaPage = figmaPages
+					.filter(
+						(figmaPage) =>
+							figmaPage.name === styleDefinition
+								.figma.pageTitles.colorJBKR,
+					);
+				const lightColorsFigmaPage = figmaPages
+					.filter(
+						(figmaPage) =>
+							figmaPage.name === styleDefinition
+								.figma.pageTitles.light,
+					);
+
+				// extract the StyleObjects frame in the page
+				const jbkrStyleObjectsFrame =
+					jbkrColorsFigmaPage[0].children[0]
+						.children.filter(
+							(child) => child.name === 'StyleObjects',
+						);
+				const lightStyleObjectsFrame =
+					lightColorsFigmaPage[0].children[0]
+						.children.filter(
+							(child) => child.name === 'StyleObjects',
+						);
+				// extract the style objects from the frame
+				const styleObjects = [
+					...jbkrStyleObjectsFrame[0].children,
+					...lightStyleObjectsFrame[0].children,
+				];
+				// for each style object
+				styleObjects.forEach((styleObject) => {
+					// get array of properties describing this style
+					const propertiesArray =
+						styleObject.name.split(' / ');
+					// get this style object's fill color as RGBA
+					const thisColorRGBA =
+						styleObject.fills[0].color;
+					// get HSL equivalent to RGB portion of RGBA
+					const thisColorHSL = returnHSLValuesFromRBGPercents({
+							r: thisColorRGBA.r,
+							g: thisColorRGBA.g,
+							b: thisColorRGBA.b,
+						});
+					// construct the HSLA version of the fill color
+					const thisColorHSLA = {
+						h: thisColorHSL.h,
+						s: thisColorHSL.s,
+						l: thisColorHSL.l,
+						a: thisColorRGBA.a,
+					};
+					if (propertiesArray[2] === 'Light') {
+						if (!(propertiesArray[3] in allColors)) {
+							allColors[propertiesArray[3]] = {};
+						}
+						allColors[propertiesArray[3]][propertiesArray[4]] = thisColorHSLA;
+					}
+					if (propertiesArray[2] === 'jbkr') {
+						if (
+							propertiesArray[3] === 'Neutral'
+							|| propertiesArray[3] === 'Brand'
+							|| propertiesArray[3] === 'State'
+						) {
+							if (!(propertiesArray[3] in allColors)) {
+								allColors[propertiesArray[3]] = {};
+							}
+							if (!(propertiesArray[4] in allColors[propertiesArray[3]])) {
+								allColors[propertiesArray[3]][propertiesArray[4]] = {};
+							}
+							allColors[propertiesArray[3]][propertiesArray[4]][propertiesArray[5]] = thisColorHSLA;
+						}
+						if (propertiesArray[3] === 'Accent') {
+							if (!(propertiesArray[3] in allColors)) {
+								allColors[propertiesArray[3]] = {};
+							}
+							if (!(propertiesArray[4] in allColors[propertiesArray[3]])) {
+								allColors[propertiesArray[3]][propertiesArray[4]] = {};
+							}
+							if (!(propertiesArray[5] in allColors[propertiesArray[3]][propertiesArray[4]])) {
+								allColors[propertiesArray[3]][propertiesArray[4]][propertiesArray[5]] = {};
+							}
+							allColors[propertiesArray[3]][propertiesArray[4]][propertiesArray[5]][propertiesArray[6]] = thisColorHSLA;
+						}
+					}
+				});
+				// then resolve the main promise with the return value
+				resolve(allColors as ColorTokenObject);
+			})
+			// if the retrieval promise is rejected with an error
+			.catch((error) => {
+				// reject the main promise with the error
+				reject(error);
+			});
 	});
-export const returnBaseTypeSize =
-	({ deviceWidth }:{ deviceWidth: DeviceWidthToken}):TypeSizeValue => {
+
+
+export const returnBaseTypeSize = (
+	{ deviceWidth }:
+	{ deviceWidth: DeviceWidthToken}
+):TypeSizeValue => {
 	return styleDefinition.gridBase * styleDefinition.type.size
 		.baseMultipliersByDeviceWidth[deviceWidth];
 };
-export const returnScaledTypeSize = ({
-	deviceWidth,
-	baseTypeSize,
-	scalingSteps,
-}:{
-	deviceWidth: DeviceWidthToken,
-	baseTypeSize: number,
-	scalingSteps: number,
-}):number => {
+export const returnScaledTypeSize = (
+	{
+		deviceWidth,
+		baseTypeSize,
+		scalingSteps,
+	}:{
+		deviceWidth: DeviceWidthToken,
+		baseTypeSize: number,
+		scalingSteps: number,
+	}
+):TypeSizeValue => {
 		const scaleMultipliersThisDeviceWidth = styleDefinition.type.size
 			.scalingMultipliersByDeviceWidth[deviceWidth];
 		const scaleMultiplierThisTypeSizeThisDeviceWidth = scalingSteps < 0
@@ -312,11 +424,13 @@ export const returnScaledTypeSize = ({
 		}
 		return scaledTypeSize / styleDefinition.gridBase;
 };
-export const returnTypeWeight = ({
-	baseTypeSize, scalingSteps, weight,
-}:{
-	baseTypeSize:TypeSizeValue, scalingSteps:number, weight:TypeWeightToken,
-}):TypeWeightValue => {
+export const returnTypeWeight = (
+	{
+		baseTypeSize, scalingSteps, weight,
+	}:{
+		baseTypeSize:TypeSizeValue, scalingSteps:number, weight:TypeWeightToken,
+	}
+):TypeWeightValue => {
 	const baseMultiplierThisWeight = styleDefinition.type.weight
 		.baseMultipliersByWeight[weight];
 	const scaleMultipliersThisWeight = styleDefinition.type.weight
@@ -354,7 +468,10 @@ export const returnTypeWeight = ({
 	}
 	return scaledWeight;
 };
-export const returnTypeLineHeight = ({ size, lineHeight }:{ size: TypeSizeValue, lineHeight: TypeLineHeightToken }):number => {
+export const returnTypeLineHeight = (
+	{ size, lineHeight }:
+	{ size: TypeSizeValue, lineHeight: TypeLineHeightToken }
+):TypeLineHeightValue => {
 	const scaleMultipliersThisUse = styleDefinition.type.lineHeight
 		.scalingMultipliers[lineHeight];
 	const naturalHeight = size > scaleMultipliersThisUse.highestLowSize ?
@@ -365,29 +482,33 @@ export const returnTypeLineHeight = ({ size, lineHeight }:{ size: TypeSizeValue,
 		multiple: styleDefinition.gridBase,
 	}) / styleDefinition.gridBase;
 };
-export const returnTypeSpacing = ({ size }: { size: TypeSizeValue }):number => (
+export const returnTypeSpacing = (
+	{ size }: { size: TypeSizeValue }
+):TypeSpacingValue => (
 	(
 		(size / styleDefinition.gridBase) ** 2 * styleDefinition
 			.type.spacing.multiplier
 	) / styleDefinition.gridBase
 );
-export const returnTypeStyle = ({
-	deviceWidth,
-	type: {
-		size,
-		weight,
-		slant,
-		lineHeight,
-	},
-}:{
-	deviceWidth: DeviceWidthToken,
-	type: {
-		size: TypeSizeToken,
-		weight: TypeWeightToken,
-		slant: TypeSlantToken,
-		lineHeight: TypeLineHeightToken,
-	},
-}):TypeStyleToken => {
+export const returnTypeStyle = (
+	{
+		deviceWidth,
+		type: {
+			size,
+			weight,
+			slant,
+			lineHeight,
+		},
+	}:{
+		deviceWidth: DeviceWidthToken,
+		type: {
+			size: TypeSizeToken,
+			weight: TypeWeightToken,
+			slant: TypeSlantToken,
+			lineHeight: TypeLineHeightToken,
+		},
+	}
+):TypeStyleToken => {
 		const baseTypeSize = returnBaseTypeSize({
 			deviceWidth,
 		});

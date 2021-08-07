@@ -1,5 +1,7 @@
 // lib predecessors
 import { styleDefinition } from './definition.js';
+// storage
+import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
 export { buildTokenSet, buildAllTokenSets } from './calculation.js';
@@ -56,15 +58,30 @@ export const style = {
     motion: {
         standardTime: styleDefinition.motion.standardTime,
     },
-    /* color: {
-        neutral: ({ hue, level }:{ hue: NeutralColorsKeys, level: NeutralColorsLevels }) => (
-            color && color.Neutral && color.Neutral[hue]
-                && color.Neutral[hue][level] ?
-                returnHSLAStringFromHSLAObject({
-                    colorObject: color.Neutral[hue][level],
-                }) :
-                ''
-        ),
-    } */
+    color: {
+        neutral: ({ hue, level }) => {
+            let hslaObject;
+            if (hue in color.Neutral) {
+                if (level in color.Neutral[hue]) {
+                    hslaObject = color.Neutral[hue][level];
+                }
+            }
+            // const hslaString = returnHSLAStringFromHSLAObject({ hslaObject });
+            // return hslaString;
+            // color && color.Neutral && color.Neutral[hue]
+            // 	&& color.Neutral[hue][level] ?
+            // returnHSLAStringFromHSLAObject({
+            // 	colorObject: color.Neutral[hue][level],
+            // })
+            //  :
+            // ''
+            return {
+                h: 1,
+                s: 1,
+                l: 1,
+                a: 1,
+            };
+        },
+    },
 };
 //# sourceMappingURL=api.js.map

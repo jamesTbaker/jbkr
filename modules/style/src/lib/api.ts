@@ -1,8 +1,9 @@
 import { FigmaDocument, FigmaPage, FigmaStyleObject }
 	from '../models/figma';
 import {
-	HSLAColor, RangeOfColorLevels, NeutralColors, BrandColors,
-	AccentColors, StateColors, LightColors, JBKRColorSet, LightColorSet, ColorTokenObject, NeutralColorsKeys, NeutralColorsLevels
+	HSLAColor, LevelKeys1, LevelKeys3, LevelKeys9, LevelKeys41,
+	AccentOnDarkPrimaryHuesKeys, AccentOnDarkSecondaryHuesKeys,
+	AccentOnDarkTertiaryHuesKeys, AccentOnDarkQuarternaryHuesKeys
 } from '../models/color';
 import { DeviceWidthToken, DeviceWidthTokens, DeviceTokenObject }
 	from '../models/device';
@@ -25,10 +26,149 @@ export { buildTokenSet, buildAllTokenSets } from './calculation.js';
 const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: HSLAColor}) =>
 			`hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;
 
+/* const returnColorLevelFromRange = (
+	{ level, range }:
+	{ level: string, range: RangeOfColorLevels }
+):HSLAColor => {
+
+}; */
 
 export const style: {[key:string]: any} = {
 	gridBase: () => styleDefinition.gridBase as number,
 	device: () => styleDefinition.device as DeviceTokenObject,
+	color: {
+		neutral: {
+			finch: (
+				{ level }:
+				{ level: LevelKeys41 }
+			):string => (
+				color
+				&& 'Neutral' in color
+				&& 'Finch' in color.Neutral
+				&& level in color.Neutral.Finch ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Neutral.Finch[level] }
+				) : ''
+			),
+			sky: (
+				{ level }:
+				{ level: LevelKeys9 }
+			):string => (
+				color
+				&& 'Neutral' in color
+				&& 'Sky' in color.Neutral
+				&& level in color.Neutral.Sky ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Neutral.Sky[level] }
+				) : ''
+			),
+			spruce: (
+				{ level }:
+				{ level: LevelKeys9 }
+			):string => (
+				color
+				&& 'Neutral' in color
+				&& 'Spruce' in color.Neutral
+				&& level in color.Neutral.Spruce ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Neutral.Spruce[level] }
+				) : ''
+			),
+			seafoam: (
+				{ level }:
+				{ level: LevelKeys9 }
+			):string => (
+				color
+				&& 'Neutral' in color
+				&& 'Seafoam' in color.Neutral
+				&& level in color.Neutral.Seafoam ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Neutral.Seafoam[level] }
+				) : ''
+			),
+		},
+		brand: {
+			finch: (
+				{ level }:
+				{ level: LevelKeys3 }
+			):string => (
+				color
+				&& 'Brand' in color
+				&& 'Finch' in color.Brand
+				&& level in color.Brand.Finch ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Brand.Finch[level] }
+				) : ''
+			),
+			spruce: (
+				{ level }:
+				{ level: LevelKeys1 }
+			):string => (
+				color
+				&& 'Brand' in color
+				&& 'Spruce' in color.Brand
+				&& level in color.Brand.Spruce ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Brand.Spruce[level] }
+				) : ''
+			),
+			peony: (
+				{ level }:
+				{ level: LevelKeys3 }
+			):string => (
+				color
+				&& 'Brand' in color
+				&& 'Peony' in color.Brand
+				&& level in color.Brand.Peony ?
+				returnHSLAStringFromHSLAObject(
+					{ hslaObject: color.Brand.Peony[level] }
+				) : ''
+			),
+		},
+		accent: {
+			onDark: {
+				primary: (
+					{ hue }:
+					{ hue: AccentOnDarkPrimaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnDark' in color.Accent
+					&& 'Primary' in color.Accent.OnDark
+					&& hue in color.Accent.OnDark.Primary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnDark.Primary[hue] }
+					) : ''
+				),
+				secondary: (
+					{ hue }:
+					{ hue: AccentOnDarkSecondaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnDark' in color.Accent
+					&& 'Secondary' in color.Accent.OnDark
+					&& hue in color.Accent.OnDark.Secondary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnDark.Secondary[hue] }
+					) : ''
+				),
+				tertiary: (
+					{ hue }:
+					{ hue: AccentOnDarkTertiaryHuesKeys }
+				):string => (
+					color
+					&& 'Accent' in color
+					&& 'OnDark' in color.Accent
+					&& 'Tertiary' in color.Accent.OnDark
+					&& hue in color.Accent.OnDark.Tertiary ?
+					returnHSLAStringFromHSLAObject(
+						{ hslaObject: color.Accent.OnDark.Tertiary[hue] }
+					) : ''
+				),
+			}
+		}
+	},
 	type: {
 		family: () => styleDefinition.type.family as string,
 		style: ({
@@ -92,16 +232,4 @@ export const style: {[key:string]: any} = {
 	motion: {
 		standardTime: styleDefinition.motion.standardTime,
 	},
-	color: {
-		neutral: ({ hue, level }:{ hue: string, level: NeutralColorsLevels }) => {
-			const colorObject = color.Neutral[hue][level];
-			// color && color.Neutral && color.Neutral[hue]
-			// 	&& color.Neutral[hue][level] ?
-				returnHSLAStringFromHSLAObject({
-					colorObject: color.Neutral[hue][level],
-				})
-				//  :
-				// ''
-			},
-	}
 };

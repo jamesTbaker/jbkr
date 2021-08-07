@@ -7,22 +7,36 @@ export interface HSLAColor {
 export interface RangeOfColorLevels {
 	[level: string]: HSLAColor;
 }
-export type NeutralColorsKeys = 'Finch' |  'Sky' |  'Spruce' |  'Seafoam';
-export type NeutralColorsLevels = '01' |  '02' |  '03' |  '04';
+export type NeutralHuesKeys = 'Finch' |  'Sky' |  'Spruce' |  'Seafoam';
+export type AccentOnDarkPrimaryHuesKeys =
+	'Peacock' |  'Seafoam' |  'Finch';
+export type AccentOnDarkSecondaryHuesKeys =
+	'Iris';
+export type AccentOnDarkTertiaryHuesKeys =
+	'Tiger' |  'Sunshine';
+export type AccentOnDarkQuarternaryHuesKeys =
+	'Flamingo' |  'Spruce';
+
+
+
+
+
+
+
+export type LevelKeys1 = '01';
+export type LevelKeys3 = '01' |  '02' |  '03';
+export type LevelKeys9 = '01' |  '02' |  '03' |  '04' |  '05' |  '06' |  '07' |  '08' |  '09';
+export type LevelKeys41 =
+'01' |  '02' |  '03' |  '04' |  '05' |  '06' |  '07' |  '08' |  '09' | '10'  |
+'11' |  '12' |  '13' |  '14' |  '15' |  '16' |  '17' |  '18' |  '19' | '20' |
+'21' |  '22' |  '23' |  '24' |  '25' |  '26' |  '27' |  '28' |  '29' | '30' |
+'31' |  '32' |  '33' |  '34' |  '35' |  '36' |  '37' |  '38' |  '39' | '40' | '41';
 
 export interface NeutralColors {
-	Finch: {
-		[level: string]: HSLAColor
-	};
-	Sky: {
-		[level: string]: HSLAColor
-	};
-	Spruce: {
-		[level: string]: HSLAColor
-	};
-	Seafoam: {
-		[level: string]: HSLAColor
-	};
+	Finch: RangeOfColorLevels;
+	Sky: RangeOfColorLevels;
+	Spruce: RangeOfColorLevels;
+	Seafoam: RangeOfColorLevels;
 }
 export interface BrandColors {
 	Finch: RangeOfColorLevels;
@@ -86,10 +100,13 @@ export interface JBKRColorSet {
 export interface LightColorSet {
 	Light: LightColors;
 }
-export interface ColorTokenObject {
+/* export interface ColorTokenObject {
 	Neutral: NeutralColors;
 	Brand: BrandColors;
 	Accent: AccentColors;
 	State: StateColors;
 	Light: LightColors;
+} */
+export interface ColorTokenObject {
+	[key: string]: any;
 }
