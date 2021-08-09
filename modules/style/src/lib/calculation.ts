@@ -4,27 +4,20 @@
  * @internal
  */
 // models
-import { FigmaDocument, FigmaPage, FigmaStyleObject }
-	from '../models/figma';
-import {
-	HSLAColor, RangeOfColorLevels, NeutralColors, BrandColors,
-	AccentColors, StateColors, LightColors, JBKRColorSet, LightColorSet, ColorTokenObject
-} from '../models/color';
-import { DeviceWidthToken, DeviceWidthTokens }
-	from '../models/device';
-import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
-	TypeWeightValue, TypeLineHeightToken, TypeLineHeightValue, TypeSlantToken,
-	TypeSpacingValue, TypeStyleToken, TypeStylesTokenSet
+import { FigmaPage }	from '../models/figma';
+import { AllColors } from '../models/color';
+import { DeviceWidthToken } from '../models/device';
+import { TypeSizeKey, TypeWeightKey, TypeLineHeightKey,
+	TypeSlantKey, TypeStyle, AllTypeStyles
 } from '../models/type';
-import { Shadow, ShadowSet, ShadowTokenObject } from '../models/shadow';
+import { ShadowSubset, AllShadows } from '../models/shadow';
 // lib predecessors
-import { styleDefinition } from './definition.js';
+import { foundation } from './foundation.js';
 import { storeFigmaStylePages, returnStoredFigmaStylePages } from './extraction.js';
 // modules
 import {
 	returnHSLValuesFromRBGPercents,
 	returnNumberRoundedUpToMultiple,
-	returnCopyOfObjectWithStringKeys,
 } from 'utilities';
 import * as fs from 'fs';
 
@@ -40,7 +33,7 @@ import * as fs from 'fs';
  *
  * @internal
  */
-/* export const returnColors = ():Promise<ColorTokenObject> =>
+/* export const returnColors = ():Promise<AllColors> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve the figma style pages
@@ -48,7 +41,7 @@ import * as fs from 'fs';
 			// if the retrieval promise is resolved with a result
 			.then((figmaPages:FigmaPage[]) => {
 				// set up container
-				const allColors:ColorTokenObject = {
+				const allColors:AllColors = {
 						Neutral: {
 							Finch: {},
 							Sky: {},
@@ -93,13 +86,13 @@ import * as fs from 'fs';
 				const jbkrColorsFigmaPage = figmaPages
 					.filter(
 						(figmaPage) =>
-							figmaPage.name === styleDefinition
+							figmaPage.name === foundation
 								.figma.pageTitles.colorJBKR,
 					);
 				const lightColorsFigmaPage = figmaPages
 					.filter(
 						(figmaPage) =>
-							figmaPage.name === styleDefinition
+							figmaPage.name === foundation
 								.figma.pageTitles.light,
 					);
 
@@ -271,7 +264,7 @@ import * as fs from 'fs';
 			});
 	}); */
 
-export const returnColors = ():Promise<ColorTokenObject> =>
+export const returnColors = ():Promise<AllColors> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve the figma style pages
@@ -286,13 +279,13 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 				const jbkrColorsFigmaPage = figmaPages
 					.filter(
 						(figmaPage) =>
-							figmaPage.name === styleDefinition
+							figmaPage.name === foundation
 								.figma.pageTitles.colorJBKR,
 					);
 				const lightColorsFigmaPage = figmaPages
 					.filter(
 						(figmaPage) =>
-							figmaPage.name === styleDefinition
+							figmaPage.name === foundation
 								.figma.pageTitles.light,
 					);
 
@@ -368,7 +361,7 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 					}
 				});
 				// then resolve the main promise with the return value
-				resolve(allColors as ColorTokenObject);
+				resolve(allColors as AllColors);
 			})
 			// if the retrieval promise is rejected with an error
 			.catch((error) => {
@@ -381,8 +374,8 @@ export const returnColors = ():Promise<ColorTokenObject> =>
 export const returnBaseTypeSize = (
 	{ deviceWidth }:
 	{ deviceWidth: DeviceWidthToken}
-):TypeSizeValue => {
-	return styleDefinition.gridBase * styleDefinition.type.size
+):number => {
+	return foundation.gridBase * foundation.type.size
 		.baseMultipliersByDeviceWidth[deviceWidth];
 };
 export const returnScaledTypeSize = (
@@ -395,8 +388,8 @@ export const returnScaledTypeSize = (
 		baseTypeSize: number,
 		scalingSteps: number,
 	}
-):TypeSizeValue => {
-		const scaleMultipliersThisDeviceWidth = styleDefinition.type.size
+):number => {
+		const scaleMultipliersThisDeviceWidth = foundation.type.size
 			.scalingMultipliersByDeviceWidth[deviceWidth];
 		const scaleMultiplierThisTypeSizeThisDeviceWidth = scalingSteps < 0
 			? scaleMultipliersThisDeviceWidth.low
@@ -422,18 +415,18 @@ export const returnScaledTypeSize = (
 			}
 			scaledTypeSize = Math.floor(scaledTypeSize);
 		}
-		return scaledTypeSize / styleDefinition.gridBase;
+		return scaledTypeSize / foundation.gridBase;
 };
 export const returnTypeWeight = (
 	{
 		baseTypeSize, scalingSteps, weight,
 	}:{
-		baseTypeSize:TypeSizeValue, scalingSteps:number, weight:TypeWeightToken,
+		baseTypeSize:number, scalingSteps:number, weight:TypeWeightKey,
 	}
-):TypeWeightValue => {
-	const baseMultiplierThisWeight = styleDefinition.type.weight
+):number => {
+	const baseMultiplierThisWeight = foundation.type.weight
 		.baseMultipliersByWeight[weight];
-	const scaleMultipliersThisWeight = styleDefinition.type.weight
+	const scaleMultipliersThisWeight = foundation.type.weight
 		.scalingMultipliersByWeight[weight];
 	const baseWeight = baseTypeSize * baseMultiplierThisWeight;
 	const minimumWeight = baseWeight - scaleMultipliersThisWeight.maxSubtraction;
@@ -470,25 +463,25 @@ export const returnTypeWeight = (
 };
 export const returnTypeLineHeight = (
 	{ size, lineHeight }:
-	{ size: TypeSizeValue, lineHeight: TypeLineHeightToken }
-):TypeLineHeightValue => {
-	const scaleMultipliersThisUse = styleDefinition.type.lineHeight
+	{ size: number, lineHeight: TypeLineHeightKey }
+):number => {
+	const scaleMultipliersThisUse = foundation.type.lineHeight
 		.scalingMultipliers[lineHeight];
 	const naturalHeight = size > scaleMultipliersThisUse.highestLowSize ?
 		size * scaleMultipliersThisUse.high :
 		size * scaleMultipliersThisUse.low;
 	return returnNumberRoundedUpToMultiple({
 		number: naturalHeight,
-		multiple: styleDefinition.gridBase,
-	}) / styleDefinition.gridBase;
+		multiple: foundation.gridBase,
+	}) / foundation.gridBase;
 };
 export const returnTypeSpacing = (
-	{ size }: { size: TypeSizeValue }
-):TypeSpacingValue => (
+	{ size }: { size: number }
+):number => (
 	(
-		(size / styleDefinition.gridBase) ** 2 * styleDefinition
+		(size / foundation.gridBase) ** 2 * foundation
 			.type.spacing.multiplier
-	) / styleDefinition.gridBase
+	) / foundation.gridBase
 );
 export const returnTypeStyle = (
 	{
@@ -502,23 +495,23 @@ export const returnTypeStyle = (
 	}:{
 		deviceWidth: DeviceWidthToken,
 		type: {
-			size: TypeSizeToken,
-			weight: TypeWeightToken,
-			slant: TypeSlantToken,
-			lineHeight: TypeLineHeightToken,
+			size: TypeSizeKey,
+			weight: TypeWeightKey,
+			slant: TypeSlantKey,
+			lineHeight: TypeLineHeightKey,
 		},
 	}
-):TypeStyleToken => {
+):TypeStyle => {
 		const baseTypeSize = returnBaseTypeSize({
 			deviceWidth,
 		});
-		const scalingSteps = styleDefinition.type.size.scalingSteps[size];
+		const scalingSteps = foundation.type.size.scalingSteps[size];
 		const scaledTypeSize = returnScaledTypeSize({
 			deviceWidth,
 			baseTypeSize,
 			scalingSteps,
 		});
-		const typeStyle:TypeStyleToken = {
+		const typeStyle:TypeStyle = {
 			size: scaledTypeSize,
 			style: slant === 'italic' ? 'italic' : 'normal',
 			weight: returnTypeWeight({
@@ -528,36 +521,36 @@ export const returnTypeStyle = (
 			}),
 			height: returnTypeLineHeight({
 				size: scaledTypeSize *
-					styleDefinition.gridBase,
+					foundation.gridBase,
 				lineHeight,
 			}),
 			spacing: returnTypeSpacing({
-				size: scaledTypeSize * styleDefinition.gridBase,
+				size: scaledTypeSize * foundation.gridBase,
 			}),
 		};
 
 		return typeStyle;
 };
-export const returnTypeStyles = ():Promise<TypeStylesTokenSet> =>
+export const returnTypeStyles = ():Promise<AllTypeStyles> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		const typeStyles:{
 			[key: string]: any;
 		} = {};
-		Object.keys(styleDefinition.device.widths).forEach((deviceWidthToken) => {
+		Object.keys(foundation.device.widths).forEach((deviceWidthToken) => {
 			typeStyles[deviceWidthToken] = {};
-			styleDefinition.type.size.tokens.forEach((typeSizeToken) => {
+			foundation.type.size.tokens.forEach((typeSizeToken) => {
 				typeStyles[deviceWidthToken][typeSizeToken] = {};
-				styleDefinition.type.weight.tokens
+				foundation.type.weight.tokens
 					.forEach((typeWeightToken) => {
 						typeStyles[deviceWidthToken][typeSizeToken][
 							typeWeightToken] = {};
-						styleDefinition.type.slant.tokens
+						foundation.type.slant.tokens
 							.forEach((typeSlantToken) => {
 								typeStyles[deviceWidthToken][
 									typeSizeToken][typeWeightToken][
 									typeSlantToken] = {};
-								styleDefinition.type.lineHeight.tokens
+								foundation.type.lineHeight.tokens
 									.forEach((typeLineHeightoken) => {
 										typeStyles[deviceWidthToken][
 											typeSizeToken][typeWeightToken][
@@ -565,10 +558,10 @@ export const returnTypeStyles = ():Promise<TypeStylesTokenSet> =>
 											returnTypeStyle({
 												deviceWidth: deviceWidthToken as DeviceWidthToken,
 												type: {
-													size: typeSizeToken as TypeSizeToken,
-													weight: typeWeightToken as TypeWeightToken,
-													slant: typeSlantToken as TypeSlantToken,
-													lineHeight: typeLineHeightoken as TypeLineHeightToken,
+													size: typeSizeToken as TypeSizeKey,
+													weight: typeWeightToken as TypeWeightKey,
+													slant: typeSlantToken as TypeSlantKey,
+													lineHeight: typeLineHeightoken as TypeLineHeightKey,
 												},
 											});
 									});
@@ -576,9 +569,9 @@ export const returnTypeStyles = ():Promise<TypeStylesTokenSet> =>
 					});
 			});
 		});
-		resolve(typeStyles as TypeStylesTokenSet);
+		resolve(typeStyles as AllTypeStyles);
 	});
-export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
+export const returnShadowStyles = ():Promise<AllShadows> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve the figma style pages
@@ -586,12 +579,12 @@ export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
 			// if the retrieval promise is resolved with a result
 			.then((figmaPages:FigmaPage[]) => {
 				// set up container
-				const shadows:ShadowTokenObject = {};
+				const shadows:AllShadows = {};
 				// extract the relevant Figma page
 				const shadowsFigmaPage = figmaPages
 					.filter(
 						(figmaPage) =>
-							figmaPage.name === styleDefinition
+							figmaPage.name === foundation
 								.figma.pageTitles.shadow,
 					);
 				// extract the StyleObjects frame in the page
@@ -604,7 +597,7 @@ export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
 				const styleObjects = shadowsStyleObjectsFrame[0].children;
 				// for each style object
 				styleObjects.forEach((styleObject) => {
-					const thisShadowSet:ShadowSet = [];
+					const thisShadowSet:ShadowSubset = [];
 					styleObject.effects.forEach((effect) => {
 						if (effect.type === 'DROP_SHADOW') {
 							const thisColorHSL = returnHSLValuesFromRBGPercents({
@@ -619,9 +612,9 @@ export const returnShadowStyles = ():Promise<ShadowTokenObject> =>
 								a: effect.color.a,
 							};
 							thisShadowSet.push({
-								'offset-x': effect.offset.x / styleDefinition.gridBase,
-								'offset-y': effect.offset.y / styleDefinition.gridBase,
-								'blur-radius': effect.radius / styleDefinition.gridBase,
+								'offset-x': effect.offset.x / foundation.gridBase,
+								'offset-y': effect.offset.y / foundation.gridBase,
+								'blur-radius': effect.radius / foundation.gridBase,
 								color: thisColorHSLA,
 							});
 						}
@@ -658,12 +651,12 @@ export const buildTokenSet = (
 			// get a promise to retrieve the shadow styles
 			tokenSetFunction()
 				// if the retrieval promise is resolved with a result
-				.then((result:ColorTokenObject | TypeStylesTokenSet | ShadowTokenObject) => {
+				.then((result:AllColors | AllTypeStyles | AllShadows) => {
 					// extract and format the objects data for convenience
 					const tokenObjectString = `export const ${tokenSet} = ${JSON.stringify(result)};`;
 					// write data to file
 					fs.writeFileSync(
-						`${styleDefinition.storage.path}${styleDefinition.storage.names[tokenSet]}`,
+						`${foundation.storage.path}${foundation.storage.names[tokenSet]}`,
 						tokenObjectString,
 					);
 					// then resolve the main promise with the result

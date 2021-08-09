@@ -1,42 +1,37 @@
-import { FigmaDocument, FigmaPage, FigmaStyleObject }
-	from '../models/figma';
 import {
-	HSLAColor, LevelKeys1, LevelKeys3, LevelKeys5, LevelKeys9, LevelKeys17, LevelKeys41, StateToneKeys, LightSurfaceKeys,
-	AccentOnDarkPrimaryHuesKeys, AccentOnDarkSecondaryHuesKeys,
-	AccentOnDarkTertiaryHuesKeys, AccentOnDarkQuarternaryHuesKeys,
-	AccentOnMediumPrimaryHuesKeys, AccentOnMediumTertiaryHuesKeys,
-	AccentOnMediumQuarternaryHuesKeys, AccentOnLightPrimaryHuesKeys,
-	AccentOnLightSecondaryHuesKeys, AccentOnLightQuarternaryHuesKeys,
+	Color, LightnessLevelKeyOf1, LightnessLevelKeyOf3, LightnessLevelKeyOf5, LightnessLevelKeyOf9,
+	LightnessLevelKeyOf41, StateToneKey, LightSurfaceKey,
+	AccentOnDarkPrimaryHuesKey, AccentOnDarkSecondaryHuesKey,
+	AccentOnDarkTertiaryHuesKey, AccentOnDarkQuarternaryHuesKey,
+	AccentOnMediumPrimaryHuesKey, AccentOnMediumTertiaryHuesKey,
+	AccentOnMediumQuarternaryHuesKey, AccentOnLightPrimaryHuesKey,
+	AccentOnLightSecondaryHuesKey, AccentOnLightQuarternaryHuesKey,
 } from '../models/color';
-import { DeviceWidthToken, DeviceWidthTokens, DeviceTokenObject }
+import { DeviceWidthToken, DeviceTokenObject }
 	from '../models/device';
-import { TypeSizeToken, TypeSizeValue, TypeWeightToken,
-	TypeWeightValue, TypeLineHeightToken, TypeSlantToken,
-	TypeStyleToken, TypeStylesTokenSet
+import { TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey
 } from '../models/type';
-import { Shadow, ShadowLevel, ShadowSet, ShadowTokenObject } from '../models/shadow';
+import { ShadowLevelKeyOf17 } from '../models/shadow';
 // lib predecessors
-import { styleDefinition } from './definition.js';
+import { foundation } from './foundation.js';
 // storage
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
 
-
-
 export { buildTokenSet, buildAllTokenSets } from './calculation.js';
 
-const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: HSLAColor}) =>
+const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: Color}) =>
 			`hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;
 
 export const style: {[key:string]: any} = {
-	gridBase: () => styleDefinition.gridBase as number,
-	device: () => styleDefinition.device as DeviceTokenObject,
+	gridBase: () => foundation.gridBase as number,
+	device: () => foundation.device as DeviceTokenObject,
 	color: {
 		neutral: {
 			finch: (
 				{ level }:
-				{ level: LevelKeys41 }
+				{ level: LightnessLevelKeyOf41 }
 			):string => (
 				color
 				&& 'Neutral' in color
@@ -48,7 +43,7 @@ export const style: {[key:string]: any} = {
 			),
 			sky: (
 				{ level }:
-				{ level: LevelKeys9 }
+				{ level: LightnessLevelKeyOf9 }
 			):string => (
 				color
 				&& 'Neutral' in color
@@ -60,7 +55,7 @@ export const style: {[key:string]: any} = {
 			),
 			spruce: (
 				{ level }:
-				{ level: LevelKeys9 }
+				{ level: LightnessLevelKeyOf9 }
 			):string => (
 				color
 				&& 'Neutral' in color
@@ -72,7 +67,7 @@ export const style: {[key:string]: any} = {
 			),
 			seafoam: (
 				{ level }:
-				{ level: LevelKeys9 }
+				{ level: LightnessLevelKeyOf9 }
 			):string => (
 				color
 				&& 'Neutral' in color
@@ -86,7 +81,7 @@ export const style: {[key:string]: any} = {
 		brand: {
 			finch: (
 				{ level }:
-				{ level: LevelKeys3 }
+				{ level: LightnessLevelKeyOf3 }
 			):string => (
 				color
 				&& 'Brand' in color
@@ -98,7 +93,7 @@ export const style: {[key:string]: any} = {
 			),
 			spruce: (
 				{ level }:
-				{ level: LevelKeys1 }
+				{ level: LightnessLevelKeyOf1 }
 			):string => (
 				color
 				&& 'Brand' in color
@@ -110,7 +105,7 @@ export const style: {[key:string]: any} = {
 			),
 			peony: (
 				{ level }:
-				{ level: LevelKeys3 }
+				{ level: LightnessLevelKeyOf3 }
 			):string => (
 				color
 				&& 'Brand' in color
@@ -125,7 +120,7 @@ export const style: {[key:string]: any} = {
 			onDark: {
 				primary: (
 					{ hue }:
-					{ hue: AccentOnDarkPrimaryHuesKeys }
+					{ hue: AccentOnDarkPrimaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -138,7 +133,7 @@ export const style: {[key:string]: any} = {
 				),
 				secondary: (
 					{ hue }:
-					{ hue: AccentOnDarkSecondaryHuesKeys }
+					{ hue: AccentOnDarkSecondaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -151,7 +146,7 @@ export const style: {[key:string]: any} = {
 				),
 				tertiary: (
 					{ hue }:
-					{ hue: AccentOnDarkTertiaryHuesKeys }
+					{ hue: AccentOnDarkTertiaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -164,7 +159,7 @@ export const style: {[key:string]: any} = {
 				),
 				quarternary: (
 					{ hue }:
-					{ hue: AccentOnDarkQuarternaryHuesKeys }
+					{ hue: AccentOnDarkQuarternaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -179,7 +174,7 @@ export const style: {[key:string]: any} = {
 			onMedium: {
 				primary: (
 					{ hue }:
-					{ hue: AccentOnMediumPrimaryHuesKeys }
+					{ hue: AccentOnMediumPrimaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -192,7 +187,7 @@ export const style: {[key:string]: any} = {
 				),
 				tertiary: (
 					{ hue }:
-					{ hue: AccentOnMediumTertiaryHuesKeys }
+					{ hue: AccentOnMediumTertiaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -205,7 +200,7 @@ export const style: {[key:string]: any} = {
 				),
 				quarternary: (
 					{ hue }:
-					{ hue: AccentOnMediumQuarternaryHuesKeys }
+					{ hue: AccentOnMediumQuarternaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -220,7 +215,7 @@ export const style: {[key:string]: any} = {
 			onLight: {
 				primary: (
 					{ hue }:
-					{ hue: AccentOnLightPrimaryHuesKeys }
+					{ hue: AccentOnLightPrimaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -233,7 +228,7 @@ export const style: {[key:string]: any} = {
 				),
 				secondary: (
 					{ hue }:
-					{ hue: AccentOnLightSecondaryHuesKeys }
+					{ hue: AccentOnLightSecondaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -246,7 +241,7 @@ export const style: {[key:string]: any} = {
 				),
 				quarternary: (
 					{ hue }:
-					{ hue: AccentOnLightQuarternaryHuesKeys }
+					{ hue: AccentOnLightQuarternaryHuesKey }
 				):string => (
 					color
 					&& 'Accent' in color
@@ -261,7 +256,7 @@ export const style: {[key:string]: any} = {
 		},
 		state:(
 				{ tone, level }:
-				{ tone: StateToneKeys, level: LevelKeys5 }
+				{ tone: StateToneKey, level: LightnessLevelKeyOf5 }
 			):string => (
 				color
 				&& 'State' in color
@@ -273,7 +268,7 @@ export const style: {[key:string]: any} = {
 			),
 		light:(
 				{ surface, level }:
-				{ surface: LightSurfaceKeys, level: LevelKeys5 }
+				{ surface: LightSurfaceKey, level: LightnessLevelKeyOf5 }
 			):string => (
 				color
 				&& 'Light' in color
@@ -285,7 +280,7 @@ export const style: {[key:string]: any} = {
 			),
 	},
 	type: {
-		family: () => styleDefinition.type.family as string,
+		family: () => foundation.type.family as string,
 		style: ({
 			deviceWidth,
 			size,
@@ -294,10 +289,10 @@ export const style: {[key:string]: any} = {
 			usage,
 		}:{
 			deviceWidth: DeviceWidthToken,
-			size: TypeSizeToken,
-			weight?: TypeWeightToken,
-			slant?: TypeSlantToken,
-			usage?: TypeLineHeightToken,
+			size: TypeSizeKey,
+			weight?: TypeWeightKey,
+			slant?: TypeSlantKey,
+			usage?: TypeLineHeightKey,
 		}) => {
 			const paramsClone = {
 				deviceWidth,
@@ -319,11 +314,11 @@ export const style: {[key:string]: any} = {
 		}
 	},
 	position: {
-		verticalAlignMiddle: () => styleDefinition
+		verticalAlignMiddle: () => foundation
 			.position.verticalAlignMiddle,
-		zIndexNumber: () => styleDefinition
+		zIndexNumber: () => foundation
 			.position.zIndexes,
-		shadow: ({ level = '06' }: { level?: ShadowLevel }) => {
+		shadow: ({ level = '06' }: { level?: ShadowLevelKeyOf17 }) => {
 			const shadowObject = shadow[level];
 			return `box-shadow:
 				${shadowObject[0]['offset-x']}rem ${shadowObject[0]['offset-y']}rem ${shadowObject[0]['blur-radius']}rem hsla(${shadowObject[0].color.h}, ${shadowObject[0].color.s}%, ${shadowObject[0].color.l}%, ${shadowObject[0].color.a}),
@@ -331,20 +326,20 @@ export const style: {[key:string]: any} = {
 		},
 	},
 	visibility: {
-		hiddenBlock: () => styleDefinition.visibility.blockHidden,
-		overrideHidingBlock: () => styleDefinition
+		hiddenBlock: () => foundation.visibility.blockHidden,
+		overrideHidingBlock: () => foundation
 			.visibility.overrideBlockHidden,
-		hiddenInline: () => styleDefinition
+		hiddenInline: () => foundation
 			.visibility.inlineHidden,
-		hiddenTableColumn: () => styleDefinition
+		hiddenTableColumn: () => foundation
 			.visibility.tableColumnHidden,
 	},
 	shape: {
-		standardCorners: () => styleDefinition.shape.standardCorners,
-		straightCorners: () => styleDefinition.shape.straightCorners,
-		circular: () => styleDefinition.shape.circular,
+		standardCorners: () => foundation.shape.standardCorners,
+		straightCorners: () => foundation.shape.straightCorners,
+		circular: () => foundation.shape.circular,
 	},
 	motion: {
-		standardTime: styleDefinition.motion.standardTime,
+		standardTime: foundation.motion.standardTime,
 	},
 };

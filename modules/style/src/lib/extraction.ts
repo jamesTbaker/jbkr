@@ -7,7 +7,7 @@
 import axios from 'axios';
 import { config as dotenvConfig } from 'dotenv';
 import * as fs from 'fs';
-import { styleDefinition } from './definition.js';
+import { foundation } from './foundation.js';
 import { FigmaDocument, FigmaPage } from '../models/figma';
 
 // get environment vars
@@ -54,7 +54,7 @@ export const fetchFigmaStylePages =
 						const figmaStylePages = result.data.document.children
 							.filter(
 								(page) => Object.values(
-									styleDefinition.figma.pageTitles,
+									foundation.figma.pageTitles,
 								).includes(page.name),
 							);
 						// if the array contains 1+ page objects
@@ -105,7 +105,7 @@ export const storeFigmaStylePages = ():Promise<{ error: boolean }> =>
 				try {
 					// write data to file
 					fs.writeFileSync(
-						`${styleDefinition.storage.path}${styleDefinition.storage.names.figma}`,
+						`${foundation.storage.path}${foundation.storage.names.figma}`,
 						objectsData,
 					);
 					// then resolve this promise with the result
@@ -139,7 +139,7 @@ export const returnStoredFigmaStylePages = ():Promise<FigmaPage[]> =>
 	// return a new promise
 	new Promise((resolve, reject) => {
 		fs.readFile(
-			`${styleDefinition.storage.path}${styleDefinition.storage.names.figma}`,
+			`${foundation.storage.path}${foundation.storage.names.figma}`,
 			'utf8',
 			(error, jsonString) => {
 				if (error) {

@@ -5,7 +5,7 @@
  * @internal
  */
 
-export const styleDefinition = {
+export const foundation = {
 	storage: {
 		path: './modules/style/src/store/',
 		names: {
