@@ -418,6 +418,26 @@ export namespace color {
         };
     }
     namespace Brand {
+        export const Peony: {
+            "01": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "03": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "02": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+        };
         const Finch_1: {
             "03": {
                 h: number;
@@ -448,26 +468,6 @@ export namespace color {
             };
         };
         export { Spruce_1 as Spruce };
-        export const Peony: {
-            "01": {
-                h: number;
-                s: number;
-                l: number;
-                a: number;
-            };
-            "03": {
-                h: number;
-                s: number;
-                l: number;
-                a: number;
-            };
-            "02": {
-                h: number;
-                s: number;
-                l: number;
-                a: number;
-            };
-        };
     }
     namespace Accent {
         namespace OnDark {

@@ -16,7 +16,7 @@
 				"${workspaceFolder}/**/*.js"
 			],
 			"preLaunchTask": "build-utilities",
-			// "console": "integratedTerminal"
+			"console": "integratedTerminal"
 		},
 		{
 			"name": "style",
@@ -30,7 +30,8 @@
 				"${workspaceFolder}/**/*.js"
 			],
 			"preLaunchTask": "build-style",
-			// "console": "integratedTerminal"
+			"console": "integratedTerminal",
+			"envFile": "${workspaceFolder}/modules/style/.env"
 		}
 	]
 }

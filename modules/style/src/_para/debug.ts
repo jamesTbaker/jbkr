@@ -1,17 +1,17 @@
 import {
-	fetchFigmaStylePages,
+	getFigmaStylePages,
 	storeFigmaStylePages,
 	returnStoredFigmaStylePages
 } from '../lib/extraction.js';
 import {
-	returnColors,
+	returnAllColors,
 	returnBaseTypeSize,
 	returnScaledTypeSize,
 	returnTypeWeight,
 	returnTypeLineHeight,
 	returnTypeSpacing,
 	returnTypeStyle,
-	buildAllTokenSets,
+	buildAllStyleSets,
 } from '../lib/calculation.js';
 import { style } from '../lib/api.js';
 
@@ -20,4 +20,4 @@ import { style } from '../lib/api.js';
 // 	size: 's',
 // });
 // style.position.shadow('08');
-buildAllTokenSets();
+buildAllStyleSets();

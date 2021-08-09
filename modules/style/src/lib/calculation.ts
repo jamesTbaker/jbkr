@@ -96,10 +96,13 @@ export const returnAllColors = ():Promise<AllColors> =>
 						a: thisColorRGBA.a,
 					};
 					if (propertiesArray[2] === 'Light') {
-						if (!(propertiesArray[3] in allColors)) {
-							allColors[propertiesArray[3]] = {};
+						if (!(propertiesArray[2] in allColors)) {
+							allColors[propertiesArray[2]] = {};
 						}
-						allColors[propertiesArray[3]][propertiesArray[4]] = thisColorHSLA;
+						if (!(propertiesArray[3] in allColors[propertiesArray[2]])) {
+							allColors[propertiesArray[2]][propertiesArray[3]] = {};
+						}
+						allColors[propertiesArray[2]][propertiesArray[3]][propertiesArray[4]] = thisColorHSLA;
 					}
 					if (propertiesArray[2] === 'jbkr') {
 						if (

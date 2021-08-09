@@ -4,10 +4,16 @@
  *
  * @internal
  */
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 export const foundation = {
 	storage: {
-		path: './modules/style/src/store/',
+		// path: './src/store/',
+		path: path.join(
+			fileURLToPath(import.meta.url),
+			'../../../src/store',
+		),
 		names: {
 			figma: 'figmaObjects.json',
 			color: 'color.js',

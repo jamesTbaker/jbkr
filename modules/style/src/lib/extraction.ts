@@ -5,14 +5,11 @@
  */
 
 import axios from 'axios';
-import { config as dotenvConfig } from 'dotenv';
 import * as fs from 'fs';
 import { foundation } from './foundation.js';
 import { FigmaDocument, FigmaPage } from '../models/figma';
-
-// get environment vars
-dotenvConfig();
-
+import path from 'path';
+import { fileURLToPath } from 'url';
 /**
  * Get the specified file from the Figma API. Extract and return only
  * the pages specified in [[`definition`]].
@@ -115,7 +112,7 @@ export const storeFigmaStylePages = ():Promise<{ error: boolean }> =>
 				} catch (error) {
 					// reject this promise with the error
 					reject(new Error(
-						'storeFigmaStylePages: could not write file'
+						`storeFigmaStylePages: could not write file - ${JSON.stringify(error)}`
 					));
 				}
 			})

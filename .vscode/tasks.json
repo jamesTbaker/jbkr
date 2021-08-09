@@ -2,31 +2,11 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "build-watch-style",
-			"type": "typescript",
-			"tsconfig": "modules/style/tsconfig.json",
-			"option": "watch",
-			"problemMatcher": [
-				"$tsc-watch"
-			],
-			"group": "build"
-		},
-		{
 			"label": "build-style",
 			"type": "typescript",
 			"tsconfig": "modules/style/tsconfig.json",
 			"problemMatcher": [
 				"$tsc"
-			],
-			"group": "build"
-		},
-		{
-			"label": "build-watch-utilities",
-			"type": "typescript",
-			"tsconfig": "modules/utilities/tsconfig.json",
-			"option": "watch",
-			"problemMatcher": [
-				"$tsc-watch"
 			],
 			"group": "build"
 		},
