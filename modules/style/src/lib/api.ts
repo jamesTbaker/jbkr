@@ -19,7 +19,7 @@ import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
 
-export { buildTokenSet, buildAllTokenSets } from './calculation.js';
+export { buildStyleSet, buildAllStyleSets } from './calculation.js';
 
 const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: Color}) =>
 			`hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;

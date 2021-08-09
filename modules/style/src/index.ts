@@ -1,5 +1,5 @@
 export {
-	buildTokenSet,
-	buildAllTokenSets,
+	buildStyleSet,
+	buildAllStyleSets,
 	style
 } from './lib/api.js';

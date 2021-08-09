@@ -24,7 +24,7 @@ dotenvConfig();
  *
  * @internal
  */
-export const fetchFigmaStylePages =
+export const getFigmaStylePages =
 	():Promise<FigmaPage[]> =>
 		// return a new, main promise
 		new Promise((resolve, reject) => {
@@ -65,13 +65,13 @@ export const fetchFigmaStylePages =
 						} else {
 							// reject the main promise with a custom error
 							reject(new Error(
-								'fetchFigmaStylePages: Array figmaStylePages contains no objects'
+								'getFigmaStylePages: Array figmaStylePages contains no objects'
 								));
 						}
 					} else {
 						// reject the main promise with a custom error
 						reject(new Error(
-							'fetchFigmaStylePages: API result does not conform to expected architecture'
+							'getFigmaStylePages: API result does not conform to expected architecture'
 						));
 					}
 				})
@@ -79,12 +79,12 @@ export const fetchFigmaStylePages =
 				.catch((error) => {
 					// reject the main promise with a custom error
 					reject(new Error(
-						`fetchFigmaStylePages: Axios - Figma  - ${JSON.stringify(error)}`
+						`getFigmaStylePages: Axios - Figma  - ${JSON.stringify(error)}`
 						));
 				});
 		});
 /**
- * Get Figma data using [[`fetchFigmaStylePages`]] and write it to the
+ * Get Figma data using [[`getFigmaStylePages`]] and write it to the
  * local file system.
  *
  * @remarks
@@ -98,7 +98,7 @@ export const storeFigmaStylePages = ():Promise<{ error: boolean }> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to return the styles objects
-		fetchFigmaStylePages()
+		getFigmaStylePages()
 			.then((result: FigmaPage[]) => {
 				// extract and format the objects data for convenience
 				const objectsData = JSON.stringify(result);

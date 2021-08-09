@@ -33,238 +33,7 @@ import * as fs from 'fs';
  *
  * @internal
  */
-/* export const returnColors = ():Promise<AllColors> =>
-	// return a new, main promise
-	new Promise((resolve, reject) => {
-		// get a promise to retrieve the figma style pages
-		returnStoredFigmaStylePages()
-			// if the retrieval promise is resolved with a result
-			.then((figmaPages:FigmaPage[]) => {
-				// set up container
-				const allColors:AllColors = {
-						Neutral: {
-							Finch: {},
-							Sky: {},
-							Spruce: {},
-							Seafoam: {},
-						},
-						Brand: {
-							Finch: {},
-							Spruce: {},
-							Peony: {},
-						},
-						Accent: {
-							OnDark: {
-								Primary: {},
-								Secondary: {},
-								Tertiary: {},
-								Quarternary: {},
-							},
-							OnMedium: {
-								Primary: {},
-								Tertiary: {},
-								Quarternary: {},
-							},
-							OnLight: {
-								Primary: {},
-								Secondary: {},
-								Quarternary: {},
-							},
-						},
-						State: {
-							Positive: {},
-							Warning: {},
-							Negative: {},
-							Neutral: {},
-						},
-						Light: {
-							OnLight: {},
-							OnDark: {},
-						},
-				};
-				// extract the relevant Figma pages
-				const jbkrColorsFigmaPage = figmaPages
-					.filter(
-						(figmaPage) =>
-							figmaPage.name === foundation
-								.figma.pageTitles.colorJBKR,
-					);
-				const lightColorsFigmaPage = figmaPages
-					.filter(
-						(figmaPage) =>
-							figmaPage.name === foundation
-								.figma.pageTitles.light,
-					);
-
-				// extract the StyleObjects frame in the page
-				const jbkrStyleObjectsFrame =
-					jbkrColorsFigmaPage[0].children[0]
-						.children.filter(
-							(child) => child.name === 'StyleObjects',
-						);
-				const lightStyleObjectsFrame =
-					lightColorsFigmaPage[0].children[0]
-						.children.filter(
-							(child) => child.name === 'StyleObjects',
-						);
-				// extract the style objects from the frame
-				const styleObjects = [
-					...jbkrStyleObjectsFrame[0].children,
-					...lightStyleObjectsFrame[0].children,
-				];
-				// for each style object
-				styleObjects.forEach((styleObject) => {
-					// get array of properties describing this style
-					const propertiesArray =
-						styleObject.name.split(' / ');
-					// get this style object's fill color as RGBA
-					const thisColorRGBA =
-						styleObject.fills[0].color;
-					// get HSL equivalent to RGB portion of RGBA
-					const thisColorHSL = returnHSLValuesFromRBGPercents({
-							r: thisColorRGBA.r,
-							g: thisColorRGBA.g,
-							b: thisColorRGBA.b,
-						});
-					// construct the HSLA version of the fill color
-					const thisColorHSLA = {
-						h: thisColorHSL.h,
-						s: thisColorHSL.s,
-						l: thisColorHSL.l,
-						a: thisColorRGBA.a,
-					};
-					if (propertiesArray[2] === 'jbkr') {
-						if (propertiesArray[3] === 'Neutral') {
-							if (propertiesArray[4] === 'Finch') {
-								allColors.Neutral.Finch[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Sky') {
-								allColors.Neutral.Sky[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Spruce') {
-								allColors.Neutral.Spruce[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Seafoam') {
-								allColors.Neutral.Seafoam[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-						}
-						if (propertiesArray[3] === 'Brand') {
-							if (propertiesArray[4] === 'Finch') {
-								allColors.Brand.Finch[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Spruce') {
-								allColors.Brand.Spruce[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Peony') {
-								allColors.Brand.Peony[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-						}
-						if (propertiesArray[3] === 'Accent') {
-							if (propertiesArray[4] === 'OnDark') {
-								if (propertiesArray[5] === 'Primary') {
-									allColors.Accent.OnDark
-										.Primary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Secondary') {
-									allColors.Accent.OnDark
-										.Secondary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Tertiary') {
-									allColors.Accent.OnDark
-										.Tertiary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Quarternary') {
-									allColors.Accent.OnDark
-										.Quarternary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-							}
-							if (propertiesArray[4] === 'OnMedium') {
-								if (propertiesArray[5] === 'Primary') {
-									allColors.Accent.OnMedium
-										.Primary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Tertiary') {
-									allColors.Accent.OnMedium
-										.Tertiary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Quarternary') {
-									allColors.Accent.OnMedium
-										.Quarternary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-							}
-							if (propertiesArray[4] === 'OnLight') {
-								if (propertiesArray[5] === 'Primary') {
-									allColors.Accent.OnLight
-										.Primary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Secondary') {
-									allColors.Accent.OnLight
-										.Secondary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-								if (propertiesArray[5] === 'Quarternary') {
-									allColors.Accent.OnLight
-										.Quarternary[propertiesArray[6]] =
-											thisColorHSLA;
-								}
-							}
-						}
-						if (propertiesArray[3] === 'State') {
-							if (propertiesArray[4] === 'Positive') {
-								allColors.State.Positive[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Warning') {
-								allColors.State.Warning[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Negative') {
-								allColors.State.Negative[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-							if (propertiesArray[4] === 'Neutral') {
-								allColors.State.Neutral[propertiesArray[5]] =
-									thisColorHSLA;
-							}
-						}
-					}
-					if (propertiesArray[2] === 'Light') {
-						if (propertiesArray[3] === 'OnLight') {
-							allColors.Light.OnLight[propertiesArray[4]] =
-								thisColorHSLA;
-						}
-						if (propertiesArray[3] === 'OnDark') {
-							allColors.Light.OnDark[propertiesArray[4]] =
-								thisColorHSLA;
-						}
-					}
-				});
-				// then resolve the main promise with the return value
-				resolve(allColors);
-			})
-			// if the retrieval promise is rejected with an error
-			.catch((error) => {
-				// reject the main promise with the error
-				reject(error);
-			});
-	}); */
-
-export const returnColors = ():Promise<AllColors> =>
+export const returnAllColors = ():Promise<AllColors> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve the figma style pages
@@ -369,8 +138,6 @@ export const returnColors = ():Promise<AllColors> =>
 				reject(error);
 			});
 	});
-
-
 export const returnBaseTypeSize = (
 	{ deviceWidth }:
 	{ deviceWidth: DeviceWidthToken}
@@ -531,7 +298,7 @@ export const returnTypeStyle = (
 
 		return typeStyle;
 };
-export const returnTypeStyles = ():Promise<AllTypeStyles> =>
+export const returnAllTypeStyles = ():Promise<AllTypeStyles> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		const typeStyles:{
@@ -571,7 +338,7 @@ export const returnTypeStyles = ():Promise<AllTypeStyles> =>
 		});
 		resolve(typeStyles as AllTypeStyles);
 	});
-export const returnShadowStyles = ():Promise<AllShadows> =>
+export const returnAllShadows = ():Promise<AllShadows> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve the figma style pages
@@ -631,7 +398,7 @@ export const returnShadowStyles = ():Promise<AllShadows> =>
 				reject(error);
 			});
 	});
-export const buildTokenSet = (
+export const buildStyleSet = (
 	{ tokenSet }:
 	{ tokenSet: 'color' | 'type' | 'shadow'}
 ):Promise<{ error: boolean }> =>
@@ -639,11 +406,11 @@ export const buildTokenSet = (
 	new Promise((resolve, reject) => {
 		let tokenSetFunction;
 		if (tokenSet === 'color') {
-			tokenSetFunction = returnColors;
+			tokenSetFunction = returnAllColors;
 		} else if (tokenSet === 'type') {
-			tokenSetFunction = returnTypeStyles;
+			tokenSetFunction = returnAllTypeStyles;
 		} else if (tokenSet === 'shadow') {
-			tokenSetFunction = returnShadowStyles;
+			tokenSetFunction = returnAllShadows;
 		}
 		// const tokenSetFunction = tokenSet === 'color' ? buildColorTokens
 		// 	: tokenSet === 'type' ? buildTypeTokens
@@ -671,11 +438,11 @@ export const buildTokenSet = (
 				});
 		} else {
 			reject(new Error(
-				'buildTokenSet - could not find appropriate function'
+				'buildStyleSet - could not find appropriate function'
 			));
 		}
 	});
-export const buildAllTokenSets = ():Promise<{ error: boolean }> =>
+export const buildAllStyleSets = ():Promise<{ error: boolean }> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to store a fresh copy of the Figma style pages
@@ -684,9 +451,9 @@ export const buildAllTokenSets = ():Promise<{ error: boolean }> =>
 			.then(() => {
 				// get promises to build each token set
 				Promise.all([
-					buildTokenSet({ tokenSet: 'color'}),
-					buildTokenSet({ tokenSet: 'type'}),
-					buildTokenSet({ tokenSet: 'shadow'}),
+					buildStyleSet({ tokenSet: 'color'}),
+					buildStyleSet({ tokenSet: 'type'}),
+					buildStyleSet({ tokenSet: 'shadow'}),
 				])
 					// if the build promises are resolved with a result
 					.then((result) => {
