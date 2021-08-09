@@ -1,3 +1,4 @@
+
 /**
  * Specify some styles in full, and specify settings for
  * generating other styles.
@@ -7,12 +8,13 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+
 export const foundation = {
 	storage: {
 		// path: './src/store/',
 		path: path.join(
 			fileURLToPath(import.meta.url),
-			'../../../src/store',
+			'../../../src/store/',
 		),
 		names: {
 			figma: 'figmaObjects.json',

@@ -8,8 +8,6 @@ import axios from 'axios';
 import * as fs from 'fs';
 import { foundation } from './foundation.js';
 import { FigmaDocument, FigmaPage } from '../models/figma';
-import path from 'path';
-import { fileURLToPath } from 'url';
 /**
  * Get the specified file from the Figma API. Extract and return only
  * the pages specified in [[`definition`]].
@@ -21,65 +19,67 @@ import { fileURLToPath } from 'url';
  *
  * @internal
  */
-export const getFigmaStylePages =
-	():Promise<FigmaPage[]> =>
-		// return a new, main promise
-		new Promise((resolve, reject) => {
-			// get a promise to retrieve file from the Figma API
-			axios({
-				method: 'get',
-				url: `https://api.figma.com/v1/files/${process.env.figmaFileID}`,
-				timeout: 10000,
-				headers: {
-					'X-Figma-Token': process.env.figmaAccessToken,
-				},
-			})
-				// if the retrieval promise is resolved with a result
-				.then((result:{
+export const getFigmaStylePages =	():Promise<FigmaPage[]> =>
+// return a new, main promise
+	new Promise((resolve, reject) => {
+		// get a promise to retrieve file from the Figma API
+		axios({
+			method: 'get',
+			url:
+				`https://api.figma.com/v1/files/${process.env.figmaFileID}`,
+			timeout: 10000,
+			headers: {
+				'X-Figma-Token': process.env.figmaAccessToken,
+			},
+		})
+		// if the retrieval promise is resolved with a result
+			.then((result:{
 					data: FigmaDocument
 				}) => {
-					// if the returned object has the expected architecture
-					if (
-						result &&
-						result.data &&
-						result.data.document &&
+				// if the returned object has the expected architecture
+				if (
+					result
+						&& result.data
+						&& result.data.document
+						&& result.data.document.children
+				) {
+					// create a new array and attempt to populate it
+					// with the Figma pages whose names are
+					// specified in definition
+					const figmaStylePages =
 						result.data.document.children
-					) {
-						// create a new array and attempt to populate it
-						// with the Figma pages whose names are
-						// specified in definition
-						const figmaStylePages = result.data.document.children
 							.filter(
 								(page) => Object.values(
 									foundation.figma.pageTitles,
 								).includes(page.name),
 							);
 						// if the array contains 1+ page objects
-						if (figmaStylePages.length > 0) {
-							// then resolve the main promise with the array
-							resolve(figmaStylePages);
+					if (figmaStylePages.length > 0) {
+						// then resolve the main promise with the array
+						resolve(figmaStylePages);
 						// if the array doesn't contain 1+ page objects
-						} else {
-							// reject the main promise with a custom error
-							reject(new Error(
-								'getFigmaStylePages: Array figmaStylePages contains no objects'
-								));
-						}
 					} else {
 						// reject the main promise with a custom error
 						reject(new Error(
-							'getFigmaStylePages: API result does not conform to expected architecture'
+							'getFigmaStylePages: figmaStylePages ' +
+							'contains no objects',
 						));
 					}
-				})
-				// if the retrieval promise is rejected with an error
-				.catch((error) => {
+				} else {
 					// reject the main promise with a custom error
 					reject(new Error(
-						`getFigmaStylePages: Axios - Figma  - ${JSON.stringify(error)}`
-						));
-				});
-		});
+						'getFigmaStylePages: API result does not conform to expected architecture',
+					));
+				}
+			})
+		// if the retrieval promise is rejected with an error
+			.catch((error) => {
+				// reject the main promise with a custom error
+				reject(new Error(
+					`getFigmaStylePages: Axios - Figma  - ${JSON.stringify(error)}`,
+				));
+			});
+	});
 /**
  * Get Figma data using [[`getFigmaStylePages`]] and write it to the
  * local file system.
@@ -112,7 +112,7 @@ export const storeFigmaStylePages = ():Promise<{ error: boolean }> =>
 				} catch (error) {
 					// reject this promise with the error
 					reject(new Error(
-						`storeFigmaStylePages: could not write file - ${JSON.stringify(error)}`
+						`storeFigmaStylePages: could not write file - ${JSON.stringify(error)}`,
 					));
 				}
 			})

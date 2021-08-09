@@ -14,40 +14,40 @@ export const style = {
             finch: ({ level }) => (color
                 && 'Neutral' in color
                 && 'Finch' in color.Neutral
-                && level in color.Neutral.Finch ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Finch[level] }) : ''),
+                && level in color.Neutral.Finch
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Finch[level] }) : ''),
             sky: ({ level }) => (color
                 && 'Neutral' in color
                 && 'Sky' in color.Neutral
-                && level in color.Neutral.Sky ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Sky[level] }) : ''),
+                && level in color.Neutral.Sky
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Sky[level] }) : ''),
             spruce: ({ level }) => (color
                 && 'Neutral' in color
                 && 'Spruce' in color.Neutral
-                && level in color.Neutral.Spruce ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Spruce[level] }) : ''),
+                && level in color.Neutral.Spruce
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Spruce[level] }) : ''),
             seafoam: ({ level }) => (color
                 && 'Neutral' in color
                 && 'Seafoam' in color.Neutral
-                && level in color.Neutral.Seafoam ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Seafoam[level] }) : ''),
+                && level in color.Neutral.Seafoam
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Neutral.Seafoam[level] }) : ''),
         },
         brand: {
             finch: ({ level }) => (color
                 && 'Brand' in color
                 && 'Finch' in color.Brand
-                && level in color.Brand.Finch ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Brand.Finch[level] }) : ''),
+                && level in color.Brand.Finch
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Brand.Finch[level] }) : ''),
             spruce: ({ level }) => (color
                 && 'Brand' in color
                 && 'Spruce' in color.Brand
-                && level in color.Brand.Spruce ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Brand.Spruce[level] }) : ''),
+                && level in color.Brand.Spruce
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Brand.Spruce[level] }) : ''),
             peony: ({ level }) => (color
                 && 'Brand' in color
                 && 'Peony' in color.Brand
-                && level in color.Brand.Peony ?
-                returnHSLAStringFromHSLAObject({ hslaObject: color.Brand.Peony[level] }) : ''),
+                && level in color.Brand.Peony
+                ? returnHSLAStringFromHSLAObject({ hslaObject: color.Brand.Peony[level] }) : ''),
         },
         accent: {
             onDark: {
@@ -55,78 +55,78 @@ export const style = {
                     && 'Accent' in color
                     && 'OnDark' in color.Accent
                     && 'Primary' in color.Accent.OnDark
-                    && hue in color.Accent.OnDark.Primary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Primary[hue] }) : ''),
+                    && hue in color.Accent.OnDark.Primary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Primary[hue] }) : ''),
                 secondary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnDark' in color.Accent
                     && 'Secondary' in color.Accent.OnDark
-                    && hue in color.Accent.OnDark.Secondary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Secondary[hue] }) : ''),
+                    && hue in color.Accent.OnDark.Secondary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Secondary[hue] }) : ''),
                 tertiary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnDark' in color.Accent
                     && 'Tertiary' in color.Accent.OnDark
-                    && hue in color.Accent.OnDark.Tertiary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Tertiary[hue] }) : ''),
+                    && hue in color.Accent.OnDark.Tertiary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Tertiary[hue] }) : ''),
                 quarternary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnDark' in color.Accent
                     && 'Quarternary' in color.Accent.OnDark
-                    && hue in color.Accent.OnDark.Quarternary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Quarternary[hue] }) : ''),
+                    && hue in color.Accent.OnDark.Quarternary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnDark.Quarternary[hue] }) : ''),
             },
             onMedium: {
                 primary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnMedium' in color.Accent
                     && 'Primary' in color.Accent.OnMedium
-                    && hue in color.Accent.OnMedium.Primary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnMedium.Primary[hue] }) : ''),
+                    && hue in color.Accent.OnMedium.Primary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnMedium.Primary[hue] }) : ''),
                 tertiary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnMedium' in color.Accent
                     && 'Tertiary' in color.Accent.OnMedium
-                    && hue in color.Accent.OnMedium.Tertiary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnMedium.Tertiary[hue] }) : ''),
+                    && hue in color.Accent.OnMedium.Tertiary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnMedium.Tertiary[hue] }) : ''),
                 quarternary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnMedium' in color.Accent
                     && 'Quarternary' in color.Accent.OnMedium
-                    && hue in color.Accent.OnMedium.Quarternary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnMedium.Quarternary[hue] }) : ''),
+                    && hue in color.Accent.OnMedium.Quarternary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnMedium.Quarternary[hue] }) : ''),
             },
             onLight: {
                 primary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnLight' in color.Accent
                     && 'Primary' in color.Accent.OnLight
-                    && hue in color.Accent.OnLight.Primary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnLight.Primary[hue] }) : ''),
+                    && hue in color.Accent.OnLight.Primary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnLight.Primary[hue] }) : ''),
                 secondary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnLight' in color.Accent
                     && 'Secondary' in color.Accent.OnLight
-                    && hue in color.Accent.OnLight.Secondary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnLight.Secondary[hue] }) : ''),
+                    && hue in color.Accent.OnLight.Secondary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnLight.Secondary[hue] }) : ''),
                 quarternary: ({ hue }) => (color
                     && 'Accent' in color
                     && 'OnLight' in color.Accent
                     && 'Quarternary' in color.Accent.OnLight
-                    && hue in color.Accent.OnLight.Quarternary ?
-                    returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnLight.Quarternary[hue] }) : ''),
+                    && hue in color.Accent.OnLight.Quarternary
+                    ? returnHSLAStringFromHSLAObject({ hslaObject: color.Accent.OnLight.Quarternary[hue] }) : ''),
             },
         },
         state: ({ tone, level }) => (color
             && 'State' in color
             && tone in color.State
-            && level in color.State[tone] ?
-            returnHSLAStringFromHSLAObject({ hslaObject: color.State[tone][level] }) : ''),
+            && level in color.State[tone]
+            ? returnHSLAStringFromHSLAObject({ hslaObject: color.State[tone][level] }) : ''),
         light: ({ surface, level }) => (color
             && 'Light' in color
             && surface in color.Light
-            && level in color.Light[surface] ?
-            returnHSLAStringFromHSLAObject({ hslaObject: color.Light[surface][level] }) : ''),
+            && level in color.Light[surface]
+            ? returnHSLAStringFromHSLAObject({ hslaObject: color.Light[surface][level] }) : ''),
     },
     type: {
         family: () => foundation.type.family,
@@ -146,7 +146,7 @@ export const style = {
 				line-height: ${typeObject.height}rem;
 				letter-spacing: ${typeObject.spacing}rem;
 			`;
-        }
+        },
     },
     position: {
         verticalAlignMiddle: () => foundation

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * Specify some styles in full, and specify settings for
  * generating other styles.
@@ -9,7 +10,7 @@ import { fileURLToPath } from 'url';
 export const foundation = {
     storage: {
         // path: './src/store/',
-        path: path.join(fileURLToPath(import.meta.url), '../../../src/store'),
+        path: path.join(fileURLToPath(import.meta.url), '../../../src/store/'),
         names: {
             figma: 'figmaObjects.json',
             color: 'color.js',

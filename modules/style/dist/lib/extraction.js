@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * Extract styles data from Figma and store it locally.
  *
@@ -32,10 +33,10 @@ new Promise((resolve, reject) => {
         // if the retrieval promise is resolved with a result
         .then((result) => {
         // if the returned object has the expected architecture
-        if (result &&
-            result.data &&
-            result.data.document &&
-            result.data.document.children) {
+        if (result
+            && result.data
+            && result.data.document
+            && result.data.document.children) {
             // create a new array and attempt to populate it
             // with the Figma pages whose names are
             // specified in definition

@@ -1,9 +1,16 @@
+/* eslint-disable max-len */
+/**
+ * Extract styles data from Figma and store it locally.
+ *
+ * @internal
+ */
+// models
+import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, } from 'utilities';
+import * as fs from 'fs';
 // lib predecessors
 import { foundation } from './foundation.js';
 import { storeFigmaStylePages, returnStoredFigmaStylePages } from './extraction.js';
 // modules
-import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, } from 'utilities';
-import * as fs from 'fs';
 /**
  * Get all colors from the stored Figma pages. This includes the colors
  * assigned to the jbkr brand and the colors representing
@@ -105,10 +112,8 @@ new Promise((resolve, reject) => {
         reject(error);
     });
 });
-export const returnBaseTypeSize = ({ deviceWidth }) => {
-    return foundation.gridBase * foundation.type.size
-        .baseMultipliersByDeviceWidth[deviceWidth];
-};
+export const returnBaseTypeSize = ({ deviceWidth }) => foundation.gridBase * foundation.type.size
+    .baseMultipliersByDeviceWidth[deviceWidth];
 export const returnScaledTypeSize = ({ deviceWidth, baseTypeSize, scalingSteps, }) => {
     const scaleMultipliersThisDeviceWidth = foundation.type.size
         .scalingMultipliersByDeviceWidth[deviceWidth];
@@ -163,9 +168,9 @@ export const returnTypeWeight = ({ baseTypeSize, scalingSteps, weight, }) => {
 export const returnTypeLineHeight = ({ size, lineHeight }) => {
     const scaleMultipliersThisUse = foundation.type.lineHeight
         .scalingMultipliers[lineHeight];
-    const naturalHeight = size > scaleMultipliersThisUse.highestLowSize ?
-        size * scaleMultipliersThisUse.high :
-        size * scaleMultipliersThisUse.low;
+    const naturalHeight = size > scaleMultipliersThisUse.highestLowSize
+        ? size * scaleMultipliersThisUse.high
+        : size * scaleMultipliersThisUse.low;
     return returnNumberRoundedUpToMultiple({
         number: naturalHeight,
         multiple: foundation.gridBase,
@@ -192,8 +197,8 @@ export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, line
             weight,
         }),
         height: returnTypeLineHeight({
-            size: scaledTypeSize *
-                foundation.gridBase,
+            size: scaledTypeSize
+                * foundation.gridBase,
             lineHeight,
         }),
         spacing: returnTypeSpacing({
@@ -204,7 +209,7 @@ export const returnTypeStyle = ({ deviceWidth, type: { size, weight, slant, line
 };
 export const returnAllTypeStyles = () => 
 // return a new, main promise
-new Promise((resolve, reject) => {
+new Promise((resolve) => {
     const typeStyles = {};
     Object.keys(foundation.device.widths).forEach((deviceWidthToken) => {
         typeStyles[deviceWidthToken] = {};
@@ -218,16 +223,15 @@ new Promise((resolve, reject) => {
                     typeStyles[deviceWidthToken][typeSizeToken][typeWeightToken][typeSlantToken] = {};
                     foundation.type.lineHeight.tokens
                         .forEach((typeLineHeightoken) => {
-                        typeStyles[deviceWidthToken][typeSizeToken][typeWeightToken][typeSlantToken][typeLineHeightoken] =
-                            returnTypeStyle({
-                                deviceWidth: deviceWidthToken,
-                                type: {
-                                    size: typeSizeToken,
-                                    weight: typeWeightToken,
-                                    slant: typeSlantToken,
-                                    lineHeight: typeLineHeightoken,
-                                },
-                            });
+                        typeStyles[deviceWidthToken][typeSizeToken][typeWeightToken][typeSlantToken][typeLineHeightoken] = returnTypeStyle({
+                            deviceWidth: deviceWidthToken,
+                            type: {
+                                size: typeSizeToken,
+                                weight: typeWeightToken,
+                                slant: typeSlantToken,
+                                lineHeight: typeLineHeightoken,
+                            },
+                        });
                     });
                 });
             });
@@ -277,8 +281,7 @@ new Promise((resolve, reject) => {
                     });
                 }
             });
-            shadows[styleObject.name.split(' / ')[1]] =
-                thisShadowSet;
+            shadows[styleObject.name.split(' / ')[1]] = thisShadowSet;
         });
         // then resolve the main promise with the populated container
         resolve(shadows);
@@ -342,7 +345,7 @@ new Promise((resolve, reject) => {
             buildStyleSet({ tokenSet: 'shadow' }),
         ])
             // if the build promises are resolved with a result
-            .then((result) => {
+            .then(() => {
             // then resolve the main promise with a message
             resolve({ error: false });
         })
