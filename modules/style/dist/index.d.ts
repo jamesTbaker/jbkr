@@ -1,1 +1,1 @@
-export { buildStyleSet, buildAllStyleSets, style } from './lib/api.js';
+export { buildStyleSet, buildAllStyleSets, style, } from './lib/api.js';

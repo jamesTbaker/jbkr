@@ -1,5 +1,6 @@
 export {
 	buildStyleSet,
 	buildAllStyleSets,
-	style
+	style,
+// eslint-disable-next-line import/no-unresolved
 } from './lib/api.js';

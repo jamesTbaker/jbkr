@@ -27,9 +27,9 @@ export const returnHSLValuesFromRBGPercents = ({ r, g, b }) => {
         h /= 6;
     }
     return {
-        h: Math.round(h * 360),
-        s: Math.round(s * 100),
-        l: Math.round(l * 100),
+        'h': Math.round(h * 360),
+        's': Math.round(s * 100),
+        'l': Math.round(l * 100),
     };
 };
 export const returnCopyOfObjectWithStringKeys = ({ incoming }) => {
@@ -40,15 +40,23 @@ export const returnCopyOfObjectWithStringKeys = ({ incoming }) => {
         // Parsing a boolean or a number will not throw an error, so we
         // must check that type is object. However, null is also of type
         // object, so we must also test for truthiness.
-        // if type is object and value is truthy
-        if (result && typeof result === 'object') {
-            // return it
-            return result;
-            // if either type is not object or value is not truthy
+        // if value is truthy
+        if (result) {
+            // if type is object
+            if (typeof result === 'object') {
+                // return it
+                return result;
+                // if type is not object
+            }
+            else {
+                // throw custom error
+                throw 'returnCopyOfObjectWithStringKeys - result not object';
+            }
+            // if value is not truthy
         }
         else {
-            // return custom error
-            return new Error('returnCopyOfObjectWithStringKeys - result not successful');
+            // throw custom error
+            throw 'returnCopyOfObjectWithStringKeys - result not truthy';
         }
         // if attempt to get an object resulted in an error
     }

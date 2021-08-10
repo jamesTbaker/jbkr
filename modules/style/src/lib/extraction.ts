@@ -6,7 +6,9 @@
 
 import axios from 'axios';
 import * as fs from 'fs';
+// eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';
+// eslint-disable-next-line import/extensions
 import { FigmaDocument, FigmaPage } from '../models/figma';
 /**
  * Get the specified file from the Figma API. Extract and return only
@@ -24,11 +26,11 @@ export const getFigmaStylePages =	():Promise<FigmaPage[]> =>
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve file from the Figma API
 		axios({
-			method: 'get',
-			url:
+			'method': 'get',
+			'url':
 				`https://api.figma.com/v1/files/${process.env.figmaFileID}`,
-			timeout: 10000,
-			headers: {
+			'timeout': 10000,
+			'headers': {
 				'X-Figma-Token': process.env.figmaAccessToken,
 			},
 		})
@@ -53,30 +55,29 @@ export const getFigmaStylePages =	():Promise<FigmaPage[]> =>
 									foundation.figma.pageTitles,
 								).includes(page.name),
 							);
-						// if the array contains 1+ page objects
+					// if the array contains 1+ page objects
 					if (figmaStylePages.length > 0) {
 						// then resolve the main promise with the array
 						resolve(figmaStylePages);
 						// if the array doesn't contain 1+ page objects
 					} else {
-						// reject the main promise with a custom error
-						reject(new Error(
-							'getFigmaStylePages: figmaStylePages ' +
-							'contains no objects',
-						));
+						// throw custom error
+						throw '> > > JBKR: getFigmaStylePages: \
+							figmaStylePages contains no objects';
 					}
 				} else {
-					// reject the main promise with a custom error
-					reject(new Error(
-						'getFigmaStylePages: API result does not conform to expected architecture',
-					));
+					// throw custom error
+					throw '> > > JBKR: getFigmaStylePages: \
+						API result does not conform to \
+						expected architecture';
 				}
 			})
-		// if the retrieval promise is rejected with an error
+			// if the retrieval promise is rejected with an error
 			.catch((error) => {
 				// reject the main promise with a custom error
 				reject(new Error(
-					`getFigmaStylePages: Axios - Figma  - ${JSON.stringify(error)}`,
+					`> > > JBKR: getFigmaStylePages: \
+						Axios - Figma  - ${JSON.stringify(error)}`,
 				));
 			});
 	});
@@ -102,17 +103,19 @@ export const storeFigmaStylePages = ():Promise<{ error: boolean }> =>
 				try {
 					// write data to file
 					fs.writeFileSync(
-						`${foundation.storage.path}${foundation.storage.names.figma}`,
+						`${foundation.storage.path}\
+							${foundation.storage.names.figma}`,
 						objectsData,
 					);
 					// then resolve this promise with the result
 					resolve({
-						error: false,
+						'error': false,
 					});
 				} catch (error) {
-					// reject this promise with the error
+					// throw custom error
 					reject(new Error(
-						`storeFigmaStylePages: could not write file - ${JSON.stringify(error)}`,
+						`storeFigmaStylePages: could not write file - \
+						${JSON.stringify(error)}`,
 					));
 				}
 			})
@@ -142,8 +145,7 @@ export const returnStoredFigmaStylePages = ():Promise<FigmaPage[]> =>
 				if (error) {
 					reject(error);
 				}
-				const storedFigmaStylePages:FigmaPage[] = JSON.parse(jsonString);
-				resolve(storedFigmaStylePages);
+				resolve(JSON.parse(jsonString));
 			},
 		);
 	});

@@ -6,7 +6,10 @@
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"type": "module",
-	"dependencies": {
+	"scripts": {
+		"build": "tsc --project ./tsconfig.json"
+	},
+	"devDependencies": {
 		"typescript": "^4.3.5"
 	}
 }

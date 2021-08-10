@@ -1,7 +1,7 @@
 export type DeviceWidthToken = 's' | 'm' | 'l';
 export interface DeviceWidthTokens {
 	tokens: DeviceWidthToken[];
-};
+}
 export interface DeviceWidthSpec {
 	minimum: number | undefined;
 	maximum: number | undefined;
@@ -13,4 +13,4 @@ export interface DeviceWidthsTokenObject {
 }
 export interface DeviceTokenObject {
 	widths: DeviceWidthsTokenObject;
-};
+}

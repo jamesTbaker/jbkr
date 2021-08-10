@@ -1,35 +1,47 @@
 import {
-	Color, LightnessLevelKeyOf1, LightnessLevelKeyOf3, LightnessLevelKeyOf5, LightnessLevelKeyOf9,
+	Color, LightnessLevelKeyOf1, LightnessLevelKeyOf3,
+	LightnessLevelKeyOf5, LightnessLevelKeyOf9,
 	LightnessLevelKeyOf41, StateToneKey, LightSurfaceKey,
 	AccentOnDarkPrimaryHuesKey, AccentOnDarkSecondaryHuesKey,
 	AccentOnDarkTertiaryHuesKey, AccentOnDarkQuarternaryHuesKey,
 	AccentOnMediumPrimaryHuesKey, AccentOnMediumTertiaryHuesKey,
 	AccentOnMediumQuarternaryHuesKey, AccentOnLightPrimaryHuesKey,
 	AccentOnLightSecondaryHuesKey, AccentOnLightQuarternaryHuesKey,
+// eslint-disable-next-line import/extensions
 } from '../models/color';
-import { DeviceWidthToken, DeviceTokenObject }
-	from '../models/device';
+// eslint-disable-next-line import/extensions
+import { DeviceWidthToken, DeviceTokenObject } from '../models/device';
 import {
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
+// eslint-disable-next-line import/extensions
 } from '../models/type';
+// eslint-disable-next-line import/extensions
 import { ShadowLevelKeyOf17 } from '../models/shadow';
 // lib predecessors
+// eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';
 // storage
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
 
+
+// eslint-disable-next-line import/no-unresolved
 export { buildStyleSet, buildAllStyleSets } from './calculation.js';
 
-const returnHSLAStringFromHSLAObject = ({ hslaObject }:{hslaObject: Color}) => `hsla(${hslaObject.h}, ${hslaObject.s}%, ${hslaObject.l}%, ${hslaObject.a})`;
+const returnHSLAStringFromHSLAObject = (
+	{ hslaObject }:
+	{hslaObject: Color},
+) => `hsla(${hslaObject.h}, ${hslaObject.s}%, \
+	${hslaObject.l}%, ${hslaObject.a})`;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const style: {[key:string]: any} = {
-	gridBase: () => foundation.gridBase as number,
-	device: () => foundation.device as DeviceTokenObject,
-	color: {
-		neutral: {
-			finch: (
+	'gridBase': () => foundation.gridBase as number,
+	'device': () => foundation.device as DeviceTokenObject,
+	'color': {
+		'neutral': {
+			'finch': (
 				{ level }:
 				{ level: LightnessLevelKeyOf41 },
 			):string => (
@@ -38,10 +50,10 @@ export const style: {[key:string]: any} = {
 				&& 'Finch' in color.Neutral
 				&& level in color.Neutral.Finch
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Neutral.Finch[level] },
+						{ 'hslaObject': color.Neutral.Finch[level] },
 					) : ''
 			),
-			sky: (
+			'sky': (
 				{ level }:
 				{ level: LightnessLevelKeyOf9 },
 			):string => (
@@ -50,10 +62,10 @@ export const style: {[key:string]: any} = {
 				&& 'Sky' in color.Neutral
 				&& level in color.Neutral.Sky
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Neutral.Sky[level] },
+						{ 'hslaObject': color.Neutral.Sky[level] },
 					) : ''
 			),
-			spruce: (
+			'spruce': (
 				{ level }:
 				{ level: LightnessLevelKeyOf9 },
 			):string => (
@@ -62,10 +74,10 @@ export const style: {[key:string]: any} = {
 				&& 'Spruce' in color.Neutral
 				&& level in color.Neutral.Spruce
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Neutral.Spruce[level] },
+						{ 'hslaObject': color.Neutral.Spruce[level] },
 					) : ''
 			),
-			seafoam: (
+			'seafoam': (
 				{ level }:
 				{ level: LightnessLevelKeyOf9 },
 			):string => (
@@ -74,12 +86,12 @@ export const style: {[key:string]: any} = {
 				&& 'Seafoam' in color.Neutral
 				&& level in color.Neutral.Seafoam
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Neutral.Seafoam[level] },
+						{ 'hslaObject': color.Neutral.Seafoam[level] },
 					) : ''
 			),
 		},
-		brand: {
-			finch: (
+		'brand': {
+			'finch': (
 				{ level }:
 				{ level: LightnessLevelKeyOf3 },
 			):string => (
@@ -88,10 +100,10 @@ export const style: {[key:string]: any} = {
 				&& 'Finch' in color.Brand
 				&& level in color.Brand.Finch
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Brand.Finch[level] },
+						{ 'hslaObject': color.Brand.Finch[level] },
 					) : ''
 			),
-			spruce: (
+			'spruce': (
 				{ level }:
 				{ level: LightnessLevelKeyOf1 },
 			):string => (
@@ -100,10 +112,10 @@ export const style: {[key:string]: any} = {
 				&& 'Spruce' in color.Brand
 				&& level in color.Brand.Spruce
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Brand.Spruce[level] },
+						{ 'hslaObject': color.Brand.Spruce[level] },
 					) : ''
 			),
-			peony: (
+			'peony': (
 				{ level }:
 				{ level: LightnessLevelKeyOf3 },
 			):string => (
@@ -112,13 +124,13 @@ export const style: {[key:string]: any} = {
 				&& 'Peony' in color.Brand
 				&& level in color.Brand.Peony
 					? returnHSLAStringFromHSLAObject(
-						{ hslaObject: color.Brand.Peony[level] },
+						{ 'hslaObject': color.Brand.Peony[level] },
 					) : ''
 			),
 		},
-		accent: {
-			onDark: {
-				primary: (
+		'accent': {
+			'onDark': {
+				'primary': (
 					{ hue }:
 					{ hue: AccentOnDarkPrimaryHuesKey },
 				):string => (
@@ -128,10 +140,10 @@ export const style: {[key:string]: any} = {
 					&& 'Primary' in color.Accent.OnDark
 					&& hue in color.Accent.OnDark.Primary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnDark.Primary[hue] },
+							{ 'hslaObject': color.Accent.OnDark.Primary[hue] },
 						) : ''
 				),
-				secondary: (
+				'secondary': (
 					{ hue }:
 					{ hue: AccentOnDarkSecondaryHuesKey },
 				):string => (
@@ -141,10 +153,13 @@ export const style: {[key:string]: any} = {
 					&& 'Secondary' in color.Accent.OnDark
 					&& hue in color.Accent.OnDark.Secondary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnDark.Secondary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnDark.Secondary[hue],
+							},
 						) : ''
 				),
-				tertiary: (
+				'tertiary': (
 					{ hue }:
 					{ hue: AccentOnDarkTertiaryHuesKey },
 				):string => (
@@ -154,10 +169,10 @@ export const style: {[key:string]: any} = {
 					&& 'Tertiary' in color.Accent.OnDark
 					&& hue in color.Accent.OnDark.Tertiary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnDark.Tertiary[hue] },
+							{ 'hslaObject': color.Accent.OnDark.Tertiary[hue] },
 						) : ''
 				),
-				quarternary: (
+				'quarternary': (
 					{ hue }:
 					{ hue: AccentOnDarkQuarternaryHuesKey },
 				):string => (
@@ -167,12 +182,15 @@ export const style: {[key:string]: any} = {
 					&& 'Quarternary' in color.Accent.OnDark
 					&& hue in color.Accent.OnDark.Quarternary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnDark.Quarternary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnDark.Quarternary[hue],
+							},
 						) : ''
 				),
 			},
-			onMedium: {
-				primary: (
+			'onMedium': {
+				'primary': (
 					{ hue }:
 					{ hue: AccentOnMediumPrimaryHuesKey },
 				):string => (
@@ -182,10 +200,13 @@ export const style: {[key:string]: any} = {
 					&& 'Primary' in color.Accent.OnMedium
 					&& hue in color.Accent.OnMedium.Primary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnMedium.Primary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnMedium.Primary[hue],
+							},
 						) : ''
 				),
-				tertiary: (
+				'tertiary': (
 					{ hue }:
 					{ hue: AccentOnMediumTertiaryHuesKey },
 				):string => (
@@ -195,10 +216,13 @@ export const style: {[key:string]: any} = {
 					&& 'Tertiary' in color.Accent.OnMedium
 					&& hue in color.Accent.OnMedium.Tertiary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnMedium.Tertiary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnMedium.Tertiary[hue],
+							},
 						) : ''
 				),
-				quarternary: (
+				'quarternary': (
 					{ hue }:
 					{ hue: AccentOnMediumQuarternaryHuesKey },
 				):string => (
@@ -208,12 +232,15 @@ export const style: {[key:string]: any} = {
 					&& 'Quarternary' in color.Accent.OnMedium
 					&& hue in color.Accent.OnMedium.Quarternary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnMedium.Quarternary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnMedium.Quarternary[hue],
+							},
 						) : ''
 				),
 			},
-			onLight: {
-				primary: (
+			'onLight': {
+				'primary': (
 					{ hue }:
 					{ hue: AccentOnLightPrimaryHuesKey },
 				):string => (
@@ -223,10 +250,10 @@ export const style: {[key:string]: any} = {
 					&& 'Primary' in color.Accent.OnLight
 					&& hue in color.Accent.OnLight.Primary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnLight.Primary[hue] },
+							{ 'hslaObject': color.Accent.OnLight.Primary[hue] },
 						) : ''
 				),
-				secondary: (
+				'secondary': (
 					{ hue }:
 					{ hue: AccentOnLightSecondaryHuesKey },
 				):string => (
@@ -236,10 +263,13 @@ export const style: {[key:string]: any} = {
 					&& 'Secondary' in color.Accent.OnLight
 					&& hue in color.Accent.OnLight.Secondary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnLight.Secondary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnLight.Secondary[hue],
+							},
 						) : ''
 				),
-				quarternary: (
+				'quarternary': (
 					{ hue }:
 					{ hue: AccentOnLightQuarternaryHuesKey },
 				):string => (
@@ -249,12 +279,15 @@ export const style: {[key:string]: any} = {
 					&& 'Quarternary' in color.Accent.OnLight
 					&& hue in color.Accent.OnLight.Quarternary
 						? returnHSLAStringFromHSLAObject(
-							{ hslaObject: color.Accent.OnLight.Quarternary[hue] },
+							{
+								'hslaObject':
+									color.Accent.OnLight.Quarternary[hue],
+							},
 						) : ''
 				),
 			},
 		},
-		state: (
+		'state': (
 			{ tone, level }:
 				{ tone: StateToneKey, level: LightnessLevelKeyOf5 },
 		):string => (
@@ -263,10 +296,10 @@ export const style: {[key:string]: any} = {
 				&& tone in color.State
 				&& level in color.State[tone]
 				? returnHSLAStringFromHSLAObject(
-					{ hslaObject: color.State[tone][level] },
+					{ 'hslaObject': color.State[tone][level] },
 				) : ''
 		),
-		light: (
+		'light': (
 			{ surface, level }:
 			{ surface: LightSurfaceKey, level: LightnessLevelKeyOf5 },
 		):string => (
@@ -275,13 +308,13 @@ export const style: {[key:string]: any} = {
 				&& surface in color.Light
 				&& level in color.Light[surface]
 				? returnHSLAStringFromHSLAObject(
-					{ hslaObject: color.Light[surface][level] },
+					{ 'hslaObject': color.Light[surface][level] },
 				) : ''
 		),
 	},
-	type: {
-		family: () => foundation.type.family as string,
-		style: ({
+	'type': {
+		'family': () => foundation.type.family as string,
+		'style': ({
 			deviceWidth,
 			size,
 			weight,
@@ -297,9 +330,9 @@ export const style: {[key:string]: any} = {
 			const paramsClone = {
 				deviceWidth,
 				size,
-				weight: weight || 'regular',
-				slant: slant || 'normal',
-				usage: usage || 'body',
+				'weight': weight || 'regular',
+				'slant': slant || 'normal',
+				'usage': usage || 'body',
 			};
 			const typeObject = type[paramsClone.deviceWidth][
 				paramsClone.size][paramsClone.weight][paramsClone.slant][
@@ -313,33 +346,47 @@ export const style: {[key:string]: any} = {
 			`;
 		},
 	},
-	position: {
-		verticalAlignMiddle: () => foundation
+	'position': {
+		'verticalAlignMiddle': () => foundation
 			.position.verticalAlignMiddle,
-		zIndexNumber: () => foundation
+		'zIndexNumber': () => foundation
 			.position.zIndexes,
-		shadow: ({ level = '06' }: { level?: ShadowLevelKeyOf17 }) => {
+		'shadow': ({ level = '06' }: { level?: ShadowLevelKeyOf17 }) => {
 			const shadowObject = shadow[level];
 			return `box-shadow:
-				${shadowObject[0]['offset-x']}rem ${shadowObject[0]['offset-y']}rem ${shadowObject[0]['blur-radius']}rem hsla(${shadowObject[0].color.h}, ${shadowObject[0].color.s}%, ${shadowObject[0].color.l}%, ${shadowObject[0].color.a}),
-				${shadowObject[1]['offset-x']}rem ${shadowObject[1]['offset-y']}rem ${shadowObject[1]['blur-radius']}rem hsla(${shadowObject[1].color.h}, ${shadowObject[1].color.s}%, ${shadowObject[1].color.l}%, ${shadowObject[1].color.a});`;
+				${shadowObject[0]['offset-x']}rem \
+				${shadowObject[0]['offset-y']}rem \
+				${shadowObject[0]['blur-radius']}rem \
+				hsla(\
+					${shadowObject[0].color.h}, \
+					${shadowObject[0].color.s}%, \
+					${shadowObject[0].color.l}%, \
+					${shadowObject[0].color.a}),\
+				${shadowObject[1]['offset-x']}rem \
+				${shadowObject[1]['offset-y']}rem \
+				${shadowObject[1]['blur-radius']}rem \
+				hsla(\
+					${shadowObject[1].color.h}, \
+					${shadowObject[1].color.s}%, \
+					${shadowObject[1].color.l}%, \
+					${shadowObject[1].color.a});`;
 		},
 	},
-	visibility: {
-		hiddenBlock: () => foundation.visibility.blockHidden,
-		overrideHidingBlock: () => foundation
+	'visibility': {
+		'hiddenBlock': () => foundation.visibility.blockHidden,
+		'overrideHidingBlock': () => foundation
 			.visibility.overrideBlockHidden,
-		hiddenInline: () => foundation
+		'hiddenInline': () => foundation
 			.visibility.inlineHidden,
-		hiddenTableColumn: () => foundation
+		'hiddenTableColumn': () => foundation
 			.visibility.tableColumnHidden,
 	},
-	shape: {
-		standardCorners: () => foundation.shape.standardCorners,
-		straightCorners: () => foundation.shape.straightCorners,
-		circular: () => foundation.shape.circular,
+	'shape': {
+		'standardCorners': () => foundation.shape.standardCorners,
+		'straightCorners': () => foundation.shape.straightCorners,
+		'circular': () => foundation.shape.circular,
 	},
-	motion: {
-		standardTime: foundation.motion.standardTime,
+	'motion': {
+		'standardTime': foundation.motion.standardTime,
 	},
 };

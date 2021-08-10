@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /**
  * Extract styles data from Figma and store it locally.
  *
@@ -6,6 +5,7 @@
  */
 import axios from 'axios';
 import * as fs from 'fs';
+// eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';
 /**
  * Get the specified file from the Figma API. Extract and return only
@@ -23,10 +23,10 @@ export const getFigmaStylePages = () =>
 new Promise((resolve, reject) => {
     // get a promise to retrieve file from the Figma API
     axios({
-        method: 'get',
-        url: `https://api.figma.com/v1/files/${process.env.figmaFileID}`,
-        timeout: 10000,
-        headers: {
+        'method': 'get',
+        'url': `https://api.figma.com/v1/files/${process.env.figmaFileID}`,
+        'timeout': 10000,
+        'headers': {
             'X-Figma-Token': process.env.figmaAccessToken,
         },
     })
@@ -49,19 +49,23 @@ new Promise((resolve, reject) => {
                 // if the array doesn't contain 1+ page objects
             }
             else {
-                // reject the main promise with a custom error
-                reject(new Error('getFigmaStylePages: Array figmaStylePages contains no objects'));
+                // throw custom error
+                throw '> > > JBKR: getFigmaStylePages: \
+							figmaStylePages contains no objects';
             }
         }
         else {
-            // reject the main promise with a custom error
-            reject(new Error('getFigmaStylePages: API result does not conform to expected architecture'));
+            // throw custom error
+            throw '> > > JBKR: getFigmaStylePages: \
+						API result does not conform to \
+						expected architecture';
         }
     })
         // if the retrieval promise is rejected with an error
         .catch((error) => {
         // reject the main promise with a custom error
-        reject(new Error(`getFigmaStylePages: Axios - Figma  - ${JSON.stringify(error)}`));
+        reject(new Error(`> > > JBKR: getFigmaStylePages: \
+						Axios - Figma  - ${JSON.stringify(error)}`));
     });
 });
 /**
@@ -85,15 +89,17 @@ new Promise((resolve, reject) => {
         const objectsData = JSON.stringify(result);
         try {
             // write data to file
-            fs.writeFileSync(`${foundation.storage.path}${foundation.storage.names.figma}`, objectsData);
+            fs.writeFileSync(`${foundation.storage.path}\
+							${foundation.storage.names.figma}`, objectsData);
             // then resolve this promise with the result
             resolve({
-                error: false,
+                'error': false,
             });
         }
         catch (error) {
-            // reject this promise with the error
-            reject(new Error(`storeFigmaStylePages: could not write file - ${JSON.stringify(error)}`));
+            // throw custom error
+            reject(new Error(`storeFigmaStylePages: could not write file - \
+						${JSON.stringify(error)}`));
         }
     })
         // if the promise is rejected with an error
@@ -119,8 +125,7 @@ new Promise((resolve, reject) => {
         if (error) {
             reject(error);
         }
-        const storedFigmaStylePages = JSON.parse(jsonString);
-        resolve(storedFigmaStylePages);
+        resolve(JSON.parse(jsonString));
     });
 });
 //# sourceMappingURL=extraction.js.map

@@ -13,8 +13,8 @@ export declare const returnHSLValuesFromRBGPercents: ({ r, g, b }: {
 };
 export declare const returnCopyOfObjectWithStringKeys: ({ incoming }: {
     incoming: {
-        [key: string]: any;
+        [key: string]: unknown;
     };
 }) => {
-    [key: string]: any;
+    [key: string]: unknown;
 };

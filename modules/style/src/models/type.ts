@@ -7,7 +7,7 @@ export interface TypeStyle {
 	weight: number;
 	height: number;
 	spacing: number;
-};
+}
 /**
  * Object keys.
  */
@@ -23,15 +23,15 @@ export type TypeSlantKey = 'normal' | 'italic';
 export interface TypeLineHeightSubset {
 	display: TypeStyle;
 	body: TypeStyle;
-};
+}
 export interface TypeSlantSubset {
 	normal: TypeLineHeightSubset;
 	italic: TypeLineHeightSubset;
-};
+}
 export interface TypeWeightSubset {
 	regular: TypeSlantSubset;
 	bold: TypeSlantSubset;
-};
+}
 export interface TypeSizeSubset {
 	'3xs': TypeWeightSubset;
 	'2xs': TypeWeightSubset;

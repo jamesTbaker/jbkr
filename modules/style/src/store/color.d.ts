@@ -1,247 +1,247 @@
 export namespace color {
     namespace Neutral {
         const Finch: {
-            "10": {
+            '10': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "11": {
+            '11': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "12": {
+            '12': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "13": {
+            '13': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "14": {
+            '14': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "15": {
+            '15': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "16": {
+            '16': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "17": {
+            '17': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "18": {
+            '18': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "19": {
+            '19': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "20": {
+            '20': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "21": {
+            '21': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "22": {
+            '22': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "23": {
+            '23': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "24": {
+            '24': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "25": {
+            '25': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "26": {
+            '26': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "27": {
+            '27': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "28": {
+            '28': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "29": {
+            '29': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "30": {
+            '30': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "31": {
+            '31': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "32": {
+            '32': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "33": {
+            '33': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "34": {
+            '34': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "35": {
+            '35': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "36": {
+            '36': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "37": {
+            '37': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "38": {
+            '38': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "39": {
+            '39': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "40": {
+            '40': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "41": {
+            '41': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "09": {
+            '09': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "08": {
+            '08': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "07": {
+            '07': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "06": {
+            '06': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
@@ -249,55 +249,55 @@ export namespace color {
             };
         };
         const Sky: {
-            "09": {
+            '09': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "08": {
+            '08': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "07": {
+            '07': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "06": {
+            '06': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
@@ -305,55 +305,55 @@ export namespace color {
             };
         };
         const Spruce: {
-            "09": {
+            '09': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "08": {
+            '08': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "07": {
+            '07': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "06": {
+            '06': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
@@ -361,55 +361,55 @@ export namespace color {
             };
         };
         const Seafoam: {
-            "09": {
+            '09': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "08": {
+            '08': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "07": {
+            '07': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "06": {
+            '06': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
@@ -419,19 +419,19 @@ export namespace color {
     }
     namespace Brand {
         export const Peony: {
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
@@ -439,19 +439,19 @@ export namespace color {
             };
         };
         const Finch_1: {
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
@@ -460,7 +460,7 @@ export namespace color {
         };
         export { Finch_1 as Finch };
         const Spruce_1: {
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
@@ -661,31 +661,31 @@ export namespace color {
     }
     namespace State {
         export const Positive: {
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
@@ -693,31 +693,31 @@ export namespace color {
             };
         };
         export const Warning: {
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
@@ -725,31 +725,31 @@ export namespace color {
             };
         };
         export const Negative: {
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
@@ -757,31 +757,31 @@ export namespace color {
             };
         };
         const Neutral_1: {
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
@@ -792,103 +792,103 @@ export namespace color {
     }
     namespace Light {
         const OnLight_1: {
-            "10": {
+            '10': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "11": {
+            '11': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "12": {
+            '12': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "13": {
+            '13': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "14": {
+            '14': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "15": {
+            '15': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "16": {
+            '16': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "09": {
+            '09': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "08": {
+            '08': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "07": {
+            '07': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "06": {
+            '06': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "00": {
+            '00': {
                 h: number;
                 s: number;
                 l: number;
@@ -897,103 +897,103 @@ export namespace color {
         };
         export { OnLight_1 as OnLight };
         const OnDark_1: {
-            "10": {
+            '10': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "11": {
+            '11': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "12": {
+            '12': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "13": {
+            '13': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "14": {
+            '14': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "15": {
+            '15': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "16": {
+            '16': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "09": {
+            '09': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "08": {
+            '08': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "07": {
+            '07': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "06": {
+            '06': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "05": {
+            '05': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "04": {
+            '04': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            '03': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            '02': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "01": {
+            '01': {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "00": {
+            '00': {
                 h: number;
                 s: number;
                 l: number;

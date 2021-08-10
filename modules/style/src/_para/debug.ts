@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
 	getFigmaStylePages,
 	storeFigmaStylePages,
-	returnStoredFigmaStylePages
+	returnStoredFigmaStylePages,
+// eslint-disable-next-line import/no-unresolved
 } from '../lib/extraction.js';
 import {
 	returnAllColors,
@@ -12,7 +14,9 @@ import {
 	returnTypeSpacing,
 	returnTypeStyle,
 	buildAllStyleSets,
+// eslint-disable-next-line import/no-unresolved
 } from '../lib/calculation.js';
+// eslint-disable-next-line import/no-unresolved
 import { style } from '../lib/api.js';
 
 // style.type.style({

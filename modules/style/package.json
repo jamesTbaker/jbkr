@@ -14,11 +14,12 @@
 		"build": "npm run compile-for-build-process && npm run build-style-sets && npm run compile-style-declarations && npm run compile-for-dist"
 	},
 	"dependencies": {
-		"@types/node": "^16.4.10",
 		"axios": "^0.21.1",
-		"dotenv": "^10.0.0",
-		"typescript": "^4.3.5",
 		"utilities": "file:../utilities"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@types/node": "^16.4.10",
+		"dotenv": "^10.0.0",
+		"typescript": "^4.3.5"
+	}
 }

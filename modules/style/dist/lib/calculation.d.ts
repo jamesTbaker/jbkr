@@ -35,7 +35,7 @@ export declare const returnTypeLineHeight: ({ size, lineHeight }: {
 export declare const returnTypeSpacing: ({ size }: {
     size: number;
 }) => number;
-export declare const returnTypeStyle: ({ deviceWidth, type: { size, weight, slant, lineHeight, }, }: {
+export declare const returnTypeStyle: ({ deviceWidth, "type": { size, weight, slant, lineHeight, }, }: {
     deviceWidth: DeviceWidthToken;
     type: {
         size: TypeSizeKey;
