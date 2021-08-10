@@ -3,7 +3,7 @@
  *
  * @internal
  */
-import { FigmaPage } from '../models/figma';
+import { FigmaPage } from 'models';
 /**
  * Get the specified file from the Figma API. Extract and return only
  * the pages specified in [[`definition`]].

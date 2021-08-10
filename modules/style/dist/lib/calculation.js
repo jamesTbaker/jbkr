@@ -3,10 +3,8 @@
  *
  * @internal
  */
-// models
 import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, } from 'utilities';
 import * as fs from 'fs';
-// lib predecessors
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';
@@ -14,7 +12,6 @@ import { storeFigmaStylePages, returnStoredFigmaStylePages,
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/no-unresolved
  } from './extraction.js';
-// modules
 /**
  * Get all colors from the stored Figma pages. This includes the colors
  * assigned to the jbkr brand and the colors representing

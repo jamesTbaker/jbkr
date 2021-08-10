@@ -3,36 +3,25 @@
  *
  * @internal
  */
-// models
 import {
 	returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple,
 } from 'utilities';
 import * as fs from 'fs';
 // eslint-disable-next-line import/extensions
-import { FigmaPage }	from '../models/figma';
-// eslint-disable-next-line import/extensions
-import { AllColors } from '../models/color';
-// eslint-disable-next-line import/extensions
-import { DeviceWidthToken } from '../models/device';
 import {
-	TypeSizeKey, TypeWeightKey, TypeLineHeightKey,
-	TypeSlantKey, TypeStyle, AllTypeStyles,
+	FigmaPage, AllColors, DeviceWidthToken, TypeSizeKey, TypeWeightKey,
+	TypeLineHeightKey, TypeSlantKey, TypeStyle, AllTypeStyles,
+	ShadowSubset, AllShadows,
 // eslint-disable-next-line import/extensions
-} from '../models/type';
-// eslint-disable-next-line import/extensions
-import { ShadowSubset, AllShadows } from '../models/shadow';
-// lib predecessors
-
+} from 'models';
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';
 import {
 	storeFigmaStylePages, returnStoredFigmaStylePages,
-
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/no-unresolved
 } from './extraction.js';
-// modules
 
 /**
  * Get all colors from the stored Figma pages. This includes the colors

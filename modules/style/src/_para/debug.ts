@@ -24,4 +24,4 @@ import { style } from '../lib/api.js';
 // 	size: 's',
 // });
 // style.position.shadow('08');
-buildAllStyleSets();
+returnAllColors();

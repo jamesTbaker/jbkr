@@ -7,16 +7,9 @@ import {
 	AccentOnMediumPrimaryHuesKey, AccentOnMediumTertiaryHuesKey,
 	AccentOnMediumQuarternaryHuesKey, AccentOnLightPrimaryHuesKey,
 	AccentOnLightSecondaryHuesKey, AccentOnLightQuarternaryHuesKey,
-// eslint-disable-next-line import/extensions
-} from '../models/color';
-// eslint-disable-next-line import/extensions
-import { DeviceWidthToken, DeviceTokenObject } from '../models/device';
-import {
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
-// eslint-disable-next-line import/extensions
-} from '../models/type';
-// eslint-disable-next-line import/extensions
-import { ShadowLevelKeyOf17 } from '../models/shadow';
+	DeviceWidthToken, DeviceTokenObject, ShadowLevelKeyOf17,
+} from 'models';
 // lib predecessors
 // eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';

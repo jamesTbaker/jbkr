@@ -1,4 +1,4 @@
-import { buildAllStyleSets,
+import { returnAllColors,
 // eslint-disable-next-line import/no-unresolved
  } from '../lib/calculation.js';
 // style.type.style({
@@ -6,5 +6,5 @@ import { buildAllStyleSets,
 // 	size: 's',
 // });
 // style.position.shadow('08');
-buildAllStyleSets();
+returnAllColors();
 //# sourceMappingURL=debug.js.map

@@ -19,8 +19,8 @@ module.exports = {
 		'import/extensions': [
 			'.js',
 			'.jsx',
-			// '.ts',
-			// '.tsx',
+			'.ts',
+			'.tsx',
 		],
 		// react: {
 		// 	version: 'latest',

@@ -9,7 +9,7 @@ import * as fs from 'fs';
 // eslint-disable-next-line import/no-unresolved
 import { foundation } from './foundation.js';
 // eslint-disable-next-line import/extensions
-import { FigmaDocument, FigmaPage } from '../models/figma';
+import { FigmaDocument, FigmaPage } from 'models';
 /**
  * Get the specified file from the Figma API. Extract and return only
  * the pages specified in [[`definition`]].
