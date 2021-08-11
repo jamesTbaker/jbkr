@@ -4,7 +4,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-	'title': 'jbkr Docs',
+	'title': 'The Docs',
 	'tagline': 'Because docs',
 	'url': 'https://jamestbaker.github.io/',
 	'baseUrl': '/jbkr/',
@@ -16,29 +16,29 @@ module.exports = {
 	'trailingSlash': false,
 	'themeConfig': {
 		'navbar': {
-			// 'style': 'dark',
 			'title': 'The Docs',
 			'logo': {
 				'alt': 'jbkr logo',
 				'src': '/img/brand/logotype--color-on-light.svg',
 				'srcDark': '/img/brand/logotype--color-on-dark.svg',
 			},
-			'items': [{
-				'type': 'doc',
-				'docId': 'intro',
-				'position': 'left',
-				'label': 'Tutorial',
-			},
-			/* {
-				'to': '/blog',
-				'label': 'Blog',
-				'position': 'left',
-			}, */
-			{
-				'href': 'https://github.com/facebook/docusaurus',
-				'label': 'GitHub',
-				'position': 'right',
-			},
+			'items': [
+				{
+					'type': 'doc',
+					'docId': 'intro',
+					'position': 'left',
+					'label': 'Tutorial',
+				},
+				/* {
+					'to': '/blog',
+					'label': 'Blog',
+					'position': 'left',
+				}, */
+				{
+					'href': 'https://github.com/jamesTbaker/jbkr',
+					'label': 'GitHub',
+					'position': 'right',
+				},
 			],
 		},
 		'footer': {
@@ -89,7 +89,6 @@ module.exports = {
 		},
 		'colorMode': {
 			'defaultMode': 'dark',
-			// 'disableSwitch': true,
 			'respectPrefersColorScheme': true,
 		},
 		'image': 'img/jbkr.png',
