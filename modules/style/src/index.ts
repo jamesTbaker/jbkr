@@ -1,3 +1,8 @@
+/**
+ * @internal
+ *
+ * @todo This is a major todo.
+ */
 export {
 	buildStyleSet,
 	buildAllStyleSets,
