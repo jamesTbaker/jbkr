@@ -36,7 +36,7 @@ const HeaderTitlePreface = styled.div`
 	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
-	color: ${style.color.neutral.spruce({ 'level': '01' })};
+	color: ${style.color.neutral.seafoam({ 'level': '01' })};
 `;
 const HeaderEmphasisLine = styled.div`
 	height: .25rem;
@@ -49,7 +49,7 @@ const HeaderTagline = styled.p`
 	line-height: 1.5rem;
 	padding-top: .75rem;
 	font-weight: 400;
-	color: ${style.color.neutral.spruce({ 'level': '01' })};
+	color: ${style.color.neutral.seafoam({ 'level': '01' })};
 
 	a {
 		color: white;
@@ -76,10 +76,9 @@ const Main = styled.main`
 `;
 const PhotoCredit = styled.p`
 	margin-top: 3rem;
-	font-size: .5rem;
-	line-height: .5rem;
+	font-size: .6875rem;
+	line-height: 1rem;
 	font-weight: 400;
-	/* color: ${style.color.neutral.spruce({ 'level': '01' })}; */
 `;
 export default () => {
 	const { siteConfig } = useDocusaurusContext();
@@ -144,7 +143,7 @@ export default () => {
 					</li> */}
 				</ul>
 				<PhotoCredit>
-					Cover photo by&nbsp;
+					Top photo by&nbsp;
 					<a href="https://unsplash.com/@adam_whitlock"
 						target="_blank">Adam Whitlock</a>, on&nbsp;
 					<a href="https://unsplash.com/@adam_whitlock"
@@ -154,4 +153,3 @@ export default () => {
 		</Layout>
 	);
 };
-// <HomepageFeatures />

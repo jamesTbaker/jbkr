@@ -7,35 +7,51 @@
 
 /* You can override the default Infima variables here. */
 :root {
-	--ifm-color-primary-lightest:	hsla(225, 25%, 86%, 1);		/* jbkr / Neutral / Finch / 06 */
-	--ifm-color-primary-lighter:	hsla(225, 25%, 78%, 1);		/* jbkr / Neutral / Finch / 09 */
-	--ifm-color-primary-light:		hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
-	--ifm-color-primary: 			hsla(225, 25%, 71%, 1);		/* jbkr / Neutral / Finch / 12 */
-	--ifm-color-primary-dark: 		hsla(225, 25%, 64%, 1);		/* jbkr / Neutral / Finch / 15 */
-	--ifm-color-primary-darker: 	hsla(225, 25%, 62%, 1);		/* jbkr / Neutral / Finch / 16 */
-	--ifm-color-primary-darkest:	hsla(225, 25%, 53%, 1);		/* jbkr / Neutral / Finch / 20 */
-	--ifm-code-font-size: 			95%;
-	--ifm-heading-color:			hsla(225, 25%, 50%, 1);		/* jbkr / Neutral / Finch / 21 */
-	--ifm-font-color-base:			hsla(225, 25%, 33%, 1);		/* jbkr / Neutral / Finch / 28 */
-	--ifm-link-color:				hsla(325, 100%, 50%, 1);	/* jbkr / Accent / OnLight / Quarternary / Flamingo */
+	--ifm-color-primary-lightest:		hsla(225, 25%, 86%, 1);		/* jbkr / Neutral / Finch / 06 */
+	--ifm-color-primary-lighter:		hsla(225, 25%, 78%, 1);		/* jbkr / Neutral / Finch / 09 */
+	--ifm-color-primary-light:			hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
+	--ifm-color-primary: 				hsla(225, 25%, 71%, 1);		/* jbkr / Neutral / Finch / 12 */
+	--ifm-color-primary-dark: 			hsla(225, 25%, 64%, 1);		/* jbkr / Neutral / Finch / 15 */
+	--ifm-color-primary-darker: 		hsla(225, 25%, 62%, 1);		/* jbkr / Neutral / Finch / 16 */
+	--ifm-color-primary-darkest:		hsla(225, 25%, 53%, 1);		/* jbkr / Neutral / Finch / 20 */
+	--ifm-code-font-size: 				95%;
+	--ifm-heading-color:				hsla(225, 25%, 45%, 1);		/* jbkr / Neutral / Finch / 23 */
+	--ifm-font-color-base:				hsla(225, 25%, 33%, 1);		/* jbkr / Neutral / Finch / 28 */
+	--ifm-link-color:					hsla(340, 100%, 40%, 1);	/* jbkr / Brand / Peony / 06 */
+	--ifm-navbar-link-color:			hsla(340, 100%, 40%, 1);	/* jbkr / Brand / Peony / 06 */
+	--ifm-navbar-link-hover-color:		hsla(340, 100%, 30%, 1);	/* jbkr / Brand / Peony / 07 */
+	--ifm-footer-background-color:		hsla(225, 25%, 93%, 1);		/* jbkr / Neutral / Finch / 03 */
+
+	--ifm-menu-color:					hsla(225, 25%, 45%, 1);		/* jbkr / Neutral / Finch / 23 */
+	--ifm-menu-color-active:			hsla(225, 25%, 14%, 1);		/* jbkr / Neutral / Finch / 36 */
+	--ifm-menu-color-background-active:	hsla(225, 25%, 86%, 1);		/* jbkr / Neutral / Finch / 06 */
+	--ifm-menu-color-background-hover:	hsla(225, 25%, 93%, 1);		/* jbkr / Neutral / Finch / 03 */
 }
 html[data-theme="dark"] {
-	--ifm-heading-color:			hsla(225, 25%, 88%, 1);		/* jbkr / Neutral / Finch / 05 */
-	--ifm-font-color-base:			hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
-	--ifm-link-color:				hsla(325, 100%, 50%, 1);	/* jbkr / Accent / OnDark / Quarternary / Flamingo */
-	--ifm-background-color:			hsla(225, 25%, 14%, 1);		/* jbkr / Neutral / Finch / 36 */
-	--ifm-background-surface-color:	hsla(225, 25%, 9%, 1);		/* jbkr / Neutral / Finch / 38 */
+	--ifm-heading-color:				hsla(225, 25%, 88%, 1);		/* jbkr / Neutral / Finch / 05 */
+	--ifm-font-color-base:				hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
+	--ifm-background-color:				hsla(225, 25%, 17%, 1);		/* jbkr / Neutral / Finch / 35 */
+	--ifm-background-surface-color:		hsla(225, 25%, 9%, 1);		/* jbkr / Neutral / Finch / 38 */
+	--ifm-link-color:					hsla(340, 100%, 70%, 1);	/* jbkr / Brand / Peony / 03 */
+	--ifm-navbar-link-color:			hsla(340, 100%, 70%, 1);	/* jbkr / Brand / Peony / 03 */
+	--ifm-navbar-link-hover-color:		hsla(340, 100%, 80%, 1);	/* jbkr / Brand / Peony / 02 */
+	--ifm-footer-background-color:		hsla(225, 25%, 9%, 1);		/* jbkr / Neutral / Finch / 38 */
+
+	--ifm-menu-color:					hsla(225, 25%, 67%, 1);		/* jbkr / Neutral / Finch / 14 */
+	--ifm-menu-color-active:			hsla(225, 25%, 98%, 1);		/* jbkr / Neutral / Finch / 01 */
+	--ifm-menu-color-background-active:	hsla(225, 25%, 14%, 1);		/* jbkr / Neutral / Finch / 36 */
+	--ifm-menu-color-background-hover:	hsla(225, 25%, 9%, 1);		/* jbkr / Neutral / Finch / 38 */
 }
 
 .docusaurus-highlight-code-line {
-	background-color: rgba(0, 12, 51, 0.1);				/* System / Solid / Blue / Finch / Vibrant / 09 */
+	background-color: 					hsla(225, 25%, 12%, 1);		/* jbkr / Neutral / Finch / 37 */
 	display: block;
 	margin: 0 calc(-1 * var(--ifm-pre-padding));
 	padding: 0 var(--ifm-pre-padding);
 }
 
 html[data-theme='dark'] .docusaurus-highlight-code-line {
-	background-color: rgba(0, 12, 51, 0.3);				/* System / Solid / Blue / Finch / Vibrant / 09 */
+	background-color:  					hsla(225, 25%, 12%, 1);		/* jbkr / Neutral / Finch / 37 */
 }
 
 nav.navbar a.navbar__brand img.navbar__logo {
@@ -52,4 +68,10 @@ nav.navbar div.navbar__items--right a[href="https://github.com/jamesTbaker/jbkr"
 }
 nav.navbar div.navbar__items--right div.react-toggle-track {
 	background-color: 				hsla(225, 25%, 33%, 1);		/* jbkr / Neutral / Finch / 28 */
+}
+main div.row article div.markdown div[class^="codeBlockTitle"] {
+	background-color: 				hsla(225, 25%, 7%, 1) !important;		/* jbkr / Neutral / Finch / 39 */
+}
+main div.row article div.markdown div[class^="codeBlockContent"] pre.prism-code {
+	background-color: 				hsla(225, 25%, 2%, 1) !important;		/* jbkr / Neutral / Finch / 41 */
 }
