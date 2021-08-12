@@ -4,8 +4,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-	'title': 'The Docs',
-	'tagline': 'Because docs',
+	'title': 'Docs',
+	'tagline': 'Because who doesn\'t love documentation?',
 	'url': 'https://jamestbaker.github.io/',
 	'baseUrl': '/jbkr/',
 	'onBrokenLinks': 'throw',
@@ -16,7 +16,7 @@ module.exports = {
 	'trailingSlash': false,
 	'themeConfig': {
 		'navbar': {
-			'title': 'The Docs',
+			'title': 'Docs',
 			'logo': {
 				'alt': 'jbkr logo',
 				'src': '/img/brand/logotype--color-on-light.svg',
@@ -42,8 +42,8 @@ module.exports = {
 			],
 		},
 		'footer': {
-			'style': 'dark',
-			/* 'links': [
+			/* 'style': 'dark',
+			'links': [
 				{
 					'title': 'Docs',
 					'items': [{

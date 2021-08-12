@@ -7,14 +7,24 @@
 
 /* You can override the default Infima variables here. */
 :root {
-	--ifm-color-primary-lightest:	rgb(210, 215, 228);	/* jbkr / Neutral / Finch / 06 */
-	--ifm-color-primary-lighter:	rgb(186, 193, 214);	/* jbkr / Neutral / Finch / 09 */
-	--ifm-color-primary-light:		rgb(179, 186, 209);	/* jbkr / Neutral / Finch / 10 */
-	--ifm-color-primary: 			#b3bad1;			/* jbkr / Neutral / Finch / 12 */
-	--ifm-color-primary-dark: 		rgb(141, 153, 187);	/* jbkr / Neutral / Finch / 15 */
-	--ifm-color-primary-darker: 	rgb(134, 143, 182);	/* jbkr / Neutral / Finch / 16 */
-	--ifm-color-primary-darkest:	rgb(104, 119, 164);	/* jbkr / Neutral / Finch / 20 */
-	--ifm-code-font-size: 95%;
+	--ifm-color-primary-lightest:	hsla(225, 25%, 86%, 1);		/* jbkr / Neutral / Finch / 06 */
+	--ifm-color-primary-lighter:	hsla(225, 25%, 78%, 1);		/* jbkr / Neutral / Finch / 09 */
+	--ifm-color-primary-light:		hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
+	--ifm-color-primary: 			hsla(225, 25%, 71%, 1);		/* jbkr / Neutral / Finch / 12 */
+	--ifm-color-primary-dark: 		hsla(225, 25%, 64%, 1);		/* jbkr / Neutral / Finch / 15 */
+	--ifm-color-primary-darker: 	hsla(225, 25%, 62%, 1);		/* jbkr / Neutral / Finch / 16 */
+	--ifm-color-primary-darkest:	hsla(225, 25%, 53%, 1);		/* jbkr / Neutral / Finch / 20 */
+	--ifm-code-font-size: 			95%;
+	--ifm-heading-color:			hsla(225, 25%, 50%, 1);		/* jbkr / Neutral / Finch / 21 */
+	--ifm-font-color-base:			hsla(225, 25%, 33%, 1);		/* jbkr / Neutral / Finch / 28 */
+	--ifm-link-color:				hsla(325, 100%, 50%, 1);	/* jbkr / Accent / OnLight / Quarternary / Flamingo */
+}
+html[data-theme="dark"] {
+	--ifm-heading-color:			hsla(225, 25%, 88%, 1);		/* jbkr / Neutral / Finch / 05 */
+	--ifm-font-color-base:			hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
+	--ifm-link-color:				hsla(325, 100%, 50%, 1);	/* jbkr / Accent / OnDark / Quarternary / Flamingo */
+	--ifm-background-color:			hsla(225, 25%, 14%, 1);		/* jbkr / Neutral / Finch / 36 */
+	--ifm-background-surface-color:	hsla(225, 25%, 9%, 1);		/* jbkr / Neutral / Finch / 38 */
 }
 
 .docusaurus-highlight-code-line {
@@ -26,4 +36,20 @@
 
 html[data-theme='dark'] .docusaurus-highlight-code-line {
 	background-color: rgba(0, 12, 51, 0.3);				/* System / Solid / Blue / Finch / Vibrant / 09 */
+}
+
+nav.navbar a.navbar__brand img.navbar__logo {
+	height: 26.4px; /* match line height of siblings */
+	margin-right: 2rem;
+}
+nav.navbar a.navbar__brand b.navbar__title,
+nav.navbar div.navbar__items--right a[href="https://github.com/jamesTbaker/jbkr"] {
+	width: 0;
+	height: 0;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+nav.navbar div.navbar__items--right div.react-toggle-track {
+	background-color: 				hsla(225, 25%, 33%, 1);		/* jbkr / Neutral / Finch / 28 */
 }

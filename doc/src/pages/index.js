@@ -5,95 +5,82 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import HomepageFeatures from '../components/HomepageFeatures';
 import siteConfigImport from '../../docusaurus.config.js';
 import styled from 'styled-components';
-// import style from 'style';
+import { style } from 'style-service';
+import { up } from 'styled-breakpoints';
 
 
-const homeContent = {
-	'titlePreface': 'Welcome to the ',
-	'titleMain': 'Doc Party',
-	'tagline': '',
-	'taglineURL': 'https://en.wikipedia.org/wiki/Software_documentation',
-	'what': {
-		'header': 'About',
-		'body': 'jbkr is the core of James Baker\'s \
-			professional online presence.',
-	},
-	'stack': {
-		'header': 'Tech Stack Overview',
-		'body': [
-			'Figma: Colors are defined in Figma and fetched from its API.',
-			'ES6 + TypeScript: Styles and other modules.',
-			'Strapi: Content.',
-			'Next: Client.',
-			// '',
-			// '',
-			// '',
-			// '',
-		],
-	},
-};
-
-const HeaderContainer = styled.header`
+const Header = styled.header`
 	background: url('/jbkr/img/party.jpg');
 	background-size: cover;
 	background-position: center bottom;
 	background-repeat: no-repeat;
-	background-color: #f00;
+	background-color:
+		${style.color.accent.onLight.secondary({ 'hue': 'Iris' })};
 	padding: 18rem 0 6rem;
 `;
 const HeaderContentContainer = styled.div`
 	display: inline-block;
 	padding: 2rem 4rem 2rem 6rem;
 	border-radius: 0 3px 3px 0;
-	background-color: hsla(275, 100%, 50%, .85);
+	background-color:
+		${style.color.accent.onLight.secondary({ 'hue': 'Iris' })};
 `;
 const HeaderTitle = styled.h1`
+	padding-bottom: .5rem;
 	font-size: 5.675rem;
-	line-height: 6rem;
+	line-height: 5rem;
 	font-weight: 600;
 	color: white;
 `;
 const HeaderTitlePreface = styled.div`
-	font-size 1rem;
+	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
-	color: hsla(190, 100%, 85%);
+	color: ${style.color.neutral.spruce({ 'level': '01' })};
 `;
 const HeaderEmphasisLine = styled.div`
 	height: .25rem;
 	border-radius: 1px;
-	background-color: hsla(325, 100%, 50%, 1);
+	background-color:
+		${style.color.accent.onMedium.primary({ 'hue': 'Seafoam' })};
 `;
 const HeaderTagline = styled.p`
-	font-size 1rem;
+	font-size: 1rem;
 	line-height: 1.5rem;
-	padding-top: 1rem;
+	padding-top: .75rem;
 	font-weight: 400;
-	color: hsla(190, 100%, 85%);
-`;
-const HeaderTaglineLink = styled.a`
-	color: white;
-`;
-const HomepageHeader = () => (
-	<HeaderContainer>
-		<HeaderContentContainer>
-			<HeaderTitle>
-				<HeaderTitlePreface>
-					{homeContent.titlePreface}
-				</HeaderTitlePreface>
-				{homeContent.titleMain}
-			</HeaderTitle>
-			<HeaderEmphasisLine />
-			<HeaderTagline>
-				Because who doesn't love&nbsp;
-				<HeaderTaglineLink
-					href={homeContent.taglineURL}
-					target="_blank">documentation</HeaderTaglineLink>?
-			</HeaderTagline>
-		</HeaderContentContainer>
-	</HeaderContainer>
-);
+	color: ${style.color.neutral.spruce({ 'level': '01' })};
 
+	a {
+		color: white;
+	}
+`;
+const Main = styled.main`
+	padding: 2rem;
+	margin: 0;
+
+
+	font-size: 1rem;
+	line-height: 1.65rem;
+	font-weight: 400;
+	margin-bottom: 1.5rem;
+	overflow-wrap: break-word;
+	text-rendering: optimizeLegibility;
+
+	h2 {
+		font-size: 2rem;
+		line-height: 2.5rem;
+		font-weight: 700;
+		margin: 2.5rem 0 1.5rem;
+	}
+`;
+const PhotoCredit = styled.p`
+	margin-top: 3rem;
+	font-size: .5rem;
+	line-height: .5rem;
+	font-weight: 400;
+	/* color: ${style.color.neutral.spruce({ 'level': '01' })}; */
+`;
 export default () => {
 	const { siteConfig } = useDocusaurusContext();
 	return (
@@ -101,10 +88,69 @@ export default () => {
 			title={siteConfig.title}
 			description={siteConfig.tagline}
 		>
-			<HomepageHeader />
-			<main>
-				<h2>{homeContent.stack.header}</h2>
-			</main>
+			<Header>
+				<HeaderContentContainer>
+					<HeaderTitle>
+						<HeaderTitlePreface>
+							Welcome to the
+						</HeaderTitlePreface>
+						Doc Party
+					</HeaderTitle>
+					<HeaderEmphasisLine />
+					<HeaderTagline>
+						Because who doesn't love&nbsp;
+						<a href={`
+							https://en.wikipedia.org/wiki/Software_documentation
+						`}
+							target="_blank">documentation</a>?
+					</HeaderTagline>
+				</HeaderContentContainer>
+			</Header>
+
+			<Main>
+				<h2>About</h2>
+				<p>
+					<a href="https://jbkr.me">jbkr</a> is the core
+					of James Baker's professional online presence.
+				</p>
+				<h2>Tech Stack Overview</h2>
+				<ul>
+					<li>
+						<b>Figma</b>: Colors are defined in Figma and fetched
+						from its API.
+					</li>
+					<li>
+						<b>ES6 + TypeScript</b>: Styles and other modules.
+					</li>
+					<li>
+						<b>Strapi</b>: Content.
+					</li>
+					<li>
+						<b>Next</b>: Client.
+					</li>
+					<li>
+						<b>MongoDB Atlas</b>: Strapi is configured to save its
+						data to MongoDB in the cloud, and the Next client
+						retrieves its content from Mongo.
+					</li>
+					{/* <li>
+
+					</li>
+					<li>
+
+					</li>
+					<li>
+
+					</li> */}
+				</ul>
+				<PhotoCredit>
+					Cover photo by&nbsp;
+					<a href="https://unsplash.com/@adam_whitlock"
+						target="_blank">Adam Whitlock</a>, on&nbsp;
+					<a href="https://unsplash.com/@adam_whitlock"
+						target="_blank">Unsplash</a>.
+				</PhotoCredit>
+			</Main>
 		</Layout>
 	);
 };
