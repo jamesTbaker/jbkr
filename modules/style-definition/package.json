@@ -1,0 +1,24 @@
+{
+	"name": "style-definition",
+	"version": "0.0.1",
+	"description": "Build the contents of the style service's store.",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"type": "module",
+	"scripts": {
+		"compile-local": "tsc --project ./tsconfig.json",
+		"build-store": "node -r dotenv/config --trace-warnings dist/_para/build.js",
+		"compile-store-declarations": "tsc --project ./src/_para/tsconfig.store.json",
+		"build": "npm run compile-local && npm run build-store && npm run compile-store-declarations"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"utilities": "file:../utilities"
+	},
+	"devDependencies": {
+		"@types/node": "^16.4.10",
+		"dotenv": "^10.0.0",
+		"models": "file:../models",
+		"typescript": "^4.3.5"
+	}
+}
