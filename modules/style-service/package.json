@@ -1,0 +1,16 @@
+{
+	"name": "style-service",
+	"version": "0.0.1",
+	"description": "Serve style data from an internal store. Store contents are built by the 'style-definition' module",
+	"main": "dist/index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"type": "module",
+	"scripts": {
+		"build": "tsc --project ./tsconfig.json"
+	},
+	"devDependencies": {
+		"models": "file:../models",
+		"typescript": "^4.3.5"
+	}
+}

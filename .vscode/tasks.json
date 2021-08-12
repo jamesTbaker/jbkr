@@ -11,6 +11,24 @@
 			"group": "build"
 		},
 		{
+			"label": "build-style-definition",
+			"type": "typescript",
+			"tsconfig": "modules/style-definition/tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "build-style-service",
+			"type": "typescript",
+			"tsconfig": "modules/style-service/tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
 			"label": "build-utilities",
 			"type": "typescript",
 			"tsconfig": "modules/utilities/tsconfig.json",
