@@ -419,7 +419,37 @@ export namespace color {
     }
     namespace Brand {
         export const Peony: {
-            "01": {
+            "05": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "09": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "08": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "07": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "06": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "04": {
                 h: number;
                 s: number;
                 l: number;
@@ -432,6 +462,12 @@ export namespace color {
                 a: number;
             };
             "02": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "01": {
                 h: number;
                 s: number;
                 l: number;
@@ -661,19 +697,31 @@ export namespace color {
     }
     namespace State {
         export const Positive: {
-            "01": {
+            "09": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            "08": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            "07": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "06": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "05": {
                 h: number;
                 s: number;
                 l: number;
@@ -685,7 +733,19 @@ export namespace color {
                 l: number;
                 a: number;
             };
-            "05": {
+            "03": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "02": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "01": {
                 h: number;
                 s: number;
                 l: number;
@@ -693,19 +753,31 @@ export namespace color {
             };
         };
         export const Warning: {
-            "01": {
+            "09": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            "08": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            "07": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "06": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "05": {
                 h: number;
                 s: number;
                 l: number;
@@ -717,7 +789,19 @@ export namespace color {
                 l: number;
                 a: number;
             };
-            "05": {
+            "03": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "02": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "01": {
                 h: number;
                 s: number;
                 l: number;
@@ -725,19 +809,31 @@ export namespace color {
             };
         };
         export const Negative: {
-            "01": {
+            "09": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            "08": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            "07": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "06": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "05": {
                 h: number;
                 s: number;
                 l: number;
@@ -749,7 +845,19 @@ export namespace color {
                 l: number;
                 a: number;
             };
-            "05": {
+            "03": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "02": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "01": {
                 h: number;
                 s: number;
                 l: number;
@@ -757,19 +865,31 @@ export namespace color {
             };
         };
         const Neutral_1: {
-            "01": {
+            "09": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "02": {
+            "08": {
                 h: number;
                 s: number;
                 l: number;
                 a: number;
             };
-            "03": {
+            "07": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "06": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "05": {
                 h: number;
                 s: number;
                 l: number;
@@ -781,7 +901,19 @@ export namespace color {
                 l: number;
                 a: number;
             };
-            "05": {
+            "03": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "02": {
+                h: number;
+                s: number;
+                l: number;
+                a: number;
+            };
+            "01": {
                 h: number;
                 s: number;
                 l: number;
