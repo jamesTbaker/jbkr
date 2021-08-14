@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
+// import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import HomepageFeatures from '../components/HomepageFeatures';
-import siteConfigImport from '../../docusaurus.config.js';
+// import HomepageFeatures from '../components/HomepageFeatures';
+// import siteConfigImport from '../../docusaurus.config.js';
 import styled from 'styled-components';
 import { style } from 'style-service';
-import { up } from 'styled-breakpoints';
+// import { up } from 'styled-breakpoints';
 
 
 const Header = styled.header`

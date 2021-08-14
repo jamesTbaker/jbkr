@@ -7,6 +7,128 @@
 
 /* You can override the default Infima variables here. */
 :root {
+
+
+
+
+
+	--jbkr-neutral-finch-41: hsla(225, 25%, 2%, 1);
+	--jbkr-neutral-finch-40: hsla(225, 25%, 5%, 1);
+	--jbkr-neutral-finch-39: hsla(225, 25%, 7%, 1);
+	--jbkr-neutral-finch-38: hsla(225, 25%, 9%, 1);
+	--jbkr-neutral-finch-37: hsla(225, 25%, 12%, 1);
+	--jbkr-neutral-finch-36: hsla(225, 25%, 14%, 1);
+	--jbkr-neutral-finch-35: hsla(225, 25%, 17%, 1);
+	--jbkr-neutral-finch-34: hsla(225, 25%, 19%, 1);
+	--jbkr-neutral-finch-33: hsla(225, 25%, 22%, 1);
+	--jbkr-neutral-finch-32: hsla(225, 25%, 24%, 1);
+	--jbkr-neutral-finch-31: hsla(225, 25%, 26%, 1);
+	--jbkr-neutral-finch-30: hsla(225, 25%, 29%, 1);
+	--jbkr-neutral-finch-29: hsla(225, 25%, 31%, 1);
+	--jbkr-neutral-finch-28: hsla(225, 25%, 33%, 1);
+	--jbkr-neutral-finch-27: hsla(225, 25%, 36%, 1);
+	--jbkr-neutral-finch-26: hsla(225, 25%, 38%, 1);
+	--jbkr-neutral-finch-25: hsla(225, 25%, 40%, 1);
+	--jbkr-neutral-finch-24: hsla(225, 25%, 43%, 1);
+	--jbkr-neutral-finch-23: hsla(225, 25%, 45%, 1);
+	--jbkr-neutral-finch-22: hsla(225, 25%, 47%, 1);
+	--jbkr-neutral-finch-21: hsla(225, 25%, 50%, 1);
+	--jbkr-neutral-finch-20: hsla(225, 25%, 53%, 1);
+	--jbkr-neutral-finch-19: hsla(225, 25%, 55%, 1);
+	--jbkr-neutral-finch-18: hsla(225, 25%, 57%, 1);
+	--jbkr-neutral-finch-17: hsla(225, 25%, 60%, 1);
+	--jbkr-neutral-finch-16: hsla(225, 25%, 62%, 1);
+	--jbkr-neutral-finch-15: hsla(225, 25%, 64%, 1);
+	--jbkr-neutral-finch-14: hsla(225, 25%, 67%, 1);
+	--jbkr-neutral-finch-13: hsla(225, 25%, 69%, 1);
+	--jbkr-neutral-finch-12: hsla(225, 25%, 71%, 1);
+	--jbkr-neutral-finch-11: hsla(225, 25%, 74%, 1);
+	--jbkr-neutral-finch-10: hsla(225, 25%, 76%, 1);
+	--jbkr-neutral-finch-09: hsla(225, 25%, 78%, 1);
+	--jbkr-neutral-finch-08: hsla(225, 25%, 81%, 1);
+	--jbkr-neutral-finch-07: hsla(225, 25%, 83%, 1);
+	--jbkr-neutral-finch-06: hsla(225, 25%, 86%, 1);
+	--jbkr-neutral-finch-05: hsla(225, 25%, 88%, 1);
+	--jbkr-neutral-finch-04: hsla(225, 25%, 91%, 1);
+	--jbkr-neutral-finch-03: hsla(225, 25%, 93%, 1);
+	--jbkr-neutral-finch-02: hsla(225, 25%, 95%, 1);
+	--jbkr-neutral-finch-01: hsla(225, 25%, 98%, 1);
+	--jbkr-neutral-sky-09: hsla(210, 35%, 10%, 1);
+	--jbkr-neutral-sky-08: hsla(210, 28%, 15%, 1);
+	--jbkr-neutral-sky-07: hsla(210, 25%, 23%, 1);
+	--jbkr-neutral-sky-06: hsla(210, 23%, 35%, 1);
+	--jbkr-neutral-sky-05: hsla(210, 23%, 50%, 1);
+	--jbkr-neutral-sky-04: hsla(210, 23%, 60%, 1);
+	--jbkr-neutral-sky-03: hsla(210, 27%, 70%, 1);
+	--jbkr-neutral-sky-02: hsla(210, 32%, 80%, 1);
+	--jbkr-neutral-sky-01: hsla(210, 47%, 90%, 1);
+	--jbkr-neutral-spruce-09: hsla(190, 35%, 10%, 1);
+	--jbkr-neutral-spruce-08: hsla(190, 20%, 15%, 1);
+	--jbkr-neutral-spruce-07: hsla(190, 20%, 23%, 1);
+	--jbkr-neutral-spruce-06: hsla(190, 20%, 35%, 1);
+	--jbkr-neutral-spruce-05: hsla(190, 15%, 50%, 1);
+	--jbkr-neutral-spruce-04: hsla(190, 20%, 60%, 1);
+	--jbkr-neutral-spruce-03: hsla(190, 30%, 70%, 1);
+	--jbkr-neutral-spruce-02: hsla(190, 40%, 80%, 1);
+	--jbkr-neutral-spruce-01: hsla(190, 50%, 88%, 1);
+	--jbkr-neutral-seafoam-09: hsla(173, 10%, 12%, 1);
+	--jbkr-neutral-seafoam-08: hsla(176, 16%, 17%, 1);
+	--jbkr-neutral-seafoam-07: hsla(173, 16%, 23%, 1);
+	--jbkr-neutral-seafoam-06: hsla(175, 16%, 35%, 1);
+	--jbkr-neutral-seafoam-05: hsla(174, 17%, 50%, 1);
+	--jbkr-neutral-seafoam-04: hsla(173, 17%, 60%, 1);
+	--jbkr-neutral-seafoam-03: hsla(173, 20%, 70%, 1);
+	--jbkr-neutral-seafoam-02: hsla(176, 30%, 80%, 1);
+	--jbkr-neutral-seafoam-01: hsla(173, 50%, 88%, 1);
+	--jbkr-brand-peony-01: hsla(340, 100%, 50%, 1);
+	--jbkr-brand-peony-03: hsla(340, 100%, 10%, 1);
+	--jbkr-brand-peony-02: hsla(340, 75%, 30%, 1);
+	--jbkr-brand-finch-03: hsla(225, 25%, 17%, 1);
+	--jbkr-brand-finch-02: hsla(225, 25%, 50%, 1);
+	--jbkr-brand-finch-01: hsla(225, 25%, 95%, 1);
+	--jbkr-brand-finch-03: hsla(225, 25%, 17%, 1);
+	--jbkr-brand-finch-02: hsla(225, 25%, 50%, 1);
+	--jbkr-brand-finch-01: hsla(225, 25%, 95%, 1);
+	--jbkr-brand-spruce-01: hsla(190, 100%, 70%, 1);
+	--jbkr-accent-onDark-primary-peacock: hsla(101, 100%, 50%, 1);
+	--jbkr-accent-onDark-primary-seafoam: hsla(175, 100%, 50%, 1);
+	--jbkr-accent-onDark-primary-finch: hsla(225, 100%, 60%, 1);
+	--jbkr-accent-onDark-secondary-iris: hsla(270, 100%, 65%, 1);
+	--jbkr-accent-onDark-tertiary-tiger: hsla(30, 100%, 50%, 1);
+	--jbkr-accent-onDark-tertiary-sunshine: hsla(50, 100%, 50%, 1);
+	--jbkr-accent-onDark-quarternary-flamingo: hsla(325, 100%, 50%, 1);
+	--jbkr-accent-onDark-quarternary-spruce: hsla(190, 100%, 50%, 1);
+	--jbkr-accent-onMedium-primary-peacock: hsla(100, 99%, 66%, 1);
+	--jbkr-accent-onMedium-primary-seafoam: hsla(175, 100%, 70%, 1);
+	--jbkr-accent-onMedium-tertiary-sunshine: hsla(50, 100%, 50%, 1);
+	--jbkr-accent-onMedium-quarternary-spruce: hsla(190, 100%, 60%, 1);
+	--jbkr-accent-onLight-primary-finch: hsla(225, 100%, 50%, 1);
+	--jbkr-accent-onLight-secondary-iris: hsla(275, 100%, 50%, 1);
+	--jbkr-accent-onLight-quarternary-flamingo: hsla(325, 100%, 50%, 1);
+	--jbkr-state-positive-01: hsla(149, 100%, 90%, 1);
+	--jbkr-state-positive-02: hsla(150, 100%, 78%, 1);
+	--jbkr-state-positive-03: hsla(150, 100%, 35%, 1);
+	--jbkr-state-positive-04: hsla(150, 50%, 23%, 1);
+	--jbkr-state-positive-05: hsla(149, 50%, 15%, 1);
+	--jbkr-state-warning-01: hsla(50, 100%, 80%, 1);
+	--jbkr-state-warning-02: hsla(50, 100%, 73%, 1);
+	--jbkr-state-warning-03: hsla(50, 79%, 50%, 1);
+	--jbkr-state-warning-04: hsla(50, 100%, 20%, 1);
+	--jbkr-state-warning-05: hsla(49, 100%, 10%, 1);
+	--jbkr-state-negative-01: hsla(360, 100%, 90%, 1);
+	--jbkr-state-negative-02: hsla(360, 100%, 80%, 1);
+	--jbkr-state-negative-03: hsla(0, 100%, 40%, 1);
+	--jbkr-state-negative-04: hsla(360, 69%, 30%, 1);
+	--jbkr-state-negative-05: hsla(360, 70%, 20%, 1);
+	--jbkr-state-neutral-01: hsla(220, 100%, 90%, 1);
+	--jbkr-state-neutral-02: hsla(220, 100%, 80%, 1);
+	--jbkr-state-neutral-03: hsla(225, 60%, 50%, 1);
+	--jbkr-state-neutral-04: hsla(225, 68%, 35%, 1);
+	--jbkr-state-neutral-05: hsla(225, 61%, 23%, 1);
+
+
+
+
 	--ifm-color-primary-lightest:		hsla(225, 25%, 86%, 1);		/* jbkr / Neutral / Finch / 06 */
 	--ifm-color-primary-lighter:		hsla(225, 25%, 78%, 1);		/* jbkr / Neutral / Finch / 09 */
 	--ifm-color-primary-light:			hsla(225, 25%, 76%, 1);		/* jbkr / Neutral / Finch / 10 */
