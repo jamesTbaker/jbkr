@@ -1,7 +1,5 @@
 /**
- * Extract styles data from Figma and store it locally.
- *
- * @internal
+ * @module Style Definition
  */
 import {
 	returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple,

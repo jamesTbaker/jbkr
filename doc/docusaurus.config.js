@@ -16,6 +16,7 @@ module.exports = {
 	'trailingSlash': false,
 	'themeConfig': {
 		'navbar': {
+			'hideOnScroll': true,
 			'title': 'Docs',
 			'logo': {
 				'alt': 'jbkr logo',
@@ -88,6 +89,7 @@ module.exports = {
 			'theme': lightCodeTheme,
 			'darkTheme': darkCodeTheme,
 		},
+		'hideableSidebar': true,
 		'colorMode': {
 			'defaultMode': 'dark',
 			'respectPrefersColorScheme': true,
@@ -119,12 +121,46 @@ module.exports = {
 	],
 	'plugins': [
 		[
+			'@docusaurus/plugin-sitemap',
+			{
+				'changefreq': 'weekly',
+				'priority': 0.5,
+			},
+		], [
 			'docusaurus-plugin-typedoc',
 			{
 				'id': 'utilities',
-				'entryPoints': ['../modules/utilities/src/lib'],
+				'entryPoints': ['../modules/utilities/src/index.ts'],
+				'exclude': '_para',
 				'tsconfig': '../modules/utilities/tsconfig.json',
+				'readme': 'none',
 				'out': 'utilities',
+				'watch': true,
+				'listInvalidSymbolLinks': true,
+				'sidebar': {
+					'categoryLabel': 'Utilities',
+					'position': 0,
+					'fullNames': true,
+				},
+			},
+		], [
+			'docusaurus-plugin-typedoc',
+			{
+				// unique id for this section
+				'id': 'style-definition',
+				'entryPoints': ['../modules/style-definition/src'],
+				'exclude': '_para',
+				'tsconfig': '../modules/style-definition/tsconfig.json',
+				'readme': 'none',
+				'plugin': ['typedoc-plugin-merge-modules'],
+				'out': 'style-definition',
+				'watch': true,
+				'listInvalidSymbolLinks': true,
+				'sidebar': {
+					'categoryLabel': 'Style Definition',
+					'position': 0,
+					'fullNames': true,
+				},
 			},
 		],
 	],

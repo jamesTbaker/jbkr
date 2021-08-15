@@ -1,7 +1,5 @@
 /**
- * Extract styles data from Figma and store it locally.
- *
- * @internal
+ * @module Style Definition
  */
 
 import axios from 'axios';
@@ -10,7 +8,7 @@ import { foundation } from './foundation.js';
 import { FigmaDocument, FigmaPage } from 'models';
 /**
  * Get the specified file from the Figma API. Extract and return only
- * the pages specified in [[`definition`]].
+ * the pages specified in {@link foundation | `foundation`}.
  *
  * @remarks
  * Figma file ID and api access token are environment variables.
@@ -19,7 +17,7 @@ import { FigmaDocument, FigmaPage } from 'models';
  *
  * @internal
  */
-export const getFigmaStylePages =	():Promise<FigmaPage[]> =>
+export const getFigmaStylePages = ():Promise<FigmaPage[]> =>
 // return a new, main promise
 	new Promise((resolve, reject) => {
 		// get a promise to retrieve file from the Figma API

@@ -1,6 +1,12 @@
+/**
+ * This is the overview of Utilities.
+ * :::info
+ * This is my info admon.
+ * :::
+ * @module Utilities
+ */
 export {
 	returnNumberRoundedUpToMultiple,
 	returnHSLValuesFromRBGPercents,
 	returnCopyOfObjectWithStringKeys,
-// eslint-disable-next-line import/no-unresolved
 } from './lib/utilities.js';
