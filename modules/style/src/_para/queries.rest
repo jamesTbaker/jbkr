@@ -1,6 +1,0 @@
-@baseURI = https://api.figma.com/v1/files/
-
-#########
-# Get AWS credentials
-GET {{baseURI}}{{figmaFileID}}
-X-Figma-Token: {{figmaAccessToken}}

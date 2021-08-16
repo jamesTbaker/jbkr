@@ -16,7 +16,6 @@ module.exports = {
 	'trailingSlash': false,
 	'themeConfig': {
 		'navbar': {
-			'hideOnScroll': true,
 			'title': 'Docs',
 			'logo': {
 				'alt': 'jbkr logo',
@@ -68,53 +67,12 @@ module.exports = {
 			],
 		},
 		'footer': {
-			/* 'style': 'dark',
-			'links': [
-				{
-					'title': 'Docs',
-					'items': [{
-						'label': 'Tutorial',
-						'to': '/docs/intro',
-					}],
-				},
-				{
-					'title': 'Community',
-					'items': [{
-						'label': 'Stack Overflow',
-						'href':
-							'https://stackoverflow.com/
-							questions/tagged/docusaurus',
-					},
-					{
-						'label': 'Discord',
-						'href': 'https://discordapp.com/invite/docusaurus',
-					},
-					{
-						'label': 'Twitter',
-						'href': 'https://twitter.com/docusaurus',
-					},
-					],
-				},
-				{
-					'title': 'More',
-					'items': [{
-						'label': 'Blog',
-						'to': '/blog',
-					},
-					{
-						'label': 'GitHub',
-						'href': 'https://github.com/facebook/docusaurus',
-					},
-					],
-				},
-			], */
 			'copyright': `Copyright &copy; ${new Date().getFullYear()}`,
 		},
 		'prism': {
 			'theme': lightCodeTheme,
 			'darkTheme': darkCodeTheme,
 		},
-		'hideableSidebar': true,
 		'colorMode': {
 			'defaultMode': 'dark',
 			'respectPrefersColorScheme': true,
@@ -145,13 +103,8 @@ module.exports = {
 		],
 	],
 	'plugins': [
+		// utilities
 		[
-			'@docusaurus/plugin-sitemap',
-			{
-				'changefreq': 'weekly',
-				'priority': 0.5,
-			},
-		], [
 			'docusaurus-plugin-typedoc',
 			{
 				'id': 'utilities',
@@ -159,31 +112,35 @@ module.exports = {
 				'exclude': '_para',
 				'tsconfig': '../modules/utilities/tsconfig.json',
 				'readme': 'none',
+				'plugin': ['typedoc-plugin-merge-modules'],
 				'out': 'other-modules/utilities',
 				'watch': true,
 				'listInvalidSymbolLinks': true,
 				'sidebar': {
+					'sidebarFile': null,
 					'categoryLabel': 'Utilities',
-					'position': 0,
+					'position': 1,
 					'fullNames': true,
 				},
 			},
-		], [
+		],
+		// style-definition
+		[
 			'docusaurus-plugin-typedoc',
 			{
-				// unique id for this section
 				'id': 'style-definition',
 				'entryPoints': ['../modules/style-definition/src'],
 				'exclude': '_para',
 				'tsconfig': '../modules/style-definition/tsconfig.json',
 				'readme': 'none',
-				'plugin': ['typedoc-plugin-merge-modules'],
+				// 'plugin': ['typedoc-plugin-merge-modules'],
 				'out': 'styles/style-definition',
 				'watch': true,
 				'listInvalidSymbolLinks': true,
 				'sidebar': {
+					'sidebarFile': null,
 					'categoryLabel': 'Style Definition',
-					'position': 0,
+					'position': 1,
 					'fullNames': true,
 				},
 			},
