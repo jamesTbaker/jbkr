@@ -26,15 +26,40 @@ module.exports = {
 			'items': [
 				{
 					'type': 'doc',
-					'docId': 'intro',
 					'position': 'left',
-					'label': 'Tutorial',
+					'docId': 'app-client/index',
+					'label': 'Client',
 				},
-				/* {
-					'to': '/blog',
-					'label': 'Blog',
+				{
+					'type': 'doc',
 					'position': 'left',
-				}, */
+					'docId': 'styles/index',
+					'label': 'Styles',
+				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'components-core/index',
+					'label': 'Components (Core)',
+				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'components-client/index',
+					'label': 'Components (Client)',
+				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'content-flow/index',
+					'label': 'Content Flow',
+				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'other-modules/index',
+					'label': 'Other Modules',
+				},
 				{
 					'href': 'https://github.com/jamesTbaker/jbkr',
 					'label': 'GitHub',
@@ -134,7 +159,7 @@ module.exports = {
 				'exclude': '_para',
 				'tsconfig': '../modules/utilities/tsconfig.json',
 				'readme': 'none',
-				'out': 'utilities',
+				'out': 'other-modules/utilities',
 				'watch': true,
 				'listInvalidSymbolLinks': true,
 				'sidebar': {
@@ -153,7 +178,7 @@ module.exports = {
 				'tsconfig': '../modules/style-definition/tsconfig.json',
 				'readme': 'none',
 				'plugin': ['typedoc-plugin-merge-modules'],
-				'out': 'style-definition',
+				'out': 'styles/style-definition',
 				'watch': true,
 				'listInvalidSymbolLinks': true,
 				'sidebar': {
