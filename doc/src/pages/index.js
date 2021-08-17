@@ -14,16 +14,23 @@ const Header = styled.header`
 	background-size: cover;
 	background-position: center bottom;
 	background-repeat: no-repeat;
-	background-color:
-		${style.color.accent.onLight.secondary({ 'hue': 'Iris' })};
+	background-color: ${style.color.string(
+	{ 'color': style.color.props().Accent.OnLight.Secondary.Iris },
+)};
 	padding: 18rem 0 6rem;
 `;
 const HeaderContentContainer = styled.div`
 	display: inline-block;
 	padding: 2rem 4rem 2rem 6rem;
 	border-radius: 0 3px 3px 0;
-	background-color:
-		${style.color.accent.onLight.secondary({ 'hue': 'Iris' })};
+	background-color: ${style.color.string(
+	{
+		'color': style.color.override({
+			'color': style.color.props().Accent.OnLight.Secondary.Iris,
+			'alpha': .87,
+		}),
+	},
+)};
 `;
 const HeaderTitle = styled.h1`
 	padding-bottom: .5rem;
@@ -36,20 +43,25 @@ const HeaderTitlePreface = styled.div`
 	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
-	color: ${style.color.neutral.seafoam({ 'level': '01' })};
+	color: ${style.color.string(
+	{ 'color': style.color.props().Neutral.Seafoam['01'] },
+)};
 `;
 const HeaderEmphasisLine = styled.div`
 	height: .25rem;
 	border-radius: 1px;
-	background-color:
-		${style.color.accent.onMedium.primary({ 'hue': 'Seafoam' })};
+	background-color:${style.color.string(
+	{ 'color': style.color.props().Accent.OnMedium.Primary.Seafoam },
+)};
 `;
 const HeaderTagline = styled.p`
 	font-size: 1rem;
 	line-height: 1.5rem;
 	padding-top: .75rem;
 	font-weight: 400;
-	color: ${style.color.neutral.seafoam({ 'level': '01' })};
+	color: ${style.color.string(
+	{ 'color': style.color.props().Neutral.Seafoam['01'] },
+)};
 
 	a {
 		color: white;
