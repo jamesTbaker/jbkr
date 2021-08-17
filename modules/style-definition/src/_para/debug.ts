@@ -15,6 +15,7 @@ import {
 	cloneFoundation,
 	buildAllStyleSets,
 	buildStyleServiceStore,
+	cloneStore,
 } from '../lib/calculation.js';
 
-buildStyleServiceStore();
+cloneStore();

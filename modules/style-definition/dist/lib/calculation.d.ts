@@ -51,6 +51,9 @@ export declare const buildStyleSet: ({ tokenSet }: {
 export declare const cloneFoundation: () => Promise<{
     error: boolean;
 }>;
+export declare const cloneStore: () => Promise<{
+    error: boolean;
+}>;
 export declare const buildAllStyleSets: () => Promise<{
     error: boolean;
 }>;
