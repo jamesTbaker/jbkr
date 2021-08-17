@@ -7,17 +7,20 @@
 	"type": "module",
 	"scripts": {
 		"compile-local": "tsc --project ./tsconfig.json",
-		"build-store": "node -r dotenv/config --trace-warnings dist/_para/build.js",
+		"build-store": "node -r dotenv/config --trace-warnings dist/_para/build.build-store.js",
 		"compile-store-declarations": "tsc --project ./src/_para/tsconfig.store.json",
-		"build": "npm run compile-local && npm run build-store && npm run compile-store-declarations"
+		"clone-store": "node --trace-warnings dist/_para/build.clone-store.js",
+		"build": "npm run compile-local && npm run build-store && npm run compile-store-declarations && npm run clone-store"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
 		"utilities": "file:../utilities"
 	},
 	"devDependencies": {
+		"@types/fs-extra": "^9.0.12",
 		"@types/node": "^16.4.10",
 		"dotenv": "^10.0.0",
+		"fs-extra": "^10.0.0",
 		"models": "file:../models",
 		"typescript": "^4.3.5"
 	}

@@ -1,8 +1,11 @@
 /**
  * @module Style Definition
  */
-import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, returnCopyOfObjectWithStringKeys, } from 'utilities';
 import * as fs from 'fs';
+import * as fsextra from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, returnCopyOfObjectWithStringKeys, } from 'utilities';
 import { foundation } from './foundation.js';
 import { storeFigmaStylePages, returnStoredFigmaStylePages, } from './extraction.js';
 /**
@@ -357,6 +360,25 @@ new Promise((resolve, reject) => {
                 'error': false,
             });
         }
+    });
+});
+export const cloneStore = () => 
+// return a new, main promise
+new Promise((resolve, reject) => {
+    const here = fileURLToPath(import.meta.url);
+    const source = path.join(here, '../../../../style-service/src/store');
+    const destination = path.join(here, '../../../../style-service/dist/store');
+    fsextra.ensureDirSync(destination);
+    fsextra.copy(source, destination)
+        // if the  promise is resolved with a result
+        .then(() => {
+        // then resolve the main promise with the result
+        resolve({ 'error': false });
+    })
+        // if the  promise is rejected with an error
+        .catch((error) => {
+        // reject the main promise with the error
+        reject(error);
     });
 });
 export const buildAllStyleSets = () => 

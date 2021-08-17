@@ -2,27 +2,38 @@ export namespace foundation {
     const gridBase: number;
     namespace device {
         namespace widths {
-            namespace s {
-                const minimum: number;
-                const maximum: number;
+            const tokens: string[];
+            namespace specs {
+                namespace s {
+                    const minimum: number;
+                    const maximum: number;
+                }
+                namespace m {
+                    const minimum_1: number;
+                    export { minimum_1 as minimum };
+                    const maximum_1: number;
+                    export { maximum_1 as maximum };
+                }
+                namespace l {
+                    const minimum_2: number;
+                    export { minimum_2 as minimum };
+                }
             }
-            namespace m {
-                const minimum_1: number;
-                export { minimum_1 as minimum };
-                const maximum_1: number;
-                export { maximum_1 as maximum };
-            }
-            namespace l {
-                const minimum_2: number;
-                export { minimum_2 as minimum };
-            }
+            const queries: {
+                "s-only": string;
+                "m-only": string;
+                "l-only": string;
+                "not-large": string;
+                "not-small": string;
+            };
         }
     }
     namespace type {
         const family: string;
         namespace size {
-            const tokens: string[];
-            const scalingSteps: {
+            const tokens_1: string[];
+            export { tokens_1 as tokens };
+            export const scalingSteps: {
                 "3xs": number;
                 "2xs": number;
                 "1xs": number;
@@ -35,7 +46,7 @@ export namespace foundation {
                 "4xl": number;
                 "5xl": number;
             };
-            namespace baseMultipliersByDeviceWidth {
+            export namespace baseMultipliersByDeviceWidth {
                 const s_1: number;
                 export { s_1 as s };
                 const m_1: number;
@@ -43,7 +54,7 @@ export namespace foundation {
                 const l_1: number;
                 export { l_1 as l };
             }
-            namespace scalingMultipliersByDeviceWidth {
+            export namespace scalingMultipliersByDeviceWidth {
                 export namespace s_2 {
                     const high: number;
                     const low: number;
@@ -71,8 +82,8 @@ export namespace foundation {
             }
         }
         namespace weight {
-            const tokens_1: string[];
-            export { tokens_1 as tokens };
+            const tokens_2: string[];
+            export { tokens_2 as tokens };
             export namespace baseMultipliersByWeight {
                 const regular: number;
                 const bold: number;
@@ -96,8 +107,8 @@ export namespace foundation {
             }
         }
         namespace lineHeight {
-            const tokens_2: string[];
-            export { tokens_2 as tokens };
+            const tokens_3: string[];
+            export { tokens_3 as tokens };
             export namespace scalingMultipliers {
                 namespace display {
                     const high_3: number;
@@ -117,8 +128,8 @@ export namespace foundation {
             }
         }
         namespace slant {
-            const tokens_3: string[];
-            export { tokens_3 as tokens };
+            const tokens_4: string[];
+            export { tokens_4 as tokens };
         }
         namespace spacing {
             const multiplier: number;

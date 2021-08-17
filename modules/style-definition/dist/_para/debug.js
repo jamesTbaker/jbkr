@@ -1,3 +1,3 @@
-import { buildStyleServiceStore, } from '../lib/calculation.js';
-buildStyleServiceStore();
+import { cloneStore, } from '../lib/calculation.js';
+cloneStore();
 //# sourceMappingURL=debug.js.map

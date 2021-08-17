@@ -1,11 +1,14 @@
 /**
  * @module Style Definition
  */
+import * as fs from 'fs';
+import * as fsextra from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import {
 	returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple,
 	returnCopyOfObjectWithStringKeys,
 } from 'utilities';
-import * as fs from 'fs';
 import {
 	FigmaPage, AllColors, DeviceWidthToken, TypeSizeKey, TypeWeightKey,
 	TypeLineHeightKey, TypeSlantKey, TypeStyle, AllTypeStyles,
@@ -513,6 +516,35 @@ export const cloneFoundation = ():Promise<{ error: boolean }> =>
 			}
 		});
 	});
+export const cloneStore = ():Promise<{ error: boolean }> =>
+	// return a new, main promise
+	new Promise((resolve, reject) => {
+		const here = fileURLToPath(import.meta.url);
+		const source = path.join(
+			here,
+			'../../../../style-service/src/store',
+		);
+		const destination = path.join(
+			here,
+			'../../../../style-service/dist/store',
+		);
+		fsextra.ensureDirSync(destination);
+		fsextra.copy(
+			source,
+			destination,
+		)
+			// if the  promise is resolved with a result
+			.then(() => {
+				// then resolve the main promise with the result
+				resolve({ 'error': false });
+			})
+			// if the  promise is rejected with an error
+			.catch((error) => {
+				// reject the main promise with the error
+				reject(error);
+			});
+	});
+
 export const buildAllStyleSets = ():Promise<{ error: boolean }> =>
 	// return a new, main promise
 	new Promise((resolve, reject) => {

@@ -26,7 +26,7 @@ const returnHSLAStringFromHSLAObject = (
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const style: {[key:string]: any} = {
 	'gridBase': (): number => foundation.gridBase,
-	'device': () => foundation.device,
+	'device': (): Device => foundation.device,
 	/* 'color': {
 		'neutral': {
 			'finch': (
