@@ -1,12 +1,8 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-// import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-// import HomepageFeatures from '../components/HomepageFeatures';
-// import siteConfigImport from '../../docusaurus.config.js';
 import styled from 'styled-components';
 import { style } from 'style-service';
-// import { up } from 'styled-breakpoints';
 
 
 const Header = styled.header`
@@ -19,8 +15,12 @@ const Header = styled.header`
 )};
 	padding: 18rem 0 6rem;
 `;
+
 const HeaderContentContainer = styled.div`
-	@media ${style.device.widths.queries['not-small']} {
+	@media ${style.device().widths.queries['s-only']} {
+		padding: 2rem;
+	}
+	@media ${style.device().widths.queries['not-small']} {
 		display: inline-block;
 		padding: 2rem 4rem 2rem 6rem;
 		border-radius: 0 3px 3px 0;
@@ -35,10 +35,22 @@ const HeaderContentContainer = styled.div`
 )};
 `;
 const HeaderTitle = styled.h1`
-	padding-bottom: .5rem;
-	font-size: 5.675rem;
-	line-height: 5rem;
-	font-weight: 600;
+	@media ${style.device().widths.queries['s-only']} {
+		font-size: 3.0625rem;
+		line-height: 3.5rem;
+		font-weight: 600;
+	}
+	@media ${style.device().widths.queries['m-only']} {
+		font-size: 4.1875rem;
+		line-height: 4.5rem;
+		font-weight: 600;
+	}
+	@media ${style.device().widths.queries['l-only']} {
+		font-size: 5.675rem;
+		line-height: 5rem;
+		font-weight: 600;
+		padding-bottom: .5rem;
+	}
 	color: white;
 `;
 const HeaderTitlePreface = styled.div`
@@ -72,8 +84,6 @@ const HeaderTagline = styled.p`
 const Main = styled.main`
 	padding: 2rem;
 	margin: 0;
-
-
 	font-size: 1rem;
 	line-height: 1.65rem;
 	font-weight: 400;

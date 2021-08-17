@@ -24,7 +24,6 @@
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"style-service": "file:../modules/style-service",
-		"styled-breakpoints": "^10.0.1",
 		"styled-components": "^5.3.0",
 		"url-loader": "^4.1.1"
 	},
