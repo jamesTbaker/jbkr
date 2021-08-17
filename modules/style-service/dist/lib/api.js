@@ -2,7 +2,6 @@ import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
-import { returnCopyOfObjectWithStringKeys } from 'utilities';
 const returnHSLAStringFromHSLAObject = ({ hslaObject }) => `hsla(${hslaObject.h}, ${hslaObject.s}%, \
 	${hslaObject.l}%, ${hslaObject.a})`;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -285,9 +284,7 @@ export const style = {
     'color': {
         'props': () => color,
         'override': ({ color, hue, saturation, lightness, alpha, }) => {
-            const colorClone = returnCopyOfObjectWithStringKeys({
-                'incoming': color,
-            });
+            const colorClone = Object.assign({}, color);
             if (hue) {
                 colorClone.h = hue;
             }
@@ -365,7 +362,7 @@ export const style = {
         'circular': () => foundation.shape.circular,
     },
     'motion': {
-        'standardTime': foundation.motion.standardTime,
+        'standardTime': () => foundation.motion.standardTime,
     },
 };
 //# sourceMappingURL=api.js.map

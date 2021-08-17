@@ -7,16 +7,15 @@
 	AccentOnMediumQuarternaryHuesKey, AccentOnLightPrimaryHuesKey,
 	AccentOnLightSecondaryHuesKey, AccentOnLightQuarternaryHuesKey, */
 import {
-	Color,
+	Color, AllColors,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
-	DeviceWidthToken, DeviceTokenObject, ShadowLevelKeyOf17,
+	DeviceWidthToken, Device, ShadowLevelKeyOf17,
 } from 'models';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
 
-import { returnCopyOfObjectWithStringKeys } from 'utilities';
 
 const returnHSLAStringFromHSLAObject = (
 	{ hslaObject }:
@@ -26,8 +25,8 @@ const returnHSLAStringFromHSLAObject = (
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const style: {[key:string]: any} = {
-	'gridBase': () => foundation.gridBase as number,
-	'device': () => foundation.device as DeviceTokenObject,
+	'gridBase': (): number => foundation.gridBase,
+	'device': () => foundation.device,
 	/* 'color': {
 		'neutral': {
 			'finch': (
@@ -302,22 +301,20 @@ export const style: {[key:string]: any} = {
 		),
 	}, */
 	'color': {
-		'props': () => color,
+		'props': (): AllColors => color,
 		'override': (
 			{
 				color, hue, saturation, lightness, alpha,
 			}:{
-				color: { [key: string]: unknown},
+				color: Color,
 				hue?: number,
 				saturation?: number,
 				lightness?: number,
 				alpha?: number,
 
 			},
-		) => {
-			const colorClone = returnCopyOfObjectWithStringKeys({
-				'incoming': color,
-			});
+		): Color => {
+			const colorClone = { ...color };
 			if (hue) {
 				colorClone.h = hue;
 			}
@@ -330,15 +327,16 @@ export const style: {[key:string]: any} = {
 			if (alpha) {
 				colorClone.a = alpha;
 			}
-			return colorClone;
+			return colorClone as Color;
 		},
 		'string':
-			({ color }:{ color: Color }) => returnHSLAStringFromHSLAObject(
-				{ 'hslaObject': color },
-			),
+			({ color }:{ color: Color }): string =>
+				returnHSLAStringFromHSLAObject(
+					{ 'hslaObject': color },
+				),
 	},
 	'type': {
-		'family': () => foundation.type.family as string,
+		'family': (): string => foundation.type.family,
 		'style': ({
 			deviceWidth,
 			size,
@@ -351,7 +349,7 @@ export const style: {[key:string]: any} = {
 			weight?: TypeWeightKey,
 			slant?: TypeSlantKey,
 			usage?: TypeLineHeightKey,
-		}) => {
+		}): string => {
 			const paramsClone = {
 				deviceWidth,
 				size,
@@ -372,9 +370,9 @@ export const style: {[key:string]: any} = {
 		},
 	},
 	'position': {
-		'verticalAlignMiddle': () => foundation
+		'verticalAlignMiddle': (): string => foundation
 			.position.verticalAlignMiddle,
-		'zIndexNumber': () => foundation
+		'zIndexNumber': ():{ [key: string]: number } => foundation
 			.position.zIndexes,
 		'shadow': ({ level = '06' }: { level?: ShadowLevelKeyOf17 }) => {
 			const shadowObject = shadow[level];
@@ -398,20 +396,21 @@ export const style: {[key:string]: any} = {
 		},
 	},
 	'visibility': {
-		'hiddenBlock': () => foundation.visibility.blockHidden,
-		'overrideHidingBlock': () => foundation
+		'hiddenBlock': (): string => foundation.visibility.blockHidden,
+		'overrideHidingBlock': (): string => foundation
 			.visibility.overrideBlockHidden,
-		'hiddenInline': () => foundation
+		'hiddenInline': (): string => foundation
 			.visibility.inlineHidden,
-		'hiddenTableColumn': () => foundation
+		'hiddenTableColumn': (): string => foundation
 			.visibility.tableColumnHidden,
 	},
 	'shape': {
-		'standardCorners': () => foundation.shape.standardCorners,
-		'straightCorners': () => foundation.shape.straightCorners,
-		'circular': () => foundation.shape.circular,
+		'standardCorners': (): string => foundation.shape.standardCorners,
+		'straightCorners': (): string => foundation.shape.straightCorners,
+		'circular': (): string => foundation.shape.circular,
 	},
 	'motion': {
-		'standardTime': foundation.motion.standardTime,
+		'standardTime': (): { 's': number, 'ms': number } =>
+			foundation.motion.standardTime,
 	},
 };

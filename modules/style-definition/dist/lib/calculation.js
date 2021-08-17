@@ -216,7 +216,7 @@ new Promise((resolve) => {
     // set up container
     const typeStyles = {};
     //
-    Object.keys(foundation.device.widths).forEach((deviceWidth) => {
+    foundation.device.widths.tokens.forEach((deviceWidth) => {
         typeStyles[deviceWidth] = {};
         foundation.type.size.tokens.forEach((typeSize) => {
             typeStyles[deviceWidth][typeSize] = {};

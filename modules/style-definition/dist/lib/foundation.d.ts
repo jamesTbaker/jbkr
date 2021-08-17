@@ -24,17 +24,27 @@ export declare const foundation: {
     gridBase: number;
     device: {
         widths: {
-            s: {
-                minimum: number;
-                maximum: number;
+            tokens: string[];
+            specs: {
+                s: {
+                    minimum: number;
+                    maximum: number;
+                };
+                m: {
+                    minimum: number;
+                    maximum: number;
+                };
+                l: {
+                    minimum: number;
+                    maximum: undefined;
+                };
             };
-            m: {
-                minimum: number;
-                maximum: number;
-            };
-            l: {
-                minimum: number;
-                maximum: undefined;
+            queries: {
+                's-only': string;
+                'm-only': string;
+                'l-only': string;
+                'not-large': string;
+                'not-small': string;
             };
         };
     };

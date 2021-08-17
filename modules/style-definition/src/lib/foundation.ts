@@ -38,17 +38,27 @@ export const foundation = {
 	'gridBase': 8,
 	'device': {
 		'widths': {
-			's': {
-				'minimum': 0,
-				'maximum': 414,
+			'tokens': ['s', 'm', 'l'],
+			'specs': {
+				's': {
+					'minimum': 0,
+					'maximum': 414,
+				},
+				'm': {
+					'minimum': 415,
+					'maximum': 1024,
+				},
+				'l': {
+					'minimum': 1025,
+					'maximum': undefined,
+				},
 			},
-			'm': {
-				'minimum': 415,
-				'maximum': 1024,
-			},
-			'l': {
-				'minimum': 1025,
-				'maximum': undefined,
+			'queries': {
+				's-only': '(max-width: 414px)',
+				'm-only': '(min-width: 415px) and (max-width: 1024px)',
+				'l-only': '(min-width: 1025px)',
+				'not-large': '(max-width: 1024px)',
+				'not-small': '(min-width: 415px)',
 			},
 		},
 	},
