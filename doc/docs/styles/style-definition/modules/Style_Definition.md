@@ -18,15 +18,23 @@ custom_edit_url: null
 | :------ | :------ |
 | `device` | `Object` |
 | `device.widths` | `Object` |
-| `device.widths.l` | `Object` |
-| `device.widths.l.maximum` | `undefined` |
-| `device.widths.l.minimum` | `number` |
-| `device.widths.m` | `Object` |
-| `device.widths.m.maximum` | `number` |
-| `device.widths.m.minimum` | `number` |
-| `device.widths.s` | `Object` |
-| `device.widths.s.maximum` | `number` |
-| `device.widths.s.minimum` | `number` |
+| `device.widths.queries` | `Object` |
+| `device.widths.queries.l-only` | `string` |
+| `device.widths.queries.m-only` | `string` |
+| `device.widths.queries.not-large` | `string` |
+| `device.widths.queries.not-small` | `string` |
+| `device.widths.queries.s-only` | `string` |
+| `device.widths.specs` | `Object` |
+| `device.widths.specs.l` | `Object` |
+| `device.widths.specs.l.maximum` | `undefined` |
+| `device.widths.specs.l.minimum` | `number` |
+| `device.widths.specs.m` | `Object` |
+| `device.widths.specs.m.maximum` | `number` |
+| `device.widths.specs.m.minimum` | `number` |
+| `device.widths.specs.s` | `Object` |
+| `device.widths.specs.s.maximum` | `number` |
+| `device.widths.specs.s.minimum` | `number` |
+| `device.widths.tokens` | `string`[] |
 | `extraction` | `Object` |
 | `extraction.definitions` | `Object` |
 | `extraction.definitions.names` | `Object` |
@@ -132,4 +140,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[foundation.ts:9](https://github.com/jamesTbaker/jbkr/blob/8f708bd/modules/style-definition/src/lib/foundation.ts#L9)
+[foundation.ts:9](https://github.com/jamesTbaker/jbkr/blob/0284c90/modules/style-definition/src/lib/foundation.ts#L9)

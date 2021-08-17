@@ -20,9 +20,11 @@ const Header = styled.header`
 	padding: 18rem 0 6rem;
 `;
 const HeaderContentContainer = styled.div`
-	display: inline-block;
-	padding: 2rem 4rem 2rem 6rem;
-	border-radius: 0 3px 3px 0;
+	@media ${style.device.widths.queries['not-small']} {
+		display: inline-block;
+		padding: 2rem 4rem 2rem 6rem;
+		border-radius: 0 3px 3px 0;
+	}
 	background-color: ${style.color.string(
 	{
 		'color': style.color.override({
