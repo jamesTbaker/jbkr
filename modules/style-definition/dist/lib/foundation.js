@@ -1,8 +1,5 @@
 /**
- * Specify some styles in full, and specify settings for
- * generating other styles.
- *
- * @internal
+ * @module Style Definition
  */
 import path from 'path';
 import { fileURLToPath } from 'url';

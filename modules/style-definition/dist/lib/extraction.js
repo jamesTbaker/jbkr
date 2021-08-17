@@ -1,14 +1,12 @@
 /**
- * Extract styles data from Figma and store it locally.
- *
- * @internal
+ * @module Style Definition
  */
 import axios from 'axios';
 import * as fs from 'fs';
 import { foundation } from './foundation.js';
 /**
  * Get the specified file from the Figma API. Extract and return only
- * the pages specified in [[`definition`]].
+ * the pages specified in {@link foundation | `foundation`}.
  *
  * @remarks
  * Figma file ID and api access token are environment variables.

@@ -10,7 +10,7 @@ export interface Color {
 /**
  * Object keys.
  */
-export type NeutralHuesKey = 'Finch' | 'Sky' | 'Spruce' | 'Seafoam';
+export type NeutralHuesKey = 'Base' | 'Finch' | 'Sky' | 'Spruce' | 'Seafoam';
 export type AccentOnDarkPrimaryHuesKey = 'Peacock' | 'Seafoam' | 'Finch';
 export type AccentOnDarkSecondaryHuesKey = 'Iris';
 export type AccentOnDarkTertiaryHuesKey = 'Tiger' | 'Sunshine';
@@ -40,6 +40,7 @@ export interface LightnessLevelSubset {
 	[level: string]: Color;
 }
 export interface NeutralSubset {
+	Base: LightnessLevelSubset;
 	Finch: LightnessLevelSubset;
 	Sky: LightnessLevelSubset;
 	Spruce: LightnessLevelSubset;

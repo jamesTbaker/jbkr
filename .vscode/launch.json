@@ -19,21 +19,6 @@
 			"console": "integratedTerminal"
 		},
 		{
-			"name": "style",
-			"type": "pwa-node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/modules/style/src/_para/debug.ts",
-			"outFiles": [
-				"${workspaceFolder}/**/*.js"
-			],
-			"preLaunchTask": "build-style",
-			"console": "integratedTerminal",
-			"envFile": "${workspaceFolder}/modules/style/.env"
-		},
-		{
 			"name": "style-definition",
 			"type": "pwa-node",
 			"request": "launch",

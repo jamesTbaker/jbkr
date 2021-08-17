@@ -1,12 +1,13 @@
-import {
-	Color, LightnessLevelKeyOf1, LightnessLevelKeyOf3,
+/* LightnessLevelKeyOf1, LightnessLevelKeyOf3,
 	LightnessLevelKeyOf5, LightnessLevelKeyOf9,
 	LightnessLevelKeyOf41, StateToneKey, LightSurfaceKey,
 	AccentOnDarkPrimaryHuesKey, AccentOnDarkSecondaryHuesKey,
 	AccentOnDarkTertiaryHuesKey, AccentOnDarkQuarternaryHuesKey,
 	AccentOnMediumPrimaryHuesKey, AccentOnMediumTertiaryHuesKey,
 	AccentOnMediumQuarternaryHuesKey, AccentOnLightPrimaryHuesKey,
-	AccentOnLightSecondaryHuesKey, AccentOnLightQuarternaryHuesKey,
+	AccentOnLightSecondaryHuesKey, AccentOnLightQuarternaryHuesKey, */
+import {
+	Color,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
 	DeviceWidthToken, DeviceTokenObject, ShadowLevelKeyOf17,
 } from 'models';
@@ -14,6 +15,8 @@ import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
+
+import { returnCopyOfObjectWithStringKeys } from 'utilities';
 
 const returnHSLAStringFromHSLAObject = (
 	{ hslaObject }:
@@ -25,7 +28,7 @@ const returnHSLAStringFromHSLAObject = (
 export const style: {[key:string]: any} = {
 	'gridBase': () => foundation.gridBase as number,
 	'device': () => foundation.device as DeviceTokenObject,
-	'color': {
+	/* 'color': {
 		'neutral': {
 			'finch': (
 				{ level }:
@@ -297,6 +300,42 @@ export const style: {[key:string]: any} = {
 					{ 'hslaObject': color.Light[surface][level] },
 				) : ''
 		),
+	}, */
+	'color': {
+		'props': () => color,
+		'override': (
+			{
+				color, hue, saturation, lightness, alpha,
+			}:{
+				color: { [key: string]: unknown},
+				hue?: number,
+				saturation?: number,
+				lightness?: number,
+				alpha?: number,
+
+			},
+		) => {
+			const colorClone = returnCopyOfObjectWithStringKeys({
+				'incoming': color,
+			});
+			if (hue) {
+				colorClone.h = hue;
+			}
+			if (saturation) {
+				colorClone.s = saturation;
+			}
+			if (lightness) {
+				colorClone.l = lightness;
+			}
+			if (alpha) {
+				colorClone.a = alpha;
+			}
+			return colorClone;
+		},
+		'string':
+			({ color }:{ color: Color }) => returnHSLAStringFromHSLAObject(
+				{ 'hslaObject': color },
+			),
 	},
 	'type': {
 		'family': () => foundation.type.family as string,

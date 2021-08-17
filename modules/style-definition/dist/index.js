@@ -1,4 +1,9 @@
-export { buildStyleSet, buildAllStyleSets, style,
-// eslint-disable-next-line import/no-unresolved
- } from './lib/api.js';
+"use strict";
+/**
+ * This is the pkg desc.
+ * :::info
+ * This is my info admon.
+ * :::
+ * @module Style Definition
+ */
 //# sourceMappingURL=index.js.map

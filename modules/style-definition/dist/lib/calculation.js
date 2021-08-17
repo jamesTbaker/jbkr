@@ -1,7 +1,5 @@
 /**
- * Extract styles data from Figma and store it locally.
- *
- * @internal
+ * @module Style Definition
  */
 import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, returnCopyOfObjectWithStringKeys, } from 'utilities';
 import * as fs from 'fs';
@@ -107,6 +105,9 @@ new Promise((resolve, reject) => {
                 }
             }
         });
+        // fix the incorrect alpha transparency coming from API on the
+        // color for which it really matters (transparent)
+        allColors.Neutral.Base.Transparent.a = 0;
         // then resolve the main promise with the return value
         resolve(allColors);
     })

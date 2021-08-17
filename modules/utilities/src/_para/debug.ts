@@ -3,7 +3,6 @@ import {
 	returnNumberRoundedUpToMultiple,
 	returnHSLValuesFromRBGPercents,
 	returnCopyOfObjectWithStringKeys,
-// eslint-disable-next-line import/no-unresolved
 } from '../index.js';
 
 
