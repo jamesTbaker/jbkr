@@ -1,9 +1,9 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { color, typography } from './styles';
-import style from 'style-service';
+// import { style } from 'style-service';
 
+// ${style.type.family()};
 export const bodyStyles = css`
-	${style.type.family()};
 	font-size: ${typography.size.s3}px;
 	color: ${color.darkest};
 
