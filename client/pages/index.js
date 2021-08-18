@@ -1,19 +1,24 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Head from 'next/head';
+// import Head from 'next/head';
 import { connectToDatabase } from '../lib/mongodb';
-
-/* eslint-disable-next-line */
-export interface ProfileScreenProps { };
+// import { Text } from 'components-core';
+import { Text } from '../components/Text/Text';
 
 const StyledProfileScreen = styled.div`
 	color: pink;
 `;
 
-const ProfileScreen = (props: ProfileScreenProps) => (
+const ProfileScreen = (props) => (
 	<StyledProfileScreen>
-		<h2>The Profile Screen</h2>
-
+		{/* <Text
+			deviceWidth='l'
+			size='3xl'
+			weight='bold'
+			slant='italic'
+			usage='display'
+		>The Profile Screen</Text> */}
+		<Text>The Profile Screen</Text>
 		<Link href="/library">Library</Link>
 	</StyledProfileScreen>
 );
@@ -23,8 +28,8 @@ export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
 	const data = await db.collection('skills').find({}).toArray();
 	const skills = JSON.parse(JSON.stringify(data));
-	console.log(skills);
+	// console.log(skills);
 	return {
-		props: { skills },
+		'props': { skills },
 	};
 }
