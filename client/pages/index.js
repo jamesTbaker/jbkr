@@ -3,7 +3,7 @@ import Link from 'next/link';
 // import Head from 'next/head';
 import { connectToDatabase } from '../lib/mongodb';
 // import { Text } from 'components-core';
-import { Text } from '../components/Text/Text';
+import { Text } from '../components-core/Text/Text';
 
 const StyledProfileScreen = styled.div`
 	color: pink;
