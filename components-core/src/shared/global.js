@@ -1,8 +1,9 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { color, typography } from './styles';
+import { style } from 'style-service';
 
 export const bodyStyles = css`
-	font-family: ${typography.type.primary};
+	${style.type.family()};
 	font-size: ${typography.size.s3}px;
 	color: ${color.darkest};
 
@@ -12,8 +13,8 @@ export const bodyStyles = css`
 	-webkit-tap-highlight-color: transparent;
 	-webkit-overflow-scrolling: touch;
 
-  * {
-    box-sizing: border-box;
+	* {
+		box-sizing: border-box;
 	}
 
 	h1,
@@ -78,14 +79,14 @@ export const bodyStyles = css`
 	}
 
 	pre {
-	line-height: 18px;
-	padding: 11px 1rem;
-	white-space: pre-wrap;
+		line-height: 18px;
+		padding: 11px 1rem;
+		white-space: pre-wrap;
 
-	background: rgba(0, 0, 0, 0.05);
-	color: ${color.darkest};
-	border-radius: 3px;
-	margin: 1rem 0;
+		background: rgba(0, 0, 0, 0.05);
+		color: ${color.darkest};
+		border-radius: 3px;
+		margin: 1rem 0;
 	}
 
 	&.ReactModal__Body--open {
