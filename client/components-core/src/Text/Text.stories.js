@@ -11,7 +11,7 @@ export default {
 // define a function for each test state; a story is a function that returns
 // a rendered element in a given state
 
-const Template = args => <Text {...args} />;
+const Template = args => <Text {...args} >jbkr</Text>;
 
 export const SmallDisplay5xlRegular = Template.bind({});
 SmallDisplay5xlRegular.args = {

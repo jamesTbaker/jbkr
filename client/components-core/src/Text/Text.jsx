@@ -8,16 +8,13 @@ const TextContainer = styled.span`
 		weight,
 		slant,
 		usage,
-	}) => style.type.style(
+	}) => style.type.style({
 		deviceWidth,
 		size,
 		weight,
 		slant,
 		usage,
-	)};
-	color: ${style.color.string(
-		{ 'color': style.color.props().Accent.OnLight.Secondary.Iris },
-	)};
+	})}
 `;
 
 export const Text = ({

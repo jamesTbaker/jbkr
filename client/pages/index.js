@@ -11,14 +11,14 @@ const StyledProfileScreen = styled.div`
 
 const ProfileScreen = (props) => (
 	<StyledProfileScreen>
-		{/* <Text
+		<Text
 			deviceWidth='l'
 			size='3xl'
 			weight='bold'
 			slant='italic'
 			usage='display'
-		>The Profile Screen</Text> */}
-		<Text>The Profile Screen</Text>
+		>The Profile Screen</Text>
+		{/* <Text>The Profile Screen</Text> */}
 		<Link href="/library">Library</Link>
 	</StyledProfileScreen>
 );
