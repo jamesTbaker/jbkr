@@ -1,8 +1,15 @@
 import React from 'react';
 import { Normalize } from 'styled-normalize';
-import { darkTheme, lightTheme } from './jbkr/sb-ui-themes/index';
-import { GlobalStyle } from '../components-core/storybook/global';
+import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
+import { createGlobalStyle } from 'styled-components';
 import { style } from '@jbkr/style-service';
+
+const GlobalStyle = createGlobalStyle`
+	body {
+		${style.type.family()};
+	}
+`;
+
 
 // Global decorator to apply the styles to all stories
 export const decorators = [

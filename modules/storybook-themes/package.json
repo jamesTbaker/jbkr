@@ -5,5 +5,8 @@
 	"main": "src/index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@jbkr/style-service": "file:../style-service"
+	}
 }
