@@ -1,16 +1,11 @@
 ---
 id: "index"
-title: "utilities"
+title: "@jbkr/utilities"
 slug: "/other-modules/utilities"
 sidebar_label: "Exports"
 sidebar_position: 0.5
 custom_edit_url: null
 ---
-
-This is the overview of Utilities.
-:::info
-This is my info admon.
-:::
 
 ## Functions
 
@@ -31,7 +26,7 @@ This is my info admon.
 
 #### Defined in
 
-[lib/utilities.ts:46](https://github.com/jamesTbaker/jbkr/blob/4cc3136/modules/utilities/src/lib/utilities.ts#L46)
+[lib/utilities.ts:46](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/utilities/src/lib/utilities.ts#L46)
 
 ___
 
@@ -60,7 +55,7 @@ ___
 
 #### Defined in
 
-[lib/utilities.ts:5](https://github.com/jamesTbaker/jbkr/blob/4cc3136/modules/utilities/src/lib/utilities.ts#L5)
+[lib/utilities.ts:5](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/utilities/src/lib/utilities.ts#L5)
 
 ___
 
@@ -82,4 +77,4 @@ ___
 
 #### Defined in
 
-[lib/utilities.ts:1](https://github.com/jamesTbaker/jbkr/blob/4cc3136/modules/utilities/src/lib/utilities.ts#L1)
+[lib/utilities.ts:1](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/utilities/src/lib/utilities.ts#L1)

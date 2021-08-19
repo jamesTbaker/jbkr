@@ -1,5 +1,5 @@
 {
-	"name": "style-definition",
+	"name": "@jbkr/style-definition",
 	"version": "0.1.0",
 	"description": "Build the contents of the style service's store.",
 	"author": "James Baker",
@@ -17,11 +17,12 @@
 		"utilities": "file:../utilities"
 	},
 	"devDependencies": {
+		"@jbkr/models": "file:../models",
+		"@jbkr/utilities": "file:../utilities",
 		"@types/fs-extra": "^9.0.12",
 		"@types/node": "^16.4.10",
 		"dotenv": "^10.0.0",
 		"fs-extra": "^10.0.0",
-		"models": "file:../models",
 		"typescript": "^4.3.5"
 	}
 }

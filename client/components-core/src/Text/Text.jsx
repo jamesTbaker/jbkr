@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { style } from 'style-service';
+import { style } from '@jbkr/style-service';
 
 const TextContainer = styled.span`
 	${({

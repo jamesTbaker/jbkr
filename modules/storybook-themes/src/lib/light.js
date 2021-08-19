@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming';
-import { style } from '@jbkr/style-service';
+import { style } from 'style-service';
 
 export const lightTheme = create({
 	// use SB's light theme as a baseline

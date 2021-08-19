@@ -5,7 +5,7 @@
 import axios from 'axios';
 import * as fs from 'fs';
 import { foundation } from './foundation.js';
-import { FigmaDocument, FigmaPage } from 'models';
+import { FigmaDocument, FigmaPage } from '@jbkr/models';
 /**
  * Get the specified file from the Figma API. Extract and return only
  * the pages specified in {@link foundation | `foundation`}.

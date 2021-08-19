@@ -1,5 +1,5 @@
 {
-	"name": "utilities",
+	"name": "@jbkr/utilities",
 	"version": "0.1.0",
 	"description": "Miscellaneous functions.",
 	"main": "build/index.js",

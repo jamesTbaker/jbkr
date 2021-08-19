@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styled from 'styled-components';
-import { style } from 'style-service';
+import { style } from '@jbkr/style-service';
 
 
 const Header = styled.header`

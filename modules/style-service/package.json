@@ -1,5 +1,5 @@
 {
-	"name": "style-service",
+	"name": "@jbkr/style-service",
 	"version": "0.1.0",
 	"description": "Serve style data from an internal store. Store contents are built by the 'style-definition' module",
 	"main": "dist/index.js",
@@ -10,8 +10,8 @@
 		"build": "tsc --project ./tsconfig.json"
 	},
 	"devDependencies": {
-		"models": "file:../models",
-		"typescript": "^4.3.5",
-		"utilities": "file:../utilities"
+		"@jbkr/models": "file:../models",
+		"@jbkr/utilities": "file:../utilities",
+		"typescript": "^4.3.5"
 	}
 }

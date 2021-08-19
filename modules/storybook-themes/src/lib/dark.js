@@ -1,9 +1,9 @@
 import { create } from '@storybook/theming';
-import { style } from '@jbkr/style-service';
+import { style } from 'style-service';
 
-export const lightTheme = create({
-	// use SB's light theme as a baseline
-	base: 'light',
+export const darkTheme = create({
+	// use SB's dark theme as a baseline
+	base: 'dark',
 
 	// colorPrimary: '#',
 	// colorSecondary: '#',
@@ -11,15 +11,15 @@ export const lightTheme = create({
 	// UI
 	appBg: style.color.string(
 		{
-			'color': style.color.props().Neutral.Finch['01']
+			'color': style.color.props().Neutral.Finch['37']
 		},
 	),
 	appContentBg: style.color.string(
 		{
-			'color': style.color.props().Neutral.Finch['03']
+			'color': style.color.props().Neutral.Finch['35']
 		},
 	),
-	appBorderColor: 'hsla(225, 70%, 70%, 1)',
+	appBorderColor: 'hsla(225, 61%, 23%, 1)',
 	appBorderRadius: 3,
 
 	// Typography
@@ -33,24 +33,24 @@ export const lightTheme = create({
 	// Toolbar default and active colors
 	barTextColor: style.color.string(
 		{
-			'color': style.color.props().Brand.Peony['06']
+			'color': style.color.props().Brand.Peony['03']
 		},
 	),
 	barSelectedColor: style.color.string(
 		{
-			'color': style.color.props().Brand.Peony['07']
+			'color': style.color.props().Brand.Peony['05']
 		},
 	),
 	barBg: style.color.string(
 		{
-			'color': style.color.props().Neutral.Base.White
+			'color': style.color.props().Neutral.Finch['33']
 		},
 	),
 
 	// Form colors
 	inputBg: style.color.string(
 		{
-			'color': style.color.props().Neutral.Base.White
+			'color': style.color.props().Neutral.Finch['33']
 		},
 	),
 	// inputBorder: '#',

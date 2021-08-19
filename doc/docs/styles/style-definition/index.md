@@ -1,6 +1,6 @@
 ---
 id: "index"
-title: "style-definition"
+title: "@jbkr/style-definition"
 slug: "/styles/style-definition"
 sidebar_label: "Exports"
 sidebar_position: 0.5

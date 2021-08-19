@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as fsextra from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, returnCopyOfObjectWithStringKeys, } from 'utilities';
+import { returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple, returnCopyOfObjectWithStringKeys, } from '@jbkr/utilities';
 import { foundation } from './foundation.js';
 import { storeFigmaStylePages, returnStoredFigmaStylePages, } from './extraction.js';
 /**

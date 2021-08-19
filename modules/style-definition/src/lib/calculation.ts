@@ -8,12 +8,12 @@ import { fileURLToPath } from 'url';
 import {
 	returnHSLValuesFromRBGPercents, returnNumberRoundedUpToMultiple,
 	returnCopyOfObjectWithStringKeys,
-} from 'utilities';
+} from '@jbkr/utilities';
 import {
 	FigmaPage, AllColors, DeviceWidthToken, TypeSizeKey, TypeWeightKey,
 	TypeLineHeightKey, TypeSlantKey, TypeStyle, AllTypeStyles,
 	ShadowSubset, AllShadows,
-} from 'models';
+} from '@jbkr/models';
 import { foundation } from './foundation.js';
 import {
 	storeFigmaStylePages, returnStoredFigmaStylePages,

@@ -50,13 +50,15 @@ export const returnCopyOfObjectWithStringKeys = ({ incoming }) => {
             }
             else {
                 // throw custom error
-                throw 'returnCopyOfObjectWithStringKeys - result not object';
+                throw '> > > JBKR: returnCopyOfObjectWithStringKeys - \
+					result not object';
             }
             // if value is not truthy
         }
         else {
             // throw custom error
-            throw 'returnCopyOfObjectWithStringKeys - result not truthy';
+            throw '> > > JBKR: returnCopyOfObjectWithStringKeys - \
+				result not truthy';
         }
         // if attempt to get an object resulted in an error
     }

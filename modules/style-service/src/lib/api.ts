@@ -10,7 +10,7 @@ import {
 	Color, AllColors,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
 	DeviceWidthToken, Device, ShadowLevelKeyOf17,
-} from 'models';
+} from '@jbkr/models';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';

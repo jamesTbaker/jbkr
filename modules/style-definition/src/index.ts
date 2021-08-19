@@ -1,7 +1,3 @@
 /**
- * This is the pkg desc.
- * :::info
- * This is my info admon.
- * :::
- * @module Style Definition
+ * @todo Build process should delete `dist` prior to building.
  */

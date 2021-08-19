@@ -1,9 +1,5 @@
 /**
- * This is the overview of Utilities.
- * :::info
- * This is my info admon.
- * :::
- * @module Utilities
+ * @todo Build process should delete `dist` prior to building.
  */
 export {
 	returnNumberRoundedUpToMultiple,

@@ -304,6 +304,13 @@ export const style = {
     'type': {
         'family': () => foundation.type.family,
         'style': ({ deviceWidth, size, weight, slant, usage, }) => {
+            console.log(' >>> API ');
+            console.log(deviceWidth);
+            console.log(size);
+            console.log(weight);
+            console.log(slant);
+            console.log(usage);
+            console.log(' >>> API ');
             const paramsClone = {
                 deviceWidth,
                 size,

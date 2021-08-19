@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { returnHSLValuesFromRBGPercents,
-// eslint-disable-next-line import/no-unresolved
- } from '../index.js';
+import { returnHSLValuesFromRBGPercents, } from '../index.js';
 /* returnNumberRoundedUpToMultiple({
     number: 61,
     multiple: 8,

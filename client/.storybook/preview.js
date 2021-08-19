@@ -1,7 +1,8 @@
 import React from 'react';
-import { darkTheme, lightTheme } from './jbkr/sb-ui-themes/index';
 import { Normalize } from 'styled-normalize';
+import { darkTheme, lightTheme } from './jbkr/sb-ui-themes/index';
 import { GlobalStyle } from '../components-core/storybook/global';
+import { style } from '@jbkr/style-service';
 
 // Global decorator to apply the styles to all stories
 export const decorators = [
@@ -23,8 +24,32 @@ export const parameters = {
 	},
 	// turn on dark / light mode toggle in SB ui (module: storybook-dark-mode)
 	darkMode: {
-		dark: { ...darkTheme },
-		light: { ...lightTheme }
+		dark: {
+			...darkTheme,
+			barTextColor: style.color.string(
+				{
+					'color': style.color.props().Brand.Peony['03']
+				},
+			),
+			barSelectedColor: style.color.string(
+				{
+					'color': style.color.props().Brand.Peony['05']
+				},
+			),
+		},
+		light: {
+			...lightTheme,
+			barTextColor: style.color.string(
+				{
+					'color': style.color.props().Brand.Peony['06']
+				},
+			),
+			barSelectedColor: style.color.string(
+				{
+					'color': style.color.props().Brand.Peony['07']
+				},
+			),
+		}
 	},
 	// set docs to use dark theme
 	docs: {

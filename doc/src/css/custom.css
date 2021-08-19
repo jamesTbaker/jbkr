@@ -225,26 +225,26 @@
 
 	--ifm-heading-color:				var(--jbkr-neutral-finch-23);
 	--ifm-font-color-base:				var(--jbkr-neutral-finch-28);
-	--ifm-link-color:					var(--jbkr-brand-peony-06);
+	--ifm-link-color:					var(--jbkr-brand-peony-07);
 
 	/* main surfaces */
 
-	--ifm-background-color:				var(--ifm-color-white);
-	--ifm-background-surface-color:		var(--jbkr-neutral-finch-02);
+	--ifm-background-color:				var(--jbkr-neutral-finch-01);
+	/* --ifm-background-surface-color:		var(--jbkr-neutral-finch-02); */
 
 	/* navbar + footer */
 
 	--ifm-navbar-link-color:			var(--jbkr-brand-peony-06);
-	--ifm-navbar-link-hover-color:		var(--jbkr-brand-peony-06);
-	--ifm-navbar-background-color:		var(--jbkr-neutral-finch-02);
-	--ifm-footer-background-color:		var(--jbkr-neutral-finch-02);
+	--ifm-navbar-link-hover-color:		var(--jbkr-brand-peony-07);
+	--ifm-navbar-background-color:		var(--ifm-color-white);
+	--ifm-footer-background-color:		var(--ifm-color-white);
 
 	/* sidebar + toc */
 
 	--ifm-menu-color:					var(--jbkr-neutral-finch-23);
-	--ifm-menu-color-active:			var(--jbkr-neutral-finch-36);
-	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-04);
-	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-02);
+	--ifm-menu-color-active:			var(--jbkr-neutral-finch-37);
+	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-06);
+	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-04);
 	--ifm-toc-link-color:				var(--jbkr-neutral-finch-21);
 
 	/* blockquote */
@@ -323,7 +323,7 @@ html[data-theme="dark"] {
 	/* main surfaces */
 
 	--ifm-background-color:				var(--jbkr-neutral-finch-37);
-	--ifm-background-surface-color:		var(--jbkr-neutral-finch-35);
+	/* --ifm-background-surface-color:		var(--jbkr-neutral-finch-35); */
 
 	/* navbar + footer */
 
