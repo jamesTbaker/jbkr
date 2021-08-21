@@ -1,15 +1,15 @@
 {
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"sb": "start-storybook -p 6006",
-		"build-sb": "build-storybook"
+		"next:dev": "next dev",
+		"next:lint": "next lint",
+		"next:build": "next build",
+		"next:start": "next start",
+		"sb:dev": "start-storybook -p 6006",
+		"sb:build": "build-storybook"
 	},
 	"dependencies": {
 		"@jbkr/style-service": "file:../modules/style-service",
-		"components-core": "file:../components-core",
 		"mongodb": "^3.5.9",
 		"next": "^11.1.0",
 		"next-transpile-modules": "^8.0.0",
@@ -29,6 +29,7 @@
 		"@storybook/theming": "^6.3.7",
 		"babel-loader": "^8.2.2",
 		"babel-plugin-styled-components": "^1.13.2",
+		"prop-types": "^15.7.2",
 		"storybook-dark-mode": "^1.0.8"
 	}
 }
