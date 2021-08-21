@@ -1,28 +1,40 @@
-import styled from 'styled-components';
-import Link from 'next/link';
-// import Head from 'next/head';
+/* eslint-disable no-unused-vars */
+/* eslint-disable indent */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
+import Head from 'next/head';
 import { connectToDatabase } from '../lib/mongodb';
-// import { Text } from 'components-core';
-import { Text } from '../components-core/Text/Text';
+import styled from 'styled-components';
+import { style } from '@jbkr/style-service';
 
-const StyledProfileScreen = styled.div`
-	color: pink;
+
+const Title = styled.h1`
+	font-size: 50px;
+	color: ${style.color.string(
+	{ 'color': style.color.props().Accent.OnLight.Secondary.Iris },
+)};
 `;
 
-const ProfileScreen = (props) => (
-	<StyledProfileScreen>
-		<Text
-			deviceWidth='l'
-			size='3xl'
-			weight='bold'
-			slant='italic'
-			usage='display'
-		>The Profile Screen</Text>
-		{/* <Text>The Profile Screen</Text> */}
-		<Link href="/library">Library</Link>
-	</StyledProfileScreen>
-);
-export default ProfileScreen;
+export default function Home({ skills }) {
+	return (
+		<div className="container">
+			<Head>
+				<title>Create Next App</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
+
+			<main>
+				<Title>
+					Welcome to
+					<a href="https://nextjs.org">Next.js with MongoDB!</a>
+				</Title>
+				<pre>{JSON.stringify(skills)}</pre>
+
+			</main>
+
+		</div>
+	);
+}
 
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
