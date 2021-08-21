@@ -2,38 +2,40 @@
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
-import Head from 'next/head';
-import { connectToDatabase } from '../lib/mongodb';
+
+
 import styled from 'styled-components';
+import { connectToDatabase } from '../../lib/mongodb';
 import Link from 'next/link';
-import { Text } from '../components/core/Text';
+import { Text } from '../../components/core/Text';
 
-
-const StyledProfileScreen = styled.div`
+const StyledLibLabListScreen = styled.div`
 	color: pink;
 `;
-const ProfileScreen = ({ skills }) => (
-	<StyledProfileScreen>
+
+const LibLabListScreen = ({ posts }) => (
+	<StyledLibLabListScreen>
 		<Text
 			deviceWidth='l'
 			size='3xl'
 			weight='bold'
 			slant='italic'
 			usage='display'
-		>The Profile Screen</Text>
+		>The LibLabList Screen</Text>
 		<Link href="/">Profile</Link>
 		<Link href="/library">Library</Link>
 		<Link href="/contact">Contact</Link>
-		<pre>{JSON.stringify(skills)}</pre>
-	</StyledProfileScreen>
+	</StyledLibLabListScreen>
 );
-export default ProfileScreen;
+
+export default LibLabListScreen;
+
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
-	const data = await db.collection('skills').find({}).toArray();
-	const skills = JSON.parse(JSON.stringify(data));
-	// console.log(skills);
+	const data = await db.collection('posts').find({}).toArray();
+	const posts = JSON.parse(JSON.stringify(data));
+	console.log(posts);
 	return {
-		'props': { skills },
+		'props': { posts },
 	};
 }

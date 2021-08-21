@@ -350,13 +350,6 @@ export const style: {[key:string]: any} = {
 			slant?: TypeSlantKey,
 			usage?: TypeLineHeightKey,
 		}): string => {
-			console.log(' >>> API ');
-			console.log(deviceWidth);
-			console.log(size);
-			console.log(weight);
-			console.log(slant);
-			console.log(usage);
-			console.log(' >>> API ');
 			const paramsClone = {
 				deviceWidth,
 				size,
