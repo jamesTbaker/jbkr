@@ -6,7 +6,7 @@ import { style } from '@jbkr/style-service';
 export default {
 	'title': 'Core/Text',
 	'component': TextComponent,
-	'argTypes': {
+	/* 'argTypes': {
 		'deviceWidth': {
 			'options': style.device().widths.tokens,
 			'control': { 'type': 'select' },
@@ -31,7 +31,7 @@ export default {
 			'options': ['dark', 'light'],
 			'control': { 'type': 'select' },
 		},
-	},
+	}, */
 };
 
 // define a function for each test state; a story is a function that returns
@@ -48,6 +48,6 @@ Text.args = {
 	'weight': 'regular',
 	'slant': 'normal',
 	'usage': 'display',
-	'color': 'hsla(0, 0%,	100%, 1)',
+	'color': 'hsla(0, 0%, 100%, 1)',
 	'colorMode': 'dark',
 };

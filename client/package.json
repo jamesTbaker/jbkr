@@ -14,6 +14,7 @@
 		"sb:build": "build-storybook"
 	},
 	"dependencies": {
+		"@jbkr/prop-type-helpers": "file:../modules/prop-type-helpers",
 		"@jbkr/style-service": "file:../modules/style-service",
 		"mongodb": "^3.5.9",
 		"next": "latest",

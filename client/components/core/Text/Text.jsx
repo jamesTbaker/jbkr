@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { style } from '@jbkr/style-service';
+import { DeviceWidthTokens } from '@jbkr/prop-type-helpers';
 
 const TextContainer = styled.span`
 	${({
@@ -21,6 +22,9 @@ const TextContainer = styled.span`
 	color: ${({ color }) => color };
 `;
 
+/**
+ * This is a `Text` description.
+ */
 export const Text = ({
 	deviceWidth = 's',
 	size = 's',
@@ -40,7 +44,7 @@ export const Text = ({
 	{children}
 </TextContainer>);
 Text.propTypes = {
-	'deviceWidth': PropTypes.oneOf(style.device().widths.tokens),
+	'deviceWidth': PropTypes.oneOf(DeviceWidthTokens),
 	'size': PropTypes.oneOf(style.type.foundation().size.tokens),
 	'weight': PropTypes.oneOf(style.type.foundation().weight.tokens),
 	'slant': PropTypes.oneOf(style.type.foundation().slant.tokens),

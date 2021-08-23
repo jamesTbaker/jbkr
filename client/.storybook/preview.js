@@ -45,11 +45,16 @@ export const decorators = [
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
 	controls: {
-		// expanded: true,
+		expanded: true,
 		matchers: {
 			color: /(background|color)$/i,
 			date: /Date$/,
 		},
+		presetColors: [
+			{ color: 'hsla(300, 100%, 64%, .5)', title: null },
+			'rgba(0, 159, 183, 1)',
+			'#fe4a49',
+		]
 	},
 	// set docs to use dark theme
 	docs: {
