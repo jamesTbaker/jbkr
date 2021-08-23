@@ -303,6 +303,8 @@ export const style = {
     },
     'type': {
         'family': () => foundation.type.family,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        'foundation': () => foundation.type,
         'style': ({ deviceWidth, size, weight, slant, usage, }) => {
             const paramsClone = {
                 deviceWidth,

@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { style } from '@jbkr/style-service';
 
 const TextContainer = styled.span`
@@ -17,6 +18,7 @@ const TextContainer = styled.span`
 		slant,
 		usage,
 	})}
+	color: ${({ color }) => color };
 `;
 
 export const Text = ({
@@ -25,6 +27,7 @@ export const Text = ({
 	weight,
 	slant,
 	usage,
+	color,
 	children,
 }) => (<TextContainer
 	deviceWidth={deviceWidth}
@@ -32,6 +35,15 @@ export const Text = ({
 	weight={weight}
 	slant={slant}
 	usage={usage}
+	color={color}
 >
 	{children}
 </TextContainer>);
+Text.propTypes = {
+	'deviceWidth': PropTypes.oneOf(style.device().widths.tokens),
+	'size': PropTypes.oneOf(style.type.foundation().size.tokens),
+	'weight': PropTypes.oneOf(style.type.foundation().weight.tokens),
+	'slant': PropTypes.oneOf(style.type.foundation().slant.tokens),
+	'usage': PropTypes.oneOf(style.type.foundation().lineHeight.tokens),
+	'color': PropTypes.string,
+};

@@ -1,12 +1,3 @@
-/* export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  controls: {
-	matchers: {
-	  color: /(background|color)$/i,
-	  date: /Date$/,
-	},
-  },
-} */
 import React from 'react';
 import { Normalize } from 'styled-normalize';
 import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
@@ -16,23 +7,45 @@ import { style } from '@jbkr/style-service';
 const GlobalStyle = createGlobalStyle`
 	body {
 		${style.type.family()};
+		height: 100%;
+		width: 100%;
 	}
 `;
-
-
+const LightModeStyle = createGlobalStyle`
+	body {
+		background-color: ${style.color.string({
+	'color': style.color.props().Neutral.Finch['05']
+})};
+	}
+`;
+const DarkModeStyle = createGlobalStyle`
+	body {
+		background-color: ${style.color.string({
+	'color': style.color.props().Neutral.Finch['35']
+})};
+	}
+`;
 // Global decorator to apply the styles to all stories
 export const decorators = [
-	Story => (
-		<>
-			<Normalize />
-			<GlobalStyle />
-			<Story />
-		</>
-	),
+	(Story, context) => {
+		console.log('context');
+		console.log(context);
+		let ColorModeStyle = context.args.colorMode === 'light' ?
+			LightModeStyle : DarkModeStyle;
+		return (
+			<>
+				<Normalize />
+				<GlobalStyle />
+				<ColorModeStyle />
+				<Story />
+			</>
+		)
+	},
 ];
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
 	controls: {
+		// expanded: true,
 		matchers: {
 			color: /(background|color)$/i,
 			date: /Date$/,

@@ -337,6 +337,11 @@ export const style: {[key:string]: any} = {
 	},
 	'type': {
 		'family': (): string => foundation.type.family,
+		/**
+		 * @todo create and use type foundation interface
+		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		'foundation': (): { [key: string]: any} => foundation.type,
 		'style': ({
 			deviceWidth,
 			size,
