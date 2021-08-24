@@ -1,5 +1,5 @@
 import {
-	Color, AllColors,
+	Color, KindKey, AllToneKey,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
 	DeviceWidthToken, Device, ShadowLevelKeyOf17,
 } from '@jbkr/models';
@@ -19,40 +19,40 @@ const returnHSLAStringFromHSLAObject = (
 export const style: {[key:string]: any} = {
 	'gridBase': (): number => foundation.gridBase,
 	'device': (): Device => foundation.device,
-	'color': {
-		'props': (): AllColors => color,
-		'override': (
-			{
-				color, hue, saturation, lightness, alpha,
-			}:{
-				color: Color,
-				hue?: number,
-				saturation?: number,
-				lightness?: number,
-				alpha?: number,
-
-			},
-		): Color => {
-			const colorClone = { ...color };
-			if (hue) {
-				colorClone.h = hue;
-			}
-			if (saturation) {
-				colorClone.s = saturation;
-			}
-			if (lightness) {
-				colorClone.l = lightness;
-			}
-			if (alpha) {
-				colorClone.a = alpha;
-			}
-			return colorClone as Color;
+	'color': (
+		{
+			kind, tone, level, alpha, format,
+		}:{
+			kind: KindKey,
+			tone: AllToneKey,
+			level: number,
+			alpha?: number,
+			format: string,
 		},
-		'string':
-			({ color }:{ color: Color }): string =>
-				returnHSLAStringFromHSLAObject(
-					{ 'hslaObject': color },
-				),
+	): Color | string => {
+		let colorObject: Color = {
+			'h': 0,
+			's': 0,
+			'l': 0,
+			'a': 1,
+		};
+		if (
+			color[kind] &&
+			color[kind][tone] &&
+			color[kind][tone][level]
+		) {
+			colorObject = color[kind][tone][level];
+		}
+		if (alpha) {
+			colorObject.a = alpha;
+		}
+		if (format === 'string') {
+			return returnHSLAStringFromHSLAObject(
+				{ 'hslaObject': colorObject },
+			);
+		} else {
+			return colorObject as Color;
+		}
 	},
 	'type': {
 		'family': (): string => foundation.type.family,

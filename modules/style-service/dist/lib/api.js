@@ -8,25 +8,27 @@ const returnHSLAStringFromHSLAObject = ({ hslaObject }) => `hsla(${hslaObject.h}
 export const style = {
     'gridBase': () => foundation.gridBase,
     'device': () => foundation.device,
-    'color': {
-        'props': () => color,
-        'override': ({ color, hue, saturation, lightness, alpha, }) => {
-            const colorClone = Object.assign({}, color);
-            if (hue) {
-                colorClone.h = hue;
-            }
-            if (saturation) {
-                colorClone.s = saturation;
-            }
-            if (lightness) {
-                colorClone.l = lightness;
-            }
-            if (alpha) {
-                colorClone.a = alpha;
-            }
-            return colorClone;
-        },
-        'string': ({ color }) => returnHSLAStringFromHSLAObject({ 'hslaObject': color }),
+    'color': ({ kind, tone, level, alpha, format, }) => {
+        let colorObject = {
+            'h': 0,
+            's': 0,
+            'l': 0,
+            'a': 1,
+        };
+        if (color[kind] &&
+            color[kind][tone] &&
+            color[kind][tone][level]) {
+            colorObject = color[kind][tone][level];
+        }
+        if (alpha) {
+            colorObject.a = alpha;
+        }
+        if (format === 'string') {
+            return returnHSLAStringFromHSLAObject({ 'hslaObject': colorObject });
+        }
+        else {
+            return colorObject;
+        }
     },
     'type': {
         'family': () => foundation.type.family,
