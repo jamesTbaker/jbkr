@@ -10,19 +10,11 @@ export interface Color {
 /**
  * Object keys.
  */
-export type NeutralHuesKey = 'Base' | 'Finch' | 'Sky' | 'Spruce' | 'Seafoam';
-export type AccentOnDarkPrimaryHuesKey = 'Peacock' | 'Seafoam' | 'Finch';
-export type AccentOnDarkSecondaryHuesKey = 'Iris';
-export type AccentOnDarkTertiaryHuesKey = 'Tiger' | 'Sunshine';
-export type AccentOnDarkQuarternaryHuesKey = 'Flamingo' | 'Spruce';
-export type AccentOnMediumPrimaryHuesKey = 'Peacock' | 'Seafoam';
-export type AccentOnMediumTertiaryHuesKey = 'Sunshine';
-export type AccentOnMediumQuarternaryHuesKey = 'Spruce';
-export type AccentOnLightPrimaryHuesKey = 'Finch';
-export type AccentOnLightSecondaryHuesKey = 'Iris';
-export type AccentOnLightQuarternaryHuesKey = 'Flamingo';
+export type NeutralToneKey = 'Base' | 'Finch' | 'Sky' | 'Spruce' | 'Seafoam';
+
+
 export type StateToneKey = 'Positive' | 'Warning' | 'Negative' | 'Neutral';
-export type LightSurfaceKey = 'OnLight' | 'OnDark';
+export type LightToneKey = 'OnLight' | 'OnDark';
 export type LightnessLevelKeyOf1 = '01';
 export type LightnessLevelKeyOf3 = '01' | '02' | '03';
 export type LightnessLevelKeyOf5 = '01' | '02' | '03' | '04' | '05';
@@ -52,22 +44,14 @@ export interface BrandSubset {
 	Peony: LightnessLevelSubset;
 }
 export interface AccentSubset {
-	OnDark: {
-		Primary: LightnessLevelSubset;
-		Secondary: LightnessLevelSubset;
-		Tertiary: LightnessLevelSubset;
-		Quarternary: LightnessLevelSubset;
-	}
-	OnMedium: {
-		Primary: LightnessLevelSubset;
-		Tertiary: LightnessLevelSubset;
-		Quarternary: LightnessLevelSubset;
-	}
-	OnLight: {
-		Primary: LightnessLevelSubset;
-		Secondary: LightnessLevelSubset;
-		Quarternary: LightnessLevelSubset;
-	}
+	Peacock: LightnessLevelSubset;
+	Seafoam: LightnessLevelSubset;
+	Finch: LightnessLevelSubset;
+	Iris: LightnessLevelSubset;
+	Tiger: LightnessLevelSubset;
+	Sunshine: LightnessLevelSubset;
+	Flamingo: LightnessLevelSubset;
+	Spruce: LightnessLevelSubset;
 }
 export interface StateSubset {
 	Positive: LightnessLevelSubset;
