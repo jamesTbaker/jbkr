@@ -13,15 +13,21 @@ const GlobalStyle = createGlobalStyle`
 `;
 const LightModeStyle = createGlobalStyle`
 	body {
-		background-color: ${style.color.string({
-	'color': style.color.props().Neutral.Finch['05']
+		background-color: ${style.color({
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': '02',
+	'format': 'string',
 })};
 	}
 `;
 const DarkModeStyle = createGlobalStyle`
 	body {
-		background-color: ${style.color.string({
-	'color': style.color.props().Neutral.Finch['35']
+		background-color: ${style.color({
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': '39',
+	'format': 'string',
 })};
 	}
 `;
@@ -47,14 +53,14 @@ export const parameters = {
 	controls: {
 		expanded: true,
 		matchers: {
-			color: /(background|color)$/i,
+			// color: /(background|color)$/i,
 			date: /Date$/,
 		},
-		presetColors: [
+		/* presetColors: [
 			{ color: 'hsla(300, 100%, 64%, .5)', title: null },
 			'rgba(0, 159, 183, 1)',
 			'#fe4a49',
-		]
+		] */
 	},
 	// set docs to use dark theme
 	docs: {

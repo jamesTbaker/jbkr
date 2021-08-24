@@ -9,16 +9,18 @@ export const darkTheme = create({
 	// colorSecondary: '#',
 
 	// UI
-	'appBg': style.color.string(
-		{
-			'color': style.color.props().Neutral.Finch['37'],
-		},
-	),
-	'appContentBg': style.color.string(
-		{
-			'color': style.color.props().Neutral.Finch['35'],
-		},
-	),
+	'appBg': style.color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '37',
+		'format': 'string',
+	}),
+	'appContentBg': style.color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '39',
+		'format': 'string',
+	}),
 	'appBorderColor': 'hsla(225, 61%, 23%, 1)',
 	'appBorderRadius': 3,
 
@@ -27,40 +29,46 @@ export const darkTheme = create({
 	'fontCode': '"SF Mono", monospace',
 
 	// Text colors
-	'textColor': style.color.string(
-		{
-			'color': style.color.props().Neutral.Finch['07'],
-		},
-	),
-	'textInverseColor': style.color.string(
-		{
-			'color': style.color.props().Neutral.Finch['33'],
-		},
-	),
+	'textColor': style.color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '07',
+		'format': 'string',
+	}),
+	'textInverseColor': style.color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '33',
+		'format': 'string',
+	}),
 
 	// Toolbar default and active colors
-	'barTextColor': style.color.string(
-		{
-			'color': style.color.props().Brand.Peony['03'],
-		},
-	),
-	'barSelectedColor': style.color.string(
-		{
-			'color': style.color.props().Brand.Peony['05'],
-		},
-	),
-	'barBg': style.color.string(
-		{
-			'color': style.color.props().Neutral.Finch['33'],
-		},
-	),
+	'barTextColor': style.color({
+		'kind': 'Brand',
+		'tone': 'Peony',
+		'level': '03',
+		'format': 'string',
+	}),
+	'barSelectedColor': style.color({
+		'kind': 'Brand',
+		'tone': 'Peony',
+		'level': '05',
+		'format': 'string',
+	}),
+	'barBg': style.color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '33',
+		'format': 'string',
+	}),
 
 	// Form colors
-	'inputBg': style.color.string(
-		{
-			'color': style.color.props().Neutral.Finch['33'],
-		},
-	),
+	'inputBg': style.color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '33',
+		'format': 'string',
+	}),
 	// inputBorder: '#',
 	// inputTextColor: '#',
 	'inputBorderRadius': 3,

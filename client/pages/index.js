@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/react-in-jsx-scope */
+
 import Head from 'next/head';
 import { connectToDatabase } from '../lib/mongodb';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Text } from '../components/core/Text';
+import { Text } from '../components/core/Text/Text';
 
 
 const StyledProfileScreen = styled.div`
@@ -20,12 +20,17 @@ const ProfileScreen = ({ skills }) => (
 			weight='bold'
 			slant='italic'
 			usage='display'
+			color={{
+				'kind': 'Accent',
+				'tone': 'Iris',
+				'level': '01',
+			}}
 		>The Profile Screen</Text>
 		<Link href="/">Profile</Link>
 		<Link href="/library">Library</Link>
 		<Link href="/contact">Contact</Link>
 		<pre>{JSON.stringify(skills)}</pre>
-	</StyledProfileScreen>
+	</StyledProfileScreen >
 );
 export default ProfileScreen;
 export async function getServerSideProps(context) {

@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/react-in-jsx-scope */
 
 
 import styled from 'styled-components';
 import { connectToDatabase } from '../../lib/mongodb';
 import Link from 'next/link';
-import { Text } from '../../components/core/Text';
+import { Text } from '../../components/core/Text/Text';
 
 const StyledLibLabListScreen = styled.div`
 	color: pink;
@@ -21,6 +20,11 @@ const LibLabListScreen = ({ posts }) => (
 			weight='bold'
 			slant='italic'
 			usage='display'
+			color={{
+				'kind': 'Accent',
+				'tone': 'Iris',
+				'level': '01',
+			}}
 		>The LibLabList Screen</Text>
 		<Link href="/">Profile</Link>
 		<Link href="/library">Library</Link>

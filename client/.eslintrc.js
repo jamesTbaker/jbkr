@@ -32,4 +32,7 @@ module.exports = {
 		'plugin:jsx-a11y/strict',
 		'plugin:styled-components-a11y/strict',
 	],
+	'rules': {
+		'react/react-in-jsx-scope': 'off',
+	},
 };
