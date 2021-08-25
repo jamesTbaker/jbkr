@@ -27,7 +27,7 @@ export const style: {[key:string]: any} = {
 			}
 			if (width === 'm') {
 				return `@media (min-width: ${foundation.device
-					.widths.specs.m.minimum}px) and max-width: ${foundation
+					.widths.specs.m.minimum}px) and (max-width: ${foundation
 					.device.widths.specs.m.maximum}px)`;
 			}
 			if (width === 'l') {
