@@ -1,4 +1,22 @@
 /**
  * @todo Build process should delete `dist` prior to building.
  */
-export { style } from './lib/api.js';
+import { style } from './lib/api.js';
+
+export const gridBase = style.gridBase;
+export const device = style.device;
+export const deviceWidthQuery = style.device.widths.queries;
+export const color = style.color;
+export const typeFamily = style.type.family;
+export const typeStyle = style.type.style;
+export const verticalAlignMiddle = style.position.verticalAlignMiddle;
+export const zIndexNumber = style.position.zIndexNumber;
+export const shadow = style.position.shadow;
+export const hiddenBlock = style.visibility.hiddenBlock;
+export const overrideHidingBlock = style.visibility.overrideHidingBlock;
+export const hiddenInline = style.visibility.hiddenInline;
+export const hiddenTableColumn = style.visibility.hiddenTableColumn;
+export const standardCorners = style.shape.standardCorners;
+export const straightCorners = style.shape.straightCorners;
+export const circular = style.shape.circular;
+export const standardTime = style.motion.standardTime;

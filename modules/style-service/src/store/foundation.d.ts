@@ -19,13 +19,6 @@ export namespace foundation {
                     export { minimum_2 as minimum };
                 }
             }
-            const queries: {
-                "s-only": string;
-                "m-only": string;
-                "l-only": string;
-                "not-large": string;
-                "not-small": string;
-            };
         }
     }
     namespace type {
