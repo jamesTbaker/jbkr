@@ -2,6 +2,7 @@ export declare const gridBase: any;
 export declare const device: any;
 export declare const deviceWidthQuery: any;
 export declare const color: any;
+export declare const colors: any;
 export declare const typeFamily: any;
 export declare const typeStyle: any;
 export declare const verticalAlignMiddle: any;

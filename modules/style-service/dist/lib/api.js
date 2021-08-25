@@ -59,6 +59,7 @@ export const style = {
             return colorObject;
         }
     },
+    'colors': () => color,
     'type': {
         'family': () => foundation.type.family,
         /**
