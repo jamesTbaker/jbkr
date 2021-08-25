@@ -18,12 +18,6 @@ custom_edit_url: null
 | :------ | :------ |
 | `device` | `Object` |
 | `device.widths` | `Object` |
-| `device.widths.queries` | `Object` |
-| `device.widths.queries.l-only` | `string` |
-| `device.widths.queries.m-only` | `string` |
-| `device.widths.queries.not-large` | `string` |
-| `device.widths.queries.not-small` | `string` |
-| `device.widths.queries.s-only` | `string` |
 | `device.widths.specs` | `Object` |
 | `device.widths.specs.l` | `Object` |
 | `device.widths.specs.l.maximum` | `undefined` |
@@ -140,4 +134,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[foundation.ts:9](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/style-definition/src/lib/foundation.ts#L9)
+[foundation.ts:9](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/style-definition/src/lib/foundation.ts#L9)
