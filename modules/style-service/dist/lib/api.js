@@ -8,6 +8,35 @@ const returnHSLAStringFromHSLAObject = ({ hslaObject }) => `hsla(${hslaObject.h}
 export const style = {
     'gridBase': () => foundation.gridBase,
     'device': () => foundation.device,
+    'deviceWidthQuery': {
+        'only': ({ width }) => {
+            if (width === 's') {
+                return `@media (max-width: ${foundation.device
+                    .widths.specs.s.maximum}px)`;
+            }
+            if (width === 'm') {
+                return `@media (min-width: ${foundation.device
+                    .widths.specs.m.minimum}px) and (max-width: ${foundation
+                    .device.widths.specs.m.maximum}px)`;
+            }
+            if (width === 'l') {
+                return `@media (min-width: ${foundation.device
+                    .widths.specs.l.minimum}px)`;
+            }
+            throw new Error('deviceWidthQuery.only: width not found');
+        },
+        'not': ({ width }) => {
+            if (width === 's') {
+                return `@media (min-width: ${foundation.device
+                    .widths.specs.m.minimum}px)`;
+            }
+            if (width === 'l') {
+                return `@media (max-width: ${foundation.device
+                    .widths.specs.m.maximum}px)`;
+            }
+            throw new Error('deviceWidthQuery.not: width not found');
+        },
+    },
     'color': ({ kind, tone, level, alpha, format, }) => {
         let colorObject = {
             'h': 0,
@@ -36,7 +65,7 @@ export const style = {
          * @todo create and use type foundation interface
          */
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        'foundation': () => foundation.type,
+        // 'foundation': (): { [key: string]: any} => foundation.type,
         'style': ({ deviceWidth, size, weight, slant, usage, }) => {
             const paramsClone = {
                 deviceWidth,

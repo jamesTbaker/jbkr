@@ -1,7 +1,7 @@
 import {
 	Color, KindKey, AllToneKey,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
-	DeviceWidthToken, Device, ShadowLevelKeyOf17,
+	DeviceWidthToken, Device, DeviceWidthQuery, ShadowLevelKeyOf17,
 } from '@jbkr/models';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
@@ -19,6 +19,35 @@ const returnHSLAStringFromHSLAObject = (
 export const style: {[key:string]: any} = {
 	'gridBase': (): number => foundation.gridBase,
 	'device': (): Device => foundation.device,
+	'deviceWidthQuery': {
+		'only': ({ width }:{width: string}): DeviceWidthQuery => {
+			if (width === 's') {
+				return `@media (max-width: ${foundation.device
+					.widths.specs.s.maximum}px)`;
+			}
+			if (width === 'm') {
+				return `@media (min-width: ${foundation.device
+					.widths.specs.m.minimum}px) and (max-width: ${foundation
+					.device.widths.specs.m.maximum}px)`;
+			}
+			if (width === 'l') {
+				return `@media (min-width: ${foundation.device
+					.widths.specs.l.minimum}px)`;
+			}
+			throw new Error('deviceWidthQuery.only: width not found');
+		},
+		'not': ({ width }:{width: string}): DeviceWidthQuery => {
+			if (width === 's') {
+				return `@media (min-width: ${foundation.device
+					.widths.specs.m.minimum}px)`;
+			}
+			if (width === 'l') {
+				return `@media (max-width: ${foundation.device
+					.widths.specs.m.maximum}px)`;
+			}
+			throw new Error('deviceWidthQuery.not: width not found');
+		},
+	},
 	'color': (
 		{
 			kind, tone, level, alpha, format,
@@ -60,7 +89,7 @@ export const style: {[key:string]: any} = {
 		 * @todo create and use type foundation interface
 		 */
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		'foundation': (): { [key: string]: any} => foundation.type,
+		// 'foundation': (): { [key: string]: any} => foundation.type,
 		'style': ({
 			deviceWidth,
 			size,

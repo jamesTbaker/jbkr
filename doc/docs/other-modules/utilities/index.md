@@ -26,7 +26,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/utilities.ts:46](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/utilities/src/lib/utilities.ts#L46)
+[lib/utilities.ts:46](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/utilities/src/lib/utilities.ts#L46)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[lib/utilities.ts:5](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/utilities/src/lib/utilities.ts#L5)
+[lib/utilities.ts:5](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/utilities/src/lib/utilities.ts#L5)
 
 ___
 
@@ -77,4 +77,4 @@ ___
 
 #### Defined in
 
-[lib/utilities.ts:1](https://github.com/jamesTbaker/jbkr/blob/0b726d9/modules/utilities/src/lib/utilities.ts#L1)
+[lib/utilities.ts:1](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/utilities/src/lib/utilities.ts#L1)

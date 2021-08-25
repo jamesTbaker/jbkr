@@ -39,13 +39,6 @@ export declare const foundation: {
                     maximum: undefined;
                 };
             };
-            queries: {
-                's-only': string;
-                'm-only': string;
-                'l-only': string;
-                'not-large': string;
-                'not-small': string;
-            };
         };
     };
     type: {

@@ -6,7 +6,7 @@ export interface DeviceWidthSpec {
 	minimum: number;
 	maximum?: number;
 }
-export type QueryString = string;
+export type DeviceWidthQuery = string;
 
 /**
  * Subsets.
@@ -17,13 +17,6 @@ export interface DeviceWidthsSpecsObject {
 	m: DeviceWidthSpec;
 	l: DeviceWidthSpec;
 }
-export interface DeviceWidthsQueries {
-	's-only': QueryString;
-	'm-only': QueryString;
-	'l-only': QueryString;
-	'not-large': QueryString;
-	'not-small': QueryString;
-}
 /**
  * @todo Change `DeviceWidths` property `tokens` from `string[]` to
  * `DeviceWidthTokens`. Currently, causes error tsc2322 in api.ts. The values
@@ -33,7 +26,6 @@ export interface DeviceWidthsQueries {
 export interface DeviceWidths {
 	tokens: string[];
 	specs: DeviceWidthsSpecsObject;
-	queries: DeviceWidthsQueries;
 }
 export interface Device {
 	widths: DeviceWidths;

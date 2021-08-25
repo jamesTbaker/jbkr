@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styled from 'styled-components';
-import { style } from '@jbkr/style-service';
+import { deviceWidthQuery, color } from '@jbkr/style-service';
 
 
 const Header = styled.header`
@@ -10,73 +10,83 @@ const Header = styled.header`
 	background-size: cover;
 	background-position: center bottom;
 	background-repeat: no-repeat;
-	background-color: ${style.color.string(
-	{ 'color': style.color.props().Accent.OnLight.Secondary.Iris },
-)};
+	background-color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': '35',
+	'format': 'string',
+})};
 	padding: 18rem 0 6rem;
 `;
 
 const HeaderContentContainer = styled.div`
-	@media ${style.device().widths.queries['s-only']} {
+	${deviceWidthQuery.only({ 'width': 's' })} {
 		padding: 2rem;
 	}
-	@media ${style.device().widths.queries['not-small']} {
+	${deviceWidthQuery.not({ 'width': 's' })} {
 		display: inline-block;
 		padding: 2rem 4rem 2rem 6rem;
 		border-radius: 0 3px 3px 0;
 	}
-	background-color: ${style.color.string(
-	{
-		'color': style.color.override({
-			'color': style.color.props().Accent.OnLight.Secondary.Iris,
-			'alpha': .87,
-		}),
-	},
-)};
+	background-color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': '35',
+	'alpha': .93,
+	'format': 'string',
+})};
 `;
 const HeaderTitle = styled.h1`
-	@media ${style.device().widths.queries['s-only']} {
+	color: white;
+	${deviceWidthQuery.only({ 'width': 's' })} {
 		font-size: 3.0625rem;
 		line-height: 3.5rem;
 		font-weight: 600;
 	}
-	@media ${style.device().widths.queries['m-only']} {
+	${deviceWidthQuery.only({ 'width': 'm' })} {
 		font-size: 4.1875rem;
 		line-height: 4.5rem;
 		font-weight: 600;
 	}
-	@media ${style.device().widths.queries['l-only']} {
+	${deviceWidthQuery.only({ 'width': 'l' })} {
 		font-size: 5.675rem;
 		line-height: 5rem;
 		font-weight: 600;
 		padding-bottom: .5rem;
 	}
-	color: white;
 `;
 const HeaderTitlePreface = styled.div`
 	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
-	color: ${style.color.string(
-	{ 'color': style.color.props().Neutral.Seafoam['01'] },
-)};
+	color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Seafoam',
+	'level': '01',
+	'format': 'string',
+})};
 `;
 const HeaderEmphasisLine = styled.div`
 	height: .25rem;
 	border-radius: 1px;
-	background-color:${style.color.string(
-	{ 'color': style.color.props().Accent.OnMedium.Primary.Seafoam },
-)};
+	background-color:${color({
+	'kind': 'Accent',
+	'tone': 'Seafoam',
+	'level': '02',
+	'format': 'string',
+})};
 `;
 const HeaderTagline = styled.p`
 	font-size: 1rem;
 	line-height: 1.5rem;
 	padding-top: .75rem;
 	font-weight: 400;
-	color: ${style.color.string(
-	{ 'color': style.color.props().Neutral.Seafoam['01'] },
-)};
-
+	color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Seafoam',
+	'level': '01',
+	'format': 'string',
+})};
 	a {
 		color: white;
 	}

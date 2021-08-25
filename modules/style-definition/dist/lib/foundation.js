@@ -44,13 +44,6 @@ export const foundation = {
                     'maximum': undefined,
                 },
             },
-            'queries': {
-                's-only': '(max-width: 414px)',
-                'm-only': '(min-width: 415px) and (max-width: 1024px)',
-                'l-only': '(min-width: 1025px)',
-                'not-large': '(max-width: 1024px)',
-                'not-small': '(min-width: 415px)',
-            },
         },
     },
     'type': {
