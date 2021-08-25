@@ -1,3 +1,9 @@
+import { Color } from '@jbkr/models';
+export const returnHSLAStringFromHSLAObject = (
+	{ hslaObject }:
+	{hslaObject: Color},
+): string => `hsla(${hslaObject.h}, ${hslaObject.s}%, \
+	${hslaObject.l}%, ${hslaObject.a})`;
 export const returnNumberRoundedUpToMultiple =
 	({ number, multiple}: { number: number, multiple: number}): number =>
 		Math.ceil(number / multiple) * multiple;

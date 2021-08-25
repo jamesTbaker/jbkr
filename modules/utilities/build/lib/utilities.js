@@ -1,3 +1,5 @@
+export const returnHSLAStringFromHSLAObject = ({ hslaObject }) => `hsla(${hslaObject.h}, ${hslaObject.s}%, \
+	${hslaObject.l}%, ${hslaObject.a})`;
 export const returnNumberRoundedUpToMultiple = ({ number, multiple }) => Math.ceil(number / multiple) * multiple;
 export const returnHSLValuesFromRBGPercents = ({ r, g, b }) => {
     const max = Math.max(r, g, b);

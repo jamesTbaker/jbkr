@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"@jbkr/style-service": "file:../modules/style-service",
+		"@jbkr/utilities": "file:../modules/utilities",
 		"mongodb": "^3.5.9",
 		"next": "latest",
 		"prop-types": "^15.7.2",

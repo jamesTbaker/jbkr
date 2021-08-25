@@ -1,8 +1,4 @@
 /**
- * This is the overview of Utilities.
- * :::info
- * This is my info admon.
- * :::
- * @module Utilities
+ * @todo Build process should delete `dist` prior to building.
  */
-export { returnNumberRoundedUpToMultiple, returnHSLValuesFromRBGPercents, returnCopyOfObjectWithStringKeys, } from './lib/utilities.js';
+export { returnHSLAStringFromHSLAObject, returnNumberRoundedUpToMultiple, returnHSLValuesFromRBGPercents, returnCopyOfObjectWithStringKeys, } from './lib/utilities.js';

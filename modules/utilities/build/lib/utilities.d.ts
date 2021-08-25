@@ -1,3 +1,7 @@
+import { Color } from '@jbkr/models';
+export declare const returnHSLAStringFromHSLAObject: ({ hslaObject }: {
+    hslaObject: Color;
+}) => string;
 export declare const returnNumberRoundedUpToMultiple: ({ number, multiple }: {
     number: number;
     multiple: number;
