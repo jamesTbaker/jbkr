@@ -1,7 +1,7 @@
 import {
 	Color, KindKey, AllToneKey,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
-	DeviceWidthToken, Device, DeviceWidthQuery, ShadowLevelKeyOf17,
+	DeviceWidthToken, Device, DeviceWidthQuery, ShadowLevelKeyOf17, AllColors,
 } from '@jbkr/models';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
@@ -83,6 +83,7 @@ export const style: {[key:string]: any} = {
 			return colorObject as Color;
 		}
 	},
+	'colors': (): AllColors => color,
 	'type': {
 		'family': (): string => foundation.type.family,
 		/**

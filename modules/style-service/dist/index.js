@@ -6,6 +6,7 @@ export const gridBase = style.gridBase;
 export const device = style.device;
 export const deviceWidthQuery = style.deviceWidthQuery;
 export const color = style.color;
+export const colors = style.colors;
 export const typeFamily = style.type.family;
 export const typeStyle = style.type.style;
 export const verticalAlignMiddle = style.position.verticalAlignMiddle;
