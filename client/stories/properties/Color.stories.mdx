@@ -5,8 +5,25 @@ import { Meta } from '@storybook/addon-docs';
 
 # Color
 
+Colors are defined in [Figma](https://www.figma.com/file/OHRLg3ooz9FCKPjF1xpShW/Totus?node-id=108%3A2568), extracted in the @jbkr/style-definition module.
+
 Colors are expressed as hsla values (hue, saturation, lightness, and alpha
 transparency). These hsla values are determined by 3-4 parameters: kind, tone,
 level, and alpha.
 
 Place exact color function signature + params here.
+
+```js
+import styled from 'styled-components';
+import { color } from '@jbkr/style-service';
+
+const Example = styled.span`
+	color: color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': '03',
+		'alpha': .5,
+		'format': 'string'
+	});
+`;
+```

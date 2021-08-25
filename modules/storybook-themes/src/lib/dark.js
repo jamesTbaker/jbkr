@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming';
-import { style } from '@jbkr/style-service';
+import { color } from '@jbkr/style-service';
 
 export const darkTheme = create({
 	// use SB's dark theme as a baseline
@@ -9,13 +9,13 @@ export const darkTheme = create({
 	// colorSecondary: '#',
 
 	// UI
-	'appBg': style.color({
+	'appBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': '37',
 		'format': 'string',
 	}),
-	'appContentBg': style.color({
+	'appContentBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': '39',
@@ -29,13 +29,13 @@ export const darkTheme = create({
 	'fontCode': '"SF Mono", monospace',
 
 	// Text colors
-	'textColor': style.color({
+	'textColor': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': '07',
 		'format': 'string',
 	}),
-	'textInverseColor': style.color({
+	'textInverseColor': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': '33',
@@ -43,19 +43,19 @@ export const darkTheme = create({
 	}),
 
 	// Toolbar default and active colors
-	'barTextColor': style.color({
+	'barTextColor': color({
 		'kind': 'Brand',
 		'tone': 'Peony',
 		'level': '03',
 		'format': 'string',
 	}),
-	'barSelectedColor': style.color({
+	'barSelectedColor': color({
 		'kind': 'Brand',
 		'tone': 'Peony',
 		'level': '05',
 		'format': 'string',
 	}),
-	'barBg': style.color({
+	'barBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': '33',
@@ -63,7 +63,7 @@ export const darkTheme = create({
 	}),
 
 	// Form colors
-	'inputBg': style.color({
+	'inputBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': '33',

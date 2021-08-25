@@ -6,26 +6,16 @@ import Head from 'next/head';
 import { connectToDatabase } from '../lib/mongodb';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Text } from '../components/core/Text/Text';
+import { Copy } from '../components/core/Copy/Copy';
 
 
 const StyledProfileScreen = styled.div`
 	color: pink;
+	background-color: #336;
 `;
 const ProfileScreen = ({ skills }) => (
 	<StyledProfileScreen>
-		<Text
-			deviceWidth='l'
-			size='3xl'
-			weight='bold'
-			slant='italic'
-			usage='display'
-			color={{
-				'kind': 'Accent',
-				'tone': 'Iris',
-				'level': '01',
-			}}
-		>The Profile Screen</Text>
+		<Copy kind="h1">The Profile Screen</Copy>
 		<Link href="/">Profile</Link>
 		<Link href="/library">Library</Link>
 		<Link href="/contact">Contact</Link>

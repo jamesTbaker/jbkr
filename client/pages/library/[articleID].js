@@ -4,29 +4,19 @@
 
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Text } from '../../components/core/Text/Text';
 import { useRouter } from 'next/router';
+import { Copy } from '../components/core/Copy/Copy';
 
 const StyledLibLabItemScreen = styled.div`
 	color: pink;
+	background-color: #336;
 `;
 
 const LibLabItemScreen = (props) => {
 	const router = useRouter();
 	return (
 		<StyledLibLabItemScreen>
-			<Text
-				deviceWidth='l'
-				size='3xl'
-				weight='bold'
-				slant='italic'
-				usage='display'
-				color={{
-					'kind': 'Accent',
-					'tone': 'Iris',
-					'level': '01',
-				}}
-			>The LibLab Item Screen</Text>
+			<Copy kind="h1">The LibLab Item Screen</Copy>
 			<Link href="/">Profile</Link>
 			<Link href="/library">Library</Link>
 			<Link href="/contact">Contact</Link>

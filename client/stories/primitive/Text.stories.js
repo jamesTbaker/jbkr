@@ -1,13 +1,10 @@
-import { Text as TextComponent } from '../../components/core/Text/Text';
+import { Text } from '../../components/primitive/Text/Text';
 
 // tell Storybook about the component we are documenting
 export default {
-	'title': 'Core / Text',
-	'component': TextComponent,
+	'title': 'Primitive / Text',
+	'component': Text,
 	'argTypes': {
-		'deviceWidth': {
-			'control': { 'type': 'select' },
-		},
 		'size': {
 			'control': { 'type': 'select' },
 		},
@@ -29,13 +26,12 @@ export default {
 // define a function for each test state; a story is a function that returns
 // a rendered element in a given state
 const Template = (args) => (
-	<TextComponent
+	<Text
 		{...args}
 	/>
 );
-export const Text = Template.bind({});
-Text.args = {
-	'deviceWidth': 's',
+export const General = Template.bind({});
+General.args = {
 	'size': 'l',
 	'weight': 'regular',
 	'slant': 'normal',

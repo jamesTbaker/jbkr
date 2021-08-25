@@ -1,37 +1,66 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { style } from '@jbkr/style-service';
+import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
 
 const TextContainer = styled.span`
-	${({
-		deviceWidth,
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		${({
 		size,
 		weight,
 		slant,
 		usage,
-	}) => style.type.style({
-		deviceWidth,
+	}) => typeStyle({
+		'deviceWidth': 's',
 		size,
 		weight,
 		slant,
 		usage,
 	})}
-	color: ${({ 'color': { kind, tone, level, alpha } }) =>
-		style.color({kind, tone, level, alpha, 'format': 'string'})};
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		${({
+		size,
+		weight,
+		slant,
+		usage,
+	}) => typeStyle({
+		'deviceWidth': 'm',
+		size,
+		weight,
+		slant,
+		usage,
+	})}
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		${({
+		size,
+		weight,
+		slant,
+		usage,
+	}) => typeStyle({
+		'deviceWidth': 'l',
+		size,
+		weight,
+		slant,
+		usage,
+	})}
+	}
+	color: ${({ '$color': { kind, tone, level, alpha } }) =>
+		color({kind, tone, level, alpha, 'format': 'string'})};
 `;
 /**
  * `Text` creates a `span` that can contain a string with any color and type
  * style specs.
  *
- * This component is somewhat like a primitive and it should not be used
- * directly. If you're looking for a component to add some semantically tagged
+ * This primitive component should not be used directly.
+ * If you're looking for a component to add some semantically tagged
  * and styled text (a.k.a., copy) to a screen, then you're probably looking for
  * [the `Copy` component](https://jbkr.me)).
  *
  * @todo Update links in this description.
  */
 export const Text = ({
-	deviceWidth = 's',
+	tag,
 	size = 's',
 	weight,
 	slant,
@@ -42,39 +71,23 @@ export const Text = ({
 		'level': '21',
 	},
 	children,
-}) => {
-	console.log('deviceWidth', deviceWidth);
-	console.log('size', size);
-	console.log('children', children);
-	return (
-		<TextContainer
-			deviceWidth={deviceWidth}
-			size={size}
-			weight={weight}
-			slant={slant}
-			usage={usage}
-			color={color}
-		>
-			{children}
-		</TextContainer>
-	);};
-/* }) => (
+}) => (
 	<TextContainer
-		deviceWidth={deviceWidth}
+		as={tag}
 		size={size}
 		weight={weight}
 		slant={slant}
 		usage={usage}
-		color={color}
+		$color={color}
 	>
 		{children}
 	</TextContainer>
-); */
+);
 Text.propTypes = {
 	/**
-	 * Width of user's device's screen (viewport) in density-independent pixels.
+	 * The HTML tag that should be used for this text item.
 	 */
-	'deviceWidth': PropTypes.oneOf(['s', 'm', 'l']).isRequired,
+	'tag': PropTypes.string,
 	/**
 	 * Token indicating size of type.
 	 */
