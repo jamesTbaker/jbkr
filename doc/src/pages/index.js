@@ -11,9 +11,10 @@ const Header = styled.header`
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-color: ${color({
-	'kind': 'Accent',
-	'tone': 'Iris',
-	'level': '02',
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': '35',
+	'format': 'string',
 })};
 	padding: 18rem 0 6rem;
 `;
@@ -28,13 +29,15 @@ const HeaderContentContainer = styled.div`
 		border-radius: 0 3px 3px 0;
 	}
 	background-color: ${color({
-	'kind': 'Accent',
-	'tone': 'Iris',
-	'level': '02',
-	'alpha': .87,
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': '35',
+	'alpha': .93,
+	'format': 'string',
 })};
 `;
 const HeaderTitle = styled.h1`
+	color: white;
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		font-size: 3.0625rem;
 		line-height: 3.5rem;
@@ -51,7 +54,6 @@ const HeaderTitle = styled.h1`
 		font-weight: 600;
 		padding-bottom: .5rem;
 	}
-	color: white;
 `;
 const HeaderTitlePreface = styled.div`
 	font-size: 1rem;
@@ -61,6 +63,7 @@ const HeaderTitlePreface = styled.div`
 	'kind': 'Neutral',
 	'tone': 'Seafoam',
 	'level': '01',
+	'format': 'string',
 })};
 `;
 const HeaderEmphasisLine = styled.div`
@@ -69,7 +72,8 @@ const HeaderEmphasisLine = styled.div`
 	background-color:${color({
 	'kind': 'Accent',
 	'tone': 'Seafoam',
-	'level': '01',
+	'level': '02',
+	'format': 'string',
 })};
 `;
 const HeaderTagline = styled.p`
@@ -81,6 +85,7 @@ const HeaderTagline = styled.p`
 	'kind': 'Neutral',
 	'tone': 'Seafoam',
 	'level': '01',
+	'format': 'string',
 })};
 	a {
 		color: white;
