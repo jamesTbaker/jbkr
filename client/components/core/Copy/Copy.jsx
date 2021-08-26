@@ -10,7 +10,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
-			'level': '01',
+			'level': 1,
 		},
 	},
 	'h2': {
@@ -20,7 +20,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
-			'level': '01',
+			'level': 1,
 		},
 	},
 	'h3': {
@@ -30,7 +30,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
-			'level': '01',
+			'level': 1,
 		},
 	},
 	'h4': {
@@ -40,7 +40,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
-			'level': '01',
+			'level': 1,
 		},
 	},
 	'h5': {
@@ -50,7 +50,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
-			'level': '01',
+			'level': 1,
 		},
 	},
 	'body--standard': {
@@ -60,7 +60,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': '07',
+			'level': 7,
 		},
 	},
 	'body--enlarged': {
@@ -70,7 +70,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': '07',
+			'level': 7,
 		},
 	},
 	'small': {
@@ -80,7 +80,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
-			'level': '01',
+			'level': 1,
 		},
 	},
 	'button-label--horizontal': {
@@ -90,7 +90,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': '07',
+			'level': 7,
 		},
 	},
 	'button-label--vertical': {
@@ -100,7 +100,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': '07',
+			'level': 7,
 		},
 	},
 };

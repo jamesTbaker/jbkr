@@ -1,3 +1,3 @@
-import { cloneStore, } from '../lib/calculation.js';
-cloneStore();
+import { returnAllColors, } from '../lib/calculation.js';
+returnAllColors();
 //# sourceMappingURL=debug.js.map

@@ -22,7 +22,7 @@ const LightModeStyle = createGlobalStyle`
 		background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': '02',
+	'level': 2,
 	'format': 'string',
 })};
 	}
@@ -32,7 +32,7 @@ const DarkModeStyle = createGlobalStyle`
 		background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': '39',
+	'level': 39,
 	'format': 'string',
 })};
 	}
@@ -99,7 +99,7 @@ export const parameters = {
 				value: color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': '39',
+					'level': 39,
 					'format': 'string',
 				}),
 			},
@@ -108,7 +108,7 @@ export const parameters = {
 				value: color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': '02',
+					'level': 2,
 					'format': 'string',
 				}),
 			},

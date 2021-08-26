@@ -101,14 +101,9 @@ export const returnAllColors = ():Promise<AllColors> =>
 								{};
 						}
 						allColors[propertiesArray[2]][propertiesArray[3]][
-							propertiesArray[4]] = thisColorHSLA;
+							parseInt(propertiesArray[4])] = thisColorHSLA;
 					}
 					if (propertiesArray[2] === 'jbkr') {
-						// if (
-						// 	propertiesArray[3] === 'Neutral'
-						// 	|| propertiesArray[3] === 'Brand'
-						// 	|| propertiesArray[3] === 'State'
-						// ) {
 						if (!(
 							propertiesArray[3] in
 							allColors
@@ -123,40 +118,12 @@ export const returnAllColors = ():Promise<AllColors> =>
 								propertiesArray[4]] = {};
 						}
 						allColors[propertiesArray[3]][propertiesArray[4]][
-							propertiesArray[5]] = thisColorHSLA;
-						/* }
-						if (propertiesArray[3] === 'Accent') {
-							if (!(
-								propertiesArray[3] in
-								allColors
-							)) {
-								allColors[propertiesArray[3]] = {};
-							}
-							if (!(
-								propertiesArray[4] in
-								allColors[propertiesArray[3]]
-							)) {
-								allColors[propertiesArray[3]][
-									propertiesArray[4]] = {};
-							}
-							if (!(
-								propertiesArray[5] in
-								allColors[propertiesArray[3]][
-									propertiesArray[4]]
-							)) {
-								allColors[propertiesArray[3]][
-									propertiesArray[4]][propertiesArray[5]] =
-										{};
-							}
-							allColors[propertiesArray[3]][propertiesArray[4]][
-								propertiesArray[5]][propertiesArray[6]] =
-									thisColorHSLA;
-						} */
+							parseInt(propertiesArray[5])] = thisColorHSLA;
 					}
 				});
 				// fix the incorrect alpha transparency coming from API on the
 				// color for which it really matters (transparent)
-				allColors.Neutral.Base['00'].a = 0;
+				allColors.Neutral.Base[0].a = 0;
 
 				// then resolve the main promise with the return value
 				resolve(allColors as AllColors);

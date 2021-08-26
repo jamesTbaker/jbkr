@@ -12,13 +12,13 @@ export const darkTheme = create({
 	'appBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '37',
+		'level': 37,
 		'format': 'string',
 	}),
 	'appContentBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '39',
+		'level': 39,
 		'format': 'string',
 	}),
 	'appBorderColor': 'hsla(225, 61%, 23%, 1)',
@@ -32,13 +32,13 @@ export const darkTheme = create({
 	'textColor': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '07',
+		'level': 7,
 		'format': 'string',
 	}),
 	'textInverseColor': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '33',
+		'level': 33,
 		'format': 'string',
 	}),
 
@@ -46,19 +46,19 @@ export const darkTheme = create({
 	'barTextColor': color({
 		'kind': 'Brand',
 		'tone': 'Peony',
-		'level': '03',
+		'level': 3,
 		'format': 'string',
 	}),
 	'barSelectedColor': color({
 		'kind': 'Brand',
 		'tone': 'Peony',
-		'level': '05',
+		'level': 5,
 		'format': 'string',
 	}),
 	'barBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '33',
+		'level': 33,
 		'format': 'string',
 	}),
 
@@ -66,7 +66,7 @@ export const darkTheme = create({
 	'inputBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '33',
+		'level': 33,
 		'format': 'string',
 	}),
 	// inputBorder: '#',

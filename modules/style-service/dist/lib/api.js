@@ -1,9 +1,8 @@
+import { returnHSLAStringFromHSLAObject } from '@jbkr/utilities';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
-const returnHSLAStringFromHSLAObject = ({ hslaObject }) => `hsla(${hslaObject.h}, ${hslaObject.s}%, \
-	${hslaObject.l}%, ${hslaObject.a})`;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const style = {
     'gridBase': () => foundation.gridBase,

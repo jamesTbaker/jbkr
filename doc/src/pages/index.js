@@ -13,7 +13,7 @@ const Header = styled.header`
 	background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': '35',
+	'level': 35,
 	'format': 'string',
 })};
 	padding: 18rem 0 6rem;
@@ -31,7 +31,7 @@ const HeaderContentContainer = styled.div`
 	background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': '35',
+	'level': 35,
 	'alpha': .93,
 	'format': 'string',
 })};
@@ -62,7 +62,7 @@ const HeaderTitlePreface = styled.div`
 	color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Seafoam',
-	'level': '01',
+	'level': 1,
 	'format': 'string',
 })};
 `;
@@ -72,7 +72,7 @@ const HeaderEmphasisLine = styled.div`
 	background-color:${color({
 	'kind': 'Accent',
 	'tone': 'Seafoam',
-	'level': '02',
+	'level': 2,
 	'format': 'string',
 })};
 `;
@@ -84,7 +84,7 @@ const HeaderTagline = styled.p`
 	color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Seafoam',
-	'level': '01',
+	'level': 1,
 	'format': 'string',
 })};
 	a {

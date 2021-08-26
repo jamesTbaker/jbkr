@@ -26,7 +26,28 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/utilities.ts:46](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/utilities/src/lib/utilities.ts#L46)
+[lib/utilities.ts:52](https://github.com/jamesTbaker/jbkr/blob/563bdbc/modules/utilities/src/lib/utilities.ts#L52)
+
+___
+
+### returnHSLAStringFromHSLAObject
+
+▸ `Const` **returnHSLAStringFromHSLAObject**(`__namedParameters`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `__namedParameters` | `Object` |
+| `__namedParameters.hslaObject` | `Color` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/utilities.ts:2](https://github.com/jamesTbaker/jbkr/blob/563bdbc/modules/utilities/src/lib/utilities.ts#L2)
 
 ___
 
@@ -55,7 +76,7 @@ ___
 
 #### Defined in
 
-[lib/utilities.ts:5](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/utilities/src/lib/utilities.ts#L5)
+[lib/utilities.ts:11](https://github.com/jamesTbaker/jbkr/blob/563bdbc/modules/utilities/src/lib/utilities.ts#L11)
 
 ___
 
@@ -77,4 +98,4 @@ ___
 
 #### Defined in
 
-[lib/utilities.ts:1](https://github.com/jamesTbaker/jbkr/blob/1bbfbd1/modules/utilities/src/lib/utilities.ts#L1)
+[lib/utilities.ts:7](https://github.com/jamesTbaker/jbkr/blob/563bdbc/modules/utilities/src/lib/utilities.ts#L7)

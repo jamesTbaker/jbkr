@@ -68,7 +68,7 @@ export const Text = ({
 	color = {
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': '21',
+		'level': 21,
 	},
 	children,
 }) => (

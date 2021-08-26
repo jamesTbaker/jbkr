@@ -3,17 +3,11 @@ import {
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
 	DeviceWidthToken, Device, DeviceWidthQuery, ShadowLevelKeyOf17, AllColors,
 } from '@jbkr/models';
+import { returnHSLAStringFromHSLAObject } from '@jbkr/utilities';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';
 import { type } from '../store/type.js';
 import { shadow } from '../store/shadow.js';
-
-
-const returnHSLAStringFromHSLAObject = (
-	{ hslaObject }:
-	{hslaObject: Color},
-) => `hsla(${hslaObject.h}, ${hslaObject.s}%, \
-	${hslaObject.l}%, ${hslaObject.a})`;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const style: {[key:string]: any} = {
