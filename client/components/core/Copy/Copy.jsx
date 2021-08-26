@@ -7,6 +7,7 @@ const propsSpecifications = {
 		'tag': 'h1',
 		'size': '2xl',
 		'weight': 'bold',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -17,6 +18,7 @@ const propsSpecifications = {
 		'tag': 'h2',
 		'size': '1xl',
 		'weight': 'bold',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -27,6 +29,7 @@ const propsSpecifications = {
 		'tag': 'h3',
 		'size': 'l',
 		'weight': 'bold',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -37,6 +40,7 @@ const propsSpecifications = {
 		'tag': 'h4',
 		'size': 'm',
 		'weight': 'bold',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -47,6 +51,7 @@ const propsSpecifications = {
 		'tag': 'h5',
 		'size': 's',
 		'weight': 'bold',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -57,6 +62,7 @@ const propsSpecifications = {
 		'tag': 'p',
 		'size': 's',
 		'weight': 'regular',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -67,6 +73,7 @@ const propsSpecifications = {
 		'tag': 'p',
 		'size': 'm',
 		'weight': 'regular',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -77,6 +84,7 @@ const propsSpecifications = {
 		'tag': 'small',
 		'size': '2xs',
 		'weight': 'regular',
+		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -111,7 +119,7 @@ const propsSpecifications = {
 export const Copy = ({
 	kind = 'body--standard',
 	children,
-	propOverrides,
+	// propOverrides,
 }) => {
 	const tagThisCopy = propsSpecifications[kind].tag;
 	const propsThisCopy = propsSpecifications[kind];

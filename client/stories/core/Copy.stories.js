@@ -22,6 +22,6 @@ const Template = (args) => (
 );
 export const General = Template.bind({});
 General.args = {
-	'kind': '1',
+	'kind': 'h1',
 	'children': 'The quick brown fox jumped over the lazy dog.',
 };

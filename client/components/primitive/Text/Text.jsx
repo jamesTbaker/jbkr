@@ -2,18 +2,20 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
 
-const TextContainer = styled.span`
+const TextContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		${({
 		size,
 		weight,
 		slant,
+		spaced,
 		usage,
 	}) => typeStyle({
 		'deviceWidth': 's',
 		size,
 		weight,
 		slant,
+		spaced,
 		usage,
 	})}
 	}
@@ -22,12 +24,14 @@ const TextContainer = styled.span`
 		size,
 		weight,
 		slant,
+		spaced,
 		usage,
 	}) => typeStyle({
 		'deviceWidth': 'm',
 		size,
 		weight,
 		slant,
+		spaced,
 		usage,
 	})}
 	}
@@ -36,12 +40,14 @@ const TextContainer = styled.span`
 		size,
 		weight,
 		slant,
+		spaced,
 		usage,
 	}) => typeStyle({
 		'deviceWidth': 'l',
 		size,
 		weight,
 		slant,
+		spaced,
 		usage,
 	})}
 	}
@@ -49,7 +55,7 @@ const TextContainer = styled.span`
 		color({kind, tone, level, alpha, 'format': 'string'})};
 `;
 /**
- * `Text` creates a `span` that can contain a string with any color and type
+ * `Text` creates a `div` that can contain a string with any color and type
  * style specs.
  *
  * This primitive component should not be used directly.
@@ -65,6 +71,7 @@ export const Text = ({
 	weight,
 	slant,
 	usage,
+	spaced,
 	color = {
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -78,6 +85,7 @@ export const Text = ({
 		weight={weight}
 		slant={slant}
 		usage={usage}
+		spaced={spaced}
 		$color={color}
 	>
 		{children}
@@ -108,6 +116,10 @@ Text.propTypes = {
 	 * about the distinction.
 	 */
 	'usage': PropTypes.oneOf(['display', 'body']),
+	/**
+	 * Token indicating the inclusion of spacing around the text (e.g., margin).
+	 */
+	'spaced': PropTypes.bool,
 	/**
 	 * Go to [Color](/?path=/story/props-color--page) to learn more about
 	 * color props.

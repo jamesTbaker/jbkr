@@ -66,7 +66,7 @@ export const style = {
          */
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         // 'foundation': (): { [key: string]: any} => foundation.type,
-        'style': ({ deviceWidth, size, weight, slant, usage, }) => {
+        'style': ({ deviceWidth, size, weight, slant, usage, spaced, }) => {
             const paramsClone = {
                 deviceWidth,
                 size,
@@ -75,13 +75,17 @@ export const style = {
                 'usage': usage || 'body',
             };
             const typeObject = type[paramsClone.deviceWidth][paramsClone.size][paramsClone.weight][paramsClone.slant][paramsClone.usage];
-            return `
+            let typeString = `
 				font-size: ${typeObject.size}rem;
 				font-weight: ${typeObject.weight};
 				font-style: ${typeObject.style};
 				line-height: ${typeObject.height}rem;
 				letter-spacing: ${typeObject.spacing}rem;
 			`;
+            if (spaced) {
+                typeString += `margin: 0 0 ${typeObject.height}rem 0;`;
+            }
+            return typeString;
         },
     },
     'position': {

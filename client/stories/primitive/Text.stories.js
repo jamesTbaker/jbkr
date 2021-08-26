@@ -36,6 +36,7 @@ General.args = {
 	'weight': 'regular',
 	'slant': 'normal',
 	'usage': 'display',
+	'spaced': false,
 	'color': {
 		'kind': 'Neutral',
 		'tone': 'Finch',
