@@ -51,7 +51,7 @@ export const foundation = {
 			\'San Francisco\', \'HelveticaNeue-Light\', \
 			\'Helvetica Neue Light\', \'Helvetica Neue\', \'Helvetica\', \
 			\'Liberation Sans\', \'Nimbus Sans L\', \'Roboto\', \
-			\'Arial\', sans-serif',
+			\'Arial\', sans-serif;',
         'size': {
             'tokens': [
                 '3xs',

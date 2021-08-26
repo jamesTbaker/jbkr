@@ -10,17 +10,21 @@ import { Copy } from '../components/core/Copy/Copy';
 
 
 const StyledProfileScreen = styled.div`
-	color: pink;
-	background-color: #336;
 `;
 const ProfileScreen = ({ skills }) => (
-	<StyledProfileScreen>
-		<Copy kind="h1">The Profile Screen</Copy>
-		<Link href="/">Profile</Link>
-		<Link href="/library">Library</Link>
-		<Link href="/contact">Contact</Link>
-		<pre>{JSON.stringify(skills)}</pre>
-	</StyledProfileScreen >
+	<>
+		<Head>
+			<title>Profile | jbkr</title>
+			<meta name="description" content="I speak suit, geek, and creative. 20+ years' experience in business, technology, and design."></meta>
+		</Head>
+		<StyledProfileScreen>
+			<Copy kind="h1">The Profile Screen</Copy>
+			<Link href="/">Profile</Link>
+			<Link href="/library">Library</Link>
+			<Link href="/contact">Contact</Link>
+			<pre>{JSON.stringify(skills)}</pre>
+		</StyledProfileScreen>
+	</>
 );
 export default ProfileScreen;
 export async function getServerSideProps(context) {
