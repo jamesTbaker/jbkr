@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
 		color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Base',
-	'level': 0,
+	'level': 1,
 	'format': 'string',
 })};
 		background-color: ${color({
@@ -35,18 +35,24 @@ export default function App({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
+				{/* meta content */}
 				<meta name="author" content="James T. Baker" />
+				{/* viewport */}
 				<meta
 					name="viewport"
 					content="initial-scale=1.0, width=device-width"
 				/>
+				{/* font */}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect"
 					href="https://fonts.gstatic.com" crossOrigin="true" />
 				<link rel="stylesheet"
-					// eslint-disable-next-line max-len
-					href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+					href={
+						'https://fonts.googleapis.com/css2?' +
+						'family=Inter&display=swap'
+					}
 				/>
+				{/* favicon */}
 				<link rel="icon"
 					href="/favicon/brands.svg" type="image/svg+xml" />
 				<link rel="icon" type="image/png" sizes="16x16"
@@ -62,7 +68,11 @@ export default function App({ Component, pageProps }) {
 				<link rel="manifest" href="/favicon/site.webmanifest" />
 				<meta name="theme-color" content="#60709f" />
 
-
+				{/* default - should be replaced per page */}
+				<meta name="description"
+					content="I speak suit, geek, and creative.
+					20+ years' experience in business, technology, and design."
+				/>
 			</Head>
 			<GlobalStyle />
 			<Component {...pageProps} />

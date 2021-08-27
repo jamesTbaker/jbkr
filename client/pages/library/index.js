@@ -2,24 +2,29 @@
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
 
-
+import Head from 'next/head';
 import styled from 'styled-components';
 import { connectToDatabase } from '../../lib/mongodb';
 import Link from 'next/link';
-import { Copy } from '../components/core/Copy/Copy';
+import { Copy } from '../../components/core/Copy/Copy';
 
 const StyledLibLabListScreen = styled.div`
-	color: pink;
-	background-color: #336;
 `;
 
 const LibLabListScreen = ({ posts }) => (
-	<StyledLibLabListScreen>
-		<Copy kind="h1">The LibLabList Screen</Copy>
-		<Link href="/">Profile</Link>
-		<Link href="/library">Library</Link>
-		<Link href="/contact">Contact</Link>
-	</StyledLibLabListScreen>
+	<>
+		<Head>
+			<title>LibLab | jbkr</title>
+			<meta name="description" content="Items from the vault."></meta>
+		</Head>
+		<StyledLibLabListScreen>
+			<Copy kind="h1">The LibLabList Screen</Copy>
+			<Link href="/">Profile</Link>
+			<Link href="/library">Library</Link>
+			<Link href="/contact">Contact</Link>
+			<pre>{JSON.stringify(posts)}</pre>
+		</StyledLibLabListScreen>
+	</>
 );
 
 export default LibLabListScreen;
