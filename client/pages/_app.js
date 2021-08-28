@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
 	'level': 35,
 	'format': 'string',
 })};
+	scroll-behavior: smooth;
 	}
 `;
 

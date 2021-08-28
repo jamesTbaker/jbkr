@@ -92,7 +92,7 @@ export const Text = ({
 			dangerouslySetInnerHTML={{
 				'__html': htmlContent,
 			}}
-		/>);
+		></TextContainer>);
 	}
 	return (<TextContainer
 		as={tag}

@@ -1,1 +1,1 @@
-export { renderMarkdown } from './lib/transform-content.js';
+export { transformToHTML, transformWithAnchorsTOC } from './lib/transform-content.js';

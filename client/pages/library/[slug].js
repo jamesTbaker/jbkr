@@ -8,17 +8,15 @@ import { connectToDatabase } from '../../lib/mongodb';
 // import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Copy } from '../../components/core/Copy/Copy';
-import MarkdownIt from 'markdown-it';
-import { renderMarkdown } from '@jbkr/client-helpers';
-
+import { TableOfContents }
+	from '../../components/app/TableOfContents/TableOfContents';
+import { transformToHTML, transformWithAnchorsTOC } from '@jbkr/client-helpers';
+import readingTime from 'reading-time';
 
 const StyledLibLabItemScreen = styled.div`
 `;
 
 const LibLabItemScreen = ({ post }) => {
-	// console.log('post');
-	// console.log(post);
-	// const router = useRouter();
 	return (
 		<>
 			<Head>
@@ -58,8 +56,6 @@ const LibLabItemScreen = ({ post }) => {
 					width={post.coverImage.width}
 					height={post.coverImage.height}
 				/>
-
-
 				<Copy
 					kind="small"
 					htmlContent={post.coverImage.caption}
@@ -69,20 +65,33 @@ const LibLabItemScreen = ({ post }) => {
 					htmlContent={post.title}
 				/>
 				<Copy kind="body--standard">{post.publicationDate}</Copy>
-
-
-				<Copy
-					kind="body--standard"
-					htmlContent={post.snippetDescription}
-				/>
-
-
+				<Copy kind="body--standard">
+					{`${post.body.stats.words} words |
+					${post.body.stats.minutes} minutes to read`}
+				</Copy>
 				{
 					post.tagline &&
 
-					<Copy kind="body--standard">{post.tagline}</Copy>
+					<Copy
+						kind="body--standard"
+						htmlContent={post.tagline}
+					/>
 				}
-				<Copy kind="body-container--standard">{post.body}</Copy>
+				<Copy
+					kind="body-container--standard"
+					htmlContent={post.snippetDescription}
+				/>
+				{
+					post.body.nav &&
+
+					<TableOfContents
+						contents={post.body.nav}
+					/>
+				}
+				<Copy
+					kind="body-container--standard"
+					htmlContent={post.body.content}
+				/>
 			</StyledLibLabItemScreen>
 		</>
 	);
@@ -91,7 +100,6 @@ const LibLabItemScreen = ({ post }) => {
 export default LibLabItemScreen;
 
 export async function getServerSideProps(context) {
-	const markdownItClient = new MarkdownIt();
 	const { db } = await connectToDatabase();
 	const data = await db.collection('posts').aggregate([
 		{ '$match': { 'Slug': context.query.slug } },
@@ -122,19 +130,32 @@ export async function getServerSideProps(context) {
 		},
 	]).toArray();
 	const postRaw = JSON.parse(JSON.stringify(data))[0];
+	postRaw.bodyStats = readingTime(postRaw.Body);
 	const postFormatted = {
 		'slug': postRaw.Slug,
+		'coverImage': {
+			'caption': transformToHTML({
+				'content': postRaw.CoverImages[0].caption,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			}),
+			'url': postRaw.CoverImages[0].url,
+			'alternativeText': postRaw.CoverImages[0].alternativeText,
+			'width': postRaw.CoverImages[0].width,
+			'height': postRaw.CoverImages[0].height,
+		},
 		'title': postRaw.Subtitle ?
-			renderMarkdown({
+			transformToHTML({
 				'content': `${postRaw.Title.trim()}: ${postRaw.Subtitle}`,
 				'options': {
-					'removeEndTags': true,
+					'removeEndCapTags': true,
 				},
 			}) :
-			renderMarkdown({
+			transformToHTML({
 				'content': postRaw.Title,
 				'options': {
-					'removeEndTags': true,
+					'removeEndCapTags': true,
 				},
 			}),
 		'publicationDate': new Date(postRaw.PublicationDate)
@@ -144,27 +165,36 @@ export async function getServerSideProps(context) {
 				'day': 'numeric',
 			}),
 		'tagline': postRaw.Tagline ?
-			renderMarkdown({
+			transformToHTML({
 				'content': postRaw.Tagline,
 				'options': {
-					'removeEndTags': true,
+					'removeEndCapTags': true,
 				},
 			}) :
 			'',
 		'metaTitle': postRaw.MetaTitle,
 		'metaDescription': postRaw.MetaDescription,
-
-
-		'snippetDescription':
-			markdownItClient.render(postRaw.SnippetDescription),
 		'socialDescription': postRaw.SocialDescription,
-		'body': postRaw.Body,
-		'coverImage': {
-			'caption': markdownItClient.render(postRaw.CoverImages[0].caption),
-			'url': postRaw.CoverImages[0].url,
-			'alternativeText': postRaw.CoverImages[0].alternativeText,
-			'width': postRaw.CoverImages[0].width,
-			'height': postRaw.CoverImages[0].height,
+		'snippetDescription': transformToHTML({
+			'content': postRaw.SnippetDescription,
+		}),
+		'body': {
+			'stats': {
+				'minutes': Math.round(postRaw.bodyStats.minutes),
+				'words': postRaw.bodyStats.words,
+			},
+			'nav': transformToHTML({
+				'content': postRaw.Body,
+				'options': {
+					'navOnly': true,
+				},
+			}),
+			'content': transformToHTML({
+				'content': postRaw.Body,
+				'options': {
+					'withAnchors': true,
+				},
+			}),
 		},
 	};
 	return {

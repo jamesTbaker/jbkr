@@ -142,17 +142,10 @@ export const Copy = ({
 	kind = 'body--standard',
 	htmlContent,
 	children,
-	// propOverrides,
 }) => {
 	const tagThisCopy = propsSpecifications[kind].tag;
 	const propsThisCopy = propsSpecifications[kind];
 	propsThisCopy.htmlContent = htmlContent;
-	delete propsThisCopy.tag;
-	/* if (propOverrides) {
-		propOverrides.forEach(element => {
-			propsThisCopy[element.key] = element.value;
-		});
-	} */
 	return (
 		<Text
 			tag={tagThisCopy}
@@ -177,16 +170,4 @@ Copy.propTypes = {
 	 * supplied, then `children` will be ignored.
 	 */
 	'children': PropTypes.string,
-	// /**
-	//  * Override 1+ props, e.g., color, weight, slant, etc.
-	//  *
-	//  * Go to [Color](/?path=/story/props-color--page) to learn more about
-	//  * color props.
-	//  *
-	//  * @todo Update links in this description.
-	//  */
-	// 'propOverrides': PropTypes.arrayOf({
-	// 	'key': PropTypes.string.isRequired,
-	// 	'value': PropTypes.any.isRequired,
-	// }),
 };
