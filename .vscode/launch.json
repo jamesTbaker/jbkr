@@ -46,6 +46,15 @@
 			],
 			"preLaunchTask": "build-style-service",
 			"console": "integratedTerminal"
+		},
+		{
+			"name": "client",
+			"type": "node",
+			"request": "attach",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"port": 9229
 		}
 	]
 }

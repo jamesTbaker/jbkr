@@ -37,6 +37,7 @@ export default function App({ Component, pageProps }) {
 			<Head>
 				{/* meta content */}
 				<meta name="author" content="James T. Baker" />
+				<meta property="og:site_name" content="jbkr" />
 				{/* viewport */}
 				<meta
 					name="viewport"

@@ -7,6 +7,7 @@
 	"private": true,
 	"scripts": {
 		"n:dev": "next dev",
+		"n:debug": "NODE_OPTIONS='--inspect' next dev",
 		"n:lint": "next lint",
 		"n:build": "next build",
 		"n:start": "next start",
@@ -14,8 +15,10 @@
 		"sb:build": "build-storybook"
 	},
 	"dependencies": {
+		"@jbkr/client-helpers": "file:../modules/client-helpers",
 		"@jbkr/style-service": "file:../modules/style-service",
 		"@jbkr/utilities": "file:../modules/utilities",
+		"markdown-it": "^12.2.0",
 		"mongodb": "^3.5.9",
 		"next": "latest",
 		"prop-types": "^15.7.2",

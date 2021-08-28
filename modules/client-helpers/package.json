@@ -1,0 +1,12 @@
+{
+	"name": "@jbkr/client-helpers",
+	"version": "0.1.0",
+	"description": "Miscellaneous functions.",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"type": "module",
+	"devDependencies": {
+		"markdown-it": "^12.2.0"
+	}
+}

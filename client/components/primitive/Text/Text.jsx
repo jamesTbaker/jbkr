@@ -77,9 +77,24 @@ export const Text = ({
 		'tone': 'Finch',
 		'level': 21,
 	},
+	htmlContent,
 	children,
-}) => (
-	<TextContainer
+}) => {
+	if (htmlContent) {
+		return (<TextContainer
+			as={tag}
+			size={size}
+			weight={weight}
+			slant={slant}
+			usage={usage}
+			spaced={spaced}
+			$color={color}
+			dangerouslySetInnerHTML={{
+				'__html': htmlContent,
+			}}
+		/>);
+	}
+	return (<TextContainer
 		as={tag}
 		size={size}
 		weight={weight}
@@ -89,8 +104,8 @@ export const Text = ({
 		$color={color}
 	>
 		{children}
-	</TextContainer>
-);
+	</TextContainer>);
+};
 Text.propTypes = {
 	/**
 	 * The HTML tag that should be used for this text item.
@@ -129,11 +144,17 @@ Text.propTypes = {
 	'color': PropTypes.exact({
 		'kind': PropTypes.string.isRequired,
 		'tone': PropTypes.string.isRequired,
-		'level': PropTypes.string.isRequired,
+		'level': PropTypes.number.isRequired,
 		'alpha': PropTypes.string,
 	}),
 	/**
-	 * The text characters.
+	 * The text characters marked up with HTML tags. If `htmlContent` is
+	 * supplied, then `children` will be ignored.
 	 */
-	'children': PropTypes.string.isRequired,
+	'htmlContent': PropTypes.string,
+	/**
+	 * The text characters. If `htmlContent` is
+	 * supplied, then `children` will be ignored.
+	 */
+	'children': PropTypes.string,
 };

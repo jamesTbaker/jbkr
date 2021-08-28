@@ -19,9 +19,6 @@
     "Subtitle": {
       "type": "string"
     },
-    "Tagline": {
-      "type": "richtext"
-    },
     "Snippet": {
       "type": "richtext",
       "required": true
@@ -54,6 +51,29 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "SnippetDescription": {
+      "type": "richtext",
+      "required": true,
+      "maxLength": 220
+    },
+    "SocialDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 200
+    },
+    "MetaDescription": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "Tagline": {
+      "type": "string",
+      "required": false,
+      "maxLength": 200
+    },
+    "MetaTitle": {
+      "type": "string"
     }
   }
 }

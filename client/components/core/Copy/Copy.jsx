@@ -69,8 +69,30 @@ const propsSpecifications = {
 			'level': 7,
 		},
 	},
+	'body-container--standard': {
+		'tag': 'div',
+		'size': 's',
+		'weight': 'regular',
+		'spaced': true,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 7,
+		},
+	},
 	'body--enlarged': {
 		'tag': 'p',
+		'size': 'm',
+		'weight': 'regular',
+		'spaced': true,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 7,
+		},
+	},
+	'body-container--enlarged': {
+		'tag': 'div',
 		'size': 'm',
 		'weight': 'regular',
 		'spaced': true,
@@ -118,11 +140,13 @@ const propsSpecifications = {
  */
 export const Copy = ({
 	kind = 'body--standard',
+	htmlContent,
 	children,
 	// propOverrides,
 }) => {
 	const tagThisCopy = propsSpecifications[kind].tag;
 	const propsThisCopy = propsSpecifications[kind];
+	propsThisCopy.htmlContent = htmlContent;
 	delete propsThisCopy.tag;
 	/* if (propOverrides) {
 		propOverrides.forEach(element => {
@@ -144,9 +168,15 @@ Copy.propTypes = {
 	 */
 	'kind': PropTypes.oneOf(Object.keys(propsSpecifications)).isRequired,
 	/**
-	 * The text characters.
+	 * The text characters marked up with HTML tags. If `htmlContent` is
+	 * supplied, then `children` will be ignored.
 	 */
-	'children': PropTypes.string.isRequired,
+	'htmlContent': PropTypes.string,
+	/**
+	 * The text characters. If `htmlContent` is
+	 * supplied, then `children` will be ignored.
+	 */
+	'children': PropTypes.string,
 	// /**
 	//  * Override 1+ props, e.g., color, weight, slant, etc.
 	//  *
