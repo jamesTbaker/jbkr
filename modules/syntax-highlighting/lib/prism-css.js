@@ -1,7 +1,7 @@
-import { syntaxColors } from './colors';
+const syntaxColors = require('./colors');
 
 
-export const prismCSS = `
+module.exports = `
 	code[class*="language-"],
 	pre[class*="language-"] {
 		color: ${syntaxColors.Neutral[1]};
@@ -82,7 +82,7 @@ export const prismCSS = `
 	.token.char,
 	.token.builtin,
 	.token.inserted {
-		color: ${syntaxColors.Accent.Peacock};
+		color: ${syntaxColors.Accent.Kiwi};
 	}
 
 	.token.operator,

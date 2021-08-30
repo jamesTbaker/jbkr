@@ -1,4 +1,4 @@
-import { syntaxColors } from './colors';
+const syntaxColors = require('./colors');
 
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 	}, {
 		'types': ['inserted'],
 		'style': {
-			'color': syntaxColors.Accent.Peacock,
+			'color': syntaxColors.Accent.Kiwi,
 			'fontStyle': 'italic',
 		},
 	}, {
@@ -33,7 +33,7 @@ module.exports = {
 	}, {
 		'types': ['string', 'url'],
 		'style': {
-			'color': syntaxColors.Accent.Peacock,
+			'color': syntaxColors.Accent.Kiwi,
 		},
 	}, {
 		'types': ['variable'],
@@ -58,7 +58,7 @@ module.exports = {
 	}, {
 		'types': ['selector', 'doctype'],
 		'style': {
-			'color': syntaxColors.Accent.Peacock,
+			'color': syntaxColors.Accent.Kiwi,
 			'fontStyle': 'italic',
 		},
 	}, {
@@ -85,7 +85,7 @@ module.exports = {
 	}, {
 		'types': ['attr-name'],
 		'style': {
-			'color': '${syntaxColors.Accent.Peacock} !important',
+			'color': '${syntaxColors.Accent.Kiwi} !important',
 		},
 	}, {
 		'types': ['doctype'],

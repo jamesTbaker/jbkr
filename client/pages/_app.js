@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { normalize } from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
 import { color, typeFamily } from '@jbkr/style-service';
+import Prism from 'prismjs';
+import { prismCSS } from '@jbkr/syntax-highlighting';
+
 
 const GlobalStyle = createGlobalStyle`
 
@@ -25,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
 		background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': 35,
+	'level': 37,
 	'format': 'string',
 })};
 	scroll-behavior: smooth;
@@ -33,6 +37,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function App({ Component, pageProps }) {
+	useEffect(() => {
+		Prism.highlightAll();
+	}, []);
 	return (
 		<>
 			<Head>
@@ -75,6 +82,7 @@ export default function App({ Component, pageProps }) {
 					content="I speak suit, geek, and creative.
 					20+ years' experience in business, technology, and design."
 				/>
+				<style>{prismCSS}</style>
 			</Head>
 			<GlobalStyle />
 			<Component {...pageProps} />

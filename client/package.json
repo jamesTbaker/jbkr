@@ -17,6 +17,7 @@
 	"dependencies": {
 		"@jbkr/client-helpers": "file:../modules/client-helpers",
 		"@jbkr/style-service": "file:../modules/style-service",
+		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
 		"@jbkr/utilities": "file:../modules/utilities",
 		"markdown-it": "^12.2.0",
 		"mongodb": "^3.5.9",

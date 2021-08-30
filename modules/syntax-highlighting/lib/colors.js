@@ -1,68 +1,21 @@
-import { color } from '@jbkr/style-service';
-
-export const syntaxColors = {
+module.exports = {
 	'Accent': {
-		'Iris': color({
-			'kind': 'Accent',
-			'tone': 'Iris',
-			'level': 1,
-		}),
-		'Flamingo': color({
-			'kind': 'Accent',
-			'tone': 'Flamingo',
-			'level': 1,
-		}),
-		'Tiger': color({
-			'kind': 'Accent',
-			'tone': 'Tiger',
-			'level': 1,
-		}),
-		'Sunshine': color({
-			'kind': 'Accent',
-			'tone': 'Sunshine',
-			'level': 1,
-		}),
-		'Peacock': color({
-			'kind': 'Accent',
-			'tone': 'Peacock',
-			'level': 2,
-		}),
-		'Spruce': color({
-			'kind': 'Accent',
-			'tone': 'Spruce',
-			'level': 1,
-		}),
-		'Finch': color({
-			'kind': 'Accent',
-			'tone': 'Finch',
-			'level': 1,
-		}),
+		'Iris': 'hsla(270, 100%, 70%, 1)',
+		'Flamingo': 'hsla(325, 100%, 60%, 1)',
+		'Tiger': 'hsla(30, 100%, 50%, 1)',
+		'Sunshine': 'hsla(50, 100%, 50%, 1)',
+		'Kiwi': 'hsla(75, 100%, 50%, 1)',
+		'Spruce': 'hsla(190, 100%, 60%, 1)',
+		'Finch': 'hsla(225, 100%, 70%, 1)',
 	},
 	'Neutral': {
 		// eslint-disable-next-line quote-props
-		1: color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 1,
-		}),
+		1: 'hsla(225, 25%, 98%, 1)',
 		// eslint-disable-next-line quote-props
-		2: color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 8,
-		}),
+		2: 'hsla(225, 25%, 81%, 1)',
 		// eslint-disable-next-line quote-props
-		3: color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 17,
-		}),
+		3: 'hsla(225, 25%, 60%, 1)',
 		// eslint-disable-next-line quote-props
-		4: color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 35,
-		}),
-
+		4: 'hsla(225, 25%, 2%, 1)',
 	},
 };
