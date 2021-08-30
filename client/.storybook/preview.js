@@ -4,6 +4,7 @@ import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
 import { createGlobalStyle } from 'styled-components';
 import { typeFamily, color } from '@jbkr/style-service';
 
+
 const GlobalStyle = createGlobalStyle`
 	html {
 		font-size: 8px;
@@ -40,8 +41,6 @@ const DarkModeStyle = createGlobalStyle`
 // Global decorator to apply the styles to all stories
 export const decorators = [
 	(Story, context) => {
-		// console.log('context');
-		// console.log(context);
 		let ColorModeStyle = context.args.colorMode === 'light' ?
 			LightModeStyle : DarkModeStyle;
 		return (

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { ColorSwatches } from './Color.component';
+import { prismCSS } from '@jbkr/syntax-highlighting';
 
 <Meta title="Props / Color" />
 
@@ -13,7 +14,7 @@ transparency). These hsla values are determined by 3-4 parameters: kind, tone,
 level, and alpha.
 
 Place exact color function signature + params here.
-
+<style>{prismCSS}</style>
 ```js
 import styled from 'styled-components';
 import { color } from '@jbkr/style-service';
@@ -28,4 +29,4 @@ const Example = styled.span`
 	});
 `;
 ```
-<ColorSwatches/>
+<ColorSwatches />

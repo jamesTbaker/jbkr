@@ -61,6 +61,12 @@ export default function App({ Component, pageProps }) {
 						'family=Inter&display=swap'
 					}
 				/>
+				<link rel="stylesheet"
+					href={
+						'https://fonts.googleapis.com/css2?' +
+						'family=Roboto+Mono&display=swap'
+					}
+				/>
 				{/* favicon */}
 				<link rel="icon"
 					href="/favicon/brands.svg" type="image/svg+xml" />

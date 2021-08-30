@@ -26,7 +26,7 @@ export const darkTheme = create({
 
 	// Typography
 	'fontBase': '"Inter", sans-serif',
-	'fontCode': '"SF Mono", monospace',
+	'fontCode': '"Roboto Mono", monospace',
 
 	// Text colors
 	'textColor': color({
