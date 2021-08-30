@@ -16,6 +16,8 @@ module.exports = {
 		// eslint-disable-next-line quote-props
 		3: 'hsla(225, 25%, 60%, 1)',
 		// eslint-disable-next-line quote-props
-		4: 'hsla(225, 25%, 2%, 1)',
+		4: 'hsla(225, 25%, 26%, 1)',
+		// eslint-disable-next-line quote-props
+		5: 'hsla(225, 25%, 2%, 1)',
 	},
 };

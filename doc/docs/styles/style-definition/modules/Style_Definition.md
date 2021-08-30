@@ -134,4 +134,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[foundation.ts:9](https://github.com/jamesTbaker/jbkr/blob/d280a0e/modules/style-definition/src/lib/foundation.ts#L9)
+[foundation.ts:9](https://github.com/jamesTbaker/jbkr/blob/9319638/modules/style-definition/src/lib/foundation.ts#L9)

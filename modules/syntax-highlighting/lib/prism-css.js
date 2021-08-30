@@ -7,7 +7,7 @@ module.exports = `
 	div.os-host.os-host-foreign.os-theme-dark code[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark pre[class*="language-"] {
 		color: ${syntaxColors.Neutral[1]};
-		background: ${syntaxColors.Neutral[4]};
+		background: ${syntaxColors.Neutral[5]};
 		text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 		font-family: 'Roboto Mono', monospace;
 		font-size: 1em;
@@ -40,13 +40,22 @@ module.exports = `
 	pre[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark :not(pre) > code[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark pre[class*="language-"] {
-		background: ${syntaxColors.Neutral[4]};
+		background: ${syntaxColors.Neutral[5]};
+	}
+
+	:not(pre) > code,
+	.sbdocs :not(pre) > code {
+		font-size: 80%;
+		padding: .125rem .25rem;
+		color: ${syntaxColors.Accent.Spruce};
+		border: 2px solid ${syntaxColors.Neutral[4]};
+		background-color: ${syntaxColors.Neutral[5]};
+		border-radius: 3px;
+		vertical-align: middle;
 	}
 
 
 
-
-	/* Inline code */
 	:not(pre) > code[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark :not(pre) > code[class*="language-"] {
 		padding: .1em;

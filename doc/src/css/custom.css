@@ -163,6 +163,7 @@
 	--ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	--ifm-font-family-monospace: 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	--ifm-code-font-size: 				80%;
+	--ifm-global-radius:				3px;
 
 	--ifm-color-primary-darkest:		var(--jbkr-neutral-finch-40);
 	--ifm-color-primary-darker: 		var(--jbkr-neutral-finch-36);
@@ -356,7 +357,7 @@ html[data-theme="dark"] {
 
 	/* code */
 
-	--ifm-code-background:				var(--jbkr-neutral-finch-31);
+	--ifm-code-background:				var(--jbkr-neutral-finch-41);
 
 	/* table */
 
@@ -394,4 +395,9 @@ main div.row article div.markdown div[class^="codeBlockTitle"] {
 }
 main div.row article div.markdown div[class^="codeBlockContent"] pre.prism-code {
 	background-color: 				var(--jbkr-neutral-finch-41) !important;
+}
+
+code {
+	color: 							var(--jbkr-brand-spruce-01);
+	border: 0.1rem solid var(--jbkr-neutral-finch-31);
 }

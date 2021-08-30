@@ -4,7 +4,7 @@ const syntaxColors = require('./colors');
 module.exports = {
 	'plain': {
 		'color': syntaxColors.Neutral[1],
-		'backgroundColor': syntaxColors.Neutral[4],
+		'backgroundColor': syntaxColors.Neutral[5],
 	},
 	'styles': [{
 		'types': ['changed'],
