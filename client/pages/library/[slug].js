@@ -36,7 +36,8 @@ const LibLabItemScreen = ({ post }) => {
 				*/}
 				<meta property="og:image" content={post.coverImage.url} />
 
-
+				<meta property="twitter:url"
+					content={`https://jbkr.me/library/${post.slug}`} />
 				<meta name="twitter:title"
 					content={`${post.title}`} />
 				<meta name="twitter:description"
