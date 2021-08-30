@@ -5,6 +5,7 @@
 	"main": "build/index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
+	"private": true,
 	"type": "module",
 	"scripts": {
 		"build": "tsc --project ./tsconfig.json"

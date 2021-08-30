@@ -1,12 +1,11 @@
 {
-	"name": "@jbkr/storybook-themes",
+	"name": "@jbkr/syntax-highlighting",
 	"version": "0.1.0",
-	"description": "Light and dark themes for the Storybook UI",
-	"main": "src/index.js",
+	"description": "Miscellaneous functions.",
+	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"private": true,
-	"type": "module",
 	"dependencies": {
 		"@jbkr/style-service": "file:../style-service"
 	}

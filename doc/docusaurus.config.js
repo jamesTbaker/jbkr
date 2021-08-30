@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const lightCodeTheme = require('prism-react-renderer/themes/okaidia');
-const darkCodeTheme = require('prism-react-renderer/themes/okaidia');
+// const darkCodeTheme = require('prism-react-renderer/themes/okaidia');
+const codeThemes = require('@jbkr/syntax-highlighting');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -71,7 +72,7 @@ module.exports = {
 		},
 		'prism': {
 			'theme': lightCodeTheme,
-			'darkTheme': darkCodeTheme,
+			'darkTheme': codeThemes.prismReactRendererTheme,
 		},
 		'colorMode': {
 			'defaultMode': 'dark',

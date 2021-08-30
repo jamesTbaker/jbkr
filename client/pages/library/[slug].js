@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,11 +13,16 @@ import { TableOfContents }
 	from '../../components/app/TableOfContents/TableOfContents';
 import { transformToHTML, transformWithAnchorsTOC } from '@jbkr/client-helpers';
 import readingTime from 'reading-time';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-okaidia.css';
 
 const StyledLibLabItemScreen = styled.div`
 `;
 
 const LibLabItemScreen = ({ post }) => {
+	useEffect(() => {
+		Prism.highlightAll();
+	}, []);
 	return (
 		<>
 			<Head>

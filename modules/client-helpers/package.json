@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
+	"private": true,
 	"type": "module",
 	"devDependencies": {
 		"markdown-it": "^12.2.0"
