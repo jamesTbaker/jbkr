@@ -44,9 +44,7 @@
       "model": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false,
@@ -74,6 +72,25 @@
     },
     "MetaTitle": {
       "type": "string"
+    },
+    "CoverImageCaption": {
+      "type": "string"
+    },
+    "MetaImageGravity": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "north",
+        "south",
+        "east",
+        "west",
+        "north_east",
+        "south_east",
+        "north_west",
+        "south_west"
+      ],
+      "required": false,
+      "default": "center"
     }
   }
 }

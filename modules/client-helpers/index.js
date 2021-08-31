@@ -1,1 +1,4 @@
-export { transformToHTML, transformWithAnchorsTOC } from './lib/transform-content.js';
+export {
+	returnHTMLFromMarkdown,
+	returnSocialImageCloudinaryURI,
+} from './lib/transform-content.js';

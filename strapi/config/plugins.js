@@ -1,5 +1,4 @@
 module.exports = ({ env }) => ({
-	// ...
 	upload: {
 		provider: 'cloudinary',
 		providerOptions: {
@@ -7,6 +6,8 @@ module.exports = ({ env }) => ({
 			api_key: env('cloudinaryCDNKey'),
 			api_secret: env('cloudinaryCDNSecret'),
 		},
+		breakpoints: {
+			standard: 1920,
+		}
 	},
-	// ...
 });

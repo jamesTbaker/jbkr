@@ -10,7 +10,10 @@ import styled from 'styled-components';
 import { Copy } from '../../components/core/Copy/Copy';
 import { TableOfContents }
 	from '../../components/app/TableOfContents/TableOfContents';
-import { transformToHTML } from '@jbkr/client-helpers';
+import {
+	returnHTMLFromMarkdown,
+	returnSocialImageCloudinaryURI,
+} from '@jbkr/client-helpers';
 import readingTime from 'reading-time';
 
 const StyledLibLabItemScreen = styled.div`
@@ -22,6 +25,7 @@ const LibLabItemScreen = ({ post }) => {
 			<Head>
 				<title>{`${post.metaTitle}`} | jbkr</title>
 				<meta name="description" content={post.metaDescription} />
+
 				<meta property="og:type" content="article" />
 				<meta property="og:title"
 					content={`${post.title}`} />
@@ -29,12 +33,7 @@ const LibLabItemScreen = ({ post }) => {
 					content={`https://jbkr.me/library/${post.slug}`} />
 				<meta property="og:description"
 					content={post.socialDescription} />
-				{/*
-					@todo improve image selection
-
-					1200×630 or larger, up to 1MB, 1.91:1 aspect ratio
-				*/}
-				<meta property="og:image" content={post.coverImage.url} />
+				<meta property="og:image" content={post.metaImage.url} />
 
 				<meta property="twitter:url"
 					content={`https://jbkr.me/library/${post.slug}`} />
@@ -43,7 +42,7 @@ const LibLabItemScreen = ({ post }) => {
 				<meta name="twitter:description"
 					content={post.socialDescription} />
 				<meta name="twitter:image"
-					content={post.coverImage.url} />
+					content={post.metaImage.url} />
 				<meta name="twitter:image:alt"
 					content={post.coverImage.alternativeText} />
 				<meta name="twitter:card" content="summary_large_image" />
@@ -56,6 +55,11 @@ const LibLabItemScreen = ({ post }) => {
 					alt={post.coverImage.alternativeText}
 					width={post.coverImage.width}
 					height={post.coverImage.height}
+					quality={100}
+				/>
+				<Copy
+					kind="small"
+					htmlContent={post.coverImage.credit}
 				/>
 				<Copy
 					kind="small"
@@ -125,6 +129,8 @@ export async function getServerSideProps(context) {
 				'Subtitle': 1,
 				'Tagline': 1,
 				'CoverImages': 1,
+				'CoverImageCaption': 1,
+				'MetaImageGravity': 1,
 				'PublicationDate': 1,
 				'Body': 1,
 			},
@@ -134,8 +140,22 @@ export async function getServerSideProps(context) {
 	postRaw.bodyStats = readingTime(postRaw.Body);
 	const postFormatted = {
 		'slug': postRaw.Slug,
+		'metaImage': {
+			'url': returnSocialImageCloudinaryURI({
+				'imagePublicID':
+					postRaw.CoverImages[0].provider_metadata.public_id,
+				'imageExtension': postRaw.CoverImages[0].ext,
+				'gravity': postRaw.MetaImageGravity,
+			}),
+		},
 		'coverImage': {
-			'caption': transformToHTML({
+			'caption': returnHTMLFromMarkdown({
+				'content': postRaw.CoverImageCaption,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			}),
+			'credit': returnHTMLFromMarkdown({
 				'content': postRaw.CoverImages[0].caption,
 				'options': {
 					'removeEndCapTags': true,
@@ -147,13 +167,13 @@ export async function getServerSideProps(context) {
 			'height': postRaw.CoverImages[0].height,
 		},
 		'title': postRaw.Subtitle ?
-			transformToHTML({
+			returnHTMLFromMarkdown({
 				'content': `${postRaw.Title.trim()}: ${postRaw.Subtitle}`,
 				'options': {
 					'removeEndCapTags': true,
 				},
 			}) :
-			transformToHTML({
+			returnHTMLFromMarkdown({
 				'content': postRaw.Title,
 				'options': {
 					'removeEndCapTags': true,
@@ -165,18 +185,16 @@ export async function getServerSideProps(context) {
 				'month': 'long',
 				'day': 'numeric',
 			}),
-		'tagline': postRaw.Tagline ?
-			transformToHTML({
-				'content': postRaw.Tagline,
-				'options': {
-					'removeEndCapTags': true,
-				},
-			}) :
-			'',
+		'tagline': returnHTMLFromMarkdown({
+			'content': postRaw.Tagline,
+			'options': {
+				'removeEndCapTags': true,
+			},
+		}),
 		'metaTitle': postRaw.MetaTitle,
 		'metaDescription': postRaw.MetaDescription,
 		'socialDescription': postRaw.SocialDescription,
-		'snippetDescription': transformToHTML({
+		'snippetDescription': returnHTMLFromMarkdown({
 			'content': postRaw.SnippetDescription,
 		}),
 		'body': {
@@ -184,13 +202,13 @@ export async function getServerSideProps(context) {
 				'minutes': Math.round(postRaw.bodyStats.minutes),
 				'words': postRaw.bodyStats.words,
 			},
-			'nav': transformToHTML({
+			'nav': returnHTMLFromMarkdown({
 				'content': postRaw.Body,
 				'options': {
 					'navOnly': true,
 				},
 			}),
-			'content': transformToHTML({
+			'content': returnHTMLFromMarkdown({
 				'content': postRaw.Body,
 				'options': {
 					'withAnchors': true,
