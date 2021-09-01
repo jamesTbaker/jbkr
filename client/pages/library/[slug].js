@@ -1,104 +1,58 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import { connectToDatabase } from '../../lib/mongodb';
-// import { useRouter } from 'next/router';
-import styled from 'styled-components';
-import { Copy } from '../../components/core/Copy/Copy';
-import { TableOfContents }
-	from '../../components/app/TableOfContents/TableOfContents';
 import {
 	returnHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
 } from '@jbkr/client-helpers';
+import styled from 'styled-components';
 import readingTime from 'reading-time';
+import { Scaffold } from '../../components/app/Scaffold/Scaffold';
+import { Post } from '../../components/app/Posts/Post';
 
-const StyledLibLabItemScreen = styled.div`
+const PostContainer = styled.div`
 `;
 
 const LibLabItemScreen = ({ post }) => {
 	return (
-		<>
-			<Head>
-				<title>{`${post.metaTitle}`} | jbkr</title>
-				<meta name="description" content={post.metaDescription} />
-
-				<meta property="og:type" content="article" />
-				<meta property="og:title"
-					content={`${post.title}`} />
-				<meta property="og:url"
-					content={`https://jbkr.me/library/${post.slug}`} />
-				<meta property="og:description"
-					content={post.socialDescription} />
-				<meta property="og:image" content={post.metaImage.url} />
-
-				<meta property="twitter:url"
-					content={`https://jbkr.me/library/${post.slug}`} />
-				<meta name="twitter:title"
-					content={`${post.title}`} />
-				<meta name="twitter:description"
-					content={post.socialDescription} />
-				<meta name="twitter:image"
-					content={post.metaImage.url} />
-				<meta name="twitter:image:alt"
-					content={post.coverImage.alternativeText} />
-				<meta name="twitter:card" content="summary_large_image" />
-			</Head>
-			<StyledLibLabItemScreen>
-				<Link href="/">Profile</Link>
-				<Link href="/library">Library</Link>
-				<Link href="/contact">Contact</Link>
-				<Image src={post.coverImage.url}
-					alt={post.coverImage.alternativeText}
-					width={post.coverImage.width}
-					height={post.coverImage.height}
-					quality={100}
-				/>
-				<Copy
-					kind="small"
-					htmlContent={post.coverImage.credit}
-				/>
-				<Copy
-					kind="small"
-					htmlContent={post.coverImage.caption}
-				/>
-				<Copy
-					kind="h1"
-					htmlContent={post.title}
-				/>
-				<Copy kind="body--standard">{post.publicationDate}</Copy>
-				<Copy kind="body--standard">
-					{`${post.body.stats.words} words |
-					${post.body.stats.minutes} minutes to read`}
-				</Copy>
-				{
-					post.tagline &&
-
-					<Copy
-						kind="body--standard"
-						htmlContent={post.tagline}
-					/>
-				}
-				<Copy
-					kind="body-container--standard"
-					htmlContent={post.snippetDescription}
-				/>
-				{
-					post.body.nav &&
-
-					<TableOfContents
-						contents={post.body.nav}
-					/>
-				}
-				<Copy
-					kind="body-container--standard"
-					htmlContent={post.body.content}
-				/>
-			</StyledLibLabItemScreen>
-		</>
+		<Scaffold
+			meta={{
+				'type': 'article',
+				'url': `/library/${post.slug}`,
+				'title': post.metaTitle,
+				'descriptions': {
+					'main': post.metaDescription,
+					'social': post.socialDescription,
+				},
+				'image': {
+					'url': post.metaImage.url,
+					'alternativeText': post.metaImage.alternativeText,
+				},
+			}}
+		>
+			<PostContainer>
+				<Post
+					image={{
+						'url': post.coverImage.url,
+						'alt': post.coverImage.alternativeText,
+						'width': post.coverImage.width,
+						'height': post.coverImage.height,
+						'credit': post.coverImage.credit,
+						'caption': post.coverImage.caption,
+					}}
+					frontMatter={{
+						'title': post.title,
+						'publicationDate': post.publicationDate,
+						'tagline': post.tagline,
+						'tableOfContents': post.body.nav,
+						'stats': post.body.stats,
+					}}
+					body={post.body.content}
+				>
+				</Post>
+			</PostContainer>
+		</Scaffold>
 	);
 };
 
@@ -124,7 +78,6 @@ export async function getServerSideProps(context) {
 				'Title': 1,
 				'MetaTitle': 1,
 				'MetaDescription': 1,
-				'SnippetDescription': 1,
 				'SocialDescription': 1,
 				'Subtitle': 1,
 				'Tagline': 1,
@@ -147,6 +100,7 @@ export async function getServerSideProps(context) {
 				'imageExtension': postRaw.CoverImages[0].ext,
 				'gravity': postRaw.MetaImageGravity,
 			}),
+			'alternativeText': postRaw.CoverImages[0].alternativeText,
 		},
 		'coverImage': {
 			'caption': returnHTMLFromMarkdown({
@@ -194,9 +148,6 @@ export async function getServerSideProps(context) {
 		'metaTitle': postRaw.MetaTitle,
 		'metaDescription': postRaw.MetaDescription,
 		'socialDescription': postRaw.SocialDescription,
-		'snippetDescription': returnHTMLFromMarkdown({
-			'content': postRaw.SnippetDescription,
-		}),
 		'body': {
 			'stats': {
 				'minutes': Math.round(postRaw.bodyStats.minutes),

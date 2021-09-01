@@ -46,6 +46,7 @@ export default function App({ Component, pageProps }) {
 				{/* meta content */}
 				<meta name="author" content="James T. Baker" />
 				<meta property="og:site_name" content="jbkr" />
+				<meta name="twitter:card" content="summary_large_image" />
 				{/* viewport */}
 				<meta
 					name="viewport"

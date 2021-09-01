@@ -2,27 +2,31 @@
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
 
-import Head from 'next/head';
-import styled from 'styled-components';
-import Link from 'next/link';
 import { Copy } from '../components/core/Copy/Copy';
+import { Scaffold } from '../components/app/Scaffold/Scaffold';
+import {
+	defaultMetaImageURL,
+	defaultMetaImageAlternativeText,
+} from '@jbkr/client-helpers';
 
-const StyledContactScreen = styled.div`
-`;
 
 const ContactScreen = (props) => (
-	<>
-		<Head>
-			<title>Contact | jbkr</title>
-			<meta name="description" content="Get in touch now!"></meta>
-		</Head>
-		<StyledContactScreen>
-			<Copy kind="h1">The Contact Screen</Copy>
-			<Link href="/">Profile</Link>
-			<Link href="/library">Library</Link>
-			<Link href="/contact">Contact</Link>
-		</StyledContactScreen>
-	</>
+	<Scaffold
+		meta={{
+			'type': 'website',
+			'title': 'Contact',
+			'descriptions': {
+				'main': 'Get in touch now!',
+				'social': 'Get in touch now!',
+			},
+			'image': {
+				'url': defaultMetaImageURL,
+				'alternativeText': defaultMetaImageAlternativeText,
+			},
+		}}
+	>
+		<Copy kind="h1">The Contact Screen</Copy>
+	</Scaffold>
 );
 
 export default ContactScreen;

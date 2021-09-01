@@ -2,26 +2,31 @@
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
 
-import Head from 'next/head';
-import styled from 'styled-components';
-import Link from 'next/link';
 import { Copy } from '../components/core/Copy/Copy';
-
-const StyledFourOhFourScreen = styled.div`
-`;
+import { Scaffold } from '../components/app/Scaffold/Scaffold';
+import {
+	defaultMetaImageURL,
+	defaultMetaImageAlternativeText,
+} from '@jbkr/client-helpers';
 
 const FourOhFourScreen = (props) => (
-	<>
-		<Head>
-			<title>On no! | jbkr</title>
-		</Head>
-		<StyledFourOhFourScreen>
-			<Copy kind="h1">The FourOhFour Screen</Copy>
-			<Link href="/">Profile</Link>
-			<Link href="/library">Library</Link>
-			<Link href="/contact">Contact</Link>
-		</StyledFourOhFourScreen>
-	</>
+	<Scaffold
+		meta={{
+			'type': 'website',
+			'title': 'On no!',
+			'descriptions': {
+				'main': 'We couldn\'t find what you were looking for.',
+				'social': 'We couldn\'t find what you were looking for.',
+			},
+			'image': {
+				'url': defaultMetaImageURL,
+				'alternativeText': defaultMetaImageAlternativeText,
+			},
+		}}
+	>
+		<Copy kind="h1">The FourOhFour Screen</Copy>
+	</Scaffold>
+
 );
 
 export default FourOhFourScreen;
