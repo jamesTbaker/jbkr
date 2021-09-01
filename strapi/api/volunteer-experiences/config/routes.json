@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/volunteer-experiences",
+      "handler": "volunteer-experiences.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/volunteer-experiences/count",
+      "handler": "volunteer-experiences.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/volunteer-experiences/:id",
+      "handler": "volunteer-experiences.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/volunteer-experiences",
+      "handler": "volunteer-experiences.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/volunteer-experiences/:id",
+      "handler": "volunteer-experiences.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/volunteer-experiences/:id",
+      "handler": "volunteer-experiences.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

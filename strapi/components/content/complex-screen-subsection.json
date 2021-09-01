@@ -1,0 +1,55 @@
+{
+  "collectionName": "components_content_complex_screen_subsections",
+  "info": {
+    "name": "ComplexScreenSubsection",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "SubsectionTitle": {
+      "type": "string"
+    },
+    "SubsectionGravity": {
+      "type": "enumeration",
+      "enum": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ]
+    },
+    "SubsectionID": {
+      "type": "string"
+    },
+    "SubsectionText": {
+      "type": "richtext"
+    },
+    "SubsectionMedia": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "SubsectionMediaEmbedsArray": {
+      "type": "json"
+    },
+    "SubsectionMediaSVGArray": {
+      "type": "json"
+    },
+    "SubsectionMediaGravity": {
+      "type": "enumeration",
+      "enum": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ]
+    }
+  }
+}

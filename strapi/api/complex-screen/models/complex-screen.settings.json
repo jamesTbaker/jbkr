@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "complex_screens",
+  "info": {
+    "name": "ComplexScreen",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Intro": {
+      "type": "text"
+    },
+    "BriefStatement": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.brief-statement"
+    },
+    "Section": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.complex-screen-section"
+    },
+    "SnippetDescription": {
+      "type": "richtext",
+      "required": true
+    },
+    "Slug": {
+      "type": "string"
+    }
+  }
+}

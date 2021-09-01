@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/education-certifications",
+      "handler": "education-certification.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/education-certifications/count",
+      "handler": "education-certification.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/education-certifications/:id",
+      "handler": "education-certification.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/education-certifications",
+      "handler": "education-certification.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/education-certifications/:id",
+      "handler": "education-certification.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/education-certifications/:id",
+      "handler": "education-certification.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

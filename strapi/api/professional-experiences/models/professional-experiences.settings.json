@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "professional_experiences",
+  "info": {
+    "name": "ProfessionalExperiences"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Employer": {
+      "type": "string",
+      "required": true
+    },
+    "StartDate": {
+      "type": "date",
+      "required": true
+    },
+    "EndDate": {
+      "type": "date"
+    },
+    "Description": {
+      "type": "richtext"
+    }
+  }
+}

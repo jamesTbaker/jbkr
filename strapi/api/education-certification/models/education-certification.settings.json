@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "education_certifications",
+  "info": {
+    "name": "EducationCertification"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Header": {
+      "type": "string",
+      "required": true
+    },
+    "Tagline": {
+      "type": "string"
+    },
+    "StartYear": {
+      "type": "integer"
+    },
+    "EndYear": {
+      "type": "integer",
+      "required": true
+    },
+    "Details": {
+      "type": "richtext"
+    }
+  }
+}

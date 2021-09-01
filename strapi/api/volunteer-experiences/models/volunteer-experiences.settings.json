@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "volunteer_experiences",
+  "info": {
+    "name": "VolunteerExperiences"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "ForWhom": {
+      "type": "string",
+      "required": true
+    },
+    "StartYear": {
+      "type": "integer",
+      "required": true
+    },
+    "EndYear": {
+      "type": "integer"
+    },
+    "Description": {
+      "type": "richtext"
+    }
+  }
+}
