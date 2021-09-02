@@ -13,8 +13,6 @@
     "SubsectionGravity": {
       "type": "enumeration",
       "enum": [
-        "top",
-        "bottom",
         "left",
         "right"
       ]
@@ -45,8 +43,6 @@
     "SubsectionMediaGravity": {
       "type": "enumeration",
       "enum": [
-        "top",
-        "bottom",
         "left",
         "right"
       ]
