@@ -60,6 +60,19 @@
     "MetaTitle": {
       "type": "string",
       "required": true
+    },
+    "Featured": {
+      "type": "boolean"
+    },
+    "MetaImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }
