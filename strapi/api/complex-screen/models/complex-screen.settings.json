@@ -35,6 +35,31 @@
     },
     "Slug": {
       "type": "string"
+    },
+    "Subtitle": {
+      "type": "string"
+    },
+    "PublicationDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "SocialDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 200
+    },
+    "MetaDescription": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "Tagline": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "MetaTitle": {
+      "type": "string",
+      "required": true
     }
   }
 }

@@ -19,10 +19,6 @@
     "Subtitle": {
       "type": "string"
     },
-    "Snippet": {
-      "type": "richtext",
-      "required": true
-    },
     "PublicationDate": {
       "type": "datetime",
       "required": true
@@ -71,7 +67,8 @@
       "maxLength": 200
     },
     "MetaTitle": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "CoverImageCaption": {
       "type": "string"

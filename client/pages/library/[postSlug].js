@@ -61,7 +61,7 @@ export default LibLabItemScreen;
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
 	const data = await db.collection('posts').aggregate([
-		{ '$match': { 'Slug': context.query.slug } },
+		{ '$match': { 'Slug': context.query.postSlug } },
 		{
 			'$lookup':
 			{
