@@ -1,8 +1,8 @@
-/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
 import { connectToDatabase } from '../../../lib/mongodb';
+import { ObjectID } from 'bson';
 import {
 	returnHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
@@ -12,59 +12,27 @@ import readingTime from 'reading-time';
 import { Scaffold } from '../../../components/app/Scaffold/Scaffold';
 import { Post } from '../../../components/app/Posts/Post';
 
+
 const PostContainer = styled.div`
 `;
+// const genID = new ObjectID();
+// console.log('genID');
+// console.log(genID.toString());
 
 const LibLabItemScreen = ({ screen }) => {
-	console.log('screen');
-	console.log(screen);
+
+	// console.log('ObjectID');
+	// console.log(ObjectID);
+	// console.log('screen');
+	// console.log(screen);
 	return (<div></div>);
-	/* return (
-		<Scaffold
-			meta={{
-				'type': 'article',
-				'url': `/library/${post.slug}`,
-				'title': post.metaTitle,
-				'descriptions': {
-					'main': post.metaDescription,
-					'social': post.socialDescription,
-				},
-				'image': {
-					'url': post.metaImage.url,
-					'alternativeText': post.metaImage.alternativeText,
-				},
-			}}
-		>
-			<PostContainer>
-				<Post
-					image={{
-						'url': post.coverImage.url,
-						'alt': post.coverImage.alternativeText,
-						'width': post.coverImage.width,
-						'height': post.coverImage.height,
-						'credit': post.coverImage.credit,
-						'caption': post.coverImage.caption,
-					}}
-					frontMatter={{
-						'title': post.title,
-						'publicationDate': post.publicationDate,
-						'tagline': post.tagline,
-						'tableOfContents': post.body.nav,
-						'stats': post.body.stats,
-					}}
-					body={post.body.content}
-				>
-				</Post>
-			</PostContainer>
-		</Scaffold>
-	); */
 };
 
 export default LibLabItemScreen;
 
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
-	const data = await db.collection('complex_screens').aggregate([
+	let screenDataRaw = await db.collection('complex_screens').aggregate([
 		{ '$match': { 'Slug': context.query.complexSlug } },
 		{
 			'$lookup':
@@ -75,17 +43,26 @@ export async function getServerSideProps(context) {
 				'as': 'BriefStatements',
 			},
 		},
-		{
-			'$lookup':
-			{
-				'from': 'components_content_complex_screen_sections',
-				'let': { 'sectionID': 'Section.ref' },
-				'pipeline': [
-					{ '$match': { '$expr': { '$eq': ['$_id', '$$sectionID'] } } },
-				],
-				'as': 'Sections',
-			},
-		},
+		// {
+		// 	'$lookup':
+		// 	{
+		// 		'from': 'components_content_complex_screen_sections',
+		// 		'let': { 'sectionID': '$Section.ref' },
+		// 		'pipeline': [
+		// 			{ '$match': { '$expr': { '$eq': ['$_id', '$$sectionID'] } } },
+		// 		],
+		// 		'as': 'MatchedSections',
+		// 	},
+		// },
+		// {
+		// 	'$lookup':
+		// 	{
+		// 		'from': 'components_content_complex_screen_sections',
+		// 		'localField': 'Section.ref',
+		// 		'foreignField': '_id',
+		// 		'as': 'Sections',
+		// 	},
+		// },
 		// {
 		// 	'$lookup':
 		// 	{
@@ -107,14 +84,65 @@ export async function getServerSideProps(context) {
 				'Subtitle': 1,
 				'Tagline': 1,
 				'BriefStatement': 1,
-				'Sections': 1,
+				'Section': 1,
+				'MatchedSections': 1,
+				// 'Sections': 1,
 				// 'SectionBriefStatements': 1,
 			},
 		},
 	]).toArray();
-	const screenRaw = JSON.parse(JSON.stringify(data))[0];
+	screenDataRaw = JSON.parse(JSON.stringify(screenDataRaw))[0];
+	const screenSectionIDs = [];
+	screenDataRaw.Section.forEach((sectionObject) => {
+		screenSectionIDs.push(new ObjectID(sectionObject.ref));
+	});
+	// console.log(screenSectionIDs);
+	let sectionDataRaw = await db.collection('components_content_complex_screen_sections').aggregate([
+		{ '$match': { '_id': { '$in': screenSectionIDs } } },
+		{
+			'$lookup':
+			{
+				'from': 'components_content_brief_statements',
+				'localField': 'BriefStatement.ref',
+				'foreignField': '_id',
+				'as': 'SectionBriefStatements',
+			},
+		},
+		{
+			'$lookup':
+			{
+				'from': 'components_content_complex_screen_subsections',
+				'localField': 'ComplexScreenSubsection.ref',
+				'foreignField': '_id',
+				'as': 'Subsections',
+			},
+		},
+		{
+			'$project': {
+				'SectionID': 1,
+				'SectionTitle': 1,
+				'SectionIntro': 1,
+				'SectionBriefStatements.Statement': 1,
+				'Subsections': 1,
+				'SectionQuote': 1,
+			},
+		},
+	]).toArray();
+	sectionDataRaw = JSON.parse(JSON.stringify(sectionDataRaw));
+	const mediaItemIDs = [];
+	sectionDataRaw.forEach((sectionObject) => {
+		sectionObject.Subsections.forEach((subsectionObject) => {
+			subsectionObject.SubsectionMedia.forEach((mediaItemIDString) => {
+				mediaItemIDs.push(new ObjectID(mediaItemIDString));
+			});
+		});
+	});
+	let mediaDataRaw = await db.collection('upload_file')
+		.find({ '_id': { '$in': mediaItemIDs } }).toArray();
+	mediaDataRaw = JSON.parse(JSON.stringify(mediaDataRaw));
+
 
 	return {
-		'props': { 'screen': screenRaw },
+		'props': { 'screen': sectionDataRaw },
 	};
 }
