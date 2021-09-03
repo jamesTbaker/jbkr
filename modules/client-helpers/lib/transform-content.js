@@ -10,7 +10,9 @@ const markdownItClientAnchorsToC = new MarkdownIt()
 	.use(MarkdownItAnchor, {
 		'permalink': MarkdownItAnchor.permalink.headerLink(),
 	})
-	.use(MarkdownItToC);
+	.use(MarkdownItToC, {
+		// 'placeholder': '-----TOC-----',
+	});
 
 export const returnHTMLFromMarkdown = ({ content, options }) => {
 	let renderedContent = '';
@@ -35,6 +37,8 @@ export const returnHTMLFromMarkdown = ({ content, options }) => {
 		}
 		// if we received the navOnly option
 		if (options && options.navOnly) {
+			// console.log('CONTENT');
+			// console.log(content);
 			// set an initial render using the client with anchors and toc
 			renderedContent =
 				markdownItClientAnchorsToC.render(`[toc]${content}`);
