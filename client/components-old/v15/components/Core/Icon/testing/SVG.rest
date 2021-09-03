@@ -1,0 +1,6 @@
+@baseURI = https://www.mos.org/api/v1
+
+
+#########
+# Get AWS credentials
+GET {{baseURI}}/svgs.json

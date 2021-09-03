@@ -6,13 +6,9 @@ import {
 	returnHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
 } from '@jbkr/client-helpers';
-import styled from 'styled-components';
 import readingTime from 'reading-time';
 import { Scaffold } from '../../components/app/Scaffold/Scaffold';
 import { Post } from '../../components/app/Posts/Post';
-
-const PostContainer = styled.div`
-`;
 
 const LibLabItemScreen = ({ post }) => {
 	return (
@@ -31,27 +27,24 @@ const LibLabItemScreen = ({ post }) => {
 				},
 			}}
 		>
-			<PostContainer>
-				<Post
-					image={{
-						'url': post.coverImage.url,
-						'alt': post.coverImage.alternativeText,
-						'width': post.coverImage.width,
-						'height': post.coverImage.height,
-						'credit': post.coverImage.credit,
-						'caption': post.coverImage.caption,
-					}}
-					frontMatter={{
-						'title': post.title,
-						'publicationDate': post.publicationDate,
-						'tagline': post.tagline,
-						'tableOfContents': post.body.nav,
-						'stats': post.body.stats,
-					}}
-					body={post.body.content}
-				>
-				</Post>
-			</PostContainer>
+			<Post
+				image={{
+					'url': post.coverImage.url,
+					'alt': post.coverImage.alternativeText,
+					'width': post.coverImage.width,
+					'height': post.coverImage.height,
+					'credit': post.coverImage.credit,
+					'caption': post.coverImage.caption,
+				}}
+				frontMatter={{
+					'title': post.title,
+					'publicationDate': post.publicationDate,
+					'tagline': post.tagline,
+					'tableOfContents': post.body.nav,
+					'stats': post.body.stats,
+				}}
+				body={post.body.content}
+			/>
 		</Scaffold>
 	);
 };

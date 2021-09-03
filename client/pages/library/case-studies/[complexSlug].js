@@ -11,25 +11,50 @@ import {
 import styled from 'styled-components';
 import readingTime from 'reading-time';
 import { Scaffold } from '../../../components/app/Scaffold/Scaffold';
-import { Post } from '../../../components/app/Posts/Post';
+import { ComplexContent } from '../../../components/app/ComplexContents/ComplexContent';
 
-
-const PostContainer = styled.div`
-`;
-// const genID = new ObjectID();
-// console.log('genID');
-// console.log(genID.toString());
-
-const LibLabItemScreen = ({ screen }) => {
-
-	// console.log('ObjectID');
-	// console.log(ObjectID);
+const ComplexScreen = ({ screen }) => {
 	console.log('screen');
 	console.log(screen);
-	return (<div></div>);
+	return (
+		<Scaffold
+			meta={{
+				'type': 'article',
+				'url': `/library/${screen.slug}`,
+				'title': screen.metaTitle,
+				'descriptions': {
+					'main': screen.metaDescription,
+					'social': screen.socialDescription,
+				},
+				'image': {
+					'url': screen.metaImage.url,
+					'alternativeText': screen.metaImage.alternativeText,
+				},
+			}}
+		>
+			{/* <ComplexContent
+				image={{
+					'url': post.coverImage.url,
+					'alt': post.coverImage.alternativeText,
+					'width': post.coverImage.width,
+					'height': post.coverImage.height,
+					'credit': post.coverImage.credit,
+					'caption': post.coverImage.caption,
+				}}
+				frontMatter={{
+					'title': post.title,
+					'publicationDate': post.publicationDate,
+					'tagline': post.tagline,
+					'tableOfContents': post.body.nav,
+					'stats': post.body.stats,
+				}}
+				body={post.body.content}
+			/> */}
+		</Scaffold >
+	);
 };
 
-export default LibLabItemScreen;
+export default ComplexScreen;
 
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
@@ -241,6 +266,36 @@ export async function getServerSideProps(context) {
 			'briefStatementsRaw': screenDataRaw.BriefStatements,
 		});
 	}
+	const textAnalysis = {
+		'approximateTotalText': `
+			${screenFormatted.title}
+			${screenFormatted.publicationDate}
+		`,
+	};
+	screenFormatted.briefStatements.forEach((briefStatement) => {
+		textAnalysis.approximateTotalText += ' ' + briefStatement;
+	});
+	screenFormatted.sections.forEach((section) => {
+		textAnalysis.approximateTotalText += `
+			${section.sectionTitle}
+			${section.sectionQuote}
+			${section.sectionIntro}
+		`;
+		section.sectionBriefStatements.forEach((sectionBriefStatement) => {
+			textAnalysis.approximateTotalText += ' ' + sectionBriefStatement;
+		});
+		section.subsections.forEach((subsection) => {
+			textAnalysis.approximateTotalText += `
+			${subsection.subsectionTitle}
+			${subsection.subsectionText}
+		`;
+		});
+	});
+	textAnalysis.stats = readingTime(textAnalysis.approximateTotalText);
+	screenFormatted.stats = {
+		'minutes': Math.round(textAnalysis.stats.minutes),
+		'words': textAnalysis.stats.words,
+	};
 	return {
 		'props': { 'screen': screenFormatted },
 	};
