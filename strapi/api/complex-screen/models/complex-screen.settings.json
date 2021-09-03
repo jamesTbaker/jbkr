@@ -73,6 +73,20 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "MetaImageGravity": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "north",
+        "south",
+        "east",
+        "west",
+        "north_east",
+        "south_east",
+        "north_west",
+        "south_west"
+      ]
     }
   }
 }

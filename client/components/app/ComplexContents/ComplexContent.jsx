@@ -9,13 +9,13 @@ import { TableOfContents }
 
 const ComplexContentContainer = styled.div``;
 
-export const Post = ({
-	image,
+export const ComplexContent = ({
+	// image,
 	frontMatter,
-	body,
+	sections,
 }) => (
 	<ComplexContentContainer>
-		<Image src={image.url}
+		{/* <Image src={image.url}
 			alt={image.alt}
 			width={image.width}
 			height={image.height}
@@ -56,6 +56,6 @@ export const Post = ({
 		<Copy
 			kind="body-container--standard"
 			htmlContent={body}
-		/>
+		/> */}
 	</ComplexContentContainer>
 );
