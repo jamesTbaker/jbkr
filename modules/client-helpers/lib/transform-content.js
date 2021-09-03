@@ -1,3 +1,9 @@
+import React from 'react';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
+import rehypeReact from 'rehype-react';
 import MarkdownIt from 'markdown-it';
 import MarkdownItAnchor from 'markdown-it-anchor';
 import MarkdownItToC from 'markdown-it-toc-done-right';
@@ -73,3 +79,12 @@ export const returnSocialImageCloudinaryURI = ({
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
 'c_fill,g_' + gravity + ',w_1200,h_628,q_100/' +
 imagePublicID + imageExtension;
+
+export const returnHTMLFromMarkdownTwo = ({ content, options }) => {
+	const result = unified()
+		.use(remarkParse)
+		.use(remarkRehype)
+		.use(rehypeStringify)
+		.processSync(content).value;
+	return result;
+};

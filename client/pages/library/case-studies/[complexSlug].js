@@ -6,6 +6,7 @@ import { connectToDatabase } from '../../../lib/mongodb';
 import { ObjectID } from 'bson';
 import {
 	returnHTMLFromMarkdown,
+	returnHTMLFromMarkdownTwo,
 	returnSocialImageCloudinaryURI,
 } from '@jbkr/client-helpers';
 import styled from 'styled-components';
@@ -339,12 +340,18 @@ ${textAnalysis.briefStatements}`);
 
 	// get table of contents - this must be done prior to rendering html
 
-	screenIntermediate.nav = returnHTMLFromMarkdown({
+	/* screenIntermediate.nav = returnHTMLFromMarkdown({
 		'content': textAnalysis.approximateMain,
 		'options': {
 			'navOnly': true,
 		},
+	}); */
+
+	const TransTest = returnHTMLFromMarkdownTwo({
+		'content': screenIntermediate.sections[0].sectionTitle,
 	});
+	console.log('TransTest');
+	console.log(TransTest);
 
 
 	//  =======================================================
