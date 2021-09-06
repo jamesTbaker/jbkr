@@ -8,6 +8,12 @@ import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import remarkSlug from 'remark-slug';
 import rehypeReact from 'rehype-react';
+import {
+	defaultMetaImageURL,
+	defaultMetaImageAlternativeText,
+	defaultStandardImageURL,
+	defaultStandardImageAlternativeText,
+} from './meta-content';
 
 //  =======================================================
 //  =======================================================
@@ -95,6 +101,10 @@ export const returnSocialImageCloudinaryURI = ({
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
 'c_fill,g_' + gravity + ',w_1200,h_628,q_100/' +
 imagePublicID + imageExtension;
+export const returnStandardImageCloudinaryURI = ({
+	imagePublicID, imageExtension,
+}) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
+imagePublicID + imageExtension;
 export const returnSimpleHTMLFromMarkdown = ({ content }) => {
 	const result = unified()
 		.use(remarkParse)
@@ -149,13 +159,13 @@ const returnExtractedBriefStatements = ({ briefStatementsRaw }) => {
 const returnArticleIntermediateData = ({
 	articleDataRaw, sectionDataRaw, mediaDataRaw,
 }) => {
-	// start putting the data together, but don't transform anything to HTML yet
-
+	// set up container for all sections
 	const sectionsIntermediate = [];
+	// for each section in the raw data
 	sectionDataRaw.forEach((sectionObject) => {
-		const sectionIntermediate = {
-			'_id': sectionObject._id,
-		};
+		// set up a new, single section container; add the
+		// corresponding properties from the raw section data
+		const sectionIntermediate = {};
 		if (sectionObject.SectionID) {
 			sectionIntermediate.sectionID = sectionObject.SectionID;
 		}
@@ -163,11 +173,8 @@ const returnArticleIntermediateData = ({
 			sectionIntermediate.sectionTitle =
 				`## ${sectionObject.SectionTitle}`;
 		}
-		if (sectionObject.SectionIntro) {
-			sectionIntermediate.sectionIntro = sectionObject.SectionIntro;
-		}
-		if (sectionObject.SectionQuote) {
-			sectionIntermediate.sectionQuote = sectionObject.SectionQuote;
+		if (sectionObject.SectionPreface) {
+			sectionIntermediate.SectionPreface = sectionObject.SectionPreface;
 		}
 		if (sectionObject.SectionBriefStatements) {
 			sectionIntermediate.sectionBriefStatements =
@@ -175,21 +182,19 @@ const returnArticleIntermediateData = ({
 					'briefStatementsRaw': sectionObject.SectionBriefStatements,
 				});
 		}
-
+		if (sectionObject.SectionQuote) {
+			sectionIntermediate.sectionQuote = sectionObject.SectionQuote;
+		}
+		// set up a new container of this section's subsections
 		const SubsectionsThisSection = [];
+		// for each subsection in the raw data for this section
 		sectionObject.Subsections.forEach((subsectionObject) => {
+			// set up a new, single subsection container; add the
+			// corresponding properties from the raw subsection data
 			const subsectionIntermediate = {};
 			if (subsectionObject.SubsectionID) {
 				subsectionIntermediate.subsectionID =
 					subsectionObject.SubsectionID;
-			}
-			if (subsectionObject.SubsectionGravity) {
-				subsectionIntermediate.subsectionGravity =
-					subsectionObject.SubsectionGravity;
-			}
-			if (subsectionObject.SubsectionMediaGravity) {
-				subsectionIntermediate.subsectionMediaGravity =
-					subsectionObject.SubsectionMediaGravity;
 			}
 			if (subsectionObject.SubsectionTitle) {
 				subsectionIntermediate.subsectionTitle =
@@ -199,62 +204,59 @@ const returnArticleIntermediateData = ({
 				subsectionIntermediate.subsectionText =
 					subsectionObject.SubsectionText;
 			}
-			if (subsectionObject.SubsectionMediaSVGArray) {
-				subsectionIntermediate.subsectionMediaSVGArray =
-					subsectionObject.SubsectionMediaSVGArray;
+			if (subsectionObject.SubsectionGravity) {
+				subsectionIntermediate.subsectionGravity =
+					subsectionObject.SubsectionGravity;
 			}
+			if (subsectionObject.SubsectionMediaSVG) {
+				subsectionIntermediate.SubsectionMediaSVG =
+					subsectionObject.SubsectionMediaSVG;
+			}
+			if (subsectionObject.SubsectionMediaGravity) {
+				subsectionIntermediate.subsectionMediaGravity =
+					subsectionObject.SubsectionMediaGravity;
+			}
+			// set up a new container of this subsection's media items
 			const mediaThisSubsection = [];
-			subsectionObject.SubsectionMedia.forEach((mediaReference) => {
+			// for each media item ID in the raw data for this subsection
+			subsectionObject.SubsectionMedia.forEach((mediaItemID) => {
+				// for each media item
 				mediaDataRaw.forEach((mediaItem) => {
-					if (mediaItem._id === mediaReference) {
+					// if this media item's ID matches this media item ID
+					if (mediaItem._id === mediaItemID) {
+						// add the media item to the container of
+						// this subsection's media items
 						mediaThisSubsection.push(mediaItem);
 					}
 				});
 			});
-			if (mediaThisSubsection.length > 0) {
+			// if any media was found for this subsection
+			if (mediaThisSubsection[0]) {
+				// add the media container to the subsection
 				subsectionIntermediate.subsectionMedia = mediaThisSubsection;
 			}
-			SubsectionsThisSection.push(subsectionIntermediate);
+			// if this subsection container received any properties
+			if (Object.keys(subsectionIntermediate)[0]) {
+				// add the subsection to the section container
+				SubsectionsThisSection.push(subsectionIntermediate);
+			}
 		});
-		sectionIntermediate.subsections = SubsectionsThisSection;
-		sectionsIntermediate.push(sectionIntermediate);
+		// if this subsection container received any elements
+		if (SubsectionsThisSection[0]) {
+			// add the subsection container to the section container
+			sectionIntermediate.subsections = SubsectionsThisSection;
+		}
+		// if this section container received any elements
+		if (SubsectionsThisSection[0]) {
+			// add the section container to the sections container
+			sectionsIntermediate.push(sectionIntermediate);
+		}
 	});
-
-
+	// set up container for article properties; add the
+	// corresponding properties from the raw section data
 	const articleIntermedate = {};
 	if (articleDataRaw.Featured) {
 		articleIntermedate.featured = articleDataRaw.Featured;
-	}
-	if (articleDataRaw.Slug) {
-		articleIntermedate.slug = articleDataRaw.Slug;
-	}
-	if (articleDataRaw.Title) {
-		articleIntermedate.title = articleDataRaw.Subtitle ?
-			`${articleDataRaw.Title.trim()}: ${articleDataRaw.Subtitle}` :
-			articleDataRaw.Title;
-	}
-	if (articleDataRaw.MetaTitle) {
-		articleIntermedate.metaTitle = articleDataRaw.MetaTitle;
-	}
-	if (articleDataRaw.MetaDescription) {
-		articleIntermedate.metaDescription = articleDataRaw.MetaDescription;
-	}
-	if (
-		articleDataRaw.MetaImages &&
-		articleDataRaw.MetaImages[0]
-	) {
-		articleIntermedate.metaImage = {
-			'url': returnSocialImageCloudinaryURI({
-				'imagePublicID':
-					articleDataRaw.MetaImages[0].provider_metadata.public_id,
-				'imageExtension': articleDataRaw.MetaImages[0].ext,
-				'gravity': articleDataRaw.MetaImageGravity,
-			}),
-			'alternativeText': articleDataRaw.MetaImages[0].alternativeText,
-		};
-	}
-	if (articleDataRaw.SocialDescription) {
-		articleIntermedate.socialDescription = articleDataRaw.SocialDescription;
 	}
 	if (articleDataRaw.PublicationDate) {
 		articleIntermedate.publicationDate =
@@ -265,24 +267,133 @@ const returnArticleIntermediateData = ({
 					'day': 'numeric',
 				});
 	}
-	if (sectionsIntermediate && sectionsIntermediate[0]) {
-		articleIntermedate.sections = sectionsIntermediate;
+	if (articleDataRaw.UpdateDate) {
+		articleIntermedate.updateDate =
+			new Date(articleDataRaw.UpdateDate)
+				.toLocaleDateString('en-US', {
+					'year': 'numeric',
+					'month': 'long',
+					'day': 'numeric',
+				});
+	}
+	if (articleDataRaw.Slug) {
+		articleIntermedate.slug = articleDataRaw.Slug;
+	}
+	if (articleDataRaw.Title) {
+		articleIntermedate.title = articleDataRaw.Subtitle ?
+			`${articleDataRaw.Title.trim()}: ${articleDataRaw.Subtitle}` :
+			articleDataRaw.Title;
 	}
 	if (articleDataRaw.Tagline) {
 		articleIntermedate.tagline = articleDataRaw.Tagline;
 	}
-	if (articleDataRaw.Intro) {
-		articleIntermedate.intro = articleDataRaw.Intro;
+	if (articleDataRaw.MetaTitle) {
+		articleIntermedate.metaTitle = articleDataRaw.MetaTitle;
+	}
+	if (articleDataRaw.MetaDescription) {
+		articleIntermedate.metaDescription = articleDataRaw.MetaDescription;
+	}
+	if (articleDataRaw.SocialDescription) {
+		articleIntermedate.socialDescription = articleDataRaw.SocialDescription;
+	}
+	if (
+		articleDataRaw.MetaImages &&
+		articleDataRaw.MetaImages[0]
+	) {
+		let metaImageGravity = 'center';
+		if (articleDataRaw.MetaImageGravity) {
+			metaImageGravity = articleDataRaw.MetaImageGravity;
+		}
+		if (
+			!articleDataRaw.MetaImages[0].hash ||
+			!articleDataRaw.MetaImages[0].ext ||
+			!articleDataRaw.MetaImages[0].alternativeText
+		) {
+			articleIntermedate.metaImage = {
+				'url': defaultMetaImageURL,
+				'alternativeText': defaultMetaImageAlternativeText,
+			};
+		} else {
+			articleIntermedate.metaImage = {
+				'url': returnSocialImageCloudinaryURI({
+					'imagePublicID':
+						articleDataRaw.MetaImages[0].hash,
+					'imageExtension': articleDataRaw.MetaImages[0].ext,
+					'gravity': metaImageGravity,
+				}),
+				'alternativeText': articleDataRaw.MetaImages[0].alternativeText,
+			};
+
+		}
+	}
+	if (
+		articleDataRaw.HeadImages &&
+		articleDataRaw.HeadImages[0]
+	) {
+		if (
+			!articleDataRaw.HeadImages[0].hash ||
+			!articleDataRaw.HeadImages[0].ext ||
+			!articleDataRaw.HeadImages[0].alternativeText
+		) {
+			articleIntermedate.headImage = {
+				'url': defaultStandardImageURL,
+				'alternativeText': defaultStandardImageAlternativeText,
+			};
+		} else {
+			articleIntermedate.metaImage = {
+				'url': returnStandardImageCloudinaryURI({
+					'imagePublicID':
+						articleDataRaw.MetaImages[0].hash,
+					'imageExtension': articleDataRaw.MetaImages[0].ext,
+				}),
+				'alternativeText': articleDataRaw.MetaImages[0].alternativeText,
+			};
+			if (
+				articleIntermedate.metaImage &&
+				articleDataRaw.HeadImageCaption
+			) {
+				articleIntermedate.metaImage.caption =
+					articleDataRaw.HeadImageCaption;
+			}
+		}
 	}
 	if (articleDataRaw.BriefStatements) {
 		articleIntermedate.briefStatements = returnExtractedBriefStatements({
 			'briefStatementsRaw': articleDataRaw.BriefStatements,
 		});
 	}
-
+	if (articleDataRaw.IntroText) {
+		articleIntermedate.intro = articleDataRaw.IntroText;
+	}
+	if (
+		articleDataRaw.IntroVideos &&
+		articleDataRaw.IntroVideos[0]
+	) {
+		if (
+			articleDataRaw.IntroVideos[0].hash &&
+			articleDataRaw.IntroVideos[0].ext &&
+			articleDataRaw.IntroVideos[0].alternativeText
+		) {
+			articleIntermedate.introVideo = {
+				'url': returnStandardImageCloudinaryURI({
+					'imagePublicID':
+						articleDataRaw.IntroVideos[0].hash,
+					'imageExtension': articleDataRaw.IntroVideos[0].ext,
+				}),
+				'alternativeText':
+					articleDataRaw.IntroVideos[0].alternativeText,
+			};
+		}
+	}
+	if (sectionsIntermediate && sectionsIntermediate[0]) {
+		articleIntermedate.sections = sectionsIntermediate;
+	}
+	if (articleDataRaw.SimpleBody) {
+		articleIntermedate.simpleBody = articleDataRaw.SimpleBody;
+	}
 	// get stats
 
-	const textAnalysis = {
+	/* const textAnalysis = {
 		'approximateMain': `${articleIntermedate.title}
 ${articleIntermedate.publicationDate}
 `,
@@ -335,11 +446,10 @@ ${textAnalysis.briefStatements}`,
 
 	articleIntermedate.headingsWithMetadata = returnHeadingsWithMetadata({
 		'content': textAnalysis.approximateMain,
-	});
+	}); */
 
 	return articleIntermedate;
 };
-
 export const returnTransformedArticleData = ({
 	articleDataRaw, sectionDataRaw, mediaDataRaw,
 }) => {

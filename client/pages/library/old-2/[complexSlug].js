@@ -268,8 +268,7 @@ export async function getServerSideProps(context) {
 				'imagePublicID':
 					screenDataRaw.MetaImages[0].provider_metadata.public_id,
 				'imageExtension': screenDataRaw.MetaImages[0].ext,
-				// 'gravity': screenDataRaw.MetaImageGravity,
-				'gravity': 'center',
+				'gravity': screenDataRaw.MetaImageGravity,
 			}),
 			'alternativeText': screenDataRaw.MetaImages[0].alternativeText,
 		};

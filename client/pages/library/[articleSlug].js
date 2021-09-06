@@ -111,37 +111,40 @@ export async function getServerSideProps(context) {
 				'as': 'IntroVideos',
 			},
 		},
-		// specify which properties to return
+		// specify which fields to return
 		{
 			'$project': {
-				'_id': 0,
-				'Featured': 1,
-				'PublicationDate': 1,
-				'UpdateDate': 1,
-				'Slug': 1,
-				'Title': 1,
-				'Subtitle': 1,
-				'Tagline': 1,
-				'MetaTitle': 1,
-				'MetaDescription': 1,
-				'SocialDescription': 1,
-				'MetaImages.ext': 1,
-				'MetaImages.hash': 1,
-				'HeadImages.ext': 1,
-				'HeadImages.hash': 1,
-				'MetaImageGravity': 1,
-				'HeadImageCaption': 1,
-				'BriefStatements.Statement': 1,
-				'IntroText': 1,
-				'IntroVideos.ext': 1,
-				'IntroVideos.hash': 1,
+				// '_id': 0,
+				// 'Featured': 1,
+				// 'PublicationDate': 1,
+				// 'UpdateDate': 1,
+				// 'Slug': 1,
+				// 'Title': 1,
+				// 'Subtitle': 1,
+				// 'Tagline': 1,
+				// 'MetaTitle': 1,
+				// 'MetaDescription': 1,
+				// 'SocialDescription': 1,
+				// 'MetaImages.alternativeText': 1,
+				// 'MetaImages.ext': 1,
+				// 'MetaImages.hash': 1,
+				// 'HeadImages.alternativeText': 1,
+				// 'HeadImages.ext': 1,
+				// 'HeadImages.hash': 1,
+				// 'MetaImageGravity': 1,
+				// 'HeadImageCaption': 1,
+				// 'BriefStatements.Statement': 1,
+				// 'IntroText': 1,
+				// 'IntroVideos.alternativeText': 1,
+				// 'IntroVideos.ext': 1,
+				// 'IntroVideos.hash': 1,
 				'Section': 1,
 				'SimpleBody': 1,
 			},
 		},
 	]).toArray();
 	// serialize and deserialize returned data, converting BSON to JSON
-	articleDataRaw = JSON.parse(JSON.stringify(articleDataRaw));
+	articleDataRaw = JSON.parse(JSON.stringify(articleDataRaw))[0];
 	// get the IDs of any sections in this article
 	const articleSectionIDs = [];
 	if (
@@ -177,9 +180,10 @@ export async function getServerSideProps(context) {
 				'as': 'Subsections',
 			},
 		},
-		// specify which properties to return
+		// specify which fields to return
 		{
 			'$project': {
+				'_id': 0,
 				'SectionID': 1,
 				'SectionTitle': 1,
 				'SectionPreface': 1,
@@ -207,10 +211,19 @@ export async function getServerSideProps(context) {
 		});
 	});
 	// get the raw data for this article's sections's subsection media items
-	// from the database; i.e., find the documents whose IDs are in the
-	// collection of IDs
+	// from the database
 	let mediaDataRaw = await db.collection('upload_file')
-		.find({ '_id': { '$in': mediaItemIDs } }).toArray();
+		.find(
+			// find the documents whose IDs are in the collection of IDs
+			{ '_id': { '$in': mediaItemIDs } },
+			// specify which fields to return
+			{
+				'_id': 0,
+				'ext': 1,
+				'hash': 1,
+				'alternativeText': 1,
+			},
+		).toArray();
 	// serialize and deserialize returned data, converting BSON to JSON
 	mediaDataRaw = JSON.parse(JSON.stringify(mediaDataRaw));
 	// get a transformed version of all of the data we've pulled
@@ -219,6 +232,6 @@ export async function getServerSideProps(context) {
 	});
 	// send transformed article data to component
 	return {
-		'props': { 'articleContent': articleDataRaw },
+		'props': { 'articleContent': articleTransformed },
 	};
 }
