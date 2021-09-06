@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { connectToDatabase } from '../../lib/mongodb';
+import { connectToDatabase } from '../../../lib/mongodb';
 import {
 	returnHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
 } from '@jbkr/client-helpers';
 import readingTime from 'reading-time';
-import { Scaffold } from '../../components/app/Scaffold/Scaffold';
-import { Post } from '../../components/app/Posts/Post';
+import { Scaffold } from '../../../components/app/Scaffold/Scaffold';
+import { Post } from '../../../components/app/Posts/Post';
 
 const LibLabItemScreen = ({ post }) => {
 	return (
