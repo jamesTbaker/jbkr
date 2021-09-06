@@ -1,0 +1,49 @@
+{
+	"collectionName": "components_content_article_subsections",
+	"info": {
+		"name": "ArticleSubsection",
+		"icon": "adjust",
+		"description": ""
+	},
+	"options": {},
+	"attributes": {
+		"SubsectionID": {
+			"type": "string",
+			"required": false
+		},
+		"SubsectionGravity": {
+			"type": "enumeration",
+			"enum": [
+				"left",
+				"right"
+			]
+		},
+		"SubsectionTitle": {
+			"type": "string"
+		},
+		"SubsectionMedia": {
+			"collection": "file",
+			"via": "related",
+			"allowedTypes": [
+				"images",
+				"videos"
+			],
+			"plugin": "upload",
+			"required": false,
+			"pluginOptions": {}
+		},
+		"SubsectionMediaComponents": {
+			"type": "json"
+		},
+		"SubsectionMediaGravity": {
+			"type": "enumeration",
+			"enum": [
+				"left",
+				"right"
+			]
+		},
+		"SubsectionText": {
+			"type": "richtext"
+		}
+	}
+}

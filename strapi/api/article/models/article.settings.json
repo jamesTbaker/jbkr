@@ -1,0 +1,121 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "name": "Article",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Authors": {
+      "collection": "author",
+      "via": "Articles",
+      "dominant": true
+    },
+    "Featured": {
+      "type": "boolean"
+    },
+    "PublicationDate": {
+      "type": "date",
+      "required": false
+    },
+    "UpdateDate": {
+      "type": "date"
+    },
+    "Slug": {
+      "type": "string",
+      "required": true
+    },
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Subtitle": {
+      "type": "string"
+    },
+    "Tagline": {
+      "type": "string"
+    },
+    "MetaTitle": {
+      "type": "string"
+    },
+    "MetaDescription": {
+      "type": "text"
+    },
+    "SocialDescription": {
+      "type": "text"
+    },
+    "TeaserDescription": {
+      "type": "text"
+    },
+    "HeadImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "HeadImageCaption": {
+      "type": "text"
+    },
+    "MetaImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "MetaImageGravity": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "north",
+        "south",
+        "east",
+        "west",
+        "north_east",
+        "south_east",
+        "north_west",
+        "south_west"
+      ],
+      "default": "center"
+    },
+    "BriefStatements": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.article-brief-statement"
+    },
+    "IntroText": {
+      "type": "richtext"
+    },
+    "IntroVideo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "Section": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.article-section"
+    },
+    "SimpleBody": {
+      "type": "richtext"
+    }
+  }
+}

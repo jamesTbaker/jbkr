@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_content_article_sections",
+  "info": {
+    "name": "ArticleSection",
+    "icon": "air-freshener",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "SectionID": {
+      "type": "string"
+    },
+    "SectionTitle": {
+      "type": "string"
+    },
+    "SectionPreface": {
+      "type": "richtext"
+    },
+    "BriefStatement": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.article-brief-statement"
+    },
+    "Subsection": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.article-subsection"
+    },
+    "SectionQuote": {
+      "type": "text"
+    },
+    "SectionFooter": {
+      "type": "string"
+    }
+  }
+}

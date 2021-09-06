@@ -18,6 +18,10 @@
     },
     "Name": {
       "type": "string"
+    },
+    "Articles": {
+      "via": "Authors",
+      "collection": "article"
     }
   }
 }

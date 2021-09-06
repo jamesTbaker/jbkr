@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_content_article_brief_statements",
+  "info": {
+    "name": "ArticleBriefStatement",
+    "icon": "align-center"
+  },
+  "options": {},
+  "attributes": {
+    "Statement": {
+      "type": "text"
+    }
+  }
+}
