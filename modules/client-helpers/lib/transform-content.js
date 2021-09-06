@@ -1,8 +1,12 @@
 import React from 'react';
+import readingtime from 'reading-time';
+import GithubSlugger from 'github-slugger';
 import { unified } from 'unified';
+import { remark } from 'remark';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import remarkSlug from 'remark-slug';
 import rehypeReact from 'rehype-react';
 import MarkdownIt from 'markdown-it';
 import MarkdownItAnchor from 'markdown-it-anchor';
@@ -80,11 +84,42 @@ export const returnSocialImageCloudinaryURI = ({
 'c_fill,g_' + gravity + ',w_1200,h_628,q_100/' +
 imagePublicID + imageExtension;
 
-export const returnHTMLFromMarkdownTwo = ({ content, options }) => {
+export const returnSimpleHTMLFromMarkdown = ({ content }) => {
 	const result = unified()
 		.use(remarkParse)
 		.use(remarkRehype)
 		.use(rehypeStringify)
 		.processSync(content).value;
 	return result;
+};
+
+export const returnContentStats = ({ content }) => {
+	const statsRaw = readingtime(content);
+	const estimatedMinutes = Math.round(statsRaw.minutes);
+	return {
+		'words': statsRaw.words,
+		'minutes': estimatedMinutes,
+		'statement': `${statsRaw.words} words //
+		${estimatedMinutes} minutes to read`,
+	};
+};
+export const returnHeadingsWithMetadata = ({ content }) => {
+	// define regex for identifying headings
+	const headingRegex = /^###*\s/;
+	// get an array of the content lines that are headings
+	const headingLines = content.split('\n')
+		.filter((line) => {
+			return line.match(headingRegex);
+		});
+	// get an array of heading objects
+	const headingObjects = [];
+	headingLines.forEach((line) => {
+		const lineContent = line.replace(headingRegex, '');
+		headingObjects.push({
+			'level': line.slice(0, 3) === '###' ? 3 : 2,
+			'content': lineContent,
+			'slug': GithubSlugger.slug(lineContent),
+		});
+	});
+	return headingObjects;
 };

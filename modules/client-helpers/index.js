@@ -1,6 +1,8 @@
 export {
 	returnHTMLFromMarkdown,
-	returnHTMLFromMarkdownTwo,
+	returnSimpleHTMLFromMarkdown,
+	returnContentStats,
+	returnHeadingsWithMetadata,
 	returnSocialImageCloudinaryURI,
 } from './lib/transform-content.js';
 export {

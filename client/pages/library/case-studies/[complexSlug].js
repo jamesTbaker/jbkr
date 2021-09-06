@@ -6,17 +6,18 @@ import { connectToDatabase } from '../../../lib/mongodb';
 import { ObjectID } from 'bson';
 import {
 	returnHTMLFromMarkdown,
-	returnHTMLFromMarkdownTwo,
+	returnSimpleHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
+	returnContentStats,
+	returnHeadingsWithMetadata,
 } from '@jbkr/client-helpers';
 import styled from 'styled-components';
-import readingTime from 'reading-time';
 import { Scaffold } from '../../../components/app/Scaffold/Scaffold';
 import { ComplexContent } from '../../../components/app/ComplexContents/ComplexContent';
 
 const ComplexScreen = ({ screen }) => {
-	// console.log('screen');
-	// console.log(screen);
+	console.log('screen');
+	console.log(screen);
 	return (
 		<Scaffold
 			meta={{
@@ -331,28 +332,16 @@ ${screenIntermediate.publicationDate}
 			}
 		});
 	});
-	textAnalysis.stats = readingTime(`${textAnalysis.approximateMain}
-${textAnalysis.briefStatements}`);
-	screenIntermediate.stats = {
-		'minutes': Math.round(textAnalysis.stats.minutes),
-		'words': textAnalysis.stats.words,
-	};
+	screenIntermediate.stats = returnContentStats({
+		'content': `${textAnalysis.approximateMain}
+${textAnalysis.briefStatements}`,
+	});
 
 	// get table of contents - this must be done prior to rendering html
 
-	/* screenIntermediate.nav = returnHTMLFromMarkdown({
+	screenIntermediate.headingsWithMetadata = returnHeadingsWithMetadata({
 		'content': textAnalysis.approximateMain,
-		'options': {
-			'navOnly': true,
-		},
-	}); */
-
-	const TransTest = returnHTMLFromMarkdownTwo({
-		'content': screenIntermediate.sections[0].sectionTitle,
 	});
-	console.log('TransTest');
-	console.log(TransTest);
-
 
 	//  =======================================================
 	//  =======================================================
