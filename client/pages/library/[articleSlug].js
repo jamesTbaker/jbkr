@@ -11,8 +11,8 @@ import {
 	returnSocialImageCloudinaryURI,
 	returnContentStats,
 	returnHeadingsWithMetadata,
-	returnTransformedArticleData,
-} from '@jbkr/client-helpers';
+	returnTransformedArticleContent,
+} from '@jbkr/client-content';
 import styled from 'styled-components';
 import { Scaffold } from '../../components/app/Scaffold/Scaffold';
 import { Article } from '../../components/app/Articles/Article';
@@ -114,30 +114,30 @@ export async function getServerSideProps(context) {
 		// specify which fields to return
 		{
 			'$project': {
-				// '_id': 0,
-				// 'Featured': 1,
-				// 'PublicationDate': 1,
-				// 'UpdateDate': 1,
-				// 'Slug': 1,
-				// 'Title': 1,
-				// 'Subtitle': 1,
-				// 'Tagline': 1,
-				// 'MetaTitle': 1,
-				// 'MetaDescription': 1,
-				// 'SocialDescription': 1,
-				// 'MetaImages.alternativeText': 1,
-				// 'MetaImages.ext': 1,
-				// 'MetaImages.hash': 1,
-				// 'HeadImages.alternativeText': 1,
-				// 'HeadImages.ext': 1,
-				// 'HeadImages.hash': 1,
-				// 'MetaImageGravity': 1,
-				// 'HeadImageCaption': 1,
-				// 'BriefStatements.Statement': 1,
-				// 'IntroText': 1,
-				// 'IntroVideos.alternativeText': 1,
-				// 'IntroVideos.ext': 1,
-				// 'IntroVideos.hash': 1,
+				'_id': 0,
+				'Featured': 1,
+				'PublicationDate': 1,
+				'UpdateDate': 1,
+				'Slug': 1,
+				'Title': 1,
+				'Subtitle': 1,
+				'Tagline': 1,
+				'MetaTitle': 1,
+				'MetaDescription': 1,
+				'SocialDescription': 1,
+				'MetaImages.alternativeText': 1,
+				'MetaImages.ext': 1,
+				'MetaImages.hash': 1,
+				'HeadImages.alternativeText': 1,
+				'HeadImages.ext': 1,
+				'HeadImages.hash': 1,
+				'MetaImageGravity': 1,
+				'HeadImageCaption': 1,
+				'BriefStatements.Statement': 1,
+				'IntroText': 1,
+				'IntroVideos.alternativeText': 1,
+				'IntroVideos.ext': 1,
+				'IntroVideos.hash': 1,
 				'Section': 1,
 				'SimpleBody': 1,
 			},
@@ -227,11 +227,11 @@ export async function getServerSideProps(context) {
 	// serialize and deserialize returned data, converting BSON to JSON
 	mediaDataRaw = JSON.parse(JSON.stringify(mediaDataRaw));
 	// get a transformed version of all of the data we've pulled
-	const articleTransformed = returnTransformedArticleData({
+	const articleTransformedContent = returnTransformedArticleContent({
 		articleDataRaw, sectionDataRaw, mediaDataRaw,
 	});
 	// send transformed article data to component
 	return {
-		'props': { 'articleContent': articleTransformed },
+		'props': { 'articleContent': articleTransformedContent },
 	};
 }

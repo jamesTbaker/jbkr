@@ -4,7 +4,7 @@ export {
 	returnContentStats,
 	returnHeadingsWithMetadata,
 	returnSocialImageCloudinaryURI,
-	returnTransformedArticleData,
+	returnTransformedArticleContent,
 } from './lib/transform-content.js';
 export {
 	defaultMetaImageURL,

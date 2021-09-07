@@ -5,7 +5,7 @@ import { connectToDatabase } from '../../../lib/mongodb';
 import {
 	returnHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
-} from '@jbkr/client-helpers';
+} from '@jbkr/client-content';
 import readingTime from 'reading-time';
 import { Scaffold } from '../../../components/app/Scaffold/Scaffold';
 import { Post } from '../../../components/app/Posts/Post';

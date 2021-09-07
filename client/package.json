@@ -15,7 +15,7 @@
 		"sb:build": "build-storybook"
 	},
 	"dependencies": {
-		"@jbkr/client-helpers": "file:../modules/client-helpers",
+		"@jbkr/client-content": "file:../modules/client-content",
 		"@jbkr/style-service": "file:../modules/style-service",
 		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
 		"@jbkr/utilities": "file:../modules/utilities",

@@ -7,7 +7,7 @@ import { Scaffold } from '../components/app/Scaffold/Scaffold';
 import {
 	defaultMetaImageURL,
 	defaultMetaImageAlternativeText,
-} from '@jbkr/client-helpers';
+} from '@jbkr/client-content';
 
 const FourOhFourScreen = (props) => (
 	<Scaffold
