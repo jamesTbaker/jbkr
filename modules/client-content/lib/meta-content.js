@@ -8,3 +8,5 @@ export const defaultStandardImageURL =
 	'Brand--Leaf_s60q0w.jpg';
 export const defaultStandardImageAlternativeText =
 	'jbkr: suit, geek, and creative';
+export const defaultStandardImageWidth = 1920;
+export const defaultStandardImageHeight = 1080;

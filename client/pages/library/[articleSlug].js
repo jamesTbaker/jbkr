@@ -6,57 +6,36 @@
 import { connectToDatabase } from '../../lib/mongodb';
 import { ObjectID } from 'bson';
 import {
-	returnHTMLFromMarkdown,
-	returnSimpleHTMLFromMarkdown,
-	returnSocialImageCloudinaryURI,
-	returnContentStats,
-	returnHeadingsWithMetadata,
 	returnTransformedArticleContent,
 } from '@jbkr/client-content';
 import styled from 'styled-components';
 import { Scaffold } from '../../components/app/Scaffold/Scaffold';
 import { Article } from '../../components/app/Articles/Article';
 
-const ArticleScreen = ({ articleContent }) => {
-	console.log('articleContent');
-	console.log(articleContent);
+const ArticleScreen = ({ 'content': {
+	meta,
+	frontMatter,
+	mainContent,
+} }) => {
 	return (
 		<Scaffold
 			meta={{
-				// 	'type': 'article',
-				// 	'url': `/library/${screen.slug}`,
-				// 	'title': screen.metaTitle,
-				// 	'descriptions': {
-				// 		'main': screen.metaDescription,
-				// 		'social': screen.socialDescription,
-				// 	},
-				// 	'image': {
-				// 		'url': screen.metaImage.url,
-				// 		'alternativeText': screen.metaImage.alternativeText,
-				// 	},
+				'type': 'article',
+				'url': `/library/${meta.slug}`,
+				'title': meta.metaTitle,
+				'descriptions': {
+					'main': meta.metaDescription,
+					'social': meta.socialDescription,
+				},
+				'image': {
+					'url': meta.metaImage.url,
+					'alternativeText': meta.metaImage.alternativeText,
+				},
 			}}
 		>
 			<Article
-			// image={{
-			// 	'url': post.coverImage.url,
-			// 	'alt': post.coverImage.alternativeText,
-			// 	'width': post.coverImage.width,
-			// 	'height': post.coverImage.height,
-			// 	'credit': post.coverImage.credit,
-			// 	'caption': post.coverImage.caption,
-			// }}
-
-
-			// frontMatter={{
-			// 	'title': screen.title,
-			// 	'publicationDate': screen.publicationDate,
-			// 	'tagline': screen.tagline,
-			// 	'intro': screen.intro,
-			// 	// 'tableOfContents': post.body.nav,
-			// 	'stats': screen.stats,
-			// 	'briefStatements': screen.briefStatements,
-			// }}
-			// sections={screen.sections}
+				frontMatter={frontMatter}
+				mainContent={mainContent}
 			/>
 		</Scaffold >
 	);
@@ -129,8 +108,11 @@ export async function getServerSideProps(context) {
 				'MetaImages.ext': 1,
 				'MetaImages.hash': 1,
 				'HeadImages.alternativeText': 1,
+				'HeadImages.width': 1,
+				'HeadImages.height': 1,
 				'HeadImages.ext': 1,
 				'HeadImages.hash': 1,
+				'HeadImages.caption': 1,
 				'MetaImageGravity': 1,
 				'HeadImageCaption': 1,
 				'BriefStatements.Statement': 1,
@@ -138,6 +120,7 @@ export async function getServerSideProps(context) {
 				'IntroVideos.alternativeText': 1,
 				'IntroVideos.ext': 1,
 				'IntroVideos.hash': 1,
+				'IntroVideos.caption': 1,
 				'Section': 1,
 				'SimpleBody': 1,
 			},
@@ -232,6 +215,6 @@ export async function getServerSideProps(context) {
 	});
 	// send transformed article data to component
 	return {
-		'props': { 'articleContent': articleTransformedContent },
+		'props': { 'content': articleTransformedContent },
 	};
 }

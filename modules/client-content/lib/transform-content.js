@@ -17,6 +17,8 @@ import {
 	defaultMetaImageAlternativeText,
 	defaultStandardImageURL,
 	defaultStandardImageAlternativeText,
+	defaultStandardImageWidth,
+	defaultStandardImageHeight,
 } from './meta-content';
 
 //  =======================================================
@@ -182,9 +184,10 @@ export const returnHeadingsWithMetadata = ({ content }) => {
 	// get an array of heading objects
 	const headingObjects = [];
 	headingLines.forEach((line) => {
-		const lineContent = line.replace(headingRegex, '');
+		const separatorPositionAndHeadingLevel = line.indexOf(' ');
+		const lineContent = line.slice(separatorPositionAndHeadingLevel + 1);
 		headingObjects.push({
-			'level': line.slice(0, 3) === '###' ? 3 : 2,
+			'level': separatorPositionAndHeadingLevel,
 			'content': lineContent,
 			'slug': GithubSlugger.slug(lineContent),
 		});
@@ -384,12 +387,16 @@ const returnArticleIntermediateContent = ({
 		if (
 			!articleDataRaw.HeadImages[0].hash ||
 			!articleDataRaw.HeadImages[0].ext ||
-			!articleDataRaw.HeadImages[0].alternativeText
+			!articleDataRaw.HeadImages[0].alternativeText ||
+			!articleDataRaw.HeadImages[0].width ||
+			!articleDataRaw.HeadImages[0].height
 		) {
 			// use a default image
 			articleIntermedate.headImage = {
 				'url': defaultStandardImageURL,
 				'alternativeText': defaultStandardImageAlternativeText,
+				'width': defaultStandardImageWidth,
+				'height': defaultStandardImageHeight,
 			};
 			// if all of the image properties are present
 		} else {
@@ -401,6 +408,9 @@ const returnArticleIntermediateContent = ({
 					'imageExtension': articleDataRaw.HeadImages[0].ext,
 				}),
 				'alternativeText': articleDataRaw.HeadImages[0].alternativeText,
+				'width': articleDataRaw.HeadImages[0].width,
+				'height': articleDataRaw.HeadImages[0].height,
+				'credit': articleDataRaw.HeadImages[0].caption,
 			};
 			// if a caption was also specified
 			if (articleDataRaw.HeadImageCaption) {
@@ -425,6 +435,7 @@ const returnArticleIntermediateContent = ({
 		if (
 			articleDataRaw.IntroVideos[0].hash &&
 			articleDataRaw.IntroVideos[0].ext &&
+			articleDataRaw.IntroVideos[0].alternativeText &&
 			articleDataRaw.IntroVideos[0].alternativeText
 		) {
 			articleIntermedate.introVideo = {
@@ -435,6 +446,8 @@ const returnArticleIntermediateContent = ({
 				}),
 				'alternativeText':
 					articleDataRaw.IntroVideos[0].alternativeText,
+				'credit':
+					articleDataRaw.IntroVideos[0].caption,
 			};
 		}
 	}
@@ -520,6 +533,15 @@ const returnTableOfContentsContent = ({ headings }) => {
 		if (heading.level === 3) {
 			listItemPreface = `    ${listItemPreface}`;
 		}
+		if (heading.level === 4) {
+			listItemPreface = `        ${listItemPreface}`;
+		}
+		if (heading.level === 5) {
+			listItemPreface = `            ${listItemPreface}`;
+		}
+		if (heading.level === 6) {
+			listItemPreface = `                ${listItemPreface}`;
+		}
 		markdown +=
 			`${listItemPreface}[${heading.content}](#${heading.slug})\n`;
 	});
@@ -554,7 +576,30 @@ const returnArticleRenderedContent = ({ content }) => {
 	}
 	// collect and render the article's front matter content
 	if (content.headImage) {
-		articleRendered.frontMatter.headImage = content.headImage;
+		articleRendered.frontMatter.headImage = {
+			'url': content.headImage.url,
+			'alternativeText': content.headImage.alternativeText,
+			'width': content.headImage.width,
+			'height': content.headImage.height,
+		};
+		if (content.headImage.credit) {
+			articleRendered.frontMatter.headImage.credit =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.headImage.credit,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
+		if (content.headImage.caption) {
+			articleRendered.frontMatter.headImage.caption =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.headImage.caption,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
 	}
 	if (content.title) {
 		articleRendered.frontMatter.title = content.title;

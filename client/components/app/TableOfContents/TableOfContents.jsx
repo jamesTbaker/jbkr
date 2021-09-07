@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-const TableOfContentsContainer = styled.nav`
-	ol {
+/* 	ol {
 		counter-reset: list-item;
 	}
 	li {
@@ -12,6 +10,8 @@ const TableOfContentsContainer = styled.nav`
 	li:before {
 		content: counters(list-item,'.') ' ';
 	}
+ */
+const TableOfContentsContainer = styled.nav`
 `;
 /**
  * The TOC
