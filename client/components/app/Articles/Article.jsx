@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Copy } from '../../core/Copy/Copy';
+import { ArticleBriefStatement } from './ArticleBriefStatement';
 import { TableOfContents }
 	from '../TableOfContents/TableOfContents';
 
 const ArticleContainer = styled.div``;
+const DynamicVideo = dynamic(
+	() => import('../CloudinaryVideoPlayer/CloudinaryVideoPlayer'),
+	{ 'ssr': false },
+);
 
 export const Article = ({
 	frontMatter,
@@ -53,19 +59,44 @@ export const Article = ({
 		<Copy kind="body--standard">
 			{frontMatter.stats}
 		</Copy>
-		{/* {
+		{
 			frontMatter.tagline &&
 
 			<Copy
 				kind="body--standard"
 				htmlContent={frontMatter.tagline}
 			/>
-		} */}
+		}
+		{
+			frontMatter.briefStatements &&
+
+			frontMatter.briefStatements.map((briefStatement) =>
+				<ArticleBriefStatement
+					key={briefStatement.key}
+					content={briefStatement.content}
+				/>,
+			)
+		}
 		{
 			frontMatter.tableOfContents &&
 
 			<TableOfContents
 				contents={frontMatter.tableOfContents}
+			/>
+		}
+		{
+			frontMatter.introText &&
+
+			<Copy
+				kind="body--standard"
+				htmlContent={frontMatter.introText}
+			/>
+		}
+		{
+			frontMatter.introVideo &&
+
+			<DynamicVideo
+				params={frontMatter.introVideo}
 			/>
 		}
 		{

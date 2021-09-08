@@ -201,7 +201,10 @@ const returnExtractedBriefStatements = ({ briefStatementsRaw }) => {
 		briefStatementsRaw[0]
 	) {
 		briefStatementsRaw.forEach((briefStatementRaw) => {
-			briefStatementsExtracted.push(briefStatementRaw.Statement);
+			briefStatementsExtracted.push({
+				'key': briefStatementRaw._id,
+				'content': briefStatementRaw.Statement,
+			});
 		});
 	}
 	return briefStatementsExtracted;
@@ -475,7 +478,7 @@ ${articleIntermedate.publicationDate}
 		articleIntermedate.briefStatements[0]
 	) {
 		articleIntermedate.briefStatements.forEach((briefStatement) => {
-			textCollection.briefStatements += ' ' + briefStatement;
+			textCollection.briefStatements += ' ' + briefStatement.content;
 		});
 	}
 	if (
@@ -494,7 +497,7 @@ ${articleIntermedate.publicationDate}
 				section.sectionBriefStatements
 					.forEach((sectionBriefStatement) => {
 						textCollection.briefStatements +=
-							' ' + sectionBriefStatement;
+							' ' + sectionBriefStatement.content;
 					});
 			}
 			section.subsections.forEach((subsection) => {
@@ -611,14 +614,15 @@ const returnArticleRenderedContent = ({ content }) => {
 		articleRendered.frontMatter.briefStatements = [];
 		content.briefStatements
 			.forEach((briefStatement) => {
-				articleRendered.frontMatter.briefStatements.push(
-					returnSimpleHTMLFromMarkdown({
-						'content': briefStatement,
+				articleRendered.frontMatter.briefStatements.push({
+					'key': briefStatement.key,
+					'content': returnSimpleHTMLFromMarkdown({
+						'content': briefStatement.content,
 						'options': {
 							'removeEndCapTags': true,
 						},
 					}),
-				);
+				});
 			});
 	}
 	if (content.introText) {

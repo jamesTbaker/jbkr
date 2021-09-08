@@ -20,6 +20,8 @@
 		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
 		"@jbkr/utilities": "file:../modules/utilities",
 		"bson": "^4.5.1",
+		"cloudinary-core": "^2.11.4",
+		"cloudinary-video-player": "^1.5.5",
 		"markdown-it": "^12.2.0",
 		"mongodb": "^3.5.9",
 		"next": "latest",
