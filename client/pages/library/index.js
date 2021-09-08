@@ -5,12 +5,13 @@ import { connectToDatabase } from '../../lib/mongodb';
 import {
 	returnHTMLFromMarkdown,
 	returnSocialImageCloudinaryURI,
-} from '@jbkr/client-helpers';
-import { Scaffold } from '../../components/app/Scaffold/Scaffold';
+} from '@jbkr/client-content';
+import { ScreenScaffold } from
+	'../../components/app/ScreenScaffold/ScreenScaffold';
 import { PostSummaries } from '../../components/app/Posts/PostSummaries';
 
-const LibLabListScreen = ({ metaImage, postSummaries }) => (
-	<Scaffold
+const ScreenContainer = ({ metaImage, postSummaries }) => (
+	<ScreenScaffold
 		meta={{
 			'type': 'website',
 			'url': `/library`,
@@ -28,10 +29,10 @@ const LibLabListScreen = ({ metaImage, postSummaries }) => (
 		<PostSummaries
 			postSummaries={postSummaries}
 		/>
-	</Scaffold>
+	</ScreenScaffold>
 );
 
-export default LibLabListScreen;
+export default ScreenContainer;
 
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();

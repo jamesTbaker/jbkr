@@ -2,29 +2,28 @@
 /* eslint-disable react/prop-types */
 
 import Head from 'next/head';
-import Link from 'next/link';
+import { Banner } from '../Regions/Banner';
+import { Footer } from '../Regions/Footer';
 import styled from 'styled-components';
 
-const AppContainer = styled.div`
-`;
-const Header = styled.header`
+const SkipLinksContainer = styled.div`
 	height: 5rem;
-`;
-const ScreenContentContainer = styled.div`
+	background-color: hsla(275,100%,15%,1);
 `;
 
-export const Scaffold = ({
+export const ScreenScaffold = ({
 	'meta': {
 		type,
 		url,
 		title,
 		descriptions,
 		image,
+		hasTableOfContents,
 	},
 	children,
 }) => {
 	return(
-		<AppContainer>
+		<>
 			<Head>
 				{
 					title &&
@@ -83,14 +82,30 @@ export const Scaffold = ({
 						content={image.alternativeText} />
 				}
 			</Head>
-			<Header>
-				<Link href="/">Profile</Link>
-				<Link href="/library">Library</Link>
-				<Link href="/contact">Contact</Link>
-			</Header>
-			<ScreenContentContainer>
-				{children}
-			</ScreenContentContainer>
-		</AppContainer>
+			<SkipLinksContainer>
+				{
+					hasTableOfContents &&
+					<ul>
+						<li>
+							<a href="#table-of-contents">
+								Skip to table of contents
+							</a>
+						</li>
+						<li>
+							<a href="#main-content">
+								Skip to main content
+							</a>
+						</li>
+					</ul>
+				}
+				{
+					!hasTableOfContents &&
+					<a href="#main-content">Skip to main content</a>
+				}
+			</SkipLinksContainer>
+			<Banner />
+			{children}
+			<Footer />
+		</>
 	);
 };

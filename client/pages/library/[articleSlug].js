@@ -9,16 +9,16 @@ import {
 	returnTransformedArticleContent,
 } from '@jbkr/client-content';
 import styled from 'styled-components';
-import { Scaffold } from '../../components/app/Scaffold/Scaffold';
-import { Article } from '../../components/app/Articles/Article';
+import { ScreenScaffold } from '../../components/app/ScreenScaffold/ScreenScaffold';
+import { ArticleScreen } from '../../components/app/Articles/ArticleScreen';
 
-const ArticleScreen = ({ 'content': {
+const ScreenContainer = ({ 'content': {
 	meta,
 	frontMatter,
 	mainContent,
 } }) => {
 	return (
-		<Scaffold
+		<ScreenScaffold
 			meta={{
 				'type': 'article',
 				'url': `/library/${meta.slug}`,
@@ -31,17 +31,18 @@ const ArticleScreen = ({ 'content': {
 					'url': meta.metaImage.url,
 					'alternativeText': meta.metaImage.alternativeText,
 				},
+				'hasTableOfContents': frontMatter.tableOfContents ? true : false,
 			}}
 		>
-			<Article
+			<ArticleScreen
 				frontMatter={frontMatter}
 				mainContent={mainContent}
 			/>
-		</Scaffold >
+		</ScreenScaffold >
 	);
 };
 
-export default ArticleScreen;
+export default ScreenContainer;
 
 export async function getServerSideProps(context) {
 	// set up database connection
@@ -119,8 +120,7 @@ export async function getServerSideProps(context) {
 				'BriefStatements.Statement': 1,
 				'IntroText': 1,
 				'IntroVideos.alternativeText': 1,
-				'IntroVideos.ext': 1,
-				'IntroVideos.hash': 1,
+				'IntroVideos.url': 1,
 				'IntroVideos.caption': 1,
 				'Section': 1,
 				'SimpleBody': 1,

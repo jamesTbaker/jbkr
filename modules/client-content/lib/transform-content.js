@@ -436,22 +436,18 @@ const returnArticleIntermediateContent = ({
 		articleDataRaw.IntroVideos[0]
 	) {
 		if (
-			articleDataRaw.IntroVideos[0].hash &&
-			articleDataRaw.IntroVideos[0].ext &&
-			articleDataRaw.IntroVideos[0].alternativeText &&
+			articleDataRaw.IntroVideos[0].url &&
 			articleDataRaw.IntroVideos[0].alternativeText
 		) {
 			articleIntermedate.introVideo = {
-				'url': returnStandardImageCloudinaryURI({
-					'imagePublicID':
-						articleDataRaw.IntroVideos[0].hash,
-					'imageExtension': articleDataRaw.IntroVideos[0].ext,
-				}),
+				'url': articleDataRaw.IntroVideos[0].url,
 				'alternativeText':
 					articleDataRaw.IntroVideos[0].alternativeText,
-				'credit':
-					articleDataRaw.IntroVideos[0].caption,
 			};
+			if (articleDataRaw.IntroVideos[0].caption) {
+				articleIntermedate.introVideo.credit =
+					articleDataRaw.IntroVideos[0].caption;
+			}
 		}
 	}
 	if (sectionsIntermediate && sectionsIntermediate[0]) {
@@ -532,7 +528,7 @@ const returnTableOfContentsContent = ({ headings }) => {
 	let markdown = '';
 	// for each heading
 	headings.forEach((heading) => {
-		let listItemPreface = `- `;
+		let listItemPreface = `1. `;
 		if (heading.level === 3) {
 			listItemPreface = `    ${listItemPreface}`;
 		}
@@ -632,7 +628,19 @@ const returnArticleRenderedContent = ({ content }) => {
 			});
 	}
 	if (content.introVideo) {
-		articleRendered.frontMatter.introVideo = content.introVideo;
+		articleRendered.frontMatter.introVideo = {
+			'url': content.introVideo.url,
+			'alternativeText': content.introVideo.alternativeText,
+		};
+		if (content.introVideo.credit) {
+			articleRendered.frontMatter.introVideo.credit =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.introVideo.credit,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
 	}
 	if (content.headingsWithMetadata) {
 		articleRendered.frontMatter.tableOfContents =

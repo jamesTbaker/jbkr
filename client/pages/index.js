@@ -4,15 +4,16 @@
 
 import { connectToDatabase } from '../lib/mongodb';
 import { Copy } from '../components/core/Copy/Copy';
-import { Scaffold } from '../components/app/Scaffold/Scaffold';
+import { ScreenScaffold }
+	from '../components/app/ScreenScaffold/ScreenScaffold';
 import {
 	defaultMetaImageURL,
 	defaultMetaImageAlternativeText,
-} from '@jbkr/client-helpers';
+} from '@jbkr/client-content';
 
 
-const ProfileScreen = ({ skills }) => (
-	<Scaffold
+const ScreenContainer = ({ skills }) => (
+	<ScreenScaffold
 		meta={{
 			'type': 'profile',
 			'url': `/`,
@@ -30,9 +31,9 @@ const ProfileScreen = ({ skills }) => (
 		}}
 	>
 		<Copy kind="h1">The Profile Screen</Copy>
-	</Scaffold>
+	</ScreenScaffold>
 );
-export default ProfileScreen;
+export default ScreenContainer;
 export async function getServerSideProps(context) {
 	const { db } = await connectToDatabase();
 	const data = await db.collection('skills').find({}).toArray();

@@ -3,14 +3,15 @@
 /* eslint-disable react/prop-types */
 
 import { Copy } from '../components/core/Copy/Copy';
-import { Scaffold } from '../components/app/Scaffold/Scaffold';
+import { ScreenScaffold }
+	from '../components/app/ScreenScaffold/ScreenScaffold';
 import {
 	defaultMetaImageURL,
 	defaultMetaImageAlternativeText,
 } from '@jbkr/client-content';
 
-const FourOhFourScreen = (props) => (
-	<Scaffold
+const ScreenContainer = (props) => (
+	<ScreenScaffold
 		meta={{
 			'type': 'website',
 			'title': 'On no!',
@@ -25,8 +26,8 @@ const FourOhFourScreen = (props) => (
 		}}
 	>
 		<Copy kind="h1">The FourOhFour Screen</Copy>
-	</Scaffold>
+	</ScreenScaffold>
 
 );
 
-export default FourOhFourScreen;
+export default ScreenContainer;

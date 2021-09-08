@@ -3,15 +3,16 @@
 /* eslint-disable react/prop-types */
 
 import { Copy } from '../components/core/Copy/Copy';
-import { Scaffold } from '../components/app/Scaffold/Scaffold';
+import { ScreenScaffold }
+	from '../components/app/ScreenScaffold/ScreenScaffold';
 import {
 	defaultMetaImageURL,
 	defaultMetaImageAlternativeText,
-} from '@jbkr/client-helpers';
+} from '@jbkr/client-content';
 
 
-const ContactScreen = (props) => (
-	<Scaffold
+const ScreenContainer = (props) => (
+	<ScreenScaffold
 		meta={{
 			'type': 'website',
 			'title': 'Contact',
@@ -26,7 +27,7 @@ const ContactScreen = (props) => (
 		}}
 	>
 		<Copy kind="h1">The Contact Screen</Copy>
-	</Scaffold>
+	</ScreenScaffold>
 );
 
-export default ContactScreen;
+export default ScreenContainer;
