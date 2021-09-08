@@ -4,13 +4,13 @@
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
 
-const ArticleSectionContainer = styled.div``;
+const ArticleSubsectionContainer = styled.div``;
 
-export const ArticleSection = ({ content }) => (
-	<ArticleSectionContainer>
+export const ArticleSubsection = ({ content }) => (
+	<ArticleSubsectionContainer>
 		{/* <Copy
 			kind="small"
 			htmlContent={content}
 		/> */}
-	</ArticleSectionContainer>
+	</ArticleSubsectionContainer>
 );

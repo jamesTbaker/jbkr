@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { Copy } from '../../core/Copy/Copy';
 
-const ArticleHeaderContainer = styled.div``;
+const ArticleHeaderContainer = styled.header``;
 
 export const ArticleHeader = ({
 	headImage,
@@ -57,7 +57,6 @@ export const ArticleHeader = ({
 		</Copy>
 		{
 			tagline &&
-
 			<Copy
 				kind="body--standard"
 				htmlContent={tagline}

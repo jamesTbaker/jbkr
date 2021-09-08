@@ -2,15 +2,19 @@
 /* eslint-disable react/prop-types */
 
 import styled from 'styled-components';
-import { Copy } from '../../core/Copy/Copy';
+import { ArticleSection } from './ArticleSection';
 
 const ArticleSectionsContainer = styled.div``;
 
-export const ArticleSections = ({ content }) => (
+export const ArticleSections = ({ sections }) => (
 	<ArticleSectionsContainer>
-		{/* <Copy
-			kind="small"
-			htmlContent={content}
-		/> */}
+		{
+			sections.map((section) =>
+				<ArticleSection
+					key={section.sectionID}
+					section={section}
+				/>,
+			)
+		}
 	</ArticleSectionsContainer>
 );

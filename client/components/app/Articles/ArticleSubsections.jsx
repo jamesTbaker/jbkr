@@ -2,15 +2,19 @@
 /* eslint-disable react/prop-types */
 
 import styled from 'styled-components';
-import { Copy } from '../../core/Copy/Copy';
+import { ArticleSubsection } from './ArticleSubsection';
 
-const ArticleSectionsContainer = styled.div``;
+const ArticleSubsectionsContainer = styled.div``;
 
-export const ArticleSections = ({ content }) => (
-	<ArticleSectionsContainer>
-		{/* <Copy
-			kind="small"
-			htmlContent={content}
-		/> */}
-	</ArticleSectionsContainer>
+export const ArticleSubsections = ({ subsections }) => (
+	<ArticleSubsectionsContainer>
+		{
+			subsections.map((subsection) =>
+				<ArticleSubsection
+					key={subsection.subsectionID}
+					content={subsection}
+				/>,
+			)
+		}
+	</ArticleSubsectionsContainer>
 );

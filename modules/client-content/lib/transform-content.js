@@ -691,14 +691,15 @@ const returnArticleRenderedContent = ({ content }) => {
 				sectionRendered.sectionBriefStatements = [];
 				sectionObject.sectionBriefStatements
 					.forEach((briefStatement) => {
-						sectionRendered.sectionBriefStatements.push(
-							returnSimpleHTMLFromMarkdown({
-								'content': briefStatement,
+						sectionRendered.sectionBriefStatements.push({
+							'key': briefStatement.key,
+							'content': returnSimpleHTMLFromMarkdown({
+								'content': briefStatement.content,
 								'options': {
 									'removeEndCapTags': true,
 								},
 							}),
-						);
+						});
 					});
 			}
 			if (sectionObject.sectionQuote) {

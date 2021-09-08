@@ -11,49 +11,54 @@ import { ArticleSections } from './ArticleSections';
 import { TableOfContents }
 	from '../TableOfContents/TableOfContents';
 
+const ArticleScreenContainer = styled.div`
+`;
+
 export const ArticleScreen = ({
 	frontMatter,
 	mainContent,
 }) => (
-	<>
+	<ArticleScreenContainer>
 		<MainContent>
-			<ArticleHeader
-				headImage={frontMatter.headImage}
-				title={frontMatter.title}
-				updateDate={frontMatter.updateDate}
-				publicationDate={frontMatter.publicationDate}
-				stats={frontMatter.stats}
-				tagline={frontMatter.tagline}
-			/>
-			<ArticleIntro
-				briefStatements={frontMatter.briefStatements}
-				introText={frontMatter.introText}
-				introVideo={frontMatter.introVideo}
-			/>
-			{
-				mainContent.simpleBody &&
-
-				<Copy
-					kind="body-container--standard"
-					htmlContent={mainContent.simpleBody}
+			<article>
+				<ArticleHeader
+					headImage={frontMatter.headImage}
+					title={frontMatter.title}
+					updateDate={frontMatter.updateDate}
+					publicationDate={frontMatter.publicationDate}
+					stats={frontMatter.stats}
+					tagline={frontMatter.tagline}
 				/>
-			}
-			{
-				mainContent.sections &&
-
-				<ArticleSections
-					sections={mainContent.sections}
+				<ArticleIntro
+					briefStatements={frontMatter.briefStatements}
+					introText={frontMatter.introText}
+					introVideo={frontMatter.introVideo}
 				/>
-			}
+				{
+					mainContent.simpleBody &&
+
+					<Copy
+						kind="body-container--standard"
+						htmlContent={mainContent.simpleBody}
+					/>
+				}
+				{
+					mainContent.sections &&
+
+					<ArticleSections
+						sections={mainContent.sections}
+					/>
+				}
+			</article>
+			<Aside>
+				{
+					frontMatter.tableOfContents &&
+
+					<TableOfContents
+						contents={frontMatter.tableOfContents}
+					/>
+				}
+			</Aside>
 		</MainContent>
-		<Aside>
-			{
-				frontMatter.tableOfContents &&
-
-				<TableOfContents
-					contents={frontMatter.tableOfContents}
-				/>
-			}
-		</Aside>
-	</>
+	</ArticleScreenContainer>
 );
