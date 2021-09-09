@@ -8,8 +8,7 @@ import { Aside } from '../Regions/Aside';
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleIntro } from './ArticleIntro';
 import { ArticleSections } from './ArticleSections';
-import { TableOfContents }
-	from '../TableOfContents/TableOfContents';
+import { ArticleAside } from './ArticleAside';
 
 const ArticleScreenContainer = styled.div`
 `;
@@ -51,13 +50,9 @@ export const ArticleScreen = ({
 				}
 			</article>
 			<Aside>
-				{
-					frontMatter.tableOfContents &&
-
-					<TableOfContents
-						contents={frontMatter.tableOfContents}
-					/>
-				}
+				<ArticleAside
+					tableOfContents={frontMatter.tableOfContents}
+				/>
 			</Aside>
 		</MainContent>
 	</ArticleScreenContainer>

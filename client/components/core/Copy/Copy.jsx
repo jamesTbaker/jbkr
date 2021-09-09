@@ -142,10 +142,16 @@ export const Copy = ({
 	kind = 'body--standard',
 	htmlContent,
 	children,
+	id,
 }) => {
 	const tagThisCopy = propsSpecifications[kind].tag;
 	const propsThisCopy = propsSpecifications[kind];
-	propsThisCopy.htmlContent = htmlContent;
+	if (htmlContent) {
+		propsThisCopy.htmlContent = htmlContent;
+	}
+	if (id) {
+		propsThisCopy.id = id;
+	}
 	return (
 		<Text
 			tag={tagThisCopy}
@@ -156,6 +162,10 @@ export const Copy = ({
 	);
 };
 Copy.propTypes = {
+	/**
+	 * DOM Element ID.
+	 */
+	'id': PropTypes.string,
 	/**
 	 * Token indicating kind of copy.
 	 */

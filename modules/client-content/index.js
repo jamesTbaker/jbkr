@@ -9,8 +9,10 @@ export {
 export {
 	defaultMetaImageURL,
 	defaultMetaImageAlternativeText,
+	defaultMetaImageType,
 	defaultStandardImageURL,
 	defaultStandardImageAlternativeText,
+	defaultStandardImageType,
 	defaultStandardImageWidth,
 	defaultStandardImageHeight,
 } from './lib/meta-content.js';

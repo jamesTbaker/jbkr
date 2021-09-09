@@ -3,11 +3,11 @@
 
 import ReactPlayer from 'react-player/file';
 
-export const VideoPlayer = ({
-	content,
+export const VideoItem = ({
+	video,
 }) => (
 	<ReactPlayer
-		url={content.url}
+		url={video.url}
 		controls
 		config={{
 			'file': {

@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import styled from 'styled-components';
-import Image from 'next/image';
+import { MediaItem } from '../Media/MediaItem';
 import { Copy } from '../../core/Copy/Copy';
 
 const ArticleHeaderContainer = styled.header``;
@@ -18,11 +18,9 @@ export const ArticleHeader = ({
 	<ArticleHeaderContainer>
 		{
 			headImage &&
-			<Image src={headImage.url}
-				alt={headImage.alternativeText}
-				width={headImage.width}
-				height={headImage.height}
-				quality={100}
+			<MediaItem
+				type={headImage.type}
+				specs={headImage}
 			/>
 		}
 		{

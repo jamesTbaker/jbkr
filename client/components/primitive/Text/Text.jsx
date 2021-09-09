@@ -79,8 +79,24 @@ export const Text = ({
 	},
 	htmlContent,
 	children,
+	id,
 }) => {
 	if (htmlContent) {
+		if (id) {
+			return (<TextContainer
+				as={tag}
+				size={size}
+				weight={weight}
+				slant={slant}
+				usage={usage}
+				spaced={spaced}
+				$color={color}
+				dangerouslySetInnerHTML={{
+					'__html': htmlContent,
+				}}
+				id={id}
+			></TextContainer>);
+		}
 		return (<TextContainer
 			as={tag}
 			size={size}
@@ -93,20 +109,40 @@ export const Text = ({
 				'__html': htmlContent,
 			}}
 		></TextContainer>);
+	} else {
+		if (id) {
+			return (<TextContainer
+				as={tag}
+				size={size}
+				weight={weight}
+				slant={slant}
+				usage={usage}
+				spaced={spaced}
+				$color={color}
+				id={id}
+			>
+				{children}
+			</TextContainer>);
+		} else {
+			return (<TextContainer
+				as={tag}
+				size={size}
+				weight={weight}
+				slant={slant}
+				usage={usage}
+				spaced={spaced}
+				$color={color}
+			>
+				{children}
+			</TextContainer>);
+		}
 	}
-	return (<TextContainer
-		as={tag}
-		size={size}
-		weight={weight}
-		slant={slant}
-		usage={usage}
-		spaced={spaced}
-		$color={color}
-	>
-		{children}
-	</TextContainer>);
 };
 Text.propTypes = {
+	/**
+	 * DOM Element ID.
+	 */
+	'id': PropTypes.string,
 	/**
 	 * The HTML tag that should be used for this text item.
 	 */

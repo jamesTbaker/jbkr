@@ -15,8 +15,10 @@ import rehypeReact from 'rehype-react';
 import {
 	defaultMetaImageURL,
 	defaultMetaImageAlternativeText,
+	defaultMetaImageType,
 	defaultStandardImageURL,
 	defaultStandardImageAlternativeText,
+	defaultStandardImageType,
 	defaultStandardImageWidth,
 	defaultStandardImageHeight,
 } from './meta-content';
@@ -194,6 +196,17 @@ export const returnHeadingsWithMetadata = ({ content }) => {
 	});
 	return headingObjects;
 };
+const returnMediaType = ({
+	mime,
+}) => {
+	if (
+		mime.startsWith('image') ||
+		mime.startsWith('video')
+	) {
+		return mime.slice(6);
+	}
+	return 'unknown';
+};
 const returnExtractedBriefStatements = ({ briefStatementsRaw }) => {
 	const briefStatementsExtracted = [];
 	if (
@@ -261,9 +274,9 @@ const returnArticleIntermediateContent = ({
 				subsectionIntermediate.subsectionGravity =
 					subsectionObject.SubsectionGravity;
 			}
-			if (subsectionObject.SubsectionMediaSVG) {
-				subsectionIntermediate.SubsectionMediaSVG =
-					subsectionObject.SubsectionMediaSVG;
+			if (subsectionObject.SubsectionMediaComponents) {
+				subsectionIntermediate.subsectionMediaComponents =
+					subsectionObject.SubsectionMediaComponents;
 			}
 			if (subsectionObject.SubsectionMediaGravity) {
 				subsectionIntermediate.subsectionMediaGravity =
@@ -279,7 +292,18 @@ const returnArticleIntermediateContent = ({
 					if (mediaItem._id === mediaItemID) {
 						// add the media item to the container of
 						// this subsection's media items
-						mediaThisSubsection.push(mediaItem);
+						mediaThisSubsection.push({
+							'ext': mediaItem.ext,
+							'hash': mediaItem.hash,
+							'url': mediaItem.url,
+							'type': returnMediaType({
+								'mime': mediaItem.mime,
+							}),
+							'alternativeText': mediaItem.alternativeText,
+							'credit': mediaItem.caption,
+							'width': mediaItem.width,
+							'height': mediaItem.height,
+						});
 					}
 				});
 			});
@@ -361,12 +385,14 @@ const returnArticleIntermediateContent = ({
 		!articleDataRaw.MetaImages[0] ||
 		!articleDataRaw.MetaImages[0].hash ||
 		!articleDataRaw.MetaImages[0].ext ||
+		!articleDataRaw.MetaImages[0].mime ||
 		!articleDataRaw.MetaImages[0].alternativeText
 	) {
 		// use a default image
 		articleIntermedate.metaImage = {
 			'url': defaultMetaImageURL,
 			'alternativeText': defaultMetaImageAlternativeText,
+			'type': defaultMetaImageType,
 		};
 		// if all of the image properties are present
 	} else {
@@ -379,6 +405,9 @@ const returnArticleIntermediateContent = ({
 				'gravity': metaImageGravity,
 			}),
 			'alternativeText': articleDataRaw.MetaImages[0].alternativeText,
+			'type': returnMediaType({
+				'mime': articleDataRaw.MetaImages[0].mime,
+			}),
 		};
 	}
 	if (
@@ -390,6 +419,7 @@ const returnArticleIntermediateContent = ({
 		if (
 			!articleDataRaw.HeadImages[0].hash ||
 			!articleDataRaw.HeadImages[0].ext ||
+			!articleDataRaw.HeadImages[0].mime ||
 			!articleDataRaw.HeadImages[0].alternativeText ||
 			!articleDataRaw.HeadImages[0].width ||
 			!articleDataRaw.HeadImages[0].height
@@ -400,6 +430,7 @@ const returnArticleIntermediateContent = ({
 				'alternativeText': defaultStandardImageAlternativeText,
 				'width': defaultStandardImageWidth,
 				'height': defaultStandardImageHeight,
+				'type': defaultStandardImageType,
 			};
 			// if all of the image properties are present
 		} else {
@@ -413,6 +444,9 @@ const returnArticleIntermediateContent = ({
 				'alternativeText': articleDataRaw.HeadImages[0].alternativeText,
 				'width': articleDataRaw.HeadImages[0].width,
 				'height': articleDataRaw.HeadImages[0].height,
+				'type': returnMediaType({
+					'mime': articleDataRaw.HeadImages[0].mime,
+				}),
 				'credit': articleDataRaw.HeadImages[0].caption,
 			};
 			// if a caption was also specified
@@ -443,6 +477,9 @@ const returnArticleIntermediateContent = ({
 				'url': articleDataRaw.IntroVideos[0].url,
 				'alternativeText':
 					articleDataRaw.IntroVideos[0].alternativeText,
+				'type': returnMediaType({
+					'mime': articleDataRaw.IntroVideos[0].mime,
+				}),
 			};
 			if (articleDataRaw.IntroVideos[0].caption) {
 				articleIntermedate.introVideo.credit =
@@ -580,6 +617,7 @@ const returnArticleRenderedContent = ({ content }) => {
 			'alternativeText': content.headImage.alternativeText,
 			'width': content.headImage.width,
 			'height': content.headImage.height,
+			'type': content.headImage.type,
 		};
 		if (content.headImage.credit) {
 			articleRendered.frontMatter.headImage.credit =
@@ -630,6 +668,7 @@ const returnArticleRenderedContent = ({ content }) => {
 	if (content.introVideo) {
 		articleRendered.frontMatter.introVideo = {
 			'url': content.introVideo.url,
+			'type': content.introVideo.type,
 			'alternativeText': content.introVideo.alternativeText,
 		};
 		if (content.introVideo.credit) {
@@ -735,12 +774,28 @@ const returnArticleRenderedContent = ({ content }) => {
 						});
 				}
 				if (subsectionObject.subsectionMedia) {
-					subsectionRendered.subsectionMedia =
-						subsectionObject.subsectionMedia;
+					subsectionRendered.subsectionMedia = [];
+					subsectionObject.subsectionMedia.forEach((mediaItem) => {
+						subsectionRendered.subsectionMedia.push({
+							'ext': mediaItem.ext,
+							'hash': mediaItem.hash,
+							'url': mediaItem.url,
+							'type': mediaItem.type,
+							'alternativeText': mediaItem.alternativeText,
+							'credit': returnSimpleHTMLFromMarkdown({
+								'content': mediaItem.credit,
+								'options': {
+									'removeEndCapTags': true,
+								},
+							}),
+							'width': mediaItem.width,
+							'height': mediaItem.height,
+						});
+					});
 				}
-				if (subsectionObject.subsectionMediaSVG) {
-					subsectionRendered.subsectionMediaSVG =
-						subsectionObject.subsectionMediaSVG;
+				if (subsectionObject.subsectionMediaComponents) {
+					subsectionRendered.subsectionMediaComponents =
+						subsectionObject.subsectionMediaComponents;
 				}
 				if (subsectionObject.subsectionMediaGravity) {
 					subsectionRendered.subsectionMediaGravity =

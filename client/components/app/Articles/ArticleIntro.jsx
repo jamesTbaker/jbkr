@@ -3,7 +3,7 @@
 
 import styled from 'styled-components';
 import { ArticleBriefStatements } from './ArticleBriefStatements';
-import { VideoPlayer } from '../VideoPlayer/VideoPlayer';
+import { MediaItem } from '../Media/MediaItem';
 import { Copy } from '../../core/Copy/Copy';
 
 const ArticleIntroContainer = styled.div``;
@@ -32,8 +32,9 @@ export const ArticleIntro = ({
 		{
 			introVideo &&
 
-			<VideoPlayer
-				content={introVideo}
+			<MediaItem
+				type={introVideo.type}
+				specs={introVideo}
 			/>
 		}
 	</ArticleIntroContainer>

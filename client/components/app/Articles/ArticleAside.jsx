@@ -3,14 +3,25 @@
 
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
+import { TableOfContents }
+	from '../TableOfContents/TableOfContents';
 
 const ArticleAsideContainer = styled.div``;
 
-export const ArticleAside = ({ content }) => (
+export const ArticleAside = ({ tableOfContents }) => (
 	<ArticleAsideContainer>
-		{/* <Copy
-			kind="small"
-			htmlContent={content}
-		/> */}
+		{
+			tableOfContents &&
+
+			<>
+				<Copy
+					kind="h2"
+					id="table-of-contents"
+				>Table of Contents</Copy>
+				<TableOfContents
+					contents={tableOfContents}
+				/>
+			</>
+		}
 	</ArticleAsideContainer>
 );

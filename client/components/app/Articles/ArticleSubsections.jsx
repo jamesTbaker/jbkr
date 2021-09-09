@@ -12,7 +12,7 @@ export const ArticleSubsections = ({ subsections }) => (
 			subsections.map((subsection) =>
 				<ArticleSubsection
 					key={subsection.subsectionID}
-					content={subsection}
+					subsection={subsection}
 				/>,
 			)
 		}

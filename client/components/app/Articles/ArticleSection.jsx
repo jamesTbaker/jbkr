@@ -17,13 +17,18 @@ export const ArticleSection = ({ section }) => (
 			/>
 		}
 		{
+			section.sectionPreface &&
+			<div
+				dangerouslySetInnerHTML={{'__html': section.sectionPreface}}
+			/>
+		}
+		{
 			section.sectionBriefStatements &&
 
 			<ArticleBriefStatements
 				briefStatements={section.sectionBriefStatements}
 			/>
 		}
-
 		{
 			section.subsections &&
 			<ArticleSubsections
@@ -34,6 +39,12 @@ export const ArticleSection = ({ section }) => (
 			section.sectionQuote &&
 			<div
 				dangerouslySetInnerHTML={{'__html': section.sectionQuote}}
+			/>
+		}
+		{
+			section.sectionFooter &&
+			<div
+				dangerouslySetInnerHTML={{'__html': section.sectionFooter}}
 			/>
 		}
 	</ArticleSectionContainer>
