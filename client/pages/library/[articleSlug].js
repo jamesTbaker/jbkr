@@ -10,7 +10,7 @@ import {
 } from '@jbkr/client-content';
 import styled from 'styled-components';
 import { ScreenScaffold } from '../../components/app/ScreenScaffold/ScreenScaffold';
-import { ArticleScreen } from '../../components/app/Articles/ArticleScreen';
+import { ArticleDetail } from '../../components/app/Articles/ArticleDetail';
 
 const ScreenContainer = ({ 'content': {
 	meta,
@@ -34,7 +34,7 @@ const ScreenContainer = ({ 'content': {
 				'hasTableOfContents': frontMatter.tableOfContents ? true : false,
 			}}
 		>
-			<ArticleScreen
+			<ArticleDetail
 				frontMatter={frontMatter}
 				mainContent={mainContent}
 			/>

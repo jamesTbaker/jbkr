@@ -82,7 +82,7 @@ export const ScreenScaffold = ({
 						content={image.alternativeText} />
 				}
 			</Head>
-			<SkipLinksContainer>
+			{/* <SkipLinksContainer>
 				{
 					hasTableOfContents &&
 					<ul>
@@ -103,9 +103,9 @@ export const ScreenScaffold = ({
 					<a href="#main-content">Skip to main content</a>
 				}
 			</SkipLinksContainer>
-			<Banner />
+			<Banner /> */}
 			{children}
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	);
 };

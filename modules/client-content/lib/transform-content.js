@@ -222,12 +222,16 @@ const returnExtractedBriefStatements = ({ briefStatementsRaw }) => {
 	}
 	return briefStatementsExtracted;
 };
+const returnDateAtNoonEasternish = ({ incomingDate }) =>
+	new Date(`${incomingDate.slice(0, 10)}T12:00:00+05:00`);
 const returnFormattedDateString = ({
 	incomingDate,
 	formatToken,
 }) => {
 	if (formatToken === 'standardLongDate') {
-		return new Date(`${incomingDate}T12:00:00+05:00`)
+		return returnDateAtNoonEasternish({
+			incomingDate,
+		})
 			.toLocaleDateString('en-US', {
 				'year': 'numeric',
 				'month': 'long',
@@ -853,24 +857,98 @@ export const returnTransformedArticleContent = ({
 	const articleContentRendered = returnArticleRenderedContent({
 		'content': articleContentIntermedate,
 	});
-
-
-	/* delete articleContentIntermedate.featured;
-	delete articleContentIntermedate.metaDescription;
-	delete articleContentIntermedate.metaImage;
-	delete articleContentIntermedate.metaTitle;
-	delete articleContentIntermedate.slug;
-	delete articleContentIntermedate.socialDescription;
-	delete articleContentIntermedate.headingsWithMetadata;
-	delete articleContentIntermedate.simpleBody;
-	delete articleContentIntermedate.title;
-	delete articleContentIntermedate.publicationDate;
-	delete articleContentIntermedate.stats;
-	delete articleContentIntermedate.intro;
-	delete articleContentIntermedate.tagline;
-	delete articleContentIntermedate.briefStatements;
-	delete articleContentIntermedate.introText;
-
-	return articleContentIntermedate; */
+	// return the rendered version of the article's content
 	return articleContentRendered;
+};
+export const returnTransformedArticlesContent = ({ articlesDataRaw }) => {
+	// set up container for all articles
+	const articlesTransformed = [];
+	// for each article in the raw data
+	articlesDataRaw.forEach((articleDataRaw) => {
+		// if all required properties are present for this article,
+		// set up a new, single section container and add the
+		// corresponding properties from the raw section data, transformed
+		// as appropriate; then push to the container for all articles
+		if (
+			articleDataRaw.Slug &&
+			articleDataRaw.Title &&
+			articleDataRaw.PublicationDate &&
+			articleDataRaw.TeaserDescription &&
+			articleDataRaw.TeaserImages &&
+			articleDataRaw.TeaserImages[0] &&
+			articleDataRaw.TeaserImages[0].alternativeText &&
+			articleDataRaw.TeaserImages[0].width &&
+			articleDataRaw.TeaserImages[0].height &&
+			articleDataRaw.TeaserImages[0].ext &&
+			articleDataRaw.TeaserImages[0].hash &&
+			articleDataRaw.TeaserImages[0].mime
+		) {
+			const articleTransformed = {
+				'key': articleDataRaw._id,
+				'slug': articleDataRaw.Slug,
+				'title': articleDataRaw.Subtitle ?
+					articleDataRaw.Title.trim() + ': ' +
+					articleDataRaw.Subtitle :
+					articleDataRaw.Title,
+				'publicationDate': articleDataRaw.PublicationDate,
+				'teaserDescription': returnSimpleHTMLFromMarkdown({
+					'content': articleDataRaw.TeaserDescription,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				}),
+				'teaserImage': {
+					'url': returnStandardImageCloudinaryURI({
+						'imagePublicID':
+							articleDataRaw.TeaserImages[0].hash,
+						'imageExtension': articleDataRaw.TeaserImages[0].ext,
+					}),
+					'alternativeText':
+						articleDataRaw.TeaserImages[0].alternativeText,
+					'width': articleDataRaw.TeaserImages[0].width,
+					'height': articleDataRaw.TeaserImages[0].height,
+					'type': returnMediaType({
+						'mime': articleDataRaw.TeaserImages[0].mime,
+					}),
+				},
+			};
+			if (articleDataRaw.Tagline) {
+				articleTransformed.tagline = articleDataRaw.Tagline;
+			}
+			if (articleDataRaw.Featured) {
+				articleTransformed.featured = true;
+			}
+			articlesTransformed.push(articleTransformed);
+		}
+	});
+	// return all articles, divided between featured and standard (not featured)
+	return {
+		'featuredArticles': articlesTransformed
+			.filter(article => article.featured),
+		'standardArticles': articlesTransformed
+			.filter(article => !article.featured),
+	};
+};
+export const returnTransformedScreenContent = ({ screenDataRaw }) => {
+	// set up container for the screen's rendered content
+	const screenRendered = {
+		'slug': screenDataRaw.Slug,
+		'title': screenDataRaw.Title,
+		'metaTitle': screenDataRaw.MetaTitle,
+		'metaDescription': screenDataRaw.MetaDescription,
+		'socialDescription': screenDataRaw.SocialDescription,
+		'metaImage': {
+			'url': returnSocialImageCloudinaryURI({
+				'imagePublicID':
+					screenDataRaw.MetaImages[0].hash,
+				'imageExtension': screenDataRaw.MetaImages[0].ext,
+				'gravity': screenDataRaw.MetaImageGravity,
+			}),
+			'alternativeText': screenDataRaw.MetaImages[0].alternativeText,
+			'type': returnMediaType({
+				'mime': screenDataRaw.MetaImages[0].mime,
+			}),
+		},
+	};
+	return screenRendered;
 };

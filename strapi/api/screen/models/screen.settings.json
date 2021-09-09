@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "screens",
+  "info": {
+    "name": "Screen",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Slug": {
+      "type": "string",
+      "required": true
+    },
+    "Title": {
+      "type": "string"
+    },
+    "MetaTitle": {
+      "type": "string",
+      "required": true
+    },
+    "MetaDescription": {
+      "type": "text"
+    },
+    "SocialDescription": {
+      "type": "text"
+    },
+    "MetaImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "MetaImageGravity": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "north",
+        "south",
+        "east",
+        "west",
+        "north_east",
+        "south_east",
+        "north_west",
+        "south_west"
+      ],
+      "default": "center"
+    },
+    "OpenGraphType": {
+      "type": "enumeration",
+      "enum": [
+        "website",
+        "article",
+        "profile"
+      ],
+      "default": "website"
+    },
+    "MetaOther": {
+      "type": "text"
+    }
+  }
+}

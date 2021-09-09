@@ -10,14 +10,14 @@ import { ArticleIntro } from './ArticleIntro';
 import { ArticleSections } from './ArticleSections';
 import { ArticleAside } from './ArticleAside';
 
-const ArticleScreenContainer = styled.div`
+const ArticleDetailContainer = styled.div`
 `;
 
-export const ArticleScreen = ({
+export const ArticleDetail = ({
 	frontMatter,
 	mainContent,
 }) => (
-	<ArticleScreenContainer>
+	<ArticleDetailContainer>
 		<MainContent>
 			<article>
 				<ArticleHeader
@@ -55,5 +55,5 @@ export const ArticleScreen = ({
 				/>
 			</Aside>
 		</MainContent>
-	</ArticleScreenContainer>
+	</ArticleDetailContainer>
 );
