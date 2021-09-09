@@ -222,6 +222,20 @@ const returnExtractedBriefStatements = ({ briefStatementsRaw }) => {
 	}
 	return briefStatementsExtracted;
 };
+const returnFormattedDateString = ({
+	incomingDate,
+	formatToken,
+}) => {
+	if (formatToken === 'standardLongDate') {
+		return new Date(`${incomingDate}T12:00:00+05:00`)
+			.toLocaleDateString('en-US', {
+				'year': 'numeric',
+				'month': 'long',
+				'day': 'numeric',
+			});
+	}
+	return '';
+};
 const returnArticleIntermediateContent = ({
 	articleDataRaw, sectionDataRaw, mediaDataRaw,
 }) => {
@@ -336,13 +350,10 @@ const returnArticleIntermediateContent = ({
 		articleIntermedate.featured = articleDataRaw.Featured;
 	}
 	if (articleDataRaw.PublicationDate) {
-		articleIntermedate.publicationDate =
-			new Date(articleDataRaw.PublicationDate)
-				.toLocaleDateString('en-US', {
-					'year': 'numeric',
-					'month': 'long',
-					'day': 'numeric',
-				});
+		articleIntermedate.publicationDate = returnFormattedDateString({
+			'incomingDate': articleDataRaw.PublicationDate,
+			'formatToken': 'standardLongDate',
+		});
 	}
 	if (articleDataRaw.UpdateDate) {
 		articleIntermedate.updateDate =
