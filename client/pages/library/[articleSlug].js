@@ -13,11 +13,14 @@ import styled from 'styled-components';
 import { ScreenScaffold } from '../../components/app/ScreenScaffold/ScreenScaffold';
 import { ArticleDetail } from '../../components/app/Articles/ArticleDetail';
 
-const ScreenContainer = ({ 'content': {
-	meta,
-	frontMatter,
-	mainContent,
-} }) => {
+const ScreenContainer = ({
+	screeen,
+	'article': {
+		meta,
+		frontMatter,
+		mainContent,
+	},
+}) => {
 	return (
 		<ScreenScaffold
 			meta={{
@@ -36,8 +39,8 @@ const ScreenContainer = ({ 'content': {
 			}}
 		>
 			<ArticleDetail
-				frontMatter={frontMatter}
-				mainContent={mainContent}
+				frontMatter={article.frontMatter}
+				mainContent={article.mainContent}
 			/>
 		</ScreenScaffold >
 	);
