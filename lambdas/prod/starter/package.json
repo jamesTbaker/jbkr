@@ -1,0 +1,11 @@
+{
+	"name": "api-content-authors",
+	"version": "0.1.0",
+	"main": "../index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"scripts": {
+		"update": "rm -rf node_modules; rm package-lock.json; rm -rf .serverless; npm i"
+	}
+}

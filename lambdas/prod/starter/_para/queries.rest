@@ -1,0 +1,7 @@
+@baseURI = https://yfiqb9itq6.execute-api.us-east-1.amazonaws.com/prod
+
+
+#########
+# Test starter config
+GET {{baseURI}}/content/starter
+# Authorization: Bearer {{accessToken}}

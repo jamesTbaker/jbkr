@@ -1,0 +1,11 @@
+{
+	"name": "@jbkr/serverless",
+	"version": "0.1.0",
+	"description": "Miscellaneous functions.",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"scripts": {
+		"update": "rm -rf node_modules; rm package-lock.json; rm -rf .serverless; npm i"
+	}
+}

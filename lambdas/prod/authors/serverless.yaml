@@ -1,0 +1,50 @@
+custom:
+  file: ${file(../config-common.yaml)}
+  config:
+    webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+    excludeFiles: ./testing/*
+
+# -------------------------------------------------------
+
+    service: api-content-authors
+    memorySize: 256
+    timeout: 5
+
+functions:
+  HandleAuthorsContentRequest:
+    handler: index.HandleAuthorsContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:provider.stage}.content.authors}
+          method: get
+          cors: true
+
+# -------------------------------------------------------
+
+service: ${self:custom.config.service}
+
+provider:
+  name: aws
+  runtime: ${self:custom.file.provider.runtime}
+  stage: ${self:custom.file.custom.config.stage}
+  region: us-east-1
+  profile: ${self:custom.file.provider.profile}
+  memorySize: ${self:custom.config.memorySize}
+  timeout: ${self:custom.config.timeout}
+  deploymentBucket:
+    name: jbkr-${self:provider.stage}-lambdas
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+    stage: ${self:provider.stage}
+    mongoDbHost: ${self:custom.file.mongoDbHost}
+    mongoDbPass: ${self:custom.file.mongoDbPass}
+    mongoDbUser: ${self:custom.file.mongoDbUser}
+    mongoDbDbName: ${self:custom.file.mongoDbDbName}
+    authJbkrSLSAdminAccessKeyID: ${self:custom.file.authJbkrSLSAdminAccessKeyID}
+    authJbkrSLSAdminSecretAccessKey: ${self:custom.file.authJbkrSLSAdminSecretAccessKey}
+package:
+  individually: true
+plugins:
+  - serverless-webpack

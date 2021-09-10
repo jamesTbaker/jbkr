@@ -1,0 +1,29 @@
+custom:
+  config:
+    org: jbkrsls
+    app: content
+    frameworkVersion: '2'
+    stage: prod
+
+#-------------
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  profile: jbkr-programmatic-access
+  lambdaHashingVersion: '20201221'
+mongoDbHost: ${ssm:mongodb-host}
+mongoDbPass: ${ssm:mongodb-pass}
+mongoDbUser: ${ssm:mongodb-user}
+mongoDbDbName: ${ssm:mongodb-db-name}
+authJbkrSLSAdminAccessKeyID: ${ssm:auth-jbkr-sls-admin-access-key-id}
+authJbkrSLSAdminSecretAccessKey: ${ssm:auth-jbkr-sls-admin-secret-access-key}
+endpoints:
+  content:
+    starter:                           content/starter
+    scaffold:                          content/scaffold
+    screen:                            content/screen
+    profile:                           content/profile
+    liblab:                            content/liblab
+    contact:                           content/contact
+    fourohfour:                        content/fourohfour
