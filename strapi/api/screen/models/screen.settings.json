@@ -64,7 +64,7 @@
       "default": "website"
     },
     "MetaOther": {
-      "type": "text"
+      "type": "json"
     }
   }
 }

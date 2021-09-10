@@ -6,6 +6,7 @@
 import { connectToDatabase } from '../../lib/mongodb';
 import { ObjectID } from 'bson';
 import {
+	returnTransformedScreenContent,
 	returnTransformedArticleContent,
 } from '@jbkr/client-content';
 import styled from 'styled-components';
@@ -50,7 +51,7 @@ export async function getServerSideProps(context) {
 	// get the raw data for this article from the database
 	let articleDataRaw = await db.collection('articles').aggregate([
 		// match the document whose slug matches the slug in context
-		{ '$match': { 'Slug': context.query.articleSlug } },
+		{ '$match': { 'Slug': '/library/*' } },
 		// look up the brief statements for this article
 		{
 			'$lookup':
@@ -219,12 +220,38 @@ export async function getServerSideProps(context) {
 		).toArray();
 	// serialize and deserialize returned data, converting BSON to JSON
 	mediaDataRaw = JSON.parse(JSON.stringify(mediaDataRaw));
-	// get a transformed version of all of the data we've pulled
+	// get the high level data for this screen
+	let screenDataRaw = await db.collection('screens').aggregate([
+		// match the documents whose IDs are in the collection of IDs
+		{ '$match': { 'Slug': context.req.url } },
+		// specify which fields to return
+		{
+			'$project': {
+				'_id': 0,
+				'OpenGraphType': 1,
+			},
+		},
+	]).toArray();
+	// serialize and deserialize returned data, converting BSON to JSON
+	screenDataRaw = JSON.parse(JSON.stringify(screenDataRaw));
+	// get a transformed version of the article data
 	const articleTransformedContent = returnTransformedArticleContent({
 		articleDataRaw, sectionDataRaw, mediaDataRaw,
 	});
+	// if this article has a table of contents
+	if (articleTransformedContent.frontMatter.tableOfContents) {
+		// add a corresponding flag to the screen data
+		screenDataRaw.hasTableOfContents = true;
+	}
+	// get a transformed version of the screen data
+	const screensTransformedContent = returnTransformedScreenContent({
+		'screenDataRaw': screenDataRaw[0],
+	});
 	// send transformed article data to component
 	return {
-		'props': { 'content': articleTransformedContent },
+		'props': {
+			'screen': screensTransformedContent,
+			'article': articleTransformedContent,
+		},
 	};
 }

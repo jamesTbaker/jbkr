@@ -17,19 +17,7 @@ const ScreenContainer = ({
 }) => {
 	return (
 		<ScreenScaffold
-			meta={{
-				'type': 'website',
-				'url': screen.slug,
-				'title': screen.title,
-				'descriptions': {
-					'main': screen.metaDescription,
-					'social': screen.socialDescription,
-				},
-				'image': {
-					'url': screen.metaImage.url,
-					'alternativeText': screen.metaImage.alternativeText,
-				},
-			}}
+			meta={screen.meta}
 		>
 			<ArticleSummaries
 				{...articles}
@@ -78,16 +66,6 @@ export async function getServerSideProps(context) {
 	let screenDataRaw = await db.collection('screens').aggregate([
 		// match the documents whose IDs are in the collection of IDs
 		{ '$match': { 'Slug': context.req.url } },
-		// look up the brief statements for this section
-		{
-			'$lookup':
-			{
-				'from': 'components_content_article_brief_statements',
-				'localField': 'BriefStatement.ref',
-				'foreignField': '_id',
-				'as': 'SectionBriefStatements',
-			},
-		},
 		// look up the meta image for this screen
 		{
 			'$lookup':
@@ -103,6 +81,7 @@ export async function getServerSideProps(context) {
 			'$project': {
 				'_id': 0,
 				'Slug': 1,
+				'OpenGraphType': 1,
 				'Title': 1,
 				'MetaTitle': 1,
 				'MetaDescription': 1,

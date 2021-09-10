@@ -930,14 +930,40 @@ export const returnTransformedArticlesContent = ({ articlesDataRaw }) => {
 	};
 };
 export const returnTransformedScreenContent = ({ screenDataRaw }) => {
-	// set up container for the screen's rendered content
+	// set up container for the screen's rendered content and
+	// add properties to it as appropriate
 	const screenRendered = {
-		'slug': screenDataRaw.Slug,
-		'title': screenDataRaw.Title,
-		'metaTitle': screenDataRaw.MetaTitle,
-		'metaDescription': screenDataRaw.MetaDescription,
-		'socialDescription': screenDataRaw.SocialDescription,
-		'metaImage': {
+		'meta': {},
+		'main': {},
+	};
+	if (screenDataRaw.Slug) {
+		screenRendered.main.url = screenDataRaw.Slug;
+	}
+	if (screenDataRaw.Title) {
+		screenRendered.main.title = screenDataRaw.Title;
+	}
+	if (screenDataRaw.MetaTitle) {
+		screenRendered.meta.title = screenDataRaw.MetaTitle;
+	}
+	if (screenDataRaw.MetaDescription) {
+		screenRendered.meta.metaDescription = screenDataRaw.MetaDescription;
+	}
+	if (screenDataRaw.SocialDescription) {
+		screenRendered.meta.socialDescription = screenDataRaw.SocialDescription;
+	}
+	if (screenDataRaw.OpenGraphType) {
+		screenRendered.meta.openGraphType = screenDataRaw.OpenGraphType;
+	}
+	if (
+		screenDataRaw.MetaImages &&
+		screenDataRaw.MetaImages[0] &&
+		screenDataRaw.MetaImages[0].hash &&
+		screenDataRaw.MetaImages[0].ext &&
+		screenDataRaw.MetaImages[0].mime &&
+		screenDataRaw.MetaImages[0].alternativeText &&
+		screenDataRaw.MetaImageGravity
+	) {
+		screenRendered.meta.metaImage = {
 			'url': returnSocialImageCloudinaryURI({
 				'imagePublicID':
 					screenDataRaw.MetaImages[0].hash,
@@ -948,7 +974,13 @@ export const returnTransformedScreenContent = ({ screenDataRaw }) => {
 			'type': returnMediaType({
 				'mime': screenDataRaw.MetaImages[0].mime,
 			}),
-		},
-	};
+		};
+	}
+	if (screenDataRaw.MetaOther) {
+		screenRendered.meta.metaOther = screenDataRaw.MetaOther;
+	}
+	if (screenDataRaw.hasTableOfContents) {
+		screenRendered.meta.hasTableOfContents = true;
+	}
 	return screenRendered;
 };

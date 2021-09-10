@@ -13,11 +13,13 @@ const SkipLinksContainer = styled.div`
 
 export const ScreenScaffold = ({
 	'meta': {
-		type,
 		url,
 		title,
-		descriptions,
-		image,
+		metaDescription,
+		socialDescription,
+		openGraphType,
+		metaImage,
+		metaOther,
 		hasTableOfContents,
 	},
 	children,
@@ -26,35 +28,9 @@ export const ScreenScaffold = ({
 		<>
 			<Head>
 				{
-					title &&
-					<title>{`${title}`} | jbkr</title>
-				}
-				{
-					descriptions && descriptions.main &&
-					<meta name="description" content={descriptions.main} />
-				}
-				{
-					type &&
-					<meta property="og:type" content={type} />
-				}
-				{
-					title &&
-					<meta property="og:title"
-						content={`${title}`} />
-				}
-				{
 					url &&
 					<meta property="og:url"
 						content={`https://jbkr.me${url}`} />
-				}
-				{
-					descriptions && descriptions.social &&
-					<meta property="og:description"
-						content={descriptions.social} />
-				}
-				{
-					image && image.url &&
-					<meta property="og:image" content={image.url} />
 				}
 				{
 					url &&
@@ -63,23 +39,59 @@ export const ScreenScaffold = ({
 				}
 				{
 					title &&
+					<title>{`${title}`} | jbkr</title>
+				}
+				{
+					title &&
+					<meta property="og:title"
+						content={`${title}`} />
+				}
+				{
+					title &&
 					<meta name="twitter:title"
 						content={`${title}`} />
 				}
 				{
-					descriptions && descriptions.social &&
+					metaDescription &&
+					<meta name="description" content={metaDescription} />
+				}
+				{
+					socialDescription &&
+					<meta property="og:description"
+						content={socialDescription} />
+				}
+				{
+					socialDescription &&
 					<meta name="twitter:description"
-						content={descriptions.social} />
+						content={socialDescription} />
 				}
 				{
-					image && image.url &&
+					openGraphType &&
+					<meta property="og:type" content={openGraphType} />
+				}
+				{
+					metaImage && metaImage.url &&
+					<meta property="og:image" content={metaImage.url} />
+				}
+				{
+					metaImage && metaImage.url &&
 					<meta name="twitter:image"
-						content={image.url} />
+						content={metaImage.url} />
 				}
 				{
-					image && image.alternativeText &&
+					metaImage && metaImage.alternativeText &&
 					<meta name="twitter:image:alt"
-						content={image.alternativeText} />
+						content={metaImage.alternativeText} />
+				}
+				{
+					metaOther && metaOther[0] &&
+					metaOther.map((otherObject, otherObjectIndex) =>
+						// key is in `otherObject`
+						// eslint-disable-next-line react/jsx-key
+						<meta
+							{...otherObject}
+						/>,
+					)
 				}
 			</Head>
 			{/* <SkipLinksContainer>
