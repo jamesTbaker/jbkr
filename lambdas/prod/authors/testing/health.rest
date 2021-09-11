@@ -1,7 +1,0 @@
-# @baseURI = https://5nkpku1rge.execute-api.us-east-1.amazonaws.com/dev
-
-
-#########
-# Check system health
-GET {{baseURI}}/content/authors
-# Authorization: Bearer {{accessToken}}

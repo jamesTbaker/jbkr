@@ -16,8 +16,7 @@ mongoDbHost: ${ssm:mongodb-host}
 mongoDbPass: ${ssm:mongodb-pass}
 mongoDbUser: ${ssm:mongodb-user}
 mongoDbDbName: ${ssm:mongodb-db-name}
-authJbkrSLSAdminAccessKeyID: ${ssm:auth-jbkr-sls-admin-access-key-id}
-authJbkrSLSAdminSecretAccessKey: ${ssm:auth-jbkr-sls-admin-secret-access-key}
+simpleAuthKey: ${ssm:simple-auth-key}
 endpoints:
   content:
     starter:                           content/starter

@@ -1,0 +1,12 @@
+{
+	"name": "@jbkr/lambda-log",
+	"version": "0.1.0",
+	"description": "Handles all logging operations.",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"dependencies": {
+		"luxon": "^2.0.2"
+	}
+}

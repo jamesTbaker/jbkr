@@ -1,0 +1,12 @@
+{
+	"name": "@jbkr/content",
+	"version": "0.1.0",
+	"description": "Handles everything related to content.",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"dependencies": {
+		"@jbkr/db-client": "file:../db-client"
+	}
+}

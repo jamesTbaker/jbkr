@@ -1,0 +1,9 @@
+{
+	"name": "@jbkr/lambda-access",
+	"version": "0.1.0",
+	"description": "Handles everything related to access.",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true
+}

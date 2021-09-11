@@ -1,5 +1,5 @@
 {
-	"name": "api-content-authors",
+	"name": "starter",
 	"version": "0.1.0",
 	"main": "../index.js",
 	"author": "James Baker",
@@ -7,5 +7,11 @@
 	"private": true,
 	"scripts": {
 		"update": "rm -rf node_modules; rm package-lock.json; rm -rf .serverless; npm i"
+	},
+	"dependencies": {
+		"@jbkr/content": "file:../../../modules/cjs/content",
+		"@jbkr/lambda-access": "file:../../../modules/cjs/lambda-access",
+		"@jbkr/lambda-log": "file:../../../modules/cjs/lambda-log",
+		"@jbkr/lambda-response": "file:../../../modules/cjs/lambda-response"
 	}
 }

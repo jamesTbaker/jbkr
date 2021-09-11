@@ -62,6 +62,17 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "lambdas",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**/*.js"
+			],
+			"program": "${file}",
+			"envFile": "${workspaceFolder}/lambdas/prod/.env"
 		}
 	]
 }

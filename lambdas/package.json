@@ -7,5 +7,11 @@
 	"private": true,
 	"scripts": {
 		"update": "rm -rf node_modules; rm package-lock.json; rm -rf .serverless; npm i"
+	},
+	"devDependencies": {
+		"serverless-webpack": "^5.5.4"
+	},
+	"dependencies": {
+		"webpack": "^5.52.1"
 	}
 }
