@@ -63,16 +63,28 @@
 				}
 			]
 		},
+		// {
+		// 	"name": "lambdas",
+		// 	"type": "node",
+		// 	"request": "launch",
+		// 	"skipFiles": [
+		// 		"<node_internals>/**",
+		// 		"node_modules/**/*.js"
+		// 	],
+		// 	"program": "${file}",
+		// 	"envFile": "${workspaceFolder}/lambdas/prod/.env"
+		// },
 		{
 			"name": "lambdas",
-			"type": "node",
+			"type": "pwa-node",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**",
 				"node_modules/**/*.js"
 			],
 			"program": "${file}",
-			"envFile": "${workspaceFolder}/lambdas/prod/.env"
+			"envFile": "${workspaceFolder}/lambdas/prod/.env",
+			"console": "integratedTerminal"
 		}
 	]
 }

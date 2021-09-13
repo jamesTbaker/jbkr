@@ -9,6 +9,7 @@
 		"update": "rm -rf node_modules; rm package-lock.json; rm -rf .serverless; npm i"
 	},
 	"devDependencies": {
+		"serverless-bundle": "^5.0.1",
 		"serverless-webpack": "^5.5.4"
 	},
 	"dependencies": {

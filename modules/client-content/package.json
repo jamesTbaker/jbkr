@@ -8,6 +8,7 @@
 	"private": true,
 	"type": "module",
 	"dependencies": {
+		"@jbkr/db-client": "file:../db-client",
 		"bson": "^4.5.1",
 		"github-slugger": "^1.4.0",
 		"hast-util-to-string": "^2.0.0",

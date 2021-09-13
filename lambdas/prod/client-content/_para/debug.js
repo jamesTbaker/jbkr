@@ -1,7 +1,7 @@
-const {
+import {
 	HandleGetLibLabContentRequest,
-	HandleGetArticleContentRequest,
-} = require('../handler');
+	// HandleGetArticleContentRequest,
+} from '../index2.js';
 
 // HandleGetArticleContentRequest(
 // 	{

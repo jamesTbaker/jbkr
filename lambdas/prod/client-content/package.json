@@ -1,7 +1,6 @@
 {
 	"name": "starter",
 	"version": "0.1.0",
-	"main": "../index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"private": true,
@@ -9,9 +8,12 @@
 		"update": "rm -rf node_modules; rm package-lock.json; rm -rf .serverless; npm i"
 	},
 	"dependencies": {
-		"@jbkr/client-content": "file:../../../modules/cjs/client-content",
-		"@jbkr/lambda-access": "file:../../../modules/cjs/lambda-access",
-		"@jbkr/lambda-log": "file:../../../modules/cjs/lambda-log",
-		"@jbkr/lambda-response": "file:../../../modules/cjs/lambda-response"
+		"@jbkr/client-content": "file:../../../modules/client-content",
+		"@jbkr/lambda-access": "file:../../../modules/lambda-access",
+		"@jbkr/lambda-log": "file:../../../modules/lambda-log",
+		"@jbkr/lambda-response": "file:../../../modules/lambda-response"
+	},
+	"devDependencies": {
+		"serverless-bundle": "^5.0.1"
 	}
 }

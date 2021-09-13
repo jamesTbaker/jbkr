@@ -1,10 +1,10 @@
 custom:
   file: ${file(../config-common.yaml)}
   config:
-    webpack:
-    webpackConfig: './webpack.config.js'
-    includeModules: true
+    linting: false
+    sourcemaps: true
     excludeFiles: ./_para/*
+
 # -------------------------------------------------------
 
     app: content
@@ -61,4 +61,4 @@ provider:
 package:
   individually: true
 plugins:
-  - serverless-webpack
+  - serverless-bundle
