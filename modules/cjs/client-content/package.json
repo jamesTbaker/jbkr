@@ -1,5 +1,5 @@
 {
-	"name": "@jbkr/content",
+	"name": "@jbkr/client-content",
 	"version": "0.1.0",
 	"description": "Handles everything related to content.",
 	"main": "index.js",
@@ -7,6 +7,7 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"dependencies": {
-		"@jbkr/db-client": "file:../db-client"
+		"@jbkr/db-client": "file:../db-client",
+		"bson": "^4.5.1"
 	}
 }

@@ -1,7 +1,6 @@
 custom:
   config:
     org: jbkrsls
-    app: content
     frameworkVersion: '2'
     stage: prod
 
@@ -18,11 +17,11 @@ mongoDbUser: ${ssm:mongodb-user}
 mongoDbDbName: ${ssm:mongodb-db-name}
 simpleAuthKey: ${ssm:simple-auth-key}
 endpoints:
-  content:
-    starter:                           content/starter
-    scaffold:                          content/scaffold
-    screen:                            content/screen
-    profile:                           content/profile
-    liblab:                            content/liblab
-    contact:                           content/contact
-    fourohfour:                        content/fourohfour
+  client-content:
+    starter:                           client-content/starter
+    scaffold:                          client-content/scaffold
+    screen:                            client-content/screen
+    profile:                           client-content/profile
+    liblab:                            client-content/liblab
+    contact:                           client-content/contact
+    fourohfour:                        client-content/fourohfour

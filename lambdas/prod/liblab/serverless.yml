@@ -8,26 +8,36 @@ custom:
 # -------------------------------------------------------
 
     app: client-content
-    service: starter
+    service: liblab
     memorySize: 256
     timeout: 5
 
-
 functions:
-  HandleGetAuthorsRequest:
-    handler: handler.HandleGetAuthorsRequest
+  HandleGetLibLabContentRequest:
+    handler: handler.HandleGetLibLabContentRequest
     events:
       - http:
           path: ${self:custom.file.endpoints.${self:app}.${self:service}}
           method: get
           cors: true
+  HandleGetArticleContentRequest:
+    handler: handler.HandleGetArticleContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}}/{slug}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                slug: true
 
 # -------------------------------------------------------
 
 projectDir: ../
 frameworkVersion: ${self:custom.file.custom.config.frameworkVersion}
 org: ${self:custom.file.custom.config.org}
-app: ${self:custom.file.custom.config.app}
+app: ${self:custom.config.app}
 service: ${self:custom.config.service}
 provider:
   name: ${self:custom.file.provider.name}

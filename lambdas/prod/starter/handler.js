@@ -1,4 +1,4 @@
-const { ReturnAuthorsFromDB } = require('@jbkr/content');
+const { ReturnAuthorsFromDB } = require('@jbkr/client-content');
 const { ReturnRequesterCanAccess } = require('@jbkr/lambda-access');
 const { CreateResponse } = require('@jbkr/lambda-response');
 

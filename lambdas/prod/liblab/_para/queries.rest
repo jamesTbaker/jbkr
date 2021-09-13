@@ -1,0 +1,12 @@
+@baseURI = https://qmnoh9hjil.execute-api.us-east-1.amazonaws.com/prod
+
+
+#########
+# Get liblab screen content
+GET {{baseURI}}/client-content/liblab
+Authorization: Bearer {{simpleAuthKey}}
+
+#########
+# Get article content
+GET {{baseURI}}/client-content/liblab/the-hub
+Authorization: Bearer {{simpleAuthKey}}

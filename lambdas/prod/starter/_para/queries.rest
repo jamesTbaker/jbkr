@@ -3,5 +3,5 @@
 
 #########
 # Test starter config
-GET {{baseURI}}/content/starter
+GET {{baseURI}}/client-content/starter
 Authorization: Bearer {{simpleAuthKey}}

@@ -2,13 +2,19 @@
 
 module.exports = {
 	'ReturnRequesterCanAccess': ({ event }) => {
-		// if this is a cron job
+		// if this is a local run
 		if (
-			(event.source &&
-				(
-					event.source === 'aws.events' ||
-					event.source === 'local'
-				)) ||
+			event.source &&
+			event.source === 'local'
+		) {
+			// return flag indicating access is allowed
+			return true;
+			// otherwise, if this is a cron job
+		} else if (
+			(
+				event.source &&
+				event.source === 'aws.events'
+			) ||
 			(event.Records &&
 				event.Records[0] &&
 				event.Records[0].eventSource &&
@@ -16,7 +22,7 @@ module.exports = {
 		) {
 			// return flag indicating access is allowed
 			return true;
-			// if this isn't a cron job
+			// otherwise,
 		} else {
 			// set up access token and prefix var
 			let accessToken;

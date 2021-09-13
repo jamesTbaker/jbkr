@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Posts": {
-      "via": "Authors",
-      "collection": "post"
-    },
     "Name": {
       "type": "string"
     },
