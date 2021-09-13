@@ -1,4 +1,4 @@
-const { ReturnAuthorsFromDB } = require('@jbkr/client-content');
+const { ReturnAllAuthorsFromDB } = require('@jbkr/client-content');
 const { ReturnRequesterCanAccess } = require('@jbkr/lambda-access');
 const { CreateResponse } = require('@jbkr/lambda-response');
 
@@ -9,7 +9,7 @@ module.exports = {
 			// attempt to do what was requested
 			try {
 				// assign result to constant
-				const result = await ReturnAuthorsFromDB();
+				const result = await ReturnAllAuthorsFromDB();
 				// respond with the result
 				return CreateResponse({
 					'statusCode': 200,

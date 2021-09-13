@@ -7,8 +7,8 @@ custom:
     excludeFiles: ./_para/*
 # -------------------------------------------------------
 
-    app: client-content
-    service: liblab
+    app: content
+    service: client
     memorySize: 256
     timeout: 5
 
@@ -17,20 +17,20 @@ functions:
     handler: handler.HandleGetLibLabContentRequest
     events:
       - http:
-          path: ${self:custom.file.endpoints.${self:app}.${self:service}}
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}.liblab}
           method: get
           cors: true
-  HandleGetArticleContentRequest:
-    handler: handler.HandleGetArticleContentRequest
-    events:
-      - http:
-          path: ${self:custom.file.endpoints.${self:app}.${self:service}}/{slug}
-          method: get
-          cors: true
-          request:
-            parameters:
-              paths:
-                slug: true
+  # HandleGetArticleContentRequest:
+  #   handler: handler.HandleGetArticleContentRequest
+  #   events:
+  #     - http:
+  #         path: ${self:custom.file.endpoints.${self:app}.${self:service}.liblab}/{slug}
+  #         method: get
+  #         cors: true
+  #         request:
+  #           parameters:
+  #             paths:
+  #               slug: true
 
 # -------------------------------------------------------
 

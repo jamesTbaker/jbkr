@@ -2,7 +2,56 @@ const { ObjectID } = require('bson');
 const { DatabaseConnection } = require('@jbkr/db-client');
 
 module.exports = {
-	'ReturnAuthorsFromDB': async () => {
+	'ReturnOneScreenFromDB': async ({ slug }) => {
+		// attempt to get the data
+		try {
+			// get a database connection
+			const db = await DatabaseConnection({
+				'dbName': process.env.mongoDbDbName,
+			});
+			// assign query result to constant
+			const result =
+				await db.collection('screens').aggregate([
+					// match the document whose slug was received
+					{ '$match': { 'Slug': slug } },
+					// look up the meta image for this screen
+					{
+						'$lookup':
+						{
+							'from': 'upload_file',
+							'localField': 'MetaImage',
+							'foreignField': '_id',
+							'as': 'MetaImages',
+						},
+					},
+					// specify which fields to return
+					{
+						'$project': {
+							'_id': 0,
+							'Slug': 1,
+							'OpenGraphType': 1,
+							'Title': 1,
+							'MetaTitle': 1,
+							'MetaOther': 1,
+							'MetaDescription': 1,
+							'SocialDescription': 1,
+							'MetaImages.alternativeText': 1,
+							'MetaImages.ext': 1,
+							'MetaImages.hash': 1,
+							'MetaImages.mime': 1,
+							'MetaImageGravity': 1,
+						},
+					},
+				]).toArray();
+			// return result
+			return result;
+			// if an error occurred
+		} catch (error) {
+			// return it
+			return error;
+		}
+	},
+	'ReturnAllAuthorsFromDB': async () => {
 		// attempt to get the data
 		try {
 			// get a database connection
@@ -20,7 +69,7 @@ module.exports = {
 			return error;
 		}
 	},
-	'ReturnArticlesFromDB': async () => {
+	'ReturnAllArticlesFromDB': async () => {
 		// attempt to get the data
 		try {
 			// get a database connection
@@ -71,7 +120,7 @@ module.exports = {
 			return error;
 		}
 	},
-	'ReturnArticleFromDB': async ({ slug }) => {
+	'ReturnOneArticleFromDB': async ({ slug }) => {
 		// attempt to get the data
 		try {
 			// get a database connection

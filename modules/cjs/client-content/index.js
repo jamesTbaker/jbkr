@@ -1,7 +1,6 @@
-const dbQueries = require('./lib/db-queries');
+const Control = require('./lib/control');
 
 module.exports = {
-	'ReturnAuthorsFromDB': dbQueries.ReturnAuthorsFromDB,
-	'ReturnArticlesFromDB': dbQueries.ReturnArticlesFromDB,
-	'ReturnArticleFromDB': dbQueries.ReturnArticleFromDB,
+	'ReturnLibLabScreenContent': Control.ReturnLibLabScreenContent,
+	'ReturnArticleScreenContent': Control.ReturnArticleScreenContent,
 };

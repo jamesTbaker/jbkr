@@ -84,6 +84,7 @@ export async function getServerSideProps(context) {
 				'OpenGraphType': 1,
 				'Title': 1,
 				'MetaTitle': 1,
+				'MetaOther': 1,
 				'MetaDescription': 1,
 				'SocialDescription': 1,
 				'MetaImages.alternativeText': 1,

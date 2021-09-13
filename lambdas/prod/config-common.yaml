@@ -17,11 +17,10 @@ mongoDbUser: ${ssm:mongodb-user}
 mongoDbDbName: ${ssm:mongodb-db-name}
 simpleAuthKey: ${ssm:simple-auth-key}
 endpoints:
-  client-content:
-    starter:                           client-content/starter
-    scaffold:                          client-content/scaffold
-    screen:                            client-content/screen
-    profile:                           client-content/profile
-    liblab:                            client-content/liblab
-    contact:                           client-content/contact
-    fourohfour:                        client-content/fourohfour
+  content:
+    client:
+      starter:                           content/client/starter
+      liblab:                            content/client/liblab
+      profile:                           content/client/profile
+      contact:                           content/client/contact
+      fourohfour:                        content/client/fourohfour

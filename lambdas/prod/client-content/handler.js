@@ -1,6 +1,6 @@
 const {
-	ReturnArticlesFromDB,
-	ReturnArticleFromDB,
+	ReturnLibLabScreenContent,
+	ReturnArticleScreenContent,
 } = require('@jbkr/client-content');
 const { ReturnRequesterCanAccess } = require('@jbkr/lambda-access');
 const { CreateResponse } = require('@jbkr/lambda-response');
@@ -12,7 +12,7 @@ module.exports = {
 			// attempt to do what was requested
 			try {
 				// assign result to constant
-				const result = await ReturnArticlesFromDB();
+				const result = await ReturnLibLabScreenContent();
 				// respond with the result
 				return CreateResponse({
 					'statusCode': 200,
@@ -47,7 +47,7 @@ module.exports = {
 			// attempt to do what was requested
 			try {
 				// assign result to constant
-				const result = await ReturnArticleFromDB({
+				const result = await ReturnArticleScreenContent({
 					'slug': event.pathParameters.slug,
 				});
 				// respond with the result
