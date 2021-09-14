@@ -9,6 +9,9 @@ import {
 	returnAllArticlesFromDB,
 	returnOneArticleFromDB,
 } from './query.js';
+import {
+	returnTransformedLibLabScreenContent,
+} from './transform.js';
 
 export const returnProfileScreenContent = async () => {
 	const defaults =
@@ -32,8 +35,10 @@ export const returnLibLabScreenContent = async () => {
 	const screenRaw =
 		await returnOneScreenFromDB({ 'slug': '/library' });
 	const articlesRaw = await returnAllArticlesFromDB();
-
-	return articlesRaw;
+	const libLabScreenContent = returnTransformedLibLabScreenContent({
+		defaults, screenRaw, articlesRaw,
+	});
+	return libLabScreenContent;
 };
 export const returnArticleScreenContent = async ({ slug }) => {
 	const defaults =

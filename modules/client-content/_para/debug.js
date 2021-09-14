@@ -26,7 +26,9 @@ import {
 // const result = await returnAllEducationCertificationFromDB();
 // const result = await returnAllVolunteerExperiencesFromDB();
 // const result = await returnAllArticlesFromDB();
-const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
+// const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
+
+const result = await returnLibLabScreenContent();
 
 
 console.log(result);

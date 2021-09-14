@@ -104,7 +104,7 @@ export const returnHTMLFromMarkdown = ({ content, options }) => {
 //  =======================================================
 //  =======================================================
 
-export const returnSocialImageCloudinaryURI = ({
+/* export const returnSocialImageCloudinaryURI = ({
 	imagePublicID, imageExtension, gravity,
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
 'c_fill,g_' + gravity + ',w_1200,h_628,q_100/' +
@@ -164,7 +164,6 @@ export const returnSluggifiedHTMLFromMarkdown = ({ content }) => {
 		.processSync(content).value;
 	return result;
 };
-
 export const returnContentStats = ({ content }) => {
 	const statsRaw = readingtime(content);
 	const estimatedMinutes = Math.round(statsRaw.minutes);
@@ -175,6 +174,7 @@ export const returnContentStats = ({ content }) => {
 			`${estimatedMinutes} minutes to read`,
 	};
 };
+
 export const returnHeadingsWithMetadata = ({ content }) => {
 	// define regex for identifying headings
 	const headingRegex = /^###*\s/;
@@ -239,7 +239,7 @@ const returnFormattedDateString = ({
 			});
 	}
 	return '';
-};
+}; */
 const returnArticleIntermediateContent = ({
 	articleDataRaw, sectionDataRaw, mediaDataRaw,
 }) => {
@@ -572,7 +572,7 @@ ${textCollection.briefStatements}`,
 	// return what we developed
 	return articleIntermedate;
 };
-const returnTableOfContentsContent = ({ headings }) => {
+/* const returnTableOfContentsContent = ({ headings }) => {
 	// construct markdown table of contents; it's easiest to do this first
 	// because markdown doesn't require us to close one tag, e.g., a
 	// nested </ol>, prior to creating another, e.g., a <li>
@@ -598,7 +598,7 @@ const returnTableOfContentsContent = ({ headings }) => {
 	});
 	const html = returnSimpleHTMLFromMarkdown({ 'content': markdown });
 	return html;
-};
+}; */
 const returnArticleRenderedContent = ({ content }) => {
 	// set up container for the article's rendered content
 	const articleRendered = {
@@ -929,7 +929,7 @@ export const returnTransformedArticlesContent = ({ articlesDataRaw }) => {
 			.filter(article => !article.featured),
 	};
 };
-export const returnTransformedScreenContent = ({ screenDataRaw }) => {
+/* export const returnTransformedScreenContent = ({ screenDataRaw }) => {
 	// set up container for the screen's rendered content and
 	// add properties to it as appropriate
 	const screenRendered = {
@@ -984,3 +984,4 @@ export const returnTransformedScreenContent = ({ screenDataRaw }) => {
 	}
 	return screenRendered;
 };
+ */
