@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_header_footer_header_footer_link_primaries",
+  "info": {
+    "name": "HeaderFooterLink",
+    "icon": "ad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "AnchorText": {
+      "type": "string"
+    },
+    "URL": {
+      "type": "string"
+    },
+    "NewTab": {
+      "type": "boolean"
+    },
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary"
+      ],
+      "required": true
+    },
+    "OrderInSet": {
+      "type": "integer"
+    }
+  }
+}

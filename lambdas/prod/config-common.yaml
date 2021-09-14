@@ -20,7 +20,8 @@ endpoints:
   content:
     client:
       starter:                           content/client/starter
-      liblab:                            content/client/liblab
       profile:                           content/client/profile
+      liblab:                            content/client/liblab
       contact:                           content/client/contact
+      meta:                              content/client/meta
       fourohfour:                        content/client/fourohfour

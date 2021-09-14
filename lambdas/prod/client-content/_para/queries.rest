@@ -2,11 +2,31 @@
 
 
 #########
-# Get liblab screen content
+# get Profile screen content
+GET {{baseURI}}/content/client/profile
+Authorization: Bearer {{simpleAuthKey}}
+
+#########
+# get LibLab screen content
 GET {{baseURI}}/content/client/liblab
 Authorization: Bearer {{simpleAuthKey}}
 
 #########
-# Get article content
+# get Article screen content
 GET {{baseURI}}/content/client/liblab/the-hub
+Authorization: Bearer {{simpleAuthKey}}
+
+#########
+# get Contact screen content
+GET {{baseURI}}/content/client/contact
+Authorization: Bearer {{simpleAuthKey}}
+
+#########
+# get Meta screen content
+GET {{baseURI}}/content/client/meta
+Authorization: Bearer {{simpleAuthKey}}
+
+#########
+# get 404 screen content
+GET {{baseURI}}/content/client/fourohfour
 Authorization: Bearer {{simpleAuthKey}}

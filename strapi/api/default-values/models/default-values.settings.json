@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "default_values",
+  "info": {
+    "name": "DefaultValues"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "DefaultValue": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.default-value"
+    }
+  }
+}

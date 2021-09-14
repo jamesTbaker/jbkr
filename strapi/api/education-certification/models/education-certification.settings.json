@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "education_certifications",
   "info": {
-    "name": "EducationCertification"
+    "name": "EducationCertification",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -27,6 +28,11 @@
     },
     "Details": {
       "type": "richtext"
+    },
+    "OrderInSet": {
+      "type": "integer",
+      "required": true,
+      "default": 0
     }
   }
 }

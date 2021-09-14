@@ -13,24 +13,52 @@ custom:
     timeout: 5
 
 functions:
-  HandleGetLibLabContentRequest:
-    handler: handler.HandleGetLibLabContentRequest
+  handleGetProfileScreenContentRequest:
+    handler: handler.handleGetProfileScreenContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}.profile}
+          method: get
+          cors: true
+  handleGetLibLabScreenContentRequest:
+    handler: handler.handleGetLibLabScreenContentRequest
     events:
       - http:
           path: ${self:custom.file.endpoints.${self:app}.${self:service}.liblab}
           method: get
           cors: true
-  # HandleGetArticleContentRequest:
-  #   handler: handler.HandleGetArticleContentRequest
-  #   events:
-  #     - http:
-  #         path: ${self:custom.file.endpoints.${self:app}.${self:service}.liblab}/{slug}
-  #         method: get
-  #         cors: true
-  #         request:
-  #           parameters:
-  #             paths:
-  #               slug: true
+  handleGetArticleScreenContentRequest:
+    handler: handler.handleGetArticleScreenContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}.liblab}/{slug}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                slug: true
+  handleGetContactScreenContentRequest:
+    handler: handler.handleGetContactScreenContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}.contact}
+          method: get
+          cors: true
+  handleGetMetaScreenContentRequest:
+    handler: handler.handleGetMetaScreenContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}.meta}
+          method: get
+          cors: true
+  handleGet404ScreenContentRequest:
+    handler: handler.handleGet404ScreenContentRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:app}.${self:service}.fourohfour}
+          method: get
+          cors: true
 
 # -------------------------------------------------------
 
