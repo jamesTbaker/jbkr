@@ -97,6 +97,7 @@ export const returnOneScreenFromDB = async ({ slug }) => {
 				{
 					'$project': {
 						'_id': 0,
+						'Links._id': 1,
 						'Links.Category': 1,
 						'Links.OrderInSet': 1,
 						'Links.AnchorText': 1,
@@ -111,17 +112,18 @@ export const returnOneScreenFromDB = async ({ slug }) => {
 				// specify sort order
 				{ '$sort': { 'Links.OrderInSet': 1 } },
 			]).toArray();
-		const footers = await db.collection('footers')
-			.find({}).projection({
-				'_id': 0,
-				'Copy': 1,
-			}).toArray();
-
+		const footer = await db.collection('footers')
+			.findOne({}, {
+				'projection': {
+					'_id': 0,
+					'Copy': 1,
+				},
+			});
 		// return results, serialized and deserialized to convert BSON to JSON
 		return {
 			'header': JSON.parse(JSON.stringify(headers))[0],
 			'main': JSON.parse(JSON.stringify(mains))[0],
-			'footer': JSON.parse(JSON.stringify(footers))[0],
+			'footer': footer,
 		};
 		// if an error occurred
 	} catch (error) {
@@ -156,11 +158,13 @@ export const returnAllSkillsFromDB = async () => {
 		});
 		// assign query result to constant
 		const result =
-			await db.collection('skills').find({}).projection({
-				'PercentageExpertise': 1,
-				'Category': 1,
-				'Featured': 1,
-				'SkillName': 1,
+			await db.collection('skills').find({}, {
+				'projection': {
+					'PercentageExpertise': 1,
+					'Category': 1,
+					'Featured': 1,
+					'SkillName': 1,
+				},
 			}).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON
 		return JSON.parse(JSON.stringify(result));
@@ -179,11 +183,13 @@ export const returnAllProfessionalExperiencesFromDB = async () => {
 		});
 		// assign query result to constant
 		const result = await db.collection('professional_experiences')
-			.find({}).projection({
-				'Title': 1,
-				'StartDate': 1,
-				'EndDate': 1,
-				'Description': 1,
+			.find({}, {
+				'projection': {
+					'Title': 1,
+					'StartDate': 1,
+					'EndDate': 1,
+					'Description': 1,
+				},
 			}).sort({ 'EndDate': -1 }).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON
 		return JSON.parse(JSON.stringify(result));
@@ -202,13 +208,15 @@ export const returnAllEducationCertificationFromDB = async () => {
 		});
 		// assign query result to constant
 		const result = await db.collection('education_certifications')
-			.find({}).projection({
-				'OrderInSet': 1,
-				'StartYear': 1,
-				'Header': 1,
-				'Tagline': 1,
-				'EndYear': 1,
-				'Details': 1,
+			.find({}, {
+				'projection': {
+					'OrderInSet': 1,
+					'StartYear': 1,
+					'Header': 1,
+					'Tagline': 1,
+					'EndYear': 1,
+					'Details': 1,
+				},
 			}).sort({ 'OrderInSet': 1 }).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON
 		return JSON.parse(JSON.stringify(result));
@@ -227,12 +235,14 @@ export const returnAllVolunteerExperiencesFromDB = async () => {
 		});
 		// assign query result to constant
 		const result = await db.collection('volunteer_experiences')
-			.find({}).projection({
-				'Title': 1,
-				'ForWhom': 1,
-				'StartYear': 1,
-				'Description': 1,
-				'EndYear': 1,
+			.find({}, {
+				'projection': {
+					'Title': 1,
+					'ForWhom': 1,
+					'StartYear': 1,
+					'Description': 1,
+					'EndYear': 1,
+				},
 			}).sort({ 'EndYear': -1 }).toArray();
 		// return result
 		return result;
