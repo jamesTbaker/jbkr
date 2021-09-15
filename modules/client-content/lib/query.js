@@ -103,6 +103,7 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 						'Links.AnchorText': 1,
 						'Links.URL': 1,
 						'Links.NewTab': 1,
+						'Links.ScreenIDs': 1,
 					},
 				},
 				/**
@@ -252,7 +253,7 @@ export const returnAllVolunteerExperiencesFromDB = async () => {
 		return error;
 	}
 };
-export const returnAllArticlesFromDB = async () => {
+export const returnAllPublishedArticlesFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
@@ -262,6 +263,8 @@ export const returnAllArticlesFromDB = async () => {
 		// assign query result to constant
 		let result =
 			await db.collection('articles').aggregate([
+				// match the documents whose published_at dates are not null
+				{ '$match': { 'published_at': { '$ne': null } } },
 				// look up the teaser image for this article
 				{
 					'$lookup':

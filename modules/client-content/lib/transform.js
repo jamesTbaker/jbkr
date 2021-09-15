@@ -229,7 +229,7 @@ const returnTableOfContentsContent = ({ headings }) => {
 	// return the html version of the headings list
 	return htmlHeadingsList;
 };
-const returnTransformedScreenContent = ({ screenRaw }) => {
+const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	// set up container for the screen's rendered content and
 	// add properties to it as appropriate
 	const screenRendered = {
@@ -252,6 +252,10 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 		// if this link should open in a new tab
 		if (linkRaw.NewTab) {
 			linkTransformed.newTab = true;
+		}
+		// if this link is for this screen
+		if (linkRaw.ScreenIDs.includes(screenID)) {
+			linkTransformed.forThisScreen = true;
 		}
 		// add this link to the container of all header links
 		allHeaderLinksTransformed.push(linkTransformed);
@@ -279,7 +283,12 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 	if (screenRaw.main.OpenGraphType) {
 		screenRendered.meta.openGraphType = screenRaw.main.OpenGraphType;
 	}
-	if (
+	screenRendered.meta.metaImage = returnMetaImage({
+		defaults,
+		'metaImage': screenRaw.main.MetaImages[0],
+		'metaImageGravity': screenRaw.main.MetaImageGravity,
+	});
+	/* if (
 		screenRaw.main.MetaImages &&
 		screenRaw.main.MetaImages[0] &&
 		screenRaw.main.MetaImages[0].hash &&
@@ -300,12 +309,9 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 				'mime': screenRaw.main.MetaImages[0].mime,
 			}),
 		};
-	}
+	} */
 	if (screenRaw.main.MetaOther) {
 		screenRendered.meta.metaOther = screenRaw.main.MetaOther;
-	}
-	if (screenRaw.hasTableOfContents) {
-		screenRendered.meta.hasTableOfContents = true;
 	}
 	if (screenRaw.main.Slug) {
 		screenRendered.meta.slug = screenRaw.main.Slug;
@@ -325,7 +331,7 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 	}
 	return screenRendered;
 };
-const returnBasicScreenObject = ({ screenRaw }) => {
+const returnBasicScreenObject = ({ defaults, screenID, screenRaw }) => {
 	// set up container for all of this screen's properties
 	const allScreenProperties = {
 		'meta': {},
@@ -335,7 +341,7 @@ const returnBasicScreenObject = ({ screenRaw }) => {
 	};
 	// get transformed version of the base screen data
 	const screenTransformed = returnTransformedScreenContent({
-		'screenRaw': screenRaw,
+		defaults, screenID, screenRaw,
 	});
 	// if screenTransformed contains a meta property
 	if (screenTransformed && screenTransformed.meta) {
@@ -365,10 +371,8 @@ const returnBasicScreenObject = ({ screenRaw }) => {
 	return allScreenProperties;
 };
 const returnArticleIntermediate = ({
-	defaultsRaw, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+	defaults, articleMainRaw, articleSectionsRaw, articleMediaRaw,
 }) => {
-	// get a transformed version of defaults
-	const defaults = returnDefaultValuesObject({ defaultsRaw });
 	// set up container for all sections
 	const sectionsIntermediate = [];
 	// for each section in the raw data
@@ -514,13 +518,18 @@ const returnArticleIntermediate = ({
 	if (articleMainRaw.SocialDescription) {
 		articleIntermedate.socialDescription = articleMainRaw.SocialDescription;
 	}
-	// use a default meta image or default gravity if not supplied
+	articleIntermedate.metaImage = returnMetaImage({
+		defaults,
+		'metaImage': articleMainRaw.MetaImages[0],
+		'metaImageGravity': articleMainRaw.MetaImageGravity,
+	});
+	/* // use a default meta image or default gravity if not supplied
 	let metaImageGravity = 'center';
 	if (articleMainRaw.MetaImageGravity) {
 		metaImageGravity = articleMainRaw.MetaImageGravity;
 	}
-	// if no meta image was supplied, or if the
-	// supplied image is missing any of the necessary properties
+	// if no meta image was supplied, or if we're missing
+	// any of the necessary properties
 	if (
 		!articleMainRaw.MetaImages ||
 		!articleMainRaw.MetaImages[0] ||
@@ -550,7 +559,7 @@ const returnArticleIntermediate = ({
 				'mime': articleMainRaw.MetaImages[0].mime,
 			}),
 		};
-	}
+	} */
 	if (
 		articleMainRaw.HeadImages &&
 		articleMainRaw.HeadImages[0]
@@ -939,11 +948,50 @@ const returnArticleRendered = ({ content }) => {
 	// return the container of the article's rendered content
 	return articleRendered;
 };
+const returnMetaImage = ({ defaults, metaImage, metaImageGravity }) => {
+	// set up a container for the meta image properties we'll generate
+	const metaImageToReturn = {};
+	// set a default meta image gravity to use
+	let metaImageGravityToUse = metaImageGravity ? metaImageGravity : 'center';
+	// if no meta image was supplied, or if we're missing
+	// any of the necessary properties
+	if (
+		!metaImage ||
+		!metaImage.hash ||
+		!metaImage.ext ||
+		!metaImage.mime ||
+		!metaImage.alternativeText
+	) {
+		// use the default meta image properties
+		metaImageToReturn.url = defaults.metaImageURL;
+		metaImageToReturn.alternativeText = defaults.metaImageAlternativeText;
+		metaImageToReturn.type = defaults.metaImageType;
+		// if all of the necessary properties are present
+	} else {
+		// get a transformed version of the selected meta image properties
+		metaImageToReturn.url = returnSocialImageCloudinaryURI({
+			'imagePublicID':
+				metaImage.hash,
+			'imageExtension': metaImage.ext,
+			'gravity': metaImageGravityToUse,
+		});
+		metaImageToReturn.alternativeText = metaImage.alternativeText;
+		metaImageToReturn.type = returnMediaType({
+			'mime': metaImage.mime,
+		});
+	}
+	// return the main container
+	return metaImageToReturn;
+};
 export const returnTransformedLibLabScreenContent = ({
-	screenRaw, articlesRaw,
+	screenID, defaultsRaw, screenRaw, articlesRaw,
 }) => {
+	// get a transformed version of defaults
+	const defaults = returnDefaultValuesObject({ defaultsRaw });
 	// set up container for all of this screen's properties
-	const allScreenProperties = returnBasicScreenObject({ screenRaw });
+	const allScreenProperties = returnBasicScreenObject(
+		{ defaults, screenID, screenRaw },
+	);
 	// add articles property to main container
 	allScreenProperties.main.articles = {
 		'featured': {},
@@ -1020,13 +1068,22 @@ export const returnTransformedLibLabScreenContent = ({
 	return allScreenProperties;
 };
 export const returnTransformedArticleScreenContent = ({
-	defaultsRaw, screenRaw, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+	screenID,
+	defaultsRaw,
+	screenRaw,
+	articleMainRaw,
+	articleSectionsRaw,
+	articleMediaRaw,
 }) => {
+	// get a transformed version of defaults
+	const defaults = returnDefaultValuesObject({ defaultsRaw });
 	// set up container for all of this screen's properties
-	const allScreenProperties = returnBasicScreenObject({ screenRaw });
+	const allScreenProperties = returnBasicScreenObject(
+		{ defaults, screenID, screenRaw },
+	);
 	// get the first, intermediate version of the article's content
 	const articleIntermedate = returnArticleIntermediate({
-		defaultsRaw, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+		defaults, articleMainRaw, articleSectionsRaw, articleMediaRaw,
 	});
 	// get the rendered version of the article's content
 	const articleRendered = returnArticleRendered({

@@ -7,7 +7,7 @@ import {
 	returnAllProfessionalExperiencesFromDB,
 	returnAllEducationCertificationFromDB,
 	returnAllVolunteerExperiencesFromDB,
-	returnAllArticlesFromDB,
+	returnAllPublishedArticlesFromDB,
 	returnOneArticleFromDB,
 } from '../lib/query.js';
 import {
@@ -26,7 +26,7 @@ import {
 // const result = await returnAllProfessionalExperiencesFromDB();
 // const result = await returnAllEducationCertificationFromDB();
 // const result = await returnAllVolunteerExperiencesFromDB();
-// const result = await returnAllArticlesFromDB();
+// const result = await returnAllPublishedArticlesFromDB();
 // const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
 
 // const result = await returnLibLabScreenContent();

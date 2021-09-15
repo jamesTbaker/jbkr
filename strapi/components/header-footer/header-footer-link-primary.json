@@ -26,6 +26,9 @@
     },
     "OrderInSet": {
       "type": "integer"
+    },
+    "ScreenIDs": {
+      "type": "json"
     }
   }
 }

@@ -6,7 +6,7 @@ import {
 	returnAllProfessionalExperiencesFromDB,
 	returnAllEducationCertificationFromDB,
 	returnAllVolunteerExperiencesFromDB,
-	returnAllArticlesFromDB,
+	returnAllPublishedArticlesFromDB,
 	returnOneArticleFromDB,
 } from './query.js';
 import {
@@ -15,11 +15,13 @@ import {
 } from './transform.js';
 
 export const returnProfileScreenContent = async () => {
+	// define screen ID
+	const screenID = 'Profile';
 	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'screenID': 'Profile' });
+		await returnOneScreenFromDB({ screenID });
 	const skillsRaw =
 		await returnAllSkillsFromDB();
 	const professionalExperiencesRaw =
@@ -32,27 +34,34 @@ export const returnProfileScreenContent = async () => {
 	return skillsRaw;
 };
 export const returnLibLabScreenContent = async () => {
+	// define screen ID
+	const screenID = 'LibLab';
 	// get the raw data
+	const defaultsRaw =
+		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'screenID': 'LibLab' });
-	const articlesRaw = await returnAllArticlesFromDB();
+		await returnOneScreenFromDB({ screenID });
+	const articlesRaw = await returnAllPublishedArticlesFromDB();
 	// get a transformed version of the data
 	const libLabScreenContent = returnTransformedLibLabScreenContent({
-		screenRaw, articlesRaw,
+		screenID, defaultsRaw, screenRaw, articlesRaw,
 	});
 	// return the transformed data
 	return libLabScreenContent;
 };
 export const returnArticleScreenContent = async ({ slug }) => {
+	// define screen ID
+	const screenID = 'Article';
 	// get the raw data
 	const defaultsRaw =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'screenID': 'Article' });
+		await returnOneScreenFromDB({ screenID });
 	const articlePartsRaw = await returnOneArticleFromDB({ slug });
 	// get a transformed version of the data
 	const articleScreenContent =
 		returnTransformedArticleScreenContent({
+			screenID,
 			defaultsRaw,
 			screenRaw,
 			'articleMainRaw': articlePartsRaw.articleMainRaw,
@@ -63,29 +72,35 @@ export const returnArticleScreenContent = async ({ slug }) => {
 	return articleScreenContent;
 };
 export const returnContactScreenContent = async () => {
+	// define screen ID
+	const screenID = 'Contact';
 	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'screenID': 'Contact' });
+		await returnOneScreenFromDB({ screenID });
 
 	return screenRaw;
 };
 export const returnMetaScreenContent = async () => {
+	// define screen ID
+	const screenID = 'Meta';
 	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'screenID': 'Meta' });
+		await returnOneScreenFromDB({ screenID });
 
 	return screenRaw;
 };
 export const return404ScreenContent = async () => {
+	// define screen ID
+	const screenID = '404';
 	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'screenID': '404' });
+		await returnOneScreenFromDB({ screenID });
 
 	return screenRaw;
 };
