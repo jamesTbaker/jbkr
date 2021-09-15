@@ -10,15 +10,17 @@ import {
 	returnOneArticleFromDB,
 } from './query.js';
 import {
+	returnTransformedProfileScreenContent,
 	returnTransformedLibLabScreenContent,
 	returnTransformedArticleScreenContent,
+	returnTransformedSimpleScreenContent,
 } from './transform.js';
 
 export const returnProfileScreenContent = async () => {
 	// define screen ID
 	const screenID = 'Profile';
 	// get the raw data
-	const defaults =
+	const defaultsRaw =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
 		await returnOneScreenFromDB({ screenID });
@@ -28,10 +30,20 @@ export const returnProfileScreenContent = async () => {
 		await returnAllProfessionalExperiencesFromDB();
 	const educationCertificationRaw =
 		await returnAllEducationCertificationFromDB();
-	const volunteerExperiences =
+	const volunteerExperiencesRaw =
 		await returnAllVolunteerExperiencesFromDB();
-
-	return skillsRaw;
+	// get a transformed version of the data
+	const profileScreenContent = returnTransformedProfileScreenContent({
+		screenID,
+		defaultsRaw,
+		screenRaw,
+		skillsRaw,
+		professionalExperiencesRaw,
+		educationCertificationRaw,
+		volunteerExperiencesRaw,
+	});
+	// return the transformed data
+	return profileScreenContent;
 };
 export const returnLibLabScreenContent = async () => {
 	// define screen ID
@@ -75,32 +87,53 @@ export const returnContactScreenContent = async () => {
 	// define screen ID
 	const screenID = 'Contact';
 	// get the raw data
-	const defaults =
+	const defaultsRaw =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
 		await returnOneScreenFromDB({ screenID });
-
-	return screenRaw;
+	// get a transformed version of the data
+	const simpleScreenContent =
+		returnTransformedSimpleScreenContent({
+			screenID,
+			defaultsRaw,
+			screenRaw,
+		});
+	// return the transformed data
+	return simpleScreenContent;
 };
 export const returnMetaScreenContent = async () => {
 	// define screen ID
 	const screenID = 'Meta';
 	// get the raw data
-	const defaults =
+	const defaultsRaw =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
 		await returnOneScreenFromDB({ screenID });
-
-	return screenRaw;
+	// get a transformed version of the data
+	const simpleScreenContent =
+		returnTransformedSimpleScreenContent({
+			screenID,
+			defaultsRaw,
+			screenRaw,
+		});
+	// return the transformed data
+	return simpleScreenContent;
 };
 export const return404ScreenContent = async () => {
 	// define screen ID
 	const screenID = '404';
 	// get the raw data
-	const defaults =
+	const defaultsRaw =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
 		await returnOneScreenFromDB({ screenID });
-
-	return screenRaw;
+	// get a transformed version of the data
+	const simpleScreenContent =
+		returnTransformedSimpleScreenContent({
+			screenID,
+			defaultsRaw,
+			screenRaw,
+		});
+	// return the transformed data
+	return simpleScreenContent;
 };

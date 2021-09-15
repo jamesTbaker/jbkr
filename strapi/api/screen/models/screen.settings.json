@@ -69,6 +69,11 @@
     "Slug": {
       "type": "string",
       "required": false
+    },
+    "UniqueContentItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.screen-content-item"
     }
   }
 }

@@ -54,6 +54,16 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 				{
 					'$lookup':
 					{
+						'from': 'components_content_screen_content_items',
+						'localField': 'UniqueContentItems.ref',
+						'foreignField': '_id',
+						'as': 'ContentItems',
+					},
+				},
+				// look up the meta image for this screen
+				{
+					'$lookup':
+					{
 						'from': 'upload_file',
 						'localField': 'MetaImage',
 						'foreignField': '_id',
@@ -76,6 +86,8 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 						'MetaImages.hash': 1,
 						'MetaImages.mime': 1,
 						'MetaImageGravity': 1,
+						'ContentItems.Key': 1,
+						'ContentItems.Value': 1,
 					},
 				},
 			]).toArray();

@@ -6,6 +6,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeSlug from 'rehype-slug';
+import rehypeExternalLinks from 'rehype-external-links';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeStringify from 'rehype-stringify';
 import { toString } from 'hast-util-to-string';
@@ -54,6 +55,7 @@ const returnSimpleHTMLFromMarkdown = ({ content, options }) => {
 		renderedContent = unified()
 			.use(remarkParse)
 			.use(remarkRehype)
+			.use(rehypeExternalLinks)
 			.use(rehypeStringify)
 			.processSync(content).value;
 		// if we received the option to remove the endcap tags
@@ -191,6 +193,18 @@ const returnFormattedDateString = ({
 				'day': 'numeric',
 			});
 	}
+	// if format is to be full month and year
+	if (formatToken === 'fullMonthfullYear') {
+		// get a datetime around noon in Boston on the relevant date
+		// and then convert it to a formatted string
+		dateString = returnDateAtNoonEasternish({
+			incomingDate,
+		})
+			.toLocaleDateString('en-US', {
+				'year': 'numeric',
+				'month': 'long',
+			});
+	}
 	// return the container
 	return dateString;
 };
@@ -288,28 +302,6 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 		'metaImage': screenRaw.main.MetaImages[0],
 		'metaImageGravity': screenRaw.main.MetaImageGravity,
 	});
-	/* if (
-		screenRaw.main.MetaImages &&
-		screenRaw.main.MetaImages[0] &&
-		screenRaw.main.MetaImages[0].hash &&
-		screenRaw.main.MetaImages[0].ext &&
-		screenRaw.main.MetaImages[0].mime &&
-		screenRaw.main.MetaImages[0].alternativeText &&
-		screenRaw.main.MetaImageGravity
-	) {
-		screenRendered.meta.metaImage = {
-			'url': returnSocialImageCloudinaryURI({
-				'imagePublicID':
-					screenRaw.main.MetaImages[0].hash,
-				'imageExtension': screenRaw.main.MetaImages[0].ext,
-				'gravity': screenRaw.main.MetaImageGravity,
-			}),
-			'alternativeText': screenRaw.main.MetaImages[0].alternativeText,
-			'type': returnMediaType({
-				'mime': screenRaw.main.MetaImages[0].mime,
-			}),
-		};
-	} */
 	if (screenRaw.main.MetaOther) {
 		screenRendered.meta.metaOther = screenRaw.main.MetaOther;
 	}
@@ -318,6 +310,16 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	}
 	if (screenRaw.main.Title) {
 		screenRendered.main.title = screenRaw.main.Title;
+	}
+	if (screenRaw.main.ContentItems && screenRaw.main.ContentItems[0]) {
+		screenRendered.main.contentItems = {};
+		screenRaw.main.ContentItems.forEach((contentItemRaw) => {
+			screenRendered.main.contentItems[
+				contentItemRaw.Key.charAt(0).toLowerCase() +
+				contentItemRaw.Key.slice(1)
+			] =
+				contentItemRaw.Value;
+		});
 	}
 	if (screenRaw.footer && screenRaw.footer.Copy) {
 		// replace a token in the footer copy
@@ -358,7 +360,12 @@ const returnBasicScreenObject = ({ defaults, screenID, screenRaw }) => {
 		// add it to the main container
 		allScreenProperties.footer = screenTransformed.footer;
 	}
-	// if screenTransformed contains a main property with a title
+	// if screenTransformed contains a main property
+	if (screenTransformed && screenTransformed.main) {
+		// add it to the main container
+		allScreenProperties.main = screenTransformed.main;
+	}
+	/* // if screenTransformed contains a main property
 	if (
 		screenTransformed &&
 		screenTransformed.main &&
@@ -367,6 +374,15 @@ const returnBasicScreenObject = ({ defaults, screenID, screenRaw }) => {
 		// add it to the main container
 		allScreenProperties.main.title = screenTransformed.main.title;
 	}
+	// if screenTransformed contains a main property with content items
+	if (
+		screenTransformed &&
+		screenTransformed.main &&
+		screenTransformed.main.contentItems
+	) {
+		// add it to the main container
+		allScreenProperties.main.contentItems = screenTransformed.main.title;
+	} */
 	// return the main container
 	return allScreenProperties;
 };
@@ -523,43 +539,6 @@ const returnArticleIntermediate = ({
 		'metaImage': articleMainRaw.MetaImages[0],
 		'metaImageGravity': articleMainRaw.MetaImageGravity,
 	});
-	/* // use a default meta image or default gravity if not supplied
-	let metaImageGravity = 'center';
-	if (articleMainRaw.MetaImageGravity) {
-		metaImageGravity = articleMainRaw.MetaImageGravity;
-	}
-	// if no meta image was supplied, or if we're missing
-	// any of the necessary properties
-	if (
-		!articleMainRaw.MetaImages ||
-		!articleMainRaw.MetaImages[0] ||
-		!articleMainRaw.MetaImages[0].hash ||
-		!articleMainRaw.MetaImages[0].ext ||
-		!articleMainRaw.MetaImages[0].mime ||
-		!articleMainRaw.MetaImages[0].alternativeText
-	) {
-		// use a default image
-		articleIntermedate.metaImage = {
-			'url': defaults.metaImageURL,
-			'alternativeText': defaults.metaImageAlternativeText,
-			'type': defaults.metaImageType,
-		};
-		// if all of the image properties are present
-	} else {
-		// transform the image properties
-		articleIntermedate.metaImage = {
-			'url': returnSocialImageCloudinaryURI({
-				'imagePublicID':
-					articleMainRaw.MetaImages[0].hash,
-				'imageExtension': articleMainRaw.MetaImages[0].ext,
-				'gravity': metaImageGravity,
-			}),
-			'alternativeText': articleMainRaw.MetaImages[0].alternativeText,
-			'type': returnMediaType({
-				'mime': articleMainRaw.MetaImages[0].mime,
-			}),
-		};
-	} */
 	if (
 		articleMainRaw.HeadImages &&
 		articleMainRaw.HeadImages[0]
@@ -983,6 +962,105 @@ const returnMetaImage = ({ defaults, metaImage, metaImageGravity }) => {
 	// return the main container
 	return metaImageToReturn;
 };
+export const returnTransformedProfileScreenContent = ({
+	screenID,
+	defaultsRaw,
+	screenRaw,
+	skillsRaw,
+	professionalExperiencesRaw,
+	educationCertificationRaw,
+	volunteerExperiencesRaw,
+}) => {
+	// get a transformed version of defaults
+	const defaults = returnDefaultValuesObject({ defaultsRaw });
+	// set up container for all of this screen's properties
+	const allScreenProperties = returnBasicScreenObject(
+		{ defaults, screenID, screenRaw },
+	);
+	// set up skills structure inside main container
+	allScreenProperties.main.skills = {
+		'technical': {
+			'featured': [],
+			'standard': [],
+		},
+		'business': {
+			'featured': [],
+			'standard': [],
+		},
+		'design': {
+			'featured': [],
+			'standard': [],
+		},
+	};
+	// for each raw skill
+	skillsRaw.forEach((skillRaw) => {
+		// define the category and prominence keys used to access the
+		// arrays inside the main container
+		const categoryKey = skillRaw.Category.toLowerCase();
+		const prominenceKey = skillRaw.Featured ? 'featured' : 'standard';
+		// add a transformed version of this skill to the appropriate array
+		allScreenProperties.main.skills[categoryKey][prominenceKey].push({
+			'percentageExpertise': skillRaw.PercentageExpertise,
+			'name': skillRaw.SkillName,
+		});
+	});
+	// set up professional experiences container inside the main container
+	allScreenProperties.main.professionalExperiences = [];
+	// for each professional experience
+	professionalExperiencesRaw.forEach((professionalExperience) => {
+		// add a transformed version of this experience to the appropriate array
+		allScreenProperties.main.professionalExperiences.push({
+			'title': professionalExperience.Title,
+			'description': returnSimpleHTMLFromMarkdown({
+				'content': professionalExperience.Description,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			}),
+			'startDate': returnFormattedDateString({
+				'incomingDate': professionalExperience.StartDate,
+				'formatToken': 'fullMonthfullYear',
+			}),
+			'endDate': returnFormattedDateString({
+				'incomingDate': professionalExperience.EndDate,
+				'formatToken': 'fullMonthfullYear',
+			}),
+		});
+	});
+	// set up education and certification container inside the main container
+	allScreenProperties.main.educationCertification = [];
+	// for each education / certification item
+	educationCertificationRaw.forEach((educationCertification) => {
+		// add a transformed version of this item to the appropriate array
+		allScreenProperties.main.educationCertification.push({
+			'header': educationCertification.Header,
+			'tagline': educationCertification.Tagline,
+			'details': returnSimpleHTMLFromMarkdown({
+				'content': educationCertification.Details,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			}),
+			'startYear': educationCertification.StartYear,
+			'endYear': educationCertification.EndYear,
+		});
+	});
+	// set up volunteer experiences container inside the main container
+	allScreenProperties.main.volunteerExperiences = [];
+	// for each volunteer experience
+	volunteerExperiencesRaw.forEach((volunteerExperience) => {
+		// add a transformed version of this experience to the appropriate array
+		allScreenProperties.main.volunteerExperiences.push({
+			'title': volunteerExperience.Title,
+			'description': volunteerExperience.Description,
+			'forWhom': volunteerExperience.ForWhom,
+			'startYear': volunteerExperience.StartYear,
+			'endYear': volunteerExperience.EndYear,
+		});
+	});
+	// return the main container
+	return allScreenProperties;
+};
 export const returnTransformedLibLabScreenContent = ({
 	screenID, defaultsRaw, screenRaw, articlesRaw,
 }) => {
@@ -1098,6 +1176,36 @@ export const returnTransformedArticleScreenContent = ({
 	};
 	delete articleRendered.meta;
 	allScreenProperties.main.article = articleRendered;
+	// return the main container
+	return allScreenProperties;
+};
+export const returnTransformedSimpleScreenContent = ({
+	screenID,
+	defaultsRaw,
+	screenRaw,
+}) => {
+	// get a transformed version of defaults
+	const defaults = returnDefaultValuesObject({ defaultsRaw });
+	// set up container for all of this screen's properties
+	const allScreenProperties = returnBasicScreenObject(
+		{ defaults, screenID, screenRaw },
+	);
+	// if there are content items, replace them with transformed versions
+	// of themselves
+	// set up temporary container of content items
+	const contentItemsTransformed = {};
+	Object.keys(allScreenProperties.main.contentItems)
+		.forEach((contentItemKey) => {
+			contentItemsTransformed[contentItemKey] =
+				returnSimpleHTMLFromMarkdown({
+					'content':
+						allScreenProperties.main.contentItems[contentItemKey],
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		});
+	allScreenProperties.main.contentItems = contentItemsTransformed;
 	// return the main container
 	return allScreenProperties;
 };
