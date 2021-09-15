@@ -846,6 +846,9 @@ const returnArticleRendered = ({ content }) => {
 			if (sectionObject.sectionQuote) {
 				sectionRendered.sectionQuote = returnSimpleHTMLFromMarkdown({
 					'content': sectionObject.sectionQuote,
+					'options': {
+						'removeEndCapTags': true,
+					},
 				});
 			}
 			// set up a new container of this section's subsections
