@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Slug": {
-      "type": "string",
-      "required": true
-    },
     "Title": {
       "type": "string"
     },
@@ -65,6 +61,14 @@
     },
     "MetaOther": {
       "type": "json"
+    },
+    "ScreenID": {
+      "type": "string",
+      "required": true
+    },
+    "Slug": {
+      "type": "string",
+      "required": false
     }
   }
 }

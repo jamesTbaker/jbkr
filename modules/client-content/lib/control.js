@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import {
 	returnDefaultValuesFromDB,
 	returnOneScreenFromDB,
-	returnAllAuthorsFromDB,
 	returnAllSkillsFromDB,
 	returnAllProfessionalExperiencesFromDB,
 	returnAllEducationCertificationFromDB,
@@ -11,13 +11,15 @@ import {
 } from './query.js';
 import {
 	returnTransformedLibLabScreenContent,
+	returnTransformedArticleScreenContent,
 } from './transform.js';
 
 export const returnProfileScreenContent = async () => {
+	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'slug': '/' });
+		await returnOneScreenFromDB({ 'screenID': 'Profile' });
 	const skillsRaw =
 		await returnAllSkillsFromDB();
 	const professionalExperiencesRaw =
@@ -30,46 +32,60 @@ export const returnProfileScreenContent = async () => {
 	return skillsRaw;
 };
 export const returnLibLabScreenContent = async () => {
-	const defaults =
-		await returnDefaultValuesFromDB();
+	// get the raw data
 	const screenRaw =
-		await returnOneScreenFromDB({ 'slug': '/library' });
+		await returnOneScreenFromDB({ 'screenID': 'LibLab' });
 	const articlesRaw = await returnAllArticlesFromDB();
+	// get a transformed version of the data
 	const libLabScreenContent = returnTransformedLibLabScreenContent({
-		defaults, screenRaw, articlesRaw,
+		screenRaw, articlesRaw,
 	});
+	// return the transformed data
 	return libLabScreenContent;
 };
 export const returnArticleScreenContent = async ({ slug }) => {
-	const defaults =
+	// get the raw data
+	const defaultsRaw =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'slug': '/library/*' });
-	const articleRaw = await returnOneArticleFromDB({ slug });
-
-	return articleRaw;
+		await returnOneScreenFromDB({ 'screenID': 'Article' });
+	const articlePartsRaw = await returnOneArticleFromDB({ slug });
+	// get a transformed version of the data
+	const articleScreenContent =
+		returnTransformedArticleScreenContent({
+			defaultsRaw,
+			screenRaw,
+			'articleMainRaw': articlePartsRaw.articleMainRaw,
+			'articleSectionsRaw': articlePartsRaw.articleSectionsRaw,
+			'articleMediaRaw': articlePartsRaw.articleMediaRaw,
+		});
+	// return the transformed data
+	return articleScreenContent;
 };
 export const returnContactScreenContent = async () => {
+	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'slug': '/contact' });
+		await returnOneScreenFromDB({ 'screenID': 'Contact' });
 
 	return screenRaw;
 };
 export const returnMetaScreenContent = async () => {
+	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'slug': '/meta' });
+		await returnOneScreenFromDB({ 'screenID': 'Meta' });
 
 	return screenRaw;
 };
 export const return404ScreenContent = async () => {
+	// get the raw data
 	const defaults =
 		await returnDefaultValuesFromDB();
 	const screenRaw =
-		await returnOneScreenFromDB({ 'slug': '/404' });
+		await returnOneScreenFromDB({ 'screenID': '404' });
 
 	return screenRaw;
 };

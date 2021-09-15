@@ -31,14 +31,14 @@ export const returnDefaultValuesFromDB = async () => {
 				},
 			]).toArray();
 		// return results, serialized and deserialized to convert BSON to JSON
-		return JSON.parse(JSON.stringify(result))[0];
+		return JSON.parse(JSON.stringify(result))[0].DefaultValues;
 		// if an error occurred
 	} catch (error) {
 		// return it
 		return error;
 	}
 };
-export const returnOneScreenFromDB = async ({ slug }) => {
+export const returnOneScreenFromDB = async ({ screenID }) => {
 	// attempt to get the data
 	try {
 		// get a database connection
@@ -49,7 +49,7 @@ export const returnOneScreenFromDB = async ({ slug }) => {
 		const mains =
 			await db.collection('screens').aggregate([
 				// match the document whose slug was received
-				{ '$match': { 'Slug': slug } },
+				{ '$match': { 'ScreenID': screenID } },
 				// look up the meta image for this screen
 				{
 					'$lookup':
@@ -311,7 +311,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 			'dbName': process.env.mongoDbDbName,
 		});
 		// get the raw data for this article from the database
-		let articleDataRaw = await db.collection('articles').aggregate([
+		let articleMainRaw = await db.collection('articles').aggregate([
 			// match the document whose slug matches the slug in context
 			{ '$match': { 'Slug': slug } },
 			// look up the brief statements for this article
@@ -394,20 +394,20 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 			},
 		]).toArray();
 		// serialize and deserialize returned data, converting BSON to JSON
-		articleDataRaw = JSON.parse(JSON.stringify(articleDataRaw))[0];
+		articleMainRaw = JSON.parse(JSON.stringify(articleMainRaw))[0];
 		// get the IDs of any sections in this article
 		const articleSectionIDs = [];
 		if (
-			articleDataRaw &&
-			articleDataRaw.Section &&
-			articleDataRaw.Section[0]
+			articleMainRaw &&
+			articleMainRaw.Section &&
+			articleMainRaw.Section[0]
 		) {
-			articleDataRaw.Section.forEach((sectionObject) => {
+			articleMainRaw.Section.forEach((sectionObject) => {
 				articleSectionIDs.push(new ObjectID(sectionObject.ref));
 			});
 		}
 		// get the raw data for this article's sections from the database
-		let sectionDataRaw = await db
+		let articleSectionsRaw = await db
 			.collection('components_content_article_sections').aggregate([
 				// match the documents whose IDs are in the
 				// collection of IDs
@@ -454,24 +454,26 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 				},
 			]).toArray();
 		// serialize and deserialize returned data, converting BSON to JSON
-		sectionDataRaw = JSON.parse(JSON.stringify(sectionDataRaw));
+		articleSectionsRaw = JSON.parse(JSON.stringify(articleSectionsRaw));
 		// get the IDs of any media items in
 		// this article's sections' subsections
-		const mediaItemIDs = [];
-		sectionDataRaw.forEach((sectionObject) => {
+		const articleMediaIDs = [];
+		articleSectionsRaw.forEach((sectionObject) => {
 			sectionObject.Subsections.forEach((subsectionObject) => {
 				subsectionObject.SubsectionMedia
-					.forEach((mediaItemIDString) => {
-						mediaItemIDs.push(new ObjectID(mediaItemIDString));
+					.forEach((articleMediaIDString) => {
+						articleMediaIDs.push(
+							new ObjectID(articleMediaIDString),
+						);
 					});
 			});
 		});
 		// get the raw data for this article's sections's
 		// subsection media items from the database
-		let mediaDataRaw = await db.collection('upload_file')
+		let articleMediaRaw = await db.collection('upload_file')
 			.find(
 				// find the documents whose IDs are in the collection of IDs
-				{ '_id': { '$in': mediaItemIDs } },
+				{ '_id': { '$in': articleMediaIDs } },
 				// specify which fields to return
 				{
 					'_id': 0,
@@ -486,9 +488,13 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 				},
 			).toArray();
 		// serialize and deserialize returned data, converting BSON to JSON
-		mediaDataRaw = JSON.parse(JSON.stringify(mediaDataRaw));
-		// return result
-		return articleDataRaw;
+		articleMediaRaw = JSON.parse(JSON.stringify(articleMediaRaw));
+		// return result all 3 results
+		return {
+			articleMainRaw,
+			articleSectionsRaw,
+			articleMediaRaw,
+		};
 		// if an error occurred
 	} catch (error) {
 		// return it

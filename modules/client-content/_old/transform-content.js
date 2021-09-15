@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import readingtime from 'reading-time';
 import GithubSlugger from 'github-slugger';
@@ -239,7 +240,7 @@ const returnFormattedDateString = ({
 			});
 	}
 	return '';
-}; */
+};
 const returnArticleIntermediateContent = ({
 	articleDataRaw, sectionDataRaw, mediaDataRaw,
 }) => {
@@ -571,7 +572,7 @@ ${textCollection.briefStatements}`,
 	});
 	// return what we developed
 	return articleIntermedate;
-};
+}; */
 /* const returnTableOfContentsContent = ({ headings }) => {
 	// construct markdown table of contents; it's easiest to do this first
 	// because markdown doesn't require us to close one tag, e.g., a
@@ -846,7 +847,7 @@ const returnArticleRenderedContent = ({ content }) => {
  * still in markup (not html), we break the transformation process into
  * two stages
  */
-export const returnTransformedArticleContent = ({
+/* export const returnTransformedArticleContent = ({
 	articleDataRaw, sectionDataRaw, mediaDataRaw,
 }) => {
 	// get the first, intermediate version of the article's content
@@ -929,7 +930,7 @@ export const returnTransformedArticlesContent = ({ articlesDataRaw }) => {
 			.filter(article => !article.featured),
 	};
 };
-/* export const returnTransformedScreenContent = ({ screenDataRaw }) => {
+export const returnTransformedScreenContent = ({ screenDataRaw }) => {
 	// set up container for the screen's rendered content and
 	// add properties to it as appropriate
 	const screenRendered = {

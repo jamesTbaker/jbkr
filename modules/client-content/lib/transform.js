@@ -11,6 +11,17 @@ import rehypeStringify from 'rehype-stringify';
 import { toString } from 'hast-util-to-string';
 import { h } from 'hastscript';
 
+const returnDefaultValuesObject = ({ defaultsRaw }) => {
+	// set up container
+	const defaultValues = {};
+	// for each object in the defaultsRaw array
+	defaultsRaw.forEach((defaultObject) => {
+		// key it into the container
+		defaultValues[defaultObject.Key] = defaultObject.Value;
+	});
+	// return the main container
+	return defaultValues;
+};
 const returnMediaType = ({
 	mime,
 }) => {
@@ -256,7 +267,7 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 	};
 	// continue extracting supplied properties
 	if (screenRaw.main.MetaTitle) {
-		screenRendered.meta.title = screenRaw.main.MetaTitle;
+		screenRendered.meta.metaTitle = screenRaw.main.MetaTitle;
 	}
 	if (screenRaw.main.MetaDescription) {
 		screenRendered.meta.metaDescription = screenRaw.main.MetaDescription;
@@ -297,7 +308,7 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 		screenRendered.meta.hasTableOfContents = true;
 	}
 	if (screenRaw.main.Slug) {
-		screenRendered.main.url = screenRaw.main.Slug;
+		screenRendered.meta.slug = screenRaw.main.Slug;
 	}
 	if (screenRaw.main.Title) {
 		screenRendered.main.title = screenRaw.main.Title;
@@ -314,19 +325,12 @@ const returnTransformedScreenContent = ({ screenRaw }) => {
 	}
 	return screenRendered;
 };
-export const returnTransformedLibLabScreenContent = ({
-	defaults, screenRaw, articlesRaw,
-}) => {
+const returnBasicScreenObject = ({ screenRaw }) => {
 	// set up container for all of this screen's properties
 	const allScreenProperties = {
 		'meta': {},
 		'header': {},
-		'main': {
-			'articles': {
-				'featured': {},
-				'standard': {},
-			},
-		},
+		'main': {},
 		'footer': {},
 	};
 	// get transformed version of the base screen data
@@ -348,19 +352,603 @@ export const returnTransformedLibLabScreenContent = ({
 		// add it to the main container
 		allScreenProperties.footer = screenTransformed.footer;
 	}
-	// if screenTransformed contains a main property
-	if (screenTransformed && screenTransformed.main) {
-		// if the main property contains a url property
-		if (screenTransformed.main.url) {
-			// add it to the main container
-			allScreenProperties.main.url = screenTransformed.main.url;
+	// if screenTransformed contains a main property with a title
+	if (
+		screenTransformed &&
+		screenTransformed.main &&
+		screenTransformed.main.title
+	) {
+		// add it to the main container
+		allScreenProperties.main.title = screenTransformed.main.title;
+	}
+	// return the main container
+	return allScreenProperties;
+};
+const returnArticleIntermediate = ({
+	defaultsRaw, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+}) => {
+	// get a transformed version of defaults
+	const defaults = returnDefaultValuesObject({ defaultsRaw });
+	// set up container for all sections
+	const sectionsIntermediate = [];
+	// for each section in the raw data
+	articleSectionsRaw.forEach((sectionObject) => {
+		// set up a new, single section container; add the
+		// corresponding properties from the raw section data
+		const sectionIntermediate = {};
+		if (sectionObject.SectionID) {
+			sectionIntermediate.sectionID = sectionObject.SectionID;
 		}
-		// if the main property contains a title property
-		if (screenTransformed.main.title) {
-			// add it to the main container
-			allScreenProperties.main.title = screenTransformed.main.title;
+		if (sectionObject.SectionTitle) {
+			sectionIntermediate.sectionTitle =
+				`## ${sectionObject.SectionTitle}`;
+		}
+		if (sectionObject.SectionPreface) {
+			sectionIntermediate.sectionPreface = sectionObject.SectionPreface;
+		}
+		if (sectionObject.SectionBriefStatements) {
+			sectionIntermediate.sectionBriefStatements =
+				returnExtractedBriefStatements({
+					'briefStatementsRaw': sectionObject.SectionBriefStatements,
+				});
+		}
+		if (sectionObject.SectionQuote) {
+			sectionIntermediate.sectionQuote = sectionObject.SectionQuote;
+		}
+		// set up a new container of this section's subsections
+		const subsectionsThisSection = [];
+		// for each subsection in the raw data for this section
+		sectionObject.Subsections.forEach((subsectionObject) => {
+			// set up a new, single subsection container; add the
+			// corresponding properties from the raw subsection data
+			const subsectionIntermediate = {};
+			if (subsectionObject.SubsectionID) {
+				subsectionIntermediate.subsectionID =
+					subsectionObject.SubsectionID;
+			}
+			if (subsectionObject.SubsectionTitle) {
+				subsectionIntermediate.subsectionTitle =
+					`### ${subsectionObject.SubsectionTitle}`;
+			}
+			if (subsectionObject.SubsectionText) {
+				subsectionIntermediate.subsectionText =
+					subsectionObject.SubsectionText;
+			}
+			if (subsectionObject.SubsectionGravity) {
+				subsectionIntermediate.subsectionGravity =
+					subsectionObject.SubsectionGravity;
+			}
+			if (subsectionObject.SubsectionMediaComponents) {
+				subsectionIntermediate.subsectionMediaComponents =
+					subsectionObject.SubsectionMediaComponents;
+			}
+			if (subsectionObject.SubsectionMediaGravity) {
+				subsectionIntermediate.subsectionMediaGravity =
+					subsectionObject.SubsectionMediaGravity;
+			}
+			// set up a new container of this subsection's media items
+			const mediaThisSubsection = [];
+			// for each media item ID in the raw data for this subsection
+			subsectionObject.SubsectionMedia.forEach((mediaItemID) => {
+				// for each media item
+				articleMediaRaw.forEach((mediaItem) => {
+					// if this media item's ID matches this media item ID
+					if (mediaItem._id === mediaItemID) {
+						// add the media item to the container of
+						// this subsection's media items
+						mediaThisSubsection.push({
+							'ext': mediaItem.ext,
+							'hash': mediaItem.hash,
+							'url': mediaItem.url,
+							'type': returnMediaType({
+								'mime': mediaItem.mime,
+							}),
+							'alternativeText': mediaItem.alternativeText,
+							'credit': mediaItem.caption,
+							'width': mediaItem.width,
+							'height': mediaItem.height,
+						});
+					}
+				});
+			});
+			// if any media was found for this subsection
+			if (mediaThisSubsection[0]) {
+				// add the media container to the subsection
+				subsectionIntermediate.subsectionMedia = mediaThisSubsection;
+			}
+			// if this subsection container received any properties
+			if (Object.keys(subsectionIntermediate)[0]) {
+				// add the subsection to the section container
+				subsectionsThisSection.push(subsectionIntermediate);
+			}
+		});
+		// if this subsection container received any elements
+		if (subsectionsThisSection[0]) {
+			// add the subsection container to the section container
+			sectionIntermediate.subsections = subsectionsThisSection;
+		}
+		// if this section container received any elements
+		if (Object.keys(sectionIntermediate)[0]) {
+			// add the section container to the sections container
+			sectionsIntermediate.push(sectionIntermediate);
+		}
+	});
+	// set up container for article properties; add the
+	// corresponding properties from the raw section data
+	const articleIntermedate = {};
+	if (articleMainRaw.Featured) {
+		articleIntermedate.featured = articleMainRaw.Featured;
+	}
+	if (articleMainRaw.PublicationDate) {
+		articleIntermedate.publicationDate = returnFormattedDateString({
+			'incomingDate': articleMainRaw.PublicationDate,
+			'formatToken': 'standardLongDate',
+		});
+	}
+	if (articleMainRaw.UpdateDate) {
+		articleIntermedate.updateDate =
+			new Date(articleMainRaw.UpdateDate)
+				.toLocaleDateString('en-US', {
+					'year': 'numeric',
+					'month': 'long',
+					'day': 'numeric',
+				});
+	}
+	if (articleMainRaw.Slug) {
+		articleIntermedate.slug = articleMainRaw.Slug;
+	}
+	if (articleMainRaw.Title) {
+		articleIntermedate.title = articleMainRaw.Subtitle ?
+			`${articleMainRaw.Title.trim()}: ${articleMainRaw.Subtitle}` :
+			articleMainRaw.Title;
+	}
+	if (articleMainRaw.Tagline) {
+		articleIntermedate.tagline = articleMainRaw.Tagline;
+	}
+	if (articleMainRaw.MetaTitle) {
+		articleIntermedate.metaTitle = articleMainRaw.MetaTitle;
+	}
+	if (articleMainRaw.MetaDescription) {
+		articleIntermedate.metaDescription = articleMainRaw.MetaDescription;
+	}
+	if (articleMainRaw.SocialDescription) {
+		articleIntermedate.socialDescription = articleMainRaw.SocialDescription;
+	}
+	// use a default meta image or default gravity if not supplied
+	let metaImageGravity = 'center';
+	if (articleMainRaw.MetaImageGravity) {
+		metaImageGravity = articleMainRaw.MetaImageGravity;
+	}
+	// if no meta image was supplied, or if the
+	// supplied image is missing any of the necessary properties
+	if (
+		!articleMainRaw.MetaImages ||
+		!articleMainRaw.MetaImages[0] ||
+		!articleMainRaw.MetaImages[0].hash ||
+		!articleMainRaw.MetaImages[0].ext ||
+		!articleMainRaw.MetaImages[0].mime ||
+		!articleMainRaw.MetaImages[0].alternativeText
+	) {
+		// use a default image
+		articleIntermedate.metaImage = {
+			'url': defaults.metaImageURL,
+			'alternativeText': defaults.metaImageAlternativeText,
+			'type': defaults.metaImageType,
+		};
+		// if all of the image properties are present
+	} else {
+		// transform the image properties
+		articleIntermedate.metaImage = {
+			'url': returnSocialImageCloudinaryURI({
+				'imagePublicID':
+					articleMainRaw.MetaImages[0].hash,
+				'imageExtension': articleMainRaw.MetaImages[0].ext,
+				'gravity': metaImageGravity,
+			}),
+			'alternativeText': articleMainRaw.MetaImages[0].alternativeText,
+			'type': returnMediaType({
+				'mime': articleMainRaw.MetaImages[0].mime,
+			}),
+		};
+	}
+	if (
+		articleMainRaw.HeadImages &&
+		articleMainRaw.HeadImages[0]
+	) {
+		// if the image is missing any of the necessary properties; even if an
+		// image caption was supplied, we won't use it with a default image
+		if (
+			!articleMainRaw.HeadImages[0].hash ||
+			!articleMainRaw.HeadImages[0].ext ||
+			!articleMainRaw.HeadImages[0].mime ||
+			!articleMainRaw.HeadImages[0].alternativeText ||
+			!articleMainRaw.HeadImages[0].width ||
+			!articleMainRaw.HeadImages[0].height
+		) {
+			// use a default image
+			articleIntermedate.headImage = {
+				'url': defaults.standardImageURL,
+				'alternativeText': defaults.standardImageAlternativeText,
+				'width': defaults.standardImageWidth,
+				'height': defaults.standardImageHeight,
+				'type': defaults.standardImageType,
+			};
+			// if all of the image properties are present
+		} else {
+			// transform the image properties
+			articleIntermedate.headImage = {
+				'url': returnStandardImageCloudinaryURI({
+					'imagePublicID':
+						articleMainRaw.HeadImages[0].hash,
+					'imageExtension': articleMainRaw.HeadImages[0].ext,
+				}),
+				'alternativeText': articleMainRaw.HeadImages[0].alternativeText,
+				'width': articleMainRaw.HeadImages[0].width,
+				'height': articleMainRaw.HeadImages[0].height,
+				'type': returnMediaType({
+					'mime': articleMainRaw.HeadImages[0].mime,
+				}),
+				'credit': articleMainRaw.HeadImages[0].caption,
+			};
+			// if a caption was also specified
+			if (articleMainRaw.HeadImageCaption) {
+				// add it as a property of the image
+				articleIntermedate.headImage.caption =
+					articleMainRaw.HeadImageCaption;
+			}
 		}
 	}
+	if (articleMainRaw.BriefStatements) {
+		articleIntermedate.briefStatements = returnExtractedBriefStatements({
+			'briefStatementsRaw': articleMainRaw.BriefStatements,
+		});
+	}
+	if (articleMainRaw.IntroText) {
+		articleIntermedate.introText = articleMainRaw.IntroText;
+	}
+	if (
+		articleMainRaw.IntroVideos &&
+		articleMainRaw.IntroVideos[0]
+	) {
+		if (
+			articleMainRaw.IntroVideos[0].url &&
+			articleMainRaw.IntroVideos[0].alternativeText
+		) {
+			articleIntermedate.introVideo = {
+				'url': articleMainRaw.IntroVideos[0].url,
+				'alternativeText':
+					articleMainRaw.IntroVideos[0].alternativeText,
+				'type': returnMediaType({
+					'mime': articleMainRaw.IntroVideos[0].mime,
+				}),
+			};
+			if (articleMainRaw.IntroVideos[0].caption) {
+				articleIntermedate.introVideo.credit =
+					articleMainRaw.IntroVideos[0].caption;
+			}
+		}
+	}
+	if (sectionsIntermediate && sectionsIntermediate[0]) {
+		articleIntermedate.sections = sectionsIntermediate;
+	}
+	if (articleMainRaw.SimpleBody) {
+		articleIntermedate.simpleBody = articleMainRaw.SimpleBody;
+	}
+	// collect the text from simple body, the various sections and subsections,
+	// and brief statements; will be used to determine stats for the content and
+	// develop a table of contents
+	const textCollection = {
+		'approximateMain': `${articleIntermedate.title}
+${articleIntermedate.publicationDate}
+`,
+		'briefStatements': '',
+	};
+	if (articleIntermedate.simpleBody) {
+		textCollection.approximateMain += articleIntermedate.simpleBody + '\n';
+	}
+	if (
+		articleIntermedate &&
+		articleIntermedate.briefStatements &&
+		articleIntermedate.briefStatements[0]
+	) {
+		articleIntermedate.briefStatements.forEach((briefStatement) => {
+			textCollection.briefStatements += ' ' + briefStatement.content;
+		});
+	}
+	if (
+		articleIntermedate &&
+		articleIntermedate.sections &&
+		articleIntermedate.sections[0]
+	) {
+		articleIntermedate.sections.forEach((section) => {
+			if (section.sectionTitle) {
+				textCollection.approximateMain += section.sectionTitle + '\n';
+			}
+			if (section.sectionIntro) {
+				textCollection.approximateMain += section.sectionIntro + '\n';
+			}
+			if (section.sectionBriefStatements) {
+				section.sectionBriefStatements
+					.forEach((sectionBriefStatement) => {
+						textCollection.briefStatements +=
+							' ' + sectionBriefStatement.content;
+					});
+			}
+			section.subsections.forEach((subsection) => {
+				if (subsection.subsectionTitle) {
+					textCollection.approximateMain +=
+						subsection.subsectionTitle + '\n';
+				}
+				if (subsection.subsectionText) {
+					textCollection.approximateMain +=
+						subsection.subsectionText + '\n';
+				}
+			});
+		});
+	}
+	// get stats about the article
+	articleIntermedate.stats = returnContentStats({
+		'content': `${textCollection.approximateMain}
+${textCollection.briefStatements}`,
+	});
+	// get a table of contents for the article
+	articleIntermedate.headingsWithMetadata = returnHeadingsWithMetadata({
+		'content': textCollection.approximateMain,
+	});
+	// return what we developed
+	return articleIntermedate;
+};
+const returnArticleRendered = ({ content }) => {
+	// set up container for the article's rendered content
+	const articleRendered = {
+		'meta': {},
+		'frontMatter': {},
+		'mainContent': {},
+	};
+	// collect the article's metadata
+	if (content.featured) {
+		articleRendered.frontMatter.featured = content.featured;
+	}
+	if (content.metaDescription) {
+		articleRendered.meta.metaDescription = content.metaDescription;
+	}
+	if (content.metaImage) {
+		articleRendered.meta.metaImage = content.metaImage;
+	}
+	if (content.metaTitle) {
+		articleRendered.meta.metaTitle = content.metaTitle;
+	}
+	if (content.slug) {
+		articleRendered.meta.slug = content.slug;
+	}
+	if (content.socialDescription) {
+		articleRendered.meta.socialDescription = content.socialDescription;
+	}
+	// collect and render the article's front matter content
+	if (content.headImage) {
+		articleRendered.frontMatter.headImage = {
+			'url': content.headImage.url,
+			'alternativeText': content.headImage.alternativeText,
+			'width': content.headImage.width,
+			'height': content.headImage.height,
+			'type': content.headImage.type,
+		};
+		if (content.headImage.credit) {
+			articleRendered.frontMatter.headImage.credit =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.headImage.credit,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
+		if (content.headImage.caption) {
+			articleRendered.frontMatter.headImage.caption =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.headImage.caption,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
+	}
+	if (content.title) {
+		articleRendered.frontMatter.title = content.title;
+	}
+	if (content.tagline) {
+		articleRendered.frontMatter.tagline = content.tagline;
+	}
+	if (content.briefStatements) {
+		articleRendered.frontMatter.briefStatements = [];
+		content.briefStatements
+			.forEach((briefStatement) => {
+				articleRendered.frontMatter.briefStatements.push({
+					'key': briefStatement.key,
+					'content': returnSimpleHTMLFromMarkdown({
+						'content': briefStatement.content,
+						'options': {
+							'removeEndCapTags': true,
+						},
+					}),
+				});
+			});
+	}
+	if (content.introText) {
+		articleRendered.frontMatter.introText =
+			returnSimpleHTMLFromMarkdown({
+				'content': content.introText,
+			});
+	}
+	if (content.introVideo) {
+		articleRendered.frontMatter.introVideo = {
+			'url': content.introVideo.url,
+			'type': content.introVideo.type,
+			'alternativeText': content.introVideo.alternativeText,
+		};
+		if (content.introVideo.credit) {
+			articleRendered.frontMatter.introVideo.credit =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.introVideo.credit,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
+	}
+	if (content.headingsWithMetadata) {
+		articleRendered.frontMatter.tableOfContents =
+			returnTableOfContentsContent({
+				'headings': content.headingsWithMetadata,
+			});
+	}
+	if (content.publicationDate) {
+		articleRendered.frontMatter.publicationDate = content.publicationDate;
+	}
+	if (content.updateDate) {
+		articleRendered.frontMatter.updateDate = content.updateDate;
+	}
+	if (content.stats) {
+		articleRendered.frontMatter.stats = content.stats.statement;
+	}
+	// collect and render the article's main content
+	if (content.simpleBody) {
+		articleRendered.mainContent.simpleBody =
+			returnSluggifiedHTMLFromMarkdown({
+				'content': content.simpleBody,
+			});
+	}
+	if (content.sections) {
+		// set up container for all sections
+		const sectionsRendered = [];
+		// for each section
+		content.sections.forEach((sectionObject) => {
+			// set up a new, single section container; add the
+			// corresponding properties from the raw section data
+			const sectionRendered = {};
+			if (sectionObject.sectionID) {
+				sectionRendered.sectionID = sectionObject.sectionID;
+			}
+			if (sectionObject.sectionTitle) {
+				sectionRendered.sectionTitle =
+					returnSluggifiedHTMLFromMarkdown({
+						'content': sectionObject.sectionTitle,
+					});
+			}
+			if (sectionObject.sectionPreface) {
+				sectionRendered.sectionPreface =
+					returnSimpleHTMLFromMarkdown({
+						'content': sectionObject.sectionPreface,
+					});
+			}
+			if (sectionObject.sectionBriefStatements) {
+				sectionRendered.sectionBriefStatements = [];
+				sectionObject.sectionBriefStatements
+					.forEach((briefStatement) => {
+						sectionRendered.sectionBriefStatements.push({
+							'key': briefStatement.key,
+							'content': returnSimpleHTMLFromMarkdown({
+								'content': briefStatement.content,
+								'options': {
+									'removeEndCapTags': true,
+								},
+							}),
+						});
+					});
+			}
+			if (sectionObject.sectionQuote) {
+				sectionRendered.sectionQuote = returnSimpleHTMLFromMarkdown({
+					'content': sectionObject.sectionQuote,
+				});
+			}
+			// set up a new container of this section's subsections
+			const subsectionsThisSection = [];
+			// for each subsection in the raw data for this section
+			sectionObject.subsections.forEach((subsectionObject) => {
+				// set up a new, single subsection container; add the
+				// corresponding properties from the raw subsection data
+				const subsectionRendered = {};
+				if (subsectionObject.subsectionID) {
+					subsectionRendered.subsectionID =
+						subsectionObject.subsectionID;
+				}
+				if (subsectionObject.subsectionGravity) {
+					subsectionRendered.subsectionGravity =
+						subsectionObject.subsectionGravity;
+				}
+				if (subsectionObject.subsectionTitle) {
+					subsectionRendered.subsectionTitle =
+						returnSluggifiedHTMLFromMarkdown({
+							'content': subsectionObject.subsectionTitle,
+						});
+				}
+				if (subsectionObject.subsectionText) {
+					subsectionRendered.subsectionText =
+						returnSluggifiedHTMLFromMarkdown({
+							'content': subsectionObject.subsectionText,
+						});
+				}
+				if (subsectionObject.subsectionMedia) {
+					subsectionRendered.subsectionMedia = [];
+					subsectionObject.subsectionMedia.forEach((mediaItem) => {
+						subsectionRendered.subsectionMedia.push({
+							'ext': mediaItem.ext,
+							'hash': mediaItem.hash,
+							'url': mediaItem.url,
+							'type': mediaItem.type,
+							'alternativeText': mediaItem.alternativeText,
+							'credit': returnSimpleHTMLFromMarkdown({
+								'content': mediaItem.credit,
+								'options': {
+									'removeEndCapTags': true,
+								},
+							}),
+							'width': mediaItem.width,
+							'height': mediaItem.height,
+						});
+					});
+				}
+				if (subsectionObject.subsectionMediaComponents) {
+					subsectionRendered.subsectionMediaComponents =
+						subsectionObject.subsectionMediaComponents;
+				}
+				if (subsectionObject.subsectionMediaGravity) {
+					subsectionRendered.subsectionMediaGravity =
+						subsectionObject.subsectionMediaGravity;
+				}
+				// if this subsection container received any properties
+				if (Object.keys(subsectionRendered)[0]) {
+					// add the subsection to the section container
+					subsectionsThisSection.push(subsectionRendered);
+				}
+			});
+			// if this subsection container received any elements
+			if (subsectionsThisSection[0]) {
+				// add the subsection container to the section container
+				sectionRendered.subsections = subsectionsThisSection;
+			}
+			// if this section container received any elements
+			if (Object.keys(sectionRendered)[0]) {
+				// add the section container to the sections container
+				sectionsRendered.push(sectionRendered);
+			}
+		});
+		// add the container for all sections to the article's other content
+		articleRendered.mainContent.sections = sectionsRendered;
+	}
+
+	// return the container of the article's rendered content
+	return articleRendered;
+};
+export const returnTransformedLibLabScreenContent = ({
+	screenRaw, articlesRaw,
+}) => {
+	// set up container for all of this screen's properties
+	const allScreenProperties = returnBasicScreenObject({ screenRaw });
+	// add articles property to main container
+	allScreenProperties.main.articles = {
+		'featured': {},
+		'standard': {},
+	};
 	// set up an intermediate container for all articles, featured and standard
 	const articlesTransformed = [];
 	// for each article in the raw data
@@ -428,6 +1016,31 @@ export const returnTransformedLibLabScreenContent = ({
 	// add the standard, transformed articles to the main container
 	allScreenProperties.main.articles.standard =
 		articlesTransformed.filter(article => !article.featured);
+	// return the main container
+	return allScreenProperties;
+};
+export const returnTransformedArticleScreenContent = ({
+	defaultsRaw, screenRaw, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+}) => {
+	// set up container for all of this screen's properties
+	const allScreenProperties = returnBasicScreenObject({ screenRaw });
+	// get the first, intermediate version of the article's content
+	const articleIntermedate = returnArticleIntermediate({
+		defaultsRaw, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+	});
+	// get the rendered version of the article's content
+	const articleRendered = returnArticleRendered({
+		'content': articleIntermedate,
+	});
+	// integrate the rendered article into allScreenProperties
+	allScreenProperties.main.title = articleRendered.frontMatter.title;
+	delete articleRendered.frontMatter.title;
+	allScreenProperties.meta = {
+		...allScreenProperties.meta,
+		...articleRendered.meta,
+	};
+	delete articleRendered.meta;
+	allScreenProperties.main.article = articleRendered;
 	// return the main container
 	return allScreenProperties;
 };

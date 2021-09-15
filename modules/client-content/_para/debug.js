@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
 	returnDefaultValuesFromDB,
 	returnOneScreenFromDB,
@@ -28,7 +29,8 @@ import {
 // const result = await returnAllArticlesFromDB();
 // const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
 
-const result = await returnLibLabScreenContent();
+// const result = await returnLibLabScreenContent();
+const result = await returnArticleScreenContent({ 'slug': 'the-hub' });
 
 
 console.log(result);
