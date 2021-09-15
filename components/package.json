@@ -1,0 +1,17 @@
+{
+	"name": "@jbkr/components",
+	"version": "0.1.0",
+	"description": "React components",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"@jbkr/style-service": "file:../modules/style-service",
+		"prop-types": "^15.7.2",
+		"react": "^17.0.2",
+		"react-player": "^2.9.0",
+		"styled-components": "^5.3.1"
+	}
+}

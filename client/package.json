@@ -1,47 +1,23 @@
 {
-	"name": "@jbkr/client",
-	"version": "0.1.0",
-	"description": "client",
-	"author": "James Baker",
-	"license": "UNLICENSED",
 	"private": true,
 	"scripts": {
-		"n:dev": "next dev",
-		"n:debug": "NODE_OPTIONS='--inspect' next dev",
-		"n:lint": "next lint",
-		"n:build": "next build",
-		"n:start": "next start",
-		"sb:dev": "start-storybook -p 6006 --ci",
-		"sb:build": "build-storybook"
+		"dev": "next",
+		"build": "next build",
+		"start": "next start"
 	},
 	"dependencies": {
-		"@jbkr/client-content": "file:../modules/client-content",
+		"@jbkr/components": "file:../components",
 		"@jbkr/style-service": "file:../modules/style-service",
 		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
-		"@jbkr/utilities": "file:../modules/utilities",
-		"bson": "^4.5.1",
-		"markdown-it": "^12.2.0",
-		"mongodb": "^3.5.9",
 		"next": "latest",
 		"prismjs": "^1.24.1",
-		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-is": "^17.0.2",
-		"react-player": "^2.9.0",
-		"styled-components": "^5.3.0",
+		"styled-components": "^5.2.3",
 		"styled-normalize": "^8.0.7"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.15.0",
-		"@jbkr/storybook-themes": "file:../modules/storybook-themes",
-		"@storybook/addon-actions": "^6.3.7",
-		"@storybook/addon-essentials": "^6.3.7",
-		"@storybook/addon-links": "^6.3.7",
-		"@storybook/components": "^6.3.7",
-		"@storybook/react": "^6.3.7",
-		"@storybook/theming": "^6.3.7",
-		"babel-loader": "^8.2.2",
-		"babel-plugin-styled-components": "^1.13.2"
+		"babel-plugin-styled-components": "^1.12.0"
 	}
 }
