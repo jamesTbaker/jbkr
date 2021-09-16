@@ -5,6 +5,7 @@ const ScreenContainer = (props) => (
 	<>
 		<p>Inside ScreenContainer</p>
 		<p>{props.content}</p>
+		<Test />
 	</>
 );
 export default ScreenContainer;
