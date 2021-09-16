@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable indent */
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { normalize } from 'styled-normalize';
