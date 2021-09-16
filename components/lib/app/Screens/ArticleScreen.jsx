@@ -2,6 +2,7 @@ import { Scaffold } from '../Layout/Scaffold';
 import { MainContent } from '../Layout/MainContent';
 import { Aside } from '../Layout/Aside';
 import { ArticleTableOfContents } from '../Articles/ArticleTableOfContents';
+import { ArticleDetail } from '../Articles/ArticleDetail';
 
 export const ArticleScreen = ({
 	meta,
@@ -18,7 +19,11 @@ export const ArticleScreen = ({
 		}
 	>
 		<MainContent>
-			<h1>{main.title}</h1>
+			<ArticleDetail
+				title={main.title}
+				frontMatter={main.article.frontMatter}
+				mainContent={main.article.mainContent}
+			/>
 		</MainContent>
 		<Aside>
 			{

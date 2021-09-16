@@ -11,18 +11,20 @@ import styled from 'styled-components';
 		content: counters(list-item,'.') ' ';
 	}
  */
-const ArticleTableOfContentsContainer = styled.nav`
+const ArticleTableOfContentsContainer = styled.div`
 `;
 /**
  * The TOC
  */
 export const ArticleTableOfContents = ({
 	contents,
-}) => <ArticleTableOfContentsContainer
-	dangerouslySetInnerHTML={{
-		'__html': contents,
-	}}
->
+}) => <ArticleTableOfContentsContainer>
+	<h2 id="table-of-contents">Table of Contents</h2>
+	<nav
+		dangerouslySetInnerHTML={{
+			'__html': contents,
+		}}
+	/>
 </ArticleTableOfContentsContainer>;
 ArticleTableOfContents.propTypes = {
 	/**

@@ -10,50 +10,39 @@ import { ArticleIntro } from './ArticleIntro';
 import { ArticleSections } from './ArticleSections';
 import { ArticleAside } from './ArticleAside';
 
-const ArticleDetailContainer = styled.div`
-`;
-
 export const ArticleDetail = ({
+	title,
 	frontMatter,
 	mainContent,
 }) => (
-	<ArticleDetailContainer>
-		<MainContent>
-			<article>
-				<ArticleHeader
-					headImage={frontMatter.headImage}
-					title={frontMatter.title}
-					updateDate={frontMatter.updateDate}
-					publicationDate={frontMatter.publicationDate}
-					stats={frontMatter.stats}
-					tagline={frontMatter.tagline}
-				/>
-				<ArticleIntro
-					briefStatements={frontMatter.briefStatements}
-					introText={frontMatter.introText}
-					introVideo={frontMatter.introVideo}
-				/>
-				{
-					mainContent.simpleBody &&
+	<article>
+		<ArticleHeader
+			headImage={frontMatter.headImage}
+			title={title}
+			updateDate={frontMatter.updateDate}
+			publicationDate={frontMatter.publicationDate}
+			stats={frontMatter.stats}
+			tagline={frontMatter.tagline}
+		/>
+		<ArticleIntro
+			briefStatements={frontMatter.briefStatements}
+			introText={frontMatter.introText}
+			introVideo={frontMatter.introVideo}
+		/>
+		{
+			mainContent.simpleBody &&
 
-					<Copy
-						kind="body-container--standard"
-						htmlContent={mainContent.simpleBody}
-					/>
-				}
-				{
-					mainContent.sections &&
+			<Copy
+				kind="body-container--standard"
+				htmlContent={mainContent.simpleBody}
+			/>
+		}
+		{
+			mainContent.sections &&
 
-					<ArticleSections
-						sections={mainContent.sections}
-					/>
-				}
-			</article>
-			<Aside>
-				<ArticleAside
-					tableOfContents={frontMatter.tableOfContents}
-				/>
-			</Aside>
-		</MainContent>
-	</ArticleDetailContainer>
+			<ArticleSections
+				sections={mainContent.sections}
+			/>
+		}
+	</article>
 );

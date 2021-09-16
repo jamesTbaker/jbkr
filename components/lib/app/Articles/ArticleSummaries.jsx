@@ -10,18 +10,22 @@ const ArticleSummariesContainer = styled.div`
 `;
 
 export const ArticleSummaries = ({
-	featuredArticles,
-	standardArticles,
+	title,
+	articles,
 }) => (
 	<ArticleSummariesContainer>
 		<MainContent>
+			<Copy
+				kind="h1"
+				htmlContent={title}
+			/>
 			<Copy
 				kind="h2"
 			>
 				Featured Articles
 			</Copy>
 			{
-				featuredArticles.map((articleSummary) =>
+				articles.featured.map((articleSummary) =>
 					<ArticleSummary
 						key={articleSummary.key}
 						content={articleSummary}
@@ -34,7 +38,7 @@ export const ArticleSummaries = ({
 				Standard Articles
 			</Copy>
 			{
-				standardArticles.map((articleSummary) =>
+				articles.standard.map((articleSummary) =>
 					<ArticleSummary
 						key={articleSummary.key}
 						content={articleSummary}

@@ -1,5 +1,7 @@
 import { Scaffold } from '../Layout/Scaffold';
 import { MainContent } from '../Layout/MainContent';
+import { ArticleSummaries } from '../Articles/ArticleSummaries';
+
 
 export const LibLabScreen = ({
 	meta,
@@ -13,7 +15,10 @@ export const LibLabScreen = ({
 		footer={footer}
 	>
 		<MainContent>
-			<h1>{main.title}</h1>
+			<ArticleSummaries
+				title={main.title}
+				articles={main.articles}
+			/>
 		</MainContent>
 	</Scaffold>
 );
