@@ -257,8 +257,8 @@ export const returnAllVolunteerExperiencesFromDB = async () => {
 					'EndYear': 1,
 				},
 			}).sort({ 'EndYear': -1 }).toArray();
-		// return result
-		return result;
+		// return result, serialized and deserialized to convert BSON to JSON
+		return JSON.parse(JSON.stringify(result));
 		// if an error occurred
 	} catch (error) {
 		// return it

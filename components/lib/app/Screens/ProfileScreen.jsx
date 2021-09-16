@@ -1,5 +1,6 @@
 import { Scaffold } from '../Layout/Scaffold';
 import { MainContent } from '../Layout/MainContent';
+import { Profile } from '../Profile/Profile';
 
 export const ProfileScreen = ({
 	meta,
@@ -13,7 +14,13 @@ export const ProfileScreen = ({
 		footer={footer}
 	>
 		<MainContent>
-			<h1>{main.title}</h1>
+			<Profile
+				title={main.title}
+				skills={main.skills}
+				professionalExperiences={main.professionalExperiences}
+				educationCertification={main.educationCertification}
+				volunteerExperiences={main.volunteerExperiences}
+			/>
 		</MainContent>
 	</Scaffold>
 );

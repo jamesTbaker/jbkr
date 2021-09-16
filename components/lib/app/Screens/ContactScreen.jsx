@@ -14,6 +14,9 @@ export const ContactScreen = ({
 	>
 		<MainContent>
 			<h1>{main.title}</h1>
+			<p
+				dangerouslySetInnerHTML={{ '__html': main.contentItems.main }}
+			/>
 		</MainContent>
 	</Scaffold>
 );

@@ -1003,8 +1003,9 @@ export const returnTransformedProfileScreenContent = ({
 		const prominenceKey = skillRaw.Featured ? 'featured' : 'standard';
 		// add a transformed version of this skill to the appropriate array
 		allScreenProperties.main.skills[categoryKey][prominenceKey].push({
-			'percentageExpertise': skillRaw.PercentageExpertise,
+			'key': skillRaw._id,
 			'name': skillRaw.SkillName,
+			'percentageExpertise': skillRaw.PercentageExpertise,
 		});
 	});
 	// set up professional experiences container inside the main container
@@ -1013,6 +1014,7 @@ export const returnTransformedProfileScreenContent = ({
 	professionalExperiencesRaw.forEach((professionalExperience) => {
 		// add a transformed version of this experience to the appropriate array
 		allScreenProperties.main.professionalExperiences.push({
+			'key': professionalExperience._id,
 			'title': professionalExperience.Title,
 			'description': returnSimpleHTMLFromMarkdown({
 				'content': professionalExperience.Description,
@@ -1036,6 +1038,7 @@ export const returnTransformedProfileScreenContent = ({
 	educationCertificationRaw.forEach((educationCertification) => {
 		// add a transformed version of this item to the appropriate array
 		allScreenProperties.main.educationCertification.push({
+			'key': educationCertification._id,
 			'header': educationCertification.Header,
 			'tagline': educationCertification.Tagline,
 			'details': returnSimpleHTMLFromMarkdown({
@@ -1054,6 +1057,7 @@ export const returnTransformedProfileScreenContent = ({
 	volunteerExperiencesRaw.forEach((volunteerExperience) => {
 		// add a transformed version of this experience to the appropriate array
 		allScreenProperties.main.volunteerExperiences.push({
+			'key': volunteerExperience._id,
 			'title': volunteerExperience.Title,
 			'description': volunteerExperience.Description,
 			'forWhom': volunteerExperience.ForWhom,
