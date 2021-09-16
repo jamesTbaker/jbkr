@@ -1,15 +1,15 @@
 import { returnContentAsProps } from '@jbkr/http-client';
-import { ProfileScreen } from '@jbkr/components';
+import { FourOhFourScreen } from '@jbkr/components';
 
 
 const ScreenContainer = (props) => (
-	<ProfileScreen
+	<FourOhFourScreen
 		{...props}
 	/>
 );
 export default ScreenContainer;
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	return await returnContentAsProps({
-		'contentToken': 'profile',
+		'contentToken': 'fourohfour',
 	});
 }

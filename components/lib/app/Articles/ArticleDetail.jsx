@@ -3,8 +3,8 @@
 
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
-import { MainContent } from '../Regions/MainContent';
-import { Aside } from '../Regions/Aside';
+import { MainContent } from '../Layout/MainContent';
+import { Aside } from '../Layout/Aside';
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleIntro } from './ArticleIntro';
 import { ArticleSections } from './ArticleSections';

@@ -1,15 +1,15 @@
 import { returnContentAsProps } from '@jbkr/http-client';
-import { ProfileScreen } from '@jbkr/components';
-
+import { ArticleScreen } from '@jbkr/components';
 
 const ScreenContainer = (props) => (
-	<ProfileScreen
+	<ArticleScreen
 		{...props}
 	/>
 );
 export default ScreenContainer;
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
 	return await returnContentAsProps({
-		'contentToken': 'profile',
+		'contentToken': 'liblab',
+		'slug': context.query.slug,
 	});
 }

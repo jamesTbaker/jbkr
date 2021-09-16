@@ -31,7 +31,7 @@ const returnContentEndpoint = ({ endpointToken, slug }) => {
 		slug
 	) {
 		// augment the endpont with the slug
-		endpoint += `/$slug`;
+		endpoint += `/${slug}`;
 	}
 	// return the endpoint
 	return endpoint;
@@ -39,7 +39,8 @@ const returnContentEndpoint = ({ endpointToken, slug }) => {
 export const returnContentAsProps = async ({ contentToken, slug }) => {
 	// get the endpoint
 	const endpoint = returnContentEndpoint({
-		'endpointToken': contentToken, slug,
+		'endpointToken': contentToken,
+		slug,
 	});
 	// construct the fetch options to include the authorization header
 	const options = {

@@ -3,7 +3,7 @@
 
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
-import { MainContent } from '../Regions/MainContent';
+import { MainContent } from '../Layout/MainContent';
 import { ArticleSummary } from './ArticleSummary';
 
 const ArticleSummariesContainer = styled.div`

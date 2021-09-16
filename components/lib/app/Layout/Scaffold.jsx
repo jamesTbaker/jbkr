@@ -2,8 +2,8 @@
 /* eslint-disable react/prop-types */
 
 import Head from 'next/head';
-import { Banner } from '../Regions/Banner';
-import { Footer } from '../Regions/Footer';
+import { Banner } from '../Layout/Banner';
+import { Footer } from '../Layout/Footer';
 import styled from 'styled-components';
 
 const SkipLinksContainer = styled.div`
@@ -13,43 +13,45 @@ const SkipLinksContainer = styled.div`
 
 export const Scaffold = ({
 	'meta': {
-		url,
-		title,
 		metaDescription,
-		socialDescription,
-		openGraphType,
 		metaImage,
 		metaOther,
-		hasTableOfContents,
+		metaTitle,
+		openGraphType,
+		slug,
+		socialDescription,
 	},
+	header,
+	footer,
+	hasTableOfContents,
 	children,
 }) => {
 	return(
 		<>
 			<Head>
 				{
-					url &&
+					slug &&
 					<meta property="og:url"
-						content={`https://jbkr.me${url}`} />
+						content={`https://jbkr.me${slug}`} />
 				}
 				{
-					url &&
+					slug &&
 					<meta property="twitter:url"
-						content={`https://jbkr.me${url}`} />
+						content={`https://jbkr.me${slug}`} />
 				}
 				{
-					title &&
-					<title>{`${title}`} | jbkr</title>
+					metaTitle &&
+					<title>{`${metaTitle}`} | jbkr</title>
 				}
 				{
-					title &&
-					<meta property="og:title"
-						content={`${title}`} />
+					metaTitle &&
+					<meta property="og:metaTitle"
+						content={`${metaTitle}`} />
 				}
 				{
-					title &&
-					<meta name="twitter:title"
-						content={`${title}`} />
+					metaTitle &&
+					<meta name="twitter:metaTitle"
+						content={`${metaTitle}`} />
 				}
 				{
 					metaDescription &&
@@ -75,8 +77,7 @@ export const Scaffold = ({
 				}
 				{
 					metaImage && metaImage.url &&
-					<meta name="twitter:image"
-						content={metaImage.url} />
+					<meta name="twitter:image" content={metaImage.url} />
 				}
 				{
 					metaImage && metaImage.alternativeText &&
@@ -94,7 +95,7 @@ export const Scaffold = ({
 					)
 				}
 			</Head>
-			{/* <SkipLinksContainer>
+			<SkipLinksContainer>
 				{
 					hasTableOfContents &&
 					<ul>
@@ -115,9 +116,13 @@ export const Scaffold = ({
 					<a href="#main-content">Skip to main content</a>
 				}
 			</SkipLinksContainer>
-			<Banner /> */}
+			<Banner
+				content={header}
+			/>
 			{children}
-			{/* <Footer /> */}
+			<Footer
+				content={footer.copy}
+			/>
 		</>
 	);
 };

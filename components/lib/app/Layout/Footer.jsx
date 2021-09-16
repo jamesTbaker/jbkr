@@ -8,8 +8,8 @@ const FooterContainer = styled.footer`
 	background-color: hsla(0,0%,0%,.8);
 `;
 
-export const Footer = ({ children }) => (
-	<FooterContainer role="contentinfo">
-		Footer Content Here. Don&apos;t include a &lt;nav&gt; element.
-	</FooterContainer>
+export const Footer = ({ content }) => (
+	<FooterContainer role="contentinfo"
+		dangerouslySetInnerHTML={{ '__html': content }}
+	/>
 );
