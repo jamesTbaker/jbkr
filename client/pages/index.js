@@ -1,25 +1,16 @@
-import { Test } from '@jbkr/components';
-
+// import { Test } from '@jbkr/components';
+import { returnContentAsProps } from '@jbkr/http-client';
 
 const ScreenContainer = (props) => (
 	<>
 		<p>Inside ScreenContainer</p>
-		<p>{props.content}</p>
-		<Test />
+		{/* <p>{props.content}</p>
+		<Test /> */}
 	</>
 );
 export default ScreenContainer;
 export async function getServerSideProps(context) {
-	const response = await fetch('https://biytkgyeaf.execute-api.us-east-1.amazonaws.com/prod/content/client/profile', {
-		'headers': {
-			'Authorization': `Bearer ${process.env.simpleAuthKey}`,
-		},
+	return await returnContentAsProps({
+		'contentToken': 'profile',
 	});
-	const json = await response.json();
-	return {
-		'props': {
-			'content': 'hereknae',
-			'data': json,
-		},
-	};
 }

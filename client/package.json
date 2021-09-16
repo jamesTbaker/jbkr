@@ -7,6 +7,7 @@
 	},
 	"dependencies": {
 		"@jbkr/components": "file:../components",
+		"@jbkr/http-client": "file:../modules/http-client",
 		"@jbkr/style-service": "file:../modules/style-service",
 		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
 		"next": "latest",
@@ -20,5 +21,17 @@
 	},
 	"devDependencies": {
 		"babel-plugin-styled-components": "^1.12.0"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	}
 }

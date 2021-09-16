@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs';
+import { prismCSS } from '@jbkr/syntax-highlighting';
+
+<Meta title="Introduction" />
+
+<style>{prismCSS}</style>
+# Components
+
+This is `some great content` about components.
+
+## Notes
+
+### Color in this Documentation
+
+For context, review how color is handled in this sytem.
+
+Storybook's controls are very limited and do not allow for nesting, cascading,
+etc. I've experimented with handling color kind, tone, level, and alpha as
+separate properties, as demonstrated in the
+[Storybook documentation re: handling complex values
+](https://storybook.js.org/docs/react/essentials/controls#dealing-with-complex-values).
+While this worked just fine initially, when a Storybook page was reloaded, the
+level control would not take its value from the URL parameter. Furthermore, it
+was still very easy to set the controls to specify colors that do not exist in
+this design system's color scheme.
+
+It's also possible to use a ColorPicker control and even [
+specify a set of color swatches for this
+control](https://storybook.js.org/docs/react/essentials/controls#specify-initial-preset-color-swatches).
+However, among other issues, this misrepresents the components' actual API.
+
+If I decide to change the API for specifying colors to something simpler, such
+as a flat list of available colors, then I may choose to add a color control.
