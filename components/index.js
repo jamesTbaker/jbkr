@@ -13,7 +13,6 @@ export { MetaScreen } from './lib/app/Screens/MetaScreen.jsx';
 export { FourOhFourScreen } from './lib/app/Screens/FourOhFourScreen.jsx';
 
 // Article
-export { ArticleAside } from './lib/app/Articles/ArticleAside.jsx';
 export { ArticleBriefStatement } from './lib/app/Articles/ArticleBriefStatement.jsx';
 export { ArticleBriefStatements } from './lib/app/Articles/ArticleBriefStatements.jsx';
 export { ArticleDetail } from './lib/app/Articles/ArticleDetail.jsx';

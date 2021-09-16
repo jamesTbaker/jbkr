@@ -16,17 +16,17 @@ export const Profile = ({
 		<ProfileHeader
 			title={title}
 		/>
-		{/* <ProfileSkills
+		<ProfileSkills
 			skills={skills}
 		/>
 		<ProfileProfessionalExperiences
 			professionalExperiences={professionalExperiences}
-		/> */}
+		/>
 		<ProfileEducationCertifications
 			educationCertification={educationCertification}
 		/>
-		{/* <ProfileVolunteerExperiences
+		<ProfileVolunteerExperiences
 			volunteerExperiences={volunteerExperiences}
-		/> */}
+		/>
 	</>
 );

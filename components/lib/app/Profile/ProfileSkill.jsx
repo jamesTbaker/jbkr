@@ -9,12 +9,15 @@ export const ProfileSkill = ({
 		{
 			visualize &&
 
-			<Copy kind="h5">Vis: {skill.name}</Copy>
+			<Copy
+				kind="h5"
+				htmlContent={`${skill.percentageExpertise}% &mdash; ${skill.name}`}
+			/>
 		}
 		{
 			!visualize &&
 
-			<Copy kind="h5">No Vis: {skill.name}</Copy>
+			<Copy kind="body--standard">{skill.name}</Copy>
 		}
 	</>
 );

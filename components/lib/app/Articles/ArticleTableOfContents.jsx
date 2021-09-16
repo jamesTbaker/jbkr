@@ -13,9 +13,6 @@ import styled from 'styled-components';
  */
 const ArticleTableOfContentsContainer = styled.div`
 `;
-/**
- * The TOC
- */
 export const ArticleTableOfContents = ({
 	contents,
 }) => <ArticleTableOfContentsContainer>
@@ -26,9 +23,3 @@ export const ArticleTableOfContents = ({
 		}}
 	/>
 </ArticleTableOfContentsContainer>;
-ArticleTableOfContents.propTypes = {
-	/**
-	 * The html content.
-	 */
-	'contents': PropTypes.string.isRequired,
-};

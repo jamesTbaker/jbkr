@@ -25,7 +25,6 @@ export const ProfileEducationCertification = ({
 			educationCertification.details &&
 			<div
 				dangerouslySetInnerHTML={{ '__html': `${educationCertification.details}` }}
-				htmlContent={`${educationCertification.details}`}
 			/>
 		}
 
