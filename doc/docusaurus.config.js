@@ -104,7 +104,7 @@ module.exports = {
 						facebook/docusaurus/edit/master/website/blog/',
 				}, */
 				'theme': {
-					'customCss': require.resolve('./src/jbkr.css'),
+					'customCss': require.resolve('./jbkr.css'),
 				},
 			},
 		],
