@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@docusaurus/core": "2.0.0-beta.4",
 		"@docusaurus/preset-classic": "2.0.0-beta.4",
+		"@jbkr/docusaurus-plugin-doc": "file:../modules/docusaurus-plugin-doc",
 		"@jbkr/style-service": "file:../modules/style-service",
 		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
 		"@mdx-js/react": "^1.6.21",

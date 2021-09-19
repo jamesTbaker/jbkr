@@ -1,0 +1,11 @@
+{
+	"name": "@jbkr/doc",
+	"version": "0.1.0",
+	"description": "Parse specified code files and generate documentation from comments.",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"type": "module",
+	"dependencies": {}
+}

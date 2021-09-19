@@ -1,0 +1,25 @@
+{
+	/* // no plugins are loaded
+	"plugins": [],
+	// if recursion is enabled, search for files 10 levels deep
+	"recurseDepth": 10,
+	"source": {
+		// only files ending in .js, .jsdoc, and .jsx will be processed
+		"includePattern": ".+\\.js(doc|x)?$",
+		// don't process a file whose name begins with an underscore
+		"excludePattern": "(^|\\/|\\\\)_"
+	},
+	// allow process EMS syntax
+	"sourceType": "module", */
+	"tags": {
+		// allowed tags
+		"allowUnknownTags": [
+			"async"
+		]
+	} /* ,
+	// options here affect the appearance and content of generated documentation
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false
+	} */
+}

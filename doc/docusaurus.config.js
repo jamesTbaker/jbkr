@@ -153,4 +153,22 @@ module.exports = {
 			},
 		],
 	], */
+	'plugins': [
+		// style-definition
+		[
+			'@jbkr/docusaurus-plugin-doc',
+			{
+				// 'id': 'style-definition',
+				'in': '../modules/style-definition/src',
+				'out': 'styles/style-definition',
+				'config': '../jsdoc.config.jsonc',
+				'ignore': [
+					'**/store/**',
+					'**/_para/**',
+					'**/node_modules/**',
+				],
+				// 'watch': true,
+			},
+		],
+	],
 };
