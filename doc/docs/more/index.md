@@ -1,6 +1,6 @@
 ---
 id: "index"
-title: "Core Components"
+title: "More"
 sidebar_label: "Intro"
 sidebar_position: 0
 ---

@@ -26,8 +26,20 @@ module.exports = {
 				{
 					'type': 'doc',
 					'position': 'left',
-					'docId': 'app-client/index',
+					'docId': 'client/index',
 					'label': 'Client',
+				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'content/index',
+					'label': 'Content',
+				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'components/index',
+					'label': 'Components',
 				},
 				{
 					'type': 'doc',
@@ -35,7 +47,7 @@ module.exports = {
 					'docId': 'styles/index',
 					'label': 'Styles',
 				},
-				{
+				/* {
 					'type': 'doc',
 					'position': 'left',
 					'docId': 'components-core/index',
@@ -46,28 +58,23 @@ module.exports = {
 					'position': 'left',
 					'docId': 'components-client/index',
 					'label': 'Components (Client)',
-				},
+				}, */
 				{
 					'type': 'doc',
 					'position': 'left',
-					'docId': 'content-flow/index',
-					'label': 'Content Flow',
+					'docId': 'more/index',
+					'label': 'More',
 				},
-				{
-					'type': 'doc',
-					'position': 'left',
-					'docId': 'other-modules/index',
-					'label': 'Other Modules',
-				},
-				{
+				/* {
 					'href': 'https://github.com/jamesTbaker/jbkr',
 					'label': 'GitHub',
 					'position': 'right',
-				},
+				}, */
 			],
 		},
 		'footer': {
-			'copyright': `Copyright &copy; ${new Date().getFullYear()}`,
+			'copyright':
+				`Copyright &copy; 1999&mdash;${new Date().getFullYear()}`,
 		},
 		'prism': {
 			'theme': codeThemes.prismReactRendererTheme,
@@ -97,12 +104,12 @@ module.exports = {
 						facebook/docusaurus/edit/master/website/blog/',
 				}, */
 				'theme': {
-					'customCss': require.resolve('./src/css/custom.css'),
+					'customCss': require.resolve('./src/jbkr.css'),
 				},
 			},
 		],
 	],
-	'plugins': [
+	/* 'plugins': [
 		// utilities
 		[
 			'docusaurus-plugin-typedoc',
@@ -145,5 +152,5 @@ module.exports = {
 				},
 			},
 		],
-	],
+	], */
 };
