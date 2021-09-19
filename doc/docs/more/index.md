@@ -1,6 +1,6 @@
 ---
 id: "index"
-title: "Client Components"
+title: "More"
 sidebar_label: "Intro"
 sidebar_position: 0
 ---

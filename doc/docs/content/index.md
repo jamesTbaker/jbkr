@@ -1,6 +1,6 @@
 ---
 id: "index"
-title: "Content and its Flow"
+title: "Content"
 sidebar_label: "Intro"
 sidebar_position: 0
 ---
