@@ -1,13 +1,14 @@
 {
-	"name": "@jbkr/lambda-log",
+	"name": "@jbkr/lambda-utilities",
 	"version": "0.1.0",
-	"description": "Handles all logging operations.",
+	"description": "Various ancillary functions particular to running operations on AWS Lambda.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"private": true,
 	"type": "module",
 	"dependencies": {
+		"@jbkr/utilities": "file:../utilities",
 		"luxon": "^2.0.2"
 	}
 }

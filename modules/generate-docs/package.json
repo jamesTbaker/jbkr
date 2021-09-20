@@ -1,12 +1,13 @@
 {
-	"name": "@jbkr/docusaurus-plugin-doc",
+	"name": "@jbkr/generate-docs",
 	"version": "0.1.0",
-	"description": "Interface between doc module and Docusaurus.",
+	"description": "Parse specified code files and generate documentation from comments.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"private": true,
 	"dependencies": {
+		"esm": "^3.2.25",
 		"glob": "^7.1.7",
 		"jsdoc-to-markdown": "^7.0.1"
 	}

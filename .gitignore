@@ -89,6 +89,9 @@ web_modules/
 out
 tmp
 out-tsc
+.docusaurus
+.cache-loader
+
 
 # Gatsby files
 .cache/

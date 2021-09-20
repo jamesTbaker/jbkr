@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const codeThemes = require('@jbkr/syntax-highlighting');
 
 
@@ -47,29 +46,12 @@ module.exports = {
 					'docId': 'styles/index',
 					'label': 'Styles',
 				},
-				/* {
-					'type': 'doc',
-					'position': 'left',
-					'docId': 'components-core/index',
-					'label': 'Components (Core)',
-				},
 				{
 					'type': 'doc',
 					'position': 'left',
-					'docId': 'components-client/index',
-					'label': 'Components (Client)',
-				}, */
-				{
-					'type': 'doc',
-					'position': 'left',
-					'docId': 'more/index',
+					'docId': 'more/Intro',
 					'label': 'More',
 				},
-				/* {
-					'href': 'https://github.com/jamesTbaker/jbkr',
-					'label': 'GitHub',
-					'position': 'right',
-				}, */
 			],
 		},
 		'footer': {
@@ -92,82 +74,12 @@ module.exports = {
 			{
 				'docs': {
 					'sidebarPath': require.resolve('./sidebars.js'),
-					// Please change this to your repo.
 					'editUrl':
 						'https://github.com/jamesTbaker/jbkr',
 				},
-				/* 'blog': {
-					'showReadingTime': true,
-					// Please change this to your repo.
-					'editUrl':
-						'https://github.com/
-						facebook/docusaurus/edit/master/website/blog/',
-				}, */
 				'theme': {
 					'customCss': require.resolve('./jbkr.css'),
 				},
-			},
-		],
-	],
-	/* 'plugins': [
-		// utilities
-		[
-			'docusaurus-plugin-typedoc',
-			{
-				'id': 'utilities',
-				'entryPoints': ['../modules/utilities/src/index.ts'],
-				'exclude': '_para',
-				'tsconfig': '../modules/utilities/tsconfig.json',
-				'readme': 'none',
-				'plugin': ['typedoc-plugin-merge-modules'],
-				'out': 'other-modules/utilities',
-				'watch': true,
-				'listInvalidSymbolLinks': true,
-				'sidebar': {
-					'sidebarFile': null,
-					'categoryLabel': 'Utilities',
-					'position': 1,
-					'fullNames': true,
-				},
-			},
-		],
-		// style-definition
-		[
-			'docusaurus-plugin-typedoc',
-			{
-				'id': 'style-definition',
-				'entryPoints': ['../modules/style-definition/src'],
-				'exclude': '_para',
-				'tsconfig': '../modules/style-definition/tsconfig.json',
-				'readme': 'none',
-				// 'plugin': ['typedoc-plugin-merge-modules'],
-				'out': 'styles/style-definition',
-				'watch': true,
-				'listInvalidSymbolLinks': true,
-				'sidebar': {
-					'sidebarFile': null,
-					'categoryLabel': 'Style Definition',
-					'position': 1,
-					'fullNames': true,
-				},
-			},
-		],
-	], */
-	'plugins': [
-		// style-definition
-		[
-			'@jbkr/docusaurus-plugin-doc',
-			{
-				// 'id': 'style-definition',
-				'in': '../modules/style-definition/src',
-				'out': 'styles/style-definition',
-				'config': '../jsdoc.config.jsonc',
-				'ignore': [
-					'**/store/**',
-					'**/_para/**',
-					'**/node_modules/**',
-				],
-				// 'watch': true,
 			},
 		],
 	],

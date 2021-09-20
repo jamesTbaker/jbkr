@@ -6,4 +6,5 @@ export {
 	returnNumberRoundedUpToMultiple,
 	returnHSLValuesFromRBGPercents,
 	returnCopyOfObjectWithStringKeys,
+	returnValueIsJSONParsableString,
 } from './lib/utilities.js';

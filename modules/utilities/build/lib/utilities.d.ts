@@ -22,3 +22,6 @@ export declare const returnCopyOfObjectWithStringKeys: ({ incoming }: {
 }) => {
     [key: string]: unknown;
 };
+export declare const returnValueIsJSONParsableString: ({ incomingValue }: {
+    incomingValue: string;
+}) => boolean;

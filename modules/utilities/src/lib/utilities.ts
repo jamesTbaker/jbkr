@@ -84,3 +84,32 @@ export const returnCopyOfObjectWithStringKeys = (
 		return error;
 	}
 };
+
+export const returnValueIsJSONParsableString = (
+	{ incomingValue }:
+	{ incomingValue: string },
+): boolean => {
+	// try...
+	try {
+		// ...to get a parsed object
+		const attemptedObject = JSON.parse(incomingValue);
+		// Parsing a boolean or a number will not throw an error,
+		// 		so we must check that type is object. However,
+		// 		null is also of type object, so we must also
+		// 		test for truthiness.
+		// if type is object and value is truthy
+		if (attemptedObject && typeof attemptedObject === 'object') {
+			// indicate that string is parsable
+			return true;
+			// if either type is not object or value is not truthy
+		}
+		// indicate that string is not parsable
+		return false;
+
+
+		// if attempt to get an object resulted in an error
+	} catch (e) {
+		// indicate that string is not parsable
+		return false;
+	}
+};

@@ -6,8 +6,11 @@ import {
 	returnMetaScreenContent,
 	return404ScreenContent,
 } from '@jbkr/client-content';
-import { returnRequesterCanAccess } from '@jbkr/lambda-access';
-import { createResponse } from '@jbkr/lambda-response';
+import {
+	returnRequesterCanAccess,
+	createResponse,
+} from '@jbkr/lambda-utilities';
+// import { createResponse } from '@jbkr/lambda-response';
 
 export const handleGetProfileScreenContentRequest = async (event, context) => {
 	// if the requester should be allowed access

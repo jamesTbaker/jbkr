@@ -1,6 +1,6 @@
 ---
-id: "index"
-title: "More"
+id: "Intro"
+title: "More — Intro"
 sidebar_label: "Intro"
 sidebar_position: 0
 ---
