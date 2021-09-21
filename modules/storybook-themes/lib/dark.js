@@ -1,10 +1,20 @@
 import { create } from '@storybook/theming';
 import { color } from '@jbkr/style-service';
 
-
-export const lightTheme = create({
-	// use SB's light theme as a baseline
-	'base': 'light',
+/**
+ * @description Send theme options to a function that returns an object of
+ * theme variables used by the Storybook UI.
+ * @param {Object} \{\} - An object with many properties.
+ * See the [Storybook theming
+ * documentation](https://storybook.js.org/docs/react/configure/theming) and
+ * [the source code](
+ * https://github.com/storybookjs/storybook/blob/next/lib/theming/src/create.ts
+ * ) for more info.
+ * @returns {Object}
+ */
+export const darkTheme = create({
+	// use SB's dark theme as a baseline
+	'base': 'dark',
 
 	// colorPrimary: '#',
 	// colorSecondary: '#',
@@ -13,16 +23,16 @@ export const lightTheme = create({
 	'appBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': 1,
+		'level': 37,
 		'format': 'string',
 	}),
 	'appContentBg': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': 35,
+		'level': 39,
 		'format': 'string',
 	}),
-	'appBorderColor': 'hsla(225, 70%, 70%, 1)',
+	'appBorderColor': 'hsla(225, 61%, 23%, 1)',
 	'appBorderRadius': 3,
 
 	// Typography
@@ -33,7 +43,7 @@ export const lightTheme = create({
 	'textColor': color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': 21,
+		'level': 7,
 		'format': 'string',
 	}),
 	'textInverseColor': color({
@@ -47,19 +57,19 @@ export const lightTheme = create({
 	'barTextColor': color({
 		'kind': 'Brand',
 		'tone': 'Peony',
-		'level': 6,
+		'level': 3,
 		'format': 'string',
 	}),
 	'barSelectedColor': color({
 		'kind': 'Brand',
 		'tone': 'Peony',
-		'level': 7,
+		'level': 5,
 		'format': 'string',
 	}),
 	'barBg': color({
 		'kind': 'Neutral',
-		'tone': 'Base',
-		'level': 1,
+		'tone': 'Finch',
+		'level': 33,
 		'format': 'string',
 	}),
 

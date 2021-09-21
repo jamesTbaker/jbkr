@@ -61,7 +61,7 @@ const HeaderTitlePreface = styled.div`
 	font-weight: 400;
 	color: ${color({
 	'kind': 'Neutral',
-	'tone': 'Seafoam',
+	'tone': 'Spruce',
 	'level': 1,
 	'format': 'string',
 })};
@@ -71,7 +71,7 @@ const HeaderEmphasisLine = styled.div`
 	border-radius: 1px;
 	background-color:${color({
 	'kind': 'Accent',
-	'tone': 'Seafoam',
+	'tone': 'Spruce',
 	'level': 2,
 	'format': 'string',
 })};

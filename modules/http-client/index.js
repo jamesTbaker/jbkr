@@ -1,8 +1,51 @@
-export const returnJSONFromEndPoint = async ({ endpoint, options }) => {
+/**
+ * Client for HTTP requests. Mostly a wrapper around the
+ * [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
+ * plus a convenience method for use with Next.js or other React frontend.
+ * @module @jbkr/db-client
+ */
+
+/**
+ * @description Construct and return a URI for an API endpoint from which
+ * to get content. Very simplistic right now, but it's here in anticipation
+ * of future growth.
+ * @param {Object} \{\} - Destructured parameters
+ * @param {String} \{\}.endpointToken - Token indicating what "category" of
+ * content is desired.
+ * @param {String} \{\}.slug - Token indicating which article is desired.
+ * Ignored if `endpointToken` is not set to `liblab`.
+ * @returns {String} - The API endpoint from which to request content.
+ */
+const returnContentEndpoint = ({ endpointToken, slug }) => {
+	// set up a simple endpoint
+	let endpoint = `https://${process.env.serverlessDomain}` +
+		`/prod/content/client/${endpointToken}`;
+	// if the endpoint is liblab and a slug was received
+	if (
+		endpointToken === 'liblab' &&
+		slug
+	) {
+		// augment the endpont with the slug
+		endpoint += `/${slug}`;
+	}
+	// return the endpoint
+	return endpoint;
+};
+/**
+ * @description A generic function to request data from an API endpoint and
+ * return the JSON representation of that data.
+ * @param {Object} \{\} - Destructured parameters
+ * @param {String} \{\}.endpoint - The API endpoint URI string.
+ * @param {Object} \{\}.fetchOptions - The options to use with
+ * [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch)
+ * @returns {Object} - The JSON representation of the data sent from the API,
+ * or an object with an `error` property.
+ */
+export const returnJSONFromEndPoint = async ({ endpoint, fetchOptions }) => {
 	// attempt...
 	try {
 		// get a response from the endpoint, using any supplied options
-		const responseObject = await fetch(endpoint, options);
+		const responseObject = await fetch(endpoint, fetchOptions);
 		// if the response doesn't have a truthy ok property, indicating an
 		// HTTP status code in the range of 200-299
 		if (!responseObject.ok) {
@@ -21,21 +64,17 @@ export const returnJSONFromEndPoint = async ({ endpoint, options }) => {
 		};
 	}
 };
-const returnContentEndpoint = ({ endpointToken, slug }) => {
-	// set up a simple endpoint
-	let endpoint = `https://${process.env.serverlessDomain}` +
-		`/prod/content/client/${endpointToken}`;
-	// if the endpoint is liblab and a slug was received
-	if (
-		endpointToken === 'liblab' &&
-		slug
-	) {
-		// augment the endpont with the slug
-		endpoint += `/${slug}`;
-	}
-	// return the endpoint
-	return endpoint;
-};
+/**
+ * @description A convenience function that makes it easy for the Next.js user
+ * to send content from an API endpoint to a React component as `props`.
+ * @param {Object} \{\} - Destructured parameters
+ * @param {String} \{\}.contentToken - Token indicating what "category" of
+ * content is desired.
+ * @param {String} \{\}.slug - Token indicating which article is desired.
+ * Ignored if `contentToken` is not set to `liblab`.
+ * @returns {Object} - An object with the content assigned to
+ * the `props` property.
+ */
 export const returnContentAsProps = async ({ contentToken, slug }) => {
 	// get the endpoint
 	const endpoint = returnContentEndpoint({
@@ -60,17 +99,3 @@ export const returnContentAsProps = async ({ contentToken, slug }) => {
 		return { 'props': { 'error': jsonResponse.error } };
 	}
 };
-/*
-
-		// set up fetch options container
-		const fetchOptions = {};
-		// if we receieved options that indicate we're using the content API
-		if (options && options.jbkrContentAPI) {
-			// add the authorization header to the fetch options
-			fetchOptions.headers = {
-				'Authorization': `Bearer ${process.env.simpleAuthKey}`,
-			};
-		}
-
-
-*/

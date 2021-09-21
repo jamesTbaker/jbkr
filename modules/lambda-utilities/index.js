@@ -116,10 +116,11 @@ export const returnRequesterCanAccess = ({ event }) => {
  * convenient timestamp. Each object property will be logged separately, both
  * key and value.
  *
- * @param {Object} incomingObject - The object to be logged.
+ * @param {Object} \{\} - Destructured parameters
+ * @param {Object} \{\}.incomingObject - The object to be logged.
  *
  * @example
- * import { log } from 'lambda-utilities';
+ * import { log } from '@jbkr/lambda-utilities';
  *
  * log({ 'incomingObject': { 'message': 'This is the message.' } });
  * // ----- September 20, 2021, 3:25 PM EDT -- message -- This is the message.
@@ -141,6 +142,7 @@ export const log = ({ incomingObject }) => {
 /**
  * @description Construct, log, and return an AWS Lambda / API Gateway response
  * from some static values and the parameters we receive.
+ *
  * @param {Object} \{\} - Destructured parameters
  * @param {Number} \{\}.statusCode - The HTTP status code.
  * @param {Number} \{\}.payload - Whatever data you want to send back. Functions

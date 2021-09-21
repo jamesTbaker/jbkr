@@ -2,7 +2,7 @@
 	"name": "@jbkr/storybook-themes",
 	"version": "0.1.0",
 	"description": "Light and dark themes for the Storybook UI",
-	"main": "src/index.js",
+	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"private": true,

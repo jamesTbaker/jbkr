@@ -5,6 +5,7 @@ sidebar_label: "Lambda Utilities"
 sidebar_position: 1
 ---
 
+<div class="jsdoc-generated">
 <a name="module_@jbkr/lambda-utilities"></a>
 
 ## @jbkr/lambda-utilities
@@ -50,11 +51,12 @@ key and value.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| incomingObject | <code>Object</code> | The object to be logged. |
+| \{\} | <code>Object</code> | Destructured parameters |
+| \{\}.incomingObject | <code>Object</code> | The object to be logged. |
 
 **Example**  
 ```js
-import { log } from 'lambda-utilities';
+import { log } from '@jbkr/lambda-utilities';
 
 log({ 'incomingObject': { 'message': 'This is the message.' } });
 // ----- September 20, 2021, 3:25 PM EDT -- message -- This is the message.
@@ -75,3 +77,5 @@ from some static values and the parameters we receive.
 | \{\}.event | <code>Number</code> | The [AWS event](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html). |
 | \{\}.context | <code>Number</code> | The [AWS context](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-context-object.html). |
 
+
+</div>

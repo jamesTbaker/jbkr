@@ -1,16 +1,16 @@
 import { ObjectID } from 'bson';
-import { databaseConnection } from '@jbkr/db-client';
+import { returnDatabaseConnection } from '@jbkr/db-client';
 
 export const returnDefaultValuesFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
 		const result =
-			await db.collection('default_values').aggregate([
+			await dbConnection.collection('default_values').aggregate([
 				// look up the meta image for this screen
 				{
 					'$lookup':
@@ -42,12 +42,12 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query results to constants
 		const mains =
-			await db.collection('screens').aggregate([
+			await dbConnection.collection('screens').aggregate([
 				// match the document whose slug was received
 				{ '$match': { 'ScreenID': screenID } },
 				// look up the meta image for this screen
@@ -93,7 +93,7 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 			]).toArray();
 		// assign query result to constant
 		const headers =
-			await db.collection('headers').aggregate([
+			await dbConnection.collection('headers').aggregate([
 				// look up the meta image for this screen
 				{
 					'$lookup':
@@ -125,7 +125,7 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 				// specify sort order
 				{ '$sort': { 'Links.OrderInSet': 1 } },
 			]).toArray();
-		const footer = await db.collection('footers')
+		const footer = await dbConnection.collection('footers')
 			.findOne({}, {
 				'projection': {
 					'_id': 0,
@@ -148,12 +148,12 @@ export const returnAllAuthorsFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
 		const result =
-			await db.collection('authors').find({}).toArray();
+			await dbConnection.collection('authors').find({}).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON
 		return JSON.parse(JSON.stringify(result));
 		// if an error occurred
@@ -166,12 +166,12 @@ export const returnAllSkillsFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
 		const result =
-			await db.collection('skills').find({}, {
+			await dbConnection.collection('skills').find({}, {
 				'projection': {
 					'PercentageExpertise': 1,
 					'Category': 1,
@@ -191,11 +191,11 @@ export const returnAllProfessionalExperiencesFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
-		const result = await db.collection('professional_experiences')
+		const result = await dbConnection.collection('professional_experiences')
 			.find({}, {
 				'projection': {
 					'Title': 1,
@@ -216,11 +216,11 @@ export const returnAllEducationCertificationFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
-		const result = await db.collection('education_certifications')
+		const result = await dbConnection.collection('education_certifications')
 			.find({}, {
 				'projection': {
 					'OrderInSet': 1,
@@ -243,11 +243,11 @@ export const returnAllVolunteerExperiencesFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
-		const result = await db.collection('volunteer_experiences')
+		const result = await dbConnection.collection('volunteer_experiences')
 			.find({}, {
 				'projection': {
 					'Title': 1,
@@ -269,12 +269,12 @@ export const returnAllPublishedArticlesFromDB = async () => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// assign query result to constant
 		let result =
-			await db.collection('articles').aggregate([
+			await dbConnection.collection('articles').aggregate([
 				// match the documents whose published_at dates are not null
 				{ '$match': { 'published_at': { '$ne': null } } },
 				// look up the teaser image for this article
@@ -322,92 +322,93 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 	// attempt to get the data
 	try {
 		// get a database connection
-		const db = await databaseConnection({
+		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
 		// get the raw data for this article from the database
-		let articleMainRaw = await db.collection('articles').aggregate([
-			// match the document whose slug matches the slug in context
-			{ '$match': { 'Slug': slug } },
-			// look up the brief statements for this article
-			{
-				'$lookup':
+		let articleMainRaw = await dbConnection
+			.collection('articles').aggregate([
+				// match the document whose slug matches the slug in context
+				{ '$match': { 'Slug': slug } },
+				// look up the brief statements for this article
 				{
-					'from': 'components_content_article_brief_statements',
-					'localField': 'BriefStatements.ref',
-					'foreignField': '_id',
-					'as': 'BriefStatements',
+					'$lookup':
+					{
+						'from': 'components_content_article_brief_statements',
+						'localField': 'BriefStatements.ref',
+						'foreignField': '_id',
+						'as': 'BriefStatements',
+					},
 				},
-			},
-			// look up the meta image for this article
-			{
-				'$lookup':
+				// look up the meta image for this article
 				{
-					'from': 'upload_file',
-					'localField': 'MetaImage',
-					'foreignField': '_id',
-					'as': 'MetaImages',
+					'$lookup':
+					{
+						'from': 'upload_file',
+						'localField': 'MetaImage',
+						'foreignField': '_id',
+						'as': 'MetaImages',
+					},
 				},
-			},
-			// look up the head image for this article
-			{
-				'$lookup':
+				// look up the head image for this article
 				{
-					'from': 'upload_file',
-					'localField': 'HeadImage',
-					'foreignField': '_id',
-					'as': 'HeadImages',
+					'$lookup':
+					{
+						'from': 'upload_file',
+						'localField': 'HeadImage',
+						'foreignField': '_id',
+						'as': 'HeadImages',
+					},
 				},
-			},
-			// look up the intro video for this article
-			{
-				'$lookup':
+				// look up the intro video for this article
 				{
-					'from': 'upload_file',
-					'localField': 'IntroVideo',
-					'foreignField': '_id',
-					'as': 'IntroVideos',
+					'$lookup':
+					{
+						'from': 'upload_file',
+						'localField': 'IntroVideo',
+						'foreignField': '_id',
+						'as': 'IntroVideos',
+					},
 				},
-			},
-			// specify which fields to return
-			{
-				'$project': {
-					'_id': 0,
-					'Featured': 1,
-					'PublicationDate': 1,
-					'UpdateDate': 1,
-					'Slug': 1,
-					'Title': 1,
-					'Subtitle': 1,
-					'Tagline': 1,
-					'MetaTitle': 1,
-					'MetaDescription': 1,
-					'SocialDescription': 1,
-					'MetaImages.alternativeText': 1,
-					'MetaImages.ext': 1,
-					'MetaImages.hash': 1,
-					'MetaImages.mime': 1,
-					'HeadImages.alternativeText': 1,
-					'HeadImages.width': 1,
-					'HeadImages.height': 1,
-					'HeadImages.ext': 1,
-					'HeadImages.hash': 1,
-					'HeadImages.mime': 1,
-					'HeadImages.caption': 1,
-					'MetaImageGravity': 1,
-					'HeadImageCaption': 1,
-					'BriefStatements._id': 1,
-					'BriefStatements.Statement': 1,
-					'IntroText': 1,
-					'IntroVideos.url': 1,
-					'IntroVideos.mime': 1,
-					'IntroVideos.alternativeText': 1,
-					'IntroVideos.caption': 1,
-					'Section': 1,
-					'SimpleBody': 1,
+				// specify which fields to return
+				{
+					'$project': {
+						'_id': 0,
+						'Featured': 1,
+						'PublicationDate': 1,
+						'UpdateDate': 1,
+						'Slug': 1,
+						'Title': 1,
+						'Subtitle': 1,
+						'Tagline': 1,
+						'MetaTitle': 1,
+						'MetaDescription': 1,
+						'SocialDescription': 1,
+						'MetaImages.alternativeText': 1,
+						'MetaImages.ext': 1,
+						'MetaImages.hash': 1,
+						'MetaImages.mime': 1,
+						'HeadImages.alternativeText': 1,
+						'HeadImages.width': 1,
+						'HeadImages.height': 1,
+						'HeadImages.ext': 1,
+						'HeadImages.hash': 1,
+						'HeadImages.mime': 1,
+						'HeadImages.caption': 1,
+						'MetaImageGravity': 1,
+						'HeadImageCaption': 1,
+						'BriefStatements._id': 1,
+						'BriefStatements.Statement': 1,
+						'IntroText': 1,
+						'IntroVideos.url': 1,
+						'IntroVideos.mime': 1,
+						'IntroVideos.alternativeText': 1,
+						'IntroVideos.caption': 1,
+						'Section': 1,
+						'SimpleBody': 1,
+					},
 				},
-			},
-		]).toArray();
+			]).toArray();
 		// serialize and deserialize returned data, converting BSON to JSON
 		articleMainRaw = JSON.parse(JSON.stringify(articleMainRaw))[0];
 		// get the IDs of any sections in this article
@@ -422,7 +423,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 			});
 		}
 		// get the raw data for this article's sections from the database
-		let articleSectionsRaw = await db
+		let articleSectionsRaw = await dbConnection
 			.collection('components_content_article_sections').aggregate([
 				// match the documents whose IDs are in the
 				// collection of IDs
@@ -485,7 +486,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 		});
 		// get the raw data for this article's sections's
 		// subsection media items from the database
-		let articleMediaRaw = await db.collection('upload_file')
+		let articleMediaRaw = await dbConnection.collection('upload_file')
 			.find(
 				// find the documents whose IDs are in the collection of IDs
 				{ '_id': { '$in': articleMediaIDs } },

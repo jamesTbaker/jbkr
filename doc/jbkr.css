@@ -99,7 +99,7 @@
 	--jbkr-accent-onDark-primary-peacock: hsla(101, 100%, 50%, 1);
 	--jbkr-accent-onDark-primary-seafoam: hsla(175, 100%, 50%, 1);
 	--jbkr-accent-onDark-primary-finch: hsla(225, 100%, 60%, 1);
-	--jbkr-accent-onDark-secondary-iris: hsla(270, 100%, 65%, 1);
+	--jbkr-accent-onDark-secondary-iris: hsla(270, 100%, 70%, 1);
 	--jbkr-accent-onDark-tertiary-tiger: hsla(30, 100%, 50%, 1);
 	--jbkr-accent-onDark-tertiary-sunshine: hsla(50, 100%, 50%, 1);
 	--jbkr-accent-onDark-quarternary-flamingo: hsla(325, 100%, 50%, 1);
@@ -254,7 +254,7 @@
 	--ifm-menu-color-active:			var(--jbkr-neutral-finch-37);
 	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-06);
 	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-04);
-	--ifm-toc-link-color:				var(--jbkr-neutral-finch-21);
+	--ifm-toc-link-color:				var(--jbkr-neutral-finch-22);
 
 	/* blockquote */
 
@@ -264,10 +264,18 @@
 	/* code */
 
 	--ifm-code-background:				var(--jbkr-neutral-finch-03);
+	--jbkr-inline-code-border:			var(--jbkr-neutral-finch-11);
+	--jbkr-inline-code-characters:		var(--jbkr-accent-onLight-secondary-iris);
 
 	/* table */
 
+	--ifm-table-head-background:		var(--jbkr-neutral-finch-04);
 	--ifm-table-stripe-background:		var(--jbkr-neutral-finch-02);
+
+	/* jsdoc-generated */
+
+	--jbkr-doc-section-border:			var(--jbkr-neutral-finch-05);
+
 
 
 	/*
@@ -348,6 +356,7 @@ html[data-theme="dark"] {
 	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-35);
 	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-39);
 	--ifm-toc-link-color:				var(--jbkr-neutral-finch-03);
+	--ifm-toc-padding-vertical:			1.25rem;
 
 	/* blockquote */
 
@@ -358,10 +367,18 @@ html[data-theme="dark"] {
 	/* code */
 
 	--ifm-code-background:				var(--jbkr-neutral-finch-41);
+	--jbkr-inline-code-border:			var(--jbkr-neutral-finch-31);
+	--jbkr-inline-code-characters:		var(--jbkr-accent-onDark-secondary-iris);
 
 	/* table */
 
+	--ifm-table-head-background:		var(--jbkr-neutral-finch-41);
 	--ifm-table-stripe-background:		var(--jbkr-neutral-finch-39);
+
+	/* jsdoc-generated */
+
+	--jbkr-doc-section-border:			var(--jbkr-neutral-finch-32);
+
 }
 
 .docusaurus-highlight-code-line {
@@ -398,6 +415,12 @@ main div.row article div.markdown div[class^="codeBlockContent"] pre.prism-code 
 }
 
 code {
-	color: 							var(--jbkr-brand-spruce-01);
-	border: 0.1rem solid var(--jbkr-neutral-finch-31);
+	color: 							var(--jbkr-inline-code-characters);
+	border: 0.1rem solid var(--jbkr-inline-code-border);
+}
+
+div.jsdoc-generated a[name]:nth-of-type(n+2) {
+	display: block;
+	margin: 3rem 0;
+	border-top: 1px solid var(--jbkr-doc-section-border);
 }
