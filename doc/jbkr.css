@@ -419,8 +419,19 @@ code {
 	border: 0.1rem solid var(--jbkr-inline-code-border);
 }
 
-div.jsdoc-generated a[name]:nth-of-type(n+2) {
+/* div.jsdoc-generated a[name]:nth-of-type(n+2) {
 	display: block;
 	margin: 3rem 0;
 	border-top: 1px solid var(--jbkr-doc-section-border);
+} */
+section.generate-docs {
+	padding-bottom: 3rem;
+	/* margin-bottom: 3rem;
+	border-bottom: 1px solid var(--jbkr-doc-section-border); */
+}
+section.generate-docs.function {
+	margin-left: 3rem;
+	padding-bottom: 3rem;
+	margin-bottom: 3rem;
+	border-bottom: 1px solid var(--jbkr-doc-section-border);
 }

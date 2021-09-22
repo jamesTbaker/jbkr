@@ -1,11 +1,11 @@
 ---
-id: "http-client"
-title: "HTTP Client"
-sidebar_label: "HTTP Client"
+id: "http-client-2"
+title: "HTTP Client 2"
+sidebar_label: "HTTP Client 2"
 sidebar_position: 4
 ---
 
-<div class="jsdoc-generated">
+<div class="jsdoc-generated-2">
 <a name="module_@jbkr/http-client"></a>
 
 ## @jbkr/http-client

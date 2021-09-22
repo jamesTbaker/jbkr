@@ -2,13 +2,17 @@
  * Client for HTTP requests. Mostly a wrapper around the
  * [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
  * plus a convenience method for use with Next.js or other React frontend.
- * @module @jbkr/db-client
+ * @module @jbkr/http-client
  */
 
+
 /**
- * @description Construct and return a URI for an API endpoint from which
- * to get content. Very simplistic right now, but it's here in anticipation
- * of future growth.
+ * Get a URL for a content API endpoint from just a couple of
+ * tokens.
+ *
+ * Saves me from having to remember and maintain (semi-)complex URLs.
+ * Very simplistic right now, but it's here in anticipation of future growth.
+ *
  * @param {Object} \{\} - Destructured parameters
  * @param {String} \{\}.endpointToken - Token indicating what "category" of
  * content is desired.
@@ -32,13 +36,13 @@ const returnContentEndpoint = ({ endpointToken, slug }) => {
 	return endpoint;
 };
 /**
- * @description A generic function to request data from an API endpoint and
- * return the JSON representation of that data.
+ * @description Get JSON from an API.
+ *
  * @param {Object} \{\} - Destructured parameters
  * @param {String} \{\}.endpoint - The API endpoint URI string.
  * @param {Object} \{\}.fetchOptions - The options to use with
  * [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch)
- * @returns {Object} - The JSON representation of the data sent from the API,
+ * @returns {Object} The JSON representation of the data sent from the API,
  * or an object with an `error` property.
  */
 export const returnJSONFromEndPoint = async ({ endpoint, fetchOptions }) => {

@@ -3,7 +3,7 @@
  * @module @jbkr/generate-docs
  */
 
-const { generate } = require('./lib/generate.js');
+const { generate, generateTwo } = require('./lib/generate.js');
 
 /**
  * @description Given the location of the documentation system to which
@@ -14,3 +14,4 @@ const { generate } = require('./lib/generate.js');
  * @param {string} docBasePath - Absolute path of the documentation system.
  */
 module.exports.generate = generate;
+module.exports.generateTwo = generateTwo;
