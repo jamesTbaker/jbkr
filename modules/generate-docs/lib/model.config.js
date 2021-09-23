@@ -4,32 +4,37 @@ module.exports = {
 			// 'Model': [],
 			// 'Management': [],
 
-			// 'Database': [],
-			'API': [
+
+			'Database': [
 				{
 					'type': 'module',
-					'directory': 'http-client',
+					'directory': 'db-client',
 					'parentDirectory': '../modules',
 					'ignore': [
 						'**/node_modules/**',
 					],
-				}, {
-					'type': 'module',
-					'directory': 'lambda-utilities',
-					'parentDirectory': '../modules',
-					'ignore': [
-						'**/node_modules/**',
-					],
-					// }, {
-					// 	'type': 'module',
-					// 	'language': 'js',
-					// 	'directory': 'storybook-themes',
-					// 	'parentDirectory': '../modules',
-					// 	'ignore': [
-					// 		'**/node_modules/**',
-					// 	],
 				},
 			],
+			// 'API': [
+			// 	{
+			// 		'type': 'module',
+			// 		'directory': 'http-client',
+			// 		'parentDirectory': '../modules',
+			// 		'ignore': [
+			// 			'**/node_modules/**',
+			// 		],
+			// 	},
+			// 	{
+			// 		'type': 'module',
+			// 		'directory': 'lambda-utilities',
+			// 		'parentDirectory': '../modules',
+			// 		'ignore': [
+			// 			'**/node_modules/**',
+			// 		],
+			// 	},
+			// ],
+
+
 			// 'Distribution': [],
 		},
 		/* 'Styles': {
@@ -40,11 +45,40 @@ module.exports = {
 		'Client': {
 			'App': [],
 			'Components': [],
-		},
-		'Doc': {
-			'Generation': [],
-			'Styles': [],
 		}, */
+		// 'Doc': {
+		// 	'Generation': [
+		// 		{
+		// 			'type': 'module',
+		// 			'language': 'js',
+		// 			'directory': 'generate-docs',
+		// 			'parentDirectory': '../modules',
+		// 			'ignore': [
+		// 				'**/node_modules/**',
+		// 			],
+		// 		},
+		// 	],
+		// 	'Styles': [
+		// 		{
+		// 			'type': 'module',
+		// 			'language': 'js',
+		// 			'directory': 'storybook-themes',
+		// 			'parentDirectory': '../modules',
+		// 			'ignore': [
+		// 				'**/node_modules/**',
+		// 			],
+		// 		},
+		// 		{
+		// 			'type': 'module',
+		// 			'language': 'js',
+		// 			'directory': 'syntax-highlighting',
+		// 			'parentDirectory': '../modules',
+		// 			'ignore': [
+		// 				'**/node_modules/**',
+		// 			],
+		// 		},
+		// 	],
+		// },
 	},
 	'modules': {},
 	'lambdas': {},

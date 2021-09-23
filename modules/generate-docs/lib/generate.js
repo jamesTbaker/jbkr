@@ -10,85 +10,29 @@ const {
 } = require('./model.config.js');
 
 module.exports = {
-
-	'generate': async (baseDocSystemPath) => {
-		// for each location in locations
-		locations.forEach((location) => {
-			// calculate some paths
-			const outPath = path.join(baseDocSystemPath, '/docs/', location.section);
-			const inPath = path.join(baseDocSystemPath, location.in);
-			const pathPattern = path.join(inPath, '/**/*.[jt]s?(x)');
-			// get an array of the files to scan
-			const filePaths = glob.sync(pathPattern, {
-				'ignore': location.ignore,
-			});
-			// set up a container for the content we'll generate
-			let content = '';
-			// for each file to scan
-			filePaths.forEach((filePath, filePathIndex) => {
-				// if (filePathIndex === 0) {
-				// jsdoc2md.getTemplateData({
-				// 	'files': filePath,
-				// }).then(console.log);
-				// }
-				// if (location.id === 'http-client') {
-				// 	console.log(filePath);
-				// 	console.log(jsdoc2md.renderSync({
-				// 		'files': filePath,
-				// 	}));
-				// }
-				// add the scanning results to the container
-				content += jsdoc2md.renderSync({
-					'files': filePath,
-				});
-			});
-			// if any scanning results were added to the container
-			if (content && content.length > 0) {
-				// add to the container Docusaurus-relevant frontmatter and
-				// and HTML container div for a styling hook
-				content = `---
-id: "${location.id}"
-title: "${location.title}"
-sidebar_label: "${location.title}"
-sidebar_position: ${location.position}
----
-
-<div class="jsdoc-generated">
-${content}
-</div>
-`;
-				// write the content to the specified location
-				fs.writeFileSync(
-					`${outPath}/${location.title}.md`,
-					content,
-				);
-			}
-
-		});
-	},
-	'generateTwo': async (baseDocSystemPath) => {
+	'generateAll': async (baseDocSystemPath) => {
 		const removal = await module.exports.removeOldDocs(baseDocSystemPath);
 		if (!removal.error) {
 			const copy = await module.exports.copyBaseDocs(baseDocSystemPath);
 			if (!copy.error) {
-				Object.keys(domains).forEach((domainKey) => {
-					Object.keys(domains[domainKey])
-						.forEach((domainSectionKey, domainSectionKeyIndex) => {
-							module.exports.generateOneSetOfDocs({
-								'levelOneTitle': domainKey,
-								'levelTwoTitle': domainSectionKey,
-								'order': domainSectionKeyIndex + 1,
-								'contentConfig':
-									domains[domainKey][domainSectionKey],
-								baseDocSystemPath,
-							});
-						});
-				});
-
+				module.exports.generateAuto(baseDocSystemPath);
 			}
-
-
 		}
+	},
+	'generateAuto': async (baseDocSystemPath) => {
+		Object.keys(domains).forEach((domainKey) => {
+			Object.keys(domains[domainKey])
+				.forEach((domainSectionKey, domainSectionKeyIndex) => {
+					module.exports.generateOneSetOfDocs({
+						'levelOneTitle': domainKey,
+						'levelTwoTitle': domainSectionKey,
+						'order': domainSectionKeyIndex + 1,
+						'contentConfig':
+							domains[domainKey][domainSectionKey],
+						baseDocSystemPath,
+					});
+				});
+		});
 	},
 	'removeOldDocs': async (baseDocSystemPath) => {
 		try {
@@ -106,11 +50,23 @@ ${content}
 			return { error };
 		}
 	},
-	'returnJSDocDataRaw': (files) =>
-		jsdocApi.explainSync({ files, 'cache': false }),
+	'returnJSDocDataRaw': (files) => {
+		const jsDocDataRaw = jsdocApi.explainSync({ files, 'cache': false });
+		fs.writeFileSync(
+			`contentRaw.json`,
+			JSON.stringify(jsDocDataRaw),
+		);
+		return jsDocDataRaw;
+	},
 	'returnJSDocDataIntermediate': (files) => {
-		const jsDocData = module.exports.returnJSDocDataRaw(files);
-		return jsdocParse(jsDocData);
+		const jsDocDataIntermediate = jsdocParse(
+			module.exports.returnJSDocDataRaw(files),
+		);
+		fs.writeFileSync(
+			`contentIntermediate.json`,
+			JSON.stringify(jsDocDataIntermediate),
+		);
+		return jsDocDataIntermediate;
 	},
 	'generateOneSetOfDocs': async ({
 		levelOneTitle,
@@ -165,10 +121,6 @@ ${content}
 				});
 			});
 		});
-		/* fs.writeFileSync(
-			`contentJSON.json`,
-			JSON.stringify(contentJSON),
-		); */
 		// start building the markdown
 		contentJSON.forEach((contentObject) => {
 			if (contentObject.kind === 'module') {

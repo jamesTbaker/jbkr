@@ -6,7 +6,7 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"watch": {
-		"generate": {
+		"g:build-all": {
 			"patterns": [
 				"../modules"
 			],
@@ -16,7 +16,7 @@
 				"_para"
 			]
 		},
-		"generate-two": {
+		"g:build-auto": {
 			"patterns": [
 				"../modules"
 			],
@@ -38,10 +38,10 @@
 		"serve": "docusaurus serve",
 		"write-translations": "docusaurus write-translations",
 		"write-heading-ids": "docusaurus write-heading-ids",
-		"generate": "cross-env-shell run-func node_modules/@jbkr/generate-docs generate $INIT_CWD",
-		"generate-two": "cross-env-shell run-func node_modules/@jbkr/generate-docs generateTwo $INIT_CWD",
-		"generate-dev": "npm-watch generate",
-		"generate-two-dev": "npm-watch generate-two"
+		"g:build-all": "cross-env-shell run-func node_modules/@jbkr/generate-docs generateAll $INIT_CWD",
+		"g:build-auto": "cross-env-shell run-func node_modules/@jbkr/generate-docs generateAuto $INIT_CWD",
+		"g:dev-all": "npm-watch g:build-all",
+		"g:dev-auto": "npm-watch g:build-auto"
 	},
 	"dependencies": {
 		"@docusaurus/core": "2.0.0-beta.4",
