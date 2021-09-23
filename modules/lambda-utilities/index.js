@@ -18,8 +18,8 @@ import { returnValueIsJSONParsableString } from '@jbkr/utilities';
  * *no* protection at all.
  *
  * @param {Object} \{\} - Destructured parameters
- * @param {Object} \{\}.event - The [AWS event]{@link
- * https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html}.
+ * @param {Object} \{\}.event - The [AWS event](
+ * https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html).
  * @param {String} \{\}.event.source - For cron jobs, AWS may have set this
  * to `aws.events`. If calling a lambda request handler locally (e.g., for
  * debugging), call said handler with custom event object and set this property
@@ -119,7 +119,7 @@ export const returnRequesterCanAccess = ({ event }) => {
  * @param {Object} \{\} - Destructured parameters
  * @param {Object} \{\}.incomingObject - The object to be logged.
  *
- * @example
+ * @example @lang js
  * import { log } from '@jbkr/lambda-utilities';
  *
  * log({ 'incomingObject': { 'message': 'This is the message.' } });
@@ -148,10 +148,10 @@ export const log = ({ incomingObject }) => {
  * @param {Number} \{\}.payload - Whatever data you want to send back. Functions
  * may set this to an error, if one occurs. The requester is responsible for
  * verifying that payload contains what they expect.
- * @param {Number} \{\}.event - The [AWS event]{@link
- * https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html}.
- * @param {Number} \{\}.context - The [AWS context]{@link
- * https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-context-object.html}.
+ * @param {Object} \{\}.event - The [AWS event](
+ * https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html).
+ * @param {Number} \{\}.context - The [AWS context](
+ * https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-context-object.html).
  * @returns {Object}
  */
 export const createResponse = ({

@@ -1,19 +1,22 @@
+/* eslint-disable no-control-regex */
 const jsdocApi = require('jsdoc-api');
 const jsdocParse = require('jsdoc-parse');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const glob = require('glob');
 const jsdoc2md = require('jsdoc-to-markdown');
-const { locations, domains, modules, lambdas } = require('./model.config.js');
+const {
+	locations, domains, modules, lambdas, baseDocsPath, baseRepositoryPath,
+} = require('./model.config.js');
 
 module.exports = {
-	'baseRepositoryPath': 'https://github.com/jamesTbaker/jbkr/blob/main',
-	'generate': async (docBasePath) => {
+
+	'generate': async (baseDocSystemPath) => {
 		// for each location in locations
 		locations.forEach((location) => {
 			// calculate some paths
-			const outPath = path.join(docBasePath, '/docs/', location.section);
-			const inPath = path.join(docBasePath, location.in);
+			const outPath = path.join(baseDocSystemPath, '/docs/', location.section);
+			const inPath = path.join(baseDocSystemPath, location.in);
 			const pathPattern = path.join(inPath, '/**/*.[jt]s?(x)');
 			// get an array of the files to scan
 			const filePaths = glob.sync(pathPattern, {
@@ -63,61 +66,45 @@ ${content}
 
 		});
 	},
-	'generateTwo': async (docBasePath) => {
-		Object.keys(domains).forEach((domainKey) => {
-			Object.keys(domains[domainKey]).forEach((domainSectionKey, domainSectionKeyIndex) => {
-				module.exports.generateOneSetOfDocs({
-					'levelOneTitle': domainKey,
-					'levelTwoTitle': domainSectionKey,
-					'order': domainSectionKeyIndex + 1,
-					'contentConfig': domains[domainKey][domainSectionKey],
-					docBasePath,
+	'generateTwo': async (baseDocSystemPath) => {
+		const removal = await module.exports.removeOldDocs(baseDocSystemPath);
+		if (!removal.error) {
+			const copy = await module.exports.copyBaseDocs(baseDocSystemPath);
+			if (!copy.error) {
+				Object.keys(domains).forEach((domainKey) => {
+					Object.keys(domains[domainKey])
+						.forEach((domainSectionKey, domainSectionKeyIndex) => {
+							module.exports.generateOneSetOfDocs({
+								'levelOneTitle': domainKey,
+								'levelTwoTitle': domainSectionKey,
+								'order': domainSectionKeyIndex + 1,
+								'contentConfig':
+									domains[domainKey][domainSectionKey],
+								baseDocSystemPath,
+							});
+						});
 				});
-			});
-		});
+
+			}
 
 
-		// // for each location in locations
-		// locations.forEach((location) => {
-		// 	// calculate some paths
-		// 	const outPath = path.join(docBasePath, '/docs/', location.section);
-		// 	const inPath = path.join(docBasePath, location.in);
-		// 	const pathPattern = path.join(inPath, '/**/*.[jt]s?(x)');
-		// 	// get an array of the files to scan
-		// 	const filePaths = glob.sync(pathPattern, {
-		// 		'ignore': location.ignore,
-		// 	});
-		// 	// set up a container for the content we'll generate
-		// 	let content = '';
-		// 	// for each file to scan
-		// 	filePaths.forEach((filePath, filePathIndex) => {
-		// 		const jsDocDataIntermediate =
-		// 			module.exports.returnJSDocDataIntermediate(filePath);
-
-		// 	});
-		// if any scanning results were added to the container
-		/* if (content && content.length > 0) {
-				// add to the container Docusaurus-relevant frontmatter and
-				// and HTML container div for a styling hook
-				content = `---
-id: "${location.id}-2"
-title: "${location.title} 2"
-sidebar_label: "${location.title} 2"
-sidebar_position: ${location.position}
----
-
-<div class="jsdoc-generated-2">
-${content}
-</div>
-`;
-				// write the content to the specified location
-				fs.writeFileSync(
-					`${outPath}/${location.title} 2.md`,
-					content,
-				);
-			} */
-
-		// });
+		}
+	},
+	'removeOldDocs': async (baseDocSystemPath) => {
+		try {
+			await fs.remove(path.join(baseDocSystemPath, '/docs'));
+			return { 'error': false };
+		} catch (error) {
+			return { error };
+		}
+	},
+	'copyBaseDocs': async (baseDocSystemPath) => {
+		try {
+			await fs.copy(baseDocsPath, path.join(baseDocSystemPath, '/docs'));
+			return { 'error': false };
+		} catch (error) {
+			return { error };
+		}
 	},
 	'returnJSDocDataRaw': (files) =>
 		jsdocApi.explainSync({ files, 'cache': false }),
@@ -130,15 +117,15 @@ ${content}
 		levelTwoTitle,
 		order,
 		contentConfig,
-		docBasePath,
+		baseDocSystemPath,
 	}) => {
 		const directoryPath =
-			path.join(docBasePath, '/docs/', levelOneTitle);
+			path.join(baseDocSystemPath, '/docs/', levelOneTitle);
 		let filesToParse = [];
 		contentConfig.forEach((contentConfigItem) => {
 			const entryDirectory =
 				path.join(
-					docBasePath,
+					baseDocSystemPath,
 					contentConfigItem.parentDirectory,
 					contentConfigItem.directory,
 				);
@@ -154,15 +141,18 @@ ${content}
 		let contentMarkdown = '';
 		const contentJSON = [];
 		// for each file to scan
-		filesToParse.forEach((filePath, filePathIndex) => {
+		filesToParse.forEach((filePath) => {
 			const jsDocDataIntermediate =
 				module.exports.returnJSDocDataIntermediate(filePath);
 			jsDocDataIntermediate.forEach((intermediateObject) => {
 				const repoNameAndSlashIndex =
 					intermediateObject.meta.path.indexOf('jbkr/') + 5;
-				const relativeCodePath = `${intermediateObject.meta.path
-					.slice(repoNameAndSlashIndex)}/${intermediateObject.meta.filename}`;
-				const absoluteCodePath = `${module.exports.baseRepositoryPath}/${relativeCodePath}`;
+				const relativeCodePath =
+					`${intermediateObject.meta.path
+						.slice(repoNameAndSlashIndex)
+					}/${intermediateObject.meta.filename}`;
+				const absoluteCodePath =
+					`${baseRepositoryPath}/${relativeCodePath}`;
 				contentJSON.push({
 					...intermediateObject,
 					relativeCodePath,
@@ -170,17 +160,15 @@ ${content}
 					'relativeCodePathWithLineNumber':
 						`${relativeCodePath}:${intermediateObject.meta.lineno}`,
 					'absoluteCodePathWithLineNumber':
-						`${absoluteCodePath}#L${intermediateObject.meta.lineno}`,
+						`${absoluteCodePath}#L${intermediateObject
+							.meta.lineno}`,
 				});
 			});
 		});
-
 		/* fs.writeFileSync(
 			`contentJSON.json`,
 			JSON.stringify(contentJSON),
 		); */
-
-
 		// start building the markdown
 		contentJSON.forEach((contentObject) => {
 			if (contentObject.kind === 'module') {
@@ -245,6 +233,7 @@ Source: [${moduleObject.relativeCodePath}](${moduleObject.absoluteCodePath})
 	'returnMarkdownForFunctionObject': ({ functionObject }) => {
 		let returnStatement = '';
 		let paramsTable = '';
+		let examples = '';
 		if (
 			functionObject.returns &&
 			functionObject.returns[0] &&
@@ -252,13 +241,51 @@ Source: [${moduleObject.relativeCodePath}](${moduleObject.absoluteCodePath})
 			functionObject.returns[0].type.names &&
 			functionObject.returns[0].type.names[0]
 		) {
-			returnStatement = `
-<p class="generate-docs function-return">
-
-Returns: \`${functionObject.returns[0].type.names[0]}\`
-— ${functionObject.returns[0].description}
-
-</p>`;
+			returnStatement = `<p class="generate-docs function-return">\n\n` +
+				`Returns: \`${functionObject.returns[0].type.names[0]}\` `;
+			if (functionObject.returns[0].description) {
+				returnStatement +=
+					`— ${functionObject.returns[0].description
+						.replace(new RegExp('\n', 'g'), ' ')}\n\n</p>`;
+			} else {
+				returnStatement += `\n\n</p>`;
+			}
+		}
+		if (
+			functionObject.params &&
+			functionObject.params[0] &&
+			functionObject.params[0].type &&
+			functionObject.params[0].type.names &&
+			functionObject.params[0].type.names[0]
+		) {
+			paramsTable +=
+				`<div class="generate-docs function-parameters">\n\n` +
+				`| Param | Type | Description |\n` +
+				`| --- | --- | --- |\n`;
+			functionObject.params.forEach((paramObject) => {
+				paramsTable += `| ${paramObject.name} | ` +
+					`\`${paramObject.type.names[0]}\` | ` +
+					`${paramObject.description
+						.replace(new RegExp('\n', 'g'), ' ')} |\n`;
+			});
+			paramsTable += `\n</div>`;
+		}
+		if (functionObject.examples && functionObject.examples[0]) {
+			functionObject.examples.forEach((example) => {
+				const languageIDBeginningIndex = example.indexOf(' ') + 1;
+				const languageIDEndingIndex = example.indexOf('\n');
+				const languageID = example.slice(
+					languageIDBeginningIndex,
+					languageIDEndingIndex,
+				);
+				const exampleContent = example.slice(languageIDEndingIndex);
+				examples +=
+					'<div class="generate-docs function-parameters">\n\n' +
+					'```' + languageID + '\n' +
+					exampleContent +
+					'\n```\n\n' +
+					'</div>';
+			});
 		}
 
 		return (`
@@ -268,16 +295,20 @@ Returns: \`${functionObject.returns[0].type.names[0]}\`
 
 <div class="generate-docs function-description">
 
-${returnStatement}
-
 ${functionObject.description}
 
 </div>
 
+${paramsTable}
+
+${returnStatement}
+
+${examples}
 
 <p class="generate-docs source-location">
 
-Source: [${functionObject.relativeCodePathWithLineNumber}](${functionObject.absoluteCodePathWithLineNumber})
+Source: [${functionObject.relativeCodePathWithLineNumber}](${functionObject
+				.absoluteCodePathWithLineNumber})
 
 </p>
 </section>

@@ -13,7 +13,7 @@
 		"order": 0,
 		"relativeCodePath": "modules/http-client/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js",
-		"relativeCodePathWithLineNumber": "modules/http-client/index.js#L1",
+		"relativeCodePathWithLineNumber": "modules/http-client/index.js:1",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js#L1"
 	},
 	{
@@ -60,7 +60,7 @@
 						"Object"
 					]
 				},
-				"description": "- The JSON representation of the data sent from the API,\nor an object with an `error` property."
+				"description": "The JSON representation of the data sent from the API,\nor an object with an `error` property."
 			}
 		],
 		"meta": {
@@ -71,7 +71,7 @@
 		"order": 2,
 		"relativeCodePath": "modules/http-client/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js",
-		"relativeCodePathWithLineNumber": "modules/http-client/index.js#L48",
+		"relativeCodePathWithLineNumber": "modules/http-client/index.js:48",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js#L48"
 	},
 	{
@@ -129,7 +129,7 @@
 		"order": 3,
 		"relativeCodePath": "modules/http-client/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js",
-		"relativeCodePathWithLineNumber": "modules/http-client/index.js#L82",
+		"relativeCodePathWithLineNumber": "modules/http-client/index.js:82",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js#L82"
 	},
 	{
@@ -187,7 +187,7 @@
 		"order": 1,
 		"relativeCodePath": "modules/http-client/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js",
-		"relativeCodePathWithLineNumber": "modules/http-client/index.js#L23",
+		"relativeCodePathWithLineNumber": "modules/http-client/index.js:23",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/http-client/index.js#L23"
 	},
 	{
@@ -204,7 +204,7 @@
 		"order": 0,
 		"relativeCodePath": "modules/lambda-utilities/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js",
-		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js#L1",
+		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js:1",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js#L1"
 	},
 	{
@@ -231,7 +231,7 @@
 						"Object"
 					]
 				},
-				"description": "The [AWS event]{@link\nhttps://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html}.",
+				"description": "The [AWS event](\nhttps://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html).",
 				"name": "\\{\\}.event"
 			},
 			{
@@ -280,7 +280,7 @@
 		"order": 1,
 		"relativeCodePath": "modules/lambda-utilities/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js",
-		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js#L35",
+		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js:35",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js#L35"
 	},
 	{
@@ -312,7 +312,7 @@
 			}
 		],
 		"examples": [
-			"import { log } from '@jbkr/lambda-utilities';\n\nlog({ 'incomingObject': { 'message': 'This is the message.' } });\n// ----- September 20, 2021, 3:25 PM EDT -- message -- This is the message."
+			"@lang js\nimport { log } from '@jbkr/lambda-utilities';\n\nlog({ 'incomingObject': { 'message': 'This is the message.' } });\n// ----- September 20, 2021, 3:25 PM EDT -- message -- This is the message."
 		],
 		"meta": {
 			"lineno": 128,
@@ -322,7 +322,7 @@
 		"order": 2,
 		"relativeCodePath": "modules/lambda-utilities/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js",
-		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js#L128",
+		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js:128",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js#L128"
 	},
 	{
@@ -364,10 +364,10 @@
 			{
 				"type": {
 					"names": [
-						"Number"
+						"Object"
 					]
 				},
-				"description": "The [AWS event]{@link\nhttps://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html}.",
+				"description": "The [AWS event](\nhttps://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-event-object.html).",
 				"name": "\\{\\}.event"
 			},
 			{
@@ -376,7 +376,7 @@
 						"Number"
 					]
 				},
-				"description": "The [AWS context]{@link\nhttps://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-context-object.html}.",
+				"description": "The [AWS context](\nhttps://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/the-context-object.html).",
 				"name": "\\{\\}.context"
 			}
 		],
@@ -397,7 +397,7 @@
 		"order": 3,
 		"relativeCodePath": "modules/lambda-utilities/index.js",
 		"absoluteCodePath": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js",
-		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js#L157",
+		"relativeCodePathWithLineNumber": "modules/lambda-utilities/index.js:157",
 		"absoluteCodePathWithLineNumber": "https://github.com/jamesTbaker/jbkr/blob/main/modules/lambda-utilities/index.js#L157"
 	}
 ]

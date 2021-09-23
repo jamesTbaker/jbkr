@@ -25,33 +25,47 @@ module.exports = {
 				{
 					'type': 'doc',
 					'position': 'left',
-					'docId': 'client/index',
-					'label': 'Client',
-				},
-				{
-					'type': 'doc',
-					'position': 'left',
-					'docId': 'content/index',
+					'docId': 'Content/Content-Intro',
 					'label': 'Content',
 				},
 				{
 					'type': 'doc',
 					'position': 'left',
-					'docId': 'components/index',
-					'label': 'Components',
-				},
-				{
-					'type': 'doc',
-					'position': 'left',
-					'docId': 'styles/index',
+					'docId': 'Styles/Styles-Intro',
 					'label': 'Styles',
 				},
 				{
 					'type': 'doc',
 					'position': 'left',
-					'docId': 'more/Intro',
-					'label': 'More',
+					'docId': 'Client/Client-Intro',
+					'label': 'Client',
 				},
+				{
+					'type': 'doc',
+					'position': 'left',
+					'docId': 'Doc/Doc-Intro',
+					'label': 'Doc',
+				},
+
+				{
+					'type': 'doc',
+					'position': 'right',
+					'docId': 'Modules/Modules-Intro',
+					'label': 'Modules',
+				},
+				{
+					'type': 'doc',
+					'position': 'right',
+					'docId': 'Lambdas/Lambdas-Intro',
+					'label': 'Lambdas',
+				},
+				{
+					'type': 'doc',
+					'position': 'right',
+					'docId': 'Components/Components-Intro',
+					'label': 'Components',
+				},
+
 			],
 		},
 		'footer': {

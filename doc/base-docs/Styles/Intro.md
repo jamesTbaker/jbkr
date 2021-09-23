@@ -1,6 +1,6 @@
 ---
-id: "index"
-title: "Client"
+id: "Styles-Intro"
+title: "Intro"
 sidebar_label: "Intro"
 sidebar_position: 0
 ---
