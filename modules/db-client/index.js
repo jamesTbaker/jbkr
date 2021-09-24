@@ -6,6 +6,8 @@
  * A Node.js MongoDB client, from the official
  * [MongoDB NodeJS Driver module](https://www.npmjs.com/package/mongodb).
  * @typedef {Object} MongoDBClient
+ * @property {Function} db - [Represents a MongoDB database](
+ * https://mongodb.github.io/node-mongodb-native/4.1/classes/Db.html)
  * @property {Function} collection - [Embodies a MongoDB collection
  * allowing for insert/update/remove/find and other command operation
  * on that MongoDB collection](
@@ -19,7 +21,7 @@ import { MongoClient } from 'mongodb';
  * Return a MongoDB Client connected to
  * the MongoDB Atlas jbkr cluster.
  *
- * @returns {Object} A MongoDB Client connected to
+ * @returns {MongoDBClient} A MongoDB Client connected to
  * the MongoDB Atlas jbkr cluster.
  *
  */

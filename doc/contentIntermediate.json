@@ -1,1 +1,121 @@
-[{"id":"module:@jbkr/db-client","longname":"module:@jbkr/db-client","name":"@jbkr/db-client","kind":"module","description":"Client for databases in the jbkr cluster in MongoDB Atlas.","meta":{"lineno":1,"filename":"index.js","path":"/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"},"order":0},{"id":"module:@jbkr/db-client.returnDatabaseConnection","longname":"module:@jbkr/db-client.returnDatabaseConnection","name":"returnDatabaseConnection","kind":"constant","scope":"static","description":"Return a MongoDB Client connected to the specified database in\nthe MongoDB Atlas jbkr cluster.","memberof":"module:@jbkr/db-client","params":[{"type":{"names":["Object"]},"description":"Destructured parameters","name":"\\{\\}"},{"type":{"names":["Object"]},"description":"Name of database to which to connect.","name":"\\{\\}.dbName"}],"examples":["@lang js\nimport { returnDatabaseConnection } from '@jbkr/db-client';\n\nconst dbConnection = await returnDatabaseConnection({\n\t'dbName': process.env.mongoDbDbName,\n});\nconst data = await dbConnection.collection('collectionName').findOne({});"],"returns":[{"type":{"names":["MongoDBClient"]},"description":"A MongoDB\nClient connected to the specified database in the MongoDB Atlas jbkr cluster."}],"meta":{"lineno":51,"filename":"index.js","path":"/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"},"order":3},{"id":"module:@jbkr/db-client~returnMongoConnection","longname":"module:@jbkr/db-client~returnMongoConnection","name":"returnMongoConnection","kind":"function","scope":"inner","description":"Return a MongoDB Client connected to\nthe MongoDB Atlas jbkr cluster.","memberof":"module:@jbkr/db-client","params":[],"returns":[{"type":{"names":["Object"]},"description":"A MongoDB Client connected to\nthe MongoDB Atlas jbkr cluster."}],"meta":{"lineno":26,"filename":"index.js","path":"/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"},"async":true,"order":2},{"id":"module:@jbkr/db-client~MongoDBClient","longname":"module:@jbkr/db-client~MongoDBClient","name":"MongoDBClient","kind":"typedef","scope":"inner","description":"A Node.js MongoDB client, from the official\n[MongoDB NodeJS Driver module](https://www.npmjs.com/package/mongodb).","memberof":"module:@jbkr/db-client","type":{"names":["Object"]},"properties":[{"type":{"names":["function"]},"description":"[Embodies a MongoDB collection\nallowing for insert/update/remove/find and other command operation\non that MongoDB collection](\nhttps://mongodb.github.io/node-mongodb-native/4.1/classes/Collection.html)","name":"collection"}],"meta":{"lineno":5,"filename":"index.js","path":"/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"},"order":1}]
+[
+	{
+		"id": "module:@jbkr/db-client",
+		"longname": "module:@jbkr/db-client",
+		"name": "@jbkr/db-client",
+		"kind": "module",
+		"description": "Client for databases in the jbkr cluster in MongoDB Atlas.",
+		"meta": {
+			"lineno": 1,
+			"filename": "index.js",
+			"path": "/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"
+		},
+		"order": 0
+	},
+	{
+		"id": "module:@jbkr/db-client.returnDatabaseConnection",
+		"longname": "module:@jbkr/db-client.returnDatabaseConnection",
+		"name": "returnDatabaseConnection",
+		"kind": "constant",
+		"scope": "static",
+		"description": "Return a MongoDB Client connected to the specified database in\nthe MongoDB Atlas jbkr cluster.",
+		"memberof": "module:@jbkr/db-client",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"Object"
+					]
+				},
+				"description": "Destructured parameters",
+				"name": "\\{\\}"
+			},
+			{
+				"type": {
+					"names": [
+						"Object"
+					]
+				},
+				"description": "Name of database to which to connect.",
+				"name": "\\{\\}.dbName"
+			}
+		],
+		"examples": [
+			"@lang js\nimport { returnDatabaseConnection } from '@jbkr/db-client';\n\nconst dbConnection = await returnDatabaseConnection({\n\t'dbName': process.env.mongoDbDbName,\n});\nconst data = await dbConnection.collection('collectionName').findOne({});"
+		],
+		"returns": [
+			{
+				"type": {
+					"names": [
+						"MongoDBClient"
+					]
+				},
+				"description": "A MongoDB\nClient connected to the specified database in the MongoDB Atlas jbkr cluster."
+			}
+		],
+		"meta": {
+			"lineno": 51,
+			"filename": "index.js",
+			"path": "/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"
+		},
+		"order": 3
+	},
+	{
+		"id": "module:@jbkr/db-client~returnMongoConnection",
+		"longname": "module:@jbkr/db-client~returnMongoConnection",
+		"name": "returnMongoConnection",
+		"kind": "function",
+		"scope": "inner",
+		"description": "Return a MongoDB Client connected to\nthe MongoDB Atlas jbkr cluster.",
+		"memberof": "module:@jbkr/db-client",
+		"params": [],
+		"returns": [
+			{
+				"type": {
+					"names": [
+						"Object"
+					]
+				},
+				"description": "A MongoDB Client connected to\nthe MongoDB Atlas jbkr cluster."
+			}
+		],
+		"meta": {
+			"lineno": 26,
+			"filename": "index.js",
+			"path": "/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"
+		},
+		"async": true,
+		"order": 2
+	},
+	{
+		"id": "module:@jbkr/db-client~MongoDBClient",
+		"longname": "module:@jbkr/db-client~MongoDBClient",
+		"name": "MongoDBClient",
+		"kind": "typedef",
+		"scope": "inner",
+		"description": "A Node.js MongoDB client, from the official\n[MongoDB NodeJS Driver module](https://www.npmjs.com/package/mongodb).",
+		"memberof": "module:@jbkr/db-client",
+		"type": {
+			"names": [
+				"Object"
+			]
+		},
+		"properties": [
+			{
+				"type": {
+					"names": [
+						"function"
+					]
+				},
+				"description": "[Embodies a MongoDB collection\nallowing for insert/update/remove/find and other command operation\non that MongoDB collection](\nhttps://mongodb.github.io/node-mongodb-native/4.1/classes/Collection.html)",
+				"name": "collection"
+			}
+		],
+		"meta": {
+			"lineno": 5,
+			"filename": "index.js",
+			"path": "/Users/skipbaker/Tresors/Software/jbkr/modules/db-client"
+		},
+		"order": 1
+	}
+]
