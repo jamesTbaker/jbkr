@@ -272,8 +272,9 @@
 	--ifm-table-head-background:		var(--jbkr-neutral-finch-04);
 	--ifm-table-stripe-background:		var(--jbkr-neutral-finch-02);
 
-	/* jsdoc-generated */
+	/* auto-generated */
 
+	--ifm-color-info-contrast-background: var(--jbkr-neutral-finch-01);
 	--jbkr-doc-section-border:			var(--jbkr-neutral-finch-05);
 
 
@@ -375,8 +376,9 @@ html[data-theme="dark"] {
 	--ifm-table-head-background:		var(--jbkr-neutral-finch-41);
 	--ifm-table-stripe-background:		var(--jbkr-neutral-finch-39);
 
-	/* jsdoc-generated */
+	/* auto-generated */
 
+	--ifm-color-info-contrast-background: var(--jbkr-neutral-finch-37);
 	--jbkr-doc-section-border:			var(--jbkr-neutral-finch-32);
 
 }
@@ -419,22 +421,51 @@ code {
 	border: 0.1rem solid var(--jbkr-inline-code-border);
 }
 
-section.generate-docs {
-	padding-bottom: 3rem;
-	/* margin-bottom: 3rem;
-	border-bottom: 1px solid var(--jbkr-doc-section-border); */
-}
-section.generate-docs.function {
-	padding-left: 3rem;
-	padding-bottom: 3rem;
-	margin-bottom: 3rem;
-	border-bottom: 1px solid var(--jbkr-doc-section-border);
-}
-
 ul.menu__list li.menu__list-item:nth-child(n+2) {
 	padding-left: 1rem;
 }
 
 div.navbar__items.navbar__items--right a.navbar__item.navbar__link {
 	font-size: 80%;
+}
+div.generate-docs.module-name {
+	display: inline-block;
+	margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
+	background-color: #696;
+}
+
+div.generate-docs.module-name span.identifier {
+	display: inline-block;
+	background-color: #966;
+}
+div.generate-docs.module-name span.identifier svg {
+	height: 1.875rem;
+}
+div.generate-docs.module-name span.identifier svg path#container {
+	fill: none;
+}
+div.generate-docs.module-name span.identifier svg path#content {
+	fill: white;
+}
+div.generate-docs.module-name h2 {
+	display: inline-block;
+	background-color: #669;
+	margin: 0;
+}
+
+section.generate-docs details {
+	padding: 0;
+	border-radius: 0;
+	border: none;
+	box-shadow: none;
+}
+section.generate-docs details summary {
+	margin-left: 1.25rem;
+	border: none;
+}
+section.generate-docs details summary h4 {
+	margin-bottom: 0;
+}
+section.generate-docs details div[class^="collapsibleContent_node_modules"] {
+	border-top: none;
 }
