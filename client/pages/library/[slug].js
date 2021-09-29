@@ -1,11 +1,17 @@
 import { returnContentAsProps } from '@jbkr/http-client';
 import { ArticleScreen } from '@jbkr/components';
 
-const ScreenContainer = (props) => (
-	<ArticleScreen
-		{...props}
-	/>
-);
+const ScreenContainer = (props) => {
+	if (props.error) {
+		return (<></>);
+	} else {
+		return (
+			<ArticleScreen
+				{...props}
+			/>
+		);
+	}
+};
 export default ScreenContainer;
 export async function getServerSideProps(context) {
 	return await returnContentAsProps({

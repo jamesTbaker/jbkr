@@ -46,6 +46,11 @@ const returnContentEndpoint = ({ endpointToken, slug }) => {
  * or an object with an `error` property.
  */
 export const returnJSONFromEndPoint = async ({ endpoint, fetchOptions }) => {
+	console.log('>> endpoint');
+	console.log(endpoint);
+	console.log('>> fetchOptions');
+	console.log(fetchOptions);
+
 	// attempt...
 	try {
 		// get a response from the endpoint, using any supplied options
@@ -85,14 +90,16 @@ export const returnContentAsProps = async ({ contentToken, slug }) => {
 		'endpointToken': contentToken,
 		slug,
 	});
+
 	// construct the fetch options to include the authorization header
-	const options = {
+	const fetchOptions = {
 		'headers': {
 			'Authorization': `Bearer ${process.env.simpleAuthKey}`,
 		},
 	};
 	// get the content as JSON
-	const jsonResponse = await returnJSONFromEndPoint({ endpoint, options });
+	const jsonResponse =
+		await returnJSONFromEndPoint({ endpoint, fetchOptions });
 	// if the response doesn't include an error
 	if (!jsonResponse.error) {
 		// return the response payload as props property
@@ -100,6 +107,6 @@ export const returnContentAsProps = async ({ contentToken, slug }) => {
 		// if the reponse includes an error
 	} else {
 		// return the error as props property
-		return { 'props': { 'error': jsonResponse.error } };
+		return { 'props': { 'error': JSON.stringify(jsonResponse.error) } };
 	}
 };
