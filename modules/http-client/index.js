@@ -46,11 +46,6 @@ const returnContentEndpoint = ({ endpointToken, slug }) => {
  * or an object with an `error` property.
  */
 export const returnJSONFromEndPoint = async ({ endpoint, fetchOptions }) => {
-	console.log('>> endpoint');
-	console.log(endpoint);
-	console.log('>> fetchOptions');
-	console.log(fetchOptions);
-
 	// attempt...
 	try {
 		// get a response from the endpoint, using any supplied options
