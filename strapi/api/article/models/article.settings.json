@@ -53,44 +53,6 @@
     "TeaserDescription": {
       "type": "text"
     },
-    "HeadImage": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "HeadImageCaption": {
-      "type": "text"
-    },
-    "MetaImage": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "MetaImageGravity": {
-      "type": "enumeration",
-      "enum": [
-        "center",
-        "north",
-        "south",
-        "east",
-        "west",
-        "north_east",
-        "south_east",
-        "north_west",
-        "south_west"
-      ],
-      "default": "center"
-    },
     "BriefStatements": {
       "type": "component",
       "repeatable": true,
@@ -117,14 +79,14 @@
     "SimpleBody": {
       "type": "richtext"
     },
-    "TeaserImage": {
+    "Image": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
         "images"
       ],
       "plugin": "upload",
-      "required": true,
+      "required": false,
       "pluginOptions": {}
     }
   }
