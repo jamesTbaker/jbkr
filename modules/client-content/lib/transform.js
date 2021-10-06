@@ -38,10 +38,9 @@ const returnMediaType = ({
 	return 'unknown';
 };
 const returnSocialImageCloudinaryURI = ({
-	imagePublicID, imageExtension, gravity,
+	imagePublicID, imageExtension,
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
-'c_fill,g_' + gravity + ',w_1200,h_628,q_100/' +
-imagePublicID + imageExtension;
+'c_fill,w_1200,h_628,q_100/' + imagePublicID + imageExtension;
 const returnStandardImageCloudinaryURI = ({
 	imagePublicID, imageExtension,
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
@@ -300,7 +299,6 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	screenRendered.meta.metaImage = returnMetaImage({
 		defaults,
 		'metaImage': screenRaw.main.MetaImages[0],
-		'metaImageGravity': screenRaw.main.MetaImageGravity,
 	});
 	if (screenRaw.main.MetaOther) {
 		screenRendered.meta.metaOther = screenRaw.main.MetaOther;
@@ -537,14 +535,12 @@ const returnArticleIntermediate = ({
 	articleIntermedate.metaImage = returnMetaImage({
 		defaults,
 		'metaImage': articleMainRaw.MetaImages[0],
-		'metaImageGravity': articleMainRaw.MetaImageGravity,
 	});
 	if (
 		articleMainRaw.HeadImages &&
 		articleMainRaw.HeadImages[0]
 	) {
-		// if the image is missing any of the necessary properties; even if an
-		// image caption was supplied, we won't use it with a default image
+		// if the image is missing any of the necessary properties
 		if (
 			!articleMainRaw.HeadImages[0].hash ||
 			!articleMainRaw.HeadImages[0].ext ||
@@ -578,12 +574,6 @@ const returnArticleIntermediate = ({
 				}),
 				'credit': articleMainRaw.HeadImages[0].caption,
 			};
-			// if a caption was also specified
-			if (articleMainRaw.HeadImageCaption) {
-				// add it as a property of the image
-				articleIntermedate.headImage.caption =
-					articleMainRaw.HeadImageCaption;
-			}
 		}
 	}
 	if (articleMainRaw.BriefStatements) {
@@ -725,15 +715,6 @@ const returnArticleRendered = ({ content }) => {
 			articleRendered.frontMatter.headImage.credit =
 				returnSimpleHTMLFromMarkdown({
 					'content': content.headImage.credit,
-					'options': {
-						'removeEndCapTags': true,
-					},
-				});
-		}
-		if (content.headImage.caption) {
-			articleRendered.frontMatter.headImage.caption =
-				returnSimpleHTMLFromMarkdown({
-					'content': content.headImage.caption,
 					'options': {
 						'removeEndCapTags': true,
 					},
@@ -930,11 +911,9 @@ const returnArticleRendered = ({ content }) => {
 	// return the container of the article's rendered content
 	return articleRendered;
 };
-const returnMetaImage = ({ defaults, metaImage, metaImageGravity }) => {
+const returnMetaImage = ({ defaults, metaImage }) => {
 	// set up a container for the meta image properties we'll generate
 	const metaImageToReturn = {};
-	// set a default meta image gravity to use
-	let metaImageGravityToUse = metaImageGravity ? metaImageGravity : 'center';
 	// if no meta image was supplied, or if we're missing
 	// any of the necessary properties
 	if (
@@ -955,7 +934,6 @@ const returnMetaImage = ({ defaults, metaImage, metaImageGravity }) => {
 			'imagePublicID':
 				metaImage.hash,
 			'imageExtension': metaImage.ext,
-			'gravity': metaImageGravityToUse,
 		});
 		metaImageToReturn.alternativeText = metaImage.alternativeText;
 		metaImageToReturn.type = returnMediaType({
