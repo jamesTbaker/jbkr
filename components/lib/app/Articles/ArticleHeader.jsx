@@ -30,13 +30,6 @@ export const ArticleHeader = ({
 				htmlContent={headImage.credit}
 			/>
 		}
-		{
-			headImage && headImage.caption &&
-			<Copy
-				kind="small"
-				htmlContent={headImage.caption}
-			/>
-		}
 		<Copy
 			kind="h1"
 			htmlContent={title}
