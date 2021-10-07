@@ -14,15 +14,19 @@ export const ArticleSummary = ({
 		slug,
 		publicationDate,
 		teaserDescription,
-		teaserImage,
+		teaserImages,
 		title,
 		tagline,
 	},
 }) => (
 	<ArticleSummaryContainer>
 		<MediaItem
-			type={teaserImage.type}
-			specs={teaserImage}
+			type={teaserImages.small.type}
+			specs={teaserImages.small}
+		/>
+		<MediaItem
+			type={teaserImages.large.type}
+			specs={teaserImages.large}
 		/>
 		<Copy
 			kind="h3"
