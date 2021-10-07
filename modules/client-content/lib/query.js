@@ -281,9 +281,9 @@ export const returnAllPublishedArticlesFromDB = async () => {
 					'$lookup':
 					{
 						'from': 'upload_file',
-						'localField': 'TeaserImage',
+						'localField': 'Image',
 						'foreignField': '_id',
-						'as': 'TeaserImages',
+						'as': 'Images',
 					},
 				},
 				// specify which field to sort on and in which direction
@@ -298,12 +298,12 @@ export const returnAllPublishedArticlesFromDB = async () => {
 						'Subtitle': 1,
 						'TeaserDescription': 1,
 						'Tagline': 1,
-						'TeaserImages.alternativeText': 1,
-						'TeaserImages.width': 1,
-						'TeaserImages.height': 1,
-						'TeaserImages.ext': 1,
-						'TeaserImages.hash': 1,
-						'TeaserImages.mime': 1,
+						'Images.alternativeText': 1,
+						'Images.width': 1,
+						'Images.height': 1,
+						'Images.ext': 1,
+						'Images.hash': 1,
+						'Images.mime': 1,
 					},
 				},
 			]).toArray();
@@ -344,19 +344,9 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					'$lookup':
 					{
 						'from': 'upload_file',
-						'localField': 'MetaImage',
+						'localField': 'Image',
 						'foreignField': '_id',
-						'as': 'MetaImages',
-					},
-				},
-				// look up the head image for this article
-				{
-					'$lookup':
-					{
-						'from': 'upload_file',
-						'localField': 'HeadImage',
-						'foreignField': '_id',
-						'as': 'HeadImages',
+						'as': 'Images',
 					},
 				},
 				// look up the intro video for this article
@@ -383,17 +373,14 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'MetaTitle': 1,
 						'MetaDescription': 1,
 						'SocialDescription': 1,
-						'MetaImages.alternativeText': 1,
-						'MetaImages.ext': 1,
-						'MetaImages.hash': 1,
-						'MetaImages.mime': 1,
-						'HeadImages.alternativeText': 1,
-						'HeadImages.width': 1,
-						'HeadImages.height': 1,
-						'HeadImages.ext': 1,
-						'HeadImages.hash': 1,
-						'HeadImages.mime': 1,
-						'HeadImages.caption': 1,
+						'Images.alternativeText': 1,
+						'Images.width': 1,
+						'Images.height': 1,
+						'Images.ext': 1,
+						'Images.hash': 1,
+						'Images.mime': 1,
+						'Images.caption': 1,
+						'ImageInHeader': 1,
 						'BriefStatements._id': 1,
 						'BriefStatements.Statement': 1,
 						'IntroText': 1,

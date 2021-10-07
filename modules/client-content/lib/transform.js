@@ -37,14 +37,20 @@ const returnMediaType = ({
 	// otherwise, return unknown
 	return 'unknown';
 };
-const returnSocialImageCloudinaryURI = ({
+/* const returnSocialImageCloudinaryURI = ({
 	imagePublicID, imageExtension,
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
-'c_fill,w_1200,h_628,q_100/' + imagePublicID + imageExtension;
+'socialBase_' + imagePublicID + imageExtension;
 const returnStandardImageCloudinaryURI = ({
 	imagePublicID, imageExtension,
 }) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
-imagePublicID + imageExtension;
+imagePublicID + imageExtension; */
+
+const returnImageURI = ({
+	imagePublicID, imageExtension, typeToken,
+}) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
+typeToken + '_' + imagePublicID + imageExtension;
+
 const returnSimpleHTMLFromMarkdown = ({ content, options }) => {
 	// set up container for value to return
 	let renderedContent = '';
@@ -532,47 +538,65 @@ const returnArticleIntermediate = ({
 	if (articleMainRaw.SocialDescription) {
 		articleIntermedate.socialDescription = articleMainRaw.SocialDescription;
 	}
-	articleIntermedate.metaImage = returnMetaImage({
-		defaults,
-		'metaImage': articleMainRaw.MetaImages[0],
-	});
 	if (
-		articleMainRaw.HeadImages &&
-		articleMainRaw.HeadImages[0]
+		articleMainRaw.Images &&
+		articleMainRaw.Images[0]
 	) {
-		// if the image is missing any of the necessary properties
+		articleIntermedate.metaImage = returnMetaImage({
+			defaults,
+			'image': articleMainRaw.Images[0],
+		});
+	}
+	if (
+		articleMainRaw.Images &&
+		articleMainRaw.Images[0]
+	) {
+		// if the image has all of the necessary properties
 		if (
-			!articleMainRaw.HeadImages[0].hash ||
-			!articleMainRaw.HeadImages[0].ext ||
-			!articleMainRaw.HeadImages[0].mime ||
-			!articleMainRaw.HeadImages[0].alternativeText ||
-			!articleMainRaw.HeadImages[0].width ||
-			!articleMainRaw.HeadImages[0].height
+			articleMainRaw.ImageInHeader &&
+			articleMainRaw.Images &&
+			articleMainRaw.Images[0] &&
+			articleMainRaw.Images[0].hash &&
+			articleMainRaw.Images[0].ext &&
+			articleMainRaw.Images[0].mime &&
+			articleMainRaw.Images[0].alternativeText &&
+			articleMainRaw.Images[0].width &&
+			articleMainRaw.Images[0].height
 		) {
-			// use a default image
-			articleIntermedate.headImage = {
-				'url': defaults.standardImageURL,
-				'alternativeText': defaults.standardImageAlternativeText,
-				'width': defaults.standardImageWidth,
-				'height': defaults.standardImageHeight,
-				'type': defaults.standardImageType,
-			};
-			// if all of the image properties are present
-		} else {
 			// transform the image properties
-			articleIntermedate.headImage = {
-				'url': returnStandardImageCloudinaryURI({
-					'imagePublicID':
-						articleMainRaw.HeadImages[0].hash,
-					'imageExtension': articleMainRaw.HeadImages[0].ext,
-				}),
-				'alternativeText': articleMainRaw.HeadImages[0].alternativeText,
-				'width': articleMainRaw.HeadImages[0].width,
-				'height': articleMainRaw.HeadImages[0].height,
-				'type': returnMediaType({
-					'mime': articleMainRaw.HeadImages[0].mime,
-				}),
-				'credit': articleMainRaw.HeadImages[0].caption,
+			articleIntermedate.headImages = {
+				'small': {
+					'url': returnImageURI({
+						'imagePublicID':
+							articleMainRaw.Images[0].hash,
+						'imageExtension': articleMainRaw.Images[0].ext,
+						'typeToken': 'headerSmall',
+					}),
+					'alternativeText':
+						articleMainRaw.Images[0].alternativeText,
+					'width': articleMainRaw.Images[0].width,
+					'height': articleMainRaw.Images[0].height,
+					'type': returnMediaType({
+						'mime': articleMainRaw.Images[0].mime,
+					}),
+					'credit': articleMainRaw.Images[0].caption,
+				},
+				'large': {
+					'url': returnImageURI({
+						'imagePublicID':
+							articleMainRaw.Images[0].hash,
+						'imageExtension': articleMainRaw.Images[0].ext,
+						'typeToken': 'headerLarge',
+					}),
+					'alternativeText':
+						articleMainRaw.Images[0].alternativeText,
+					'width': articleMainRaw.Images[0].width,
+					'height': articleMainRaw.Images[0].height,
+					'type': returnMediaType({
+						'mime': articleMainRaw.Images[0].mime,
+					}),
+					'credit': articleMainRaw.Images[0].caption,
+				},
 			};
 		}
 	}
@@ -703,18 +727,36 @@ const returnArticleRendered = ({ content }) => {
 		articleRendered.meta.socialDescription = content.socialDescription;
 	}
 	// collect and render the article's front matter content
-	if (content.headImage) {
-		articleRendered.frontMatter.headImage = {
-			'url': content.headImage.url,
-			'alternativeText': content.headImage.alternativeText,
-			'width': content.headImage.width,
-			'height': content.headImage.height,
-			'type': content.headImage.type,
+	if (content.headImages) {
+		articleRendered.frontMatter.headImages = {
+			'small': {
+				'url': content.headImages.small.url,
+				'alternativeText': content.headImages.small.alternativeText,
+				'width': content.headImages.small.width,
+				'height': content.headImages.small.height,
+				'type': content.headImages.small.type,
+			},
+			'large': {
+				'url': content.headImages.large.url,
+				'alternativeText': content.headImages.large.alternativeText,
+				'width': content.headImages.large.width,
+				'height': content.headImages.large.height,
+				'type': content.headImages.large.type,
+			},
 		};
-		if (content.headImage.credit) {
-			articleRendered.frontMatter.headImage.credit =
+		if (content.headImages.small.credit) {
+			articleRendered.frontMatter.headImages.small.credit =
 				returnSimpleHTMLFromMarkdown({
-					'content': content.headImage.credit,
+					'content': content.headImages.small.credit,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		}
+		if (content.headImages.large.credit) {
+			articleRendered.frontMatter.headImages.large.credit =
+				returnSimpleHTMLFromMarkdown({
+					'content': content.headImages.large.credit,
 					'options': {
 						'removeEndCapTags': true,
 					},
@@ -911,17 +953,17 @@ const returnArticleRendered = ({ content }) => {
 	// return the container of the article's rendered content
 	return articleRendered;
 };
-const returnMetaImage = ({ defaults, metaImage }) => {
+const returnMetaImage = ({ defaults, image }) => {
 	// set up a container for the meta image properties we'll generate
 	const metaImageToReturn = {};
 	// if no meta image was supplied, or if we're missing
 	// any of the necessary properties
 	if (
-		!metaImage ||
-		!metaImage.hash ||
-		!metaImage.ext ||
-		!metaImage.mime ||
-		!metaImage.alternativeText
+		!image ||
+		!image.hash ||
+		!image.ext ||
+		!image.mime ||
+		!image.alternativeText
 	) {
 		// use the default meta image properties
 		metaImageToReturn.url = defaults.metaImageURL;
@@ -930,14 +972,15 @@ const returnMetaImage = ({ defaults, metaImage }) => {
 		// if all of the necessary properties are present
 	} else {
 		// get a transformed version of the selected meta image properties
-		metaImageToReturn.url = returnSocialImageCloudinaryURI({
+		metaImageToReturn.url = returnImageURI({
 			'imagePublicID':
-				metaImage.hash,
-			'imageExtension': metaImage.ext,
+				image.hash,
+			'imageExtension': image.ext,
+			'typeToken': 'socialBase',
 		});
-		metaImageToReturn.alternativeText = metaImage.alternativeText;
+		metaImageToReturn.alternativeText = image.alternativeText;
 		metaImageToReturn.type = returnMediaType({
-			'mime': metaImage.mime,
+			'mime': image.mime,
 		});
 	}
 	// return the main container
@@ -1074,14 +1117,14 @@ export const returnTransformedLibLabScreenContent = ({
 			articleRaw.Title &&
 			articleRaw.PublicationDate &&
 			articleRaw.TeaserDescription &&
-			articleRaw.TeaserImages &&
-			articleRaw.TeaserImages[0] &&
-			articleRaw.TeaserImages[0].alternativeText &&
-			articleRaw.TeaserImages[0].width &&
-			articleRaw.TeaserImages[0].height &&
-			articleRaw.TeaserImages[0].ext &&
-			articleRaw.TeaserImages[0].hash &&
-			articleRaw.TeaserImages[0].mime
+			articleRaw.Images &&
+			articleRaw.Images[0] &&
+			articleRaw.Images[0].alternativeText &&
+			articleRaw.Images[0].width &&
+			articleRaw.Images[0].height &&
+			articleRaw.Images[0].ext &&
+			articleRaw.Images[0].hash &&
+			articleRaw.Images[0].mime
 		) {
 			const articleTransformed = {
 				'key': articleRaw._id,
@@ -1097,19 +1140,39 @@ export const returnTransformedLibLabScreenContent = ({
 						'removeEndCapTags': true,
 					},
 				}),
-				'teaserImage': {
-					'url': returnStandardImageCloudinaryURI({
-						'imagePublicID':
-							articleRaw.TeaserImages[0].hash,
-						'imageExtension': articleRaw.TeaserImages[0].ext,
-					}),
-					'alternativeText':
-						articleRaw.TeaserImages[0].alternativeText,
-					'width': articleRaw.TeaserImages[0].width,
-					'height': articleRaw.TeaserImages[0].height,
-					'type': returnMediaType({
-						'mime': articleRaw.TeaserImages[0].mime,
-					}),
+				'teaserImages': {
+					'small': {
+						'url': returnImageURI({
+							'imagePublicID':
+								articleRaw.Images[0].hash,
+							'imageExtension': articleRaw.Images[0].ext,
+							'typeToken': 'headerSmall',
+						}),
+						'alternativeText':
+							articleRaw.Images[0].alternativeText,
+						'width': articleRaw.Images[0].width,
+						'height': articleRaw.Images[0].height,
+						'type': returnMediaType({
+							'mime': articleRaw.Images[0].mime,
+						}),
+						'credit': articleRaw.Images[0].caption,
+					},
+					'large': {
+						'url': returnImageURI({
+							'imagePublicID':
+								articleRaw.Images[0].hash,
+							'imageExtension': articleRaw.Images[0].ext,
+							'typeToken': 'headerLarge',
+						}),
+						'alternativeText':
+							articleRaw.Images[0].alternativeText,
+						'width': articleRaw.Images[0].width,
+						'height': articleRaw.Images[0].height,
+						'type': returnMediaType({
+							'mime': articleRaw.Images[0].mime,
+						}),
+						'credit': articleRaw.Images[0].caption,
+					},
 				},
 			};
 			if (articleRaw.Tagline) {

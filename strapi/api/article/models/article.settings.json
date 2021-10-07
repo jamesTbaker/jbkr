@@ -88,6 +88,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "ImageInHeader": {
+      "type": "boolean",
+      "required": true
     }
   }
 }
