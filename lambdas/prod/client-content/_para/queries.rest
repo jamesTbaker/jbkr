@@ -12,8 +12,13 @@ GET {{baseURI}}/content/client/liblab
 Authorization: Bearer {{simpleAuthKey}}
 
 #########
-# get Article screen content
+# get The Hub Article screen content
 GET {{baseURI}}/content/client/liblab/the-hub
+Authorization: Bearer {{simpleAuthKey}}
+
+#########
+# get other Article screen content
+GET {{baseURI}}/content/client/liblab/i-could-reet-fancy-a-scrubber
 Authorization: Bearer {{simpleAuthKey}}
 
 #########
