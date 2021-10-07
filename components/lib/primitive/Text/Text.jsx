@@ -1,58 +1,109 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
+import { prop, ifProp, switchProp } from 'styled-tools';
 
 const TextContainer = styled.div`
-	${deviceWidthQuery.only({ 'width': 's' })} {
-		${({
-		size,
-		weight,
-		slant,
-		spaced,
-		usage,
-	}) => typeStyle({
-		'deviceWidth': 's',
-		size,
-		weight,
-		slant,
-		spaced,
-		usage,
-	})}
+	${
+		({ $color }) => {
+			if ($color) {
+				return `color: ${color({
+					'kind': $color.kind,
+					'tone': $color.tone,
+					'level': $color.level,
+					'alpha': $color.alpha,
+					'format': 'string'
+				})};`
+			}
+		}
 	}
-	${deviceWidthQuery.only({ 'width': 'm' })} {
-		${({
-		size,
-		weight,
-		slant,
-		spaced,
-		usage,
-	}) => typeStyle({
-		'deviceWidth': 'm',
-		size,
-		weight,
-		slant,
-		spaced,
-		usage,
-	})}
+	${
+		({ $gradient }) => {
+			if (
+				$gradient &&
+				$gradient.colors &&
+				$gradient.colors[0] &&
+				$gradient.colors[1]
+			) {
+				return `
+					@supports (background-clip: text) {
+						background: linear-gradient(
+							${color({
+								'kind': $gradient.colors[0].kind,
+								'tone': $gradient.colors[0].tone,
+								'level': $gradient.colors[0].level,
+								'alpha': $gradient.colors[0].alpha,
+								'format': 'string'
+							})},
+							${color({
+								'kind': $gradient.colors[1].kind,
+								'tone': $gradient.colors[1].tone,
+								'level': $gradient.colors[1].level,
+								'alpha': $gradient.colors[1].alpha,
+								'format': 'string'
+							})}
+						);
+						background-clip: text;
+						-webkit-background-clip: text;
+						color: transparent;
+					}
+					@supports not (background-clip: text) {
+						color: ${color({
+							'kind': $gradient.fallbackColor.kind,
+							'tone': $gradient.fallbackColor.tone,
+							'level': $gradient.fallbackColor.level,
+							'alpha': $gradient.fallbackColor.alpha,
+							'format': 'string'
+						})};
+					}
+				`;
+			}
+		}
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		${({
-		size,
-		weight,
-		slant,
-		spaced,
-		usage,
-	}) => typeStyle({
-		'deviceWidth': 'l',
-		size,
-		weight,
-		slant,
-		spaced,
-		usage,
-	})}
+	${
+		({
+			size,
+			weight,
+			slant,
+			spaced,
+			usage,
+		}) => {
+			if (size) {
+				return `
+					${deviceWidthQuery.only({ 'width': 's' })} {
+						${typeStyle({
+							'deviceWidth': 's',
+							size,
+							weight,
+							slant,
+							spaced,
+							usage,
+						})}
+					}
+					${deviceWidthQuery.only({ 'width': 'm' })} {
+						${typeStyle({
+							'deviceWidth': 'm',
+							size,
+							weight,
+							slant,
+							spaced,
+							usage,
+						})}
+					}
+					${deviceWidthQuery.only({ 'width': 'l' })} {
+						${typeStyle({
+							'deviceWidth': 'l',
+							size,
+							weight,
+							slant,
+							spaced,
+							usage,
+						})}
+					}
+				`;
+			}
+		}
 	}
-	color: ${({ '$color': { kind, tone, level, alpha } }) =>
-		color({kind, tone, level, alpha, 'format': 'string'})};
 `;
 /**
  * `Text` creates a `div` that can contain a string with any color and type
@@ -72,11 +123,8 @@ export const Text = ({
 	slant,
 	usage,
 	spaced,
-	color = {
-		'kind': 'Neutral',
-		'tone': 'Finch',
-		'level': 21,
-	},
+	color,
+	gradient,
 	htmlContent,
 	children,
 	id,
@@ -91,6 +139,7 @@ export const Text = ({
 				usage={usage}
 				spaced={spaced}
 				$color={color}
+				$gradient={gradient}
 				dangerouslySetInnerHTML={{
 					'__html': htmlContent,
 				}}
@@ -105,6 +154,7 @@ export const Text = ({
 			usage={usage}
 			spaced={spaced}
 			$color={color}
+			$gradient={gradient}
 			dangerouslySetInnerHTML={{
 				'__html': htmlContent,
 			}}
@@ -119,6 +169,7 @@ export const Text = ({
 				usage={usage}
 				spaced={spaced}
 				$color={color}
+				$gradient={gradient}
 				id={id}
 			>
 				{children}
@@ -132,6 +183,7 @@ export const Text = ({
 				usage={usage}
 				spaced={spaced}
 				$color={color}
+				$gradient={gradient}
 			>
 				{children}
 			</TextContainer>);
@@ -172,8 +224,7 @@ Text.propTypes = {
 	 */
 	'spaced': PropTypes.bool,
 	/**
-	 * Go to [Color](/?path=/story/props-color--page) to learn more about
-	 * color props.
+	 * [Learn about color props](/?path=/story/props-color--page).
 	 *
 	 * @todo Update links in this description.
 	 */
@@ -182,6 +233,26 @@ Text.propTypes = {
 		'tone': PropTypes.string.isRequired,
 		'level': PropTypes.number.isRequired,
 		'alpha': PropTypes.string,
+	}),
+	/**
+	 * Color props used to construct a gradient, and a fallback color.
+	 * [Learn about color props](/?path=/story/props-color--page).
+	 *
+	 * @todo Update links in this description.
+	 */
+	'gradient': PropTypes.exact({
+		'colors': PropTypes.arrayOf({
+			'kind': PropTypes.string.isRequired,
+			'tone': PropTypes.string.isRequired,
+			'level': PropTypes.number.isRequired,
+			'alpha': PropTypes.string,
+		}),
+		'fallbackColor': PropTypes.exact({
+			'kind': PropTypes.string.isRequired,
+			'tone': PropTypes.string.isRequired,
+			'level': PropTypes.number.isRequired,
+			'alpha': PropTypes.string,
+		}),
 	}),
 	/**
 	 * The text characters marked up with HTML tags. If `htmlContent` is
