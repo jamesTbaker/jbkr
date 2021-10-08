@@ -5,6 +5,7 @@ export declare const color: any;
 export declare const colors: any;
 export declare const typeFamily: any;
 export declare const typeStyle: any;
+export declare const iconSize: any;
 export declare const verticalAlignMiddle: any;
 export declare const zIndexNumber: any;
 export declare const shadow: any;

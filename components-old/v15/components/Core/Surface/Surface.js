@@ -15,7 +15,7 @@ import Style from '../../../services/styles';
 const ReturnElevationValues = (elevationString) => {
 	// start with a base value derived from incoming value
 	const elevationBase = parseInt(elevationString, 10);
-	// set up value to +2, unless that's over the highest elevation; 
+	// set up value to +2, unless that's over the highest elevation;
 	// if so, set to highest elevation
 	const elevationUp =
 		(
@@ -25,34 +25,34 @@ const ReturnElevationValues = (elevationString) => {
 	// set down value to -2, unless that's under 0; if so, set to 0
 	const elevationDown = (elevationBase - 2 < 0) ? 0 : (elevationBase - 2);
 	return {
-		base: elevationBase,
-		up: elevationUp,
-		down: elevationDown,
+		'base': elevationBase,
+		'up': elevationUp,
+		'down': elevationDown,
 	};
 };
 const Base = styled.div`
-	${({ base: { width } }) => (typeof (width) === 'number' && `width: ${width}rem`)};
-	${({ base: { width } }) => (typeof (width) === 'string' && `width: ${width}`)};
-	${({ base: { margin } }) => (typeof (margin) === 'number' && `margin: ${margin}rem`)};
-	${({ base: { margin } }) => (typeof (margin) === 'object' && `margin: ${margin.top}rem ${margin.right}rem ${margin.bottom}rem ${margin.left}rem`)};
-	${({ base: { backgroundColor } }) => (backgroundColor && `background-color: ${Style.Color({ token: backgroundColor })};`)};
-	${({ base: { borderColor } }) => (borderColor ? `border-color: ${Style.Color({ token: borderColor })};` : 'border-color: transparent;')};
-	${({ base: { elevation } }) => (elevation && `box-shadow: ${Style.Elevation(`ux-l-${elevation}`)};`)};
-	border-width: ${({ base: { borderSize } }) => (`${borderSize}rem`)};
+	${({ 'base': { width } }) => (typeof (width) === 'number' && `width: ${width}rem`)};
+	${({ 'base': { width } }) => (typeof (width) === 'string' && `width: ${width}`)};
+	${({ 'base': { margin } }) => (typeof (margin) === 'number' && `margin: ${margin}rem`)};
+	${({ 'base': { margin } }) => (typeof (margin) === 'object' && `margin: ${margin.top}rem ${margin.right}rem ${margin.bottom}rem ${margin.left}rem`)};
+	${({ 'base': { backgroundColor } }) => (backgroundColor && `background-color: ${Style.Color({ 'token': backgroundColor })};`)};
+	${({ 'base': { borderColor } }) => (borderColor ? `border-color: ${Style.Color({ 'token': borderColor })};` : 'border-color: transparent;')};
+	${({ 'base': { elevation } }) => (elevation && `box-shadow: ${Style.Elevation(`ux-l-${elevation}`)};`)};
+	border-width: ${({ 'base': { borderSize } }) => (`${borderSize}rem`)};
 	border-style: solid;
 	transition: all ${Style.StandardTransitionTime().stringSeconds};
 	${({
-		interactive, base: { elevation, backgroundColor, borderColor },
-	}) => {
+	interactive, 'base': { elevation, backgroundColor, borderColor },
+}) => {
 		let returnValue = '';
 		if (interactive) {
 			returnValue += `&:hover {
 				transform: scale(1.02);`;
 			if (backgroundColor) {
-				returnValue += `background-color: ${Style.Color({ token: backgroundColor, lighten: 1 })};`;
+				returnValue += `background-color: ${Style.Color({ 'token': backgroundColor, 'lighten': 1 })};`;
 			}
 			if (borderColor) {
-				returnValue += `border-color: ${Style.Color({ token: borderColor, lighten: 1 })};`;
+				returnValue += `border-color: ${Style.Color({ 'token': borderColor, 'lighten': 1 })};`;
 			}
 			if (elevation) {
 				returnValue += `box-shadow: ${Style.Elevation(`ux-l-${ReturnElevationValues(elevation).up}`)};`;
@@ -63,10 +63,10 @@ const Base = styled.div`
 				&:active {
 					transform: scale(.98);`;
 			if (backgroundColor) {
-				returnValue += `background-color: ${Style.Color({ token: backgroundColor, darken: 1 })};`;
+				returnValue += `background-color: ${Style.Color({ 'token': backgroundColor, 'darken': 1 })};`;
 			}
 			if (borderColor) {
-				returnValue += `border-color: ${Style.Color({ token: borderColor, darken: 1 })};`;
+				returnValue += `border-color: ${Style.Color({ 'token': borderColor, 'darken': 1 })};`;
 			}
 			if (elevation) {
 				returnValue += `box-shadow: ${Style.Elevation(`ux-l-${ReturnElevationValues(elevation).down}`)};`;
@@ -77,7 +77,7 @@ const Base = styled.div`
 	}}
 `;
 const Content = styled.div`
-	${({ base: { display }, content: { size, textAlign }, device }) => (
+	${({ 'base': { display }, 'content': { size, textAlign }, device }) => (
 		display && display === 'gridColumns' &&
 		`
 			display: grid;
@@ -86,13 +86,13 @@ const Content = styled.div`
 			text-align: ${textAlign || 'left'};
 		`
 	)};
-	${({ base: { padding } }) => (typeof (padding) === 'number' && `padding: ${padding}rem`)};
-	${({ base: { padding } }) => (typeof (padding) === 'object' && `padding: ${padding.top}rem ${padding.right}rem ${padding.bottom}rem ${padding.left}rem`)};
-	color: ${({ content: { color } }) => {
+	${({ 'base': { padding } }) => (typeof (padding) === 'number' && `padding: ${padding}rem`)};
+	${({ 'base': { padding } }) => (typeof (padding) === 'object' && `padding: ${padding.top}rem ${padding.right}rem ${padding.bottom}rem ${padding.left}rem`)};
+	color: ${({ 'content': { color } }) => {
 		if (color) {
-			return Style.Color({ token: color });
+			return Style.Color({ 'token': color });
 		}
-		return Style.Color({ token: 'black' });
+		return Style.Color({ 'token': 'black' });
 	}};
 	}
 	${({
@@ -102,17 +102,17 @@ const Content = styled.div`
 		if (interactive) {
 			returnValue +=
 				`&:hover {
-					color: ${Style.Color({ token: content.color, lighten: 1 })};
+					color: ${Style.Color({ 'token': content.color, 'lighten': 1 })};
 					svg {
-						fill: ${Style.Color({ token: content.color, lighten: 1 })};
+						fill: ${Style.Color({ 'token': content.color, 'lighten': 1 })};
 					};
 				}`;
 			returnValue +=
 				`&:focus,
 				&:active {
-					color: ${Style.Color({ token: content.color, darken: 1 })};
+					color: ${Style.Color({ 'token': content.color, 'darken': 1 })};
 					svg {
-						fill: ${Style.Color({ token: content.color, darken: 1 })};
+						fill: ${Style.Color({ 'token': content.color, 'darken': 1 })};
 					};
 				`;
 		}
@@ -131,17 +131,17 @@ const Surface = ({
 		base={base}
 		interactive={interactive}
 	>
-		{ content && (
+		{content && (
 			<Content
 				content={content}
 				base={base}
 				interactive={interactive}
 				device={device}
 			>
-				{ children}
+				{children}
 			</Content>
 		)}
-		{ !content && (
+		{!content && (
 			children
 		)}
 	</Base>
@@ -149,44 +149,44 @@ const Surface = ({
 
 Surface.propTypes = {
 	/** The base of the surface, or, really, the surface itself. */
-	base: PropTypes.shape({
-		elevation: PropTypes.number,
-		backgroundColor: PropTypes.string,
-		borderColor: PropTypes.string,
-		borderSize: PropTypes.number,
-		width: PropTypes.oneOfType([
+	'base': PropTypes.shape({
+		'elevation': PropTypes.number,
+		'backgroundColor': PropTypes.string,
+		'borderColor': PropTypes.string,
+		'borderSize': PropTypes.number,
+		'width': PropTypes.oneOfType([
 			PropTypes.number,
 			PropTypes.string,
 		]),
-		margin: PropTypes.oneOfType([
+		'margin': PropTypes.oneOfType([
 			PropTypes.number,
 			PropTypes.shape({
-				top: PropTypes.number,
-				right: PropTypes.number,
-				bottom: PropTypes.number,
-				left: PropTypes.number,
+				'top': PropTypes.number,
+				'right': PropTypes.number,
+				'bottom': PropTypes.number,
+				'left': PropTypes.number,
 			}),
 		]),
-		padding: PropTypes.oneOfType([
+		'padding': PropTypes.oneOfType([
 			PropTypes.number,
 			PropTypes.shape({
-				top: PropTypes.number,
-				right: PropTypes.number,
-				bottom: PropTypes.number,
-				left: PropTypes.number,
+				'top': PropTypes.number,
+				'right': PropTypes.number,
+				'bottom': PropTypes.number,
+				'left': PropTypes.number,
 			}),
 		]),
 	}),
 	/** The content container */
-	content: PropTypes.shape({
-		color: PropTypes.string,
-		padding: PropTypes.oneOfType([
+	'content': PropTypes.shape({
+		'color': PropTypes.string,
+		'padding': PropTypes.oneOfType([
 			PropTypes.number,
 			PropTypes.shape({
-				top: PropTypes.number,
-				right: PropTypes.number,
-				bottom: PropTypes.number,
-				left: PropTypes.number,
+				'top': PropTypes.number,
+				'right': PropTypes.number,
+				'bottom': PropTypes.number,
+				'left': PropTypes.number,
 			}),
 		]),
 	}),

@@ -88,6 +88,9 @@ export const style = {
             return typeString;
         },
     },
+    'icon': {
+        'size': ({ deviceWidth, size, }) => type[deviceWidth][size].regular.normal.display.size,
+    },
     'position': {
         'verticalAlignMiddle': () => foundation
             .position.verticalAlignMiddle,

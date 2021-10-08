@@ -5,6 +5,9 @@ import { createGlobalStyle } from 'styled-components';
 import { typeFamily, color } from '@jbkr/style-service';
 
 const GlobalStyle = createGlobalStyle`
+	* {
+		box-sizing: border-box;
+	}
 	html {
 		font-size: 8px;
 	}

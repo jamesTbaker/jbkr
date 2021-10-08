@@ -1,5 +1,7 @@
 // Primitive
 export { Text } from './lib/primitive/Text/Text.jsx';
+export { Line } from './lib/primitive/Line/Line.jsx';
+export { Icon } from './lib/primitive/Icon/Icon.jsx';
 
 // Core
 export { Copy } from './lib/core/Copy/Copy.jsx';

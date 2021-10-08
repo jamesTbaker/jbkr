@@ -123,6 +123,15 @@ export const style: {[key:string]: any} = {
 			return typeString;
 		},
 	},
+	'icon': {
+		'size': ({
+			deviceWidth,
+			size,
+		}:{
+			deviceWidth: DeviceWidthToken,
+			size: TypeSizeKey,
+		}): number => type[deviceWidth][size].regular.normal.display.size,
+	},
 	'position': {
 		'verticalAlignMiddle': (): string => foundation
 			.position.verticalAlignMiddle,

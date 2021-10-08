@@ -9,6 +9,7 @@
 	"type": "module",
 	"dependencies": {
 		"@jbkr/style-service": "file:../modules/style-service",
+		"@jbkr/utilities": "file:../modules/utilities",
 		"next": "^11.1.2",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.2",

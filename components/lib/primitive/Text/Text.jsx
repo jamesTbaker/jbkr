@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
-import { prop, ifProp, switchProp } from 'styled-tools';
 
 const TextContainer = styled.div`
 	${
