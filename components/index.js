@@ -5,6 +5,7 @@ export { Icon } from './lib/primitive/Icon/Icon.jsx';
 
 // Core
 export { Copy } from './lib/core/Copy/Copy.jsx';
+export { CopyLink } from './lib/core/CopyLink/CopyLink.jsx';
 
 // Screens
 export { ProfileScreen } from './lib/app/Screens/ProfileScreen.jsx';

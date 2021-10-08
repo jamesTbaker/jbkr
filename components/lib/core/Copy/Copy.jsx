@@ -476,22 +476,27 @@ export const Copy = ({
 	children,
 	id,
 }) => {
-	const tagThisCopy = propsSpecifications[kind].tag;
-	const propsThisCopy = propsSpecifications[kind];
-	if (htmlContent) {
-		propsThisCopy.htmlContent = htmlContent;
+	if (propsSpecifications[kind]) {
+		const tagThisCopy = propsSpecifications[kind].tag;
+		const propsThisCopy = propsSpecifications[kind];
+		if (htmlContent) {
+			propsThisCopy.htmlContent = htmlContent;
+		}
+		if (id) {
+			propsThisCopy.id = id;
+		}
+		return (
+			<Text
+				tag={tagThisCopy}
+				{...propsThisCopy}
+			>
+				{children}
+			</Text>
+		);
+	} else {
+		console.log(kind);
+		return (<></>);
 	}
-	if (id) {
-		propsThisCopy.id = id;
-	}
-	return (
-		<Text
-			tag={tagThisCopy}
-			{...propsThisCopy}
-		>
-			{children}
-		</Text>
-	);
 };
 Copy.propTypes = {
 	/**
