@@ -39,6 +39,7 @@ const propsSpecifications = {
 		'tag': 'h1',
 		'size': '2xl',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -50,6 +51,7 @@ const propsSpecifications = {
 		'tag': 'h2',
 		'size': '1xl',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -61,6 +63,7 @@ const propsSpecifications = {
 		'tag': 'h3',
 		'size': 'l',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -72,6 +75,7 @@ const propsSpecifications = {
 		'tag': 'h4',
 		'size': 'm',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -83,6 +87,7 @@ const propsSpecifications = {
 		'tag': 'h5',
 		'size': 's',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -94,6 +99,7 @@ const propsSpecifications = {
 		'tag': 'p',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'body',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -105,6 +111,7 @@ const propsSpecifications = {
 		'tag': 'p',
 		'size': 'm',
 		'weight': 'regular',
+		'usage': 'body',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -116,6 +123,7 @@ const propsSpecifications = {
 		'tag': 'small',
 		'size': '2xs',
 		'weight': 'regular',
+		'usage': 'body',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -127,6 +135,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -137,6 +146,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': '1xs',
 		'weight': 'regular',
+		'usage': 'display',
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -150,6 +160,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': '2xs',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -161,6 +172,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': '2xs',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Brand',
@@ -172,6 +184,7 @@ const propsSpecifications = {
 		'tag': 'h1',
 		'size': '5xl',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -183,6 +196,7 @@ const propsSpecifications = {
 		'tag': 'h1',
 		'size': '2xl',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'gradient': {
 			'colors': [
@@ -208,6 +222,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 'm',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -219,6 +234,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': '4xl',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'gradient': {
 			'colors': [
@@ -244,6 +260,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 'm',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -255,6 +272,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -266,6 +284,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'body',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -277,6 +296,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 'm',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Brand',
@@ -288,6 +308,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 'l',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Brand',
@@ -299,6 +320,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -310,6 +332,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -321,6 +344,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'body',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -332,6 +356,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -343,6 +368,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -354,6 +380,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -365,6 +392,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -376,6 +404,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -387,6 +416,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -398,6 +428,7 @@ const propsSpecifications = {
 		'tag': 'small',
 		'size': '2xs',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -417,6 +448,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Brand',
@@ -436,6 +468,7 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -447,6 +480,7 @@ const propsSpecifications = {
 		'tag': 'h2',
 		'size': 'l',
 		'weight': 'bold',
+		'usage': 'display',
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
@@ -458,12 +492,8 @@ const propsSpecifications = {
 		'tag': 'span',
 		'size': 'm',
 		'weight': 'regular',
+		'usage': 'display',
 		'spaced': true,
-		'color': {
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-		},
 	},
 };
 
@@ -511,10 +541,18 @@ Copy.propTypes = {
 	 * The text characters marked up with HTML tags. If `htmlContent` is
 	 * supplied, then `children` will be ignored.
 	 */
-	'htmlContent': PropTypes.string,
+	'htmlContent': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.element,
+		PropTypes.array
+	]),
 	/**
 	 * The text characters. If `htmlContent` is
 	 * supplied, then `children` will be ignored.
 	 */
-	'children': PropTypes.string,
+	'children': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.element,
+		PropTypes.array
+	]),
 };

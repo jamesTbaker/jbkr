@@ -4,6 +4,8 @@ import { ProfileSkills } from './ProfileSkills';
 import { ProfileProfessionalExperiences } from './ProfileProfessionalExperiences';
 import { ProfileEducationCertifications } from './ProfileEducationCertifications';
 import { ProfileVolunteerExperiences } from './ProfileVolunteerExperiences';
+import { Button } from '../../core/Button/Button';
+import { CopyLink } from '../../core/CopyLink/CopyLink';
 
 export const Profile = ({
 	title,
@@ -15,6 +17,19 @@ export const Profile = ({
 	<>
 		<ProfileHeader
 			title={title}
+		/>
+		<CopyLink
+			url="/"
+		>
+			This is a link
+		</CopyLink>
+		<br />
+		<Button
+			text="This is a Button"
+			url="/"
+			// clickHandler={() => {
+			// 	console.log('Help! I\'ve been clicked!');
+			// }}
 		/>
 		<ProfileSkills
 			skills={skills}

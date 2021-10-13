@@ -89,20 +89,18 @@ export const Line = ({
 	height,
 	alignment,
 	color,
-}) => {
-	return (
-		<LineContainer
+}) => (
+	<LineContainer
+		$height={height}
+		$alignment={alignment}
+	>
+		<LineElement
+			$width={width}
 			$height={height}
-			$alignment={alignment}
-		>
-			<LineElement
-				$width={width}
-				$height={height}
-				$color={color}
-			/>
-		</LineContainer>
-	);
-};
+			$color={color}
+		/>
+	</LineContainer>
+);
 Line.propTypes = {
 	/**
 	 * Token indicating width of line as a percentage of its container, which,
@@ -120,8 +118,6 @@ Line.propTypes = {
 	'alignment': PropTypes.oneOf(['top', 'bottom', 'center']),
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
-	 *
-	 * @todo Update links in this description.
 	 */
 	'color': PropTypes.exact({
 		'kind': PropTypes.string.isRequired,

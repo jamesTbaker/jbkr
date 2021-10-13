@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		${typeFamily()};
+		font-size: 2rem;
 		height: 100%;
 		width: 100%;
 	}

@@ -1,11 +1,12 @@
 // Primitive
 export { Text } from './lib/primitive/Text/Text.jsx';
 export { Line } from './lib/primitive/Line/Line.jsx';
-export { Icon } from './lib/primitive/Icon/Icon.jsx';
+export { Icon, IconNames } from './lib/primitive/Icon/Icon.jsx';
 
 // Core
 export { Copy } from './lib/core/Copy/Copy.jsx';
 export { CopyLink } from './lib/core/CopyLink/CopyLink.jsx';
+export { Button } from './lib/core/Button/Button.jsx';
 
 // Screens
 export { ProfileScreen } from './lib/app/Screens/ProfileScreen.jsx';

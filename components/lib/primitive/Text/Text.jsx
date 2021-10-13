@@ -127,8 +127,77 @@ export const Text = ({
 	htmlContent,
 	children,
 	id,
-}) => {
-	if (htmlContent) {
+}) => (
+	<>
+		{
+			htmlContent && id &&
+			<TextContainer
+					as={tag}
+					size={size}
+					weight={weight}
+					slant={slant}
+					usage={usage}
+					spaced={spaced}
+					$color={color}
+					$gradient={gradient}
+					dangerouslySetInnerHTML={{
+						'__html': htmlContent,
+					}}
+					id={id}
+				></TextContainer>
+		}
+		{
+			htmlContent && !id &&
+			<TextContainer
+				as={tag}
+				size={size}
+				weight={weight}
+				slant={slant}
+				usage={usage}
+				spaced={spaced}
+				$color={color}
+				$gradient={gradient}
+				dangerouslySetInnerHTML={{
+					'__html': htmlContent,
+				}}
+			></TextContainer>
+		}
+		{
+			!htmlContent && id &&
+			<TextContainer
+				as={tag}
+				size={size}
+				weight={weight}
+				slant={slant}
+				usage={usage}
+				spaced={spaced}
+				$color={color}
+				$gradient={gradient}
+				id={id}
+			>
+				{children}
+			</TextContainer>
+		}
+		{
+			!htmlContent && !id &&
+			<TextContainer
+				as={tag}
+				size={size}
+				weight={weight}
+				slant={slant}
+				usage={usage}
+				spaced={spaced}
+				$color={color}
+				$gradient={gradient}
+			>
+				{children}
+			</TextContainer>
+		}
+	</>
+);
+
+
+	/* if (htmlContent) {
 		if (id) {
 			return (<TextContainer
 				as={tag}
@@ -188,7 +257,7 @@ export const Text = ({
 			</TextContainer>);
 		}
 	}
-};
+}; */
 Text.propTypes = {
 	/**
 	 * DOM Element ID.
@@ -257,10 +326,18 @@ Text.propTypes = {
 	 * The text characters marked up with HTML tags. If `htmlContent` is
 	 * supplied, then `children` will be ignored.
 	 */
-	'htmlContent': PropTypes.string,
+	'htmlContent': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.element,
+		PropTypes.array
+	]),
 	/**
 	 * The text characters. If `htmlContent` is
 	 * supplied, then `children` will be ignored.
 	 */
-	'children': PropTypes.string,
+	'children': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.element,
+		PropTypes.array
+	]),
 };
