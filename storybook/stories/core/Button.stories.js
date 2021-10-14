@@ -28,14 +28,23 @@ AsButton.args = {
 	'clickHandler': () => {
 		console.log('Help! I\'ve been clicked!');
 	},
+	'size': 'standard',
+	'surfaceStyle': 'filled',
+	'contextColor': 'onDark',
 };
 export const AsInternalLink = Template.bind({});
 AsInternalLink.args = {
 	'text': 'Internal Link Anchor Text',
-	'url': '/?path=/story/core-button--general',
+	'url': '/?path=/story/core-button--as-internal-link',
+	'size': 'standard',
+	'surfaceStyle': 'outlined',
+	'contextColor': 'onDark',
 };
 export const AsExternalLink = Template.bind({});
 AsExternalLink.args = {
 	'text': 'External Link Anchor Text',
 	'url': 'https://theintercept.com',
+	'size': 'standard',
+	'surfaceStyle': 'transparent',
+	'contextColor': 'onDark',
 };

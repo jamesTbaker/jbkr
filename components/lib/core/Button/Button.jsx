@@ -2,28 +2,284 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Icon, IconNames } from '../../primitive/Icon/Icon';
-// import { deviceWidthQuery, color, hiddenInline } from '@jbkr/style-service';
+import { Icon, IconNames, Copy } from '../../primitive/Icon/Icon';
+import { deviceWidthQuery, color, hiddenInline } from '@jbkr/style-service';
 
-/* const ButtonContent = React.forwardRef(({ onClick, href }, ref) => {
-	return (
-		<a href={href} onClick={onClick} ref={ref}>
-			Click Me
-		</a>
-	)
-}); */
-const ButtonElement = styled.span.attrs(({
-	ref,
-	onClick,
-	href,
-	parent,
+const ButtonContentContainer = styled.span`
+	${
+		({ $contextColor, $surfaceStyle }) => {
+			let colorBorderDefault,
+			colorBorderActive,
+			colorBackgroundDefault,
+			colorBackgroundActive,
+			colorContentDefault,
+			colorContentActive;
+			if (
+				$surfaceStyle === 'filled' &&
+				$contextColor === 'onLight'
+			) {
+				colorBorderDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 8,
+					'format': 'string'
+				});
+				colorBorderActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 9,
+					'format': 'string'
+				});
+				colorBackgroundDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 8,
+					'format': 'string'
+				});
+				colorBackgroundActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 9,
+					'format': 'string'
+				});
+				colorContentDefault = color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 1,
+					'format': 'string'
+				});
+				colorContentActive = colorContentDefault;
+			}
+			if (
+				$surfaceStyle === 'filled' &&
+				$contextColor === 'onDark'
+			) {
+				colorBorderDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 5,
+					'format': 'string'
+				});
+				colorBorderActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 4,
+					'format': 'string'
+				});
+				colorBackgroundDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 5,
+					'format': 'string'
+				});
+				colorBackgroundActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 4,
+					'format': 'string'
+				});
+				colorContentDefault = color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 41,
+					'format': 'string'
+				});
+				colorContentActive = colorContentDefault;
+			}
+			if (
+				$surfaceStyle === 'outlined' ||
+				$surfaceStyle === 'transparent'
+			) {
+				colorBackgroundDefault = 'transparent';
+				colorBackgroundActive = 'transparent';
+			}
+			if (
+				(
+					$surfaceStyle === 'outlined' ||
+					$surfaceStyle === 'transparent'
+				) &&
+				$contextColor === 'onDark'
+			) {
+				colorContentDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 5,
+					'format': 'string'
+				});
+				colorContentActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 4,
+					'format': 'string'
+				});
+			}
+			if (
+				(
+					$surfaceStyle === 'outlined' ||
+					$surfaceStyle === 'transparent'
+				) &&
+				$contextColor === 'onLight'
+			) {
+				colorContentDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 7,
+					'format': 'string'
+				});
+				colorContentActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 8,
+					'format': 'string'
+				});
+			}
+			if (
+				$surfaceStyle === 'outlined' &&
+				$contextColor === 'onDark'
+			) {
+				colorBorderDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 4,
+					'format': 'string'
+				});
+				colorBorderActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 2,
+					'format': 'string'
+				});
+			}
+			if (
+				$surfaceStyle === 'outlined' &&
+				$contextColor === 'onLight'
+			) {
+				colorBorderDefault = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 6,
+					'format': 'string'
+				});
+				colorBorderActive = color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 7,
+					'format': 'string'
+				});
+			}
+			if (
+				$surfaceStyle === 'transparent'
+			) {
+				colorBorderDefault = 'transparent';
+				colorBorderActive = 'transparent';
+			}
+			return `
+				background-color: ${colorBackgroundDefault};
+				border: solid .125rem ${colorBorderDefault};
+				color: ${colorContentDefault};
+				transition: all 250ms;
+				border-radius: .375rem;
+				&:hover {
+					background-color: ${colorBackgroundActive};
+					border: solid .125rem ${colorBorderActive};
+					color: ${colorContentActive};
+				}
+			`;
+		}
+	}
+`;
+const ButtonContent = ({
+	size,
+	surfaceStyle,
+	contextColor,
+	text,
+	textHidden,
+	iconBefore,
+	iconAfter,
+}) => (
+	<ButtonContentContainer
+		$contextColor={contextColor}
+		$surfaceStyle={surfaceStyle}
+	>
+		{text}
+	</ButtonContentContainer>
+);
+const ButtonContentComponentFacilitator = styled.span.attrs(({
+	url,
 }) => {
 	const returnValue = {};
-	if (parent === 'Link') {
+	if (url && !url.startsWith('http')) {
 		returnValue.as = 'a';
 	}
-	/* if (clickHandler && !url) {
-		returnValue.onClick = clickHandler
+	return returnValue;
+})`
+	${
+		({ url, contextColor }) => {
+			if (url && !url.startsWith('http')) {
+				const colorFocusRing = contextColor && contextColor === 'onLight' ?
+					color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 2,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					});
+				return `
+					text-decoration: none;
+					&:focus {
+						outline: none;
+						border-radius: .25rem;
+						box-shadow: 0 0 0 .125rem ${colorFocusRing};
+					}
+				`;
+			}
+		}
+	}
+`;
+const ButtonRefForwarder = React.forwardRef((
+	{
+		onClick,
+		href,
+		size,
+		surfaceStyle,
+		contextColor,
+		text,
+		textHidden,
+		iconBefore,
+		iconAfter,
+		url,
+	},
+	ref
+) => (
+    <ButtonContentComponentFacilitator
+		onClick={onClick}
+		href={href}
+		ref={ref}
+		url={url}
+		contextColor={contextColor}
+	>
+		<ButtonContent
+			size={size}
+			surfaceStyle={surfaceStyle}
+			contextColor={contextColor}
+			text={text}
+			textHidden={textHidden}
+			iconBefore={iconBefore}
+			iconAfter={iconAfter}
+		/>
+    </ButtonContentComponentFacilitator>
+));
+const ButtonElement = styled.span.attrs(({ clickHandler, url, contextColor }) => {
+	const returnValue = {};
+	if (url && !url.startsWith('http')) {
+		returnValue.as = Link;
+		returnValue.href = url;
+		returnValue.passHref = true;
 	}
 	if (url && url.startsWith('http')) {
 		returnValue.as = 'a';
@@ -31,47 +287,70 @@ const ButtonElement = styled.span.attrs(({
 		returnValue.target = '_blank';
 		returnValue.rel = 'noopener noreferrer';
 	}
-	if (url && !url.startsWith('http')) {
-		returnValue.as = Link;
-		returnValue.href = url;
-	} */
+	if (clickHandler && !url) {
+		returnValue.as = 'button';
+		returnValue.onClick = clickHandler
+	}
 	return returnValue;
 })`
+	${
+		({ url, contextColor }) => {
+			if (url && url.startsWith('http')) {
+				const colorFocusRing = contextColor && contextColor === 'onLight' ?
+					color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 2,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					});
+				return `
+					text-decoration: none;
+					&:focus {
+						outline: none;
+						border-radius: .25rem;
+						box-shadow: 0 0 0 .125rem ${colorFocusRing};
+					}
+				`;
+			}
+		}
+	}
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	${
+		({ clickHandler, contextColor }) => {
+			if (clickHandler) {
+				const colorFocusRing = contextColor && contextColor === 'onLight' ?
+					color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 2,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					});
+				return `
+					&:focus {
+						outline: none;
+						border-radius: .25rem;
+						box-shadow: 0 0 0 .125rem ${colorFocusRing};
+					}
+				`;
+			}
+		}
+	}
+
 `;
-// background-color: transparent;
-// border: none;
-// padding: 0;
-
-const ButtonContentContainer = styled.span``;
-
-const ButtonContent = ({ text }) => (
-	<ButtonContentContainer>
-		{text}
-	</ButtonContentContainer>
-);
-
-
-const ButtonElementContainer = React.forwardRef((
-	{
-		onClick,
-		href,
-		parent,
-		text,
-	},
-	ref
-) => (
-    <ButtonElement
-		ref={ref}
-		onClick={onClick}
-		href={href}
-		parent={parent}
-	>
-		<ButtonContent
-			text={text}
-		/>
-    </ButtonElement>
-));
-
 /**
  * Button
  */
@@ -86,41 +365,22 @@ export const Button = ({
 	clickHandler,
 	url,
 }) => (
-	<>
-		{
-			url && !url.startsWith('http') &&
-			<Link href={url} passHref>
-				<ButtonElementContainer
-					parent="Link"
-					text={text}
-				/>
-			</Link>
-		}
-		{
-			url && url.startsWith('http') &&
-			<a
-				href={url}
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<ButtonElementContainer
-					parent="a"
-					text={text}
-				/>
-			</a>
-		}
-		{
-			clickHandler && !url &&
-			<button
-				onClick={clickHandler}
-			>
-				<ButtonElementContainer
-					parent="button"
-					text={text}
-				/>
-			</button>
-		}
-	</>
+	<ButtonElement
+		clickHandler={clickHandler}
+		url={url}
+		contextColor={contextColor}
+	>
+		<ButtonRefForwarder
+			size={size}
+			surfaceStyle={surfaceStyle}
+			contextColor={contextColor}
+			text={text}
+			textHidden={textHidden}
+			iconBefore={iconBefore}
+			iconAfter={iconAfter}
+			url={url}
+		/>
+	</ButtonElement>
 );
 Button.propTypes = {
 	/**
