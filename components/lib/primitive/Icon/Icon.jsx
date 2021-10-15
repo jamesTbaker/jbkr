@@ -93,6 +93,7 @@ const pathSpecifications = {
 };
 export const IconNames = Object.keys(pathSpecifications);
 const IconContainer = styled.span`
+	display: grid;
 	svg {
 		${
 			({ $size }) => `
@@ -117,13 +118,21 @@ const IconContainer = styled.span`
 			`
 		}
 		${
-			({ $color }) => `fill: ${color({
-				'kind': $color.kind,
-				'tone': $color.tone,
-				'level': $color.level,
-				'alpha': $color.alpha,
-				'format': 'string'
-			})};`
+			({ $color }) => {
+				if (typeof($color) === 'string') {
+					return `fill: ${$color};`;
+				}
+				if (typeof($color) === 'object') {
+					return `fill: ${color({
+						'kind': $color.kind,
+						'tone': $color.tone,
+						'level': $color.level,
+						'alpha': $color.alpha,
+						'format': 'string'
+					})};`;
+				}
+			}
+
 		}
 		overflow: hidden;
 	}
@@ -172,12 +181,15 @@ Icon.propTypes = {
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'color': PropTypes.exact({
-		'kind': PropTypes.string.isRequired,
-		'tone': PropTypes.string.isRequired,
-		'level': PropTypes.number.isRequired,
-		'alpha': PropTypes.string,
-	}),
+	'color': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.exact({
+			'kind': PropTypes.string.isRequired,
+			'tone': PropTypes.string.isRequired,
+			'level': PropTypes.number.isRequired,
+			'alpha': PropTypes.string,
+		}),
+	]),
 };
 Icon.defaultProps = {
 	content: 'arrow-up',

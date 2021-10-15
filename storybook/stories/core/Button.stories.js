@@ -31,6 +31,8 @@ AsButton.args = {
 	'size': 'standard',
 	'surfaceStyle': 'filled',
 	'contextColor': 'onDark',
+	'iconBefore': 'arrow-left',
+	'iconAfter': 'chevron-right',
 };
 export const AsInternalLink = Template.bind({});
 AsInternalLink.args = {
@@ -39,6 +41,7 @@ AsInternalLink.args = {
 	'size': 'standard',
 	'surfaceStyle': 'outlined',
 	'contextColor': 'onDark',
+	'iconBefore': 'snowflake',
 };
 export const AsExternalLink = Template.bind({});
 AsExternalLink.args = {
@@ -47,4 +50,17 @@ AsExternalLink.args = {
 	'size': 'standard',
 	'surfaceStyle': 'transparent',
 	'contextColor': 'onDark',
+	'iconBefore': 'snowflake',
+};
+export const AsIconOnly = Template.bind({});
+AsIconOnly.args = {
+	'text': 'Button Label Text',
+	'clickHandler': () => {
+		console.log('Help! I\'ve been clicked!');
+	},
+	'size': 'standard',
+	'surfaceStyle': 'transparent',
+	'contextColor': 'onDark',
+	'iconBefore': 'dribbble',
+	'textHidden': true,
 };

@@ -6,5 +6,10 @@ module.exports = {
 	"addons": [
 		"@storybook/addon-links",
 		"@storybook/addon-essentials"
-	]
+	],
+	"babel": {
+		"plugins": [
+			"babel-plugin-styled-components",
+		],
+	},
 }

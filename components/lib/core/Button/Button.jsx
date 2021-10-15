@@ -2,190 +2,264 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Icon, IconNames, Copy } from '../../primitive/Icon/Icon';
-import { deviceWidthQuery, color, hiddenInline } from '@jbkr/style-service';
+import { Icon, IconNames } from '../../primitive/Icon/Icon';
+import { Copy } from '../../core/Copy/Copy';
+import { color, hiddenBlock } from '@jbkr/style-service';
 
-const ButtonContentContainer = styled.span`
+const IconContainer = styled.span`
 	${
-		({ $contextColor, $surfaceStyle }) => {
-			let colorBorderDefault,
-			colorBorderActive,
-			colorBackgroundDefault,
-			colorBackgroundActive,
-			colorContentDefault,
-			colorContentActive;
-			if (
-				$surfaceStyle === 'filled' &&
-				$contextColor === 'onLight'
-			) {
-				colorBorderDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 8,
-					'format': 'string'
-				});
-				colorBorderActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 9,
-					'format': 'string'
-				});
-				colorBackgroundDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 8,
-					'format': 'string'
-				});
-				colorBackgroundActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 9,
-					'format': 'string'
-				});
-				colorContentDefault = color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 1,
-					'format': 'string'
-				});
-				colorContentActive = colorContentDefault;
+		({ $position }) => {
+			let positionName = '';
+			if ($position === 'before') {
+				positionName = 'iconBefore';
 			}
-			if (
-				$surfaceStyle === 'filled' &&
-				$contextColor === 'onDark'
-			) {
-				colorBorderDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 5,
-					'format': 'string'
-				});
-				colorBorderActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 4,
-					'format': 'string'
-				});
-				colorBackgroundDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 5,
-					'format': 'string'
-				});
-				colorBackgroundActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 4,
-					'format': 'string'
-				});
-				colorContentDefault = color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 41,
-					'format': 'string'
-				});
-				colorContentActive = colorContentDefault;
-			}
-			if (
-				$surfaceStyle === 'outlined' ||
-				$surfaceStyle === 'transparent'
-			) {
-				colorBackgroundDefault = 'transparent';
-				colorBackgroundActive = 'transparent';
-			}
-			if (
-				(
-					$surfaceStyle === 'outlined' ||
-					$surfaceStyle === 'transparent'
-				) &&
-				$contextColor === 'onDark'
-			) {
-				colorContentDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 5,
-					'format': 'string'
-				});
-				colorContentActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 4,
-					'format': 'string'
-				});
-			}
-			if (
-				(
-					$surfaceStyle === 'outlined' ||
-					$surfaceStyle === 'transparent'
-				) &&
-				$contextColor === 'onLight'
-			) {
-				colorContentDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 7,
-					'format': 'string'
-				});
-				colorContentActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 8,
-					'format': 'string'
-				});
-			}
-			if (
-				$surfaceStyle === 'outlined' &&
-				$contextColor === 'onDark'
-			) {
-				colorBorderDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 4,
-					'format': 'string'
-				});
-				colorBorderActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 2,
-					'format': 'string'
-				});
-			}
-			if (
-				$surfaceStyle === 'outlined' &&
-				$contextColor === 'onLight'
-			) {
-				colorBorderDefault = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 6,
-					'format': 'string'
-				});
-				colorBorderActive = color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 7,
-					'format': 'string'
-				});
-			}
-			if (
-				$surfaceStyle === 'transparent'
-			) {
-				colorBorderDefault = 'transparent';
-				colorBorderActive = 'transparent';
+			if ($position === 'after') {
+				positionName = 'iconAfter';
 			}
 			return `
-				background-color: ${colorBackgroundDefault};
-				border: solid .125rem ${colorBorderDefault};
-				color: ${colorContentDefault};
-				transition: all 250ms;
-				border-radius: .375rem;
-				&:hover {
-					background-color: ${colorBackgroundActive};
-					border: solid .125rem ${colorBorderActive};
-					color: ${colorContentActive};
-				}
-			`;
+				display: grid;
+				padding: .5rem 0;
+				grid-area: ${positionName};
+			`
 		}
+	}
+`;
+const returnContentSize = ({ buttonSize }) => buttonSize === 'standard' ? 's' : '1xs';
+const returnColors = ({ surfaceStyle, contextColor }) => {
+	const colors = {
+		border: {},
+		background: {},
+		content: {},
+	}
+	if (
+		surfaceStyle === 'filled' &&
+		contextColor === 'onLight'
+	) {
+		colors.border.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 8,
+			'format': 'string'
+		});
+		colors.border.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 9,
+			'format': 'string'
+		});
+		colors.background.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 8,
+			'format': 'string'
+		});
+		colors.background.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 9,
+			'format': 'string'
+		});
+		colors.content.default = color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		});
+		colors.content.active = colors.content.default;
+	}
+	if (
+		surfaceStyle === 'filled' &&
+		contextColor === 'onDark'
+	) {
+		colors.border.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 5,
+			'format': 'string'
+		});
+		colors.border.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 4,
+			'format': 'string'
+		});
+		colors.background.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 5,
+			'format': 'string'
+		});
+		colors.background.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 3,
+			'format': 'string'
+		});
+		colors.content.default = color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 41,
+			'format': 'string'
+		});
+		colors.content.active = colors.content.default;
+	}
+	if (
+		surfaceStyle === 'outlined' ||
+		surfaceStyle === 'transparent'
+	) {
+		colors.background.default = 'transparent';
+		colors.background.active = 'transparent';
+	}
+	if (
+		(
+			surfaceStyle === 'outlined' ||
+			surfaceStyle === 'transparent'
+		) &&
+		contextColor === 'onDark'
+	) {
+		colors.content.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 5,
+			'format': 'string'
+		});
+		colors.content.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 4,
+			'format': 'string'
+		});
+	}
+	if (
+		(
+			surfaceStyle === 'outlined' ||
+			surfaceStyle === 'transparent'
+		) &&
+		contextColor === 'onLight'
+	) {
+		colors.content.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 7,
+			'format': 'string'
+		});
+		colors.content.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 8,
+			'format': 'string'
+		});
+	}
+	if (
+		surfaceStyle === 'outlined' &&
+		contextColor === 'onDark'
+	) {
+		colors.border.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 4,
+			'format': 'string'
+		});
+		colors.border.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 2,
+			'format': 'string'
+		});
+	}
+	if (
+		surfaceStyle === 'outlined' &&
+		contextColor === 'onLight'
+	) {
+		colors.border.default = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 6,
+			'format': 'string'
+		});
+		colors.border.active = color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 7,
+			'format': 'string'
+		});
+	}
+	if (
+		surfaceStyle === 'transparent'
+	) {
+		colors.border.default = 'transparent';
+		colors.border.active = 'transparent';
+	}
+
+
+
+
+
+
+
+
+
+
+	return colors;
+};
+const returnLabelCopyKind = ({ buttonSize }) => buttonSize === 'standard' ? 'button-label--horizontal--standard' : 'button-label--horizontal--small';
+const HiddenTextContainer = styled.span`
+	${hiddenBlock}
+`;
+const ButtonContentContainer = styled.span`
+	${
+		({ $textHidden, $iconBefore, $iconAfter }) => {
+			if (!$textHidden) {
+				const paddingStatement = 'padding: 1.875rem 3.875rem 1.875rem 1.875rem;';
+				if ($iconBefore && !$iconAfter) {
+					return `
+						display: grid;
+						grid-template-columns: 2rem auto;
+						grid-column-gap: .5rem;
+						grid-template-areas: "iconBefore label";
+						${paddingStatement}
+					`;
+				}
+				if (!$iconBefore && $iconAfter) {
+					return `
+						display: grid;
+						grid-template-columns: auto 2rem;
+						grid-column-gap: .5rem;
+						grid-template-areas: "label iconAfter";
+						${paddingStatement}
+					`;
+				}
+				if ($iconBefore && $iconAfter) {
+					return `
+						display: grid;
+						grid-template-columns: 2rem auto 2rem;
+						grid-column-gap: .5rem;
+						grid-template-areas: "iconBefore label iconAfter";
+						${paddingStatement}
+					`;
+				}
+			} else {
+				const paddingStatement = 'padding: .375rem .875rem;';
+				return `
+					display: grid;
+					${paddingStatement}
+				`;
+			}
+		}
+	}
+	${
+		({ $colors }) => `
+			background-color: ${$colors.background.default};
+			border: solid .125rem ${$colors.border.default};
+			color: ${$colors.content.default};
+			transition: all 250ms;
+			border-radius: .375rem;
+			&:hover {
+				background-color: ${$colors.background.active};
+				border: solid .125rem ${$colors.border.active};
+				color: ${$colors.content.active};
+			}
+		`
 	}
 `;
 const ButtonContent = ({
@@ -196,27 +270,68 @@ const ButtonContent = ({
 	textHidden,
 	iconBefore,
 	iconAfter,
+	colors,
 }) => (
 	<ButtonContentContainer
 		$contextColor={contextColor}
 		$surfaceStyle={surfaceStyle}
+		$textHidden={textHidden}
+		$iconBefore={iconBefore}
+		$iconAfter={iconAfter}
+		$colors={colors}
 	>
-		{text}
+		{
+			iconBefore &&
+			<IconContainer
+				$position="before"
+			>
+				<Icon
+					content={iconBefore}
+					color={colors.content.default}
+					size={returnContentSize({ 'buttonSize': size })}
+				/>
+			</IconContainer>
+		}
+		{
+			!textHidden &&
+			<Copy
+				kind={returnLabelCopyKind({ 'buttonSize': size })}
+			>
+				{text}
+			</Copy>
+		}
+		{
+			textHidden &&
+			<HiddenTextContainer>{text}</HiddenTextContainer>
+		}
+		{
+			iconAfter &&
+			<IconContainer
+				$position="after"
+			>
+				<Icon
+					content={iconAfter}
+					color={colors.content.default}
+					size={returnContentSize({ 'buttonSize': size })}
+				/>
+			</IconContainer>
+		}
 	</ButtonContentContainer>
 );
 const ButtonContentComponentFacilitator = styled.span.attrs(({
-	url,
+	$url,
 }) => {
 	const returnValue = {};
-	if (url && !url.startsWith('http')) {
+	if ($url && !$url.startsWith('http')) {
 		returnValue.as = 'a';
 	}
 	return returnValue;
 })`
+	display: inline-grid;
 	${
-		({ url, contextColor }) => {
-			if (url && !url.startsWith('http')) {
-				const colorFocusRing = contextColor && contextColor === 'onLight' ?
+		({ $url, $contextColor }) => {
+			if ($url && !$url.startsWith('http')) {
+				const colorFocusRing = $contextColor && $contextColor === 'onLight' ?
 					color({
 						'kind': 'Accent',
 						'tone': 'Finch',
@@ -229,14 +344,27 @@ const ButtonContentComponentFacilitator = styled.span.attrs(({
 						'level': 1,
 						'format': 'string'
 					});
+				const colorFocusRingSeparator = $contextColor && $contextColor === 'onLight' ?
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 41,
+						'format': 'string'
+					});
 				return `
 					text-decoration: none;
 					&:focus {
 						outline: none;
-						border-radius: .25rem;
-						box-shadow: 0 0 0 .125rem ${colorFocusRing};
-					}
-				`;
+						border-radius: .375rem;
+						box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
+				}
+			`;
 			}
 		}
 	}
@@ -253,6 +381,7 @@ const ButtonRefForwarder = React.forwardRef((
 		iconBefore,
 		iconAfter,
 		url,
+		colors,
 	},
 	ref
 ) => (
@@ -260,8 +389,8 @@ const ButtonRefForwarder = React.forwardRef((
 		onClick={onClick}
 		href={href}
 		ref={ref}
-		url={url}
-		contextColor={contextColor}
+		$url={url}
+		$contextColor={contextColor}
 	>
 		<ButtonContent
 			size={size}
@@ -271,85 +400,78 @@ const ButtonRefForwarder = React.forwardRef((
 			textHidden={textHidden}
 			iconBefore={iconBefore}
 			iconAfter={iconAfter}
+			colors={colors}
 		/>
     </ButtonContentComponentFacilitator>
 ));
-const ButtonElement = styled.span.attrs(({ clickHandler, url, contextColor }) => {
+const ButtonElement = styled.span.attrs(({ $clickHandler, $url, $textHidden }) => {
 	const returnValue = {};
-	if (url && !url.startsWith('http')) {
+	if ($url && !$url.startsWith('http')) {
 		returnValue.as = Link;
-		returnValue.href = url;
+		returnValue.href = $url;
 		returnValue.passHref = true;
 	}
-	if (url && url.startsWith('http')) {
+	if ($url && $url.startsWith('http')) {
 		returnValue.as = 'a';
-		returnValue.href = url;
+		returnValue.href = $url;
 		returnValue.target = '_blank';
 		returnValue.rel = 'noopener noreferrer';
 	}
-	if (clickHandler && !url) {
+	if ($clickHandler && !$url) {
 		returnValue.as = 'button';
-		returnValue.onClick = clickHandler
+		returnValue.onClick = $clickHandler
 	}
 	return returnValue;
 })`
 	${
-		({ url, contextColor }) => {
-			if (url && url.startsWith('http')) {
-				const colorFocusRing = contextColor && contextColor === 'onLight' ?
+		({ $url, $contextColor }) => {
+			let linkStyleStatments = '';
+			const colorFocusRing = $contextColor && $contextColor === 'onLight' ?
+				color({
+					'kind': 'Accent',
+					'tone': 'Finch',
+					'level': 2,
+					'format': 'string'
+				}) :
+				color({
+					'kind': 'Accent',
+					'tone': 'Finch',
+					'level': 1,
+					'format': 'string'
+					});
+				const colorFocusRingSeparator = $contextColor && $contextColor === 'onLight' ?
 					color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 2,
-						'format': 'string'
-					}) :
-					color({
-						'kind': 'Accent',
+						'kind': 'Neutral',
 						'tone': 'Finch',
 						'level': 1,
 						'format': 'string'
+					}) :
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 41,
+						'format': 'string'
 					});
-				return `
-					text-decoration: none;
-					&:focus {
-						outline: none;
-						border-radius: .25rem;
-						box-shadow: 0 0 0 .125rem ${colorFocusRing};
-					}
-				`;
+			if ($url && $url.startsWith('http')) {
+				linkStyleStatments = 'display: inline-grid; text-decoration: none;';
 			}
+			return `
+				${linkStyleStatments}
+				&:focus {
+					outline: none;
+					border-radius: .375rem;
+					box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
+				}
+			`;
 		}
 	}
+	${
+		({ $textHidden }) => $textHidden && `display: grid;`
+	}
+	cursor: pointer;
 	background-color: transparent;
 	border: none;
 	padding: 0;
-	${
-		({ clickHandler, contextColor }) => {
-			if (clickHandler) {
-				const colorFocusRing = contextColor && contextColor === 'onLight' ?
-					color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 2,
-						'format': 'string'
-					}) :
-					color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 1,
-						'format': 'string'
-					});
-				return `
-					&:focus {
-						outline: none;
-						border-radius: .25rem;
-						box-shadow: 0 0 0 .125rem ${colorFocusRing};
-					}
-				`;
-			}
-		}
-	}
-
 `;
 /**
  * Button
@@ -366,9 +488,9 @@ export const Button = ({
 	url,
 }) => (
 	<ButtonElement
-		clickHandler={clickHandler}
-		url={url}
-		contextColor={contextColor}
+		$clickHandler={clickHandler}
+		$url={url}
+		$textHidden={textHidden}
 	>
 		<ButtonRefForwarder
 			size={size}
@@ -379,6 +501,7 @@ export const Button = ({
 			iconBefore={iconBefore}
 			iconAfter={iconAfter}
 			url={url}
+			colors={returnColors({ surfaceStyle, contextColor })}
 		/>
 	</ButtonElement>
 );

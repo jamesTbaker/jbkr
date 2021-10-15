@@ -10,4 +10,6 @@ const Template = (args) => (
 	/>
 );
 export const General = Template.bind({});
-General.args = {};
+General.args = {
+	'size': '5xl',
+};

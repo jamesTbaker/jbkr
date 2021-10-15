@@ -136,22 +136,22 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'color': {
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-		},
+		// 'color': {
+		// 	'kind': 'Brand',
+		// 	'tone': 'Peony',
+		// 	'level': 3,
+		// },
 	},
 	'button-label--horizontal--small': {
 		'tag': 'span',
 		'size': '1xs',
 		'weight': 'regular',
 		'usage': 'display',
-		'color': {
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-		},
+		// 'color': {
+		// 	'kind': 'Brand',
+		// 	'tone': 'Peony',
+		// 	'level': 3,
+		// },
 	},
 
 
@@ -505,6 +505,7 @@ export const Copy = ({
 	htmlContent,
 	children,
 	id,
+	color,
 }) => {
 	if (propsSpecifications[kind]) {
 		const tagThisCopy = propsSpecifications[kind].tag;
@@ -514,6 +515,9 @@ export const Copy = ({
 		}
 		if (id) {
 			propsThisCopy.id = id;
+		}
+		if (color) {
+			propsThisCopy.color = color;
 		}
 		return (
 			<Text
@@ -554,5 +558,17 @@ Copy.propTypes = {
 		PropTypes.string,
 		PropTypes.element,
 		PropTypes.array
+	]),
+	/**
+	 * [Learn about color props](/?path=/story/props-color--page).
+	 */
+	'color': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.exact({
+			'kind': PropTypes.string.isRequired,
+			'tone': PropTypes.string.isRequired,
+			'level': PropTypes.number.isRequired,
+			'alpha': PropTypes.string,
+		}),
 	]),
 };

@@ -6,13 +6,18 @@ const TextContainer = styled.div`
 	${
 		({ $color }) => {
 			if ($color) {
-				return `color: ${color({
-					'kind': $color.kind,
-					'tone': $color.tone,
-					'level': $color.level,
-					'alpha': $color.alpha,
-					'format': 'string'
-				})};`
+				if (typeof($color) === 'string') {
+					return `fill: ${$color};`;
+				}
+				if (typeof($color) === 'object') {
+					return `fill: ${color({
+						'kind': $color.kind,
+						'tone': $color.tone,
+						'level': $color.level,
+						'alpha': $color.alpha,
+						'format': 'string'
+					})};`;
+				}
 			}
 		}
 	}
@@ -296,12 +301,15 @@ Text.propTypes = {
 	 *
 	 * @todo Update links in this description.
 	 */
-	'color': PropTypes.exact({
-		'kind': PropTypes.string.isRequired,
-		'tone': PropTypes.string.isRequired,
-		'level': PropTypes.number.isRequired,
-		'alpha': PropTypes.string,
-	}),
+	'color': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.exact({
+			'kind': PropTypes.string.isRequired,
+			'tone': PropTypes.string.isRequired,
+			'level': PropTypes.number.isRequired,
+			'alpha': PropTypes.string,
+		}),
+	]),
 	/**
 	 * Color props used to construct a gradient, and a fallback color.
 	 * [Learn about color props](/?path=/story/props-color--page).
