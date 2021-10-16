@@ -30,7 +30,7 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		border: {},
 		background: {},
 		content: {},
-	}
+	};
 	if (
 		surfaceStyle === 'filled' &&
 		contextColor === 'onLight'

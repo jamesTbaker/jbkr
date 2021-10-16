@@ -2,6 +2,8 @@
 export { Text } from './lib/primitive/Text/Text.jsx';
 export { Line } from './lib/primitive/Line/Line.jsx';
 export { Icon, IconNames } from './lib/primitive/Icon/Icon.jsx';
+export { Brand } from './lib/primitive/Brand/Brand.jsx';
+export { Hamburger } from './lib/primitive/Hamburger/Hamburger.jsx';
 
 // Core
 export { Copy } from './lib/core/Copy/Copy.jsx';
@@ -42,6 +44,8 @@ export { Banner } from './lib/app/Layout/Banner.jsx';
 export { Footer } from './lib/app/Layout/Footer.jsx';
 export { MainContent } from './lib/app/Layout/MainContent.jsx';
 export { Scaffold } from './lib/app/Layout/Scaffold.jsx';
+// ---
+export { AppHeader } from './lib/app/Layout/AppHeader.jsx';
 
 // Media
 export { MediaItem } from './lib/app/Media/MediaItem.jsx';
