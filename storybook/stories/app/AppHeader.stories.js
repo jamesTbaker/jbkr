@@ -1,12 +1,23 @@
 import styled from 'styled-components';
+import { color } from '@jbkr/style-service';
 import { AppHeader } from '@jbkr/components';
 
 
 const ScreenEmulation = styled.div`
+	${({ $color }) => `background-color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': 37,
+	'format': 'string',
+})};`
+	}
 `;
 export default {
 	'title': 'App / AppHeader',
 	'component': AppHeader,
+	'parameters': {
+		'layout': 'fullscreen',
+	},
 };
 const Template = (args) => (
 	<ScreenEmulation>
@@ -96,7 +107,10 @@ General.args = {
 			],
 		},
 		'liblabItem': {
-			'anchorText': 'Challenge You to a Duel, Beefeater!',
+			'anchorText':
+				'Beef Shankle Chislic Meatloaf, Kielbasa in Swine for Pork: Digital Transformation for Museum of Science, Boston',
+			// 'anchorText':
+			// 	'The Hub',
 			'url': '/',
 		},
 	},

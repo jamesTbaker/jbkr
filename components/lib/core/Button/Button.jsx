@@ -190,16 +190,6 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		colors.border.default = 'transparent';
 		colors.border.active = 'transparent';
 	}
-
-
-
-
-
-
-
-
-
-
 	return colors;
 };
 const returnLabelCopyKind = ({ buttonSize }) => buttonSize === 'standard' ? 'button-label--horizontal--standard' : 'button-label--horizontal--small';
@@ -235,6 +225,14 @@ const ButtonContentContainer = styled.span`
 						grid-template-columns: 2rem auto 2rem;
 						grid-column-gap: .5rem;
 						grid-template-areas: "iconBefore label iconAfter";
+						${paddingStatement}
+					`;
+				}
+				if (!$iconBefore && !$iconAfter) {
+					return `
+						display: grid;
+						grid-template-columns: auto;
+						grid-template-areas: "label";
 						${paddingStatement}
 					`;
 				}

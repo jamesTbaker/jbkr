@@ -11,20 +11,21 @@ export default {
 	// 		'options': IconNames,
 	// 	},
 	// },
+	'parameters': {
+		'layout': 'padded',
+	},
 };
 const Template = (args) => (
 	<Copy
 		kind="body--standard"
 	>
-		{args.prependContent}
 		<CopyLink
 			{...args}
 		/>
-		{args.appendContent}
 	</Copy>
 );
 export const General = Template.bind({});
 General.args = {
 	'url': '/?path=/story/core-copylink--general',
-	'children': 'Link with descenders: qypg',
+	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
 };

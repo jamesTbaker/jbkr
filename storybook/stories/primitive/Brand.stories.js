@@ -8,6 +8,9 @@ const BrandContainer = styled.span`
 export default {
 	'title': 'Primitive / Brand',
 	'component': Brand,
+	'parameters': {
+		'layout': 'padded',
+	},
 };
 const Template = (args) => (
 	<BrandContainer>

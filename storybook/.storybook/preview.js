@@ -2,7 +2,7 @@ import React from 'react';
 import { Normalize } from 'styled-normalize';
 import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
 import { createGlobalStyle } from 'styled-components';
-import { typeFamily, color } from '@jbkr/style-service';
+import { typeFamily, color, deviceWidthQuery } from '@jbkr/style-service';
 
 const GlobalStyle = createGlobalStyle`
 	* {

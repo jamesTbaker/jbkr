@@ -3,6 +3,9 @@ import { Copy } from '@jbkr/components';
 export default {
 	'title': 'Core / Copy',
 	'component': Copy,
+	'parameters': {
+		'layout': 'padded',
+	},
 };
 const Template = (args) => (
 	<Copy

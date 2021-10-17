@@ -156,29 +156,29 @@ const propsSpecifications = {
 
 
 
-	'announcement--label': {
-		'tag': 'span',
+	'announcement--preface': {
+		'tag': 'div',
 		'size': '2xs',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		// 'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 11,
 		},
 	},
-	'announcement--anchor': {
-		'tag': 'span',
+	'announcement--body': {
+		'tag': 'div',
 		'size': '2xs',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
-		'color': {
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-		},
+		// 'spaced': false,
+		// 'color': {
+		// 	'kind': 'Brand',
+		// 	'tone': 'Peony',
+		// 	'level': 3,
+		// },
 	},
 	'screen-title--standard': {
 		'tag': 'h1',

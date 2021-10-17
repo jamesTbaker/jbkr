@@ -16,7 +16,7 @@ import Icon from '../components/sb/SBMedia.Icon/SBMedia.Icon.Pres.www';
 
 const BrandLink = styled(Link)`
 	border: 0;
-	
+
 	&:hover {
 		border: 0;
 	}
@@ -25,11 +25,11 @@ const BrandLink = styled(Link)`
 const HamburgerContainer = styled.div`
 	grid-area: 1 / 1 / 2 / 2;
 	padding-left: ${props => props.screenType === 'medium' ?
-		'4rem' : '1rem' };
+		'4rem' : '1rem'};
 `;
 
 const Hamburger = styled.button.attrs({
-	type: 'button',
+	'type': 'button',
 })`
 	display: inline-block;
 	min-width: 0;
@@ -141,7 +141,7 @@ const BrandContainerSmall = styled.div`
 `;
 const NavSmall = styled.nav`
 	position: fixed;
-	top: 11rem;
+	top: 21rem;
 	width: 100%;
 	height: 0;
 	overflow: hidden;
@@ -153,8 +153,8 @@ const NavSmall = styled.nav`
 		height: 100%;
 	`}
 `;
-// top padding = viewport height - ul height, divided by 2 to get half, 
-// 		minus height of hamburger and brand container 
+// top padding = viewport height - ul height, divided by 2 to get half,
+// 		minus height of hamburger and brand container
 const NavSmallList = styled.ul`
 	padding: calc(((100vh - 25rem) / 2) - 5rem) 0 0 0;
 	list-style: none;
@@ -166,7 +166,7 @@ const NavSmallList = styled.ul`
 	${props => props.screenType === 'medium' && `
 		margin-left: 5rem;
 		margin-right: 5rem;
-	`}	
+	`}
 `;
 const NavSmallListItem = styled.li`
 	list-style: none;
@@ -238,12 +238,6 @@ const NavSmallLink = styled(Link)`
 `;
 
 
-
-
-
-
-
-
 const HeaderLarge = styled.div`
 	position: fixed;
 	left: 0;
@@ -280,7 +274,7 @@ const NavLargeList = styled.ul`
 	list-style: none;
 `;
 const NavLargeListItem = styled.li`
-	display: block;	
+	display: block;
 	list-style: none;
 	position: relative;
 	margin: 0;
@@ -304,7 +298,7 @@ const NavLargeLink = styled(Link)`
 
 `;
 
-/* 
+/*
 
 	color: ${StylePatterns.Color('interactive-on-dark-default')};
 
@@ -352,21 +346,21 @@ export default class Header extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showSmallNav: false,
+			'showSmallNav': false,
 		};
 		this.handleHamburgerClick = this.handleHamburgerClick.bind(this);
 	}
 	handleHamburgerClick() {
 		this.setState(prevState => ({
-			showSmallNav: !prevState.showSmallNav,
+			'showSmallNav': !prevState.showSmallNav,
 		}));
 	}
 	render() {
 		return (
 			<header className="sb-root--brand-and-nav">
 				{
-					(this.props.screenType === 'small' || 
-					this.props.screenType === 'medium') && 
+					(this.props.screenType === 'small' ||
+						this.props.screenType === 'medium') &&
 
 					<Sticky enableTransforms={false} >
 						<HeaderSmall
@@ -404,7 +398,7 @@ export default class Header extends React.Component {
 									<NavSmallListItem
 										showSmallNav={this.state.showSmallNav}
 									>
-										<NavSmallLink 
+										<NavSmallLink
 											to="/"
 										>
 											Profile
@@ -434,7 +428,7 @@ export default class Header extends React.Component {
 					</Sticky>
 				}
 				{
-					this.props.screenType === 'large' && 
+					this.props.screenType === 'large' &&
 
 					<HeaderLarge>
 						<BrandContainerLarge>

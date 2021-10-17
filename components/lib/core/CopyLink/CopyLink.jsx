@@ -1,16 +1,26 @@
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Icon, IconNames } from '../../primitive/Icon/Icon';
 import { deviceWidthQuery, color } from '@jbkr/style-service';
 
+const CopyLinkComplexAnchor = React.forwardRef(({ href, htmlContent }, ref) => (
+	<a
+		href={href}
+		ref={ref}
+		dangerouslySetInnerHTML={{
+			'__html': htmlContent,
+		}}
+	/>
+));
 const CopyLinkContainer = styled.span`
 	a {
 		display: inline-block;
 		text-decoration: none;
-		line-height: 1.3;
+		/* line-height: 1.3; */
 		border-radius: 0;
-		border-bottom: solid .125rem;
+		/* border-bottom: solid .125rem; */
 		transition: all 250ms;
 		${
 			({ $primaryColor, $secondaryColor }) => {
@@ -55,7 +65,7 @@ const CopyLinkContainer = styled.span`
 					padding: 0 .5rem;
 					margin-right: .25rem;
 					outline: none;
-					border-bottom: none;
+					/* border-bottom: none; */
 					border-radius: .375rem;
 					box-shadow: 0 0 0 .125rem ${primaryColor};
 				}
@@ -79,19 +89,16 @@ const CopyLinkContainer = styled.span`
 export const CopyLink = ({
 	url,
 	children,
-	// size,
+	htmlContent,
 	primaryColor,
 	secondaryColor,
-	// iconAfter,
 }) => (
 	<CopyLinkContainer
-		// $size={size}
 		$primaryColor={primaryColor}
 		$secondaryColor={secondaryColor}
-		// $iconAfter={iconAfter}
 	>
 		{
-			url.startsWith('http') &&
+			!htmlContent && url.startsWith('http') &&
 			<a
 				href={url}
 				target="_blank"
@@ -101,7 +108,18 @@ export const CopyLink = ({
 			</a>
 		}
 		{
-			!url.startsWith('http') &&
+			htmlContent && url.startsWith('http') &&
+			<a
+				href={url}
+				target="_blank"
+				rel="noopener noreferrer"
+				dangerouslySetInnerHTML={{
+					'__html': htmlContent,
+				}}
+			></a>
+		}
+		{
+			!htmlContent && !url.startsWith('http') &&
 			<Link
 				href={url}
 			>
@@ -109,12 +127,15 @@ export const CopyLink = ({
 			</Link>
 		}
 		{
-			/* iconAfter &&
-			<Icon
-				content={iconAfter}
-				size={size}
-				color={color}
-			/> */
+			htmlContent && !url.startsWith('http') &&
+			<Link
+				href={url}
+				passHref
+			>
+				<CopyLinkComplexAnchor
+					htmlContent={htmlContent}
+				/>
+			</Link>
 		}
 	</CopyLinkContainer>
 );
@@ -128,12 +149,15 @@ CopyLink.propTypes = {
 	 * The text characters to serve as the link's anchor.
 	 */
 	'children': PropTypes.string.isRequired,
-	// /**
-	//  * Token indicating size of type.
-	//  */
-	// 'size': PropTypes.oneOf([
-	// 	'3xs', '2xs', '1xs', 's', 'm', 'l', '1xl', '2xl', '3xl', '4xl', '5xl',
-	// ]),
+	/**
+	 * The text characters to serve as the link's anchor, marked up with
+	 * HTML tags. If `htmlContent` is supplied, then `children` will be ignored.
+	 */
+	'htmlContent': PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.element,
+		PropTypes.array
+	]),
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
@@ -152,19 +176,13 @@ CopyLink.propTypes = {
 		'level': PropTypes.number.isRequired,
 		'alpha': PropTypes.string,
 	}),
-	// /**
-	//  * The icon to position adjacent to the link's anchor.
-	//  */
-	// 'iconAfter': PropTypes.oneOf(IconNames),
 };
 CopyLink.defaultProps = {
 	url: '/',
 	children: 'This is a link.',
-	// size: 's',
 	color: {
 		'kind': 'Brand',
 		'tone': 'Peony',
 		'level': 3,
 	},
-	// iconAfter: 'arrow-right',
 };

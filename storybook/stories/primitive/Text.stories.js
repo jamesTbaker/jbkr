@@ -21,6 +21,9 @@ export default {
 			'control': false,
 		},
 	},
+	'parameters': {
+		'layout': 'padded',
+	},
 };
 
 // define a function for each test state; a story is a function that returns

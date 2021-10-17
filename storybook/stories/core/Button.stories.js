@@ -16,6 +16,9 @@ export default {
 			'options': IconNames,
 		},
 	},
+	'parameters': {
+		'layout': 'padded',
+	},
 };
 const Template = (args) => (
 	<Button

@@ -3,6 +3,9 @@ import { Icon } from '@jbkr/components';
 export default {
 	'title': 'Primitive / Icon',
 	'component': Icon,
+	'parameters': {
+		'layout': 'padded',
+	},
 };
 const Template = (args) => (
 	<Icon

@@ -7,10 +7,10 @@ const TextContainer = styled.div`
 		({ $color }) => {
 			if ($color) {
 				if (typeof($color) === 'string') {
-					return `fill: ${$color};`;
+					return `color: ${$color};`;
 				}
 				if (typeof($color) === 'object') {
-					return `fill: ${color({
+					return `color: ${color({
 						'kind': $color.kind,
 						'tone': $color.tone,
 						'level': $color.level,
@@ -108,6 +108,9 @@ const TextContainer = styled.div`
 			}
 		}
 	}
+	${
+		({ $more }) => `${$more}`
+	}
 `;
 /**
  * `Text` creates a `div` that can contain a string with any color and type
@@ -129,6 +132,7 @@ export const Text = ({
 	spaced,
 	color,
 	gradient,
+	more,
 	htmlContent,
 	children,
 	id,
@@ -138,6 +142,7 @@ export const Text = ({
 			htmlContent && id &&
 			<TextContainer
 					as={tag}
+					id={id}
 					size={size}
 					weight={weight}
 					slant={slant}
@@ -145,10 +150,10 @@ export const Text = ({
 					spaced={spaced}
 					$color={color}
 					$gradient={gradient}
+					$more={more}
 					dangerouslySetInnerHTML={{
 						'__html': htmlContent,
 					}}
-					id={id}
 				></TextContainer>
 		}
 		{
@@ -162,6 +167,7 @@ export const Text = ({
 				spaced={spaced}
 				$color={color}
 				$gradient={gradient}
+				$more={more}
 				dangerouslySetInnerHTML={{
 					'__html': htmlContent,
 				}}
@@ -171,6 +177,7 @@ export const Text = ({
 			!htmlContent && id &&
 			<TextContainer
 				as={tag}
+				id={id}
 				size={size}
 				weight={weight}
 				slant={slant}
@@ -178,7 +185,7 @@ export const Text = ({
 				spaced={spaced}
 				$color={color}
 				$gradient={gradient}
-				id={id}
+				$more={more}
 			>
 				{children}
 			</TextContainer>
@@ -194,75 +201,13 @@ export const Text = ({
 				spaced={spaced}
 				$color={color}
 				$gradient={gradient}
+				$more={more}
 			>
 				{children}
 			</TextContainer>
 		}
 	</>
 );
-
-
-	/* if (htmlContent) {
-		if (id) {
-			return (<TextContainer
-				as={tag}
-				size={size}
-				weight={weight}
-				slant={slant}
-				usage={usage}
-				spaced={spaced}
-				$color={color}
-				$gradient={gradient}
-				dangerouslySetInnerHTML={{
-					'__html': htmlContent,
-				}}
-				id={id}
-			></TextContainer>);
-		}
-		return (<TextContainer
-			as={tag}
-			size={size}
-			weight={weight}
-			slant={slant}
-			usage={usage}
-			spaced={spaced}
-			$color={color}
-			$gradient={gradient}
-			dangerouslySetInnerHTML={{
-				'__html': htmlContent,
-			}}
-		></TextContainer>);
-	} else {
-		if (id) {
-			return (<TextContainer
-				as={tag}
-				size={size}
-				weight={weight}
-				slant={slant}
-				usage={usage}
-				spaced={spaced}
-				$color={color}
-				$gradient={gradient}
-				id={id}
-			>
-				{children}
-			</TextContainer>);
-		} else {
-			return (<TextContainer
-				as={tag}
-				size={size}
-				weight={weight}
-				slant={slant}
-				usage={usage}
-				spaced={spaced}
-				$color={color}
-				$gradient={gradient}
-			>
-				{children}
-			</TextContainer>);
-		}
-	}
-}; */
 Text.propTypes = {
 	/**
 	 * DOM Element ID.
@@ -298,8 +243,6 @@ Text.propTypes = {
 	'spaced': PropTypes.bool,
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
-	 *
-	 * @todo Update links in this description.
 	 */
 	'color': PropTypes.oneOfType([
 		PropTypes.string,
@@ -313,8 +256,6 @@ Text.propTypes = {
 	/**
 	 * Color props used to construct a gradient, and a fallback color.
 	 * [Learn about color props](/?path=/story/props-color--page).
-	 *
-	 * @todo Update links in this description.
 	 */
 	'gradient': PropTypes.exact({
 		'colors': PropTypes.arrayOf({
@@ -330,6 +271,10 @@ Text.propTypes = {
 			'alpha': PropTypes.string,
 		}),
 	}),
+	/**
+	 * Additional CSS declarations.
+	 */
+	'more': PropTypes.string,
 	/**
 	 * The text characters marked up with HTML tags. If `htmlContent` is
 	 * supplied, then `children` will be ignored.
