@@ -3,7 +3,6 @@ export { Text } from './lib/primitive/Text/Text.jsx';
 export { Line } from './lib/primitive/Line/Line.jsx';
 export { Icon, IconNames } from './lib/primitive/Icon/Icon.jsx';
 export { Brand } from './lib/primitive/Brand/Brand.jsx';
-export { Hamburger } from './lib/primitive/Hamburger/Hamburger.jsx';
 
 // Core
 export { Copy } from './lib/core/Copy/Copy.jsx';

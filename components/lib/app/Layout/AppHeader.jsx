@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { deviceWidthQuery, color, zIndexNumber, hiddenInline } from '@jbkr/style-service';
+import { deviceWidthQuery, color, zIndexNumber, hiddenInline, verticalAlignMiddle } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
 import { Line } from '../../primitive/Line/Line';
 import { Button } from '../../core/Button/Button';
@@ -13,17 +13,20 @@ const returnLibLabItemAnchorText = ({ rawtext }) => {
 		rawtext.indexOf(':') : rawtext.indexOf(' ', 60);
 	return `${rawtext.slice(0, breakPosition)}<span class="item-title-remainder-placeholder"></span><span class="item-title-remainder">${rawtext.slice(breakPosition)}</span>`;
 };
+const returnSecondaryLinkGridArea = ({
+	linkIndex,
+	anchorText,
+}) => anchorText === 'Meta' ? 'meta' : `secondaryLink${linkIndex}`;
 const AppHeaderContainer = styled.div`
 	position: fixed;
 	top: 0rem;
 	width: 100%;
 	display: grid;
 	${deviceWidthQuery.only({ 'width': 's' })} {
-		height: 21rem;
-		grid-template-rows: 7rem 5rem auto;
+		height: 12rem;
+		grid-template-rows: 7rem 5rem;
 		grid-template-areas: 	"announcement"
 								"brandAndNav"
-								"tableOfContents";
 	}
 `;
 const Announcement = styled.aside`
@@ -87,54 +90,96 @@ const HamburgerContainer = styled.div`
 	}
 `;
 const HamburgerButton = styled.button`
-	span:first-child
-	{
-		transform-origin: 0% 0%;
-	}
-
-	span:nth-last-child(2)
-	{
-		transform-origin: 0% 100%;
-	}
+	cursor: pointer;
+	display: inline-block;
+	min-width: 0px;
+	padding: .75rem .5rem .75rem;
+	margin-top: .5rem;
+	border: none;
+	background-color: transparent;
 `;
 const HamburgerLayer = styled.span`
 	display: block;
 	width: 2rem;
 	height: .25rem;
-	margin-bottom: .375rem;
 	position: relative;
 
-	background: #cdcdcd;
-	border-radius: 1.5px;
-
-	z-index: 1;
-
-	transform-origin: .5rem 0;
+	background: ${color({
+		'kind': 'Brand',
+		'tone': 'Peony',
+		'level': 5,
+		'format': 'string',
+	})};
+	border-radius: .125rem;
 
 	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 			background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 			opacity 0.55s ease;
+	${
+		({ $order }) => {
+			if ($order === 1) {
+				return `
+					transform-origin: top left;
+					margin-bottom: .375rem;
+				`;
+			}
+			if ($order === 2) {
+				return `
+					transform-origin: 0% 100%;
+					margin-bottom: .375rem;
+				`;
+			}
+			if ($order === 3) {
+				return `transform-origin: bottom right;`;
+			}
+		}
+	}
+	${
+		({ $order, $smallNavVisible }) => {
+			if ($smallNavVisible === true) {
+				if ($order === 1) {
+					return `
+						transform: rotate(45deg) scale(1.1, 1) translate(.125rem, -.25rem);
+					`;
+				}
+				if ($order === 2) {
+					return `
+						opacity: 0;
+						transform: rotate(0deg) scale(0.2, 0.2);
+					`;
+				}
+				if ($order === 3) {
+					return `
+						transform: rotate(-45deg) scale(1.1, 1) translate(.75rem, -1.125rem);
+					`;
+				}
+			}
+		}
+	}
 `;
-const HamburgerLabel = styled.span`
-	${hiddenInline}
-`;
-		// <HamburgerLabel>Toggle site navigation</HamburgerLabel>
 const Hamburger = ({ onClick, $smallNavVisible }) => (
 	<HamburgerButton
 		onClick={onClick}
+		aria-label="Toggle site navigation"
 	>
 		<HamburgerLayer
-			order={1}
+			$order={1}
 			$smallNavVisible={$smallNavVisible}
 		/>
-		<HamburgerLayer />
-		<HamburgerLayer />
+		<HamburgerLayer
+			$order={2}
+			$smallNavVisible={$smallNavVisible}
+		/>
+		<HamburgerLayer
+			$order={3}
+			$smallNavVisible={$smallNavVisible}
+		/>
 	</HamburgerButton>
 );
 const NavigationContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		position: fixed;
-		top: 21rem;
+		top: 12rem;
 		left: 0;
 		width: 100%;
 		height: 0;
@@ -153,13 +198,31 @@ const NavigationContainer = styled.div`
 		`}
 	}
 `;
+const NavigationConstrainer = styled.div`
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		width: 67%;
+		padding: 0 2rem;
+		${verticalAlignMiddle}
+	}
+`;
 const PrimaryNavigationContainer = styled.nav`
-	border-top: solid .125rem ${color({
-		'kind': 'Neutral',
-		'tone': 'Finch',
-		'level': 34,
-		'format': 'string',
-	})};
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		border-top: solid .125rem ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 34,
+			'format': 'string',
+		})};
+		a {
+			width: 100%;
+			> span {
+				padding-left: 0;
+				> span {
+					font-size: 2.5rem;
+				}
+			}
+		}
+	}
 `;
 const PrimaryNavigationLinkContainer = styled.span`
 	${deviceWidthQuery.only({ 'width': 's' })} {
@@ -172,10 +235,29 @@ const PrimaryNavigationLinkContainer = styled.span`
 		})};
 	}
 `;
-const SecondaryNavigationContainer = styled.nav``;
+const SecondaryNavigationContainer = styled.nav`
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		display: grid;
+		grid-template-columns: 4rem 4rem 4rem;
+		grid-template-areas: 	"secondaryLink0 secondaryLink1 secondaryLink2"
+								"secondaryLink3 secondaryLink4 secondaryLink5"
+								"secondaryLink6 secondaryLink7 secondaryLink8"
+								"secondaryLink9 secondaryLink10 secondaryLink11"
+								"meta nada nada";
+		padding-top: 6rem;
+	}
+`;
 const SecondaryNavigationLinkContainer = styled.span`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: block;
+		${
+			({ gridArea }) => `grid-area: ${gridArea};`
+		}
+		a[href="/meta"] {
+			> span {
+				padding-left: 0;
+			}
+		}
 	}
 `;
 /*
@@ -200,16 +282,16 @@ export const AppHeader = ({ content }) => {
 		smallNavVisible,
 		setSmallNavVisible,
 	] = useState(true);
-	const [
-		smallContentsVisible,
-		setSmallContentsVisible,
-	] = useState(false);
+	// const [
+	// 	smallContentsVisible,
+	// 	setSmallContentsVisible,
+	// ] = useState(false);
 	const handleHamburgerClick = () => {
 		setSmallNavVisible(!smallNavVisible);
 	};
-	const handleContentsButtonClick = () => {
-		setSmallContentsVisible(!smallContentsVisible);
-	};
+	// const handleContentsButtonClick = () => {
+	// 	setSmallContentsVisible(!smallContentsVisible);
+	// };
 	return (
 		<AppHeaderContainer>
 			<Header>
@@ -227,45 +309,51 @@ export const AppHeader = ({ content }) => {
 				<NavigationContainer
 					$smallNavVisible={smallNavVisible}
 				>
-					<PrimaryNavigationContainer
-						ariaLabel="Primary Navigation"
-						role="navigation"
-					>
-						{
-							content.links.primary.map((link) =>
-								<PrimaryNavigationLinkContainer
-									key={link.key}
-								>
-									<Button
-										text={link.anchorText}
-										url={link.url}
-										size="standard"
-										surfaceStyle="transparent"
-										contextColor="onDark"
-									/>
-								</PrimaryNavigationLinkContainer>
-							)
-						}
-					</PrimaryNavigationContainer>
-					<SecondaryNavigationContainer>
-						{
-							content.links.secondary.map((link) =>
-								<SecondaryNavigationLinkContainer
-									key={link.key}
-								>
-									<Button
-										text={link.anchorText}
-										url={link.url}
-										size={link.anchorIcon ? 'standard' : 'small'}
-										surfaceStyle="transparent"
-										contextColor="onDark"
-										iconBefore={link.anchorIcon}
-										textHidden={link.anchorIcon ? true : false}
-									/>
-								</SecondaryNavigationLinkContainer>
-							)
-						}
-					</SecondaryNavigationContainer>
+					<NavigationConstrainer>
+						<PrimaryNavigationContainer
+							ariaLabel="Primary Navigation"
+							role="navigation"
+						>
+							{
+								content.links.primary.map((link) =>
+									<PrimaryNavigationLinkContainer
+										key={link.key}
+									>
+										<Button
+											text={link.anchorText}
+											url={link.url}
+											size="standard"
+											surfaceStyle="transparent"
+											contextColor="onDark"
+										/>
+									</PrimaryNavigationLinkContainer>
+								)
+							}
+						</PrimaryNavigationContainer>
+						<SecondaryNavigationContainer>
+							{
+								content.links.secondary.map((link, linkIndex) =>
+									<SecondaryNavigationLinkContainer
+										key={link.key}
+										gridArea={returnSecondaryLinkGridArea({
+											linkIndex,
+											'anchorText': link.anchorText
+										})}
+									>
+										<Button
+											text={link.anchorText}
+											url={link.url}
+											size={link.anchorIcon ? 'standard' : 'small'}
+											surfaceStyle="transparent"
+											contextColor="onDark"
+											iconBefore={link.anchorIcon}
+											textHidden={link.anchorIcon ? true : false}
+										/>
+									</SecondaryNavigationLinkContainer>
+								)
+							}
+						</SecondaryNavigationContainer>
+					</NavigationConstrainer>
 				</NavigationContainer>
 			</Header>
 			<Announcement
