@@ -45,6 +45,7 @@ export { MainContent } from './lib/app/Layout/MainContent.jsx';
 export { Scaffold } from './lib/app/Layout/Scaffold.jsx';
 // ---
 export { AppHeader } from './lib/app/Layout/AppHeader.jsx';
+export { AppScaffold } from './lib/app/Layout/AppScaffold.jsx';
 
 // Media
 export { MediaItem } from './lib/app/Media/MediaItem.jsx';

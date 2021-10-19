@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { deviceWidthQuery, color, zIndexNumber, hiddenInline, verticalAlignMiddle } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
-import { Line } from '../../primitive/Line/Line';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../../..';
 import { CopyLink } from '../../..';
@@ -21,28 +21,48 @@ const AppHeaderContainer = styled.div`
 	position: fixed;
 	top: 0rem;
 	width: 100%;
-	display: grid;
 	${deviceWidthQuery.only({ 'width': 's' })} {
+		display: grid;
 		height: 12rem;
 		grid-template-rows: 7rem 5rem;
 		grid-template-areas: 	"announcement"
-								"brandAndNav"
+								"brandAndNav";
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		position: relative;
+		height: 12rem;
 	}
 `;
 const Announcement = styled.aside`
-	grid-area: announcement;
-	display: grid;
-	border-bottom: solid .125rem ${color({
-		'kind': 'Neutral',
-		'tone': 'Finch',
-		'level': 28,
-		'format': 'string',
-	})};
 	${deviceWidthQuery.only({ 'width': 's' })} {
+		grid-area: announcement;
+		display: grid;
 		grid-template-columns: 12rem auto;
 		grid-column-gap: 1rem;
 		grid-template-areas: "announcementPreface announcementBody";
 		margin: 2rem 2rem 0;
+		border-bottom: solid .125rem ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 28,
+			'format': 'string',
+		})};
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+		max-width: 150rem;
+		margin: 0 auto;
+		text-align: left;
+
+		display: grid;
+		grid-template-columns: 12rem auto 52rem;
+		grid-column-gap: 1rem;
+		grid-template-areas: "announcementPreface announcementBody _____";
+		/* margin: 2rem 2rem 0; */
 	}
 `;
 const AnnouncementPreface = styled.span`
@@ -60,11 +80,24 @@ const AnnouncementBody = styled.span`
 	}
 `;
 const Header = styled.header`
-	grid-area: brandAndNav;
 	display: grid;
 	${deviceWidthQuery.only({ 'width': 's' })} {
+		grid-area: brandAndNav;
 		grid-template-columns: 3rem auto 8rem;
 		grid-template-areas: "hamburger headerGap brand";
+		padding: 1rem 2rem 0;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		max-width: 150rem;
+		margin: 0 auto;
+		text-align: left;
+
+		grid-area: appHeader;
+		z-index: 2;
+		grid-template-columns: auto 9rem;
+		grid-template-areas:
+			"_____ secondaryNavigation"
+			"primaryNavigation brand";
 		padding: 1rem 2rem 0;
 	}
 `;
@@ -224,7 +257,11 @@ const PrimaryNavigationContainer = styled.nav`
 		}
 	}
 `;
-const PrimaryNavigationLinkContainer = styled.span`
+const PrimaryNavigationList = styled.ul`
+	margin: 0;
+	padding: 0;
+`;
+const PrimaryNavigationListItem = styled.li`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: block;
 		border-bottom: solid .125rem ${color({
@@ -233,41 +270,119 @@ const PrimaryNavigationLinkContainer = styled.span`
 			'level': 34,
 			'format': 'string',
 		})};
+		margin-top: -2rem;
+		margin-left: -2rem;
+		opacity: 0;
+		transition-property: opacity, margin-left, margin-top;
+		transition-duration: .5s;
+		&:nth-child(1) {
+			transition-delay: .2s;
+		}
+		&:nth-child(2) {
+			transition-delay: .25s;
+		}
+		&:nth-child(3) {
+			transition-delay: .3s;
+		}
+		${({ $smallNavVisible }) => $smallNavVisible && `
+			margin-top: 0;
+			margin-left: 0;
+			opacity: 1;
+		`}
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		display: block;
 	}
 `;
-const SecondaryNavigationContainer = styled.nav`
+const SecondaryNavigationContainer = styled.nav``;
+const SecondaryNavigationList = styled.ul`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: grid;
-		grid-template-columns: 4rem 4rem 4rem;
+		grid-template-columns: 8rem 8rem 8rem;
+		grid-template-rows: 8rem 8rem 10rem 8rem;
 		grid-template-areas: 	"secondaryLink0 secondaryLink1 secondaryLink2"
 								"secondaryLink3 secondaryLink4 secondaryLink5"
 								"secondaryLink6 secondaryLink7 secondaryLink8"
-								"secondaryLink9 secondaryLink10 secondaryLink11"
 								"meta nada nada";
-		padding-top: 6rem;
+		margin: 0;
+		padding: 4rem 0 0 0;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		display: grid;
+		grid-template-columns: 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem;
+		grid-template-areas: "secondaryLink0 secondaryLink1 secondaryLink2 secondaryLink3 secondaryLink4 secondaryLink5 secondaryLink6 secondaryLink7 meta";
+		margin: 0;
+		padding: 0;
 	}
 `;
-const SecondaryNavigationLinkContainer = styled.span`
+const SecondaryNavigationListItem = styled.li`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: block;
 		${
-			({ gridArea }) => `grid-area: ${gridArea};`
+			({ $gridArea }) => `grid-area: ${$gridArea};`
 		}
+		margin-top: -2rem;
+		margin-left: -2rem;
+		opacity: 0;
+		transition-property: opacity, margin-left, margin-top;
+		transition-duration: .5s;
+		&:nth-child(1) {
+			transition-delay: .35s;
+		}
+		&:nth-child(2) {
+			transition-delay: .375s;
+		}
+		&:nth-child(3) {
+			transition-delay: .4s;
+		}
+		&:nth-child(4) {
+			transition-delay: .425s;
+		}
+		&:nth-child(5) {
+			transition-delay: .45s;
+		}
+		&:nth-child(6) {
+			transition-delay: .475s;
+		}
+		&:nth-child(7) {
+			transition-delay: .5s;
+		}
+		&:nth-child(8) {
+			transition-delay: .525s;
+		}
+		&:nth-child(9) {
+			transition-delay: .55s;
+		}
+		${({ $smallNavVisible }) => $smallNavVisible && `
+			margin-top: 0;
+			margin-left: 0;
+			opacity: 1;
+		`}
 		a[href="/meta"] {
 			> span {
 				padding-left: 0;
 			}
 		}
+		a:not([href="/meta"]) {
+			> span {
+				padding-left: 0;
+				border-left: solid 0 transparent;
+				> span > span {
+					svg {
+						height: 3rem;
+					}
+				}
+			}
+		}
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		display: block;
+		${
+			({ $gridArea }) => `grid-area: ${$gridArea};`
+		}
 	}
 `;
-/*
-
-{
-	'kind': 'Neutral',
-	'tone': 'Finch',
-	'level': 34,
-}
-const LinkContainer = styled.span`
+/* const LinkContainer = styled.span`
 	a {
 		${props => props.forThisScreen && `
 			color: yellow;
@@ -281,17 +396,10 @@ export const AppHeader = ({ content }) => {
 	const [
 		smallNavVisible,
 		setSmallNavVisible,
-	] = useState(true);
-	// const [
-	// 	smallContentsVisible,
-	// 	setSmallContentsVisible,
-	// ] = useState(false);
+	] = useState(false);
 	const handleHamburgerClick = () => {
 		setSmallNavVisible(!smallNavVisible);
 	};
-	// const handleContentsButtonClick = () => {
-	// 	setSmallContentsVisible(!smallContentsVisible);
-	// };
 	return (
 		<AppHeaderContainer>
 			<Header>
@@ -311,13 +419,14 @@ export const AppHeader = ({ content }) => {
 				>
 					<NavigationConstrainer>
 						<PrimaryNavigationContainer
-							ariaLabel="Primary Navigation"
-							role="navigation"
+							aria-label="Primary Navigation"
 						>
+							<PrimaryNavigationList>
 							{
 								content.links.primary.map((link) =>
-									<PrimaryNavigationLinkContainer
+									<PrimaryNavigationListItem
 										key={link.key}
+										$smallNavVisible={smallNavVisible}
 									>
 										<Button
 											text={link.anchorText}
@@ -326,19 +435,24 @@ export const AppHeader = ({ content }) => {
 											surfaceStyle="transparent"
 											contextColor="onDark"
 										/>
-									</PrimaryNavigationLinkContainer>
+									</PrimaryNavigationListItem>
 								)
 							}
+							</PrimaryNavigationList>
 						</PrimaryNavigationContainer>
-						<SecondaryNavigationContainer>
+						<SecondaryNavigationContainer
+							aria-label="Secondary Navigation"
+						>
+							<SecondaryNavigationList>
 							{
 								content.links.secondary.map((link, linkIndex) =>
-									<SecondaryNavigationLinkContainer
+									<SecondaryNavigationListItem
 										key={link.key}
-										gridArea={returnSecondaryLinkGridArea({
+										$gridArea={returnSecondaryLinkGridArea({
 											linkIndex,
 											'anchorText': link.anchorText
 										})}
+										$smallNavVisible={smallNavVisible}
 									>
 										<Button
 											text={link.anchorText}
@@ -349,9 +463,10 @@ export const AppHeader = ({ content }) => {
 											iconBefore={link.anchorIcon}
 											textHidden={link.anchorIcon ? true : false}
 										/>
-									</SecondaryNavigationLinkContainer>
+									</SecondaryNavigationListItem>
 								)
 							}
+							</SecondaryNavigationList>
 						</SecondaryNavigationContainer>
 					</NavigationConstrainer>
 				</NavigationContainer>
@@ -383,4 +498,57 @@ export const AppHeader = ({ content }) => {
 			</Announcement>
 		</AppHeaderContainer>
 	);
+};
+AppHeader.propTypes = {
+	/** Data for the app's `<head>`. */
+	'meta': PropTypes.shape({
+		'slug': PropTypes.string.isRequired,
+		'metaTitle': PropTypes.string.isRequired,
+		'metaDescription': PropTypes.string.isRequired,
+		'socialDescription': PropTypes.string.isRequired,
+		'openGraphType': PropTypes.string.isRequired,
+		'metaImage': PropTypes.shape({
+			'url': PropTypes.string.isRequired,
+			'alternativeText': PropTypes.string.isRequired,
+			'type': PropTypes.string.isRequired,
+		}),
+		'metaOther': PropTypes.arrayOf(PropTypes.shape({
+			'key': PropTypes.string.isRequired,
+			'property': PropTypes.string.isRequired,
+			'content': PropTypes.string.isRequired,
+		}))
+	}),
+	/** Whether or not this screen has a table of contents */
+	'hasTableOfContents': PropTypes.bool,
+	/** Data for AppHeader */
+	'header': PropTypes.shape({
+		'links': PropTypes.shape({
+			'primary': PropTypes.arrayOf(
+				PropTypes.shape({
+					'key': PropTypes.string.isRequired,
+					'anchorText': PropTypes.string.isRequired,
+					'url': PropTypes.string.isRequired,
+					'forThisScreen': PropTypes.bool,
+				})
+			),
+			'secondary': PropTypes.arrayOf(
+				PropTypes.shape({
+					'key': PropTypes.string.isRequired,
+					'anchorText': PropTypes.string.isRequired,
+					'anchorIcon': PropTypes.string.isRequired,
+					'url': PropTypes.string.isRequired,
+				})
+			),
+		}),
+		'liblabItem': PropTypes.shape({
+			'anchorText': PropTypes.string.isRequired,
+			'url': PropTypes.string.isRequired,
+		}),
+	}),
+	/** Data for AppFooter */
+	'footer': PropTypes.shape({
+		'content': PropTypes.string,
+	}),
+	/** Screen element that implements `<main>`. */
+	'children': PropTypes.element,
 };

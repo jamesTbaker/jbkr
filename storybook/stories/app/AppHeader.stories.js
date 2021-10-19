@@ -1,17 +1,31 @@
 import styled from 'styled-components';
-import { color } from '@jbkr/style-service';
+import { deviceWidthQuery, color } from '@jbkr/style-service';
 import { AppHeader } from '@jbkr/components';
 
 
-const ScreenEmulation = styled.div`
-	${({ $color }) => `background-color: ${color({
+const BodyEmulation = styled.div`
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		height: 812px;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		text-align: center;
+		height: 1024px;
+	}
+	background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
 	'level': 37,
 	'format': 'string',
-})};`
-	}
+})
+	};
 `;
+// const LargeScreenConstrainer = styled.div`
+// 	${deviceWidthQuery.not({ 'width': 's' })} {
+// 		max-width: 150rem;
+// 		margin: 0 auto;
+// 	}
+// `;
+
 export default {
 	'title': 'App / AppHeader',
 	'component': AppHeader,
@@ -20,11 +34,11 @@ export default {
 	},
 };
 const Template = (args) => (
-	<ScreenEmulation>
+	<BodyEmulation>
 		<AppHeader
 			{...args}
 		/>
-	</ScreenEmulation>
+	</BodyEmulation>
 );
 export const General = Template.bind({});
 General.args = {
@@ -37,16 +51,16 @@ General.args = {
 					'url': '/',
 					'category': 'primary',
 					'forThisScreen': true,
-				}, {
-					'key': '6140bebd78cc2e3969ebbc5e',
-					'anchorText': 'Library',
-					'url': '/library',
-					'category': 'primary',
-				}, {
-					'key': '6140bebd78cc2e3969ebbc5f',
-					'anchorText': 'Contact',
-					'url': '/contact',
-					'category': 'primary',
+					/* }, {
+						'key': '6140bebd78cc2e3969ebbc5e',
+						'anchorText': 'Lib / Lab',
+						'url': '/library',
+						'category': 'primary',
+					}, {
+						'key': '6140bebd78cc2e3969ebbc5f',
+						'anchorText': 'Contact',
+						'url': '/contact',
+						'category': 'primary', */
 				},
 			],
 			'secondary': [
@@ -56,53 +70,53 @@ General.args = {
 					'anchorIcon': 'twitter',
 					'url': '/',
 					'category': 'secondary',
-				}, {
-					'key': 'asdf2',
-					'anchorText': 'YouTube',
-					'anchorIcon': 'youtube',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': 'asdf3',
-					'anchorText': 'LinkedIn',
-					'anchorIcon': 'linkedin',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': 'asdf4',
-					'anchorText': 'Dribbble',
-					'anchorIcon': 'dribbble',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': 'asdf5',
-					'anchorText': 'Behance',
-					'anchorIcon': 'behance',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': 'asdf6',
-					'anchorText': 'CodeSandbox',
-					'anchorIcon': 'code-sandbox',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': 'asdf7',
-					'anchorText': 'CodePen',
-					'anchorIcon': 'codepen',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': 'asdf8',
-					'anchorText': 'Medium',
-					'anchorIcon': 'medium',
-					'url': '/',
-					'category': 'secondary',
-				}, {
-					'key': '6140bebd78cc2e3969ebbc60',
-					'anchorText': 'Meta',
-					'url': '/meta',
-					'category': 'primary',
+					/* }, {
+						'key': 'asdf2',
+						'anchorText': 'YouTube',
+						'anchorIcon': 'youtube',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': 'asdf3',
+						'anchorText': 'LinkedIn',
+						'anchorIcon': 'linkedin',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': 'asdf4',
+						'anchorText': 'Dribbble',
+						'anchorIcon': 'dribbble',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': 'asdf5',
+						'anchorText': 'Behance',
+						'anchorIcon': 'behance',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': 'asdf6',
+						'anchorText': 'CodeSandbox',
+						'anchorIcon': 'code-sandbox',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': 'asdf7',
+						'anchorText': 'CodePen',
+						'anchorIcon': 'codepen',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': 'asdf8',
+						'anchorText': 'Medium',
+						'anchorIcon': 'medium',
+						'url': '/',
+						'category': 'secondary',
+					}, {
+						'key': '6140bebd78cc2e3969ebbc60',
+						'anchorText': 'Meta',
+						'url': '/meta',
+						'category': 'primary', */
 				},
 			],
 		},
