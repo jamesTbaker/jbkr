@@ -24,8 +24,25 @@ const Template = (args) => (
 		/>
 	</Copy>
 );
-export const General = Template.bind({});
-General.args = {
-	'url': '/?path=/story/core-copylink--general',
+export const SimpleInternal = Template.bind({});
+SimpleInternal.args = {
+	'url': '/?path=/story/core-copylink--simple-internal',
 	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
+};
+export const SimpleExternal = Template.bind({});
+SimpleExternal.args = {
+	'url': 'https://theintercept.com',
+	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
+};
+export const ComplexInternal = Template.bind({});
+ComplexInternal.args = {
+	'url': '/?path=/story/core-copylink--complex-internal',
+	'htmlContent': 'Trafalgar Square a <span>Flutter</span> ' +
+		'Rather Scrumpy You \'avin a Laugh',
+};
+export const ComplexExternal = Template.bind({});
+ComplexExternal.args = {
+	'url': 'https://theintercept.com',
+	'htmlContent': 'Trafalgar Square a <span>Flutter</span> ' +
+		'Rather Scrumpy You \'avin a Laugh',
 };

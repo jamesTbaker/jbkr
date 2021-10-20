@@ -8,8 +8,9 @@ import { color, hiddenBlock } from '@jbkr/style-service';
 
 const IconContainer = styled.span`
 	${
-		({ $position }) => {
+		({ $position, $size }) => {
 			let positionName = '';
+			const verticalPaddingSize = $size === 'standard' ? '.5rem' : '0';
 			if ($position === 'before') {
 				positionName = 'iconBefore';
 			}
@@ -17,8 +18,8 @@ const IconContainer = styled.span`
 				positionName = 'iconAfter';
 			}
 			return `
-				display: grid;
-				padding: .5rem 0;
+				height: 2rem;
+				padding: ${verticalPaddingSize} 0;
 				grid-area: ${positionName};
 			`
 		}
@@ -271,8 +272,9 @@ const ButtonContent = ({
 	colors,
 }) => (
 	<ButtonContentContainer
-		$contextColor={contextColor}
+		$size={size}
 		$surfaceStyle={surfaceStyle}
+		$contextColor={contextColor}
 		$textHidden={textHidden}
 		$iconBefore={iconBefore}
 		$iconAfter={iconAfter}
@@ -281,6 +283,7 @@ const ButtonContent = ({
 		{
 			iconBefore &&
 			<IconContainer
+				$size={size}
 				$position="before"
 			>
 				<Icon
@@ -305,6 +308,7 @@ const ButtonContent = ({
 		{
 			iconAfter &&
 			<IconContainer
+				$size={size}
 				$position="after"
 			>
 				<Icon
@@ -325,7 +329,8 @@ const ButtonContentComponentFacilitator = styled.span.attrs(({
 	}
 	return returnValue;
 })`
-	display: inline-grid;
+	display: block; width: max-content;
+	/* display: inline-grid; */
 	${
 		({ $url, $contextColor }) => {
 			if ($url && !$url.startsWith('http')) {
@@ -451,7 +456,7 @@ const ButtonElement = styled.span.attrs(({ $clickHandler, $url, $textHidden }) =
 						'format': 'string'
 					});
 			if ($url && $url.startsWith('http')) {
-				linkStyleStatments = 'display: inline-grid; text-decoration: none;';
+				linkStyleStatments = 'display: block; width: max-content; text-decoration: none;'; // display: inline-grid;
 			}
 			return `
 				${linkStyleStatments}

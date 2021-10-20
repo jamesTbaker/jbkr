@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { deviceWidthQuery, iconSize, color } from '@jbkr/style-service';
+import { returnNumberRoundedUpToMultiple } from '@jbkr/utilities';
+import { deviceWidthQuery, iconSize, color, verticalAlignMiddle } from '@jbkr/style-service';
 
 const pathSpecifications = {
 	'arrow-up': [
@@ -94,7 +95,46 @@ const pathSpecifications = {
 export const IconNames = Object.keys(pathSpecifications);
 const IconContainer = styled.span`
 	display: grid;
+	text-align: center;
+	${
+		({ $size }) => {
+			const smallDeviceHeight = returnNumberRoundedUpToMultiple({
+				'number': iconSize({
+					'deviceWidth': 's',
+					'size': $size,
+				}),
+				'multiple': 1,
+			});
+			const mediumDeviceHeight = returnNumberRoundedUpToMultiple({
+				'number': iconSize({
+					'deviceWidth': 'm',
+					'size': $size,
+				}),
+				'multiple': 1,
+			});
+			const largeDeviceHeight = returnNumberRoundedUpToMultiple({
+				'number': iconSize({
+					'deviceWidth': 'l',
+					'size': $size,
+				}),
+				'multiple': 1,
+			});
+			return `
+				${deviceWidthQuery.only({ 'width': 's' })} {
+					height: ${smallDeviceHeight}rem;
+				}
+				${deviceWidthQuery.only({ 'width': 'm' })} {
+					height: ${mediumDeviceHeight}rem;
+				}
+				${deviceWidthQuery.only({ 'width': 'l' })} {
+					height: ${largeDeviceHeight}rem;
+				}
+			`;
+		}
+	}
 	svg {
+		margin: 0 auto;
+		${verticalAlignMiddle}
 		${
 			({ $size }) => `
 				${deviceWidthQuery.only({ 'width': 's' })} {

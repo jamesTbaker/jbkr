@@ -42,10 +42,10 @@ export const foundation = {
 			'specs': {
 				's': {
 					'minimum': 0,
-					'maximum': 414,
+					'maximum': 479,
 				},
 				'm': {
-					'minimum': 415,
+					'minimum': 480,
 					'maximum': 1024,
 				},
 				'l': {

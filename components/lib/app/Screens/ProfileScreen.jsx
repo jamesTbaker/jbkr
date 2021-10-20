@@ -74,5 +74,5 @@ ProfileScreen.propTypes = {
 		'content': PropTypes.string,
 	}),
 	/** Data for child(ren) of `<MainContent>`. */
-	'main': PropTypes.element,
+	'main': PropTypes.object,
 };

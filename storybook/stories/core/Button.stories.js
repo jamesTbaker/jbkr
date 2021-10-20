@@ -41,7 +41,7 @@ export const AsInternalLink = Template.bind({});
 AsInternalLink.args = {
 	'text': 'Internal Link Anchor Text',
 	'url': '/?path=/story/core-button--as-internal-link',
-	'size': 'standard',
+	'size': 'small',
 	'surfaceStyle': 'outlined',
 	'contextColor': 'onDark',
 	'iconBefore': 'snowflake',

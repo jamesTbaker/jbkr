@@ -18,7 +18,6 @@ const CopyLinkContainer = styled.span`
 	a {
 		display: inline-block;
 		text-decoration: none;
-		/* line-height: 1.3; */
 		border-radius: 0;
 		/* border-bottom: solid .125rem; */
 		transition: all 250ms;
@@ -54,21 +53,20 @@ const CopyLinkContainer = styled.span`
 						'format': 'string'
 					});
 				return `
-				border-color: ${primaryColor};
-				color: ${primaryColor};
-				&:hover {
 					border-color: ${primaryColor};
 					color: ${primaryColor};
-					background-color: ${secondaryColor};
-				}
-				&:focus {
-					padding: 0 .5rem;
-					margin-right: .25rem;
-					outline: none;
-					/* border-bottom: none; */
-					border-radius: .375rem;
-					box-shadow: 0 0 0 .125rem ${primaryColor};
-				}
+					&:hover {
+						border-color: ${primaryColor};
+						color: ${primaryColor};
+						background-color: ${secondaryColor};
+					}
+					&:focus {
+						padding: 0 .5rem;
+						margin-right: .25rem;
+						outline: none;
+						border-radius: .375rem;
+						box-shadow: 0 0 0 .125rem ${primaryColor};
+					}
 				`;
 			}
 		}

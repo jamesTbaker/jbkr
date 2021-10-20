@@ -1,3 +1,3 @@
-import { returnAllColors, } from '../lib/calculation.js';
-returnAllColors();
+import { buildStyleServiceStore, } from '../lib/calculation.js';
+buildStyleServiceStore();
 //# sourceMappingURL=debug.js.map

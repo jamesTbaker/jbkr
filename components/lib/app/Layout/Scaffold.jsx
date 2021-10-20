@@ -26,8 +26,6 @@ export const Scaffold = ({
 	hasTableOfContents,
 	children,
 }) => {
-	console.log(metaImage);
-	console.log(metaOther);
 	return(
 		<>
 			<Head>
