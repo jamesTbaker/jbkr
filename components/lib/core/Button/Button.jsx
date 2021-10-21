@@ -11,6 +11,7 @@ const IconContainer = styled.span`
 		({ $position, $size }) => {
 			let positionName = '';
 			const verticalPaddingSize = $size === 'standard' ? '.5rem' : '0';
+			const height = $size === 'standard' ? '3rem' : '3rem';
 			if ($position === 'before') {
 				positionName = 'iconBefore';
 			}
@@ -18,7 +19,7 @@ const IconContainer = styled.span`
 				positionName = 'iconAfter';
 			}
 			return `
-				height: 2rem;
+				height: ${height};
 				padding: ${verticalPaddingSize} 0;
 				grid-area: ${positionName};
 			`
