@@ -18,19 +18,6 @@ export const Profile = ({
 		<ProfileHeader
 			title={title}
 		/>
-		<CopyLink
-			url="/"
-		>
-			This is a link
-		</CopyLink>
-		<br />
-		<Button
-			text="This is a Button"
-			url="/"
-			// clickHandler={() => {
-			// 	console.log('Help! I\'ve been clicked!');
-			// }}
-		/>
 		<ProfileSkills
 			skills={skills}
 		/>

@@ -72,19 +72,19 @@ const CopyLinkContainer = styled.span`
 					'level': 1,
 					'format': 'string'
 					});
-				const colorFocusRingSeparator = $contextColor === 'onLight' ?
-					color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 1,
-						'format': 'string'
-					}) :
-					color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 41,
-						'format': 'string'
-					});
+			const colorFocusRingSeparator = $contextColor === 'onLight' ?
+				color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 1,
+					'format': 'string'
+				}) :
+				color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 41,
+					'format': 'string'
+				});
 			if ($inline) {
 				return `
 					a {

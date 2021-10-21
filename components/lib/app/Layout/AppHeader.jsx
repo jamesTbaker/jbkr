@@ -20,7 +20,6 @@ const returnSecondaryLinkGridArea = ({
 	anchorText,
 }) => anchorText === 'Meta' ? 'meta' : `secondaryLink${linkIndex}`;
 const AppHeaderContainer = styled.div`
-	/* background-color: darkblue; */
 	position: fixed;
 	top: 0rem;
 	width: 100%;
@@ -38,9 +37,7 @@ const AppHeaderContainer = styled.div`
 	}
 `;
 const Aside = styled.aside`
-	/* background-color: darkgreen; */
 	grid-area: aside;
-	text-align: left;
 	border-bottom: solid .125rem ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -55,20 +52,19 @@ const Aside = styled.aside`
 		display: grid;
 		grid-template-areas: "announcement expandedSecondaryNav";
 		grid-column-gap: 6rem;
+		margin: 0 auto;
+		text-align: left;
 		width: 100%;
 		max-width: 150rem;
-		margin: 0 auto;
 	}
 `;
 const Header = styled.header`
-	/* background-color: darkmagenta; */
 	grid-area: header;
 	display: grid;
 	text-align: left;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		grid-template-columns: 5rem auto 8.625rem;
 		grid-template-areas: "compressedNavToggle _____ brand";
-		/* grid-column-gap: 5rem; */
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-template-columns: auto 8.375rem;
@@ -80,7 +76,6 @@ const Header = styled.header`
 	}
 `;
 const AnnouncementContainer = styled.div`
-	/* background-color: darkviolet; */
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: flex;
 		flex-direction: row;
@@ -115,7 +110,6 @@ const AnnouncementBody = styled.span`
 	}
 `;
 const ExpandedSecondaryNavigationContainer = styled.nav`
-	/* background-color: darkcyan; */
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -145,7 +139,6 @@ const ExpandedSecondaryNavigationListItem = styled.li`
 	}
 `;
 const CompressedNavigationToggleContainer = styled.div`
-	/* background-color: orange; */
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		grid-area: compressedNavToggle;
 		margin: 1.5rem 0 1.5rem 2rem;
@@ -154,7 +147,7 @@ const CompressedNavigationToggleContainer = styled.div`
 		display: none;
 	}
 `;
-const HamburgerButton = styled.button`
+const CompressedNavigationToggleButton = styled.button`
 	cursor: pointer;
 	display: inline-block;
 	min-width: 0px;
@@ -162,7 +155,7 @@ const HamburgerButton = styled.button`
 	border: none;
 	background-color: transparent;
 `;
-const HamburgerLayer = styled.span`
+const CompressedNavigationToggleLayer = styled.span`
 	display: block;
 	width: 2rem;
 	height: .25rem;
@@ -221,27 +214,26 @@ const HamburgerLayer = styled.span`
 		}
 	}
 `;
-const Hamburger = ({ onClick, $smallNavVisible }) => (
-	<HamburgerButton
+const CompressedNavigationToggle = ({ onClick, $smallNavVisible }) => (
+	<CompressedNavigationToggleButton
 		onClick={onClick}
 		aria-label="Toggle site navigation"
 	>
-		<HamburgerLayer
+		<CompressedNavigationToggleLayer
 			$order={1}
 			$smallNavVisible={$smallNavVisible}
 		/>
-		<HamburgerLayer
+		<CompressedNavigationToggleLayer
 			$order={2}
 			$smallNavVisible={$smallNavVisible}
 		/>
-		<HamburgerLayer
+		<CompressedNavigationToggleLayer
 			$order={3}
 			$smallNavVisible={$smallNavVisible}
 		/>
-	</HamburgerButton>
+	</CompressedNavigationToggleButton>
 );
 const BrandContainer = styled.div`
-	/* background-color: pink; */
 	grid-area: brand;
 	text-align: right;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -295,7 +287,6 @@ const BrandLink = styled.a`
 	}
 `;
 const ExpandedPrimaryNavigationContainer = styled.nav`
-	/* background-color: orange; */
 	grid-area: expandedPrimaryNav;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -499,7 +490,6 @@ const CompressedSecondaryNavigationListItem = styled.li`
 	}
 `;
 
-
 export const AppHeader = ({ content }) => {
 	const [
 		smallNavVisible,
@@ -564,7 +554,7 @@ export const AppHeader = ({ content }) => {
 			</Aside>
 			<Header>
 				<CompressedNavigationToggleContainer>
-					<Hamburger
+					<CompressedNavigationToggle
 						onClick={handleHamburgerClick}
 						$smallNavVisible={smallNavVisible}
 					/>
