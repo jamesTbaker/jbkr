@@ -221,6 +221,7 @@ export const AppHeader = ({ content }) => {
 										'rawtext': content.liblabItem.anchorText
 									})
 								}
+								inline={false}
 							/>
 						</Copy>
 					</AnnouncementBody>
@@ -235,7 +236,7 @@ export const AppHeader = ({ content }) => {
 									<Button
 										text={link.anchorText}
 										url={link.url}
-										size="small"
+										size={link.anchorIcon ? 'standard' : 'small'}
 										surfaceStyle="transparent"
 										contextColor="onDark"
 										iconBefore={link.anchorIcon}

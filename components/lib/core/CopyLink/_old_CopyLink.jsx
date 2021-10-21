@@ -15,117 +15,57 @@ const CopyLinkComplexAnchor = React.forwardRef(({ href, htmlContent }, ref) => (
 	/>
 ));
 const CopyLinkContainer = styled.span`
-	${
-		({ $inline, $primaryColor, $secondaryColor, $contextColor }) => {
-			const primaryColor = $primaryColor ?
-				color({
-					'kind': $primaryColor.kind,
-					'tone': $primaryColor.tone,
-					'level': $primaryColor.level,
-					'alpha': $primaryColor.alpha,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 3,
-					'format': 'string'
-				});
-			const secondaryColor = $secondaryColor ?
-				color({
-					'kind': $secondaryColor.kind,
-					'tone': $secondaryColor.tone,
-					'level': $secondaryColor.level,
-					'alpha': $secondaryColor.alpha,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Accent',
-					'tone': 'Sunshine',
-					'level': 1,
-					'alpha': .2,
-					'format': 'string'
-				});
-			const contrastColor = $contextColor === 'onDark' ?
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 37,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 7,
-					'format': 'string'
-				});
-			const colorFocusRing = $contextColor === 'onLight' ?
-				color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 2,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 1,
-					'format': 'string'
-					});
-				const colorFocusRingSeparator = $contextColor === 'onLight' ?
+	a {
+		display: inline-block;
+		text-decoration: none;
+		border-radius: 0;
+		/* border-bottom: solid .125rem; */
+		transition: all 250ms;
+		${
+			({ $primaryColor, $secondaryColor }) => {
+				const primaryColor = $primaryColor ?
 					color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 1,
+						'kind': $primaryColor.kind,
+						'tone': $primaryColor.tone,
+						'level': $primaryColor.level,
+						'alpha': $primaryColor.alpha,
 						'format': 'string'
 					}) :
 					color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 41,
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 3,
 						'format': 'string'
 					});
-			if ($inline) {
+				const secondaryColor = $secondaryColor ?
+					color({
+						'kind': $secondaryColor.kind,
+						'tone': $secondaryColor.tone,
+						'level': $secondaryColor.level,
+						'alpha': $secondaryColor.alpha,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 3,
+						'alpha': .2,
+						'format': 'string'
+					});
 				return `
-					a {
-						color: inherit;
-						text-decoration: none;
-						transition: background 250ms ease;
-						border-radius: .375rem;
-						background-position-y: 10%;
-						background-image: linear-gradient(
-							${secondaryColor} 50%,
-							${primaryColor} 50%
-						);
-						background-size: auto 200%;
-						&:hover {
-							color: ${contrastColor};
-							background-position-y: 100%;
-						}
-						&:focus {
-							padding: 0 .5rem;
-							margin-right: 0 .25rem;
-							outline: none;
-							box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
-						}
-					}
-				`;
-			} else {
-				return `
-					a {
+					border-color: ${primaryColor};
+					color: ${primaryColor};
+					&:hover {
+						border-color: ${primaryColor};
 						color: ${primaryColor};
-						text-decoration: none;
-						transition: background 250ms ease;
+						background-color: ${secondaryColor};
+					}
+					&:focus {
+						padding: 0 .5rem;
+						margin-right: .25rem;
+						outline: none;
 						border-radius: .375rem;
-						&:hover {
-							background-color: ${secondaryColor};
-						}
-						&:focus {
-							padding: 0 .5rem;
-							margin-right: 0 .25rem;
-							outline: none;
-							box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
-						}
+						box-shadow: 0 0 0 .125rem ${primaryColor};
 					}
 				`;
 			}
@@ -148,16 +88,12 @@ export const CopyLink = ({
 	url,
 	children,
 	htmlContent,
-	inline,
-	contextColor,
 	primaryColor,
 	secondaryColor,
 }) => (
 	<CopyLinkContainer
-		$inline={inline}
 		$primaryColor={primaryColor}
 		$secondaryColor={secondaryColor}
-		$contextColor={contextColor}
 	>
 		{
 			!htmlContent && url.startsWith('http') &&
@@ -221,14 +157,6 @@ CopyLink.propTypes = {
 		PropTypes.array
 	]),
 	/**
-	 * Whether or not the link exists inside running copy.
-	 */
-	'inline': PropTypes.bool,
-	/**
-	 * Whether the button appears on a light or dark background.
-	 */
-	'contextColor': PropTypes.oneOf(['onDark', 'onLight']),
-	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
 	'primaryColor': PropTypes.exact({
@@ -250,6 +178,9 @@ CopyLink.propTypes = {
 CopyLink.defaultProps = {
 	url: '/',
 	children: 'This is a link.',
-	inline: true,
-	contextColor: 'onDark'
+	color: {
+		'kind': 'Brand',
+		'tone': 'Peony',
+		'level': 3,
+	},
 };

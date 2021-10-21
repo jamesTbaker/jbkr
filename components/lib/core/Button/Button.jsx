@@ -199,9 +199,11 @@ const HiddenTextContainer = styled.span`
 `;
 const ButtonContentContainer = styled.span`
 	${
-		({ $textHidden, $iconBefore, $iconAfter }) => {
+		({ $textHidden, $iconBefore, $iconAfter, $size }) => {
 			if (!$textHidden) {
-				const paddingStatement = 'padding: 1.875rem 3.875rem 1.875rem 1.875rem;';
+				const paddingStatement = $size === 'standard' ?
+					'padding: 1.875rem 3.875rem 1.875rem 1.875rem;' :
+					'padding: .875rem  1.875rem .875rem  1.875rem;';
 				if ($iconBefore && !$iconAfter) {
 					return `
 						display: grid;

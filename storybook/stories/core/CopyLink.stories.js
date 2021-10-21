@@ -15,7 +15,40 @@ export default {
 		'layout': 'padded',
 	},
 };
-const Template = (args) => (
+const InlineTemplate = (args) => (
+	<Copy
+		kind="body--standard"
+	>
+		Through the dales Union Jack Bob's your uncle tip-top what a mug, snotty-nosed brat <CopyLink {...args} /> a diamond geezer conkers flabbergasted I'd reet fancy a skive Sonic Screwdriver
+	</Copy>
+);
+export const InlineSimpleInternal = InlineTemplate.bind({});
+InlineSimpleInternal.args = {
+	'url': '/?path=/story/core-copylink--inline-simple-internal',
+	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
+	'inline': true,
+};
+export const InlineSimpleExternal = InlineTemplate.bind({});
+InlineSimpleExternal.args = {
+	'url': 'https://theintercept.com',
+	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
+	'inline': true,
+};
+export const InlineComplexInternal = InlineTemplate.bind({});
+InlineComplexInternal.args = {
+	'url': '/?path=/story/core-copylink--inline-complex-internal',
+	'htmlContent': 'Trafalgar Square a <span>Flutter</span> ' +
+		'Rather Scrumpy You \'avin a Laugh',
+	'inline': true,
+};
+export const InlineComplexExternal = InlineTemplate.bind({});
+InlineComplexExternal.args = {
+	'url': 'https://theintercept.com',
+	'htmlContent': 'Trafalgar Square a <span>Flutter</span> ' +
+		'Rather Scrumpy You \'avin a Laugh',
+	'inline': true,
+};
+const BlockTemplate = (args) => (
 	<Copy
 		kind="body--standard"
 	>
@@ -24,25 +57,10 @@ const Template = (args) => (
 		/>
 	</Copy>
 );
-export const SimpleInternal = Template.bind({});
-SimpleInternal.args = {
-	'url': '/?path=/story/core-copylink--simple-internal',
-	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
-};
-export const SimpleExternal = Template.bind({});
-SimpleExternal.args = {
-	'url': 'https://theintercept.com',
-	'children': 'Trafalgar Square a Flutter Rather Scrumpy You \'avin a Laugh',
-};
-export const ComplexInternal = Template.bind({});
-ComplexInternal.args = {
-	'url': '/?path=/story/core-copylink--complex-internal',
+export const BlockComplexInternal = BlockTemplate.bind({});
+BlockComplexInternal.args = {
+	'url': '/?path=/story/core-copylink--block-complex-internal',
 	'htmlContent': 'Trafalgar Square a <span>Flutter</span> ' +
 		'Rather Scrumpy You \'avin a Laugh',
-};
-export const ComplexExternal = Template.bind({});
-ComplexExternal.args = {
-	'url': 'https://theintercept.com',
-	'htmlContent': 'Trafalgar Square a <span>Flutter</span> ' +
-		'Rather Scrumpy You \'avin a Laugh',
+	'inline': false,
 };
