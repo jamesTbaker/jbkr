@@ -495,6 +495,18 @@ const propsSpecifications = {
 		'usage': 'display',
 		'spaced': true,
 	},
+	'footer--copyright': {
+		'tag': 'p',
+		'size': '2xs',
+		'weight': 'regular',
+		'usage': 'body',
+		'spaced': false,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 17,
+		},
+	},
 };
 
 /**

@@ -109,6 +109,9 @@ const TextContainer = styled.div`
 		}
 	}
 	${
+		({ spaced }) => !spaced && `margin: 0; padding: 0;`
+	}
+	${
 		({ $more }) => `${$more}`
 	}
 `;

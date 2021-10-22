@@ -45,6 +45,7 @@ AsInternalLink.args = {
 	'surfaceStyle': 'outlined',
 	'contextColor': 'onDark',
 	'iconBefore': 'snowflake',
+	'iconBeforeTransform': 'rotate(45deg)',
 };
 export const AsExternalLink = Template.bind({});
 AsExternalLink.args = {

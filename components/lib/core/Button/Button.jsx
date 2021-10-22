@@ -11,7 +11,7 @@ const IconContainer = styled.span`
 		({ $position, $size }) => {
 			let positionName = '';
 			const verticalPaddingSize = $size === 'standard' ? '.5rem' : '0';
-			const height = $size === 'standard' ? '3rem' : '3rem';
+			const height = $size === 'standard' ? '3rem' : '2rem';
 			if ($position === 'before') {
 				positionName = 'iconBefore';
 			}
@@ -272,6 +272,8 @@ const ButtonContent = ({
 	textHidden,
 	iconBefore,
 	iconAfter,
+	iconBeforeTransform,
+	iconAfterTransform,
 	colors,
 }) => (
 	<ButtonContentContainer
@@ -293,6 +295,7 @@ const ButtonContent = ({
 					content={iconBefore}
 					color={colors.content.default}
 					size={returnContentSize({ 'buttonSize': size })}
+					transform={iconBeforeTransform}
 				/>
 			</IconContainer>
 		}
@@ -318,6 +321,7 @@ const ButtonContent = ({
 					content={iconAfter}
 					color={colors.content.default}
 					size={returnContentSize({ 'buttonSize': size })}
+					transform={iconAfterTransform}
 				/>
 			</IconContainer>
 		}
@@ -386,6 +390,8 @@ const ButtonRefForwarder = React.forwardRef((
 		textHidden,
 		iconBefore,
 		iconAfter,
+		iconBeforeTransform,
+		iconAfterTransform,
 		url,
 		colors,
 	},
@@ -406,6 +412,8 @@ const ButtonRefForwarder = React.forwardRef((
 			textHidden={textHidden}
 			iconBefore={iconBefore}
 			iconAfter={iconAfter}
+			iconBeforeTransform={iconBeforeTransform}
+			iconAfterTransform={iconAfterTransform}
 			colors={colors}
 		/>
     </ButtonContentComponentFacilitator>
@@ -490,6 +498,8 @@ export const Button = ({
 	textHidden,
 	iconBefore,
 	iconAfter,
+	iconBeforeTransform,
+	iconAfterTransform,
 	clickHandler,
 	url,
 }) => (
@@ -506,6 +516,8 @@ export const Button = ({
 			textHidden={textHidden}
 			iconBefore={iconBefore}
 			iconAfter={iconAfter}
+			iconBeforeTransform={iconBeforeTransform}
+			iconAfterTransform={iconAfterTransform}
 			url={url}
 			colors={returnColors({ surfaceStyle, contextColor })}
 		/>
@@ -540,6 +552,14 @@ Button.propTypes = {
 	 * Which, if any, icon to place after the text.
 	 */
 	'iconAfter': PropTypes.oneOf(IconNames),
+	/**
+	 * CSS transform, applied to icon before the text.
+	 */
+	'iconBeforeTransform': PropTypes.string,
+	/**
+	 * CSS transform, applied to icon before the text.
+	 */
+	'iconAfterTransform': PropTypes.string,
 	/** Function executed when button is clicked.
 	 * E.g., () => { // do something }.
 	 */

@@ -61,7 +61,6 @@ const Aside = styled.aside`
 const Header = styled.header`
 	grid-area: header;
 	display: grid;
-	text-align: left;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		grid-template-columns: 5rem auto 8.625rem;
 		grid-template-areas: "compressedNavToggle _____ brand";
@@ -403,7 +402,7 @@ const CompressedPrimaryNavigationListItem = styled.li`
 `;
 const CompressedSecondaryNavigationContainer = styled.nav``;
 const CompressedSecondaryNavigationList = styled.ul`
-	${deviceWidthQuery.only({ 'width': 's' })} {
+	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: grid;
 		grid-template-columns: 8rem 8rem 8rem;
 		grid-template-rows: 8rem 8rem 10rem 8rem;
@@ -414,7 +413,7 @@ const CompressedSecondaryNavigationList = styled.ul`
 		margin: 0;
 		padding: 4rem 0 0 0;
 	}
-	${deviceWidthQuery.not({ 'width': 's' })} {
+	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: grid;
 		grid-template-columns: 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem;
 		grid-template-areas: "secondaryLink0 secondaryLink1 secondaryLink2 secondaryLink3 secondaryLink4 secondaryLink5 secondaryLink6 secondaryLink7 meta";
@@ -423,7 +422,7 @@ const CompressedSecondaryNavigationList = styled.ul`
 	}
 `;
 const CompressedSecondaryNavigationListItem = styled.li`
-	${deviceWidthQuery.only({ 'width': 's' })} {
+	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: block;
 		${
 			({ $gridArea }) => `grid-area: ${$gridArea};`
@@ -482,7 +481,7 @@ const CompressedSecondaryNavigationListItem = styled.li`
 			}
 		}
 	}
-	${deviceWidthQuery.not({ 'width': 's' })} {
+	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: block;
 		${
 			({ $gridArea }) => `grid-area: ${$gridArea};`
@@ -508,7 +507,7 @@ export const AppHeader = ({ content }) => {
 						<Copy
 							kind="announcement--preface"
 						>
-							New in Lib / Lab
+							Now in Lib / Lab
 						</Copy>
 					</AnnouncementPreface>
 					<AnnouncementBody>

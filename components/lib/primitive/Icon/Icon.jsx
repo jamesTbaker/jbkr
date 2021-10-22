@@ -134,6 +134,8 @@ const IconContainer = styled.span`
 	}
 	svg {
 		margin: 0 auto;
+		/* transform-origin: center;
+		transition: all 250ms; */
 		${verticalAlignMiddle}
 		${
 			({ $size }) => `
@@ -174,6 +176,9 @@ const IconContainer = styled.span`
 			}
 
 		}
+		/* ${
+			({ $transform }) => `transform: ${$transform};`
+		} */
 		overflow: hidden;
 	}
 `;
@@ -185,14 +190,17 @@ export const Icon = ({
 	content,
 	size,
 	color,
+	transform,
 }) => {
 	return (
 		<IconContainer
 			$color={color}
 			$size={size}
+			$transform={transform}
 		>
 			<svg
 				viewBox="0 0 24 24"
+				transform={transform}
 			>
 				{
 					pathSpecifications[content].map((svgPath, svgPathIndex) => (
@@ -213,7 +221,7 @@ Icon.propTypes = {
 	 */
 	'content': PropTypes.oneOf(Object.keys(pathSpecifications)),
 	/**
-	 * Token indicating size of type.
+	 * Token indicating size of icon.
 	 */
 	'size': PropTypes.oneOf([
 		'3xs', '2xs', '1xs', 's', 'm', 'l', '1xl', '2xl', '3xl', '4xl', '5xl',
@@ -230,6 +238,10 @@ Icon.propTypes = {
 			'alpha': PropTypes.string,
 		}),
 	]),
+	/**
+	 * CSS transform.
+	 */
+	'transform': PropTypes.string,
 };
 Icon.defaultProps = {
 	content: 'arrow-up',
@@ -239,4 +251,5 @@ Icon.defaultProps = {
 		'tone': 'Sunshine',
 		'level': 1,
 	},
+	// transform: 'rotate(90deg)',
 };

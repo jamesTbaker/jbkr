@@ -16,3 +16,8 @@ export const General = Template.bind({});
 General.args = {
 	'size': '5xl',
 };
+export const Rotated = Template.bind({});
+Rotated.args = {
+	'size': '5xl',
+	'transform': 'rotate(45)',
+};
