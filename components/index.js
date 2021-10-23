@@ -8,6 +8,7 @@ export { Brand } from './lib/primitive/Brand/Brand.jsx';
 export { Copy } from './lib/core/Copy/Copy.jsx';
 export { CopyLink } from './lib/core/CopyLink/CopyLink.jsx';
 export { Button } from './lib/core/Button/Button.jsx';
+export { Collapsible } from './lib/core/Collapsible/Collapsible.jsx';
 
 // Screens
 export { ProfileScreen } from './lib/app/Screens/ProfileScreen.jsx';

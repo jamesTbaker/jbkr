@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		${typeFamily()};
 		font-size: 2rem;
+		text-align: left;
 		height: 100%;
 		width: 100%;
 	}
@@ -37,6 +38,12 @@ const DarkModeStyle = createGlobalStyle`
 	'kind': 'Neutral',
 	'tone': 'Finch',
 	'level': 39,
+	'format': 'string',
+})};
+		color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Base',
+	'level': 1,
 	'format': 'string',
 })};
 	}

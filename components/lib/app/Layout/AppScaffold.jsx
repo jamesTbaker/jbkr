@@ -206,10 +206,10 @@ export const AppScaffold = ({
 					},
 				}}
 			/>
-			{/* children */}
-			{/* <Footer
+			{children}
+			<Footer
 				content={footer.copy}
-			/> */}
+			/>
 		</>
 	);
 };

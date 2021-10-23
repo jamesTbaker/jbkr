@@ -113,55 +113,6 @@ export const AppFooter = ({ copy }) => (
 	</AppFooterContainer>
 );
 AppFooter.propTypes = {
-	/** Data for the app's `<head>`. */
-	'meta': PropTypes.shape({
-		'slug': PropTypes.string.isRequired,
-		'metaTitle': PropTypes.string.isRequired,
-		'metaDescription': PropTypes.string.isRequired,
-		'socialDescription': PropTypes.string.isRequired,
-		'openGraphType': PropTypes.string.isRequired,
-		'metaImage': PropTypes.shape({
-			'url': PropTypes.string.isRequired,
-			'alternativeText': PropTypes.string.isRequired,
-			'type': PropTypes.string.isRequired,
-		}),
-		'metaOther': PropTypes.arrayOf(PropTypes.shape({
-			'key': PropTypes.string.isRequired,
-			'property': PropTypes.string.isRequired,
-			'content': PropTypes.string.isRequired,
-		}))
-	}),
-	/** Whether or not this screen has a table of contents */
-	'hasTableOfContents': PropTypes.bool,
-	/** Data for AppHeader */
-	'header': PropTypes.shape({
-		'links': PropTypes.shape({
-			'primary': PropTypes.arrayOf(
-				PropTypes.shape({
-					'key': PropTypes.string.isRequired,
-					'anchorText': PropTypes.string.isRequired,
-					'url': PropTypes.string.isRequired,
-					'forThisScreen': PropTypes.bool,
-				})
-			),
-			'secondary': PropTypes.arrayOf(
-				PropTypes.shape({
-					'key': PropTypes.string.isRequired,
-					'anchorText': PropTypes.string.isRequired,
-					'anchorIcon': PropTypes.string.isRequired,
-					'url': PropTypes.string.isRequired,
-				})
-			),
-		}),
-		'liblabItem': PropTypes.shape({
-			'anchorText': PropTypes.string.isRequired,
-			'url': PropTypes.string.isRequired,
-		}),
-	}),
-	/** Data for AppFooter */
-	'footer': PropTypes.shape({
-		'content': PropTypes.string,
-	}),
-	/** Screen element that implements `<main>`. */
-	'children': PropTypes.element,
+	/** Copyright statment. */
+	'copy': PropTypes.string,
 };

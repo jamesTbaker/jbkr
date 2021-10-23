@@ -7,6 +7,7 @@ import { ProfileVolunteerExperiences } from './ProfileVolunteerExperiences';
 import { Button } from '../../core/Button/Button';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 
+
 export const Profile = ({
 	title,
 	skills,

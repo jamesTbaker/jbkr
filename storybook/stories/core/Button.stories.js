@@ -68,3 +68,17 @@ AsIconOnly.args = {
 	'iconBefore': 'dribbble',
 	'textHidden': true,
 };
+export const Playground = Template.bind({});
+Playground.args = {
+	'text': 'Button Label Text',
+	'clickHandler': () => {
+		console.log('Help! I\'ve been clicked!');
+	},
+	'size': 'standard',
+	'surfaceStyle': 'filled',
+	'contextColor': 'onDark',
+	'iconBefore': 'arrow-left',
+	'iconBeforeTransform': 'rotate(45deg)',
+	'iconAfter': 'chevron-right',
+	'iconAfterTransform': 'rotate(45deg)',
+};

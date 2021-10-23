@@ -134,8 +134,8 @@ const IconContainer = styled.span`
 	}
 	svg {
 		margin: 0 auto;
-		/* transform-origin: center;
-		transition: all 250ms; */
+		transform-origin: center;
+		transition: all 250ms;
 		${verticalAlignMiddle}
 		${
 			({ $size }) => `
@@ -176,9 +176,9 @@ const IconContainer = styled.span`
 			}
 
 		}
-		/* ${
-			({ $transform }) => `transform: ${$transform};`
-		} */
+		${
+			({ $transform }) => `transform: translateY(-50%) ${$transform};`
+		}
 		overflow: hidden;
 	}
 `;
@@ -200,7 +200,6 @@ export const Icon = ({
 		>
 			<svg
 				viewBox="0 0 24 24"
-				transform={transform}
 			>
 				{
 					pathSpecifications[content].map((svgPath, svgPathIndex) => (

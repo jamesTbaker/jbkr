@@ -418,7 +418,14 @@ const ButtonRefForwarder = React.forwardRef((
 		/>
     </ButtonContentComponentFacilitator>
 ));
-const ButtonElement = styled.span.attrs(({ $clickHandler, $url, $textHidden }) => {
+const ButtonElement = styled.span.attrs(({
+	$clickHandler,
+	$url,
+	$textHidden,
+	$ariaDisabled,
+	$ariaExpanded,
+	$ariaControls,
+}) => {
 	const returnValue = {};
 	if ($url && !$url.startsWith('http')) {
 		returnValue.as = Link;
@@ -433,7 +440,22 @@ const ButtonElement = styled.span.attrs(({ $clickHandler, $url, $textHidden }) =
 	}
 	if ($clickHandler && !$url) {
 		returnValue.as = 'button';
-		returnValue.onClick = $clickHandler
+		returnValue.onClick = $clickHandler;
+		if ($ariaDisabled === true) {
+			returnValue['aria-disabled'] = 'true';
+		}
+		if ($ariaDisabled === false) {
+			returnValue['aria-disabled'] = 'false';
+		}
+		if ($ariaExpanded === true) {
+			returnValue['aria-expanded'] = 'true';
+		}
+		if ($ariaExpanded === false) {
+			returnValue['aria-expanded'] = 'false';
+		}
+		if ($ariaControls) {
+			returnValue['aria-controls'] = $ariaControls;
+		}
 	}
 	return returnValue;
 })`
@@ -502,11 +524,17 @@ export const Button = ({
 	iconAfterTransform,
 	clickHandler,
 	url,
+	ariaDisabled,
+	ariaExpanded,
+	ariaControls,
 }) => (
 	<ButtonElement
 		$clickHandler={clickHandler}
 		$url={url}
 		$textHidden={textHidden}
+		$ariaDisabled={ariaDisabled}
+		$ariaExpanded={ariaExpanded}
+		$ariaControls={ariaControls}
 	>
 		<ButtonRefForwarder
 			size={size}
@@ -571,8 +599,8 @@ Button.propTypes = {
 	'url': PropTypes.string,
 };
 Button.defaultProps = {
-	size: 'standard',
-	surfaceStyle: 'filled',
-	contextColor: 'onDark',
-	textHidden: false,
+	'size': 'standard',
+	'surfaceStyle': 'filled',
+	'contextColor': 'onDark',
+	'textHidden': false,
 };

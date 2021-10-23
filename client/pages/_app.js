@@ -22,8 +22,7 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		${typeFamily()}
 		font-size: 2rem;
-		scroll-behavior: smooth;
-		text-align: center;
+		text-align: left;
 		color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Base',
