@@ -259,25 +259,33 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	};
 	// set up container of all header links, primary and secondary
 	const allHeaderLinksTransformed = [];
+	// sort header links
+	screenRaw.headerMain.Links.sort((a, b) => a.OrderInSet - b.OrderInSet);
 	// for each header link
-	screenRaw.header.Links.forEach((linkRaw) => {
-		// set up a transformed version of this link with common properties
-		const linkTransformed = {
-			'key': linkRaw._id,
-			'anchorText': linkRaw.AnchorText,
-			'url': linkRaw.URL,
-			'category': linkRaw.Category,
-		};
-		// if this link should open in a new tab
-		if (linkRaw.NewTab) {
-			linkTransformed.newTab = true;
+	screenRaw.headerMain.Links.forEach((linkRaw) => {
+		// if this link is not disabled
+		if (!linkRaw.Disabled) {
+			// set up a transformed version of this link with common properties
+			const linkTransformed = {
+				'key': linkRaw._id,
+				'anchorText': linkRaw.AnchorText,
+				'anchorIconBefore':
+					linkRaw.AnchorIconBefore ?
+						linkRaw.AnchorIconBefore.replace(/_/g, '-') : null,
+				'url': linkRaw.URL,
+				'category': linkRaw.Category,
+			};
+			// if this link should open in a new tab
+			if (linkRaw.NewTab) {
+				linkTransformed.newTab = true;
+			}
+			// if this link is for this screen
+			if (linkRaw.ScreenIDs && linkRaw.ScreenIDs.includes(screenID)) {
+				linkTransformed.forThisScreen = true;
+			}
+			// add this link to the container of all header links
+			allHeaderLinksTransformed.push(linkTransformed);
 		}
-		// if this link is for this screen
-		if (linkRaw.ScreenIDs.includes(screenID)) {
-			linkTransformed.forThisScreen = true;
-		}
-		// add this link to the container of all header links
-		allHeaderLinksTransformed.push(linkTransformed);
 	});
 	// add to the main container groups of primary and secondary header links
 	screenRendered.header.links = {
@@ -288,6 +296,41 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 			linkTransformed => linkTransformed.category === 'secondary',
 		),
 	};
+	// if an announcement was specified
+	if (
+		screenRaw.headerMain.AnnouncementBodyAnchor &&
+		screenRaw.headerMain.AnnouncementBodySlug
+	) {
+		// add it to header
+		screenRendered.header.announcement = {
+			'preface': screenRaw.headerMain.AnnouncementPreface,
+			'bodyAnchor': returnSimpleHTMLFromMarkdown({
+				'content': screenRaw.headerMain.AnnouncementBodyAnchor,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			}),
+			'bodyURL': screenRaw.headerMain.AnnouncementBodySlug,
+		};
+		// if no announcement was specified
+	} else {
+		// construct full article title
+		const articleFullTitle = screenRaw.headerArticle.Subtitle ?
+			screenRaw.headerArticle.Title + ': ' +
+			screenRaw.headerArticle.Subtitle :
+			screenRaw.headerArticle.Title;
+		// add article to header
+		screenRendered.header.announcement = {
+			'preface': screenRaw.headerMain.AnnouncementPreface,
+			'bodyAnchor': returnSimpleHTMLFromMarkdown({
+				'content': articleFullTitle,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			}),
+			'bodyURL': screenRaw.headerArticle.Slug,
+		};
+	}
 	// continue extracting supplied properties
 	if (screenRaw.main.MetaTitle) {
 		screenRendered.meta.metaTitle = screenRaw.main.MetaTitle;

@@ -29,8 +29,8 @@ import {
 // const result = await returnAllPublishedArticlesFromDB();
 // const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
 
-// const result = await returnProfileScreenContent();
-const result = await returnLibLabScreenContent();
+const result = await returnProfileScreenContent();
+// const result = await returnLibLabScreenContent();
 // const result = await returnArticleScreenContent({ 'slug': 'the-hub' });
 // const result = await returnArticleScreenContent({
 // 	'slug': 'challenge-you-to-a-duel-beefeater',
