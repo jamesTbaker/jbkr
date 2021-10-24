@@ -94,7 +94,7 @@ const BrandLink = styled.a`
 	}
 `;
 
-export const AppFooter = ({ copy }) => (
+export const AppFooter = ({ content }) => (
 	<AppFooterContainer>
 		<BrandContainer>
 			<BrandLink
@@ -107,12 +107,12 @@ export const AppFooter = ({ copy }) => (
 		<CopyrightContainer>
 			<Copy
 				kind="footer--copyright"
-				htmlContent={copy}
+				htmlContent={content}
 			/>
 		</CopyrightContainer>
 	</AppFooterContainer>
 );
 AppFooter.propTypes = {
 	/** Copyright statment. */
-	'copy': PropTypes.string,
+	'content': PropTypes.string,
 };

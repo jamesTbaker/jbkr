@@ -51,6 +51,7 @@ ProfileScreen.propTypes = {
 				PropTypes.shape({
 					'key': PropTypes.string.isRequired,
 					'anchorText': PropTypes.string.isRequired,
+					'anchorIconBefore': PropTypes.string,
 					'url': PropTypes.string.isRequired,
 					'forThisScreen': PropTypes.bool,
 				})
@@ -59,14 +60,15 @@ ProfileScreen.propTypes = {
 				PropTypes.shape({
 					'key': PropTypes.string.isRequired,
 					'anchorText': PropTypes.string.isRequired,
-					'anchorIcon': PropTypes.string.isRequired,
+					'anchorIconBefore': PropTypes.string,
 					'url': PropTypes.string.isRequired,
 				})
 			),
 		}),
-		'liblabItem': PropTypes.shape({
-			'anchorText': PropTypes.string.isRequired,
-			'url': PropTypes.string.isRequired,
+		'announcement': PropTypes.shape({
+			'bodyAnchor': PropTypes.string.isRequired,
+			'bodyURL': PropTypes.string.isRequired,
+			'preface': PropTypes.string.isRequired,
 		}),
 	}),
 	/** Data for AppFooter */

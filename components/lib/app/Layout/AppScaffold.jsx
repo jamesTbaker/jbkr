@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { hiddenBlock } from '@jbkr/style-service';
 import { Banner } from '../Layout/Banner';
 import { AppHeader } from '../Layout/AppHeader';
-import { Footer } from '../Layout/Footer';
+import { AppFooter } from '../Layout/AppFooter';
 
 const SkipLinksContainer = styled.div`
 	${hiddenBlock}
@@ -115,99 +115,11 @@ export const AppScaffold = ({
 					<a href="#main-content">Skip to main content</a>
 				}
 			</SkipLinksContainer>
-			{/* <AppHeader
-				content={header}
-			/> */}
 			<AppHeader
-				content={{
-					'links': {
-						'primary': [
-							{
-								'key': '6140be5a78cc2e3969ebbc5c',
-								'anchorText': 'Profile',
-								'url': '/',
-								'category': 'primary',
-								'forThisScreen': true,
-							}, {
-								'key': '6140bebd78cc2e3969ebbc5e',
-								'anchorText': 'Lib / Lab',
-								'url': '/library',
-								'category': 'primary',
-							}, {
-								'key': '6140bebd78cc2e3969ebbc5f',
-								'anchorText': 'Contact',
-								'url': '/contact',
-								'category': 'primary',
-							},
-						],
-						'secondary': [
-							{
-								'key': 'asdf1',
-								'anchorText': 'Twitter',
-								'anchorIcon': 'twitter',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf2',
-								'anchorText': 'YouTube',
-								'anchorIcon': 'youtube',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf3',
-								'anchorText': 'LinkedIn',
-								'anchorIcon': 'linkedin',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf4',
-								'anchorText': 'Dribbble',
-								'anchorIcon': 'dribbble',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf5',
-								'anchorText': 'Behance',
-								'anchorIcon': 'behance',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf6',
-								'anchorText': 'CodeSandbox',
-								'anchorIcon': 'code-sandbox',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf7',
-								'anchorText': 'CodePen',
-								'anchorIcon': 'codepen',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': 'asdf8',
-								'anchorText': 'Medium',
-								'anchorIcon': 'medium',
-								'url': '/',
-								'category': 'secondary',
-							}, {
-								'key': '6140bebd78cc2e3969ebbc60',
-								'anchorText': 'Meta',
-								'url': '/meta',
-								'category': 'primary',
-							},
-						],
-					},
-					'liblabItem': {
-						'anchorText':
-							'Beef Shankle Chislic Meatloaf, Kielbasa in Swine for Pork: Digital Transformation for Museum of Science, Boston',
-						// 'anchorText':
-						// 	'The Hub',
-						'url': '/',
-					},
-				}}
+				content={header}
 			/>
 			{children}
-			<Footer
+			<AppFooter
 				content={footer.copy}
 			/>
 		</>
@@ -241,6 +153,7 @@ AppScaffold.propTypes = {
 				PropTypes.shape({
 					'key': PropTypes.string.isRequired,
 					'anchorText': PropTypes.string.isRequired,
+					'anchorIconBefore': PropTypes.string,
 					'url': PropTypes.string.isRequired,
 					'forThisScreen': PropTypes.bool,
 				})
@@ -249,14 +162,15 @@ AppScaffold.propTypes = {
 				PropTypes.shape({
 					'key': PropTypes.string.isRequired,
 					'anchorText': PropTypes.string.isRequired,
-					'anchorIcon': PropTypes.string.isRequired,
+					'anchorIconBefore': PropTypes.string,
 					'url': PropTypes.string.isRequired,
 				})
 			),
 		}),
-		'liblabItem': PropTypes.shape({
-			'anchorText': PropTypes.string.isRequired,
-			'url': PropTypes.string.isRequired,
+		'announcement': PropTypes.shape({
+			'bodyAnchor': PropTypes.string.isRequired,
+			'bodyURL': PropTypes.string.isRequired,
+			'preface': PropTypes.string.isRequired,
 		}),
 	}),
 	/** Data for AppFooter */

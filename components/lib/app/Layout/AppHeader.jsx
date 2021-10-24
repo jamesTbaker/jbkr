@@ -507,7 +507,7 @@ export const AppHeader = ({ content }) => {
 						<Copy
 							kind="announcement--preface"
 						>
-							Now in Lib / Lab
+							{content.announcement.preface}
 						</Copy>
 					</AnnouncementPreface>
 					<AnnouncementBody>
@@ -515,10 +515,10 @@ export const AppHeader = ({ content }) => {
 							kind="announcement--body"
 						>
 							<CopyLink
-								url={content.liblabItem.url}
+								url={content.announcement.bodyURL}
 								htmlContent={
 									returnLibLabItemAnchorText({
-										'rawtext': content.liblabItem.anchorText
+										'rawtext': content.announcement.bodyAnchor
 									})
 								}
 								inline={false}
@@ -536,12 +536,12 @@ export const AppHeader = ({ content }) => {
 									<Button
 										text={link.anchorText}
 										url={link.url}
-										size={link.anchorIcon ? 'standard' : 'small'}
+										size={link.anchorIconBefore ? 'standard' : 'small'}
 										surfaceStyle="transparent"
 										contextColor="onDark"
-										iconBefore={link.anchorIcon}
+										iconBefore={link.anchorIconBefore}
 										textHidden={
-											link.anchorIcon ?
+											link.anchorIconBefore ?
 											true : false
 										}
 									/>
@@ -633,11 +633,11 @@ export const AppHeader = ({ content }) => {
 										<Button
 											text={link.anchorText}
 											url={link.url}
-											size={link.anchorIcon ? 'standard' : 'small'}
+											size={link.anchorIconBefore ? 'standard' : 'small'}
 											surfaceStyle="transparent"
 											contextColor="onDark"
-											iconBefore={link.anchorIcon}
-											textHidden={link.anchorIcon ? true : false}
+											iconBefore={link.anchorIconBefore}
+											textHidden={link.anchorIconBefore ? true : false}
 										/>
 									</CompressedSecondaryNavigationListItem>
 								)
@@ -678,6 +678,7 @@ AppHeader.propTypes = {
 				PropTypes.shape({
 					'key': PropTypes.string.isRequired,
 					'anchorText': PropTypes.string.isRequired,
+					'anchorIconBefore': PropTypes.string,
 					'url': PropTypes.string.isRequired,
 					'forThisScreen': PropTypes.bool,
 				})
@@ -686,14 +687,15 @@ AppHeader.propTypes = {
 				PropTypes.shape({
 					'key': PropTypes.string.isRequired,
 					'anchorText': PropTypes.string.isRequired,
-					'anchorIcon': PropTypes.string.isRequired,
+					'anchorIconBefore': PropTypes.string,
 					'url': PropTypes.string.isRequired,
 				})
 			),
 		}),
-		'liblabItem': PropTypes.shape({
-			'anchorText': PropTypes.string.isRequired,
-			'url': PropTypes.string.isRequired,
+		'announcement': PropTypes.shape({
+			'bodyAnchor': PropTypes.string.isRequired,
+			'bodyURL': PropTypes.string.isRequired,
+			'preface': PropTypes.string.isRequired,
 		}),
 	}),
 	/** Data for AppFooter */

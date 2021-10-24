@@ -328,7 +328,7 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 					'removeEndCapTags': true,
 				},
 			}),
-			'bodyURL': screenRaw.headerArticle.Slug,
+			'bodyURL': '/library/' + screenRaw.headerArticle.Slug,
 		};
 	}
 	// continue extracting supplied properties
