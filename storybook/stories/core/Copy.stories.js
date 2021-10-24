@@ -52,6 +52,7 @@ StandardCopyContainer.args = {
 			<h5>Utter Shambles</h5>
 			<p>Working class twiglets I'm off to Bedfordshire dignified and thus warts and all, flabbergasted gob naff off macca. Scatterbrained it's cracking flags Bad Wolf Doctor Who scatterbrained, one would be honoured to pigeons in Trafalgar Square Doctor Who. Bit of alright sausage roll lug hole brilliant bread and butter pudding doolally, the black death bowler hat Weeping Angels. Pot noodle gob bogroll clock round the earhole throw a paddy Queen Elizabeth Sherlock, make a brew sausage roll smeg who brought loaf marmite, darling ponce what a load of cobblers jolly narky.</p>
 			<p>Trouble and strife wibbly-wobbly timey-wimey stuff done up like a kipper a right royal knees up lug hole brainbox, alright geezer spam fritters it's nicked old girl. Quid codswallop bit of alright not some sort of dosshouse in a pickle working class ey up duck sweets a right corker sausage roll, crisps bog off real ale copped a bollocking bread and butter pudding bits 'n bobs drizzle.</p>
+			<small>Good <b>old fashioned</b> knees up wind up warts and all I'm off to Bedfordshire corgi <em>doolally</em> pigeons in Trafalgar Square manky throw a spanner in the works</small>
 		</>,
 };
 export const Playground = Template.bind({});

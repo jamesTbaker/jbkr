@@ -596,12 +596,24 @@ const StandardBodyContainer = styled.div`
 	}
 	b,
 	strong {
-		font-weight: 400;
+		font-weight: 560;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+			'format': 'string'
+		})};
 	}
 	i,
 	em,
 	cite {
 		font-style: italic;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+			'format': 'string'
+		})};
 	}
 	a,
 	a:visited {
@@ -651,6 +663,9 @@ const StandardBodyContainer = styled.div`
 				'format': 'string'
 				})};
 		}
+	}
+	small {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.small })}
 	}
 `;
 /**

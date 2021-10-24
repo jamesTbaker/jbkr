@@ -33,10 +33,10 @@ export const foundation = {
             'specs': {
                 's': {
                     'minimum': 0,
-                    'maximum': 767,
+                    'maximum': 479,
                 },
                 'm': {
-                    'minimum': 768,
+                    'minimum': 480,
                     'maximum': 1024,
                 },
                 'l': {
@@ -108,8 +108,8 @@ export const foundation = {
                 'bold',
             ],
             'baseMultipliersByWeight': {
-                'regular': 20,
-                'bold': 25,
+                'regular': 17,
+                'bold': 35,
             },
             'scalingMultipliersByWeight': {
                 'regular': {

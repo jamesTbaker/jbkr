@@ -54,7 +54,7 @@ const Aside = styled.aside`
 		grid-column-gap: 6rem;
 		margin: 0 auto;
 		text-align: left;
-		width: 100%;
+		width: calc(100% - 4rem);
 		max-width: 150rem;
 	}
 `;
@@ -68,7 +68,7 @@ const Header = styled.header`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-template-columns: auto 8.375rem;
 		grid-template-areas: "expandedPrimaryNav brand";
-		width: 100%;
+		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 0 auto;
 		text-align: left;

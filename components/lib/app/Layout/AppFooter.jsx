@@ -18,14 +18,20 @@ const AppFooterContainer = styled.footer`
 		padding: 3rem 0;
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
-		margin: 5rem auto 0;
 		padding: 2rem 0;
 		text-align: left;
-		width: 100%;
-		max-width: 150rem;
+
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-areas: "footerLeft footerRight";
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		margin: 5rem 2rem 0 2rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: calc(100% - 4rem);
+		max-width: 150rem;
+		margin: 5rem auto 0;
 	}
 `;
 const BrandContainer = styled.div`
