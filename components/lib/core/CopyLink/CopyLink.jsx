@@ -40,10 +40,9 @@ const CopyLinkContainer = styled.span`
 					'format': 'string'
 				}) :
 				color({
-					'kind': 'Accent',
-					'tone': 'Sunshine',
-					'level': 1,
-					'alpha': .2,
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 37,
 					'format': 'string'
 				});
 			const contrastColor = $contextColor === 'onDark' ?
@@ -91,7 +90,7 @@ const CopyLinkContainer = styled.span`
 						color: inherit;
 						text-decoration: none;
 						transition: background 250ms ease;
-						border-radius: .375rem;
+
 						background-position-y: 10%;
 						background-image: linear-gradient(
 							${secondaryColor} 50%,
@@ -101,10 +100,12 @@ const CopyLinkContainer = styled.span`
 						&:hover {
 							color: ${contrastColor};
 							background-position-y: 100%;
+							border-radius: .25rem;
 						}
 						&:focus {
 							padding: 0 .5rem;
-							margin-right: 0 .25rem;
+							margin: 0 .25rem;
+							border-radius: .25rem;
 							outline: none;
 							box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
 						}

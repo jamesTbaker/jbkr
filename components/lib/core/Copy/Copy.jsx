@@ -44,8 +44,9 @@ const propsSpecifications = {
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
+			'tone': 'Finch',
+			'level': 7,
+			'format': 'string'
 		},
 	},
 	'h2': {
@@ -55,9 +56,9 @@ const propsSpecifications = {
 		'usage': 'display',
 		'spaced': true,
 		'color': {
-			'kind': 'Accent',
+			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 1,
+			'level': 4,
 			'format': 'string'
 		},
 	},
@@ -96,7 +97,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 10,
+			'level': 4,
 			'format': 'string'
 		},
 	},
@@ -515,237 +516,56 @@ const propsSpecifications = {
 };
 const copyKinds = Object.keys(propsSpecifications);
 copyKinds.push('copy-container--standard');
+const returnStylesFromSpecifications = ({ specs }) => `
+		color: ${color(specs.color)};
+		${deviceWidthQuery.only({ 'width': 's' })} {
+			${typeStyle({
+				'deviceWidth': 's',
+				...specs
+			})}
+		}
+		${deviceWidthQuery.only({ 'width': 'm' })} {
+			${typeStyle({
+				'deviceWidth': 'm',
+				...specs
+			})}
+		}
+		${deviceWidthQuery.only({ 'width': 'l' })} {
+			${typeStyle({
+				'deviceWidth': 'l',
+				...specs
+			})}
+		}
+`;
 const StandardBodyContainer = styled.div`
 	font-weight: 320;
+	color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 7,
+		'format': 'string'
+	})};
 	h1 {
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			${typeStyle({
-				'deviceWidth': 's',
-				'size': '2xl',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-				'color': {
-					'kind': 'Neutral',
-					'tone': 'Base',
-					'level': 1,
-				},
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			${typeStyle({
-				'deviceWidth': 'm',
-				'size': '2xl',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-				'color': {
-					'kind': 'Neutral',
-					'tone': 'Base',
-					'level': 1,
-				},
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			${typeStyle({
-				'deviceWidth': 'l',
-				'size': '2xl',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-				'color': {
-					'kind': 'Neutral',
-					'tone': 'Base',
-					'level': 1,
-				},
-			})}
-		}
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h1 })}
 	}
 	h2 {
-		color: ${color(propsSpecifications.h2.color)};
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			${typeStyle({
-				'deviceWidth': 's',
-				'size': propsSpecifications.h2.size,
-				'weight': propsSpecifications.h2.weight,
-				'usage': propsSpecifications.h2.usage,
-				'spaced': propsSpecifications.h2.spaced,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			${typeStyle({
-				'deviceWidth': 'm',
-				'size': propsSpecifications.h2.size,
-				'weight': propsSpecifications.h2.weight,
-				'usage': propsSpecifications.h2.usage,
-				'spaced': propsSpecifications.h2.spaced,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			${typeStyle({
-				'deviceWidth': 'l',
-				'size': propsSpecifications.h2.size,
-				'weight': propsSpecifications.h2.weight,
-				'usage': propsSpecifications.h2.usage,
-				'spaced': propsSpecifications.h2.spaced,
-			})}
-		}
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h2 })}
 	}
 	h3 {
-		color: ${color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 14,
-			'format': 'string'
-		})};
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			${typeStyle({
-				'deviceWidth': 's',
-				'size': 'l',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			${typeStyle({
-				'deviceWidth': 'm',
-				'size': 'l',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			${typeStyle({
-				'deviceWidth': 'l',
-				'size': 'l',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h3 })}
 	}
 	h4 {
-		color: ${color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 16,
-			'format': 'string'
-		})};
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			${typeStyle({
-				'deviceWidth': 's',
-				'size': 'm',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			${typeStyle({
-				'deviceWidth': 'm',
-				'size': 'm',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			${typeStyle({
-				'deviceWidth': 'l',
-				'size': 'm',
-				'weight': 'bold',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h4 })}
 	}
 	h5 {
-		color: ${color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 10,
-			'format': 'string'
-		})};
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			${typeStyle({
-				'deviceWidth': 's',
-				'size': 's',
-				'weight': 'bold',
-				'slant': 'italic',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			${typeStyle({
-				'deviceWidth': 'm',
-				'size': 's',
-				'weight': 'bold',
-				'slant': 'italic',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			${typeStyle({
-				'deviceWidth': 'l',
-				'size': 's',
-				'weight': 'bold',
-				'slant': 'italic',
-				'usage': 'display',
-				'spaced': true,
-			})}
-		}
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h5 })}
 	}
 	p, ul, ol {
 		margin: 0;
 		padding: 0;
 	}
 	p, ul, ol {
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			${typeStyle({
-				'deviceWidth': 's',
-				'size': 's',
-				'weight': 'regular',
-				'usage': 'body',
-				'spaced': true,
-				'color': {
-					'kind': 'Neutral',
-					'tone': 'Base',
-					'level': 7,
-				},
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			${typeStyle({
-				'deviceWidth': 'm',
-				'size': 's',
-				'weight': 'regular',
-				'usage': 'body',
-				'spaced': true,
-				'color': {
-					'kind': 'Neutral',
-					'tone': 'Base',
-					'level': 7,
-				},
-			})}
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			${typeStyle({
-				'deviceWidth': 'l',
-				'size': 's',
-				'weight': 'regular',
-				'usage': 'body',
-				'spaced': true,
-				'color': {
-					'kind': 'Neutral',
-					'tone': 'Base',
-					'level': 7,
-				},
-			})}
-		}
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications['body--standard'] })}
 	}
 	ul ul,
 	ol ol {
@@ -765,9 +585,9 @@ const StandardBodyContainer = styled.div`
 	}
 	li::marker {
 		color: ${color({
-			'kind': 'Accent',
+			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 1,
+			'level': 17,
 			'format': 'string'
 		})};
 	}
@@ -782,6 +602,55 @@ const StandardBodyContainer = styled.div`
 	em,
 	cite {
 		font-style: italic;
+	}
+	a,
+	a:visited {
+		color: inherit;
+		text-decoration: none;
+		transition: background 250ms ease;
+		background-position-y: 10%;
+		background-image: linear-gradient(
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 33,
+				'format': 'string'
+			})} 50%,
+			${color({
+				'kind': 'Brand',
+				'tone': 'Peony',
+				'level': 3,
+				'format': 'string'
+			})} 50%
+		);
+		background-size: auto 200%;
+		&:hover {
+			color: ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 37,
+				'format': 'string'
+			})};
+			background-position-y: 100%;
+			border-radius: .25rem;
+		}
+		&:focus {
+			padding: 0 .5rem;
+			margin: 0 .25rem;
+			border-radius: .25rem;
+			outline: none;
+			box-shadow: 0 0 0 .25rem ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})}, 0 0 0 .5rem ${color({
+				'kind': 'Accent',
+				'tone': 'Finch',
+				'level': 1,
+				'format': 'string'
+				})};
+		}
 	}
 `;
 /**
@@ -816,7 +685,7 @@ export const Copy = ({
 					tag={tagThisCopy}
 					{...propsThisCopy}
 				>
-					.{children}
+					{children}
 				</Text>
 			);
 		} else {
