@@ -25,13 +25,13 @@ export const ArticleScreen = ({
 				mainContent={main.article.mainContent}
 			/>
 		</MainContent>
-		<Aside>
-			{
-				main.article.frontMatter.tableOfContents &&
+		{
+			main.article.frontMatter.tableOfContents &&
+			<Aside>
 				<ArticleTableOfContents
 					contents={main.article.frontMatter.tableOfContents}
 				/>
-			}
-		</Aside>
+			</Aside>
+		}
 	</AppScaffold>
 );

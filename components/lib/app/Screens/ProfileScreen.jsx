@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { AppScaffold } from '../Layout/AppScaffold';
 import { MainContent } from '../Layout/MainContent';
+import { Aside } from '../Layout/Aside';
 import { Profile } from '../Profile/Profile';
 
 export const ProfileScreen = ({
@@ -14,15 +15,13 @@ export const ProfileScreen = ({
 		header={header}
 		footer={footer}
 	>
-		<MainContent>
-			<Profile
-				title={main.title}
-				skills={main.skills}
-				professionalExperiences={main.professionalExperiences}
-				educationCertification={main.educationCertification}
-				volunteerExperiences={main.volunteerExperiences}
-			/>
-		</MainContent>
+		<Profile
+			title={main.title}
+			skills={main.skills}
+			professionalExperiences={main.professionalExperiences}
+			educationCertification={main.educationCertification}
+			volunteerExperiences={main.volunteerExperiences}
+		/>
 	</AppScaffold>
 );
 ProfileScreen.propTypes = {

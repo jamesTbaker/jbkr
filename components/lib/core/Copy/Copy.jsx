@@ -36,12 +36,25 @@ const propsSpecifications = {
 			'level': 7,
 		},
 	}, */
+	'landmark-title': {
+		'tag': 'h1',
+		'size': '5xl',
+		'weight': 'bold',
+		'usage': 'display',
+		'spaced': true,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+			'format': 'string'
+		},
+	},
 	'h1': {
 		'tag': 'h1',
 		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',

@@ -24,6 +24,12 @@ const AppHeaderContainer = styled.div`
 	top: 0rem;
 	width: 100%;
 	display: grid;
+	background-color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 37,
+		'format': 'string',
+	})};
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		grid-template-rows: 7rem 6rem;
 		grid-template-areas: 	"aside"
