@@ -123,7 +123,7 @@ const ExpandedTableOfContentsContainer = styled.div`
 		display: none;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		position: fixed;
+		position: sticky;
 		top: 296px;
 		right: 120px;
 	}
@@ -154,10 +154,10 @@ export const Profile = ({
 					Profile
 				</Copy>
 			</ProfileHeader>
-			{/* <ProfileSkills
+			<ProfileSkills
 				skills={skills}
 			/>
-			<ProfileProfessionalExperiences
+			{/* <ProfileProfessionalExperiences
 				professionalExperiences={professionalExperiences}
 			/>
 			<ProfileEducationCertifications

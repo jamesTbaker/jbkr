@@ -61,49 +61,49 @@ General.args = {
 				{
 					'key': 'asdf1',
 					'anchorText': 'Twitter',
-					'anchorIcon': 'twitter',
+					'anchorIconBefore': 'twitter',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf2',
 					'anchorText': 'YouTube',
-					'anchorIcon': 'youtube',
+					'anchorIconBefore': 'youtube',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf3',
 					'anchorText': 'LinkedIn',
-					'anchorIcon': 'linkedin',
+					'anchorIconBefore': 'linkedin',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf4',
 					'anchorText': 'Dribbble',
-					'anchorIcon': 'dribbble',
+					'anchorIconBefore': 'dribbble',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf5',
 					'anchorText': 'Behance',
-					'anchorIcon': 'behance',
+					'anchorIconBefore': 'behance',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf6',
 					'anchorText': 'CodeSandbox',
-					'anchorIcon': 'code-sandbox',
+					'anchorIconBefore': 'code-sandbox',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf7',
 					'anchorText': 'CodePen',
-					'anchorIcon': 'codepen',
+					'anchorIconBefore': 'codepen',
 					'url': '/',
 					'category': 'secondary',
 				}, {
 					'key': 'asdf8',
 					'anchorText': 'Medium',
-					'anchorIcon': 'medium',
+					'anchorIconBefore': 'medium',
 					'url': '/',
 					'category': 'secondary',
 				}, {
@@ -114,12 +114,13 @@ General.args = {
 				},
 			],
 		},
-		'liblabItem': {
-			'anchorText':
+		'announcement': {
+			'bodyAnchor':
 				'Beef Shankle Chislic Meatloaf, Kielbasa in Swine for Pork: Digital Transformation for Museum of Science, Boston',
 			// 'anchorText':
 			// 	'The Hub',
-			'url': '/',
+			'bodyURL': '/',
+			'preface': 'Now in Lib / Lab',
 		},
 	},
 };

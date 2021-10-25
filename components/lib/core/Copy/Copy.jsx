@@ -41,12 +41,11 @@ const propsSpecifications = {
 		'size': '5xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
 			'level': 1,
-			'format': 'string'
 		},
 	},
 	'h1': {
@@ -59,7 +58,6 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 7,
-			'format': 'string'
 		},
 	},
 	'h2': {
@@ -72,7 +70,6 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 4,
-			'format': 'string'
 		},
 	},
 	'h3': {
@@ -85,7 +82,6 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 14,
-			'format': 'string'
 		},
 	},
 	'h4': {
@@ -98,7 +94,6 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 16,
-			'format': 'string'
 		},
 	},
 	'h5': {
@@ -111,7 +106,6 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 4,
-			'format': 'string'
 		},
 	},
 	'body--standard': {
@@ -530,7 +524,10 @@ const propsSpecifications = {
 const copyKinds = Object.keys(propsSpecifications);
 copyKinds.push('copy-container--standard');
 const returnStylesFromSpecifications = ({ specs }) => `
-		color: ${color(specs.color)};
+		color: ${color({
+			...specs.color,
+			'format': 'string',
+		})};
 		${deviceWidthQuery.only({ 'width': 's' })} {
 			${typeStyle({
 				'deviceWidth': 's',
@@ -601,7 +598,6 @@ const StandardBodyContainer = styled.div`
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 17,
-			'format': 'string'
 		})};
 	}
 	ol li::marker {
@@ -614,7 +610,6 @@ const StandardBodyContainer = styled.div`
 			'kind': 'Neutral',
 			'tone': 'Base',
 			'level': 1,
-			'format': 'string'
 		})};
 	}
 	i,
@@ -625,7 +620,6 @@ const StandardBodyContainer = styled.div`
 			'kind': 'Neutral',
 			'tone': 'Base',
 			'level': 1,
-			'format': 'string'
 		})};
 	}
 	a,

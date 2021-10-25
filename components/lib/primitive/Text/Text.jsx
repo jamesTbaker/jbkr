@@ -15,7 +15,7 @@ const TextContainer = styled.div`
 						'tone': $color.tone,
 						'level': $color.level,
 						'alpha': $color.alpha,
-						'format': 'string'
+						'format': $color.format ? $color.format : 'string'
 					})};`;
 				}
 			}
@@ -37,14 +37,14 @@ const TextContainer = styled.div`
 								'tone': $gradient.colors[0].tone,
 								'level': $gradient.colors[0].level,
 								'alpha': $gradient.colors[0].alpha,
-								'format': 'string'
+								'format': $color.format ? $color.format : 'string'
 							})},
 							${color({
 								'kind': $gradient.colors[1].kind,
 								'tone': $gradient.colors[1].tone,
 								'level': $gradient.colors[1].level,
 								'alpha': $gradient.colors[1].alpha,
-								'format': 'string'
+								'format': $color.format ? $color.format : 'string'
 							})}
 						);
 						background-clip: text;
@@ -57,7 +57,7 @@ const TextContainer = styled.div`
 							'tone': $gradient.fallbackColor.tone,
 							'level': $gradient.fallbackColor.level,
 							'alpha': $gradient.fallbackColor.alpha,
-							'format': 'string'
+							'format': $color.format ? $color.format : 'string'
 						})};
 					}
 				`;

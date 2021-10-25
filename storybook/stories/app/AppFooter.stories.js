@@ -37,5 +37,5 @@ const Template = (args) => (
 );
 export const General = Template.bind({});
 General.args = {
-	'copy': '&copy; 1999&mdash;2021, James T. Baker. All Rights Reserved.',
+	'content': '&copy; 1999&mdash;2021, James T. Baker. All Rights Reserved.',
 };
