@@ -229,11 +229,11 @@ const propsSpecifications = {
 		},
 	},
 	'profile--section-title--preface': {
-		'tag': 'span',
+		'tag': 'div',
 		'size': 'm',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -241,11 +241,11 @@ const propsSpecifications = {
 		},
 	},
 	'profile--section-title--main': {
-		'tag': 'span',
-		'size': '4xl',
+		'tag': 'div',
+		'size': '3xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'gradient': {
 			'colors': [
 				{

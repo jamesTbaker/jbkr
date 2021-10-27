@@ -138,6 +138,7 @@ export namespace foundation {
             const profileSectionContainer: number;
             const profileSectionVideo: number;
             const profileSectionVideoOverlay: number;
+            const profileSectionTitleUnderlay: number;
             const profileSectionContent: number;
             const profileNavigation: number;
         }

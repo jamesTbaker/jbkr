@@ -132,6 +132,7 @@ export declare const foundation: {
             profileSectionContainer: number;
             profileSectionVideo: number;
             profileSectionVideoOverlay: number;
+            profileSectionTitleUnderlay: number;
             profileSectionContent: number;
             profileNavigation: number;
         };

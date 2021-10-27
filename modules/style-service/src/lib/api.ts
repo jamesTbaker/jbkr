@@ -66,7 +66,7 @@ export const style: {[key:string]: any} = {
 		) {
 			colorObject = color[kind][tone][level];
 		}
-		if (alpha) {
+		if (typeof(alpha) === 'number') {
 			colorObject.a = alpha;
 		}
 		if (format === 'string') {

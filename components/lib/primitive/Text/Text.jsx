@@ -37,14 +37,14 @@ const TextContainer = styled.div`
 								'tone': $gradient.colors[0].tone,
 								'level': $gradient.colors[0].level,
 								'alpha': $gradient.colors[0].alpha,
-								'format': $color.format ? $color.format : 'string'
+								'format': $gradient.colors[0].format ? $gradient.colors[0].format : 'string'
 							})},
 							${color({
 								'kind': $gradient.colors[1].kind,
 								'tone': $gradient.colors[1].tone,
 								'level': $gradient.colors[1].level,
 								'alpha': $gradient.colors[1].alpha,
-								'format': $color.format ? $color.format : 'string'
+								'format': $gradient.colors[1].format ? $gradient.colors[1].format : 'string'
 							})}
 						);
 						background-clip: text;
@@ -57,7 +57,7 @@ const TextContainer = styled.div`
 							'tone': $gradient.fallbackColor.tone,
 							'level': $gradient.fallbackColor.level,
 							'alpha': $gradient.fallbackColor.alpha,
-							'format': $color.format ? $color.format : 'string'
+							'format': $gradient.fallbackColor.format ? $gradient.fallbackColor.format : 'string'
 						})};
 					}
 				`;

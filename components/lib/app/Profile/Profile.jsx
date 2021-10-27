@@ -13,6 +13,7 @@ import { ProfileSection } from './ProfileSection';
 import { ProfileProfessionalExperiences } from './ProfileProfessionalExperiences';
 import { ProfileEducationCertifications } from './ProfileEducationCertifications';
 import { ProfileVolunteerExperiences } from './ProfileVolunteerExperiences';
+import { ProfileSectionHeader } from './ProfileSectionHeader';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
@@ -250,8 +251,9 @@ export const Profile = ({
 				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_pmufvu_gfxpti.jpg"
 				posterNotLargeScreen=""
 			>
-				<Copy kind="h2">Skills</Copy>
-				<Copy kind="h3">Technical Skills</Copy>
+				<ProfileSectionHeader
+					content={ProfileSectionsData.technicalSkills}
+				/>
 				{
 					skills.technical.featured && skills.technical.featured[0] &&
 

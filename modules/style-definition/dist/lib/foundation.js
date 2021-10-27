@@ -165,7 +165,8 @@ export const foundation = {
             'profileSectionContainer': 10,
             'profileSectionVideo': 11,
             'profileSectionVideoOverlay': 12,
-            'profileSectionContent': 13,
+            'profileSectionTitleUnderlay': 13,
+            'profileSectionContent': 14,
             'profileNavigation': 100,
         },
         'verticalAlignMiddle': `position: relative;
