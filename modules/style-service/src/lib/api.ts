@@ -137,6 +137,7 @@ export const style: {[key:string]: any} = {
 			.position.verticalAlignMiddle,
 		'zIndexNumber': ():{ [key: string]: number } => foundation
 			.position.zIndexes,
+		'zIndex': ({ objectName }:{ objectName: string }): number => 1,
 		'shadow': ({ level = '06' }: { level?: ShadowLevelKeyOf17 }) => {
 			const shadowObject = shadow[level];
 			return `box-shadow:

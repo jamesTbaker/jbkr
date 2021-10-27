@@ -166,9 +166,6 @@ const propsSpecifications = {
 		// 	'level': 3,
 		// },
 	},
-
-
-
 	'announcement--preface': {
 		'tag': 'div',
 		'size': '2xs',

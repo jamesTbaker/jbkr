@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, zIndexNumber, hiddenInline, verticalAlignMiddle
+	deviceWidthQuery, color, verticalAlignMiddle
 } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
 import { Copy } from '../../..';

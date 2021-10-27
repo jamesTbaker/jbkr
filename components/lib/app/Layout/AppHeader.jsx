@@ -2,7 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, zIndexNumber, hiddenInline, verticalAlignMiddle
+	deviceWidthQuery, color, hiddenInline,
+	verticalAlignMiddle, zIndexNumber
 } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
 import { Button } from '../../core/Button/Button';
@@ -30,6 +31,7 @@ const AppHeaderContainer = styled.div`
 		'level': 37,
 		'format': 'string',
 	})};
+	z-index: ${zIndexNumber().header};
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		grid-template-rows: 7rem 6rem;
 		grid-template-areas: 	"aside"
@@ -336,8 +338,7 @@ const CompressedNavigationContainer = styled.div`
 			'level': 37,
 			'format': 'string',
 		})};
-		z-index: ${zIndexNumber('modal')};
-
+		z-index: ${zIndexNumber().compressedNavigationContainer};
 		${({ $smallNavVisible }) => $smallNavVisible && `
 			height: 100%;
 		`}

@@ -154,13 +154,19 @@ export const foundation = {
     },
     'position': {
         'zIndexes': {
-            'backgroundPrimary': -1,
-            'backgroundSecondary': -1,
-            'contentPrimary': 1,
-            'header': 10,
-            'contentDimmer': 20,
-            'modal': 30,
-            'modalToggle': 31,
+            // 'backgroundPrimary': -1,
+            // 'backgroundSecondary': -1,
+            // 'contentPrimary': 1,
+            'header': 1000,
+            'contentDimmer': 1020,
+            'compressedNavigationContainer': 1030,
+            'modal': 1100,
+            'modalToggle': 1101,
+            'profileSectionContainer': 10,
+            'profileSectionVideo': 11,
+            'profileSectionVideoOverlay': 12,
+            'profileSectionContent': 13,
+            'profileNavigation': 100,
         },
         'verticalAlignMiddle': `position: relative;
 			top: 50%;

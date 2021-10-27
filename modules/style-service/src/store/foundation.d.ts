@@ -130,13 +130,16 @@ export namespace foundation {
     }
     namespace position {
         namespace zIndexes {
-            const backgroundPrimary: number;
-            const backgroundSecondary: number;
-            const contentPrimary: number;
             const header: number;
             const contentDimmer: number;
+            const compressedNavigationContainer: number;
             const modal: number;
             const modalToggle: number;
+            const profileSectionContainer: number;
+            const profileSectionVideo: number;
+            const profileSectionVideoOverlay: number;
+            const profileSectionContent: number;
+            const profileNavigation: number;
         }
         const verticalAlignMiddle: string;
     }

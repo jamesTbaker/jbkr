@@ -96,6 +96,7 @@ export const style = {
             .position.verticalAlignMiddle,
         'zIndexNumber': () => foundation
             .position.zIndexes,
+        'zIndex': ({ objectName }) => 1,
         'shadow': ({ level = '06' }) => {
             const shadowObject = shadow[level];
             return `box-shadow:

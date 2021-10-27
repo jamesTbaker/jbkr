@@ -1,11 +1,30 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import {
+	deviceWidthQuery, color
+} from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 import { ProfileSkill } from './ProfileSkill';
 
+
+const ProfileSkillsContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		background-color: #112;
+		padding: 7rem 51rem 7rem 15rem;
+	}
+`;
 export const ProfileSkills = ({
 	skills,
 }) => (
-	<>
+	<ProfileSkillsContainer>
+		<video
+			id="video-background--large-screen"
+			autoPlay muted loop playsInline
+		>
+			<source src="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4" type="video/mp4" />
+		</video>
 		<Copy kind="h2">Skills</Copy>
 		<Copy kind="h3">Technical Skills</Copy>
 		{
@@ -104,5 +123,5 @@ export const ProfileSkills = ({
 				}
 			</>
 		}
-	</>
+	</ProfileSkillsContainer>
 );

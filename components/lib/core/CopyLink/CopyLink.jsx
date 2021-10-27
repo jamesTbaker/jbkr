@@ -182,7 +182,7 @@ export const CopyLink = ({
 			></a>
 		}
 		{
-			!htmlContent && !url.startsWith('http') &&
+			!htmlContent && !url.startsWith('http') && !url.startsWith('#') &&
 			<Link
 				href={url}
 			>
@@ -190,7 +190,7 @@ export const CopyLink = ({
 			</Link>
 		}
 		{
-			htmlContent && !url.startsWith('http') &&
+			htmlContent && !url.startsWith('http') && !url.startsWith('#') &&
 			<Link
 				href={url}
 				passHref
@@ -199,6 +199,23 @@ export const CopyLink = ({
 					htmlContent={htmlContent}
 				/>
 			</Link>
+		}
+		{
+			!htmlContent && !url.startsWith('http') && url.startsWith('#') &&
+			<a
+				href={url}
+			>
+				{children}
+			</a>
+		}
+		{
+			htmlContent && !url.startsWith('http') && url.startsWith('#') &&
+			<a
+				href={url}
+				dangerouslySetInnerHTML={{
+					'__html': htmlContent,
+				}}
+			></a>
 		}
 	</CopyLinkContainer>
 );
