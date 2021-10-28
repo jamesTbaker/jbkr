@@ -4,7 +4,7 @@ import {
 	deviceWidthQuery, color, verticalAlignMiddle
 } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
-import { Copy } from '../../..';
+import { Copy } from '../../core/Copy/Copy';
 
 const AppFooterContainer = styled.footer`
 	border-top: solid .125rem ${color({

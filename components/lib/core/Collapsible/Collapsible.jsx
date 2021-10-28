@@ -101,6 +101,6 @@ Collapsible.defaultProps = {
 		'contextColor': 'onDark',
 		'text': 'Contents',
 	},
-	'copyKind': 'body-container--standard',
+	'copyKind': 'copy-container--standard',
 	'internalID': 'asdf-1',
 };

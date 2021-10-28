@@ -2,12 +2,13 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color
+	deviceWidthQuery, color, hiddenBlock
 } from '@jbkr/style-service';
 // import { MainContent } from '../Layout/MainContent';
 import { Aside } from '../Layout/Aside';
 // import { ProfileHeader } from './ProfileHeader';
 import { ProfileSkill } from './ProfileSkill';
+import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSkills } from './ProfileSkills';
 import { ProfileSection } from './ProfileSection';
 import { ProfileProfessionalExperiences } from './ProfileProfessionalExperiences';
@@ -18,10 +19,11 @@ import { Button } from '../../core/Button/Button';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Brand } from '../../..';
+import { Collapsible } from '../../..';
 
 const ProfileSectionsData = {
 	'technicalSkills': {
-		'hash': '#technical-skills',
+		'hash': 'technical-skills',
 		'anchor': 'Technical Skills',
 		'title': {
 			'preface': 'Skills',
@@ -29,7 +31,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'businessSkills': {
-		'hash': '#business-skills',
+		'hash': 'business-skills',
 		'anchor': 'Business Skills',
 		'title': {
 			'preface': 'Skills',
@@ -37,7 +39,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'designSkills': {
-		'hash': '#design-engineering-skills',
+		'hash': 'design-engineering-skills',
 		'anchor': 'Design / Engineering Skills',
 		'title': {
 			'preface': 'Skills',
@@ -45,30 +47,33 @@ const ProfileSectionsData = {
 		},
 	},
 	'professionalExperiences': {
-		'hash': '#professional-experiences',
+		'hash': 'professional-experiences',
 		'anchor': 'Professional Experiences',
 		'title': {
 			'main': 'Professional Experiences',
 		},
 	},
 	'educationAndCertification': {
-		'hash': '#education-and-certification',
+		'hash': 'education-and-certification',
 		'anchor': 'Education and Certification',
 		'title': {
 			'main': 'Education and Certification',
 		},
 	},
 	'volunteerExperiences': {
-		'hash': '#volunteer-experiences',
+		'hash': 'volunteer-experiences',
 		'anchor': 'Volunteer Experiences',
 		'title': {
 			'main': 'Volunteer Experiences',
 		},
 	},
 };
-
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin-top: 13rem;
+		display: grid;
+		grid-template-areas:	"aside"
+								"main";
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: relative;
@@ -78,8 +83,8 @@ const ProfileContainer = styled.div`
 	}
 `;
 const ProfileHeader = styled.header`
-	/* background-color: darkblue; */
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding: 0 2rem 8rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding: 15rem 51rem 10rem 15rem;
@@ -137,6 +142,7 @@ const BrandLink = styled.a`
 `;
 const MainContentContainer = styled.main`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		grid-area: main;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
@@ -181,13 +187,6 @@ const MainContentContainer = styled.main`
 		background-size: 884px 438px;
 	}
 `;
-const CompressedTableOfContentsContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		display: none;
-	}
-`;
 const ExpandedTableOfContentsContainer = styled.aside`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -212,6 +211,36 @@ const ExpandedTableOfContentsList = styled.ol`
 const ExpandedTableOfContentsListItem = styled.li`
 	list-style-type: none;
 	margin-bottom: 4rem;
+`;
+const CompressedTableOfContentsContainer = styled.aside`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		grid-area: aside;
+		padding: 3rem 2rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+`;
+const CompressedTableOfContentsListContainer = styled.nav`
+`;
+const CompressedTableOfContentsList = styled.ol`
+	margin: 1rem 0 0;
+	padding: 2rem;
+	border-radius: .375rem;
+	background-color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 39,
+		'format': 'string',
+	})};
+`;
+const CompressedTableOfContentsListItem = styled.li`
+	list-style-type: none;
+	padding-bottom: 1rem;
+`;
+const HiddenH3 = styled.h3`
+	${hiddenBlock}
+	margin: 0;
 `;
 const SampleComponent = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -247,9 +276,9 @@ export const Profile = ({
 			</ProfileHeader>
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen=""
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_pmufvu_gfxpti.jpg"
-				posterNotLargeScreen=""
+				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.technicalSkills}
@@ -258,13 +287,13 @@ export const Profile = ({
 					skills.technical.featured && skills.technical.featured[0] &&
 
 					<>
-						<Copy kind="h4">Featured</Copy>
+						<HiddenH3>Featured</HiddenH3>
 						{
 							skills.technical.featured.map((skill) =>
-								<ProfileSkill
+								<ProfileSkillVisualization
 									key={skill.key}
 									skill={skill}
-									visualize
+									featured
 								/>
 							)
 						}
@@ -274,13 +303,12 @@ export const Profile = ({
 					skills.technical.standard && skills.technical.standard[0] &&
 
 					<>
-						<Copy kind="h4">Standard</Copy>
+						<HiddenH3>Standard</HiddenH3>
 						{
 							skills.technical.standard.map((skill) =>
-								<ProfileSkill
+								<ProfileSkillVisualization
 									key={skill.key}
 									skill={skill}
-									visualize
 								/>
 							)
 						}
@@ -364,31 +392,36 @@ export const Profile = ({
 				volunteerExperiences={volunteerExperiences}
 			/> */}
 		</MainContentContainer>
-		<CompressedTableOfContentsContainer>
-			<Aside>
-				<nav>
-					<ol>
-						<li><a href="#technical-skills">
-							Technical Skills
-						</a></li>
-						<li><a href="#business-skills">
-							Business Skills
-						</a></li>
-						<li><a href="#design-engineering-skills">
-							Design / Engineering Skills
-						</a></li>
-						<li><a href="#professional-experiences">
-							Professional Experiences
-						</a></li>
-						<li><a href="#education-and-certification">
-							Education and Certification
-						</a></li>
-						<li><a href="#volunteer-experiences">
-							Volunteer Experiences
-						</a></li>
-					</ol>
-				</nav>
-			</Aside>
+		<CompressedTableOfContentsContainer
+			id="table-of-contents"
+		>
+			<Collapsible
+				button={{
+					'size': 'small',
+					'surfaceStyle': 'outlined',
+					'contextColor': 'onDark',
+					'text': 'Contents'
+				}}
+				internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
+				copyKind="profile--table-of-contents-item--anchor--not-large-device"
+			>
+				<CompressedTableOfContentsListContainer>
+					<CompressedTableOfContentsList>
+						{
+							Object.keys(ProfileSectionsData).map((sectionKey) =>
+								<CompressedTableOfContentsListItem>
+										<CopyLink
+											url={`#${ProfileSectionsData[sectionKey].hash}`}
+											inline={false}
+										>
+											{ProfileSectionsData[sectionKey].anchor}
+										</CopyLink>
+								</CompressedTableOfContentsListItem>,
+							)
+						}
+					</CompressedTableOfContentsList>
+				</CompressedTableOfContentsListContainer>
+			</Collapsible>
 		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>
 			<ExpandedTableOfContentsListContainer>
@@ -397,10 +430,10 @@ export const Profile = ({
 						Object.keys(ProfileSectionsData).map((sectionKey) =>
 							<ExpandedTableOfContentsListItem>
 								<Copy
-									kind="profile--table-of-contents-item--anchor"
+									kind="profile--table-of-contents-item--anchor--large-device"
 								>
 									<CopyLink
-										url={ProfileSectionsData[sectionKey].hash}
+										url={`#${ProfileSectionsData[sectionKey].hash}`}
 										inline={false}
 									>
 										{ProfileSectionsData[sectionKey].anchor}

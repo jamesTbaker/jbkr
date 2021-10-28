@@ -18,6 +18,9 @@ export { ArticleScreen } from './lib/app/Screens/ArticleScreen.jsx';
 export { MetaScreen } from './lib/app/Screens/MetaScreen.jsx';
 export { FourOhFourScreen } from './lib/app/Screens/FourOhFourScreen.jsx';
 
+// Profile
+export { ProfileSkillRating } from './lib/app/Profile/ProfileSkillRating.jsx';
+
 // Article
 export { ArticleBriefStatement } from './lib/app/Articles/ArticleBriefStatement.jsx';
 export { ArticleBriefStatements } from './lib/app/Articles/ArticleBriefStatements.jsx';

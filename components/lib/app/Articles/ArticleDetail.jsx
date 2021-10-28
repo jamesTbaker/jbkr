@@ -29,7 +29,7 @@ export const ArticleDetail = ({
 			mainContent.simpleBody &&
 
 			<Copy
-				kind="body-container--standard"
+				kind="copy-container--standard"
 				htmlContent={mainContent.simpleBody}
 			/>
 		}

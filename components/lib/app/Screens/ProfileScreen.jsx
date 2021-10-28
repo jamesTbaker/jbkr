@@ -14,6 +14,7 @@ export const ProfileScreen = ({
 		meta={meta}
 		header={header}
 		footer={footer}
+		hasTableOfContents={true}
 	>
 		<Profile
 			title={main.title}

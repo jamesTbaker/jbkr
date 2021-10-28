@@ -7,8 +7,8 @@ import {
 } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
 import { Button } from '../../core/Button/Button';
-import { Copy } from '../../..';
-import { CopyLink } from '../../..';
+import { Copy } from '../../core/Copy/Copy';
+import { CopyLink } from '../../core/CopyLink/CopyLink';
 
 
 const returnLibLabItemAnchorText = ({ rawtext }) => {

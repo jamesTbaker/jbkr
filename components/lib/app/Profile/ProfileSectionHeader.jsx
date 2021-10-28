@@ -9,6 +9,7 @@ import { Line } from '../../..';
 
 const ProfileSectionTitleContainer = styled.h2`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin: 0 0 1rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		margin: 0 0 2rem 0;
@@ -16,15 +17,18 @@ const ProfileSectionTitleContainer = styled.h2`
 `;
 const ProfileSectionHeaderContainer = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin-bottom: 3rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		margin-bottom: 4rem;
 	}
 `;
 
-export const ProfileSectionHeader = ({ content: { hash, title }}) => (
+export const ProfileSectionHeader = ({ content: { anchor, hash, title }}) => (
 	<ProfileSectionHeaderContainer>
-		<ProfileSectionTitleContainer>
+		<ProfileSectionTitleContainer
+			id={hash}
+		>
 			{
 				title && title.preface &&
 				<Copy

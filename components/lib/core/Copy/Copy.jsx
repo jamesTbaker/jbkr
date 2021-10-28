@@ -1,41 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Text } from '../../primitive/Text/Text';
-import { deviceWidthQuery, color, typeStyle } from '@jbkr/style-service';
+import { deviceWidthQuery, color, typeStyle, hiddenBlock, hiddenInline } from '@jbkr/style-service';
 
 const propsSpecifications = {
-	'body-container--standard': {
-		'tag': 'div',
-		'size': 's',
-		'weight': 'regular',
-		'spaced': true,
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 7,
-		},
-	},
-	/* 'body-container--enlarged': {
-		'tag': 'div',
-		'size': 'm',
-		'weight': 'regular',
-		'spaced': true,
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 7,
-		},
-	},
-	'button-label--vertical': {
-		'tag': 'span',
-		'size': '3xs',
-		'weight': 'bold',
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 7,
-		},
-	}, */
 	'landmark-title': {
 		'tag': 'h1',
 		'size': '5xl',
@@ -302,9 +270,21 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
-	'profile--table-of-contents-item--anchor': {
+	'profile--table-of-contents-item--anchor--large-device': {
 		'tag': 'span',
 		'size': 'm',
+		'weight': 'regular',
+		'usage': 'display',
+		'spaced': true,
+		'color': {
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 3,
+		},
+	},
+	'profile--table-of-contents-item--anchor--not-large-device': {
+		'tag': 'span',
+		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
 		'spaced': true,
@@ -619,11 +599,14 @@ const StandardBodyContainer = styled.div`
 			'level': 1,
 		})};
 	}
+	small {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.small })}
+	}
 	a,
 	a:visited {
 		color: inherit;
 		text-decoration: none;
-		transition: background 250ms ease;
+		transition: all 250ms ease;
 		background-position-y: 10%;
 		background-image: linear-gradient(
 			${color({
@@ -668,8 +651,51 @@ const StandardBodyContainer = styled.div`
 				})};
 		}
 	}
-	small {
-		${returnStylesFromSpecifications({ 'specs': propsSpecifications.small })}
+	div.header-container {
+		h1[id],
+		h2[id],
+		h3[id],
+		h4[id],
+		h5[id] {
+			display: inline-block;
+			margin-right: 1rem;
+		}
+		a.header-anchor[href] {
+			display: inline-block;
+			opacity: 0;
+			padding: 0 2rem;
+			span.machines-only {
+				${hiddenInline}
+			}
+		}
+		&:hover {
+			a.header-anchor {
+				opacity: 1;
+				&:hover {
+					color: ${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 37,
+						'format': 'string'
+					})};
+				}
+			}
+		}
+	}
+	div.header-container.level-1 a.header-anchor {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h1 })}
+	}
+	div.header-container.level-2 a.header-anchor {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h2 })}
+	}
+	div.header-container.level-3 a.header-anchor {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h3 })}
+	}
+	div.header-container.level-4 a.header-anchor {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h4 })}
+	}
+	div.header-container.level-5 a.header-anchor {
+		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h5 })}
 	}
 `;
 /**
@@ -685,7 +711,7 @@ export const Copy = ({
 }) => {
 	if (kind !== 'copy-container--standard') {
 		if (propsSpecifications[kind]) {
-			const tagThisCopy = propsSpecifications[kind].tag;
+			let tagThisCopy = propsSpecifications[kind].tag;
 			const propsThisCopy = propsSpecifications[kind];
 			if (htmlContent) {
 				propsThisCopy.htmlContent = htmlContent;
@@ -714,9 +740,9 @@ export const Copy = ({
 	}
 	if (kind === 'copy-container--standard') {
 		return(
-			<StandardBodyContainer>
-				{children}
-			</StandardBodyContainer>
+			<StandardBodyContainer
+				dangerouslySetInnerHTML={{ '__html': htmlContent }}
+			/>
 		);
 	}
 };
