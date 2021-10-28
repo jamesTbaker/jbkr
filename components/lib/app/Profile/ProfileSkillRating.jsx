@@ -6,6 +6,7 @@ import {
 
 
 const ProfileSkillRatingContainer = styled.div`
+	display: flex;
 	${
 		({ $size }) => {
 			if ($size === 'large') {
@@ -22,7 +23,7 @@ const ProfileSkillRatingContainer = styled.div`
 `;
 const ProfileSkillRatingIndicator = styled.div`
 	${
-		({ $order, $percentageExpertise }) => {
+		({ $size, $order, $percentageExpertise }) => {
 			const fillBasis = $percentageExpertise - ($order * 20);
 			let fillStyle = 'empty';
 			if (fillBasis === 10) {
@@ -31,20 +32,54 @@ const ProfileSkillRatingIndicator = styled.div`
 			if (fillBasis > 10) {
 				fillStyle = 'full';
 			}
-			if ($size === 'large') {
-				return `
-					padding: .5rem 0 3rem;
-				`;
-			} else {
-				return `
-					padding: .5rem 0 1rem;
-				`;
+			const marginStatement = $order === 1 ?
+				'' :
+				'margin-left: .5rem;';
+			;
+			const sizesStatements = $size === 'large' ?
+				'width: 1.5rem; height: 1.5rem; border-radius: .75rem;' :
+				'width: 1rem; height: 1rem; border-radius: .5rem;';
+			let backgroundStatement = `background-color: ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 28,
+				'format': 'string',
+			})};`;
+			if (fillStyle === 'full') {
+				backgroundStatement = `background-color: ${color({
+					'kind': 'Accent',
+					'tone': 'Iris',
+					'level': 2,
+					'format': 'string',
+				})};`;
 			}
+			if (fillStyle === 'half') {
+				backgroundStatement = `background-image: linear-gradient(
+					to right,
+					${color({
+						'kind': 'Accent',
+						'tone': 'Iris',
+						'level': 2,
+						'format': 'string',
+					})} 0,
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 28,
+						'format': 'string',
+					})} 50%
+				);`;
+			}
+			return `
+				${marginStatement}
+				${sizesStatements}
+				${backgroundStatement}
+			`;
 		}
 	}
 `;
 
-export const ProfileSkillRating = ({ size, percentageExpertise }) => {
+export const ProfileSkillRating = ({ size, percentageExpertise }) => (
 	<ProfileSkillRatingContainer
 		$size={size}
 	>
@@ -74,8 +109,8 @@ export const ProfileSkillRating = ({ size, percentageExpertise }) => {
 			$size={size}
 		/>
 	</ProfileSkillRatingContainer>
-};
-Copy.propTypes = {
+);
+ProfileSkillRating.propTypes = {
 	/**
 	 * Size.
 	 */

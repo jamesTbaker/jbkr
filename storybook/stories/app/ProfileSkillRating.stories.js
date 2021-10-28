@@ -12,5 +12,8 @@ const Template = (args) => (
 		{...args}
 	/>
 );
-export const General = Template.bind({});
-General.args = {};
+export const Playground = Template.bind({});
+Playground.args = {
+	'size': 'large',
+	'percentageExpertise': '50',
+};
