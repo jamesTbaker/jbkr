@@ -15,5 +15,5 @@ const Template = (args) => (
 export const Playground = Template.bind({});
 Playground.args = {
 	'size': 'large',
-	'percentageExpertise': '50',
+	'percentageExpertise': 50,
 };

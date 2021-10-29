@@ -239,7 +239,7 @@ const propsSpecifications = {
 		'size': 'm',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -251,7 +251,7 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',

@@ -261,12 +261,12 @@ Text.propTypes = {
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
 	'gradient': PropTypes.exact({
-		'colors': PropTypes.arrayOf({
+		'colors': PropTypes.arrayOf(PropTypes.exact({
 			'kind': PropTypes.string.isRequired,
 			'tone': PropTypes.string.isRequired,
 			'level': PropTypes.number.isRequired,
 			'alpha': PropTypes.string,
-		}),
+		})),
 		'fallbackColor': PropTypes.exact({
 			'kind': PropTypes.string.isRequired,
 			'tone': PropTypes.string.isRequired,

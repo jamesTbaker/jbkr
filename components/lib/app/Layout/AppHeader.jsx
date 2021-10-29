@@ -409,7 +409,7 @@ const CompressedPrimaryNavigationListItem = styled.li`
 `;
 const CompressedSecondaryNavigationContainer = styled.nav``;
 const CompressedSecondaryNavigationList = styled.ul`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: grid;
 		grid-template-columns: 8rem 8rem 8rem;
 		grid-template-rows: 8rem 8rem 10rem 8rem;
@@ -417,6 +417,16 @@ const CompressedSecondaryNavigationList = styled.ul`
 								"secondaryLink3 secondaryLink4 secondaryLink5"
 								"secondaryLink6 secondaryLink7 secondaryLink8"
 								"meta nada nada";
+		margin: 0;
+		padding: 4rem 0 0 0;
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		display: grid;
+		grid-template-columns: 8rem 8rem 8rem 8rem;
+		grid-template-rows: 8rem 10rem 8rem;
+		grid-template-areas: 	"secondaryLink0 secondaryLink1 secondaryLink2 secondaryLink3"
+								"secondaryLink4 secondaryLink5 secondaryLink6 secondaryLink7"
+								"meta nada nada nada";
 		margin: 0;
 		padding: 4rem 0 0 0;
 	}

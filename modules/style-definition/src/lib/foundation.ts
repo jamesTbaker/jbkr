@@ -163,9 +163,6 @@ export const foundation = {
 	},
 	'position': {
 		'zIndexes': {
-			// 'backgroundPrimary': -1,
-			// 'backgroundSecondary': -1,
-			// 'contentPrimary': 1,
 			'header': 1000,
 			'contentDimmer': 1020,
 			'compressedNavigationContainer': 1030,

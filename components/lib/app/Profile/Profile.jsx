@@ -23,6 +23,7 @@ import { Collapsible } from '../../..';
 
 const ProfileSectionsData = {
 	'technicalSkills': {
+		'id': 'FN8MtdLdWPDsdANtLqZ82kcM',
 		'hash': 'technical-skills',
 		'anchor': 'Technical Skills',
 		'title': {
@@ -31,6 +32,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'businessSkills': {
+		'id': 'w7Q3L2kW5Jez7pL8sJtum6HA',
 		'hash': 'business-skills',
 		'anchor': 'Business Skills',
 		'title': {
@@ -39,6 +41,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'designSkills': {
+		'id': 'pmftULeaT8sHpT2WNGKQa5X2',
 		'hash': 'design-engineering-skills',
 		'anchor': 'Design / Engineering Skills',
 		'title': {
@@ -47,6 +50,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'professionalExperiences': {
+		'id': 'FF8Bq5SaRnP6ud7QZcGe5HF8',
 		'hash': 'professional-experiences',
 		'anchor': 'Professional Experiences',
 		'title': {
@@ -54,6 +58,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'educationAndCertification': {
+		'id': 'EnS2mjjJwpKnhdk8z2fauHpc',
 		'hash': 'education-and-certification',
 		'anchor': 'Education and Certification',
 		'title': {
@@ -61,6 +66,7 @@ const ProfileSectionsData = {
 		},
 	},
 	'volunteerExperiences': {
+		'id': 'bj82LMezkKNSzKiLyoCn3oii',
 		'hash': 'volunteer-experiences',
 		'anchor': 'Volunteer Experiences',
 		'title': {
@@ -224,6 +230,7 @@ const CompressedTableOfContentsContainer = styled.aside`
 const CompressedTableOfContentsListContainer = styled.nav`
 `;
 const CompressedTableOfContentsList = styled.ol`
+	max-width: 36rem;
 	margin: 1rem 0 0;
 	padding: 2rem;
 	border-radius: .375rem;
@@ -241,6 +248,62 @@ const CompressedTableOfContentsListItem = styled.li`
 const HiddenH3 = styled.h3`
 	${hiddenBlock}
 	margin: 0;
+`;
+const FeaturedVisualizedSkillsContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin-bottom: 3rem;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+`;
+const StandardVisualizedSkillsContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+`;
+const SkillsStatementsList = styled.ul`
+	margin: 0;
+	padding: 0;
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+`;
+const SkillsStatementsListItem = styled.li`
+	list-style-type: none;
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		border-top: solid .125rem ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string',
+		})};
+		padding: 1.875rem 0 3rem 0;
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		width: calc(50% - 1.125rem);
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		border-top: solid .125rem ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string',
+		})};
+		padding: 1.875rem 0 3rem 0;
+		width: calc(50% - 1.125rem);
+	}
 `;
 const SampleComponent = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -274,7 +337,7 @@ export const Profile = ({
 					Profile
 				</Copy>
 			</ProfileHeader>
-			<ProfileSection
+			{/* <ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
@@ -288,15 +351,17 @@ export const Profile = ({
 
 					<>
 						<HiddenH3>Featured</HiddenH3>
-						{
-							skills.technical.featured.map((skill) =>
-								<ProfileSkillVisualization
-									key={skill.key}
-									skill={skill}
-									featured
-								/>
-							)
-						}
+						<FeaturedVisualizedSkillsContainer>
+							{
+								skills.technical.featured.map((skill) =>
+									<ProfileSkillVisualization
+										key={skill.key}
+										skill={skill}
+										featured
+									/>
+								)
+							}
+						</FeaturedVisualizedSkillsContainer>
 					</>
 				}
 				{
@@ -304,87 +369,112 @@ export const Profile = ({
 
 					<>
 						<HiddenH3>Standard</HiddenH3>
-						{
-							skills.technical.standard.map((skill) =>
-								<ProfileSkillVisualization
-									key={skill.key}
-									skill={skill}
-								/>
-							)
-						}
+						<StandardVisualizedSkillsContainer>
+							{
+								skills.technical.standard.map((skill) =>
+									<ProfileSkillVisualization
+										key={skill.key}
+										skill={skill}
+									/>
+								)
+							}
+						</StandardVisualizedSkillsContainer>
 					</>
 				}
-				{/* <Copy kind="h3">Business Skills</Copy>
-				{
-					skills.business.featured && skills.business.featured[0] &&
-
-					<>
-						<Copy kind="h4">Featured</Copy>
-						{
-							skills.business.featured.map((skill) =>
-								<ProfileSkill
-									key={skill.key}
-									skill={skill}
-								/>
-							)
-						}
-					</>
-				}
+			</ProfileSection>
+			<ProfileSection
+				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+			>
+				<ProfileSectionHeader
+					content={ProfileSectionsData.businessSkills}
+				/>
 				{
 					skills.business.standard && skills.business.standard[0] &&
 
 					<>
-						<Copy kind="h4">Standard</Copy>
-						{
-							skills.business.standard.map((skill) =>
-								<ProfileSkill
-									key={skill.key}
-									skill={skill}
-								/>
-							)
-						}
+						<SkillsStatementsList>
+							{
+								skills.business.standard.map((skill) =>
+									<SkillsStatementsListItem
+										key={skill.key}
+									>
+										<Copy
+											kind="profile--skill-statement"
+										>
+											{skill.name}
+										</Copy>
+									</SkillsStatementsListItem>
+								)
+							}
+						</SkillsStatementsList>
 					</>
 				}
-				<Copy kind="h3">Design / Engineering Skills</Copy>
+			</ProfileSection>
+			<ProfileSection
+				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+			>
+				<ProfileSectionHeader
+					content={ProfileSectionsData.designSkills}
+				/>
 				{
 					skills.design.featured && skills.design.featured[0] &&
 
 					<>
-						<Copy kind="h4">Featured</Copy>
-						{
-							skills.design.featured.map((skill) =>
-								<ProfileSkill
-									key={skill.key}
-									skill={skill}
-									visualize
-								/>
-							)
-						}
+						<HiddenH3>Featured</HiddenH3>
+						<FeaturedVisualizedSkillsContainer>
+							{
+								skills.design.featured.map((skill) =>
+									<ProfileSkillVisualization
+										key={skill.key}
+										skill={skill}
+										featured
+									/>
+								)
+							}
+						</FeaturedVisualizedSkillsContainer>
 					</>
 				}
 				{
 					skills.design.standard && skills.design.standard[0] &&
 
 					<>
-						<Copy kind="h4">Standard</Copy>
-						{
-							skills.design.standard.map((skill) =>
-								<ProfileSkill
-									key={skill.key}
-									skill={skill}
-									visualize
-								/>
-							)
-						}
+						<HiddenH3>Standard</HiddenH3>
+						<StandardVisualizedSkillsContainer>
+							{
+								skills.design.standard.map((skill) =>
+									<ProfileSkillVisualization
+										key={skill.key}
+										skill={skill}
+									/>
+								)
+							}
+						</StandardVisualizedSkillsContainer>
 					</>
-				} */}
+				}
+			</ProfileSection> */}
+			<ProfileSection
+				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+			>
+				<ProfileSectionHeader
+					content={ProfileSectionsData.professionalExperiences}
+				/>
+				<ProfileProfessionalExperiences
+					professionalExperiences={professionalExperiences}
+				/>
 			</ProfileSection>
-			{/* <ProfileSkills
-				skills={skills}
-			/>
-			<ProfileProfessionalExperiences
-				professionalExperiences={professionalExperiences}
-			/>
+
+
+
+			{/*
 			<ProfileEducationCertifications
 				educationCertification={educationCertification}
 			/>
@@ -409,7 +499,9 @@ export const Profile = ({
 					<CompressedTableOfContentsList>
 						{
 							Object.keys(ProfileSectionsData).map((sectionKey) =>
-								<CompressedTableOfContentsListItem>
+								<CompressedTableOfContentsListItem
+									key={`compressed--${ProfileSectionsData[sectionKey].id}`}
+								>
 										<CopyLink
 											url={`#${ProfileSectionsData[sectionKey].hash}`}
 											inline={false}
@@ -428,7 +520,9 @@ export const Profile = ({
 				<ExpandedTableOfContentsList>
 					{
 						Object.keys(ProfileSectionsData).map((sectionKey) =>
-							<ExpandedTableOfContentsListItem>
+							<ExpandedTableOfContentsListItem
+								key={`expanded--${ProfileSectionsData[sectionKey].id}`}
+							>
 								<Copy
 									kind="profile--table-of-contents-item--anchor--large-device"
 								>

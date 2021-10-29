@@ -21,14 +21,14 @@ const VideoOverlay = styled.div`
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 41,
-					'alpha': .3,
+					'alpha': .5,
 					'format': 'string'
 				})} 0,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 41,
-					'alpha': .5,
+					'alpha': .6,
 					'format': 'string'
 				})} 5rem,
 				${color({

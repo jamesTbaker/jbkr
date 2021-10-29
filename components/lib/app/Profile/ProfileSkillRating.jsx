@@ -24,7 +24,7 @@ const ProfileSkillRatingContainer = styled.div`
 const ProfileSkillRatingIndicator = styled.div`
 	${
 		({ $size, $order, $percentageExpertise }) => {
-			const fillBasis = $percentageExpertise - ($order * 20);
+			const fillBasis = $percentageExpertise - (($order - 1) * 20);
 			let fillStyle = 'empty';
 			if (fillBasis === 10) {
 				fillStyle = 'half';
@@ -63,11 +63,17 @@ const ProfileSkillRatingIndicator = styled.div`
 						'format': 'string',
 					})} 0,
 					${color({
+						'kind': 'Accent',
+						'tone': 'Iris',
+						'level': 2,
+						'format': 'string',
+					})} 50%,
+					${color({
 						'kind': 'Neutral',
 						'tone': 'Finch',
 						'level': 28,
 						'format': 'string',
-					})} 50%
+					})} 51%
 				);`;
 			}
 			return `
@@ -119,15 +125,15 @@ ProfileSkillRating.propTypes = {
 	 * Token indicating kind of copy.
 	 */
 	'percentageExpertise': PropTypes.oneOf([
-		'10',
-		'20',
-		'30',
-		'40',
-		'50',
-		'60',
-		'70',
-		'80',
-		'90',
-		'100',
+		10,
+		20,
+		30,
+		40,
+		50,
+		60,
+		70,
+		80,
+		90,
+		100,
 	]),
 };
