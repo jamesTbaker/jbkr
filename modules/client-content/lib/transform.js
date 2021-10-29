@@ -1080,6 +1080,7 @@ export const returnTransformedProfileScreenContent = ({
 		allScreenProperties.main.professionalExperiences.push({
 			'key': professionalExperience._id,
 			'title': professionalExperience.Title,
+			'employer': professionalExperience.Employer,
 			'description': returnSimpleHTMLFromMarkdown({
 				'content': professionalExperience.Description,
 				'options': {
@@ -1097,12 +1098,13 @@ export const returnTransformedProfileScreenContent = ({
 		});
 	});
 	// set up education and certification container inside the main container
-	allScreenProperties.main.educationCertification = [];
+	allScreenProperties.main.educationCertifications = [];
 	// for each education / certification item
 	educationCertificationRaw.forEach((educationCertification) => {
 		// add a transformed version of this item to the appropriate array
-		allScreenProperties.main.educationCertification.push({
+		allScreenProperties.main.educationCertifications.push({
 			'key': educationCertification._id,
+			'type': educationCertification.Type,
 			'header': educationCertification.Header,
 			'tagline': educationCertification.Tagline,
 			'details': returnSimpleHTMLFromMarkdown({

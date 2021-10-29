@@ -20,7 +20,7 @@ export const ProfileScreen = ({
 			title={main.title}
 			skills={main.skills}
 			professionalExperiences={main.professionalExperiences}
-			educationCertification={main.educationCertification}
+			educationCertifications={main.educationCertifications}
 			volunteerExperiences={main.volunteerExperiences}
 		/>
 	</AppScaffold>

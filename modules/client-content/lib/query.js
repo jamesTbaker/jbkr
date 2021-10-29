@@ -209,6 +209,7 @@ export const returnAllProfessionalExperiencesFromDB = async () => {
 					'StartDate': 1,
 					'EndDate': 1,
 					'Description': 1,
+					'Employer': 1,
 				},
 			}).sort({ 'EndDate': -1 }).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON
@@ -236,6 +237,7 @@ export const returnAllEducationCertificationFromDB = async () => {
 					'Tagline': 1,
 					'EndYear': 1,
 					'Details': 1,
+					'Type': 1,
 				},
 			}).sort({ 'OrderInSet': 1 }).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON

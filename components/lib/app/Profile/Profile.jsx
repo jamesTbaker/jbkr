@@ -11,15 +11,16 @@ import { ProfileSkill } from './ProfileSkill';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSkills } from './ProfileSkills';
 import { ProfileSection } from './ProfileSection';
-import { ProfileProfessionalExperiences } from './ProfileProfessionalExperiences';
-import { ProfileEducationCertifications } from './ProfileEducationCertifications';
-import { ProfileVolunteerExperiences } from './ProfileVolunteerExperiences';
+import { ProfileProfessionalExperience } from './ProfileProfessionalExperience';
+import { ProfileEducationCertification } from './ProfileEducationCertification';
+import { ProfileVolunteerExperience } from './ProfileVolunteerExperience';
 import { ProfileSectionHeader } from './ProfileSectionHeader';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Brand } from '../../..';
 import { Collapsible } from '../../..';
+
 
 const ProfileSectionsData = {
 	'technicalSkills': {
@@ -57,7 +58,7 @@ const ProfileSectionsData = {
 			'main': 'Professional Experiences',
 		},
 	},
-	'educationAndCertification': {
+	'educationAndCertifications': {
 		'id': 'EnS2mjjJwpKnhdk8z2fauHpc',
 		'hash': 'education-and-certification',
 		'anchor': 'Education and Certification',
@@ -305,17 +306,50 @@ const SkillsStatementsListItem = styled.li`
 		width: calc(50% - 1.125rem);
 	}
 `;
-const SampleComponent = styled.div`
+const ProfessionalExperiencesContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+	}
+`;
+const EducationAndCertificationsContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: grid;
+		grid-template-areas: "certification graduate undergraduate";
+		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 2rem 2rem;
+	}
+`;
+const EducationAndCertificationsSubset = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		${
+			({ gridArea }) => `grid-area: ${gridArea};`
+		}
+	}
+`;
+const VolunteerExperiencesContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: grid;
+		grid-template-areas:	"volunteerExperience0 volunteerExperience3 volunteerExperience6"
+								"volunteerExperience1 volunteerExperience4 volunteerExperience7"
+								"volunteerExperience2 volunteerExperience5 volunteerExperience8";
+		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 2rem 2rem;
 	}
 `;
 export const Profile = ({
 	title,
 	skills,
 	professionalExperiences,
-	educationCertification,
+	educationCertifications,
 	volunteerExperiences
 }) => (
 	<ProfileContainer>
@@ -337,7 +371,7 @@ export const Profile = ({
 					Profile
 				</Copy>
 			</ProfileHeader>
-			{/* <ProfileSection
+			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
@@ -457,7 +491,7 @@ export const Profile = ({
 						</StandardVisualizedSkillsContainer>
 					</>
 				}
-			</ProfileSection> */}
+			</ProfileSection>
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
@@ -467,20 +501,98 @@ export const Profile = ({
 				<ProfileSectionHeader
 					content={ProfileSectionsData.professionalExperiences}
 				/>
-				<ProfileProfessionalExperiences
-					professionalExperiences={professionalExperiences}
-				/>
+				<ProfessionalExperiencesContainer>
+				{
+					professionalExperiences.map((professionalExperience) =>
+						<ProfileProfessionalExperience
+							key={professionalExperience.key}
+							professionalExperience={professionalExperience}
+						/>
+					)
+				}
+				</ProfessionalExperiencesContainer>
 			</ProfileSection>
-
-
-
-			{/*
-			<ProfileEducationCertifications
-				educationCertification={educationCertification}
-			/>
-			<ProfileVolunteerExperiences
-				volunteerExperiences={volunteerExperiences}
-			/> */}
+			<ProfileSection
+				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+			>
+				<ProfileSectionHeader
+					content={ProfileSectionsData.educationAndCertifications}
+				/>
+				<EducationAndCertificationsContainer>
+					<EducationAndCertificationsSubset
+						gridArea="certification"
+					>
+						{
+							educationCertifications.filter(
+								educationCertification =>
+								educationCertification.type === 'certification'
+							).map(
+								educationCertification =>
+								<ProfileEducationCertification
+									key={educationCertification.key}
+									educationCertification={educationCertification}
+								/>
+							)
+						}
+					</EducationAndCertificationsSubset>
+					<EducationAndCertificationsSubset
+						gridArea="graduate"
+					>
+						{
+							educationCertifications.filter(
+								educationCertification =>
+								educationCertification.type === 'graduate'
+							).map(
+								educationCertification =>
+								<ProfileEducationCertification
+									key={educationCertification.key}
+									educationCertification={educationCertification}
+								/>
+							)
+						}
+					</EducationAndCertificationsSubset>
+					<EducationAndCertificationsSubset
+						gridArea="undergraduate"
+					>
+						{
+							educationCertifications.filter(
+								educationCertification =>
+								educationCertification.type === 'undergraduate'
+							).map(
+								educationCertification =>
+								<ProfileEducationCertification
+									key={educationCertification.key}
+									educationCertification={educationCertification}
+								/>
+							)
+						}
+					</EducationAndCertificationsSubset>
+				</EducationAndCertificationsContainer>
+			</ProfileSection>
+			<ProfileSection
+				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
+				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+			>
+				<ProfileSectionHeader
+					content={ProfileSectionsData.volunteerExperiences}
+				/>
+				<VolunteerExperiencesContainer>
+				{
+					volunteerExperiences.map((volunteerExperience, volunteerExperienceIndex) =>
+						<ProfileVolunteerExperience
+							key={volunteerExperience.key}
+							volunteerExperience={volunteerExperience}
+							gridArea={`volunteerExperience${volunteerExperienceIndex}`}
+						/>
+					)
+				}
+				</VolunteerExperiencesContainer>
+			</ProfileSection>
 		</MainContentContainer>
 		<CompressedTableOfContentsContainer
 			id="table-of-contents"
