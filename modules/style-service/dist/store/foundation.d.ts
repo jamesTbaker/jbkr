@@ -130,6 +130,7 @@ export namespace foundation {
     }
     namespace position {
         namespace zIndexes {
+            const compressedTableOfContentsContainer: number;
             const header: number;
             const contentDimmer: number;
             const compressedNavigationContainer: number;

@@ -154,9 +154,10 @@ export const foundation = {
     },
     'position': {
         'zIndexes': {
-            'header': 1000,
-            'contentDimmer': 1020,
-            'compressedNavigationContainer': 1030,
+            'compressedTableOfContentsContainer': 1010,
+            'header': 1020,
+            'contentDimmer': 1030,
+            'compressedNavigationContainer': 1040,
             'modal': 1100,
             'modalToggle': 1101,
             'profileSectionContainer': 10,

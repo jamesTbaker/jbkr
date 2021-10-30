@@ -620,8 +620,59 @@ const propsSpecifications = {
 		},
 	},
 };
-const copyKinds = Object.keys(propsSpecifications);
-copyKinds.push('copy-container--standard');
+const copyKinds = [
+	'copy-container--standard',
+	'landmark-title',
+	'h1',
+	'h2',
+	'h3',
+	'h4',
+	'h5',
+	'body--standard',
+	'body--enlarged',
+	'small',
+	'button-label--horizontal--standard',
+	'button-label--horizontal--small',
+	'announcement--preface',
+	'announcement--body',
+	'screen-title--standard',
+	'screen-title--article',
+	'profile--section-title--preface',
+	'profile--section-title--main',
+	'profile--skill-name--featured',
+	'profile--skill-name--standard',
+	'profile--skill-statement',
+	'profile--experience--job-title',
+	'profile--experience--job-employer',
+	'profile--experience--job-dates',
+	'profile--education-certification--title',
+	'profile--education-certification--tagline',
+	'profile--education-certification--dates',
+	'profile--experience--volunteer-title',
+	'profile--experience--volunteer-for-whom',
+	'profile--experience--volunteer-dates',
+	'profile--experience--volunteer-description',
+	'profile--table-of-contents-item--anchor--large-device',
+	'profile--table-of-contents-item--anchor--not-large-device',
+	'liblab-item--title-anchor',
+	'liblab-item--meta-item--label',
+	'liblab-item--meta-item--value',
+	'article--tagline',
+	'article--meta-item--small-device--date--primary',
+	'article--meta-item--small-device--date--secondary',
+	'article--meta-item--small-device--stats',
+	'article--meta-item--large-device--label',
+	'article--meta-item--large-device--value',
+	'article--brief-statement',
+	'article--image-credit--main',
+	'article--image-credit--anchor',
+	'article--table-of-contents-item--anchor',
+	'article--blockquote--large-device',
+	'contact--brand-tagline',
+	'contact--section-header',
+	'contact--item-anchor',
+	'footer--copyright'
+];
 const returnStylesFromSpecifications = ({ specs }) => `
 		color: ${color({
 			...specs.color,
@@ -862,9 +913,9 @@ export const Copy = ({
 	}
 	if (kind === 'copy-container--standard') {
 		return(
-			<StandardBodyContainer
-				dangerouslySetInnerHTML={{ '__html': htmlContent }}
-			/>
+			<StandardBodyContainer>
+				{children}
+			</StandardBodyContainer>
 		);
 	}
 };
@@ -876,7 +927,7 @@ Copy.propTypes = {
 	/**
 	 * Token indicating kind of copy.
 	 */
-	'kind': PropTypes.oneOf(copyKinds),
+	'kind': PropTypes.oneOf([...copyKinds]),
 	/**
 	 * The text characters marked up with HTML tags. If `htmlContent` is
 	 * supplied, then `children` will be ignored.

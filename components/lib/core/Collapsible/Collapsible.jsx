@@ -10,19 +10,21 @@ const FadeInAnimation = keyframes`
     100% { opacity: 1; height: 100%; }
 `;
 const CollapsibleContentContainer = styled.div`
-	display: none;
+	height: 0;
+	opacity: 0;
 	overflow: hidden;
-	transition: height .5s;
+	transition: height .75s, opacity .75s;
 	${({ $contentVisible }) => $contentVisible && css`
-		display: block;
-		animation-name: ${FadeInAnimation};
+		height: 100%;
+		opacity: 1;
+		/* animation-name: ${FadeInAnimation};
 		animation-duration: 0.35s;
 		animation-timing-function: ease-in;
 		animation-delay: 0s;
 		animation-iteration-count: 1;
 		animation-direction: normal;
 		animation-fill-mode: none;
-		animation-play-state: running;
+		animation-play-state: running; */
 	`}
 `;
 /* const CollapsibleContainer = styled.div`

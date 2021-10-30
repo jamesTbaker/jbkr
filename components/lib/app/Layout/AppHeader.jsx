@@ -145,7 +145,11 @@ const ExpandedSecondaryNavigationListItem = styled.li`
 		}
 	}
 `;
-const CompressedNavigationToggleContainer = styled.div`
+const CompressedNavigationToggleContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'compressed-navigation-parent',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		grid-area: compressedNavToggle;
 		margin: 1.5rem 0 1.5rem 2rem;
@@ -154,7 +158,16 @@ const CompressedNavigationToggleContainer = styled.div`
 		display: none;
 	}
 `;
-const CompressedNavigationToggleButton = styled.button`
+const CompressedNavigationToggleButton = styled.button.attrs(({
+	$smallNavVisible,
+}) => {
+	return {
+		'aria-label': 'Toggle site navigation',
+		'aria-expanded': $smallNavVisible,
+		'aria-controls': 'compressed-navigation',
+		'aria-haspopup': 'true',
+	};
+})`
 	cursor: pointer;
 	display: inline-block;
 	min-width: 0px;
@@ -224,7 +237,7 @@ const CompressedNavigationToggleLayer = styled.span`
 const CompressedNavigationToggle = ({ onClick, $smallNavVisible }) => (
 	<CompressedNavigationToggleButton
 		onClick={onClick}
-		aria-label="Toggle site navigation"
+		$smallNavVisible={$smallNavVisible}
 	>
 		<CompressedNavigationToggleLayer
 			$order={1}
@@ -323,7 +336,11 @@ const ExpandedPrimaryNavigationListItem = styled.li`
 		}
 	}
 `;
-const CompressedNavigationContainer = styled.div`
+const CompressedNavigationContainer = styled.div.attrs(() => {
+	return {
+		'id': 'compressed-navigation',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		position: fixed;
 		top: 12rem;
@@ -354,7 +371,7 @@ const CompressedNavigationConstrainer = styled.div`
 		${verticalAlignMiddle}
 	}
 `;
-const CompressedPrimaryNavigationContainer = styled.nav`
+const CompressedPrimaryNavigationContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		border-top: solid .125rem ${color({
 			'kind': 'Neutral',
@@ -407,7 +424,7 @@ const CompressedPrimaryNavigationListItem = styled.li`
 		`}
 	}
 `;
-const CompressedSecondaryNavigationContainer = styled.nav``;
+const CompressedSecondaryNavigationContainer = styled.div``;
 const CompressedSecondaryNavigationList = styled.ul`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: grid;
@@ -574,6 +591,58 @@ export const AppHeader = ({ content }) => {
 						onClick={handleHamburgerClick}
 						$smallNavVisible={smallNavVisible}
 					/>
+					<CompressedNavigationContainer
+						$smallNavVisible={smallNavVisible}
+					>
+						<CompressedNavigationConstrainer>
+							<CompressedPrimaryNavigationContainer>
+								<CompressedPrimaryNavigationList>
+								{
+									content.links.primary.map((link) =>
+										<CompressedPrimaryNavigationListItem
+											key={link.key}
+											$smallNavVisible={smallNavVisible}
+										>
+											<Button
+												text={link.anchorText}
+												url={link.url}
+												size="standard"
+												surfaceStyle="transparent"
+												contextColor="onDark"
+											/>
+										</CompressedPrimaryNavigationListItem>
+									)
+								}
+								</CompressedPrimaryNavigationList>
+							</CompressedPrimaryNavigationContainer>
+							<CompressedSecondaryNavigationContainer>
+								<CompressedSecondaryNavigationList>
+								{
+									content.links.secondary.map((link, linkIndex) =>
+										<CompressedSecondaryNavigationListItem
+											key={link.key}
+											$gridArea={returnSecondaryLinkGridArea({
+												linkIndex,
+												'anchorText': link.anchorText
+											})}
+											$smallNavVisible={smallNavVisible}
+										>
+											<Button
+												text={link.anchorText}
+												url={link.url}
+												size={link.anchorIconBefore ? 'standard' : 'small'}
+												surfaceStyle="transparent"
+												contextColor="onDark"
+												iconBefore={link.anchorIconBefore}
+												textHidden={link.anchorIconBefore ? true : false}
+											/>
+										</CompressedSecondaryNavigationListItem>
+									)
+								}
+								</CompressedSecondaryNavigationList>
+							</CompressedSecondaryNavigationContainer>
+						</CompressedNavigationConstrainer>
+					</CompressedNavigationContainer>
 				</CompressedNavigationToggleContainer>
 				<BrandContainer>
 					<BrandLink
@@ -607,62 +676,6 @@ export const AppHeader = ({ content }) => {
 						}
 					</ExpandedPrimaryNavigationList>
 				</ExpandedPrimaryNavigationContainer>
-				<CompressedNavigationContainer
-					$smallNavVisible={smallNavVisible}
-				>
-					<CompressedNavigationConstrainer>
-						<CompressedPrimaryNavigationContainer
-							aria-label="Primary Navigation"
-						>
-							<CompressedPrimaryNavigationList>
-							{
-								content.links.primary.map((link) =>
-									<CompressedPrimaryNavigationListItem
-										key={link.key}
-										$smallNavVisible={smallNavVisible}
-									>
-										<Button
-											text={link.anchorText}
-											url={link.url}
-											size="standard"
-											surfaceStyle="transparent"
-											contextColor="onDark"
-										/>
-									</CompressedPrimaryNavigationListItem>
-								)
-							}
-							</CompressedPrimaryNavigationList>
-						</CompressedPrimaryNavigationContainer>
-						<CompressedSecondaryNavigationContainer
-							aria-label="Secondary Navigation"
-						>
-							<CompressedSecondaryNavigationList>
-							{
-								content.links.secondary.map((link, linkIndex) =>
-									<CompressedSecondaryNavigationListItem
-										key={link.key}
-										$gridArea={returnSecondaryLinkGridArea({
-											linkIndex,
-											'anchorText': link.anchorText
-										})}
-										$smallNavVisible={smallNavVisible}
-									>
-										<Button
-											text={link.anchorText}
-											url={link.url}
-											size={link.anchorIconBefore ? 'standard' : 'small'}
-											surfaceStyle="transparent"
-											contextColor="onDark"
-											iconBefore={link.anchorIconBefore}
-											textHidden={link.anchorIconBefore ? true : false}
-										/>
-									</CompressedSecondaryNavigationListItem>
-								)
-							}
-							</CompressedSecondaryNavigationList>
-						</CompressedSecondaryNavigationContainer>
-					</CompressedNavigationConstrainer>
-				</CompressedNavigationContainer>
 			</Header>
 		</AppHeaderContainer>
 	);

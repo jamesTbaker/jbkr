@@ -124,6 +124,7 @@ export declare const foundation: {
     };
     position: {
         zIndexes: {
+            compressedTableOfContentsContainer: number;
             header: number;
             contentDimmer: number;
             compressedNavigationContainer: number;

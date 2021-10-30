@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock
+	deviceWidthQuery, color, hiddenBlock, zIndexNumber
 } from '@jbkr/style-service';
 // import { MainContent } from '../Layout/MainContent';
 import { Aside } from '../Layout/Aside';
@@ -77,10 +77,10 @@ const ProfileSectionsData = {
 };
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		margin-top: 13rem;
-		display: grid;
+		margin-top: 23rem;
+		/* display: grid;
 		grid-template-areas:	"aside"
-								"main";
+								"main"; */
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: relative;
@@ -149,7 +149,7 @@ const BrandLink = styled.a`
 `;
 const MainContentContainer = styled.main`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		grid-area: main;
+		/* grid-area: main; */
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
@@ -221,8 +221,18 @@ const ExpandedTableOfContentsListItem = styled.li`
 `;
 const CompressedTableOfContentsContainer = styled.aside`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		grid-area: aside;
+		/* grid-area: aside; */
 		padding: 3rem 2rem;
+		position: fixed;
+		top: 13rem;
+		width: 100%;
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 37,
+			'format': 'string',
+		})};
+		z-index: ${zIndexNumber().compressedTableOfContentsContainer};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: none;
@@ -231,16 +241,28 @@ const CompressedTableOfContentsContainer = styled.aside`
 const CompressedTableOfContentsListContainer = styled.nav`
 `;
 const CompressedTableOfContentsList = styled.ol`
-	max-width: 36rem;
-	margin: 1rem 0 0;
-	padding: 2rem;
+		position: fixed;
+		top: 23rem;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 2rem;
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 37,
+			'format': 'string',
+		})};
+
+	/* max-width: 36rem;
 	border-radius: .375rem;
 	background-color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': 39,
 		'format': 'string',
-	})};
+	})}; */
 `;
 const CompressedTableOfContentsListItem = styled.li`
 	list-style-type: none;

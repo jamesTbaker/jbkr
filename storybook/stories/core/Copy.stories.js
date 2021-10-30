@@ -59,4 +59,5 @@ export const Playground = Template.bind({});
 Playground.args = {
 	'kind': 'h1',
 	'children': 'The quick brown fox jumped over the lazy dog.',
+	'htmlContent': 'The quick brown fox jumped over the lazy dog.',
 };

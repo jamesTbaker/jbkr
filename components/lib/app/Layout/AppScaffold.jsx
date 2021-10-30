@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { deviceWidthQuery } from '@jbkr/style-service';
 import { hiddenBlock } from '@jbkr/style-service';
 import { Banner } from '../Layout/Banner';
 import { AppHeader } from '../Layout/AppHeader';
@@ -9,7 +10,18 @@ import { AppFooter } from '../Layout/AppFooter';
 const SkipLinksContainer = styled.div`
 	${hiddenBlock}
 `;
-
+const SkipLinkListItemLargeDevice = styled.li`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+	}
+`;
+const SkipLinkListItemNotLargeDevice = styled.li`
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+`;
 export const AppScaffold = ({
 	'meta': {
 		metaDescription,
@@ -95,25 +107,36 @@ export const AppScaffold = ({
 				}
 			</Head>
 			<SkipLinksContainer>
-				{
-					hasTableOfContents &&
-					<ul>
+				<ul>
+					<SkipLinkListItemNotLargeDevice>
+						<a href="#compressed-navigation-parent">
+							Skip to site's navigation.
+						</a>
+					</SkipLinkListItemNotLargeDevice>
+					<SkipLinkListItemLargeDevice>
+						<a href="###############">
+							Skip to site's primary navigation.
+						</a>
+					</SkipLinkListItemLargeDevice>
+					<SkipLinkListItemLargeDevice>
+						<a href="###############">
+							Skip to site's secondary navigation.
+						</a>
+					</SkipLinkListItemLargeDevice>
+					<li>
+						<a href="#main-content">
+							Skip to this page's main content.
+						</a>
+					</li>
+					{
+						hasTableOfContents &&
 						<li>
 							<a href="#table-of-contents">
-								Skip to table of contents
+								Skip to this page's table of contents.
 							</a>
 						</li>
-						<li>
-							<a href="#main-content">
-								Skip to main content
-							</a>
-						</li>
-					</ul>
-				}
-				{
-					!hasTableOfContents &&
-					<a href="#main-content">Skip to main content</a>
-				}
+					}
+				</ul>
 			</SkipLinksContainer>
 			<AppHeader
 				content={header}
