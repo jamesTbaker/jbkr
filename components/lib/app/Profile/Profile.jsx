@@ -147,7 +147,11 @@ const BrandLink = styled.a`
 		}
 	}
 `;
-const MainContentContainer = styled.main`
+const MainContentContainer = styled.main.attrs(() => {
+	return {
+		'id': 'main-content',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		/* grid-area: main; */
 	}
@@ -194,7 +198,11 @@ const MainContentContainer = styled.main`
 		background-size: 884px 438px;
 	}
 `;
-const ExpandedTableOfContentsContainer = styled.aside`
+const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
+	return {
+		'aria-label': 'Page Complimentary Information',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -205,7 +213,12 @@ const ExpandedTableOfContentsContainer = styled.aside`
 		height: 100%;
 	}
 `;
-const ExpandedTableOfContentsListContainer = styled.nav`
+const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'expanded-table-of-contents',
+		'aria-label': 'Page Table of Contents',
+	};
+})`
 	width: 28rem;
 	position: sticky;
 	top: 37rem;
@@ -219,7 +232,11 @@ const ExpandedTableOfContentsListItem = styled.li`
 	list-style-type: none;
 	margin-bottom: 4rem;
 `;
-const CompressedTableOfContentsContainer = styled.aside`
+const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
+	return {
+		'aria-label': 'Page Complimentary Information',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		/* grid-area: aside; */
 		padding: 3rem 2rem;
@@ -238,8 +255,12 @@ const CompressedTableOfContentsContainer = styled.aside`
 		display: none;
 	}
 `;
-const CompressedTableOfContentsListContainer = styled.nav`
-`;
+const CompressedTableOfContentsListContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'compressed-table-of-contents',
+		'aria-label': 'Page Table of Contents',
+	};
+})``;
 const CompressedTableOfContentsList = styled.ol`
 		position: fixed;
 		top: 23rem;
@@ -375,7 +396,7 @@ export const Profile = ({
 	volunteerExperiences
 }) => (
 	<ProfileContainer>
-		<MainContentContainer id="main-content" role="main">
+		<MainContentContainer>
 			<ProfileHeader>
 				<BrandContainer>
 					<BrandLink
@@ -616,38 +637,36 @@ export const Profile = ({
 				</VolunteerExperiencesContainer>
 			</ProfileSection>
 		</MainContentContainer>
-		<CompressedTableOfContentsContainer
-			id="table-of-contents"
-		>
-			<Collapsible
-				button={{
-					'size': 'small',
-					'surfaceStyle': 'outlined',
-					'contextColor': 'onDark',
-					'text': 'Contents'
-				}}
-				internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
-				copyKind="profile--table-of-contents-item--anchor--not-large-device"
-			>
-				<CompressedTableOfContentsListContainer>
-					<CompressedTableOfContentsList>
-						{
-							Object.keys(ProfileSectionsData).map((sectionKey) =>
-								<CompressedTableOfContentsListItem
-									key={`compressed--${ProfileSectionsData[sectionKey].id}`}
-								>
-										<CopyLink
-											url={`#${ProfileSectionsData[sectionKey].hash}`}
-											inline={false}
-										>
-											{ProfileSectionsData[sectionKey].anchor}
-										</CopyLink>
-								</CompressedTableOfContentsListItem>,
-							)
-						}
-					</CompressedTableOfContentsList>
-				</CompressedTableOfContentsListContainer>
-			</Collapsible>
+		<CompressedTableOfContentsContainer>
+			<CompressedTableOfContentsListContainer>
+				<Collapsible
+					button={{
+						'size': 'small',
+						'surfaceStyle': 'outlined',
+						'contextColor': 'onDark',
+						'text': 'Contents'
+					}}
+					internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
+					copyKind="profile--table-of-contents-item--anchor--not-large-device"
+				>
+						<CompressedTableOfContentsList>
+							{
+								Object.keys(ProfileSectionsData).map((sectionKey) =>
+									<CompressedTableOfContentsListItem
+										key={`compressed--${ProfileSectionsData[sectionKey].id}`}
+									>
+											<CopyLink
+												url={`#${ProfileSectionsData[sectionKey].hash}`}
+												inline={false}
+											>
+												{ProfileSectionsData[sectionKey].anchor}
+											</CopyLink>
+									</CompressedTableOfContentsListItem>,
+								)
+							}
+						</CompressedTableOfContentsList>
+				</Collapsible>
+			</CompressedTableOfContentsListContainer>
 		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>
 			<ExpandedTableOfContentsListContainer>

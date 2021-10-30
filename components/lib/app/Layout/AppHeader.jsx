@@ -44,7 +44,7 @@ const AppHeaderContainer = styled.div`
 		text-align: center;
 	}
 `;
-const Aside = styled.aside`
+const Aside = styled.div`
 	grid-area: aside;
 	border-bottom: solid .125rem ${color({
 		'kind': 'Neutral',
@@ -66,7 +66,11 @@ const Aside = styled.aside`
 		max-width: 150rem;
 	}
 `;
-const Header = styled.header`
+const Header = styled.header.attrs(() => {
+	return {
+		'aria-label': 'Site Header',
+	};
+})`
 	grid-area: header;
 	display: grid;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -82,7 +86,11 @@ const Header = styled.header`
 		text-align: left;
 	}
 `;
-const AnnouncementContainer = styled.div`
+const AnnouncementContainer = styled.aside.attrs(() => {
+	return {
+		'aria-label': 'Sitewide Announcement',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: flex;
 		flex-direction: row;
@@ -116,7 +124,18 @@ const AnnouncementBody = styled.span`
 		}
 	}
 `;
-const ExpandedSecondaryNavigationContainer = styled.nav`
+const ExpandedSecondaryNavigationListContainer = styled.aside.attrs(() => {
+	return {
+		'id': 'expanded-site-secondary-navigation',
+		'aria-label': 'Site Complementary Information',
+	};
+})``;
+const ExpandedSecondaryNavigationContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'expanded-site-secondary-navigation',
+		'aria-label': 'Site Secondary Navigation',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -147,7 +166,8 @@ const ExpandedSecondaryNavigationListItem = styled.li`
 `;
 const CompressedNavigationToggleContainer = styled.nav.attrs(() => {
 	return {
-		'id': 'compressed-navigation-parent',
+		'id': 'compressed-navigation-container',
+		'aria-label': 'Site Primary and Secondary Navigation',
 	};
 })`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -162,9 +182,9 @@ const CompressedNavigationToggleButton = styled.button.attrs(({
 	$smallNavVisible,
 }) => {
 	return {
-		'aria-label': 'Toggle site navigation',
+		'aria-label': 'Toggle Access to Site Primary and Secondary Navigation',
 		'aria-expanded': $smallNavVisible,
-		'aria-controls': 'compressed-navigation',
+		'aria-controls': 'compressed-navigation-links',
 		'aria-haspopup': 'true',
 	};
 })`
@@ -306,7 +326,12 @@ const BrandLink = styled.a`
 		}
 	}
 `;
-const ExpandedPrimaryNavigationContainer = styled.nav`
+const ExpandedPrimaryNavigationContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'expanded-site-primary-navigation',
+		'aria-label': 'Site Primary Navigation',
+	};
+})`
 	grid-area: expandedPrimaryNav;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -338,7 +363,7 @@ const ExpandedPrimaryNavigationListItem = styled.li`
 `;
 const CompressedNavigationContainer = styled.div.attrs(() => {
 	return {
-		'id': 'compressed-navigation',
+		'id': 'compressed-navigation-links',
 	};
 })`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -371,7 +396,11 @@ const CompressedNavigationConstrainer = styled.div`
 		${verticalAlignMiddle}
 	}
 `;
-const CompressedPrimaryNavigationContainer = styled.div`
+const CompressedPrimaryNavigationContainer = styled.section.attrs(() => {
+	return {
+		'aria-label': 'Site Primary Navigation',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		border-top: solid .125rem ${color({
 			'kind': 'Neutral',
@@ -424,7 +453,11 @@ const CompressedPrimaryNavigationListItem = styled.li`
 		`}
 	}
 `;
-const CompressedSecondaryNavigationContainer = styled.div``;
+const CompressedSecondaryNavigationContainer = styled.section.attrs(() => {
+	return {
+		'aria-label': 'Site Secondary Navigation',
+	};
+})``;
 const CompressedSecondaryNavigationList = styled.ul`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: grid;
@@ -533,58 +566,6 @@ export const AppHeader = ({ content }) => {
 	};
 	return (
 		<AppHeaderContainer>
-			<Aside
-				role="banner"
-			>
-				<AnnouncementContainer>
-					<AnnouncementPreface>
-						<Copy
-							kind="announcement--preface"
-						>
-							{content.announcement.preface}
-						</Copy>
-					</AnnouncementPreface>
-					<AnnouncementBody>
-						<Copy
-							kind="announcement--body"
-						>
-							<CopyLink
-								url={content.announcement.bodyURL}
-								htmlContent={
-									returnLibLabItemAnchorText({
-										'rawtext': content.announcement.bodyAnchor
-									})
-								}
-								inline={false}
-							/>
-						</Copy>
-					</AnnouncementBody>
-				</AnnouncementContainer>
-				<ExpandedSecondaryNavigationContainer>
-					<ExpandedSecondaryNavigationList>
-						{
-							content.links.secondary.map((link, linkIndex) =>
-								<ExpandedSecondaryNavigationListItem
-									key={link.key}
-								>
-									<Button
-										text={link.anchorText}
-										url={link.url}
-										size={link.anchorIconBefore ? 'standard' : 'small'}
-										surfaceStyle="transparent"
-										contextColor="onDark"
-										iconBefore={link.anchorIconBefore}
-										textHidden={
-											link.anchorIconBefore ?
-											true : false
-										}
-									/>
-								</ExpandedSecondaryNavigationListItem>
-							)
-						}
-					</ExpandedSecondaryNavigationList>
-				</ExpandedSecondaryNavigationContainer>
-			</Aside>
 			<Header>
 				<CompressedNavigationToggleContainer>
 					<CompressedNavigationToggle
@@ -677,6 +658,58 @@ export const AppHeader = ({ content }) => {
 					</ExpandedPrimaryNavigationList>
 				</ExpandedPrimaryNavigationContainer>
 			</Header>
+			<Aside>
+				<AnnouncementContainer>
+					<AnnouncementPreface>
+						<Copy
+							kind="announcement--preface"
+						>
+							{content.announcement.preface}
+						</Copy>
+					</AnnouncementPreface>
+					<AnnouncementBody>
+						<Copy
+							kind="announcement--body"
+						>
+							<CopyLink
+								url={content.announcement.bodyURL}
+								htmlContent={
+									returnLibLabItemAnchorText({
+										'rawtext': content.announcement.bodyAnchor
+									})
+								}
+								inline={false}
+							/>
+						</Copy>
+					</AnnouncementBody>
+				</AnnouncementContainer>
+				<ExpandedSecondaryNavigationListContainer>
+					<ExpandedSecondaryNavigationContainer>
+						<ExpandedSecondaryNavigationList>
+							{
+								content.links.secondary.map((link, linkIndex) =>
+									<ExpandedSecondaryNavigationListItem
+										key={link.key}
+									>
+										<Button
+											text={link.anchorText}
+											url={link.url}
+											size={link.anchorIconBefore ? 'standard' : 'small'}
+											surfaceStyle="transparent"
+											contextColor="onDark"
+											iconBefore={link.anchorIconBefore}
+											textHidden={
+												link.anchorIconBefore ?
+												true : false
+											}
+										/>
+									</ExpandedSecondaryNavigationListItem>
+								)
+							}
+						</ExpandedSecondaryNavigationList>
+					</ExpandedSecondaryNavigationContainer>
+				</ExpandedSecondaryNavigationListContainer>
+			</Aside>
 		</AppHeaderContainer>
 	);
 };

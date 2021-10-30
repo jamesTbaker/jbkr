@@ -109,33 +109,41 @@ export const AppScaffold = ({
 			<SkipLinksContainer>
 				<ul>
 					<SkipLinkListItemNotLargeDevice>
-						<a href="#compressed-navigation-parent">
-							Skip to site's navigation.
+						<a href="#compressed-navigation-container">
+							Skip to site's primary and secondary navigation.
 						</a>
 					</SkipLinkListItemNotLargeDevice>
+					{
+						hasTableOfContents &&
+						<SkipLinkListItemNotLargeDevice>
+							<a href="#compressed-table-of-contents">
+								Skip to page's table of contents.
+							</a>
+						</SkipLinkListItemNotLargeDevice>
+					}
 					<SkipLinkListItemLargeDevice>
-						<a href="###############">
+						<a href="#expanded-site-primary-navigation">
 							Skip to site's primary navigation.
 						</a>
 					</SkipLinkListItemLargeDevice>
 					<SkipLinkListItemLargeDevice>
-						<a href="###############">
+						<a href="#expanded-site-secondary-navigation">
 							Skip to site's secondary navigation.
 						</a>
 					</SkipLinkListItemLargeDevice>
+					{
+						hasTableOfContents &&
+						<SkipLinkListItemLargeDevice>
+							<a href="#expanded-table-of-contents">
+								Skip to page's table of contents.
+							</a>
+						</SkipLinkListItemLargeDevice>
+					}
 					<li>
 						<a href="#main-content">
 							Skip to this page's main content.
 						</a>
 					</li>
-					{
-						hasTableOfContents &&
-						<li>
-							<a href="#table-of-contents">
-								Skip to this page's table of contents.
-							</a>
-						</li>
-					}
 				</ul>
 			</SkipLinksContainer>
 			<AppHeader
