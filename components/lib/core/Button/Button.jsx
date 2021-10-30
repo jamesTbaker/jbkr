@@ -489,7 +489,7 @@ const ButtonElement = styled.span.attrs(({
 						'format': 'string'
 					});
 			if ($url && $url.startsWith('http')) {
-				linkStyleStatments = 'display: block; width: max-content; text-decoration: none;'; // display: inline-grid;
+				linkStyleStatments = 'display: block; width: max-content; text-decoration: none;';
 			}
 			return `
 				${linkStyleStatments}

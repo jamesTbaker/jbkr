@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
-import { color } from '@jbkr/style-service';
+import { zIndexNumber } from '@jbkr/style-service';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../Copy/Copy';
 
@@ -11,13 +11,16 @@ const FadeInAnimation = keyframes`
 `;
 const CollapsibleContentContainer = styled.div`
 	height: 0;
-	opacity: 0;
+	/* opacity: 0; */
 	overflow: hidden;
-	transition: height .75s, opacity .75s;
+
+	transition: height .75s;
+	/* , opacity .75s; */
+	z-index: ${zIndexNumber().compressedTableOfContentsContainer};
 	${({ $contentVisible }) => $contentVisible && css`
 		height: 100%;
-		opacity: 1;
-		/* animation-name: ${FadeInAnimation};
+		/* opacity: 1;
+		animation-name: ${FadeInAnimation};
 		animation-duration: 0.35s;
 		animation-timing-function: ease-in;
 		animation-delay: 0s;
@@ -67,7 +70,8 @@ export const Collapsible = ({
 				<Copy
 					kind={copyKind}
 				>
-					{children}
+					{React.cloneElement(children, { contentVisible })}
+					{/* {children} */}
 				</Copy>
 			</CollapsibleContentContainer>
 		</div>

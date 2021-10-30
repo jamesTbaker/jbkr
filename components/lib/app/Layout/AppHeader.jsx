@@ -194,6 +194,21 @@ const CompressedNavigationToggleButton = styled.button.attrs(({
 	padding: .75rem .5rem .75rem;
 	border: none;
 	background-color: transparent;
+	&:focus {
+		outline: none;
+		border-radius: .375rem;
+		box-shadow: 0 0 0 .25rem ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 41,
+			'format': 'string'
+		})}, 0 0 0 .5rem ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		})};
+	}
 `;
 const CompressedNavigationToggleLayer = styled.span`
 	display: block;
