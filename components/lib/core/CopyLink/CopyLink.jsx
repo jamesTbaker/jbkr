@@ -114,6 +114,7 @@ const CopyLinkContainer = styled.span`
 			} else {
 				return `
 					a {
+						display: block;
 						color: ${primaryColor};
 						text-decoration: none;
 						transition: background 250ms ease;
