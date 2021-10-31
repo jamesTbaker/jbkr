@@ -2,7 +2,7 @@ import {
 	Color, KindKey, AllToneKey,
 	TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey,
 	DeviceWidthToken, Device, DeviceWidthQuery, ShadowLevelKeyOf17, AllColors,
-} from '@jbkr/models';
+} from '@jbkr/models-typescript';
 import { returnHSLAStringFromHSLAObject } from '@jbkr/utilities';
 import { foundation } from '../store/foundation.js';
 import { color } from '../store/color.js';

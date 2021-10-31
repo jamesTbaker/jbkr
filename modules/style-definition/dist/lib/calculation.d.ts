@@ -1,4 +1,4 @@
-import { AllColors, DeviceWidthToken, TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey, TypeStyle, AllTypeStyles, AllShadows } from '@jbkr/models';
+import { AllColors, DeviceWidthToken, TypeSizeKey, TypeWeightKey, TypeLineHeightKey, TypeSlantKey, TypeStyle, AllTypeStyles, AllShadows } from '@jbkr/models-typescript';
 /**
  * Get all colors from the stored Figma pages. This includes the colors
  * assigned to the jbkr brand and the colors representing

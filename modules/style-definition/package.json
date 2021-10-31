@@ -14,11 +14,10 @@
 		"build": "npm run compile-local && npm run build-store && npm run compile-store-declarations && npm run clone-store"
 	},
 	"dependencies": {
-		"axios": "^0.21.1",
-		"utilities": "file:../utilities"
+		"axios": "^0.21.1"
 	},
 	"devDependencies": {
-		"@jbkr/models": "file:../models",
+		"@jbkr/models-typescript": "file:../models-typescript",
 		"@jbkr/utilities": "file:../utilities",
 		"@types/fs-extra": "^9.0.12",
 		"@types/node": "^16.4.10",

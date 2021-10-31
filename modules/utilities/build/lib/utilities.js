@@ -66,7 +66,7 @@ export const returnCopyOfObjectWithStringKeys = ({ incoming }) => {
     }
     catch (error) {
         // return the error
-        return error;
+        return { error };
     }
 };
 export const returnValueIsJSONParsableString = ({ incomingValue }) => {

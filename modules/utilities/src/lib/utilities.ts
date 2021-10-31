@@ -1,4 +1,4 @@
-import { Color } from '@jbkr/models';
+import { Color } from '@jbkr/models-typescript';
 export const returnHSLAStringFromHSLAObject = (
 	{ hslaObject }:
 	{hslaObject: Color},
@@ -81,7 +81,7 @@ export const returnCopyOfObjectWithStringKeys = (
 	// if attempt to get an object resulted in an error
 	} catch (error) {
 		// return the error
-		return error;
+		return { error };
 	}
 };
 

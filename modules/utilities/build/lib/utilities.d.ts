@@ -1,4 +1,4 @@
-import { Color } from '@jbkr/models';
+import { Color } from '@jbkr/models-typescript';
 export declare const returnHSLAStringFromHSLAObject: ({ hslaObject }: {
     hslaObject: Color;
 }) => string;

@@ -1,7 +1,7 @@
 /**
  * @module Style Definition
  */
-import { FigmaPage } from '@jbkr/models';
+import { FigmaPage } from '@jbkr/models-typescript';
 /**
  * Get the specified file from the Figma API. Extract and return only
  * the pages specified in {@link foundation | `foundation`}.

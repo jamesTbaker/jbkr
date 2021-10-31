@@ -13,7 +13,7 @@ import {
 	FigmaPage, AllColors, DeviceWidthToken, TypeSizeKey, TypeWeightKey,
 	TypeLineHeightKey, TypeSlantKey, TypeStyle, AllTypeStyles,
 	ShadowSubset, AllShadows,
-} from '@jbkr/models';
+} from '@jbkr/models-typescript';
 import { foundation } from './foundation.js';
 import {
 	storeFigmaStylePages, returnStoredFigmaStylePages,

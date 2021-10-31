@@ -1,10 +1,9 @@
 {
-	"name": "@jbkr/models",
+	"name": "@jbkr/models-typescript",
 	"version": "0.1.0",
-	"description": "Type Definitions and Interfaces.",
+	"description": "Type Definitions and Interfaces for TypeScript modules.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"private": true,
 	"type": "module"
 }
