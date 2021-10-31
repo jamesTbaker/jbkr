@@ -1,4 +1,4 @@
-import { Scaffold } from '../Layout/Scaffold';
+import { AppScaffold } from '../Layout/AppScaffold';
 import { MainContent } from '../Layout/MainContent';
 import { ArticleSummaries } from '../Articles/ArticleSummaries';
 
@@ -9,7 +9,7 @@ export const LibLabScreen = ({
 	main,
 	footer,
 }) => (
-	<Scaffold
+	<AppScaffold
 		meta={meta}
 		header={header}
 		footer={footer}
@@ -20,5 +20,5 @@ export const LibLabScreen = ({
 				articles={main.articles}
 			/>
 		</MainContent>
-	</Scaffold>
+	</AppScaffold>
 );

@@ -48,7 +48,7 @@ export const style = {
             color[kind][tone][level]) {
             colorObject = color[kind][tone][level];
         }
-        if (alpha) {
+        if (typeof (alpha) === 'number') {
             colorObject.a = alpha;
         }
         if (format === 'string') {
@@ -87,6 +87,9 @@ export const style = {
             }
             return typeString;
         },
+    },
+    'icon': {
+        'size': ({ deviceWidth, size, }) => type[deviceWidth][size].regular.normal.display.size,
     },
     'position': {
         'verticalAlignMiddle': () => foundation

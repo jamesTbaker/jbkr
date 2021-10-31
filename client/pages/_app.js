@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { normalize } from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
-import { color, typeFamily } from '@jbkr/style-service';
+import { deviceWidthQuery, color, typeFamily } from '@jbkr/style-service';
 import Prism from 'prismjs';
 import { prismCSS } from '@jbkr/syntax-highlighting';
 
@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		${typeFamily()}
 		font-size: 2rem;
+		text-align: left;
 		color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Base',
@@ -34,7 +35,6 @@ const GlobalStyle = createGlobalStyle`
 	'level': 37,
 	'format': 'string',
 })};
-	scroll-behavior: smooth;
 	}
 `;
 

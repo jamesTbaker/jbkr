@@ -33,6 +33,14 @@
       "type": "integer",
       "required": true,
       "default": 0
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "certification",
+        "graduate",
+        "undergraduate"
+      ]
     }
   }
 }

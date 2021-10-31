@@ -90,8 +90,7 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 					},
 				},
 			]).toArray();
-		// assign query result to constant
-		const headers =
+		const headerMain =
 			await dbConnection.collection('headers').aggregate([
 				// look up the meta image for this screen
 				{
@@ -108,22 +107,30 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 				{
 					'$project': {
 						'_id': 0,
+						'AnnouncementBodyAnchor': 1,
+						'AnnouncementBodySlug': 1,
+						'AnnouncementPreface': 1,
 						'Links._id': 1,
 						'Links.Category': 1,
 						'Links.OrderInSet': 1,
 						'Links.AnchorText': 1,
+						'Links.AnchorIconBefore': 1,
 						'Links.URL': 1,
 						'Links.NewTab': 1,
 						'Links.ScreenIDs': 1,
+						'Links.Disabled': 1,
 					},
 				},
-				/**
-				 * @todo The order of returned items is correct, but the
-				 * following sort stage doesn't actually impact order
-				 */
-				// specify sort order
-				{ '$sort': { 'Links.OrderInSet': 1 } },
 			]).toArray();
+		const headerArticle = await dbConnection.collection('articles')
+			.find({}, {
+				'projection': {
+					'_id': 0,
+					'Title': 1,
+					'Subtitle': 1,
+					'Slug': 1,
+				},
+			}).sort({ 'PublicationDate': -1 }).limit(1).toArray();
 		const footer = await dbConnection.collection('footers')
 			.findOne({}, {
 				'projection': {
@@ -133,7 +140,8 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 			});
 		// return results, serialized and deserialized to convert BSON to JSON
 		return {
-			'header': JSON.parse(JSON.stringify(headers))[0],
+			'headerMain': JSON.parse(JSON.stringify(headerMain))[0],
+			'headerArticle': JSON.parse(JSON.stringify(headerArticle))[0],
 			'main': JSON.parse(JSON.stringify(mains))[0],
 			'footer': footer,
 		};
@@ -201,6 +209,7 @@ export const returnAllProfessionalExperiencesFromDB = async () => {
 					'StartDate': 1,
 					'EndDate': 1,
 					'Description': 1,
+					'Employer': 1,
 				},
 			}).sort({ 'EndDate': -1 }).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON
@@ -228,6 +237,7 @@ export const returnAllEducationCertificationFromDB = async () => {
 					'Tagline': 1,
 					'EndYear': 1,
 					'Details': 1,
+					'Type': 1,
 				},
 			}).sort({ 'OrderInSet': 1 }).toArray();
 		// return result, serialized and deserialized to convert BSON to JSON

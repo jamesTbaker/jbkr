@@ -1,4 +1,4 @@
-import { Scaffold } from '../Layout/Scaffold';
+import { AppScaffold } from '../Layout/AppScaffold';
 import { MainContent } from '../Layout/MainContent';
 import { Aside } from '../Layout/Aside';
 import { ArticleTableOfContents } from '../Articles/ArticleTableOfContents';
@@ -10,7 +10,7 @@ export const ArticleScreen = ({
 	main,
 	footer,
 }) => (
-	<Scaffold
+	<AppScaffold
 		meta={meta}
 		header={header}
 		footer={footer}
@@ -25,13 +25,13 @@ export const ArticleScreen = ({
 				mainContent={main.article.mainContent}
 			/>
 		</MainContent>
-		<Aside>
-			{
-				main.article.frontMatter.tableOfContents &&
+		{
+			main.article.frontMatter.tableOfContents &&
+			<Aside>
 				<ArticleTableOfContents
 					contents={main.article.frontMatter.tableOfContents}
 				/>
-			}
-		</Aside>
-	</Scaffold>
+			</Aside>
+		}
+	</AppScaffold>
 );

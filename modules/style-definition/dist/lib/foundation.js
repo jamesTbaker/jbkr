@@ -33,10 +33,10 @@ export const foundation = {
             'specs': {
                 's': {
                     'minimum': 0,
-                    'maximum': 414,
+                    'maximum': 479,
                 },
                 'm': {
-                    'minimum': 415,
+                    'minimum': 480,
                     'maximum': 1024,
                 },
                 'l': {
@@ -108,8 +108,8 @@ export const foundation = {
                 'bold',
             ],
             'baseMultipliersByWeight': {
-                'regular': 20,
-                'bold': 25,
+                'regular': 17,
+                'bold': 35,
             },
             'scalingMultipliersByWeight': {
                 'regular': {
@@ -154,13 +154,18 @@ export const foundation = {
     },
     'position': {
         'zIndexes': {
-            'backgroundPrimary': -1,
-            'backgroundSecondary': -1,
-            'contentPrimary': 1,
-            'header': 10,
-            'contentDimmer': 20,
-            'modal': 30,
-            'modalToggle': 31,
+            'compressedTableOfContentsContainer': 1010,
+            'header': 1020,
+            'contentDimmer': 1030,
+            'compressedNavigationContainer': 1040,
+            'modal': 1100,
+            'modalToggle': 1101,
+            'profileSectionContainer': 10,
+            'profileSectionVideo': 11,
+            'profileSectionVideoOverlay': 12,
+            'profileSectionTitleUnderlay': 13,
+            'profileSectionContent': 14,
+            'profileNavigation': 100,
         },
         'verticalAlignMiddle': `position: relative;
 			top: 50%;

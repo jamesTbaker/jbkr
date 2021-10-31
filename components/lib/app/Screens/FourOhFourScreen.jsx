@@ -1,4 +1,4 @@
-import { Scaffold } from '../Layout/Scaffold';
+import { AppScaffold } from '../Layout/AppScaffold';
 import { MainContent } from '../Layout/MainContent';
 
 export const FourOhFourScreen = ({
@@ -7,7 +7,7 @@ export const FourOhFourScreen = ({
 	main,
 	footer,
 }) => (
-	<Scaffold
+	<AppScaffold
 		meta={meta}
 		header={header}
 		footer={footer}
@@ -18,5 +18,5 @@ export const FourOhFourScreen = ({
 				dangerouslySetInnerHTML={{ '__html': main.contentItems.main }}
 			/>
 		</MainContent>
-	</Scaffold>
+	</AppScaffold>
 );

@@ -16,6 +16,15 @@
       "type": "component",
       "repeatable": true,
       "component": "header-footer.header-footer-link-primary"
+    },
+    "AnnouncementPreface": {
+      "type": "string"
+    },
+    "AnnouncementBodyAnchor": {
+      "type": "string"
+    },
+    "AnnouncementBodySlug": {
+      "type": "string"
     }
   }
 }

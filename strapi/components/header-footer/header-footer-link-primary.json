@@ -29,6 +29,43 @@
     },
     "ScreenIDs": {
       "type": "json"
+    },
+    "AnchorIconBefore": {
+      "type": "enumeration",
+      "enum": [
+        "arrow_up",
+        "arrow_down",
+        "arrow_left",
+        "arrow_right",
+        "arrow_right_up",
+        "arrow_right_down",
+        "arrow_left_down",
+        "arrow_left_up",
+        "chevron_up",
+        "chevron_down",
+        "chevron_left",
+        "chevron_right",
+        "chevron_double_up",
+        "chevron_double_down",
+        "chevron_double_left",
+        "chevron_double_right",
+        "snowflake",
+        "package",
+        "function",
+        "link",
+        "twitter",
+        "youtube",
+        "linkedin",
+        "behance",
+        "dribbble",
+        "code_sandbox",
+        "codepen",
+        "medium",
+        "email"
+      ]
+    },
+    "Disabled": {
+      "type": "boolean"
     }
   }
 }

@@ -10,6 +10,7 @@ export const color = style.color;
 export const colors = style.colors;
 export const typeFamily = style.type.family;
 export const typeStyle = style.type.style;
+export const iconSize = style.icon.size;
 export const verticalAlignMiddle = style.position.verticalAlignMiddle;
 export const zIndexNumber = style.position.zIndexNumber;
 export const shadow = style.position.shadow;

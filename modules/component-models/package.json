@@ -1,0 +1,10 @@
+{
+	"name": "@jbkr/component-models",
+	"version": "0.1.0",
+	"description": "component models",
+	"main": "index.js",
+	"author": "James Baker",
+	"license": "UNLICENSED",
+	"private": true,
+	"type": "module"
+}

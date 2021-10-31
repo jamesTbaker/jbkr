@@ -2,14 +2,19 @@ import React from 'react';
 import { Normalize } from 'styled-normalize';
 import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
 import { createGlobalStyle } from 'styled-components';
-import { typeFamily, color } from '@jbkr/style-service';
+import { typeFamily, color, deviceWidthQuery } from '@jbkr/style-service';
 
 const GlobalStyle = createGlobalStyle`
+	* {
+		box-sizing: border-box;
+	}
 	html {
 		font-size: 8px;
 	}
 	body {
 		${typeFamily()};
+		font-size: 2rem;
+		text-align: left;
 		height: 100%;
 		width: 100%;
 	}
@@ -33,6 +38,12 @@ const DarkModeStyle = createGlobalStyle`
 	'kind': 'Neutral',
 	'tone': 'Finch',
 	'level': 39,
+	'format': 'string',
+})};
+		color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Base',
+	'level': 1,
 	'format': 'string',
 })};
 	}

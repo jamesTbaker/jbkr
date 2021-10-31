@@ -1,8 +1,14 @@
 // Primitive
 export { Text } from './lib/primitive/Text/Text.jsx';
+export { Line } from './lib/primitive/Line/Line.jsx';
+export { Icon, IconNames } from './lib/primitive/Icon/Icon.jsx';
+export { Brand } from './lib/primitive/Brand/Brand.jsx';
 
 // Core
 export { Copy } from './lib/core/Copy/Copy.jsx';
+export { CopyLink } from './lib/core/CopyLink/CopyLink.jsx';
+export { Button } from './lib/core/Button/Button.jsx';
+export { Collapsible } from './lib/core/Collapsible/Collapsible.jsx';
 
 // Screens
 export { ProfileScreen } from './lib/app/Screens/ProfileScreen.jsx';
@@ -11,6 +17,9 @@ export { ContactScreen } from './lib/app/Screens/ContactScreen.jsx';
 export { ArticleScreen } from './lib/app/Screens/ArticleScreen.jsx';
 export { MetaScreen } from './lib/app/Screens/MetaScreen.jsx';
 export { FourOhFourScreen } from './lib/app/Screens/FourOhFourScreen.jsx';
+
+// Profile
+export { ProfileSkillRating } from './lib/app/Profile/ProfileSkillRating.jsx';
 
 // Article
 export { ArticleBriefStatement } from './lib/app/Articles/ArticleBriefStatement.jsx';
@@ -38,6 +47,10 @@ export { Banner } from './lib/app/Layout/Banner.jsx';
 export { Footer } from './lib/app/Layout/Footer.jsx';
 export { MainContent } from './lib/app/Layout/MainContent.jsx';
 export { Scaffold } from './lib/app/Layout/Scaffold.jsx';
+// ---
+export { AppScaffold } from './lib/app/Layout/AppScaffold.jsx';
+export { AppHeader } from './lib/app/Layout/AppHeader.jsx';
+export { AppFooter } from './lib/app/Layout/AppFooter.jsx';
 
 // Media
 export { MediaItem } from './lib/app/Media/MediaItem.jsx';

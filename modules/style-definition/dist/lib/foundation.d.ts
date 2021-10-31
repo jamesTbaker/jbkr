@@ -124,13 +124,18 @@ export declare const foundation: {
     };
     position: {
         zIndexes: {
-            backgroundPrimary: number;
-            backgroundSecondary: number;
-            contentPrimary: number;
+            compressedTableOfContentsContainer: number;
             header: number;
             contentDimmer: number;
+            compressedNavigationContainer: number;
             modal: number;
             modalToggle: number;
+            profileSectionContainer: number;
+            profileSectionVideo: number;
+            profileSectionVideoOverlay: number;
+            profileSectionTitleUnderlay: number;
+            profileSectionContent: number;
+            profileNavigation: number;
         };
         verticalAlignMiddle: string;
     };

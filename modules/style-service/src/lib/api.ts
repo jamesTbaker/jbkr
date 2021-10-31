@@ -66,7 +66,7 @@ export const style: {[key:string]: any} = {
 		) {
 			colorObject = color[kind][tone][level];
 		}
-		if (alpha) {
+		if (typeof(alpha) === 'number') {
 			colorObject.a = alpha;
 		}
 		if (format === 'string') {
@@ -122,6 +122,15 @@ export const style: {[key:string]: any} = {
 			}
 			return typeString;
 		},
+	},
+	'icon': {
+		'size': ({
+			deviceWidth,
+			size,
+		}:{
+			deviceWidth: DeviceWidthToken,
+			size: TypeSizeKey,
+		}): number => type[deviceWidth][size].regular.normal.display.size,
 	},
 	'position': {
 		'verticalAlignMiddle': (): string => foundation
