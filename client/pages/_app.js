@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { normalize } from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
-import { deviceWidthQuery, color, typeFamily } from '@jbkr/style-service';
+import { color, typeFamily } from '@jbkr/style-service';
 import Prism from 'prismjs';
 import { prismCSS } from '@jbkr/syntax-highlighting';
 
