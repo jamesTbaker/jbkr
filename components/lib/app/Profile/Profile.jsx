@@ -87,6 +87,7 @@ const ProfileContainer = styled.div`
 		margin: 14rem auto 0;
 		width: 100%;
 		max-width: 180rem;
+		scroll-margin-top: 14rem;
 	}
 `;
 const ProfileHeader = styled.header`

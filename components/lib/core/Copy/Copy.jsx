@@ -233,6 +233,7 @@ const propsSpecifications = {
 				'level': 1,
 			},
 		},
+		'more': 'padding-bottom: 2rem;',
 	},
 	'profile--skill-name--featured': {
 		'tag': 'span',

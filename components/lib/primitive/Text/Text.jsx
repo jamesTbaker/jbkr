@@ -51,7 +51,27 @@ const TextContainer = styled.div`
 						-webkit-background-clip: text;
 						color: transparent;
 					}
-					@supports not (background-clip: text) {
+					@supports (-webkit-background-clip: text) {
+						background: linear-gradient(
+							${color({
+								'kind': $gradient.colors[0].kind,
+								'tone': $gradient.colors[0].tone,
+								'level': $gradient.colors[0].level,
+								'alpha': $gradient.colors[0].alpha,
+								'format': $gradient.colors[0].format ? $gradient.colors[0].format : 'string'
+							})},
+							${color({
+								'kind': $gradient.colors[1].kind,
+								'tone': $gradient.colors[1].tone,
+								'level': $gradient.colors[1].level,
+								'alpha': $gradient.colors[1].alpha,
+								'format': $gradient.colors[1].format ? $gradient.colors[1].format : 'string'
+							})}
+						);
+						-webkit-background-clip: text;
+						color: transparent;
+					}
+					@supports not (background-clip: text) and not (-webkit-background-clip: text) {
 						color: ${color({
 							'kind': $gradient.fallbackColor.kind,
 							'tone': $gradient.fallbackColor.tone,

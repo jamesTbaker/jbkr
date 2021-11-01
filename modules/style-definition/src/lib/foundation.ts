@@ -120,8 +120,10 @@ export const foundation = {
 				'bold',
 			],
 			'baseMultipliersByWeight': {
-				'regular': 17,
-				'bold': 35,
+				'regular': 20,
+				'bold': 25,
+				// 'regular': 17,
+				// 'bold': 35,
 			},
 			'scalingMultipliersByWeight': {
 				'regular': {

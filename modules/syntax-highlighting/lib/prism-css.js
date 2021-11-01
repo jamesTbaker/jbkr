@@ -6,10 +6,10 @@ module.exports = `
 	pre[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark code[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark pre[class*="language-"] {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Neutral[1]};
 		background: ${syntaxColors.Neutral[5]};
 		text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-		font-family: 'Roboto Mono', monospace;
 		font-size: 1em;
 		text-align: left;
 		white-space: pre;
@@ -30,6 +30,7 @@ module.exports = `
 
 	pre[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark pre[class*="language-"] {
+		font-family: 'Roboto Mono', monospace;
 		padding: 1em;
 		margin: .5em 0;
 		overflow: auto;
@@ -40,11 +41,13 @@ module.exports = `
 	pre[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark :not(pre) > code[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark pre[class*="language-"] {
+		font-family: 'Roboto Mono', monospace;
 		background: ${syntaxColors.Neutral[5]};
 	}
 
 	:not(pre) > code,
 	.sbdocs :not(pre) > code {
+		font-family: 'Roboto Mono', monospace;
 		font-size: 80%;
 		padding: .125rem .25rem;
 		color: ${syntaxColors.Accent.Spruce};
@@ -58,6 +61,7 @@ module.exports = `
 
 	:not(pre) > code[class*="language-"],
 	div.os-host.os-host-foreign.os-theme-dark :not(pre) > code[class*="language-"] {
+		font-family: 'Roboto Mono', monospace;
 		padding: .1em;
 		border-radius: .3em;
 		white-space: normal;
@@ -76,16 +80,19 @@ module.exports = `
 	div.os-host.os-host-foreign.os-theme-dark .token.prolog,
 	div.os-host.os-host-foreign.os-theme-dark .token.doctype,
 	div.os-host.os-host-foreign.os-theme-dark .token.cdata {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Neutral[1]};
 	}
 
 	.token.punctuation,
 	div.os-host.os-host-foreign.os-theme-dark .token.punctuation {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Neutral[1]};
 	}
 
 	.token.namespace,
 	div.os-host.os-host-foreign.os-theme-dark .token.namespace {
+		font-family: 'Roboto Mono', monospace;
 		opacity: .7;
 	}
 
@@ -99,6 +106,7 @@ module.exports = `
 	div.os-host.os-host-foreign.os-theme-dark .token.constant,
 	div.os-host.os-host-foreign.os-theme-dark .token.symbol,
 	div.os-host.os-host-foreign.os-theme-dark .token.deleted {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Accent.Flamingo};
 	}
 
@@ -106,6 +114,7 @@ module.exports = `
 	.token.number,
 	div.os-host.os-host-foreign.os-theme-dark .token.boolean,
 	div.os-host.os-host-foreign.os-theme-dark .token.number {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Accent.Iris};
 	}
 
@@ -121,6 +130,7 @@ module.exports = `
 	div.os-host.os-host-foreign.os-theme-dark .token.char,
 	div.os-host.os-host-foreign.os-theme-dark .token.builtin,
 	div.os-host.os-host-foreign.os-theme-dark .token.inserted {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Accent.Kiwi};
 	}
 
@@ -136,6 +146,7 @@ module.exports = `
 	div.os-host.os-host-foreign.os-theme-dark .language-css .token.string,
 	div.os-host.os-host-foreign.os-theme-dark .style .token.string,
 	div.os-host.os-host-foreign.os-theme-dark .token.variable {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Neutral[1]};
 	}
 
@@ -147,11 +158,13 @@ module.exports = `
 	div.os-host.os-host-foreign.os-theme-dark .token.attr-value,
 	div.os-host.os-host-foreign.os-theme-dark .token.function,
 	div.os-host.os-host-foreign.os-theme-dark .token.class-name {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Accent.Sunshine};
 	}
 
 	.token.keyword,
 	div.os-host.os-host-foreign.os-theme-dark .token.keyword {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Accent.Spruce};
 	}
 
@@ -159,6 +172,7 @@ module.exports = `
 	.token.important,
 	div.os-host.os-host-foreign.os-theme-dark .token.regex,
 	div.os-host.os-host-foreign.os-theme-dark .token.important {
+		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Accent.Tiger};
 	}
 
@@ -166,15 +180,18 @@ module.exports = `
 	.token.bold,
 	div.os-host.os-host-foreign.os-theme-dark .token.important,
 	div.os-host.os-host-foreign.os-theme-dark .token.bold {
+		font-family: 'Roboto Mono', monospace;
 		font-weight: bold;
 	}
 	.token.italic,
 	div.os-host.os-host-foreign.os-theme-dark .token.italic {
+		font-family: 'Roboto Mono', monospace;
 		font-style: italic;
 	}
 
 	.token.entity,
 	div.os-host.os-host-foreign.os-theme-dark .token.entity {
+		font-family: 'Roboto Mono', monospace;
 		cursor: help;
 	}
 `;

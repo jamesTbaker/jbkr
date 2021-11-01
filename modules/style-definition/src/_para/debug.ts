@@ -18,4 +18,9 @@ import {
 	cloneStore,
 } from '../lib/calculation.js';
 
-buildStyleServiceStore();
+// buildStyleServiceStore();
+returnTypeWeight({
+	'baseTypeSize': 16,
+	'scalingSteps': 5,
+	'weight': 'bold',
+});
