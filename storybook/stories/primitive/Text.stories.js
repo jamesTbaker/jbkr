@@ -43,7 +43,7 @@ General.args = {
 	'color': {
 		'kind': 'Neutral',
 		'tone': 'Finch',
-		'level': 21,
+		'level': 11,
 	},
 	'children': 'The quick brown fox jumped over the lazy dog.',
 };

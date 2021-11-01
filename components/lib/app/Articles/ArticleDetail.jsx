@@ -1,17 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
+import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleIntro } from './ArticleIntro';
 import { ArticleSections } from './ArticleSections';
+
+const ArticleContainer = styled.article`
+	margin-top: 20rem;
+`;
 
 export const ArticleDetail = ({
 	title,
 	frontMatter,
 	mainContent,
 }) => (
-	<article>
+	<ArticleContainer>
 		<ArticleHeader
 			headImage={frontMatter.headImage}
 			title={title}
@@ -40,5 +45,5 @@ export const ArticleDetail = ({
 				sections={mainContent.sections}
 			/>
 		}
-	</article>
+	</ArticleContainer>
 );

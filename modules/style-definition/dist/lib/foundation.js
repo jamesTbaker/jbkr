@@ -47,8 +47,10 @@ export const foundation = {
         },
     },
     'type': {
-        'family': 'font-family: \'Inter\', -apple-system, BlinkMacSystemFont, \
-			\'San Francisco\', \'HelveticaNeue-Light\', \
+        'fontFilesImport': '@import url(\'https://rsms.me/inter/inter.css\');',
+        'fontPrimaryName': '\'Inter var\'',
+        'fontFallbacksNames': '\'Inter\', -apple-system, \
+			BlinkMacSystemFont, \'San Francisco\', \'HelveticaNeue-Light\', \
 			\'Helvetica Neue Light\', \'Helvetica Neue\', \'Helvetica\', \
 			\'Liberation Sans\', \'Nimbus Sans L\', \'Roboto\', \
 			\'Arial\', sans-serif;',
@@ -115,7 +117,7 @@ export const foundation = {
                 'regular': {
                     'natural': 1.067,
                     'maxAddition': 100,
-                    'maxSubtraction': 100,
+                    'maxSubtraction': 20,
                 },
                 'bold': {
                     'natural': 1.125,
@@ -154,6 +156,7 @@ export const foundation = {
     },
     'position': {
         'zIndexes': {
+            'grids': 2000,
             'compressedTableOfContentsContainer': 1010,
             'header': 1020,
             'contentDimmer': 1030,

@@ -4,7 +4,10 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { normalize } from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
-import { color, typeFamily } from '@jbkr/style-service';
+import {
+	gridBase, color, fontFilesImport, fontPrimaryName, fontFallbacksNames,
+	zIndexNumber,
+} from '@jbkr/style-service';
 import Prism from 'prismjs';
 import { prismCSS } from '@jbkr/syntax-highlighting';
 
@@ -13,16 +16,25 @@ const GlobalStyle = createGlobalStyle`
 
 	${normalize}
 
+	${fontFilesImport}
+
 	* {
 		box-sizing: border-box;
 	}
 	html {
-		font-size: 8px;
+		font-size: ${gridBase()}px;
+		scroll-behavior: smooth;
+		/* prevent font zooming on mobile */
+		-ms-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
 	}
 	body {
-		${typeFamily()}
+		position: relative;
+		font-family: ${fontFallbacksNames};
 		font-size: 2rem;
 		text-align: left;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
 		color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Base',
@@ -36,6 +48,27 @@ const GlobalStyle = createGlobalStyle`
 	'format': 'string',
 })};
 	}
+	@supports (font-variation-settings: normal) {
+		body {
+			font-family: ${fontPrimaryName}, ${fontFallbacksNames};
+		}
+	}
+	/* body::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: ${zIndexNumber().grids};
+		display: block;
+		background:
+			linear-gradient(-90deg, hsla(175,100%,50%,.05) 1px, transparent 1px),
+			linear-gradient(		hsla(175,100%,50%,.05) 1px, transparent 1px);
+		background-size:
+			1rem 1rem,
+			1rem 1rem;
+	} */
 `;
 
 export default function App({ Component, pageProps }) {
@@ -58,12 +91,6 @@ export default function App({ Component, pageProps }) {
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect"
 					href="https://fonts.gstatic.com" crossOrigin="true" />
-				<link rel="stylesheet"
-					href={
-						'https://fonts.googleapis.com/css2?' +
-						'family=Inter&display=swap'
-					}
-				/>
 				<link rel="stylesheet"
 					href={
 						'https://fonts.googleapis.com/css2?' +

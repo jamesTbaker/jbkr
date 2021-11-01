@@ -2,21 +2,38 @@ import React from 'react';
 import { Normalize } from 'styled-normalize';
 import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
 import { createGlobalStyle } from 'styled-components';
-import { typeFamily, color, deviceWidthQuery } from '@jbkr/style-service';
+import {
+	gridBase, color, fontFilesImport, fontPrimaryName, fontFallbacksNames,
+	zIndexNumber,
+} from '@jbkr/style-service';
 
 const GlobalStyle = createGlobalStyle`
+
+	/* For some reason, importing Inter only works in preview-head.html. */
+
 	* {
 		box-sizing: border-box;
 	}
 	html {
-		font-size: 8px;
+		font-size: ${gridBase()}px;
+		scroll-behavior: smooth;
+		/* prevent font zooming on mobile */
+		-ms-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
 	}
 	body {
-		${typeFamily()};
+		font-family: ${fontFallbacksNames};
 		font-size: 2rem;
 		text-align: left;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
 		height: 100%;
 		width: 100%;
+	}
+	@supports (font-variation-settings: normal) {
+		body {
+			font-family: ${fontPrimaryName}, ${fontFallbacksNames};
+		}
 	}
 	body.sb-show-main.sb-main-padded {
 		padding: 4rem;

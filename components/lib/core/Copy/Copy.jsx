@@ -912,11 +912,20 @@ export const Copy = ({
 		}
 	}
 	if (kind === 'copy-container--standard') {
-		return(
-			<StandardBodyContainer>
-				{children}
-			</StandardBodyContainer>
-		);
+		if (!htmlContent && children) {
+			return(
+				<StandardBodyContainer>
+					{children}
+				</StandardBodyContainer>
+			);
+		}
+		if (htmlContent) {
+			return(
+				<StandardBodyContainer
+					dangerouslySetInnerHTML={{ '__html': htmlContent }}
+				/>
+			);
+		}
 	}
 };
 Copy.propTypes = {

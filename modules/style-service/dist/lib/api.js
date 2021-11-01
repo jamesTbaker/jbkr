@@ -60,7 +60,9 @@ export const style = {
     },
     'colors': () => color,
     'type': {
-        'family': () => foundation.type.family,
+        'fontFilesImport': () => foundation.type.fontFilesImport,
+        'fontPrimaryName': () => foundation.type.fontPrimaryName,
+        'fontFallbacksNames': () => foundation.type.fontFallbacksNames,
         /**
          * @todo create and use type foundation interface
          */

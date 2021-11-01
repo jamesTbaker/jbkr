@@ -79,7 +79,9 @@ export const style: {[key:string]: any} = {
 	},
 	'colors': (): AllColors => color,
 	'type': {
-		'family': (): string => foundation.type.family,
+		'fontFilesImport': (): string => foundation.type.fontFilesImport,
+		'fontPrimaryName': (): string => foundation.type.fontPrimaryName,
+		'fontFallbacksNames': (): string => foundation.type.fontFallbacksNames,
 		/**
 		 * @todo create and use type foundation interface
 		 */

@@ -42,7 +42,9 @@ export declare const foundation: {
         };
     };
     type: {
-        family: string;
+        fontFilesImport: string;
+        fontPrimaryName: string;
+        fontFallbacksNames: string;
         size: {
             tokens: string[];
             scalingSteps: {
@@ -124,6 +126,7 @@ export declare const foundation: {
     };
     position: {
         zIndexes: {
+            grids: number;
             compressedTableOfContentsContainer: number;
             header: number;
             contentDimmer: number;

@@ -22,7 +22,9 @@ export namespace foundation {
         }
     }
     namespace type {
-        const family: string;
+        const fontFilesImport: string;
+        const fontPrimaryName: string;
+        const fontFallbacksNames: string;
         namespace size {
             const tokens_1: string[];
             export { tokens_1 as tokens };
@@ -130,6 +132,7 @@ export namespace foundation {
     }
     namespace position {
         namespace zIndexes {
+            const grids: number;
             const compressedTableOfContentsContainer: number;
             const header: number;
             const contentDimmer: number;

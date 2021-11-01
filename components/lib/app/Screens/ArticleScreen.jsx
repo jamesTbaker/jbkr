@@ -18,20 +18,22 @@ export const ArticleScreen = ({
 			main.article.frontMatter.tableOfContents ? true : false
 		}
 	>
-		<MainContent>
-			<ArticleDetail
-				title={main.title}
-				frontMatter={main.article.frontMatter}
-				mainContent={main.article.mainContent}
-			/>
-		</MainContent>
-		{
-			main.article.frontMatter.tableOfContents &&
-			<Aside>
-				<ArticleTableOfContents
-					contents={main.article.frontMatter.tableOfContents}
+		<>
+			<MainContent>
+				<ArticleDetail
+					title={main.title}
+					frontMatter={main.article.frontMatter}
+					mainContent={main.article.mainContent}
 				/>
-			</Aside>
-		}
+			</MainContent>
+			{
+				main.article.frontMatter.tableOfContents &&
+				<Aside>
+					<ArticleTableOfContents
+						contents={main.article.frontMatter.tableOfContents}
+					/>
+				</Aside>
+			}
+		</>
 	</AppScaffold>
 );
