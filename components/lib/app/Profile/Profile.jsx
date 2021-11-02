@@ -267,7 +267,7 @@ const CompressedTableOfContentsList = styled.ol`
 	overflow: hidden;
 	margin: 0;
 	padding: 0 2rem;
-	transition: height .5s;
+	transition: height .5s, padding .5s;
 	background-color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -280,6 +280,7 @@ const CompressedTableOfContentsList = styled.ol`
 			if (contentVisible) {
 				return `
 					height: 100%;
+					padding: 2rem;
 					li {
 						margin-top: 0;
 						margin-left: 0;
@@ -324,6 +325,12 @@ const CompressedTableOfContentsListItem = styled.li`
 	}
 	&:nth-child(9) {
 		transition-delay: .4s;
+	}
+	a {
+		padding: 1rem 0;
+		:focus {
+			padding: 1rem .5rem;
+		}
 	}
 `;
 const HiddenH3 = styled.h3`
