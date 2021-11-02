@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock
+	deviceWidthQuery, color, hiddenBlock, hiddenInline
 } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 
@@ -15,43 +15,72 @@ const EducationAndCertificationsContainer = styled.div`
 	})};
 	padding: 2.875rem 0 4rem;
 `;
+const EducationAndCertificationMetaList = styled.ul`
+	margin: 0;
+	padding: 0;
+`;
+const EducationAndCertificationMetaListItem = styled.li`
+	list-style: none;
+`;
+const EducationAndCertificationMetaListItemLabel = styled.span`
+	${hiddenInline}
+`;
+const EducationAndCertificationDetailsLabel = styled.h4`
+	${hiddenBlock}
+`;
 export const ProfileEducationCertification = ({
 	educationCertification,
-}) => {
-	const details =
-		educationCertification.details.startsWith('<li>') ||
-		educationCertification.details.startsWith('\n<li>') ?
-		`<ul>${educationCertification.details}<ul>` :
-		educationCertification.details;
-	return (
-		<EducationAndCertificationsContainer>
-			<Copy kind="profile--education-certification--title">
-				{educationCertification.header}
-			</Copy>
-			<Copy kind="profile--education-certification--tagline">
-				{educationCertification.tagline}
-			</Copy>
+	type,
+}) => (
+	<EducationAndCertificationsContainer>
+		<Copy kind="profile--education-certification--title">
+			{educationCertification.header}
+		</Copy>
+		<EducationAndCertificationMetaList>
+			<EducationAndCertificationMetaListItem>
+				<EducationAndCertificationMetaListItemLabel>
+					{type === 'certification' ? 'Organization: ' : 'Objective: '}
+				</EducationAndCertificationMetaListItemLabel>
+				<Copy kind="profile--education-certification--tagline">
+					{educationCertification.tagline}
+				</Copy>
+			</EducationAndCertificationMetaListItem>
 			{
 				educationCertification.endYear && educationCertification.startYear &&
-				<Copy
-					kind="profile--education-certification--dates"
-					htmlContent={`${educationCertification.startYear} &mdash; ${educationCertification.endYear}`}
-				/>
+				<EducationAndCertificationMetaListItem>
+					<EducationAndCertificationMetaListItemLabel>
+						Dates:&nbsp;
+					</EducationAndCertificationMetaListItemLabel>
+					<Copy
+						kind="profile--education-certification--dates"
+						htmlContent={`${educationCertification.startYear} &mdash; ${educationCertification.endYear}`}
+					/>
+				</EducationAndCertificationMetaListItem>
 			}
 			{
 				educationCertification.endYear && !educationCertification.startYear &&
-				<Copy
-					kind="profile--education-certification--dates"
-					htmlContent={`${educationCertification.endYear}`}
-				/>
+				<EducationAndCertificationMetaListItem>
+					<EducationAndCertificationMetaListItemLabel>
+						Dates:&nbsp;
+					</EducationAndCertificationMetaListItemLabel>
+					<Copy
+						kind="profile--education-certification--dates"
+						htmlContent={`${educationCertification.endYear}`}
+					/>
+				</EducationAndCertificationMetaListItem>
 			}
-			{
-				educationCertification.details &&
+		</EducationAndCertificationMetaList>
+		{
+			educationCertification.details &&
+			<>
+				<EducationAndCertificationDetailsLabel>
+					More Details
+				</EducationAndCertificationDetailsLabel>
 				<Copy
 					kind="copy-container--standard"
-					htmlContent={details}
+					htmlContent={educationCertification.details}
 				/>
-			}
-		</EducationAndCertificationsContainer>
-	);
-};
+			</>
+		}
+	</EducationAndCertificationsContainer>
+);

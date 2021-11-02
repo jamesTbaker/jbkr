@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock
+	deviceWidthQuery, color, hiddenInline
 } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 
@@ -21,6 +21,16 @@ const ProfileVolunteerExperienceContainer = styled.div`
 
 	}
 `;
+const VolunteerExperienceList = styled.ul`
+	margin: 0;
+	padding: 0;
+`;
+const VolunteerExperienceListItem = styled.li`
+	list-style: none;
+`;
+const VolunteerExperienceListItemLabel = styled.span`
+	${hiddenInline}
+`;
 export const ProfileVolunteerExperience = ({
 	volunteerExperience,
 	gridArea,
@@ -33,35 +43,58 @@ export const ProfileVolunteerExperience = ({
 		>
 			{volunteerExperience.title}
 		</Copy>
-		<Copy
-			kind="profile--experience--volunteer-for-whom"
-		>
-			{volunteerExperience.forWhom}
-		</Copy>
-		{
-			volunteerExperience.endYear &&
-			volunteerExperience.startYear &&
-			volunteerExperience.endYear !== volunteerExperience.startYear &&
-			<Copy
-				kind="profile--experience--volunteer-dates"
-				htmlContent={`${volunteerExperience.startYear} &mdash; ${volunteerExperience.endYear}`}
-			/>
-		}
-		{
-			volunteerExperience.endYear &&
-			volunteerExperience.startYear &&
-			volunteerExperience.endYear === volunteerExperience.startYear &&
-			<Copy
-				kind="profile--experience--volunteer-dates"
-				htmlContent={`${volunteerExperience.endYear}`}
-			/>
-		}
-		{
-			volunteerExperience.description &&
-			<Copy
-				kind="profile--experience--volunteer-description"
-				htmlContent={volunteerExperience.description}
-			/>
-		}
+		<VolunteerExperienceList>
+			<VolunteerExperienceListItem>
+				<VolunteerExperienceListItemLabel>
+					For Whom:&nbsp;
+				</VolunteerExperienceListItemLabel>
+				<Copy
+					kind="profile--experience--volunteer-for-whom"
+				>
+					{volunteerExperience.forWhom}
+				</Copy>
+			</VolunteerExperienceListItem>
+			{
+				volunteerExperience.endYear &&
+				volunteerExperience.startYear &&
+				volunteerExperience.endYear !== volunteerExperience.startYear &&
+				<VolunteerExperienceListItem>
+					<VolunteerExperienceListItemLabel>
+						Dates:&nbsp;
+					</VolunteerExperienceListItemLabel>
+					<Copy
+						kind="profile--experience--volunteer-dates"
+						htmlContent={`${volunteerExperience.startYear} &mdash; ${volunteerExperience.endYear}`}
+					/>
+				</VolunteerExperienceListItem>
+			}
+			{
+				volunteerExperience.endYear &&
+				volunteerExperience.startYear &&
+				volunteerExperience.endYear === volunteerExperience.startYear &&
+
+				<VolunteerExperienceListItem>
+					<VolunteerExperienceListItemLabel>
+						Date:&nbsp;
+					</VolunteerExperienceListItemLabel>
+					<Copy
+						kind="profile--experience--volunteer-dates"
+						htmlContent={`${volunteerExperience.endYear}`}
+					/>
+				</VolunteerExperienceListItem>
+			}
+			{
+				volunteerExperience.description &&
+				<VolunteerExperienceListItem>
+					<VolunteerExperienceListItemLabel>
+						Objective:&nbsp;
+					</VolunteerExperienceListItemLabel>
+					<Copy
+						kind="profile--experience--volunteer-description"
+						htmlContent={volunteerExperience.description}
+					/>
+				</VolunteerExperienceListItem>
+			}
+		</VolunteerExperienceList>
 	</ProfileVolunteerExperienceContainer>
 );

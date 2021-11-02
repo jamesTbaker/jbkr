@@ -197,7 +197,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--section-title--preface': {
-		'tag': 'div',
+		'tag': 'span',
 		'size': 'm',
 		'weight': 'bold',
 		'usage': 'display',
@@ -209,7 +209,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--section-title--main': {
-		'tag': 'div',
+		'tag': 'span',
 		'size': '3xl',
 		'weight': 'bold',
 		'usage': 'display',
@@ -233,7 +233,7 @@ const propsSpecifications = {
 				'level': 1,
 			},
 		},
-		'more': 'padding-bottom: 2rem;',
+		'more': 'display: block; padding-bottom: 2rem;',
 	},
 	'profile--skill-name--featured': {
 		'tag': 'span',
@@ -284,7 +284,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--experience--job-employer': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
@@ -296,7 +296,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--experience--job-dates': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
 		'slant': 'italic',
@@ -321,7 +321,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--education-certification--tagline': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
@@ -333,7 +333,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--education-certification--dates': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
@@ -357,7 +357,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--experience--volunteer-for-whom': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
@@ -369,7 +369,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--experience--volunteer-dates': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
 		'slant': 'italic',
@@ -382,7 +382,7 @@ const propsSpecifications = {
 		},
 	},
 	'profile--experience--volunteer-description': {
-		'tag': 'p',
+		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',

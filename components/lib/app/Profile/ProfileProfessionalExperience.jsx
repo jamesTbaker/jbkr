@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock
+	deviceWidthQuery, color, hiddenBlock, hiddenInline
 } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 
@@ -27,6 +27,19 @@ const JobMetaContainer = styled.div`
 		grid-area: jobMeta;
 	}
 `;
+const JobMetaList = styled.ul`
+	margin: 0;
+	padding: 0;
+`;
+const JobMetaListItem = styled.li`
+	list-style: none;
+`;
+const JobMetaListItemLabel = styled.span`
+	${hiddenInline}
+`;
+const JobDescriptionLabel = styled.h4`
+	${hiddenBlock}
+`;
 const JobDescription = styled.div`
 	margin: 1rem 0 0;
 	${deviceWidthQuery.not({ 'width': 's' })} {
@@ -35,37 +48,39 @@ const JobDescription = styled.div`
 `;
 export const ProfileProfessionalExperience = ({
 	professionalExperience,
-}) => {
-	const description =
-		professionalExperience.description.startsWith('<li>') ||
-		professionalExperience.description.startsWith('\n<li>') ?
-		`<ul>${professionalExperience.description}<ul>` :
-		professionalExperience.description;
-	return (
-		<JobContainer>
-			<JobMetaContainer>
-				<Copy
-					kind="profile--experience--job-title"
-				>
-					{professionalExperience.title}
-				</Copy>
-				<Copy
-					kind="profile--experience--job-employer"
-				>
-					{professionalExperience.employer}
-				</Copy>
-				<Copy
-					kind="profile--experience--job-dates"
-				>
-					{professionalExperience.startDate} &mdash; {professionalExperience.endDate}
-				</Copy>
-			</JobMetaContainer>
-			<JobDescription>
-				<Copy
-					kind="copy-container--standard"
-					htmlContent={`${description}`}
-				/>
-			</JobDescription>
-		</JobContainer>
-	);
-};
+}) => (
+	<JobContainer>
+		<JobMetaContainer>
+			<Copy
+				kind="profile--experience--job-title"
+			>
+				{professionalExperience.title}
+			</Copy>
+			<JobMetaList>
+				<JobMetaListItem>
+					<JobMetaListItemLabel>Employer: </JobMetaListItemLabel>
+					<Copy
+						kind="profile--experience--job-employer"
+					>
+						{professionalExperience.employer}
+					</Copy>
+				</JobMetaListItem>
+				<JobMetaListItem>
+					<JobMetaListItemLabel>Dates: </JobMetaListItemLabel>
+					<Copy
+						kind="profile--experience--job-dates"
+					>
+						{professionalExperience.startDate} &mdash; {professionalExperience.endDate}
+					</Copy>
+				</JobMetaListItem>
+			</JobMetaList>
+		</JobMetaContainer>
+		<JobDescriptionLabel>Responsibilities and Achievements</JobDescriptionLabel>
+		<JobDescription>
+			<Copy
+				kind="copy-container--standard"
+				htmlContent={professionalExperience.description}
+			/>
+		</JobDescription>
+	</JobContainer>
+);

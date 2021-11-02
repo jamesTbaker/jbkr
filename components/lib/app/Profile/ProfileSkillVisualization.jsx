@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock
+	deviceWidthQuery, color, hiddenInline
 } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 import { ProfileSkillRating } from './ProfileSkillRating';
 
-const ProfileSkillVisualizationContainer = styled.div`
+const ProfileSkillVisualizationContainer = styled.li`
 	break-inside: avoid;
 	margin-bottom: 2rem;
+	list-style: none;
 	${
 		({ $featured }) => {
 			if ($featured) {
@@ -59,7 +60,9 @@ const ProfileSkillVisualizationContainer = styled.div`
 		}
 	}
 `;
-
+const ProfileSkillRatingText = styled.span`
+	${hiddenInline}
+`;
 export const ProfileSkillVisualization = ({
 	skill,
 	featured
@@ -74,6 +77,9 @@ export const ProfileSkillVisualization = ({
 					kind="profile--skill-name--featured"
 					htmlContent={skill.name}
 				/>
+				<ProfileSkillRatingText>
+					: {skill.percentageExpertise}% expertise
+				</ProfileSkillRatingText>
 				<ProfileSkillRating
 					size="large"
 					percentageExpertise={skill.percentageExpertise}
@@ -87,6 +93,9 @@ export const ProfileSkillVisualization = ({
 					kind="profile--skill-name--standard"
 					htmlContent={skill.name}
 				/>
+				<ProfileSkillRatingText>
+					: {skill.percentageExpertise}% expertise
+				</ProfileSkillRatingText>
 				<ProfileSkillRating
 					size="small"
 					percentageExpertise={skill.percentageExpertise}

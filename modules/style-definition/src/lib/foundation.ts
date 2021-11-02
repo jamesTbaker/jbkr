@@ -191,6 +191,7 @@ export const foundation = {
 			width: 0;
 			height: 0;
 			padding: 0;
+			margin: 0;
 			text-indent: 100%;
 			white-space: nowrap;
 			overflow: hidden;`,

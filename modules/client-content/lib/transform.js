@@ -1083,9 +1083,6 @@ export const returnTransformedProfileScreenContent = ({
 			'employer': professionalExperience.Employer,
 			'description': returnSimpleHTMLFromMarkdown({
 				'content': professionalExperience.Description,
-				'options': {
-					'removeEndCapTags': true,
-				},
 			}),
 			'startDate': returnFormattedDateString({
 				'incomingDate': professionalExperience.StartDate,
@@ -1109,9 +1106,6 @@ export const returnTransformedProfileScreenContent = ({
 			'tagline': educationCertification.Tagline,
 			'details': returnSimpleHTMLFromMarkdown({
 				'content': educationCertification.Details,
-				'options': {
-					'removeEndCapTags': true,
-				},
 			}),
 			'startYear': educationCertification.StartYear,
 			'endYear': educationCertification.EndYear,

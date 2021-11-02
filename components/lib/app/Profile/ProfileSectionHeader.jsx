@@ -12,7 +12,8 @@ const ProfileSectionTitleContainer = styled.h2`
 		margin: 0 0 1rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin: 0 0 2rem 0;
+		margin: 0;
+		scroll-margin-top: 21rem;
 	}
 `;
 const ProfileSectionHeaderContainer = styled.header`
@@ -34,7 +35,7 @@ export const ProfileSectionHeader = ({ content: { anchor, hash, title }}) => (
 				<Copy
 					kind="profile--section-title--preface"
 				>
-					{title.preface}
+					{title.preface}&nbsp;
 				</Copy>
 			}
 			<Copy

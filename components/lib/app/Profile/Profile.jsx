@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber
+	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
-// import { MainContent } from '../Layout/MainContent';
-import { Aside } from '../Layout/Aside';
-// import { ProfileHeader } from './ProfileHeader';
-import { ProfileSkill } from './ProfileSkill';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
-import { ProfileSkills } from './ProfileSkills';
 import { ProfileSection } from './ProfileSection';
 import { ProfileProfessionalExperience } from './ProfileProfessionalExperience';
 import { ProfileEducationCertification } from './ProfileEducationCertification';
 import { ProfileVolunteerExperience } from './ProfileVolunteerExperience';
 import { ProfileSectionHeader } from './ProfileSectionHeader';
-import { Button } from '../../core/Button/Button';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Brand } from '../../..';
@@ -97,6 +90,9 @@ const ProfileHeader = styled.header`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding: 15rem 51rem 10rem 15rem;
 	}
+`;
+const LandmarkTitlePreface = styled.span`
+	${hiddenInline}
 `;
 const BrandContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -334,25 +330,32 @@ const HiddenH3 = styled.h3`
 	${hiddenBlock}
 	margin: 0;
 `;
-const FeaturedVisualizedSkillsContainer = styled.div`
+const FeaturedVisualizedSkillsContainer = styled.ul`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		margin-bottom: 3rem;
+		margin: 0 0 3rem 0;
+		padding: 0;
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		margin: 0;
+		padding: 0;
 	}
 `;
-const StandardVisualizedSkillsContainer = styled.div`
+const StandardVisualizedSkillsContainer = styled.ul`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin: 0;
+		padding: 0;
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		margin: 0;
+		padding: 0;
 	}
 `;
 const SkillsStatementsList = styled.ul`
@@ -452,7 +455,7 @@ export const Profile = ({
 				<Copy
 					kind="landmark-title"
 				>
-					Profile
+					Profile<LandmarkTitlePreface>&nbsp;of James T. Baker</LandmarkTitlePreface>
 				</Copy>
 			</ProfileHeader>
 			<ProfileSection
@@ -541,39 +544,18 @@ export const Profile = ({
 					content={ProfileSectionsData.designSkills}
 				/>
 				{
-					skills.design.featured && skills.design.featured[0] &&
-
-					<>
-						<HiddenH3>Featured</HiddenH3>
-						<FeaturedVisualizedSkillsContainer>
-							{
-								skills.design.featured.map((skill) =>
-									<ProfileSkillVisualization
-										key={skill.key}
-										skill={skill}
-										featured
-									/>
-								)
-							}
-						</FeaturedVisualizedSkillsContainer>
-					</>
-				}
-				{
 					skills.design.standard && skills.design.standard[0] &&
 
-					<>
-						<HiddenH3>Standard</HiddenH3>
-						<StandardVisualizedSkillsContainer>
-							{
-								skills.design.standard.map((skill) =>
-									<ProfileSkillVisualization
-										key={skill.key}
-										skill={skill}
-									/>
-								)
-							}
-						</StandardVisualizedSkillsContainer>
-					</>
+					<StandardVisualizedSkillsContainer>
+						{
+							skills.design.standard.map((skill) =>
+								<ProfileSkillVisualization
+									key={skill.key}
+									skill={skill}
+								/>
+							)
+						}
+					</StandardVisualizedSkillsContainer>
 				}
 			</ProfileSection>
 			<ProfileSection
@@ -618,6 +600,7 @@ export const Profile = ({
 								<ProfileEducationCertification
 									key={educationCertification.key}
 									educationCertification={educationCertification}
+									type="certification"
 								/>
 							)
 						}
@@ -634,6 +617,7 @@ export const Profile = ({
 								<ProfileEducationCertification
 									key={educationCertification.key}
 									educationCertification={educationCertification}
+									type="graduate"
 								/>
 							)
 						}
@@ -650,6 +634,7 @@ export const Profile = ({
 								<ProfileEducationCertification
 									key={educationCertification.key}
 									educationCertification={educationCertification}
+									type="undergraduate"
 								/>
 							)
 						}
