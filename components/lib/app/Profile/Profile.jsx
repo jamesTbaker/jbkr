@@ -71,16 +71,12 @@ const ProfileSectionsData = {
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 23rem;
-		/* display: grid;
-		grid-template-areas:	"aside"
-								"main"; */
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: relative;
 		margin: 14rem auto 0;
 		width: 100%;
 		max-width: 180rem;
-		scroll-margin-top: 14rem;
 	}
 `;
 const ProfileHeader = styled.header`
@@ -150,7 +146,7 @@ const MainContentContainer = styled.main.attrs(() => {
 	};
 })`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		/* grid-area: main; */
+
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
@@ -235,7 +231,6 @@ const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	};
 })`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		/* grid-area: aside; */
 		padding: 3rem 2rem;
 		position: fixed;
 		top: 13rem;

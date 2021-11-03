@@ -10,6 +10,7 @@ import { Line } from '../../..';
 const ProfileSectionTitleContainer = styled.h2`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin: 0 0 1rem;
+		scroll-margin-top: 30rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		margin: 0;
