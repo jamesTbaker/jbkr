@@ -77,6 +77,7 @@ const ProfileContainer = styled.div`
 		margin: 14rem auto 0;
 		width: 100%;
 		max-width: 180rem;
+		text-align: center;
 	}
 `;
 const ProfileHeader = styled.header`
@@ -84,7 +85,20 @@ const ProfileHeader = styled.header`
 		padding: 0 2rem 8rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		padding: 15rem 51rem 10rem 15rem;
+		/* padding: 15rem 51rem 10rem 15rem; */
+		width: calc(100% - 4rem);
+		max-width: 150rem;
+		margin: 0 auto;
+		padding: 15rem 0 10rem 0;
+		text-align: left;
+	}
+`;
+const ProfileHeaderContentConstrainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		/* padding: 15rem 51rem 10rem 15rem; */
+		padding-right: 36rem;
 	}
 `;
 const LandmarkTitlePreface = styled.span`
@@ -202,8 +216,9 @@ const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: absolute;
 		top: 0;
-		right: 18rem;
+		right: 15rem;
 		height: 100%;
+		text-align: left;
 	}
 `;
 const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
@@ -470,21 +485,23 @@ export const Profile = ({
 	<ProfileContainer>
 		<MainContentContainer>
 			<ProfileHeader>
-				<BrandContainer>
-					<BrandLink
-						href="/"
-						$contextColor="onDark"
+				<ProfileHeaderContentConstrainer>
+					<BrandContainer>
+						<BrandLink
+							href="/"
+							$contextColor="onDark"
+						>
+							<Brand
+								contextColor="onDark"
+							/>
+						</BrandLink>
+					</BrandContainer>
+					<Copy
+						kind="landmark-title"
 					>
-						<Brand
-							contextColor="onDark"
-						/>
-					</BrandLink>
-				</BrandContainer>
-				<Copy
-					kind="landmark-title"
-				>
-					Profile<LandmarkTitlePreface>&nbsp;of James T. Baker</LandmarkTitlePreface>
-				</Copy>
+						Profile<LandmarkTitlePreface>&nbsp;of James T. Baker</LandmarkTitlePreface>
+					</Copy>
+				</ProfileHeaderContentConstrainer>
 			</ProfileHeader>
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"

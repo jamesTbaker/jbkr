@@ -139,6 +139,17 @@ const TitleUnderlay = styled.div`
 const ContentContainer = styled.div`
 	position: relative;
 	z-index: ${zIndexNumber().profileSectionContent};
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: calc(100% - 4rem);
+		max-width: 150rem;
+		margin: 0 auto;
+		text-align: left;
+	}
+`;
+const ContentConstrainer = styled.div`
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		padding-right: 36rem;
+	}
 `;
 const LargeDeviceVideo = styled.video`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -175,9 +186,13 @@ const ProfileSectionContainer = styled.section`
 		z-index: ${zIndexNumber().profileSectionContainer};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		padding: 7rem 51rem 7rem 15rem;
+		/* padding: 7rem 51rem 7rem 15rem; */
 		position: relative;
 		z-index: ${zIndexNumber().profileSectionContainer};
+		width: 100%;
+		max-width: 180rem;
+		margin: 0 auto;
+		padding: 7rem 0;
 	}
 `;
 export const ProfileSection = ({
@@ -203,7 +218,9 @@ export const ProfileSection = ({
 		<TitleUnderlay />
 		<VideoOverlay />
 		<ContentContainer>
-			{children}
+			<ContentConstrainer>
+				{children}
+			</ContentConstrainer>
 		</ContentContainer>
 	</ProfileSectionContainer>
 );
