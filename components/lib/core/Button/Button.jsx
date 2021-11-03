@@ -329,10 +329,14 @@ const ButtonContent = ({
 );
 const ButtonContentComponentFacilitator = styled.span.attrs(({
 	$url,
+	$clickHandler,
 }) => {
 	const returnValue = {};
 	if ($url && !$url.startsWith('http')) {
 		returnValue.as = 'a';
+	}
+	if ($clickHandler) {
+		returnValue.onClick = $clickHandler;
 	}
 	return returnValue;
 })`
@@ -394,6 +398,7 @@ const ButtonRefForwarder = React.forwardRef((
 		iconAfterTransform,
 		url,
 		colors,
+		clickHandler,
 	},
 	ref
 ) => (
@@ -403,6 +408,7 @@ const ButtonRefForwarder = React.forwardRef((
 		ref={ref}
 		$url={url}
 		$contextColor={contextColor}
+		$clickHandler={clickHandler}
 	>
 		<ButtonContent
 			size={size}
@@ -548,6 +554,7 @@ export const Button = ({
 			iconAfterTransform={iconAfterTransform}
 			url={url}
 			colors={returnColors({ surfaceStyle, contextColor })}
+			clickHandler={clickHandler}
 		/>
 	</ButtonElement>
 );

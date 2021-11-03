@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -572,12 +573,27 @@ const CompressedSecondaryNavigationListItem = styled.li`
 `;
 
 export const AppHeader = ({ content }) => {
+	const router = useRouter();
 	const [
 		smallNavVisible,
 		setSmallNavVisible,
 	] = useState(false);
 	const handleHamburgerClick = () => {
 		setSmallNavVisible(!smallNavVisible);
+	};
+	const handleInternalLinkClick = (e) => {
+		e.preventDefault();
+		setSmallNavVisible(!smallNavVisible);
+		const urlWithDomain = e.target.closest('a').href.split('//')[1];
+		const positionFirstSlash = urlWithDomain.indexOf('/');
+		const urlWithoutDomain = urlWithDomain.slice(positionFirstSlash);
+		router.push(urlWithoutDomain);
+	};
+	const handleExternalLinkClick = (e) => {
+		e.preventDefault();
+		setSmallNavVisible(!smallNavVisible);
+		const urlWithProtocol = e.target.closest('a').href;
+		window.open(urlWithProtocol, '_blank');
 	};
 	return (
 		<AppHeaderContainer>
@@ -605,6 +621,7 @@ export const AppHeader = ({ content }) => {
 												size="standard"
 												surfaceStyle="transparent"
 												contextColor="onDark"
+												clickHandler={handleInternalLinkClick}
 											/>
 										</CompressedPrimaryNavigationListItem>
 									)
@@ -631,6 +648,7 @@ export const AppHeader = ({ content }) => {
 												contextColor="onDark"
 												iconBefore={link.anchorIconBefore}
 												textHidden={link.anchorIconBefore ? true : false}
+												clickHandler={link.anchorIconBefore ? handleExternalLinkClick : handleInternalLinkClick}
 											/>
 										</CompressedSecondaryNavigationListItem>
 									)
