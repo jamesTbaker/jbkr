@@ -571,7 +571,6 @@ const CompressedSecondaryNavigationListItem = styled.li`
 		}
 	}
 `;
-
 export const AppHeader = ({ content }) => {
 	const router = useRouter();
 	const [

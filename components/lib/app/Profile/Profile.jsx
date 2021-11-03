@@ -252,12 +252,38 @@ const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 		display: none;
 	}
 `;
-const CompressedTableOfContentsListContainer = styled.nav.attrs(() => {
+const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 	return {
 		'id': 'compressed-table-of-contents',
 		'aria-label': 'Page Table of Contents',
 	};
 })``;
+const CompressedTableOfContentsListContainer = ({
+	contentVisible,
+	clickHandler,
+}) => {
+	return (
+		<CompressedTableOfContentsList
+			contentVisible={contentVisible}
+		>
+			{
+				Object.keys(ProfileSectionsData).map((sectionKey) =>
+					<CompressedTableOfContentsListItem
+						key={`compressed--${ProfileSectionsData[sectionKey].id}`}
+					>
+							<CopyLink
+								url={`#${ProfileSectionsData[sectionKey].hash}`}
+								inline={false}
+								clickHandler={clickHandler}
+							>
+								{ProfileSectionsData[sectionKey].anchor}
+							</CopyLink>
+					</CompressedTableOfContentsListItem>,
+				)
+			}
+		</CompressedTableOfContentsList>
+	);
+};
 const CompressedTableOfContentsList = styled.ol`
 	position: fixed;
 	top: 23rem;
@@ -671,7 +697,7 @@ export const Profile = ({
 			</ProfileSection>
 		</MainContentContainer>
 		<CompressedTableOfContentsContainer>
-			<CompressedTableOfContentsListContainer>
+			<CompressedTableOfContentsCollapsibleContainer>
 				<Collapsible
 					button={{
 						'size': 'small',
@@ -682,24 +708,9 @@ export const Profile = ({
 					internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
 					copyKind="profile--table-of-contents-item--anchor--not-large-device"
 				>
-						<CompressedTableOfContentsList>
-							{
-								Object.keys(ProfileSectionsData).map((sectionKey) =>
-									<CompressedTableOfContentsListItem
-										key={`compressed--${ProfileSectionsData[sectionKey].id}`}
-									>
-											<CopyLink
-												url={`#${ProfileSectionsData[sectionKey].hash}`}
-												inline={false}
-											>
-												{ProfileSectionsData[sectionKey].anchor}
-											</CopyLink>
-									</CompressedTableOfContentsListItem>,
-								)
-							}
-						</CompressedTableOfContentsList>
+					<CompressedTableOfContentsListContainer />
 				</Collapsible>
-			</CompressedTableOfContentsListContainer>
+			</CompressedTableOfContentsCollapsibleContainer>
 		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>
 			<ExpandedTableOfContentsListContainer>

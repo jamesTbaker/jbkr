@@ -49,6 +49,9 @@ export const Collapsible = ({
 	const handleButtonClick = () => {
 		setContentVisible(!contentVisible);
 	};
+	const handleChildClick = () => {
+		setContentVisible(!contentVisible);
+	};
 	return (
 		<div>
 			<Button
@@ -70,8 +73,10 @@ export const Collapsible = ({
 				<Copy
 					kind={copyKind}
 				>
-					{React.cloneElement(children, { contentVisible })}
-					{/* {children} */}
+					{React.cloneElement(children, {
+						contentVisible,
+						'clickHandler': handleChildClick,
+					})}
 				</Copy>
 			</CollapsibleContentContainer>
 		</div>

@@ -154,6 +154,7 @@ export const CopyLink = ({
 	contextColor,
 	primaryColor,
 	secondaryColor,
+	clickHandler,
 }) => (
 	<CopyLinkContainer
 		$inline={inline}
@@ -205,6 +206,7 @@ export const CopyLink = ({
 			!htmlContent && !url.startsWith('http') && url.startsWith('#') &&
 			<a
 				href={url}
+				onClick={clickHandler}
 			>
 				{children}
 			</a>
@@ -213,6 +215,7 @@ export const CopyLink = ({
 			htmlContent && !url.startsWith('http') && url.startsWith('#') &&
 			<a
 				href={url}
+				onClick={clickHandler}
 				dangerouslySetInnerHTML={{
 					'__html': htmlContent,
 				}}
