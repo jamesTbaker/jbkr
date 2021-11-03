@@ -216,9 +216,19 @@ const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: absolute;
 		top: 0;
-		right: 15rem;
+		left: 0;
 		height: 100%;
-		text-align: left;
+		text-align: center;
+		width: 100%;
+	}
+`;
+const Extra = styled.div`
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: calc(100% - 4rem);
+		max-width: 150rem;
+		margin: 0 auto;
+		text-align: right;
+		height: 100%;
 	}
 `;
 const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
@@ -231,6 +241,11 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 	position: sticky;
 	top: 37rem;
 	z-index: 1000;
+	margin: 0 0 0 auto;
+	text-align: left;
+	/* @media screen and (max-height: 80rem) {
+		top: 29rem;
+	} */
 `;
 const ExpandedTableOfContentsList = styled.ol`
 	margin: 0;
@@ -239,6 +254,14 @@ const ExpandedTableOfContentsList = styled.ol`
 const ExpandedTableOfContentsListItem = styled.li`
 	list-style-type: none;
 	margin-bottom: 4rem;
+	/* @media (max-height: 100rem) {
+		margin-bottom: 3rem;
+	}
+	@media (max-height: 92rem) {
+		a {
+			font-size: 80%;
+		}
+	} */
 `;
 const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	return {
@@ -725,28 +748,30 @@ export const Profile = ({
 			</CompressedTableOfContentsCollapsibleContainer>
 		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>
-			<ExpandedTableOfContentsListContainer>
-				<ExpandedTableOfContentsList>
-					{
-						Object.keys(ProfileSectionsData).map((sectionKey) =>
-							<ExpandedTableOfContentsListItem
-								key={`expanded--${ProfileSectionsData[sectionKey].id}`}
-							>
-								<Copy
-									kind="profile--table-of-contents-item--anchor--large-device"
+			<Extra>
+				<ExpandedTableOfContentsListContainer>
+					<ExpandedTableOfContentsList>
+						{
+							Object.keys(ProfileSectionsData).map((sectionKey) =>
+								<ExpandedTableOfContentsListItem
+									key={`expanded--${ProfileSectionsData[sectionKey].id}`}
 								>
-									<CopyLink
-										url={`#${ProfileSectionsData[sectionKey].hash}`}
-										inline={false}
+									<Copy
+										kind="profile--table-of-contents-item--anchor--large-device"
 									>
-										{ProfileSectionsData[sectionKey].anchor}
-									</CopyLink>
-								</Copy>
-							</ExpandedTableOfContentsListItem>,
-						)
-					}
-				</ExpandedTableOfContentsList>
-			</ExpandedTableOfContentsListContainer>
+										<CopyLink
+											url={`#${ProfileSectionsData[sectionKey].hash}`}
+											inline={false}
+										>
+											{ProfileSectionsData[sectionKey].anchor}
+										</CopyLink>
+									</Copy>
+								</ExpandedTableOfContentsListItem>,
+							)
+						}
+					</ExpandedTableOfContentsList>
+				</ExpandedTableOfContentsListContainer>
+			</Extra>
 		</ExpandedTableOfContentsContainer>
 	</ProfileContainer>
 );
