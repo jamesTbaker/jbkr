@@ -243,9 +243,12 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 	z-index: 1000;
 	margin: 0 0 0 auto;
 	text-align: left;
-	/* @media screen and (max-height: 80rem) {
-		top: 29rem;
-	} */
+	@media (max-height: 660px) {
+		top: 25rem;
+	}
+	@media (max-height: 580px) {
+		top: 20rem;
+	}
 `;
 const ExpandedTableOfContentsList = styled.ol`
 	margin: 0;
@@ -254,14 +257,14 @@ const ExpandedTableOfContentsList = styled.ol`
 const ExpandedTableOfContentsListItem = styled.li`
 	list-style-type: none;
 	margin-bottom: 4rem;
-	/* @media (max-height: 100rem) {
+	@media (max-height: 800px) {
 		margin-bottom: 3rem;
 	}
-	@media (max-height: 92rem) {
+	@media (max-height: 760px) {
 		a {
 			font-size: 80%;
 		}
-	} */
+	}
 `;
 const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	return {

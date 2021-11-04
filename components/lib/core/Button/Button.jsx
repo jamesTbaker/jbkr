@@ -76,25 +76,25 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		colors.border.default = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 5,
+			'level': 4,
 			'format': 'string'
 		});
 		colors.border.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 4,
+			'level': 3,
 			'format': 'string'
 		});
 		colors.background.default = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 5,
+			'level': 4,
 			'format': 'string'
 		});
 		colors.background.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 3,
+			'level': 2,
 			'format': 'string'
 		});
 		colors.content.default = color({
@@ -122,13 +122,13 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		colors.content.default = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 5,
+			'level': 4,
 			'format': 'string'
 		});
 		colors.content.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 4,
+			'level': 3,
 			'format': 'string'
 		});
 	}
@@ -159,13 +159,13 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		colors.border.default = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 4,
+			'level': 3,
 			'format': 'string'
 		});
 		colors.border.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 2,
+			'level': 1,
 			'format': 'string'
 		});
 	}
