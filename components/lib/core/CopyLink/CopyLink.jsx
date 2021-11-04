@@ -18,10 +18,10 @@ const CopyLinkContainer = styled.span`
 	${
 		({ $inline, $contextColor }) => {
 			const colors = {
-				content: {},
-				background: {},
-				focusRing: {},
-				focusRingSeparator: {},
+				'content': {},
+				'background': {},
+				'focusRing': {},
+				'focusRingSeparator': {},
 			};
 			if ($inline) {
 				colors.content.default = $contextColor === 'onDark' ?

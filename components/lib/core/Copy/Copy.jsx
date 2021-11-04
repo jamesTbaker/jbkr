@@ -699,7 +699,6 @@ const returnStylesFromSpecifications = ({ specs }) => `
 		}
 `;
 const StandardBodyContainer = styled.div`
-	font-weight: 320;
 	color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -724,14 +723,12 @@ const StandardBodyContainer = styled.div`
 	p, ul, ol {
 		margin: 0;
 		padding: 0;
-	}
-	p, ul, ol {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications['body--standard'] })}
 	}
 	ul ul,
 	ol ol {
-		margin: 0;
 		padding: 0;
+		margin: 0;
 	}
 	ul li,
 	ol li {
@@ -778,15 +775,13 @@ const StandardBodyContainer = styled.div`
 	}
 	a,
 	a:visited {
+		text-decoration: none;
 		color: ${color({
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 1,
 			'format': 'string'
 		})};
-		text-decoration: none;
-		transition: all 250ms ease;
-		background-position-y: 10%;
 		background-image: linear-gradient(
 			${color({
 				'kind': 'Neutral',
@@ -802,6 +797,8 @@ const StandardBodyContainer = styled.div`
 			})} 50%
 		);
 		background-size: auto 200%;
+		background-position-y: 10%;
+		transition: all 250ms ease;
 		&:hover {
 			color: ${color({
 				'kind': 'Neutral',
@@ -813,10 +810,10 @@ const StandardBodyContainer = styled.div`
 			border-radius: .25rem;
 		}
 		&:focus {
+			outline: none;
 			padding: 0 .5rem;
 			margin: 0 .25rem;
 			border-radius: .25rem;
-			outline: none;
 			box-shadow: 0 0 0 .25rem ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
@@ -841,8 +838,8 @@ const StandardBodyContainer = styled.div`
 		}
 		a.header-anchor[href] {
 			display: inline-block;
-			opacity: 0;
 			padding: 0 2rem;
+			opacity: 0;
 			span.machines-only {
 				${hiddenInline}
 			}

@@ -31,6 +31,7 @@ const TextContainer = styled.div`
 			) {
 				return `
 					@supports (background-clip: text) {
+						color: transparent;
 						background: linear-gradient(
 							${color({
 								'kind': $gradient.colors[0].kind,
@@ -49,9 +50,9 @@ const TextContainer = styled.div`
 						);
 						background-clip: text;
 						-webkit-background-clip: text;
-						color: transparent;
 					}
 					@supports (-webkit-background-clip: text) {
+						color: transparent;
 						background: linear-gradient(
 							${color({
 								'kind': $gradient.colors[0].kind,
@@ -69,7 +70,6 @@ const TextContainer = styled.div`
 							})}
 						);
 						-webkit-background-clip: text;
-						color: transparent;
 					}
 					@supports not (background-clip: text) and not (-webkit-background-clip: text) {
 						color: ${color({

@@ -19,9 +19,9 @@ const IconContainer = styled.span`
 				positionName = 'iconAfter';
 			}
 			return `
+				grid-area: ${positionName};
 				height: ${height};
 				padding: ${verticalPaddingSize} 0;
-				grid-area: ${positionName};
 			`
 		}
 	}
@@ -29,9 +29,11 @@ const IconContainer = styled.span`
 const returnContentSize = ({ buttonSize }) => buttonSize === 'standard' ? 's' : '1xs';
 const returnColors = ({ surfaceStyle, contextColor }) => {
 	const colors = {
-		border: {},
-		background: {},
-		content: {},
+		'content': {},
+		'background': {},
+		'border': {},
+		'focusRing': {},
+		'focusRingSeparator': {},
 	};
 	if (
 		surfaceStyle === 'filled' &&
@@ -192,6 +194,33 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		colors.border.default = 'transparent';
 		colors.border.active = 'transparent';
 	}
+	colors.focusRing = contextColor === 'onDark' ?
+		color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		}) :
+		color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 2,
+			'format': 'string'
+			});
+	colors.focusRingSeparator = contextColor === 'onDark' ?
+		color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 41,
+			'format': 'string'
+		}) :
+		color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		});
+
 	return colors;
 };
 const returnLabelCopyKind = ({ buttonSize }) => buttonSize === 'standard' ? 'button-label--horizontal--standard' : 'button-label--horizontal--small';
@@ -251,15 +280,15 @@ const ButtonContentContainer = styled.span`
 	}
 	${
 		({ $colors }) => `
-			background-color: ${$colors.background.default};
-			border: solid .125rem ${$colors.border.default};
-			color: ${$colors.content.default};
-			transition: all 250ms;
 			border-radius: .375rem;
+			color: ${$colors.content.default};
+			border: solid .125rem ${$colors.border.default};
+			background-color: ${$colors.background.default};
+			transition: all 250ms;
 			&:hover {
-				background-color: ${$colors.background.active};
-				border: solid .125rem ${$colors.border.active};
 				color: ${$colors.content.active};
+				border: solid .125rem ${$colors.border.active};
+				background-color: ${$colors.background.active};
 				svg {
 					fill: ${$colors.content.active};
 				}
@@ -333,6 +362,7 @@ const ButtonContent = ({
 const ButtonContentComponentFacilitator = styled.span.attrs(({
 	$url,
 	$clickHandler,
+	$colors,
 }) => {
 	const returnValue = {};
 	if ($url && !$url.startsWith('http')) {
@@ -344,42 +374,15 @@ const ButtonContentComponentFacilitator = styled.span.attrs(({
 	return returnValue;
 })`
 	display: block; width: max-content;
-	/* display: inline-grid; */
 	${
-		({ $url, $contextColor }) => {
+		({ $url, $colors }) => {
 			if ($url && !$url.startsWith('http')) {
-				const colorFocusRing = $contextColor && $contextColor === 'onLight' ?
-					color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 2,
-						'format': 'string'
-					}) :
-					color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 1,
-						'format': 'string'
-					});
-				const colorFocusRingSeparator = $contextColor && $contextColor === 'onLight' ?
-					color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 1,
-						'format': 'string'
-					}) :
-					color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 41,
-						'format': 'string'
-					});
 				return `
 					text-decoration: none;
 					&:focus {
 						outline: none;
 						border-radius: .375rem;
-						box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
+						box-shadow: 0 0 0 .25rem ${$colors.focusRingSeparator}, 0 0 0 .5rem ${$colors.focusRing};
 				}
 			`;
 			}
@@ -412,6 +415,7 @@ const ButtonRefForwarder = React.forwardRef((
 		$url={url}
 		$contextColor={contextColor}
 		$clickHandler={clickHandler}
+		$colors={colors}
 	>
 		<ButtonContent
 			size={size}
@@ -430,7 +434,6 @@ const ButtonRefForwarder = React.forwardRef((
 const ButtonElement = styled.span.attrs(({
 	$clickHandler,
 	$url,
-	$textHidden,
 	$ariaDisabled,
 	$ariaExpanded,
 	$ariaControls,
