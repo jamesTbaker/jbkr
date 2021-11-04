@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ContextColorKey } from '@jbkr/models-react';
 import Link from 'next/link';
 import { Icon, IconNames } from '../../primitive/Icon/Icon';
 import { deviceWidthQuery, color } from '@jbkr/style-service';
@@ -314,25 +315,7 @@ CopyLink.propTypes = {
 	/**
 	 * Whether the button appears on a light or dark background.
 	 */
-	'contextColor': PropTypes.oneOf(['onDark', 'onLight']),
-	/**
-	 * [Learn about color props](/?path=/story/props-color--page).
-	 */
-	/* 'primaryColor': PropTypes.exact({
-		'kind': PropTypes.string.isRequired,
-		'tone': PropTypes.string.isRequired,
-		'level': PropTypes.number.isRequired,
-		'alpha': PropTypes.string,
-	}), */
-	/**
-	 * [Learn about color props](/?path=/story/props-color--page).
-	 */
-	/* 'secondaryColor': PropTypes.exact({
-		'kind': PropTypes.string.isRequired,
-		'tone': PropTypes.string.isRequired,
-		'level': PropTypes.number.isRequired,
-		'alpha': PropTypes.string,
-	}), */
+	'contextColor': ContextColorKey,
 };
 CopyLink.defaultProps = {
 	url: '/',

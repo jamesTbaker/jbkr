@@ -961,31 +961,10 @@ Copy.propTypes = {
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'color': PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.exact({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		}),
-	]),
+	'color': Color,
 	/**
 	 * Color props used to construct a gradient, and a fallback color.
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'gradient': PropTypes.exact({
-		'colors': PropTypes.arrayOf({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		}),
-		'fallbackColor': PropTypes.exact({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		}),
-	}),
+	'gradient': Gradient,
 };

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Color, TypeSizeKey } from '@jbkr/models-react';
 import { returnNumberRoundedUpToMultiple } from '@jbkr/utilities';
 import { deviceWidthQuery, iconSize, color, verticalAlignMiddle } from '@jbkr/style-service';
 
@@ -222,21 +223,11 @@ Icon.propTypes = {
 	/**
 	 * Token indicating size of icon.
 	 */
-	'size': PropTypes.oneOf([
-		'3xs', '2xs', '1xs', 's', 'm', 'l', '1xl', '2xl', '3xl', '4xl', '5xl',
-	]).isRequired,
+	'size': TypeSizeKey.isRequired,
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'color': PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.exact({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		}),
-	]),
+	'color': Color,
 	/**
 	 * CSS transform.
 	 */

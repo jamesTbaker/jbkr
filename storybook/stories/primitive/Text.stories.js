@@ -1,3 +1,6 @@
+import {
+	TypeSizeKeys, TypeWeightKeys, TypeSlantKeys, TypeUsageKeys,
+} from '@jbkr/models-react';
 import { Text } from '@jbkr/components';
 
 // tell Storybook about the component we are documenting
@@ -6,18 +9,25 @@ export default {
 	'component': Text,
 	'argTypes': {
 		'size': {
+			'options': TypeSizeKeys,
 			'control': { 'type': 'select' },
 		},
 		'weight': {
+			'options': TypeWeightKeys,
 			'control': { 'type': 'select' },
 		},
 		'slant': {
+			'options': TypeSlantKeys,
 			'control': { 'type': 'select' },
 		},
 		'usage': {
+			'options': TypeUsageKeys,
 			'control': { 'type': 'select' },
 		},
 		'color': {
+			'control': false,
+		},
+		'gradient': {
 			'control': false,
 		},
 	},

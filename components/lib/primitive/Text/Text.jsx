@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { typeColor } from '@jbkr/models-react';
+import {
+	Color, Gradient, TypeSizeKey, TypeWeightKey, TypeSlantKey, TypeUsageKey,
+} from '@jbkr/models-react';
 import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
 
 const TextContainer = styled.div`
@@ -244,23 +246,21 @@ Text.propTypes = {
 	/**
 	 * Token indicating size of type.
 	 */
-	'size': PropTypes.oneOf([
-		'3xs', '2xs', '1xs', 's', 'm', 'l', '1xl', '2xl', '3xl', '4xl', '5xl',
-	]).isRequired,
+	'size': TypeSizeKey.isRequired,
 	/**
 	 * Token indicating weight of type.
 	 */
-	'weight': PropTypes.oneOf(['regular', 'bold']),
+	'weight': TypeWeightKey,
 	/**
 	 * Token indicating slant of type.
 	 */
-	'slant': PropTypes.oneOf(['normal', 'italic']),
+	'slant': TypeSlantKey,
 	/**
 	 * Token indicating usage of type. Check out [this article on Wikipedia
 	 * ](https://en.wikipedia.org/wiki/Display_typeface) to learn
 	 * about the distinction.
 	 */
-	'usage': PropTypes.oneOf(['display', 'body']),
+	'usage': TypeUsageKey,
 	/**
 	 * Token indicating the inclusion of spacing around the text (e.g., margin).
 	 */
@@ -268,34 +268,12 @@ Text.propTypes = {
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'color': typeColor,
-	/* PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.exact({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		}),
-	]), */
+	'color': Color,
 	/**
 	 * Color props used to construct a gradient, and a fallback color.
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'gradient': PropTypes.exact({
-		'colors': PropTypes.arrayOf(PropTypes.exact({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		})),
-		'fallbackColor': PropTypes.exact({
-			'kind': PropTypes.string.isRequired,
-			'tone': PropTypes.string.isRequired,
-			'level': PropTypes.number.isRequired,
-			'alpha': PropTypes.string,
-		}),
-	}),
+	'gradient': Gradient,
 	/**
 	 * Additional CSS declarations.
 	 */

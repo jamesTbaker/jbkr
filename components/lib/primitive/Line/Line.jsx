@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Color } from '@jbkr/models-react';
 import { returnNumberRoundedUpToMultiple } from '@jbkr/utilities';
 import { color } from '@jbkr/style-service';
 
@@ -119,12 +120,7 @@ Line.propTypes = {
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'color': PropTypes.exact({
-		'kind': PropTypes.string.isRequired,
-		'tone': PropTypes.string.isRequired,
-		'level': PropTypes.number.isRequired,
-		'alpha': PropTypes.string,
-	}),
+	'color': Color,
 };
 Line.defaultProps = {
 	width: 50,
