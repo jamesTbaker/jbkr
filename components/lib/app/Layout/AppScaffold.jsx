@@ -36,126 +36,124 @@ export const AppScaffold = ({
 	footer,
 	hasTableOfContents,
 	children,
-}) => {
-	return(
-		<>
-			<Head>
+}) => (
+	<>
+		<Head>
+			{
+				slug &&
+				<meta property="og:url"
+					content={`https://jbkr.me${slug}`} />
+			}
+			{
+				slug &&
+				<meta property="twitter:url"
+					content={`https://jbkr.me${slug}`} />
+			}
+			{
+				metaTitle &&
+				<title>{`${metaTitle}`} | jbkr</title>
+			}
+			{
+				metaTitle &&
+				<meta property="og:metaTitle"
+					content={`${metaTitle}`} />
+			}
+			{
+				metaTitle &&
+				<meta name="twitter:metaTitle"
+					content={`${metaTitle}`} />
+			}
+			{
+				metaDescription &&
+				<meta name="description" content={metaDescription} />
+			}
+			{
+				socialDescription &&
+				<meta property="og:description"
+					content={socialDescription} />
+			}
+			{
+				socialDescription &&
+				<meta name="twitter:description"
+					content={socialDescription} />
+			}
+			{
+				openGraphType &&
+				<meta property="og:type" content={openGraphType} />
+			}
+			{
+				metaImage && metaImage.url &&
+				<meta property="og:image" content={metaImage.url} />
+			}
+			{
+				metaImage && metaImage.url &&
+				<meta name="twitter:image" content={metaImage.url} />
+			}
+			{
+				metaImage && metaImage.alternativeText &&
+				<meta name="twitter:image:alt"
+					content={metaImage.alternativeText} />
+			}
+			{
+				metaOther && metaOther[0] &&
+				metaOther.map((otherObject, otherObjectIndex) =>
+					// key is in `otherObject`
+					// eslint-disable-next-line react/jsx-key
+					<meta
+						{...otherObject}
+					/>,
+				)
+			}
+		</Head>
+		<SkipLinksContainer>
+			<ul>
+				<SkipLinkListItemNotLargeDevice>
+					<a href="#compressed-navigation-container">
+						Skip to site's primary and secondary navigation.
+					</a>
+				</SkipLinkListItemNotLargeDevice>
 				{
-					slug &&
-					<meta property="og:url"
-						content={`https://jbkr.me${slug}`} />
-				}
-				{
-					slug &&
-					<meta property="twitter:url"
-						content={`https://jbkr.me${slug}`} />
-				}
-				{
-					metaTitle &&
-					<title>{`${metaTitle}`} | jbkr</title>
-				}
-				{
-					metaTitle &&
-					<meta property="og:metaTitle"
-						content={`${metaTitle}`} />
-				}
-				{
-					metaTitle &&
-					<meta name="twitter:metaTitle"
-						content={`${metaTitle}`} />
-				}
-				{
-					metaDescription &&
-					<meta name="description" content={metaDescription} />
-				}
-				{
-					socialDescription &&
-					<meta property="og:description"
-						content={socialDescription} />
-				}
-				{
-					socialDescription &&
-					<meta name="twitter:description"
-						content={socialDescription} />
-				}
-				{
-					openGraphType &&
-					<meta property="og:type" content={openGraphType} />
-				}
-				{
-					metaImage && metaImage.url &&
-					<meta property="og:image" content={metaImage.url} />
-				}
-				{
-					metaImage && metaImage.url &&
-					<meta name="twitter:image" content={metaImage.url} />
-				}
-				{
-					metaImage && metaImage.alternativeText &&
-					<meta name="twitter:image:alt"
-						content={metaImage.alternativeText} />
-				}
-				{
-					metaOther && metaOther[0] &&
-					metaOther.map((otherObject, otherObjectIndex) =>
-						// key is in `otherObject`
-						// eslint-disable-next-line react/jsx-key
-						<meta
-							{...otherObject}
-						/>,
-					)
-				}
-			</Head>
-			<SkipLinksContainer>
-				<ul>
+					hasTableOfContents &&
 					<SkipLinkListItemNotLargeDevice>
-						<a href="#compressed-navigation-container">
-							Skip to site's primary and secondary navigation.
+						<a href="#compressed-table-of-contents">
+							Skip to page's table of contents.
 						</a>
 					</SkipLinkListItemNotLargeDevice>
-					{
-						hasTableOfContents &&
-						<SkipLinkListItemNotLargeDevice>
-							<a href="#compressed-table-of-contents">
-								Skip to page's table of contents.
-							</a>
-						</SkipLinkListItemNotLargeDevice>
-					}
+				}
+				<SkipLinkListItemLargeDevice>
+					<a href="#expanded-site-primary-navigation">
+						Skip to site's primary navigation.
+					</a>
+				</SkipLinkListItemLargeDevice>
+				<SkipLinkListItemLargeDevice>
+					<a href="#expanded-site-secondary-navigation">
+						Skip to site's secondary navigation.
+					</a>
+				</SkipLinkListItemLargeDevice>
+				{
+					hasTableOfContents &&
 					<SkipLinkListItemLargeDevice>
-						<a href="#expanded-site-primary-navigation">
-							Skip to site's primary navigation.
+						<a href="#expanded-table-of-contents">
+							Skip to page's table of contents.
 						</a>
 					</SkipLinkListItemLargeDevice>
-					<SkipLinkListItemLargeDevice>
-						<a href="#expanded-site-secondary-navigation">
-							Skip to site's secondary navigation.
-						</a>
-					</SkipLinkListItemLargeDevice>
-					{
-						hasTableOfContents &&
-						<SkipLinkListItemLargeDevice>
-							<a href="#expanded-table-of-contents">
-								Skip to page's table of contents.
-							</a>
-						</SkipLinkListItemLargeDevice>
-					}
-					<li>
-						<a href="#main-content">
-							Skip to this page's main content.
-						</a>
-					</li>
-				</ul>
-			</SkipLinksContainer>
-			<AppHeader
-				content={header}
-			/>
-			{children}
-			<AppFooter
-				content={footer.copy}
-			/>
-		</>
-	);
-};
+				}
+				<li>
+					<a href="#main-content">
+						Skip to this page's main content.
+					</a>
+				</li>
+			</ul>
+		</SkipLinksContainer>
+		<AppHeader
+			content={header}
+		/>
+		{children}
+		<AppFooter
+			content={footer.copy}
+		/>
+	</>
+);
 AppScaffold.propTypes = {
 	/** Data for the app's `<head>`. */
 	'meta': PropTypes.shape({

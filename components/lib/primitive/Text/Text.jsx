@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { typeColor } from '@jbkr/models-react';
 import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
 
 const TextContainer = styled.div`
@@ -267,7 +268,8 @@ Text.propTypes = {
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'color': PropTypes.oneOfType([
+	'color': typeColor,
+	/* PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.exact({
 			'kind': PropTypes.string.isRequired,
@@ -275,7 +277,7 @@ Text.propTypes = {
 			'level': PropTypes.number.isRequired,
 			'alpha': PropTypes.string,
 		}),
-	]),
+	]), */
 	/**
 	 * Color props used to construct a gradient, and a fallback color.
 	 * [Learn about color props](/?path=/story/props-color--page).
