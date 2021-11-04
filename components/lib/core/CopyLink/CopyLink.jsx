@@ -55,7 +55,7 @@ const CopyLinkContainer = styled.span`
 					color({
 						'kind': 'Neutral',
 						'tone': 'Finch',
-						'level': 35,
+						'level': 33,
 						'format': 'string'
 					}) :
 					color({
@@ -123,7 +123,7 @@ const CopyLinkContainer = styled.span`
 				colors.background.focus = colors.background.hover;
 
 			}
-			focusRing.focusRing = $contextColor === 'onDark' ?
+			colors.focusRing = $contextColor === 'onDark' ?
 				color({
 					'kind': 'Accent',
 					'tone': 'Finch',
@@ -136,17 +136,17 @@ const CopyLinkContainer = styled.span`
 					'level': 2,
 					'format': 'string'
 					});
-			const colorFocusRingSeparator = $contextColor === 'onLight' ?
+			colors.focusRingSeparator = $contextColor === 'onDark' ?
 				color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': 1,
+					'level': 41,
 					'format': 'string'
 				}) :
 				color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': 41,
+					'level': 1,
 					'format': 'string'
 				});
 			if ($inline) {
@@ -154,7 +154,7 @@ const CopyLinkContainer = styled.span`
 					a {
 						color: ${colors.content.default};
 						text-decoration: none;
-						transition: background 250ms ease;
+						transition: all 250ms ease;
 						background-position-y: 10%;
 						background-image: linear-gradient(
 							${colors.background.default} 50%,
@@ -171,7 +171,7 @@ const CopyLinkContainer = styled.span`
 							margin: 0 .25rem;
 							border-radius: .25rem;
 							outline: none;
-							box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
+							box-shadow: 0 0 0 .25rem ${colors.focusRingSeparator}, 0 0 0 .5rem ${colors.focusRing};
 						}
 					}
 				`;
@@ -191,7 +191,7 @@ const CopyLinkContainer = styled.span`
 							padding: 0 .5rem;
 							margin-right: 0 .25rem;
 							outline: none;
-							box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
+							box-shadow: 0 0 0 .25rem ${colors.focusRingSeparator}, 0 0 0 .5rem ${colors.focusRing};
 						}
 					}
 				`;

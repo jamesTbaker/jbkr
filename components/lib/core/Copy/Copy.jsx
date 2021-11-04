@@ -778,7 +778,12 @@ const StandardBodyContainer = styled.div`
 	}
 	a,
 	a:visited {
-		color: inherit;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		})};
 		text-decoration: none;
 		transition: all 250ms ease;
 		background-position-y: 10%;
@@ -801,7 +806,7 @@ const StandardBodyContainer = styled.div`
 			color: ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 37,
+				'level': 41,
 				'format': 'string'
 			})};
 			background-position-y: 100%;
