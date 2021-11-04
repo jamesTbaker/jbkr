@@ -16,59 +16,124 @@ const CopyLinkComplexAnchor = React.forwardRef(({ href, htmlContent }, ref) => (
 ));
 const CopyLinkContainer = styled.span`
 	${
-		({ $inline, $primaryColor, $secondaryColor, $contextColor }) => {
-			const primaryColor = $primaryColor ?
-				color({
-					'kind': $primaryColor.kind,
-					'tone': $primaryColor.tone,
-					'level': $primaryColor.level,
-					'alpha': $primaryColor.alpha,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Brand',
-					'tone': 'Peony',
-					'level': 3,
-					'format': 'string'
-				});
-			const secondaryColor = $secondaryColor ?
-				color({
-					'kind': $secondaryColor.kind,
-					'tone': $secondaryColor.tone,
-					'level': $secondaryColor.level,
-					'alpha': $secondaryColor.alpha,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 37,
-					'format': 'string'
-				});
-			const contrastColor = $contextColor === 'onDark' ?
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 37,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 7,
-					'format': 'string'
-				});
-			const colorFocusRing = $contextColor === 'onLight' ?
-				color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 2,
-					'format': 'string'
-				}) :
+		({ $inline, $contextColor }) => {
+			const colors = {
+				content: {},
+				background: {},
+				focusRing: {},
+				focusRingSeparator: {},
+			};
+			if ($inline) {
+				colors.content.default = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 41,
+						'format': 'string'
+					});
+				colors.content.hover = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 41,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					});
+				colors.content.focus = colors.content.hover;
+				colors.background.default = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 35,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					});
+				colors.background.hover = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 3,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 7,
+						'format': 'string'
+					});
+				colors.background.focus = colors.background.hover;
+			} else {
+				colors.content.default = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 4,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 7,
+						'format': 'string'
+					});
+				colors.content.hover = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 2,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 8,
+						'format': 'string'
+					});
+				colors.content.focus = colors.content.hover;
+				colors.background.default = 'transparent';
+				colors.background.hover = $contextColor === 'onDark' ?
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 35,
+						'format': 'string'
+					}) :
+					color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 1,
+						'format': 'string'
+					});
+				colors.background.focus = colors.background.hover;
+
+			}
+			focusRing.focusRing = $contextColor === 'onDark' ?
 				color({
 					'kind': 'Accent',
 					'tone': 'Finch',
 					'level': 1,
+					'format': 'string'
+				}) :
+				color({
+					'kind': 'Accent',
+					'tone': 'Finch',
+					'level': 2,
 					'format': 'string'
 					});
 			const colorFocusRingSeparator = $contextColor === 'onLight' ?
@@ -87,18 +152,17 @@ const CopyLinkContainer = styled.span`
 			if ($inline) {
 				return `
 					a {
-						color: inherit;
+						color: ${colors.content.default};
 						text-decoration: none;
 						transition: background 250ms ease;
-
 						background-position-y: 10%;
 						background-image: linear-gradient(
-							${secondaryColor} 50%,
-							${primaryColor} 50%
+							${colors.background.default} 50%,
+							${colors.background.hover} 50%
 						);
 						background-size: auto 200%;
 						&:hover {
-							color: ${contrastColor};
+							color: ${colors.content.hover};
 							background-position-y: 100%;
 							border-radius: .25rem;
 						}
@@ -115,12 +179,13 @@ const CopyLinkContainer = styled.span`
 				return `
 					a {
 						display: block;
-						color: ${primaryColor};
+						color: ${colors.content.default};
 						text-decoration: none;
 						transition: background 250ms ease;
 						border-radius: .375rem;
 						&:hover {
-							background-color: ${secondaryColor};
+							color: ${colors.content.hover};
+							background-color: ${colors.background.hover};
 						}
 						&:focus {
 							padding: 0 .5rem;
@@ -152,14 +217,14 @@ export const CopyLink = ({
 	htmlContent,
 	inline,
 	contextColor,
-	primaryColor,
-	secondaryColor,
+	// primaryColor,
+	// secondaryColor,
 	clickHandler,
 }) => (
 	<CopyLinkContainer
 		$inline={inline}
-		$primaryColor={primaryColor}
-		$secondaryColor={secondaryColor}
+		// $primaryColor={primaryColor}
+		// $secondaryColor={secondaryColor}
 		$contextColor={contextColor}
 	>
 		{
@@ -253,21 +318,21 @@ CopyLink.propTypes = {
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'primaryColor': PropTypes.exact({
+	/* 'primaryColor': PropTypes.exact({
 		'kind': PropTypes.string.isRequired,
 		'tone': PropTypes.string.isRequired,
 		'level': PropTypes.number.isRequired,
 		'alpha': PropTypes.string,
-	}),
+	}), */
 	/**
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
-	'secondaryColor': PropTypes.exact({
+	/* 'secondaryColor': PropTypes.exact({
 		'kind': PropTypes.string.isRequired,
 		'tone': PropTypes.string.isRequired,
 		'level': PropTypes.number.isRequired,
 		'alpha': PropTypes.string,
-	}),
+	}), */
 };
 CopyLink.defaultProps = {
 	url: '/',

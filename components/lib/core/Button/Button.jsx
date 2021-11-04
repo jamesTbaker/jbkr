@@ -128,7 +128,7 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 		colors.content.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 3,
+			'level': 2,
 			'format': 'string'
 		});
 	}
@@ -260,6 +260,9 @@ const ButtonContentContainer = styled.span`
 				background-color: ${$colors.background.active};
 				border: solid .125rem ${$colors.border.active};
 				color: ${$colors.content.active};
+				svg {
+					fill: ${$colors.content.active};
+				}
 			}
 		`
 	}
