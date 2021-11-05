@@ -30,13 +30,13 @@ const ProfileSkillRatingIndicator = styled.div`
 			if (fillBasis > 10) {
 				fillStyle = 'full';
 			}
+			const sizesStatements = $size === 'large' ?
+				'width: 1.5rem; height: 1.5rem; border-radius: .75rem;' :
+				'width: 1rem; height: 1rem; border-radius: .5rem;';
 			const marginStatement = $order === 1 ?
 				'' :
 				'margin-left: .5rem;';
 			;
-			const sizesStatements = $size === 'large' ?
-				'width: 1.5rem; height: 1.5rem; border-radius: .75rem;' :
-				'width: 1rem; height: 1rem; border-radius: .5rem;';
 			let backgroundStatement = `background-color: ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
@@ -75,8 +75,8 @@ const ProfileSkillRatingIndicator = styled.div`
 				);`;
 			}
 			return `
-				${marginStatement}
 				${sizesStatements}
+				${marginStatement}
 				${backgroundStatement}
 			`;
 		}

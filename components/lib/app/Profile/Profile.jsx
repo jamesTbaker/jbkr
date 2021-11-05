@@ -80,9 +80,9 @@ const ProfileContainer = styled.div`
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: relative;
-		margin: 14rem auto 0;
 		width: 100%;
 		max-width: 180rem;
+		margin: 14rem auto 0;
 		text-align: center;
 	}
 `;
@@ -91,7 +91,6 @@ const ProfileHeader = styled.header`
 		padding: 0 2rem 8rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* padding: 15rem 51rem 10rem 15rem; */
 		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 0 auto;
@@ -100,10 +99,7 @@ const ProfileHeader = styled.header`
 	}
 `;
 const ProfileHeaderContentConstrainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* padding: 15rem 51rem 10rem 15rem; */
 		padding-right: 36rem;
 	}
 `;
@@ -165,9 +161,6 @@ const MainContentContainer = styled.main.attrs(() => {
 		'id': 'main-content',
 	};
 })`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
 		background-image:
@@ -206,9 +199,9 @@ const MainContentContainer = styled.main.attrs(() => {
 				})} 20rem
 			),
 			url('https://res.cloudinary.com/jbkrcdn/image/upload/v1633623944/Backgrounds/Copenhagen-Curves_gy6gjw.jpg');
-		background-repeat: no-repeat;
 		background-position: top 15rem right 0;
 		background-size: 884px 438px;
+		background-repeat: no-repeat;
 	}
 `;
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -223,18 +216,9 @@ const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
 		position: absolute;
 		top: 0;
 		left: 0;
+		width: 100%;
 		height: 100%;
 		text-align: center;
-		width: 100%;
-	}
-`;
-const Extra = styled.div`
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: calc(100% - 4rem);
-		max-width: 150rem;
-		margin: 0 auto;
-		text-align: right;
-		height: 100%;
 	}
 `;
 const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
@@ -243,11 +227,19 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 		'aria-label': 'Page Table of Contents',
 	};
 })`
-	width: 28rem;
+		width: calc(100% - 4rem);
+		max-width: 150rem;
+		height: 100%;
+		margin: 0 auto;
+		text-align: right;
+`;
+const ExpandedTableOfContentsList = styled.ol`
 	position: sticky;
 	top: 37rem;
-	z-index: 1000;
+	width: 28rem;
 	margin: 0 0 0 auto;
+	padding: 0;
+	z-index: ${zIndexNumber().expandedNavigation};
 	text-align: left;
 	@media (max-height: 660px) {
 		top: 25rem;
@@ -255,10 +247,6 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 	@media (max-height: 580px) {
 		top: 20rem;
 	}
-`;
-const ExpandedTableOfContentsList = styled.ol`
-	margin: 0;
-	padding: 0;
 `;
 const ExpandedTableOfContentsListItem = styled.li`
 	list-style-type: none;
@@ -278,10 +266,10 @@ const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	};
 })`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 3rem 2rem;
 		position: fixed;
 		top: 13rem;
 		width: 100%;
+		padding: 3rem 2rem;
 		background-color: ${color({
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -335,13 +323,13 @@ const CompressedTableOfContentsList = styled.ol`
 	overflow: hidden;
 	margin: 0;
 	padding: 0 2rem;
-	transition: height .5s, padding .5s;
 	background-color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': 37,
 		'format': 'string',
 	})};
+	transition: height .5s, padding .5s;
 	z-index: ${zIndexNumber().compressedTableOfContentsContainer};
 	${
 		({ contentVisible}) => {
@@ -361,9 +349,9 @@ const CompressedTableOfContentsList = styled.ol`
 `;
 const CompressedTableOfContentsListItem = styled.li`
 	list-style-type: none;
-	padding-bottom: 1rem;
 	margin-top: -1rem;
 	margin-left: -1rem;
+	padding-bottom: 1rem;
 	opacity: 0;
 	transition-property: opacity, margin-left, margin-top;
 	transition-duration: .5s;
@@ -446,37 +434,30 @@ const SkillsStatementsList = styled.ul`
 const SkillsStatementsListItem = styled.li`
 	list-style-type: none;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding: 1.875rem 0 3rem 0;
 		border-top: solid .125rem ${color({
 			'kind': 'Accent',
 			'tone': 'Finch',
 			'level': 1,
 			'format': 'string',
 		})};
-		padding: 1.875rem 0 3rem 0;
 	}
 	${deviceWidthQuery.only({ 'width': 'm' })} {
 		width: calc(50% - 1.125rem);
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: calc(50% - 1.125rem);
+		padding: 1.875rem 0 3rem 0;
 		border-top: solid .125rem ${color({
 			'kind': 'Accent',
 			'tone': 'Finch',
 			'level': 1,
 			'format': 'string',
 		})};
-		padding: 1.875rem 0 3rem 0;
-		width: calc(50% - 1.125rem);
 	}
 `;
-const ProfessionalExperiencesContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
+const ProfessionalExperiencesContainer = styled.div``;
 const EducationAndCertificationsContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: grid;
 		grid-template-areas: "certification graduate undergraduate";
@@ -486,8 +467,6 @@ const EducationAndCertificationsContainer = styled.div`
 	}
 `;
 const EducationAndCertificationsSubset = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${
 			({ gridArea }) => `grid-area: ${gridArea};`
@@ -495,8 +474,6 @@ const EducationAndCertificationsSubset = styled.div`
 	}
 `;
 const VolunteerExperiencesContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: grid;
 		grid-template-areas:	"volunteerExperience0 volunteerExperience3 volunteerExperience6"
@@ -754,30 +731,28 @@ export const Profile = ({
 			</CompressedTableOfContentsCollapsibleContainer>
 		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>
-			<Extra>
-				<ExpandedTableOfContentsListContainer>
-					<ExpandedTableOfContentsList>
-						{
-							Object.keys(ProfileSectionsData).map((sectionKey) =>
-								<ExpandedTableOfContentsListItem
-									key={`expanded--${ProfileSectionsData[sectionKey].id}`}
+			<ExpandedTableOfContentsListContainer>
+				<ExpandedTableOfContentsList>
+					{
+						Object.keys(ProfileSectionsData).map((sectionKey) =>
+							<ExpandedTableOfContentsListItem
+								key={`expanded--${ProfileSectionsData[sectionKey].id}`}
+							>
+								<Copy
+									kind="profile--table-of-contents-item--anchor--large-device"
 								>
-									<Copy
-										kind="profile--table-of-contents-item--anchor--large-device"
+									<CopyLink
+										url={`#${ProfileSectionsData[sectionKey].hash}`}
+										inline={false}
 									>
-										<CopyLink
-											url={`#${ProfileSectionsData[sectionKey].hash}`}
-											inline={false}
-										>
-											{ProfileSectionsData[sectionKey].anchor}
-										</CopyLink>
-									</Copy>
-								</ExpandedTableOfContentsListItem>,
-							)
-						}
-					</ExpandedTableOfContentsList>
-				</ExpandedTableOfContentsListContainer>
-			</Extra>
+										{ProfileSectionsData[sectionKey].anchor}
+									</CopyLink>
+								</Copy>
+							</ExpandedTableOfContentsListItem>,
+						)
+					}
+				</ExpandedTableOfContentsList>
+			</ExpandedTableOfContentsListContainer>
 		</ExpandedTableOfContentsContainer>
 	</ProfileContainer>
 );

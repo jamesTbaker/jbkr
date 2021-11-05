@@ -144,7 +144,7 @@ export namespace foundation {
             const profileSectionVideoOverlay: number;
             const profileSectionTitleUnderlay: number;
             const profileSectionContent: number;
-            const profileNavigation: number;
+            const expandedNavigation: number;
         }
         const verticalAlignMiddle: string;
     }

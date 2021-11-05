@@ -138,7 +138,7 @@ export declare const foundation: {
             profileSectionVideoOverlay: number;
             profileSectionTitleUnderlay: number;
             profileSectionContent: number;
-            profileNavigation: number;
+            expandedNavigation: number;
         };
         verticalAlignMiddle: string;
     };

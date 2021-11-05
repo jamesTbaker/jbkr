@@ -14,8 +14,8 @@ const EducationAndCertificationsContainer = styled.div`
 		'level': 1,
 		'format': 'string',
 	})};
-	padding: 2.875rem 0 0;
 	margin-bottom: 4rem;
+	padding: 2.875rem 0 0;
 `;
 const EducationAndCertificationMetaList = styled.ul`
 	margin: 0;

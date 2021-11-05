@@ -180,7 +180,7 @@ export const foundation = {
 			'profileSectionVideoOverlay': 12,
 			'profileSectionTitleUnderlay': 13,
 			'profileSectionContent': 14,
-			'profileNavigation': 100,
+			'expandedNavigation': 100,
 		},
 		'verticalAlignMiddle': `position: relative;
 			top: 50%;

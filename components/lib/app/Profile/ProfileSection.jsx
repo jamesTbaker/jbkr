@@ -185,7 +185,6 @@ const ProfileSectionContainer = styled.section`
 		z-index: ${zIndexNumber().profileSectionContainer};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* padding: 7rem 51rem 7rem 15rem; */
 		position: relative;
 		z-index: ${zIndexNumber().profileSectionContainer};
 		width: 100%;
