@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ContextColorKey } from '@jbkr/models-react';
 import { color } from '@jbkr/style-service';
 
 const returnColors = ({ greyscale, contextColor }) => {
@@ -124,7 +125,7 @@ Brand.propTypes = {
 	/**
 	 * Whether the button appears on a light or dark background.
 	 */
-	'contextColor': PropTypes.oneOf(['onDark', 'onLight']),
+	'contextColor': ContextColorKey,
 	/**
 	 * Token indicating size of line and its container. To maintain alignment,
 	 * a line always exists within a container whose height is a multiple of 8.

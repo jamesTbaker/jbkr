@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ContextColorKey } from '@jbkr/models-react';
 import Link from 'next/link';
 import { Icon, IconNames } from '../../primitive/Icon/Icon';
 import { Copy } from '../../core/Copy/Copy';
@@ -576,7 +577,7 @@ Button.propTypes = {
 	/**
 	 * Whether the button appears on a light or dark background.
 	 */
-	'contextColor': PropTypes.oneOf(['onDark', 'onLight']),
+	'contextColor': ContextColorKey,
 	/**
 	 * The text characters describing the button's function.
 	 */

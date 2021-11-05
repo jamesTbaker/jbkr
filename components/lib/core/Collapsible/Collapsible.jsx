@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { ContextColorKey } from '@jbkr/models-react';
 import { zIndexNumber } from '@jbkr/style-service';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../Copy/Copy';
@@ -70,7 +71,7 @@ Collapsible.propTypes = {
 	'button': PropTypes.shape({
 		'size': PropTypes.oneOf(['standard', 'small']),
 		'surfaceStyle': PropTypes.oneOf(['filled', 'outlined', 'transparent']),
-		'contextColor': PropTypes.oneOf(['onDark', 'onLight']),
+		'contextColor': ContextColorKey,
 		'text': PropTypes.string,
 	}),
 	/**

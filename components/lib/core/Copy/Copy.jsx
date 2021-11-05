@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Color, Gradient } from '@jbkr/models-react';
 import { Text } from '../../primitive/Text/Text';
 import { deviceWidthQuery, color, typeStyle, hiddenBlock, hiddenInline } from '@jbkr/style-service';
 
