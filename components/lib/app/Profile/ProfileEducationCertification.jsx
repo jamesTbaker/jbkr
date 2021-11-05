@@ -26,6 +26,12 @@ const EducationAndCertificationMetaListItem = styled.li`
 `;
 const EducationAndCertificationMetaListItemLabel = styled.span`
 	${hiddenInline}
+	color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 1,
+		'format': 'string',
+	})};
 `;
 const EducationAndCertificationDetailsLabel = styled.h4`
 	${hiddenBlock}

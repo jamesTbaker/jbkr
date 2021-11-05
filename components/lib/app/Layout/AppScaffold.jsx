@@ -2,12 +2,11 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery } from '@jbkr/style-service';
-import { hiddenBlock } from '@jbkr/style-service';
-import { Banner } from '../Layout/Banner';
+import { color, hiddenBlock } from '@jbkr/style-service';
 import { AppHeader } from '../Layout/AppHeader';
 import { AppFooter } from '../Layout/AppFooter';
 
-const SkipLinksContainer = styled.div`
+const SkipLinksContainer = styled.ul`
 	${hiddenBlock}
 `;
 const SkipLinkListItemLargeDevice = styled.li`
@@ -15,11 +14,41 @@ const SkipLinkListItemLargeDevice = styled.li`
 		display: none;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		padding: 0;
+		a {
+			color: ${color({
+				'kind': 'Brand',
+				'tone': 'Peony',
+				'level': 2,
+				'format': 'string'
+			})};
+		}
 	}
 `;
 const SkipLinkListItemNotLargeDevice = styled.li`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		a {
+			color: ${color({
+				'kind': 'Brand',
+				'tone': 'Peony',
+				'level': 2,
+				'format': 'string'
+			})};
+		}
+	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: none;
+	}
+`;
+const SkipLinkListItemAnyDevice = styled.li`
+	padding: 0;
+	a {
+		color: ${color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 2,
+			'format': 'string'
+		})};
 	}
 `;
 export const AppScaffold = ({
@@ -106,44 +135,42 @@ export const AppScaffold = ({
 			}
 		</Head>
 		<SkipLinksContainer>
-			<ul>
+			<SkipLinkListItemNotLargeDevice>
+				<a href="#compressed-navigation-container">
+					Skip to site's primary and secondary navigation.
+				</a>
+			</SkipLinkListItemNotLargeDevice>
+			{
+				hasTableOfContents &&
 				<SkipLinkListItemNotLargeDevice>
-					<a href="#compressed-navigation-container">
-						Skip to site's primary and secondary navigation.
+					<a href="#compressed-table-of-contents">
+						Skip to page's table of contents.
 					</a>
 				</SkipLinkListItemNotLargeDevice>
-				{
-					hasTableOfContents &&
-					<SkipLinkListItemNotLargeDevice>
-						<a href="#compressed-table-of-contents">
-							Skip to page's table of contents.
-						</a>
-					</SkipLinkListItemNotLargeDevice>
-				}
+			}
+			<SkipLinkListItemLargeDevice>
+				<a href="#expanded-site-primary-navigation">
+					Skip to site's primary navigation.
+				</a>
+			</SkipLinkListItemLargeDevice>
+			<SkipLinkListItemLargeDevice>
+				<a href="#expanded-site-secondary-navigation">
+					Skip to site's secondary navigation.
+				</a>
+			</SkipLinkListItemLargeDevice>
+			{
+				hasTableOfContents &&
 				<SkipLinkListItemLargeDevice>
-					<a href="#expanded-site-primary-navigation">
-						Skip to site's primary navigation.
+					<a href="#expanded-table-of-contents">
+						Skip to page's table of contents.
 					</a>
 				</SkipLinkListItemLargeDevice>
-				<SkipLinkListItemLargeDevice>
-					<a href="#expanded-site-secondary-navigation">
-						Skip to site's secondary navigation.
-					</a>
-				</SkipLinkListItemLargeDevice>
-				{
-					hasTableOfContents &&
-					<SkipLinkListItemLargeDevice>
-						<a href="#expanded-table-of-contents">
-							Skip to page's table of contents.
-						</a>
-					</SkipLinkListItemLargeDevice>
-				}
-				<li>
-					<a href="#main-content">
-						Skip to this page's main content.
-					</a>
-				</li>
-			</ul>
+			}
+			<SkipLinkListItemAnyDevice>
+				<a href="#main-content">
+					Skip to this page's main content.
+				</a>
+			</SkipLinkListItemAnyDevice>
 		</SkipLinksContainer>
 		<AppHeader
 			content={header}

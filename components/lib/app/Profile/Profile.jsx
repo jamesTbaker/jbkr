@@ -115,47 +115,6 @@ const BrandContainer = styled.div`
 		height: 8rem;
 	}
 `;
-const BrandLink = styled.a`
-	${
-		({ $contextColor }) => {
-			const colorFocusRing = $contextColor === 'onLight' ?
-				color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 2,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 1,
-					'format': 'string'
-					});
-			const colorFocusRingSeparator = $contextColor === 'onLight' ?
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 1,
-					'format': 'string'
-				}) :
-				color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 41,
-					'format': 'string'
-				});
-			return `
-				&:focus {
-					outline: none;
-					> span {
-						border-radius: .375rem;
-						box-shadow: 0 0 0 .25rem ${colorFocusRingSeparator}, 0 0 0 .5rem ${colorFocusRing};
-					}
-				}
-			`;
-		}
-	}
-`;
 const MainContentContainer = styled.main.attrs(() => {
 	return {
 		'id': 'main-content',
@@ -496,14 +455,9 @@ export const Profile = ({
 			<ProfileHeader>
 				<ProfileHeaderContentConstrainer>
 					<BrandContainer>
-						<BrandLink
-							href="/"
-							$contextColor="onDark"
-						>
-							<Brand
-								contextColor="onDark"
-							/>
-						</BrandLink>
+						<Brand
+							contextColor="onDark"
+						/>
 					</BrandContainer>
 					<Copy
 						kind="landmark-title"

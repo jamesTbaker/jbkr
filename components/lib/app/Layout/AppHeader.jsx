@@ -301,6 +301,9 @@ const BrandContainer = styled.div`
 		margin: 1.5rem 0 .5rem;
 	}
 `;
+const HiddenContainer = styled.span`
+	${hiddenInline};
+`;
 const BrandLink = styled.a`
 	${
 		({ $contextColor }) => {
@@ -331,6 +334,12 @@ const BrandLink = styled.a`
 					'format': 'string'
 				});
 			return `
+				color: ${color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 2,
+					'format': 'string'
+				})};
 				&:focus {
 					outline: none;
 					> span {
@@ -662,6 +671,7 @@ export const AppHeader = ({ content }) => {
 						href="/"
 						$contextColor="onDark"
 					>
+						<HiddenContainer>Homepage</HiddenContainer>
 						<Brand
 							contextColor="onDark"
 						/>

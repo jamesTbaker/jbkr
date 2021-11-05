@@ -144,7 +144,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 11,
+			'level': 7,
 		},
 	},
 	'announcement--body': {

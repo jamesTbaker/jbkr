@@ -63,6 +63,12 @@ const ProfileSkillVisualizationContainer = styled.li`
 `;
 const ProfileSkillRatingText = styled.span`
 	${hiddenInline}
+	color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 1,
+		'format': 'string',
+	})};
 `;
 export const ProfileSkillVisualization = ({
 	skill,

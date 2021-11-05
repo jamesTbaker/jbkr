@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, verticalAlignMiddle
+	deviceWidthQuery, color, verticalAlignMiddle, hiddenInline
 } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
 import { Copy } from '../../core/Copy/Copy';
@@ -51,6 +51,9 @@ const BrandContainer = styled.div`
 		}
 	}
 `;
+const HiddenContainer = styled.span`
+	${hiddenInline};
+`;
 const CopyrightContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		grid-area: footerLeft;
@@ -88,6 +91,12 @@ const BrandLink = styled.a`
 					'format': 'string'
 				});
 			return `
+				color: ${color({
+					'kind': 'Brand',
+					'tone': 'Peony',
+					'level': 2,
+					'format': 'string'
+				})};
 				&:focus {
 					outline: none;
 					> span {
@@ -107,6 +116,7 @@ export const AppFooter = ({ content }) => (
 				href="/"
 				$contextColor="onDark"
 			>
+				<HiddenContainer>Homepage</HiddenContainer>
 				<Brand />
 			</BrandLink>
 		</BrandContainer>
