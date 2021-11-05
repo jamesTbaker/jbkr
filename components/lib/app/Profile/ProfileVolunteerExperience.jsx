@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { VolunteerExperience } from '@jbkr/models-react';
 import {
 	deviceWidthQuery, color, hiddenInline
 } from '@jbkr/style-service';
@@ -98,3 +99,8 @@ export const ProfileVolunteerExperience = ({
 		</VolunteerExperienceList>
 	</ProfileVolunteerExperienceContainer>
 );
+
+ProfileVolunteerExperience.propTypes = {
+	'gridArea': PropTypes.string,
+	'volunteerExperience': VolunteerExperience,
+}

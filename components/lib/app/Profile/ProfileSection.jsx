@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
 	deviceWidthQuery, zIndexNumber, color
 } from '@jbkr/style-service';
-import { Copy } from '../../core/Copy/Copy';
 
 
 const VideoOverlay = styled.div`
@@ -224,3 +223,11 @@ export const ProfileSection = ({
 		</ContentContainer>
 	</ProfileSectionContainer>
 );
+
+ProfileSection.propTypes = {
+	'videoLargeScreen': PropTypes.string,
+	'videoNotLargeScreen': PropTypes.string,
+	'posterLargeScreen': PropTypes.string,
+	'posterNotLargeScreen': PropTypes.string,
+	'children': PropTypes.any,
+}

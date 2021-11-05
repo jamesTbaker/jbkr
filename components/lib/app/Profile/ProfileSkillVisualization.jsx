@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Skill } from '@jbkr/models-react';
 import {
 	deviceWidthQuery, color, hiddenInline
 } from '@jbkr/style-service';
@@ -104,3 +105,8 @@ export const ProfileSkillVisualization = ({
 		}
 	</ProfileSkillVisualizationContainer>
 );
+
+ProfileSkillVisualization.propTypes = {
+	'featured': PropTypes.bool,
+	'skill': Skill,
+}

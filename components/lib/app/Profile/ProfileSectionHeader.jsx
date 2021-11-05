@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, zIndexNumber, color
-} from '@jbkr/style-service';
+import { deviceWidthQuery } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 import { Line } from '../../..';
 
@@ -25,8 +23,12 @@ const ProfileSectionHeaderContainer = styled.header`
 		margin-bottom: 4rem;
 	}
 `;
-
-export const ProfileSectionHeader = ({ content: { anchor, hash, title }}) => (
+export const ProfileSectionHeader = ({
+	content: {
+		hash,
+		title,
+	}
+}) => (
 	<ProfileSectionHeaderContainer>
 		<ProfileSectionTitleContainer
 			id={hash}
@@ -57,3 +59,12 @@ export const ProfileSectionHeader = ({ content: { anchor, hash, title }}) => (
 		/>
 	</ProfileSectionHeaderContainer>
 );
+ProfileSectionHeader.propTypes = {
+	'content': PropTypes.shape({
+		'hash': PropTypes.string,
+		'title': PropTypes.shape({
+			'main': PropTypes.string,
+			'preface': PropTypes.string,
+		}),
+	}),
+}

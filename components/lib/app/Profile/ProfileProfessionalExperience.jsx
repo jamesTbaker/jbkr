@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ProfessionalExperience } from '@jbkr/models-react';
 import {
 	deviceWidthQuery, color, hiddenBlock, hiddenInline
 } from '@jbkr/style-service';
@@ -84,3 +85,7 @@ export const ProfileProfessionalExperience = ({
 		</JobDescription>
 	</JobContainer>
 );
+
+ProfileProfessionalExperience.propTypes = {
+	'professionalExperience': ProfessionalExperience,
+}

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { EducationCertification } from '@jbkr/models-react';
 import {
 	deviceWidthQuery, color, hiddenBlock, hiddenInline
 } from '@jbkr/style-service';
@@ -13,7 +14,8 @@ const EducationAndCertificationsContainer = styled.div`
 		'level': 1,
 		'format': 'string',
 	})};
-	padding: 2.875rem 0 4rem;
+	padding: 2.875rem 0 0;
+	margin-bottom: 4rem;
 `;
 const EducationAndCertificationMetaList = styled.ul`
 	margin: 0;
@@ -30,7 +32,6 @@ const EducationAndCertificationDetailsLabel = styled.h4`
 `;
 export const ProfileEducationCertification = ({
 	educationCertification,
-	type,
 }) => (
 	<EducationAndCertificationsContainer>
 		<Copy kind="profile--education-certification--title">
@@ -39,7 +40,7 @@ export const ProfileEducationCertification = ({
 		<EducationAndCertificationMetaList>
 			<EducationAndCertificationMetaListItem>
 				<EducationAndCertificationMetaListItemLabel>
-					{type === 'certification' ? 'Organization: ' : 'Objective: '}
+					{educationCertification.type === 'certification' ? 'Organization: ' : 'Objective: '}
 				</EducationAndCertificationMetaListItemLabel>
 				<Copy kind="profile--education-certification--tagline">
 					{educationCertification.tagline}
@@ -84,3 +85,7 @@ export const ProfileEducationCertification = ({
 		}
 	</EducationAndCertificationsContainer>
 );
+
+ProfileEducationCertification.propTypes = {
+	'educationCertification': EducationCertification,
+}

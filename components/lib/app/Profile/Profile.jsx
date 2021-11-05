@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
+	SkillWithReactKey,
+	ProfessionalExperienceWithReactKey,
+	EducationCertificationWithReactKey,
+	VolunteerExperienceWithReactKey,
+} from '@jbkr/models-react';
+import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
@@ -101,7 +107,7 @@ const ProfileHeaderContentConstrainer = styled.div`
 		padding-right: 36rem;
 	}
 `;
-const LandmarkTitlePreface = styled.span`
+const LandmarkTitleAppendix = styled.span`
 	${hiddenInline}
 `;
 const BrandContainer = styled.div`
@@ -525,7 +531,7 @@ export const Profile = ({
 					<Copy
 						kind="landmark-title"
 					>
-						Profile<LandmarkTitlePreface>&nbsp;of James T. Baker</LandmarkTitlePreface>
+						Profile<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
 					</Copy>
 				</ProfileHeaderContentConstrainer>
 			</ProfileHeader>
@@ -671,7 +677,6 @@ export const Profile = ({
 								<ProfileEducationCertification
 									key={educationCertification.key}
 									educationCertification={educationCertification}
-									type="certification"
 								/>
 							)
 						}
@@ -688,7 +693,6 @@ export const Profile = ({
 								<ProfileEducationCertification
 									key={educationCertification.key}
 									educationCertification={educationCertification}
-									type="graduate"
 								/>
 							)
 						}
@@ -705,7 +709,6 @@ export const Profile = ({
 								<ProfileEducationCertification
 									key={educationCertification.key}
 									educationCertification={educationCertification}
-									type="undergraduate"
 								/>
 							)
 						}
@@ -778,3 +781,25 @@ export const Profile = ({
 		</ExpandedTableOfContentsContainer>
 	</ProfileContainer>
 );
+
+Profile.propTypes = {
+	'title': PropTypes.string,
+	'skills': PropTypes.shape({
+		'technical': PropTypes.shape({
+			'featured': PropTypes.arrayOf(SkillWithReactKey),
+			'standard': PropTypes.arrayOf(SkillWithReactKey),
+		}),
+
+		'business': PropTypes.shape({
+			'featured': PropTypes.arrayOf(SkillWithReactKey),
+			'standard': PropTypes.arrayOf(SkillWithReactKey),
+		}),
+		'design': PropTypes.shape({
+			'featured': PropTypes.arrayOf(SkillWithReactKey),
+			'standard': PropTypes.arrayOf(SkillWithReactKey),
+		}),
+	}),
+	'professionalExperiences': PropTypes.arrayOf(ProfessionalExperienceWithReactKey),
+	'educationCertifications': PropTypes.arrayOf(EducationCertificationWithReactKey),
+	'volunteerExperiences': PropTypes.arrayOf(VolunteerExperienceWithReactKey),
+}

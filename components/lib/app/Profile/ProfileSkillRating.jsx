@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, color, hiddenBlock
-} from '@jbkr/style-service';
+import { color } from '@jbkr/style-service';
 
 
 const ProfileSkillRatingContainer = styled.div`
