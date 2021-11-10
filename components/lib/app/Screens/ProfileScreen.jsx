@@ -21,6 +21,8 @@ export const ProfileScreen = ({
 			professionalExperiences={main.professionalExperiences}
 			educationCertifications={main.educationCertifications}
 			volunteerExperiences={main.volunteerExperiences}
+			sectionProperties={main.dataContentItems.sectionProperties}
+			media={main.mediaContentItems}
 		/>
 	</AppScaffold>
 );

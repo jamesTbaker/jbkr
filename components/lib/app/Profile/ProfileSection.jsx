@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Image, Video } from '@jbkr/models-react';
 import {
 	deviceWidthQuery, zIndexNumber, color
 } from '@jbkr/style-service';
@@ -208,14 +209,14 @@ export const ProfileSection = ({
 }) => (
 	<ProfileSectionContainer>
 		<LargeDeviceVideo
-			poster={imageLargeScreen}
+			poster={imageLargeScreen.url}
 		>
-			<source src={videoLargeScreen} type="video/mp4" />
+			<source src={videoLargeScreen.url} type="video/mp4" />
 		</LargeDeviceVideo>
 		<NotLargeDeviceVideo
-			poster={imageNotLargeScreen}
+			poster={imageNotLargeScreen.url}
 		>
-			<source src={videoNotLargeScreen} type="video/mp4" />
+			<source src={videoNotLargeScreen.url} type="video/mp4" />
 		</NotLargeDeviceVideo>
 		<TitleUnderlay />
 		<BackgroundOverlay />
@@ -228,9 +229,9 @@ export const ProfileSection = ({
 );
 
 ProfileSection.propTypes = {
-	'videoLargeScreen': PropTypes.string,
-	'videoNotLargeScreen': PropTypes.string,
-	'imageLargeScreen': PropTypes.string,
-	'imageNotLargeScreen': PropTypes.string,
+	'videoLargeScreen': Video,
+	'videoNotLargeScreen': Video,
+	'imageLargeScreen': Image,
+	'imageNotLargeScreen': Image,
 	'children': PropTypes.any,
 }

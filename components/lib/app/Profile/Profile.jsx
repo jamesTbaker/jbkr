@@ -21,7 +21,7 @@ import { Brand } from '../../..';
 import { Collapsible } from '../../..';
 
 
-const ProfileSectionsData = {
+/* const ProfileSectionsData = {
 	'technicalSkills': {
 		'id': 'FN8MtdLdWPDsdANtLqZ82kcM',
 		'hash': 'technical-skills',
@@ -73,7 +73,7 @@ const ProfileSectionsData = {
 			'main': 'Volunteer Experiences',
 		},
 	},
-};
+}; */
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 23rem;
@@ -250,22 +250,23 @@ const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 const CompressedTableOfContentsListContainer = ({
 	contentVisible,
 	clickHandler,
+	sectionProperties,
 }) => {
 	return (
 		<CompressedTableOfContentsList
 			contentVisible={contentVisible}
 		>
 			{
-				Object.keys(ProfileSectionsData).map((sectionKey) =>
+				Object.keys(sectionProperties).map((sectionKey) =>
 					<CompressedTableOfContentsListItem
-						key={`compressed--${ProfileSectionsData[sectionKey].id}`}
+						key={`compressed--${sectionProperties[sectionKey].id}`}
 					>
 							<CopyLink
-								url={`#${ProfileSectionsData[sectionKey].hash}`}
+								url={`#${sectionProperties[sectionKey].hash}`}
 								inline={false}
 								clickHandler={clickHandler}
 							>
-								{ProfileSectionsData[sectionKey].anchor}
+								{sectionProperties[sectionKey].anchor}
 							</CopyLink>
 					</CompressedTableOfContentsListItem>,
 				)
@@ -448,7 +449,9 @@ export const Profile = ({
 	skills,
 	professionalExperiences,
 	educationCertifications,
-	volunteerExperiences
+	volunteerExperiences,
+	sectionProperties,
+	media,
 }) => (
 	<ProfileContainer>
 		<MainContentContainer>
@@ -467,13 +470,13 @@ export const Profile = ({
 				</ProfileHeaderContentConstrainer>
 			</ProfileHeader>
 			<ProfileSection
-				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
 			>
 				<ProfileSectionHeader
-					content={ProfileSectionsData.technicalSkills}
+					content={sectionProperties.technicalSkills}
 				/>
 				{
 					skills.technical.featured && skills.technical.featured[0] &&
@@ -512,13 +515,13 @@ export const Profile = ({
 				}
 			</ProfileSection>
 			<ProfileSection
-				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
 			>
 				<ProfileSectionHeader
-					content={ProfileSectionsData.businessSkills}
+					content={sectionProperties.businessSkills}
 				/>
 				{
 					skills.business.standard && skills.business.standard[0] &&
@@ -543,13 +546,13 @@ export const Profile = ({
 				}
 			</ProfileSection>
 			<ProfileSection
-				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
 			>
 				<ProfileSectionHeader
-					content={ProfileSectionsData.designSkills}
+					content={sectionProperties.designSkills}
 				/>
 				{
 					skills.design.standard && skills.design.standard[0] &&
@@ -567,13 +570,13 @@ export const Profile = ({
 				}
 			</ProfileSection>
 			<ProfileSection
-				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
 			>
 				<ProfileSectionHeader
-					content={ProfileSectionsData.professionalExperiences}
+					content={sectionProperties.professionalExperiences}
 				/>
 				<ProfessionalExperiencesContainer>
 				{
@@ -587,13 +590,13 @@ export const Profile = ({
 				</ProfessionalExperiencesContainer>
 			</ProfileSection>
 			<ProfileSection
-				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
 			>
 				<ProfileSectionHeader
-					content={ProfileSectionsData.educationAndCertifications}
+					content={sectionProperties.educationAndCertifications}
 				/>
 				<EducationAndCertificationsContainer>
 					<EducationAndCertificationsSubset
@@ -647,13 +650,13 @@ export const Profile = ({
 				</EducationAndCertificationsContainer>
 			</ProfileSection>
 			<ProfileSection
-				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
 			>
 				<ProfileSectionHeader
-					content={ProfileSectionsData.volunteerExperiences}
+					content={sectionProperties.volunteerExperiences}
 				/>
 				<VolunteerExperiencesContainer>
 				{
@@ -680,7 +683,9 @@ export const Profile = ({
 					internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
 					copyKind="profile--table-of-contents-item--anchor--not-large-device"
 				>
-					<CompressedTableOfContentsListContainer />
+					<CompressedTableOfContentsListContainer
+						sectionProperties={sectionProperties}
+					/>
 				</Collapsible>
 			</CompressedTableOfContentsCollapsibleContainer>
 		</CompressedTableOfContentsContainer>
@@ -688,18 +693,18 @@ export const Profile = ({
 			<ExpandedTableOfContentsListContainer>
 				<ExpandedTableOfContentsList>
 					{
-						Object.keys(ProfileSectionsData).map((sectionKey) =>
+						Object.keys(sectionProperties).map((sectionKey) =>
 							<ExpandedTableOfContentsListItem
-								key={`expanded--${ProfileSectionsData[sectionKey].id}`}
+								key={`expanded--${sectionProperties[sectionKey].id}`}
 							>
 								<Copy
 									kind="profile--table-of-contents-item--anchor--large-device"
 								>
 									<CopyLink
-										url={`#${ProfileSectionsData[sectionKey].hash}`}
+										url={`#${sectionProperties[sectionKey].hash}`}
 										inline={false}
 									>
-										{ProfileSectionsData[sectionKey].anchor}
+										{sectionProperties[sectionKey].anchor}
 									</CopyLink>
 								</Copy>
 							</ExpandedTableOfContentsListItem>,
