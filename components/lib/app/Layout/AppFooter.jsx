@@ -51,9 +51,6 @@ const BrandContainer = styled.div`
 		}
 	}
 `;
-const HiddenContainer = styled.span`
-	${hiddenInline};
-`;
 const CopyrightContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		grid-area: footerLeft;
@@ -61,7 +58,11 @@ const CopyrightContainer = styled.div`
 		text-align: right;
 	}
 `;
-const BrandLink = styled.a`
+const BrandLink = styled.a.attrs(() => {
+	return {
+		'aria-label': 'jbkr Homepage',
+	};
+})`
 	${
 		({ $contextColor }) => {
 			const colorFocusRing = $contextColor === 'onLight' ?
@@ -116,7 +117,6 @@ export const AppFooter = ({ content }) => (
 				href="/"
 				$contextColor="onDark"
 			>
-				<HiddenContainer>Homepage</HiddenContainer>
 				<Brand />
 			</BrandLink>
 		</BrandContainer>

@@ -301,10 +301,11 @@ const BrandContainer = styled.div`
 		margin: 1.5rem 0 .5rem;
 	}
 `;
-const HiddenContainer = styled.span`
-	${hiddenInline};
-`;
-const BrandLink = styled.a`
+const BrandLink = styled.a.attrs(() => {
+	return {
+		'aria-label': 'jbkr Homepage',
+	};
+})`
 	${
 		({ $contextColor }) => {
 			const colorFocusRing = $contextColor === 'onLight' ?
@@ -671,7 +672,6 @@ export const AppHeader = ({ content }) => {
 						href="/"
 						$contextColor="onDark"
 					>
-						<HiddenContainer>Homepage</HiddenContainer>
 						<Brand
 							contextColor="onDark"
 						/>
