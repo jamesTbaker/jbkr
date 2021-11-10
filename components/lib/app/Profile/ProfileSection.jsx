@@ -4,8 +4,16 @@ import {
 	deviceWidthQuery, zIndexNumber, color
 } from '@jbkr/style-service';
 
+const videoCommonAttributes = {
+	'autoPlay': true,
+	'muted': true,
+	'loop': true,
+	'playsInline': true,
+	'tabIndex': '-1',
+	'aria-hidden': true,
+};
 
-const VideoOverlay = styled.div`
+const BackgroundOverlay = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -99,8 +107,6 @@ const VideoOverlay = styled.div`
 	}
 `;
 const TitleUnderlay = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: absolute;
 		top: 0;
@@ -150,7 +156,7 @@ const ContentConstrainer = styled.div`
 		padding-right: 36rem;
 	}
 `;
-const LargeDeviceVideo = styled.video`
+const LargeDeviceVideo = styled.video.attrs(() => videoCommonAttributes)`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -164,7 +170,7 @@ const LargeDeviceVideo = styled.video`
 		z-index: ${zIndexNumber().profileSectionVideo};
 	}
 `;
-const NotLargeDeviceVideo = styled.video`
+const NotLargeDeviceVideo = styled.video.attrs(() => videoCommonAttributes)`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		position: absolute;
 		top: 0;
@@ -196,25 +202,23 @@ const ProfileSectionContainer = styled.section`
 export const ProfileSection = ({
 	videoLargeScreen,
 	videoNotLargeScreen,
-	posterLargeScreen,
-	posterNotLargeScreen,
+	imageLargeScreen,
+	imageNotLargeScreen,
 	children
 }) => (
 	<ProfileSectionContainer>
 		<LargeDeviceVideo
-			autoPlay muted loop playsInline
-			poster={posterLargeScreen}
+			poster={imageLargeScreen}
 		>
 			<source src={videoLargeScreen} type="video/mp4" />
 		</LargeDeviceVideo>
 		<NotLargeDeviceVideo
-			autoPlay muted loop playsInline
-			poster={posterNotLargeScreen}
+			poster={imageNotLargeScreen}
 		>
 			<source src={videoNotLargeScreen} type="video/mp4" />
 		</NotLargeDeviceVideo>
 		<TitleUnderlay />
-		<VideoOverlay />
+		<BackgroundOverlay />
 		<ContentContainer>
 			<ContentConstrainer>
 				{children}
@@ -226,7 +230,7 @@ export const ProfileSection = ({
 ProfileSection.propTypes = {
 	'videoLargeScreen': PropTypes.string,
 	'videoNotLargeScreen': PropTypes.string,
-	'posterLargeScreen': PropTypes.string,
-	'posterNotLargeScreen': PropTypes.string,
+	'imageLargeScreen': PropTypes.string,
+	'imageNotLargeScreen': PropTypes.string,
 	'children': PropTypes.any,
 }

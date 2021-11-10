@@ -469,8 +469,8 @@ export const Profile = ({
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.technicalSkills}
@@ -514,8 +514,8 @@ export const Profile = ({
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.businessSkills}
@@ -545,8 +545,8 @@ export const Profile = ({
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.designSkills}
@@ -569,8 +569,8 @@ export const Profile = ({
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.professionalExperiences}
@@ -589,8 +589,8 @@ export const Profile = ({
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.educationAndCertifications}
@@ -649,8 +649,8 @@ export const Profile = ({
 			<ProfileSection
 				videoLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
 				videoNotLargeScreen="https://res.cloudinary.com/jbkrcdn/video/upload/v1633607248/Backgrounds/profile--section-background--large-screen--sample_pmufvu.mp4"
-				posterLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
-				posterNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
+				imageLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635344345/Backgrounds/profile--section-background--poster--large-screen--sample_gfxpti.jpg"
+				imageNotLargeScreen="https://res.cloudinary.com/jbkrcdn/image/upload/v1635434862/Backgrounds/profile--section-background--poster--small-screen--sample_ct6z2k.jpg"
 			>
 				<ProfileSectionHeader
 					content={ProfileSectionsData.volunteerExperiences}
