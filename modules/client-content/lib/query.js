@@ -50,14 +50,44 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 			await dbConnection.collection('screens').aggregate([
 				// match the document whose slug was received
 				{ '$match': { 'ScreenID': screenID } },
-				// look up the meta image for this screen
+				// look up the text content items for this screen
 				{
 					'$lookup':
 					{
 						'from': 'components_content_screen_content_items',
 						'localField': 'UniqueContentItems.ref',
 						'foreignField': '_id',
-						'as': 'ContentItems',
+						'as': 'TextContentItems',
+					},
+				},
+				// look up the data content items for this screen
+				{
+					'$lookup':
+					{
+						'from': 'components_content_screen_data_content_items',
+						'localField': 'UniqueDataContentItems.ref',
+						'foreignField': '_id',
+						'as': 'DataContentItems',
+					},
+				},
+				// look up the media content item IDs for this screen
+				{
+					'$lookup':
+					{
+						'from': 'components_content_screen_media_content_items',
+						'localField': 'UniqueMediaContentItems.ref',
+						'foreignField': '_id',
+						'as': 'MediaContentItemIDs',
+					},
+				},
+				// look up the meta image for this screen
+				{
+					'$lookup':
+					{
+						'from': 'upload_file',
+						'localField': 'MetaImage',
+						'foreignField': '_id',
+						'as': 'MetaImages',
 					},
 				},
 				// look up the meta image for this screen
@@ -85,8 +115,43 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 						'MetaImages.ext': 1,
 						'MetaImages.hash': 1,
 						'MetaImages.mime': 1,
-						'ContentItems.Key': 1,
-						'ContentItems.Value': 1,
+						'TextContentItems.Key': 1,
+						'TextContentItems.Value': 1,
+						'DataContentItems.Key': 1,
+						'DataContentItems.Value': 1,
+						'MediaContentItemIDs.Key': 1,
+						'MediaContentItemIDs.Value': 1,
+					},
+				},
+			]).toArray();
+		const mediaContentItemIDs = [];
+		if (
+			mains &&
+			mains[0] &&
+			mains[0].MediaContentItemIDs &&
+			mains[0].MediaContentItemIDs[0]
+		) {
+			mains[0].MediaContentItemIDs.forEach((mediaIDObject) => {
+				mediaContentItemIDs.push(new ObjectID(mediaIDObject.Value));
+			});
+		}
+		const mainsMedia = await dbConnection
+			.collection('upload_file').aggregate([
+				// match the documents whose IDs are in the
+				// collection of IDs
+				{ '$match': { '_id': { '$in': mediaContentItemIDs } } },
+				// specify which fields to return
+				{
+					'$project': {
+						// '_id': 0,
+						'alternativeText': 1,
+						'width': 1,
+						'height': 1,
+						'ext': 1,
+						'hash': 1,
+						'mime': 1,
+						'url': 1,
+						'caption': 1,
 					},
 				},
 			]).toArray();
@@ -143,6 +208,7 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 			'headerMain': JSON.parse(JSON.stringify(headerMain))[0],
 			'headerArticle': JSON.parse(JSON.stringify(headerArticle))[0],
 			'main': JSON.parse(JSON.stringify(mains))[0],
+			'mainMedia': JSON.parse(JSON.stringify(mainsMedia)),
 			'footer': footer,
 		};
 		// if an error occurred

@@ -37,20 +37,16 @@ const returnMediaType = ({
 	// otherwise, return unknown
 	return 'unknown';
 };
-/* const returnSocialImageCloudinaryURI = ({
-	imagePublicID, imageExtension,
-}) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
-'socialBase_' + imagePublicID + imageExtension;
-const returnStandardImageCloudinaryURI = ({
-	imagePublicID, imageExtension,
-}) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
-imagePublicID + imageExtension; */
-
 const returnImageURI = ({
 	imagePublicID, imageExtension, typeToken,
-}) => 'https://res.cloudinary.com/jbkrcdn/image/upload/' +
-typeToken + '_' + imagePublicID + imageExtension;
-
+}) => {
+	const uriBase = 'https://res.cloudinary.com/jbkrcdn/image/upload/';
+	if (typeToken) {
+		return uriBase + typeToken + '_' + imagePublicID + imageExtension;
+	} else {
+		return uriBase + imagePublicID + imageExtension;
+	}
+};
 const returnSimpleHTMLFromMarkdown = ({ content, options }) => {
 	// set up container for value to return
 	let renderedContent = '';
@@ -358,14 +354,75 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	if (screenRaw.main.Title) {
 		screenRendered.main.title = screenRaw.main.Title;
 	}
-	if (screenRaw.main.ContentItems && screenRaw.main.ContentItems[0]) {
-		screenRendered.main.contentItems = {};
-		screenRaw.main.ContentItems.forEach((contentItemRaw) => {
-			screenRendered.main.contentItems[
+	if (
+		screenRaw.main.TextContentItems &&
+		screenRaw.main.TextContentItems[0]
+	) {
+		screenRendered.main.textContentItems = {};
+		screenRaw.main.TextContentItems.forEach((contentItemRaw) => {
+			screenRendered.main.textContentItems[
 				contentItemRaw.Key.charAt(0).toLowerCase() +
 				contentItemRaw.Key.slice(1)
 			] =
 				contentItemRaw.Value;
+		});
+	}
+	if (
+		screenRaw.main.DataContentItems &&
+		screenRaw.main.DataContentItems[0]
+	) {
+		screenRendered.main.dataContentItems = {};
+		screenRaw.main.DataContentItems.forEach((contentItemRaw) => {
+			screenRendered.main.dataContentItems[
+				contentItemRaw.Key.charAt(0).toLowerCase() +
+				contentItemRaw.Key.slice(1)
+			] =
+				contentItemRaw.Value;
+		});
+	}
+	if (
+		screenRaw.main.MediaContentItemIDs &&
+		screenRaw.main.MediaContentItemIDs[0] &&
+		screenRaw.mainMedia &&
+		screenRaw.mainMedia[0]
+	) {
+		screenRendered.main.mediaContentItems = {};
+		screenRaw.main.MediaContentItemIDs.forEach((contentItemIDRaw) => {
+			screenRaw.mainMedia.forEach((contentItemRaw) => {
+				if (contentItemRaw._id === contentItemIDRaw.Value) {
+					if (contentItemRaw.mime.startsWith('image')) {
+						screenRendered.main
+							.mediaContentItems[contentItemIDRaw.Key] =
+						{
+							'url': returnImageURI({
+								'imagePublicID':
+									contentItemRaw.hash,
+								'imageExtension': contentItemRaw.ext,
+							}),
+							'alternativeText':
+								contentItemRaw.alternativeText,
+							'width': contentItemRaw.width,
+							'height': contentItemRaw.height,
+							'type': returnMediaType({
+								'mime': contentItemRaw.mime,
+							}),
+							'credit': contentItemRaw.caption,
+						};
+					}
+					if (contentItemRaw.mime.startsWith('video')) {
+						screenRendered.main
+							.mediaContentItems[contentItemIDRaw.Key] =
+						{
+							'url': contentItemRaw.url,
+							'alternativeText':
+								contentItemRaw.alternativeText,
+							'type': returnMediaType({
+								'mime': contentItemRaw.mime,
+							}),
+						};
+					}
+				}
+			});
 		});
 	}
 	if (screenRaw.footer && screenRaw.footer.Copy) {
@@ -412,24 +469,6 @@ const returnBasicScreenObject = ({ defaults, screenID, screenRaw }) => {
 		// add it to the main container
 		allScreenProperties.main = screenTransformed.main;
 	}
-	/* // if screenTransformed contains a main property
-	if (
-		screenTransformed &&
-		screenTransformed.main &&
-		screenTransformed.main.title
-	) {
-		// add it to the main container
-		allScreenProperties.main.title = screenTransformed.main.title;
-	}
-	// if screenTransformed contains a main property with content items
-	if (
-		screenTransformed &&
-		screenTransformed.main &&
-		screenTransformed.main.contentItems
-	) {
-		// add it to the main container
-		allScreenProperties.main.contentItems = screenTransformed.main.title;
-	} */
 	// return the main container
 	return allScreenProperties;
 };
@@ -1277,22 +1316,20 @@ export const returnTransformedSimpleScreenContent = ({
 	const allScreenProperties = returnBasicScreenObject(
 		{ defaults, screenID, screenRaw },
 	);
-	// if there are content items, replace them with transformed versions
+	// if there are text content items, replace them with transformed versions
 	// of themselves
-	// set up temporary container of content items
-	const contentItemsTransformed = {};
-	Object.keys(allScreenProperties.main.contentItems)
+	const textContentItemsTransformed = {};
+	Object.keys(allScreenProperties.main.textContentItems)
 		.forEach((contentItemKey) => {
-			contentItemsTransformed[contentItemKey] =
+			textContentItemsTransformed[contentItemKey] =
 				returnSimpleHTMLFromMarkdown({
-					'content':
-						allScreenProperties.main.contentItems[contentItemKey],
+					'content': allScreenProperties.main
+						.textContentItems[contentItemKey],
 					'options': {
 						'removeEndCapTags': true,
 					},
 				});
 		});
-	allScreenProperties.main.contentItems = contentItemsTransformed;
 	// return the main container
 	return allScreenProperties;
 };

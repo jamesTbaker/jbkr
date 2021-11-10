@@ -19,8 +19,9 @@ import {
 	return404ScreenContent,
 } from '../lib/control.js';
 
+
 // const result = await returnDefaultValuesFromDB();
-// const result = await returnOneScreenFromDB({ 'slug': '/' });
+// const result = await returnOneScreenFromDB({ 'screenID': 'Profile' });
 // const result = await returnAllAuthorsFromDB();
 // const result = await returnAllSkillsFromDB();
 // const result = await returnAllProfessionalExperiencesFromDB();

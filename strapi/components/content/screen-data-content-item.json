@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_content_screen_data_content_items",
+  "info": {
+    "name": "ScreenDataContentItem",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "Key": {
+      "type": "string"
+    },
+    "Value": {
+      "type": "json"
+    }
+  }
+}

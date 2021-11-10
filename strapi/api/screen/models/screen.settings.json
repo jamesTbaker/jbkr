@@ -74,6 +74,16 @@
       "type": "component",
       "repeatable": true,
       "component": "content.screen-content-item"
+    },
+    "UniqueMediaContentItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.screen-media-content-item"
+    },
+    "UniqueDataContentItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.screen-data-content-item"
     }
   }
 }
