@@ -21,59 +21,6 @@ import { Brand } from '../../..';
 import { Collapsible } from '../../..';
 
 
-/* const ProfileSectionsData = {
-	'technicalSkills': {
-		'id': 'FN8MtdLdWPDsdANtLqZ82kcM',
-		'hash': 'technical-skills',
-		'anchor': 'Technical Skills',
-		'title': {
-			'preface': 'Skills',
-			'main': 'Technical',
-		},
-	},
-	'businessSkills': {
-		'id': 'w7Q3L2kW5Jez7pL8sJtum6HA',
-		'hash': 'business-skills',
-		'anchor': 'Business Skills',
-		'title': {
-			'preface': 'Skills',
-			'main': 'Business',
-		},
-	},
-	'designSkills': {
-		'id': 'pmftULeaT8sHpT2WNGKQa5X2',
-		'hash': 'design-engineering-skills',
-		'anchor': 'Design / Engineering Skills',
-		'title': {
-			'preface': 'Skills',
-			'main': 'Design / Engineering',
-		},
-	},
-	'professionalExperiences': {
-		'id': 'FF8Bq5SaRnP6ud7QZcGe5HF8',
-		'hash': 'professional-experiences',
-		'anchor': 'Professional Experiences',
-		'title': {
-			'main': 'Professional Experiences',
-		},
-	},
-	'educationAndCertifications': {
-		'id': 'EnS2mjjJwpKnhdk8z2fauHpc',
-		'hash': 'education-and-certification',
-		'anchor': 'Education and Certification',
-		'title': {
-			'main': 'Education and Certification',
-		},
-	},
-	'volunteerExperiences': {
-		'id': 'bj82LMezkKNSzKiLyoCn3oii',
-		'hash': 'volunteer-experiences',
-		'anchor': 'Volunteer Experiences',
-		'title': {
-			'main': 'Volunteer Experiences',
-		},
-	},
-}; */
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 23rem;
@@ -122,44 +69,46 @@ const MainContentContainer = styled.main.attrs(() => {
 })`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
-		background-image:
-			linear-gradient(
-				to bottom,
-				${color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 2,
-					'alpha': .075,
-					'format': 'string'
-				})},
-				${color({
-					'kind': 'Accent',
-					'tone': 'Finch',
-					'level': 2,
-					'alpha': .075,
-					'format': 'string'
-				})} 20rem
-			),
-			linear-gradient(
-				to bottom,
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 41,
-					'alpha': .85,
-					'format': 'string'
-				})},
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 41,
-					'alpha': .85,
-					'format': 'string'
-				})} 20rem
-			),
-			url('https://res.cloudinary.com/jbkrcdn/image/upload/v1633623944/Backgrounds/Copenhagen-Curves_gy6gjw.jpg');
+		${({ $menuBackgroundImageLarge }) => `
+			background-image:
+				linear-gradient(
+					to bottom,
+					${color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 2,
+						'alpha': .075,
+						'format': 'string'
+					})},
+					${color({
+						'kind': 'Accent',
+						'tone': 'Finch',
+						'level': 2,
+						'alpha': .075,
+						'format': 'string'
+					})} 20rem
+				),
+				linear-gradient(
+					to bottom,
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 41,
+						'alpha': .85,
+						'format': 'string'
+					})},
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 41,
+						'alpha': .85,
+						'format': 'string'
+					})} 20rem
+				),
+				url('${$menuBackgroundImageLarge}');
+		`}
 		background-position: top 15rem right 0;
-		background-size: 884px 438px;
+		background-size: 111rem 55rem;
 		background-repeat: no-repeat;
 	}
 `;
@@ -454,7 +403,9 @@ export const Profile = ({
 	media,
 }) => (
 	<ProfileContainer>
-		<MainContentContainer>
+		<MainContentContainer
+			$menuBackgroundImageLarge={media.menuBackgroundImageLarge.url}
+		>
 			<ProfileHeader>
 				<ProfileHeaderContentConstrainer>
 					<BrandContainer>

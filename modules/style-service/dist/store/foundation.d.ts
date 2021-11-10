@@ -140,8 +140,8 @@ export namespace foundation {
             const modal: number;
             const modalToggle: number;
             const profileSectionContainer: number;
-            const profileSectionVideo: number;
-            const profileSectionVideoOverlay: number;
+            const profileSectionBackground: number;
+            const profileSectionBackgroundOverlay: number;
             const profileSectionTitleUnderlay: number;
             const profileSectionContent: number;
             const expandedNavigation: number;

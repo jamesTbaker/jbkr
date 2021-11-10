@@ -134,8 +134,8 @@ export declare const foundation: {
             modal: number;
             modalToggle: number;
             profileSectionContainer: number;
-            profileSectionVideo: number;
-            profileSectionVideoOverlay: number;
+            profileSectionBackground: number;
+            profileSectionBackgroundOverlay: number;
             profileSectionTitleUnderlay: number;
             profileSectionContent: number;
             expandedNavigation: number;

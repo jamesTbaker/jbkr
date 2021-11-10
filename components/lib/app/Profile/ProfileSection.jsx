@@ -13,14 +13,13 @@ const videoCommonAttributes = {
 	'tabIndex': '-1',
 	'aria-hidden': true,
 };
-
 const BackgroundOverlay = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: ${zIndexNumber().profileSectionVideoOverlay};
+	z-index: ${zIndexNumber().profileSectionBackgroundOverlay};
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		background-image:
 			linear-gradient(
@@ -157,7 +156,7 @@ const ContentConstrainer = styled.div`
 		padding-right: 36rem;
 	}
 `;
-const LargeDeviceVideo = styled.video.attrs(() => videoCommonAttributes)`
+const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -168,10 +167,13 @@ const LargeDeviceVideo = styled.video.attrs(() => videoCommonAttributes)`
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		z-index: ${zIndexNumber().profileSectionVideo};
+		z-index: ${zIndexNumber().profileSectionBackground};
+	}
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
 	}
 `;
-const NotLargeDeviceVideo = styled.video.attrs(() => videoCommonAttributes)`
+const VideoNotLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		position: absolute;
 		top: 0;
@@ -179,12 +181,58 @@ const NotLargeDeviceVideo = styled.video.attrs(() => videoCommonAttributes)`
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		z-index: ${zIndexNumber().profileSectionVideo};
+		z-index: ${zIndexNumber().profileSectionBackground};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: none;
 	}
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
+	}
 `;
+const ImageLargeDevice = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: ${zIndexNumber().profileSectionBackground};
+		${
+			({ $imageURL }) => `background-image: url("${$imageURL}");`
+		}
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		display: none;
+	}
+`;
+const ImageNotLargeDevice = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: ${zIndexNumber().profileSectionBackground};
+		${
+			({ $imageURL }) => `background-image: url("${$imageURL}");`
+		}
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		display: none;
+	}
+`;
+
 const ProfileSectionContainer = styled.section`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 7rem 2rem;
@@ -208,16 +256,22 @@ export const ProfileSection = ({
 	children
 }) => (
 	<ProfileSectionContainer>
-		<LargeDeviceVideo
+		<VideoLargeDevice
 			poster={imageLargeScreen.url}
 		>
 			<source src={videoLargeScreen.url} type="video/mp4" />
-		</LargeDeviceVideo>
-		<NotLargeDeviceVideo
+		</VideoLargeDevice>
+		<VideoNotLargeDevice
 			poster={imageNotLargeScreen.url}
 		>
 			<source src={videoNotLargeScreen.url} type="video/mp4" />
-		</NotLargeDeviceVideo>
+		</VideoNotLargeDevice>
+		<ImageLargeDevice
+			$imageURL={imageLargeScreen.url}
+		/>
+		<ImageNotLargeDevice
+			$imageURL={imageNotLargeScreen.url}
+		/>
 		<TitleUnderlay />
 		<BackgroundOverlay />
 		<ContentContainer>
