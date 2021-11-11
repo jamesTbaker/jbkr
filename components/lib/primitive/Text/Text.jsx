@@ -5,6 +5,7 @@ import {
 } from '@jbkr/models-react';
 import { deviceWidthQuery, typeStyle, color } from '@jbkr/style-service';
 
+
 const TextContainer = styled.div`
 	${
 		({ $color }) => {

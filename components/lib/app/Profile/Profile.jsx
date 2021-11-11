@@ -11,6 +11,7 @@ import {
 } from '@jbkr/style-service';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSection } from './ProfileSection';
+import { ProfileSectionSkillsTechnical } from './ProfileSectionSkillsTechnical';
 import { ProfileProfessionalExperience } from './ProfileProfessionalExperience';
 import { ProfileEducationCertification } from './ProfileEducationCertification';
 import { ProfileVolunteerExperience } from './ProfileVolunteerExperience';
@@ -420,7 +421,15 @@ export const Profile = ({
 					</Copy>
 				</ProfileHeaderContentConstrainer>
 			</ProfileHeader>
-			<ProfileSection
+			<ProfileSectionSkillsTechnical
+				videoLargeScreen={media.sampleBackgroundVideoLarge}
+				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+				imageLargeScreen={media.sampleBackgroundImageLarge}
+				imageNotLargeScreen={media.sampleBackgroundImageSmall}
+				sectionHeaderContent ={sectionProperties.technicalSkills}
+				skills={skills.technical}
+			/>
+			{/* <ProfileSection
 				videoLargeScreen={media.sampleBackgroundVideoLarge}
 				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
 				imageLargeScreen={media.sampleBackgroundImageLarge}
@@ -620,7 +629,7 @@ export const Profile = ({
 					)
 				}
 				</VolunteerExperiencesContainer>
-			</ProfileSection>
+			</ProfileSection> */}
 		</MainContentContainer>
 		<CompressedTableOfContentsContainer>
 			<CompressedTableOfContentsCollapsibleContainer>

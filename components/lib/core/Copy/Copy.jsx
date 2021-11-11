@@ -4,6 +4,7 @@ import { Color, Gradient } from '@jbkr/models-react';
 import { Text } from '../../primitive/Text/Text';
 import { deviceWidthQuery, color, typeStyle, hiddenBlock, hiddenInline } from '@jbkr/style-service';
 
+
 const propsSpecifications = {
 	'landmark-title': {
 		'tag': 'h1',
@@ -621,6 +622,18 @@ const propsSpecifications = {
 			'level': 17,
 		},
 	},
+	'hidden-block': {
+		'tag': 'span',
+		'size': '2xs',
+		'more': `display: block;
+			width: 0;
+			height: 0;
+			padding: 0;
+			margin: 0;
+			text-indent: 100%;
+			white-space: nowrap;
+			overflow: hidden;`,
+	},
 };
 const copyKinds = [
 	'copy-container--standard',
@@ -673,7 +686,8 @@ const copyKinds = [
 	'contact--brand-tagline',
 	'contact--section-header',
 	'contact--item-anchor',
-	'footer--copyright'
+	'footer--copyright',
+	'hidden-block',
 ];
 const returnStylesFromSpecifications = ({ specs }) => `
 		color: ${color({
@@ -885,6 +899,7 @@ export const Copy = ({
 	id,
 	color,
 	gradient,
+	tagOverride,
 }) => {
 	if (kind !== 'copy-container--standard') {
 		if (propsSpecifications[kind]) {
@@ -901,6 +916,9 @@ export const Copy = ({
 			}
 			if (gradient) {
 				propsThisCopy.gradient = gradient;
+			}
+			if (tagOverride) {
+				tagThisCopy = tagOverride;
 			}
 			return (
 				<Text
@@ -968,4 +986,8 @@ Copy.propTypes = {
 	 * [Learn about color props](/?path=/story/props-color--page).
 	 */
 	'gradient': Gradient,
+	/**
+	 * HTML tag used instead of that specified.
+	 */
+	'tagOverride': PropTypes.string,
 };
