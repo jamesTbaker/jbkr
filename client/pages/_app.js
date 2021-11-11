@@ -6,7 +6,6 @@ import { normalize } from 'styled-normalize';
 import { createGlobalStyle } from 'styled-components';
 import {
 	gridBase, color, fontFilesImport, fontPrimaryName, fontFallbacksNames,
-	zIndexNumber,
 } from '@jbkr/style-service';
 import Prism from 'prismjs';
 import { prismCSS } from '@jbkr/syntax-highlighting';
@@ -53,22 +52,6 @@ const GlobalStyle = createGlobalStyle`
 			font-family: ${fontPrimaryName}, ${fontFallbacksNames};
 		}
 	}
-	/* body::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: ${zIndexNumber().grids};
-		display: block;
-		background:
-			linear-gradient(-90deg, hsla(175,100%,50%,.05) 1px, transparent 1px),
-			linear-gradient(		hsla(175,100%,50%,.05) 1px, transparent 1px);
-		background-size:
-			1rem 1rem,
-			1rem 1rem;
-	} */
 `;
 
 export default function App({ Component, pageProps }) {
@@ -100,6 +83,8 @@ export default function App({ Component, pageProps }) {
 				{/* favicon */}
 				<link rel="icon"
 					href="/favicon/brands.svg" type="image/svg+xml" />
+				<link rel="shortcut icon"
+					href="/favicon.ico" type="image/x-icon" />
 				<link rel="icon" type="image/png" sizes="16x16"
 					href="/favicon/16px.png" />
 				<link rel="icon" type="image/png" sizes="32x32"
