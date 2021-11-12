@@ -181,6 +181,9 @@ export const foundation = {
 			'profileSectionBackgroundOverlay': 13,
 			'profileSectionTitleUnderlay': 14,
 			'profileSectionContent': 15,
+			'contactBodyContent': 10,
+			'contactBodyMediaImageLargeDevice': 11,
+			'contactBodyMediaVideoLargeDevice': 12,
 			'expandedNavigation': 100,
 		},
 		'verticalAlignMiddle': `position: relative;

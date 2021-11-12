@@ -139,6 +139,9 @@ export declare const foundation: {
             profileSectionBackgroundOverlay: number;
             profileSectionTitleUnderlay: number;
             profileSectionContent: number;
+            contactBodyContent: number;
+            contactBodyMediaImageLargeDevice: number;
+            contactBodyMediaVideoLargeDevice: number;
             expandedNavigation: number;
         };
         verticalAlignMiddle: string;

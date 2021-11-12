@@ -5,6 +5,7 @@ import {
 	deviceWidthQuery, zIndexNumber, color
 } from '@jbkr/style-service';
 
+
 const videoCommonAttributes = {
 	'autoPlay': true,
 	'muted': true,
@@ -174,7 +175,6 @@ const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		width: 100%;
 		height: 100%;
 		object-position: center top;
-		/* object-fit: cover; */
 		z-index: ${zIndexNumber().profileSectionBackgroundVideo};
 	}
 	@media (prefers-reduced-motion: reduce) {
@@ -188,7 +188,6 @@ const VideoNotLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		/* object-fit: cover; */
 		z-index: ${zIndexNumber().profileSectionBackgroundVideo};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {

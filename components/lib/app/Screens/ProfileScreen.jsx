@@ -31,8 +31,8 @@ ProfileScreen.propTypes = {
 	'meta': Meta,
 	/** Data for AppHeader */
 	'header': Header,
-	/** Data for AppFooter */
-	'footer': Footer,
 	/** Data for child(ren) of `<MainContent>`. */
 	'main': PropTypes.object,
+	/** Data for AppFooter */
+	'footer': Footer,
 };

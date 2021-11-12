@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
+import { Meta, Header, Footer } from '@jbkr/models-react';
 import { AppScaffold } from '../Layout/AppScaffold';
-import { MainContent } from '../Layout/MainContent';
+import { Contact } from '../Contact/Contact';
 
 export const ContactScreen = ({
 	meta,
@@ -12,11 +14,24 @@ export const ContactScreen = ({
 		header={header}
 		footer={footer}
 	>
-		<MainContent>
-			<h1>{main.title}</h1>
-			<p
-				dangerouslySetInnerHTML={{ '__html': main.contentItems.main }}
-			/>
-		</MainContent>
+		<Contact
+			title={main.title}
+			media={main.mediaContentItems}
+			text={main.textContentItems}
+			channels={header.links.secondary.filter(
+				channel =>
+				channel.url.startsWith('http')
+			)}
+		/>
 	</AppScaffold>
 );
+ContactScreen.propTypes = {
+	/** Data for the app's `<head>`. */
+	'meta': Meta,
+	/** Data for AppHeader */
+	'header': Header,
+	/** Data for child(ren) of `<MainContent>`. */
+	'main': PropTypes.object,
+	/** Data for AppFooter */
+	'footer': Footer,
+};

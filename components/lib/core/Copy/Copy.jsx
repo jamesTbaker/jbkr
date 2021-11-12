@@ -596,7 +596,6 @@ const propsSpecifications = {
 		'size': 'l',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',

@@ -315,7 +315,6 @@ const FeaturedVisualizedSkillsContainer = styled.ul`
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: wrap;
 		justify-content: space-between;
 		margin: 0;
 		padding: 0;
