@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import useInView from 'react-cool-inview';
 import {
 	SkillWithReactKey,
 	ProfessionalExperienceWithReactKey,
@@ -111,6 +112,9 @@ const MainContentContainer = styled.main.attrs(() => {
 		background-position: top 15rem right 0;
 		background-size: 111rem 55rem;
 		background-repeat: no-repeat;
+		@media (min-width: 1321px) {
+			background-position: top 15rem right 7.5rem;
+		}
 	}
 `;
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -402,279 +406,306 @@ export const Profile = ({
 	volunteerExperiences,
 	sectionProperties,
 	media,
-}) => (
-	<ProfileContainer>
-		<MainContentContainer
-			$menuBackgroundImageLarge={media.menuBackgroundImageLarge.url}
-		>
-			<ProfileHeader>
-				<ProfileHeaderContentConstrainer>
-					<BrandContainer>
-						<Brand
-							contextColor="onDark"
+}) => {
+	const { observe: observeSkillsBusiness, inView: inViewSkillsBusiness } = useInView({
+		onEnter: ({ unobserve }) => unobserve(),
+	});
+	const { observe: observeSkillsDesign, inView: inViewSkillsDesign } = useInView({
+		onEnter: ({ unobserve }) => unobserve(),
+	});
+	const { observe: observeProfessionalExperiences, inView: inViewProfessionalExperiences } = useInView({
+		onEnter: ({ unobserve }) => unobserve(),
+	});
+	const { observe: observeEducationCertifications, inView: inViewEducationCertifications } = useInView({
+		onEnter: ({ unobserve }) => unobserve(),
+	});
+	const { observe: observeVounteerExperiences, inView: inViewVounteerExperiences } = useInView({
+		onEnter: ({ unobserve }) => unobserve(),
+	});
+	return (
+		<ProfileContainer>
+			<MainContentContainer
+				$menuBackgroundImageLarge={media.menuBackgroundImageLarge.url}
+			>
+				<ProfileHeader>
+					<ProfileHeaderContentConstrainer>
+						<BrandContainer>
+							<Brand
+								contextColor="onDark"
+							/>
+						</BrandContainer>
+						<Copy
+							kind="landmark-title"
+						>
+							Profile<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
+						</Copy>
+					</ProfileHeaderContentConstrainer>
+				</ProfileHeader>
+				<div>
+					<ProfileSection
+						videoLargeScreen={media.sampleBackgroundVideoLarge}
+						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+						imageLargeScreen={media.sampleBackgroundImageLarge}
+						imageNotLargeScreen={media.sampleBackgroundImageSmall}
+						inView={true}
+					>
+						<ProfileSectionHeader
+							content={sectionProperties.technicalSkills}
 						/>
-					</BrandContainer>
-					<Copy
-						kind="landmark-title"
-					>
-						Profile<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
-					</Copy>
-				</ProfileHeaderContentConstrainer>
-			</ProfileHeader>
-			<ProfileSectionSkillsTechnical
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-				sectionHeaderContent ={sectionProperties.technicalSkills}
-				skills={skills.technical}
-			/>
-			{/* <ProfileSection
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-			>
-				<ProfileSectionHeader
-					content={sectionProperties.technicalSkills}
-				/>
-				{
-					skills.technical.featured && skills.technical.featured[0] &&
-
-					<>
-						<HiddenH3>Featured</HiddenH3>
-						<FeaturedVisualizedSkillsContainer>
-							{
-								skills.technical.featured.map((skill) =>
-									<ProfileSkillVisualization
-										key={skill.key}
-										skill={skill}
-										featured
-									/>
-								)
-							}
-						</FeaturedVisualizedSkillsContainer>
-					</>
-				}
-				{
-					skills.technical.standard && skills.technical.standard[0] &&
-
-					<>
-						<HiddenH3>Standard</HiddenH3>
-						<StandardVisualizedSkillsContainer>
-							{
-								skills.technical.standard.map((skill) =>
-									<ProfileSkillVisualization
-										key={skill.key}
-										skill={skill}
-									/>
-								)
-							}
-						</StandardVisualizedSkillsContainer>
-					</>
-				}
-			</ProfileSection>
-			<ProfileSection
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-			>
-				<ProfileSectionHeader
-					content={sectionProperties.businessSkills}
-				/>
-				{
-					skills.business.standard && skills.business.standard[0] &&
-
-					<>
-						<SkillsStatementsList>
-							{
-								skills.business.standard.map((skill) =>
-									<SkillsStatementsListItem
-										key={skill.key}
-									>
-										<Copy
-											kind="profile--skill-statement"
-										>
-											{skill.name}
-										</Copy>
-									</SkillsStatementsListItem>
-								)
-							}
-						</SkillsStatementsList>
-					</>
-				}
-			</ProfileSection>
-			<ProfileSection
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-			>
-				<ProfileSectionHeader
-					content={sectionProperties.designSkills}
-				/>
-				{
-					skills.design.standard && skills.design.standard[0] &&
-
-					<StandardVisualizedSkillsContainer>
 						{
-							skills.design.standard.map((skill) =>
-								<ProfileSkillVisualization
-									key={skill.key}
-									skill={skill}
-								/>
-							)
+							skills.technical.featured && skills.technical.featured[0] &&
+
+							<>
+								<HiddenH3>Featured</HiddenH3>
+								<FeaturedVisualizedSkillsContainer>
+									{
+										skills.technical.featured.map((skill) =>
+											<ProfileSkillVisualization
+												key={skill.key}
+												skill={skill}
+												featured
+											/>
+										)
+									}
+								</FeaturedVisualizedSkillsContainer>
+							</>
 						}
-					</StandardVisualizedSkillsContainer>
-				}
-			</ProfileSection>
-			<ProfileSection
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-			>
-				<ProfileSectionHeader
-					content={sectionProperties.professionalExperiences}
-				/>
-				<ProfessionalExperiencesContainer>
-				{
-					professionalExperiences.map((professionalExperience) =>
-						<ProfileProfessionalExperience
-							key={professionalExperience.key}
-							professionalExperience={professionalExperience}
+						{
+							skills.technical.standard && skills.technical.standard[0] &&
+
+							<>
+								<HiddenH3>Standard</HiddenH3>
+								<StandardVisualizedSkillsContainer>
+									{
+										skills.technical.standard.map((skill) =>
+											<ProfileSkillVisualization
+												key={skill.key}
+												skill={skill}
+											/>
+										)
+									}
+								</StandardVisualizedSkillsContainer>
+							</>
+						}
+					</ProfileSection>
+				</div>
+				<div ref={observeSkillsBusiness}>
+					<ProfileSection
+						videoLargeScreen={media.sampleTwoBackgroundVideoLarge}
+						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+						imageLargeScreen={media.sampleBackgroundImageLarge}
+						imageNotLargeScreen={media.sampleBackgroundImageSmall}
+						inView={inViewSkillsBusiness}
+					>
+						<ProfileSectionHeader
+							content={sectionProperties.businessSkills}
 						/>
-					)
-				}
-				</ProfessionalExperiencesContainer>
-			</ProfileSection>
-			<ProfileSection
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-			>
-				<ProfileSectionHeader
-					content={sectionProperties.educationAndCertifications}
-				/>
-				<EducationAndCertificationsContainer>
-					<EducationAndCertificationsSubset
-						gridArea="certification"
-					>
 						{
-							educationCertifications.filter(
-								educationCertification =>
-								educationCertification.type === 'certification'
-							).map(
-								educationCertification =>
-								<ProfileEducationCertification
-									key={educationCertification.key}
-									educationCertification={educationCertification}
-								/>
-							)
+							skills.business.standard && skills.business.standard[0] &&
+
+							<>
+								<SkillsStatementsList>
+									{
+										skills.business.standard.map((skill) =>
+											<SkillsStatementsListItem
+												key={skill.key}
+											>
+												<Copy
+													kind="profile--skill-statement"
+												>
+													{skill.name}
+												</Copy>
+											</SkillsStatementsListItem>
+										)
+									}
+								</SkillsStatementsList>
+							</>
 						}
-					</EducationAndCertificationsSubset>
-					<EducationAndCertificationsSubset
-						gridArea="graduate"
+					</ProfileSection>
+				</div>
+				<div ref={observeSkillsDesign}>
+					<ProfileSection
+						videoLargeScreen={media.sampleBackgroundVideoLarge}
+						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+						imageLargeScreen={media.sampleBackgroundImageLarge}
+						imageNotLargeScreen={media.sampleBackgroundImageSmall}
+						inView={inViewSkillsDesign}
 					>
-						{
-							educationCertifications.filter(
-								educationCertification =>
-								educationCertification.type === 'graduate'
-							).map(
-								educationCertification =>
-								<ProfileEducationCertification
-									key={educationCertification.key}
-									educationCertification={educationCertification}
-								/>
-							)
-						}
-					</EducationAndCertificationsSubset>
-					<EducationAndCertificationsSubset
-						gridArea="undergraduate"
-					>
-						{
-							educationCertifications.filter(
-								educationCertification =>
-								educationCertification.type === 'undergraduate'
-							).map(
-								educationCertification =>
-								<ProfileEducationCertification
-									key={educationCertification.key}
-									educationCertification={educationCertification}
-								/>
-							)
-						}
-					</EducationAndCertificationsSubset>
-				</EducationAndCertificationsContainer>
-			</ProfileSection>
-			<ProfileSection
-				videoLargeScreen={media.sampleBackgroundVideoLarge}
-				videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-				imageLargeScreen={media.sampleBackgroundImageLarge}
-				imageNotLargeScreen={media.sampleBackgroundImageSmall}
-			>
-				<ProfileSectionHeader
-					content={sectionProperties.volunteerExperiences}
-				/>
-				<VolunteerExperiencesContainer>
-				{
-					volunteerExperiences.map((volunteerExperience, volunteerExperienceIndex) =>
-						<ProfileVolunteerExperience
-							key={volunteerExperience.key}
-							volunteerExperience={volunteerExperience}
-							gridArea={`volunteerExperience${volunteerExperienceIndex}`}
+						<ProfileSectionHeader
+							content={sectionProperties.designSkills}
 						/>
-					)
-				}
-				</VolunteerExperiencesContainer>
-			</ProfileSection> */}
-		</MainContentContainer>
-		<CompressedTableOfContentsContainer>
-			<CompressedTableOfContentsCollapsibleContainer>
-				<Collapsible
-					button={{
-						'size': 'small',
-						'surfaceStyle': 'outlined',
-						'contextColor': 'onDark',
-						'text': 'Contents'
-					}}
-					internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
-					copyKind="profile--table-of-contents-item--anchor--not-large-device"
-				>
-					<CompressedTableOfContentsListContainer
-						sectionProperties={sectionProperties}
-					/>
-				</Collapsible>
-			</CompressedTableOfContentsCollapsibleContainer>
-		</CompressedTableOfContentsContainer>
-		<ExpandedTableOfContentsContainer>
-			<ExpandedTableOfContentsListContainer>
-				<ExpandedTableOfContentsList>
-					{
-						Object.keys(sectionProperties).map((sectionKey) =>
-							<ExpandedTableOfContentsListItem
-								key={`expanded--${sectionProperties[sectionKey].id}`}
+						{
+							skills.design.standard && skills.design.standard[0] &&
+
+							<StandardVisualizedSkillsContainer>
+								{
+									skills.design.standard.map((skill) =>
+										<ProfileSkillVisualization
+											key={skill.key}
+											skill={skill}
+										/>
+									)
+								}
+							</StandardVisualizedSkillsContainer>
+						}
+					</ProfileSection>
+				</div>
+				<div ref={observeProfessionalExperiences}>
+					<ProfileSection
+						videoLargeScreen={media.sampleBackgroundVideoLarge}
+						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+						imageLargeScreen={media.sampleBackgroundImageLarge}
+						imageNotLargeScreen={media.sampleBackgroundImageSmall}
+						inView={inViewProfessionalExperiences}
+					>
+						<ProfileSectionHeader
+							content={sectionProperties.professionalExperiences}
+						/>
+						<ProfessionalExperiencesContainer>
+						{
+							professionalExperiences.map((professionalExperience) =>
+								<ProfileProfessionalExperience
+									key={professionalExperience.key}
+									professionalExperience={professionalExperience}
+								/>
+							)
+						}
+						</ProfessionalExperiencesContainer>
+					</ProfileSection>
+				</div>
+				<div ref={observeEducationCertifications}>
+					<ProfileSection
+						videoLargeScreen={media.sampleBackgroundVideoLarge}
+						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+						imageLargeScreen={media.sampleBackgroundImageLarge}
+						imageNotLargeScreen={media.sampleBackgroundImageSmall}
+						inView={inViewEducationCertifications}
+					>
+						<ProfileSectionHeader
+							content={sectionProperties.educationAndCertifications}
+						/>
+						<EducationAndCertificationsContainer>
+							<EducationAndCertificationsSubset
+								gridArea="certification"
 							>
-								<Copy
-									kind="profile--table-of-contents-item--anchor--large-device"
+								{
+									educationCertifications.filter(
+										educationCertification =>
+										educationCertification.type === 'certification'
+									).map(
+										educationCertification =>
+										<ProfileEducationCertification
+											key={educationCertification.key}
+											educationCertification={educationCertification}
+										/>
+									)
+								}
+							</EducationAndCertificationsSubset>
+							<EducationAndCertificationsSubset
+								gridArea="graduate"
+							>
+								{
+									educationCertifications.filter(
+										educationCertification =>
+										educationCertification.type === 'graduate'
+									).map(
+										educationCertification =>
+										<ProfileEducationCertification
+											key={educationCertification.key}
+											educationCertification={educationCertification}
+										/>
+									)
+								}
+							</EducationAndCertificationsSubset>
+							<EducationAndCertificationsSubset
+								gridArea="undergraduate"
+							>
+								{
+									educationCertifications.filter(
+										educationCertification =>
+										educationCertification.type === 'undergraduate'
+									).map(
+										educationCertification =>
+										<ProfileEducationCertification
+											key={educationCertification.key}
+											educationCertification={educationCertification}
+										/>
+									)
+								}
+							</EducationAndCertificationsSubset>
+						</EducationAndCertificationsContainer>
+					</ProfileSection>
+				</div>
+				<div ref={observeVounteerExperiences}>
+					<ProfileSection
+						videoLargeScreen={media.sampleBackgroundVideoLarge}
+						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+						imageLargeScreen={media.sampleBackgroundImageLarge}
+						imageNotLargeScreen={media.sampleBackgroundImageSmall}
+						inView={inViewVounteerExperiences}
+					>
+						<ProfileSectionHeader
+							content={sectionProperties.volunteerExperiences}
+						/>
+						<VolunteerExperiencesContainer>
+						{
+							volunteerExperiences.map((volunteerExperience, volunteerExperienceIndex) =>
+								<ProfileVolunteerExperience
+									key={volunteerExperience.key}
+									volunteerExperience={volunteerExperience}
+									gridArea={`volunteerExperience${volunteerExperienceIndex}`}
+								/>
+							)
+						}
+						</VolunteerExperiencesContainer>
+					</ProfileSection>
+				</div>
+			</MainContentContainer>
+			<CompressedTableOfContentsContainer>
+				<CompressedTableOfContentsCollapsibleContainer>
+					<Collapsible
+						button={{
+							'size': 'small',
+							'surfaceStyle': 'outlined',
+							'contextColor': 'onDark',
+							'text': 'Contents'
+						}}
+						internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
+						copyKind="profile--table-of-contents-item--anchor--not-large-device"
+					>
+						<CompressedTableOfContentsListContainer
+							sectionProperties={sectionProperties}
+						/>
+					</Collapsible>
+				</CompressedTableOfContentsCollapsibleContainer>
+			</CompressedTableOfContentsContainer>
+			<ExpandedTableOfContentsContainer>
+				<ExpandedTableOfContentsListContainer>
+					<ExpandedTableOfContentsList>
+						{
+							Object.keys(sectionProperties).map((sectionKey) =>
+								<ExpandedTableOfContentsListItem
+									key={`expanded--${sectionProperties[sectionKey].id}`}
 								>
-									<CopyLink
-										url={`#${sectionProperties[sectionKey].hash}`}
-										inline={false}
+									<Copy
+										kind="profile--table-of-contents-item--anchor--large-device"
 									>
-										{sectionProperties[sectionKey].anchor}
-									</CopyLink>
-								</Copy>
-							</ExpandedTableOfContentsListItem>,
-						)
-					}
-				</ExpandedTableOfContentsList>
-			</ExpandedTableOfContentsListContainer>
-		</ExpandedTableOfContentsContainer>
-	</ProfileContainer>
-);
+										<CopyLink
+											url={`#${sectionProperties[sectionKey].hash}`}
+											inline={false}
+										>
+											{sectionProperties[sectionKey].anchor}
+										</CopyLink>
+									</Copy>
+								</ExpandedTableOfContentsListItem>,
+							)
+						}
+					</ExpandedTableOfContentsList>
+				</ExpandedTableOfContentsListContainer>
+			</ExpandedTableOfContentsContainer>
+		</ProfileContainer>
+	);
+};
 
 Profile.propTypes = {
 	'title': PropTypes.string,

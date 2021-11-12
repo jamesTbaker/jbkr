@@ -99,10 +99,17 @@ const BackgroundOverlay = styled.div`
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
+					'level': 41,
+					'alpha': 1,
+					'format': 'string'
+				})} 90rem,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
 					'level': 37,
 					'alpha': 1,
 					'format': 'string'
-				})} 95%
+				})} 98%
 			);
 	}
 `;
@@ -166,8 +173,9 @@ const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
-		z-index: ${zIndexNumber().profileSectionBackground};
+		object-position: center top;
+		/* object-fit: cover; */
+		z-index: ${zIndexNumber().profileSectionBackgroundVideo};
 	}
 	@media (prefers-reduced-motion: reduce) {
 		display: none;
@@ -180,8 +188,8 @@ const VideoNotLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
-		z-index: ${zIndexNumber().profileSectionBackground};
+		/* object-fit: cover; */
+		z-index: ${zIndexNumber().profileSectionBackgroundVideo};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: none;
@@ -200,7 +208,7 @@ const ImageLargeDevice = styled.div`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: ${zIndexNumber().profileSectionBackground};
+		z-index: ${zIndexNumber().profileSectionBackgroundImage};
 		${
 			({ $imageURL }) => `background-image: url("${$imageURL}");`
 		}
@@ -218,7 +226,7 @@ const ImageNotLargeDevice = styled.div`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: ${zIndexNumber().profileSectionBackground};
+		z-index: ${zIndexNumber().profileSectionBackgroundImage};
 		${
 			({ $imageURL }) => `background-image: url("${$imageURL}");`
 		}
@@ -253,19 +261,25 @@ export const ProfileSection = ({
 	videoNotLargeScreen,
 	imageLargeScreen,
 	imageNotLargeScreen,
-	children
+	inView,
+	children,
 }) => (
 	<ProfileSectionContainer>
-		<VideoLargeDevice
-			poster={imageLargeScreen.url}
-		>
-			<source src={videoLargeScreen.url} type="video/mp4" />
-		</VideoLargeDevice>
-		<VideoNotLargeDevice
-			poster={imageNotLargeScreen.url}
-		>
-			<source src={videoNotLargeScreen.url} type="video/mp4" />
-		</VideoNotLargeDevice>
+		{
+			inView &&
+			<>
+				<VideoLargeDevice
+					poster={imageLargeScreen.url}
+				>
+					<source src={videoLargeScreen.url} type="video/mp4" />
+				</VideoLargeDevice>
+				<VideoNotLargeDevice
+					poster={imageNotLargeScreen.url}
+				>
+					<source src={videoNotLargeScreen.url} type="video/mp4" />
+				</VideoNotLargeDevice>
+			</>
+		}
 		<ImageLargeDevice
 			$imageURL={imageLargeScreen.url}
 		/>
