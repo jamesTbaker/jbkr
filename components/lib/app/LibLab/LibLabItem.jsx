@@ -23,6 +23,7 @@ const LibLabItemContainer = styled.div`
 				}
 				if ($type === 'featured') {
 					return `
+						height: 100%;
 						background-color: #3d8b64;
 					`;
 				}
