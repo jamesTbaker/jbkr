@@ -436,7 +436,7 @@ export const Profile = ({
 						<Copy
 							kind="landmark-title"
 						>
-							Profile<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
+							{title}<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
 						</Copy>
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
