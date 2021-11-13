@@ -73,8 +73,6 @@ const MainContentContainer = styled.main.attrs(() => {
 		background-size: 60% auto;
 		background-repeat: no-repeat;
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
 `;
 const ContactHeader = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -93,10 +91,10 @@ const ContactHeader = styled.header`
 `;
 const BrandingContainerHeader = styled.div`
 	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
-		padding: 2rem 0 2rem 5rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
+		padding: 2rem 0 2rem 5rem;
 	}
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		display: none;
@@ -114,24 +112,22 @@ const TaglineContainerHeader = styled.div`
 const ContactBody = styled.div`
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		position: relative;
-		text-align: center;
 		width: 100%;
+		text-align: center;
 	}
 `;
 const MediaContainerFive = styled.div`
 	@media (max-width: ${customBreakpointsInPixels.four - 1}px) {
 		display: none;
 	}
-	@media (min-width: ${customBreakpointsInPixels.four}px) {
-	}
 `;
 const MediaImagesContainerFive = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 	position: absolute;
 	top: 4rem;
 	left: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	width: 100%;
 	text-align: left;
 	z-index: ${zIndexNumber().contactBodyMediaImageLargeDevice};
@@ -144,18 +140,17 @@ const MediaImageFive = styled.div`
 	height: 18rem;
 	background-size: cover;
 	background-repeat: no-repeat;
-	/* @media (prefers-reduced-motion: no-preference) {
+	@media (prefers-reduced-motion: no-preference) {
 		display: none;
-	} */
+	}
 `;
 const MediaVideosContainerFive = styled.div`
-	display: flex;
-	display: none;
-	flex-direction: row;
-	justify-content: space-between;
 	position: absolute;
 	top: 4rem;
 	left: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	width: 100%;
 	text-align: left;
 	z-index: ${zIndexNumber().contactBodyMediaVideoLargeDevice};
@@ -177,12 +172,12 @@ const MediaContainerThree = styled.div`
 	}
 `;
 const MediaImagesContainerThree = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 	position: absolute;
 	top: 4rem;
 	left: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	width: 100%;
 	text-align: left;
 	z-index: ${zIndexNumber().contactBodyMediaImageLargeDevice};
@@ -195,18 +190,17 @@ const MediaImageThree = styled.div`
 	height: 18rem;
 	background-size: cover;
 	background-repeat: no-repeat;
-	/* @media (prefers-reduced-motion: no-preference) {
+	@media (prefers-reduced-motion: no-preference) {
 		display: none;
-	} */
+	}
 `;
 const MediaVideosContainerThree = styled.div`
-	display: flex;
-	display: none;
-	flex-direction: row;
-	justify-content: space-between;
 	position: absolute;
 	top: 4rem;
 	left: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	width: 100%;
 	text-align: left;
 	z-index: ${zIndexNumber().contactBodyMediaVideoLargeDevice};
@@ -225,7 +219,7 @@ const ContentContainer = styled.div`
 		width: 100%;
 		margin: 0 auto;
 		text-align: left;
-				background-image:
+		background-image:
 			linear-gradient(
 				to bottom,
 				${color({
@@ -243,7 +237,6 @@ const ContentContainer = styled.div`
 					'format': 'string'
 				})}
 			);
-
 	}
 `;
 const ContentConstrainer = styled.div`
@@ -251,18 +244,17 @@ const ContentConstrainer = styled.div`
 		padding: 0 2rem;
 	}
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
-		margin: 0 auto;
-		padding: 32rem 0 0 0;
-		text-align: left;
-		max-width: 150rem;
-		width: calc(100% - 4rem);
 		position: relative;
-		top: 0;
-		z-index: ${zIndexNumber().contactBodyContent};
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-areas: "brand text";
 		grid-column-gap: 4rem;
+		max-width: 150rem;
+		width: calc(100% - 4rem);
+		margin: 0 auto;
+		padding: 32rem 0 0 0;
+		text-align: left;
+		z-index: ${zIndexNumber().contactBodyContent};
 	}
 	@media (min-width: ${customBreakpointsInPixels.four}px) {
 		padding: 37rem 0 0 0;
@@ -287,8 +279,6 @@ const TaglineContainerBody = styled.div`
 	margin: 0 auto;
 `;
 const ContactOptionsContent = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: text;
 		text-align: left;
@@ -298,14 +288,10 @@ const EmailHeaderContainer = styled.div`
 	padding-bottom: 2rem;
 `;
 const EmailContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
 	display: grid;
 	grid-gap: 2rem;
-	padding-bottom: 5rem;
 	grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+	padding-bottom: 5rem;
 	a {
 		width: 100%;
 		span {
@@ -317,19 +303,11 @@ const ChannelsHeaderContainer = styled.div`
 	padding-bottom: 2rem;
 `;
 const ChannelsContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
 	display: grid;
 	grid-gap: 2rem;
 	grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
 `;
 const ChannelContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
 	a {
 		width: 100%;
 		span {
@@ -515,8 +493,9 @@ export const Contact = ({
 );
 
 Contact.propTypes = {
-	/* 'title': PropTypes.string,
-	'skills': PropTypes.shape({
+	'title': PropTypes.string,
+
+	/* 'skills': PropTypes.shape({
 		'technical': PropTypes.shape({
 			'featured': PropTypes.arrayOf(SkillWithReactKey),
 			'standard': PropTypes.arrayOf(SkillWithReactKey),
