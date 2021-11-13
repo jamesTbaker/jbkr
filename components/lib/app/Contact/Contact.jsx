@@ -9,8 +9,8 @@ import { Button } from '../../core/Button/Button';
 
 
 const customBreakpointsInPixels = {
-	'one': 428,
-	'three': 768,
+	'one': 360,
+	'three': 880,
 	'four': 1025,
 };
 const videoCommonAttributes = {
@@ -81,7 +81,7 @@ const ContactHeader = styled.header`
 		padding: 0 2rem 0 2rem;
 	}
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
-		padding-bottom: 10rem;
+		padding-bottom: 8rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: calc(100% - 4rem);
@@ -118,11 +118,13 @@ const ContactBody = styled.div`
 		width: 100%;
 	}
 `;
+
+
 const MediaContainerFive = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.four - 1}px) {
 		display: none;
 	}
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
 	}
 `;
 const MediaImagesContainerFive = styled.div`
@@ -168,6 +170,61 @@ const MediaVideoFive = styled.video.attrs(() => videoCommonAttributes)`
 		display: none;
 	}
 `;
+
+
+const MediaContainerThree = styled.div`
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+		display: none;
+	}
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
+		display: none;
+	}
+`;
+const MediaImagesContainerThree = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: absolute;
+	top: 4rem;
+	left: 0;
+	width: 100%;
+	text-align: left;
+	z-index: ${zIndexNumber().contactBodyMediaImageLargeDevice};
+`;
+const MediaImageThree = styled.div`
+	${
+		({ $imageURL }) => `background-image: url("${$imageURL}");`
+	}
+	width: calc((100% - 8rem) / 3);
+	height: 18rem;
+	background-size: cover;
+	background-repeat: no-repeat;
+	/* @media (prefers-reduced-motion: no-preference) {
+		display: none;
+	} */
+`;
+const MediaVideosContainerThree = styled.div`
+	display: flex;
+	display: none;
+	flex-direction: row;
+	justify-content: space-between;
+	position: absolute;
+	top: 4rem;
+	left: 0;
+	width: 100%;
+	text-align: left;
+	z-index: ${zIndexNumber().contactBodyMediaVideoLargeDevice};
+`;
+const MediaVideoThree = styled.video.attrs(() => videoCommonAttributes)`
+	width: calc((100% - 8rem) / 3);
+	height: 18rem;
+	object-fit: cover;
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
+	}
+`;
+
+
 const ContentContainer = styled.div`
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		max-width: 160rem;
@@ -201,7 +258,7 @@ const ContentConstrainer = styled.div`
 	}
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		margin: 0 auto;
-		padding: 37rem 0 0 0;
+		padding: 32rem 0 0 0;
 		text-align: left;
 		max-width: 150rem;
 		width: calc(100% - 4rem);
@@ -212,6 +269,9 @@ const ContentConstrainer = styled.div`
 		grid-template-columns: 1fr 1fr;
 		grid-template-areas: "brand text";
 		grid-column-gap: 4rem;
+	}
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
+		padding: 37rem 0 0 0;
 	}
 `;
 const BrandingContainerBody = styled.div`
@@ -372,52 +432,36 @@ export const Contact = ({
 						</MediaVideoFive>
 					</MediaVideosContainerFive>
 				</MediaContainerFive>
-				<MediaContainerFive>
-					<MediaImagesContainerFive>
-						<MediaImageFive
+				<MediaContainerThree>
+					<MediaImagesContainerThree>
+						<MediaImageThree
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<MediaImageFive
+						<MediaImageThree
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<MediaImageFive
+						<MediaImageThree
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-					</MediaImagesContainerFive>
-					<MediaVideosContainerFive>
-						<MediaVideoFive
+					</MediaImagesContainerThree>
+					<MediaVideosContainerThree>
+						<MediaVideoThree
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
+						</MediaVideoThree>
+						<MediaVideoThree
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
+						</MediaVideoThree>
+						<MediaVideoThree
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-					</MediaVideosContainerFive>
-				</MediaContainerFive>
+						</MediaVideoThree>
+					</MediaVideosContainerThree>
+				</MediaContainerThree>
 				<ContentContainer>
 					<ContentConstrainer>
 						<BrandingContainerBody>
