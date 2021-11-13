@@ -8,6 +8,12 @@ import { Brand } from '../../..';
 import { Button } from '../../core/Button/Button';
 
 
+const customBreakpointsInPixels = {
+	'one': 428,
+	'two': 550,
+	'three': 768,
+	'four': 1025,
+};
 const videoCommonAttributes = {
 	'autoPlay': true,
 	'muted': true,
@@ -16,12 +22,24 @@ const videoCommonAttributes = {
 	'tabIndex': '-1',
 	'aria-hidden': true,
 };
+const ContactContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin-top: 23rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		position: relative;
+		width: 100%;
+		max-width: 180rem;
+		margin: 14rem auto 0;
+		text-align: center;
+	}
+`;
 const MainContentContainer = styled.main.attrs(() => {
 	return {
 		'id': 'main-content',
 	};
 })`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
 		${
 			({ $backgroundImageSmall }) => `
 				background-image:
@@ -56,25 +74,10 @@ const MainContentContainer = styled.main.attrs(() => {
 		background-size: 30.5rem 32rem;
 		background-repeat: no-repeat;
 	}
-	@media (min-width: 648px) {
-		background-size: 61rem 64rem;
-	}
-	@media (min-width: 648px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		background-size: 61rem 64rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
-const ContactContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		margin-top: 23rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		position: relative;
-		width: 100%;
-		max-width: 180rem;
-		margin: 14rem auto 0;
-		text-align: center;
 	}
 `;
 const ContactHeader = styled.header`
@@ -89,6 +92,26 @@ const ContactHeader = styled.header`
 		text-align: left;
 	}
 `;
+const BrandingContainerHeader = styled.div`
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+		padding: 2rem 0 2rem 5rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
+		display: none;
+	}
+`;
+const LogoContainerHeader = styled.div`
+	width: 3rem;
+	height: 12rem;
+`;
+const TaglineContainerHeader = styled.div`
+	width: 16rem;
+	height: 6rem;
+	margin: 3rem 0 3rem 2rem;
+`;
 const ContactBody = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
@@ -98,34 +121,14 @@ const ContactBody = styled.div`
 		width: 100%;
 	}
 `;
-const ContactBodyMediaLargeDevice = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+const MediaContainerFive = styled.div`
+	@media (max-width: ${customBreakpointsInPixels.four - 1}px) {
 		display: none;
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
 	}
 `;
-const ContactBodyBrandNotLargeDevice = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 2rem 0 2rem 7rem;
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		display: none;
-	}
-`;
-const BrandContainerNotLargeDevice = styled.div`
-	width: 3rem;
-	height: 12rem;
-`;
-const BrandTaglineNotLargeDevice = styled.div`
-	width: 16rem;
-	height: 6rem;
-	margin: 3rem 0 3rem 2rem;
-`;
-const ContactBodyMediaImagesLargeDevice = styled.div`
+const MediaImagesContainerFive = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -140,7 +143,7 @@ const ContactBodyMediaImagesLargeDevice = styled.div`
 		z-index: ${zIndexNumber().contactBodyMediaImageLargeDevice};
 	}
 `;
-const ImageLargeDevice = styled.div`
+const MediaImageFive = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -152,15 +155,16 @@ const ImageLargeDevice = styled.div`
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
-	@media (prefers-reduced-motion: no-preference) {
+	/* @media (prefers-reduced-motion: no-preference) {
 		display: none;
-	}
+	} */
 `;
-const ContactBodyMediaVideosLargeDevice = styled.div`
+const MediaVideosContainerFive = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: flex;
+		display: none;
 		flex-direction: row;
 		justify-content: space-between;
 		position: absolute;
@@ -171,7 +175,7 @@ const ContactBodyMediaVideosLargeDevice = styled.div`
 		z-index: ${zIndexNumber().contactBodyMediaVideoLargeDevice};
 	}
 `;
-const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
+const MediaVideoFive = styled.video.attrs(() => videoCommonAttributes)`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -184,20 +188,13 @@ const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		display: none;
 	}
 `;
-const ContactBodyContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 0 2rem;
-	}
+const ContentContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin: 0 auto;
-		padding: 37rem 0 10rem 0;
-		text-align: left;
 		max-width: 160rem;
 		width: 100%;
-		position: relative;
-		top: 0;
-		z-index: ${zIndexNumber().contactBodyContent};
-		background-image:
+		margin: 0 auto;
+		text-align: left;
+				background-image:
 			linear-gradient(
 				to bottom,
 				${color({
@@ -215,23 +212,71 @@ const ContactBodyContainer = styled.div`
 					'format': 'string'
 				})}
 			);
-		text-align: center;
+
 	}
 `;
-const ContactBodyConstrainer = styled.div`
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		max-width: 150rem;
-		width: 100%;
+const ContentConstrainer = styled.div`
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+		padding: 0 2rem;
+	}
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		margin: 0 auto;
+		padding: 37rem 0 0 0;
+		text-align: left;
+		max-width: 150rem;
+		width: calc(100% - 4rem);
+		position: relative;
+		top: 0;
+		z-index: ${zIndexNumber().contactBodyContent};
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas: "brand text";
+		grid-column-gap: 4rem;
+	}
+`;
+const BrandingContainerBody = styled.div`
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+		display: none;
+	}
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
+		grid-area: brand;
+	}
+`;
+const LogoContainerBody = styled.div`
+	width: 12.5rem;
+	height: 52.5rem;
+	margin: 0 auto 4rem;
+`;
+const TaglineContainerBody = styled.div`
+	width: 17rem;
+	height: 4rem;
+	margin: 0 auto;
+`;
+const ContactOptionsContent = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		grid-area: text;
 		text-align: left;
 	}
 `;
-const EmailOptionContainer = styled.div`
+const EmailHeaderContainer = styled.div`
+	padding-bottom: 2rem;
+`;
+const EmailContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
-	padding: 2rem 0 5rem;
+	display: grid;
+	grid-gap: 2rem;
+	padding-bottom: 5rem;
+	@media (min-width: ${customBreakpointsInPixels.one}px) and (max-width: ${customBreakpointsInPixels.three - 1}px) {
+		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+	}
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
+		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+	}
 	a {
 		width: 100%;
 		span {
@@ -239,22 +284,30 @@ const EmailOptionContainer = styled.div`
 		}
 	}
 `;
+const ChannelsHeaderContainer = styled.div`
+	padding-bottom: 2rem;
+`;
 const ChannelsContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
-	padding-top: 2rem;
+	display: grid;
+	grid-gap: 2rem;
+	@media (min-width: ${customBreakpointsInPixels.one}px) and (max-width: ${customBreakpointsInPixels.three - 1}px) {
+		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+	}
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
+		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+	}
 `;
 const ChannelContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
 	a {
 		width: 100%;
-		margin-bottom: 2rem;
 		span {
 			width: 100%;
 		}
@@ -276,111 +329,132 @@ export const Contact = ({
 				>
 					{title}
 				</Copy>
-			</ContactHeader>
-			<ContactBody>
-				<ContactBodyBrandNotLargeDevice>
-					<BrandContainerNotLargeDevice>
+				<BrandingContainerHeader>
+					<LogoContainerHeader>
 						<Brand
 							includeWordmark={false}
 							contextColor="onDark"
 						/>
-					</BrandContainerNotLargeDevice>
-					<BrandTaglineNotLargeDevice>
+					</LogoContainerHeader>
+					<TaglineContainerHeader>
 						<Copy
 							kind="contact--brand-tagline"
 						>
 							{text.brandTagline}
 						</Copy>
-					</BrandTaglineNotLargeDevice>
-				</ContactBodyBrandNotLargeDevice>
-				<ContactBodyMediaLargeDevice>
-					<ContactBodyMediaImagesLargeDevice>
-						<ImageLargeDevice
+					</TaglineContainerHeader>
+				</BrandingContainerHeader>
+			</ContactHeader>
+			<ContactBody>
+				<MediaContainerFive>
+					<MediaImagesContainerFive>
+						<MediaImageFive
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<ImageLargeDevice
+						<MediaImageFive
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<ImageLargeDevice
+						<MediaImageFive
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<ImageLargeDevice
+						<MediaImageFive
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-						<ImageLargeDevice
+						<MediaImageFive
 							$imageURL={media.sampleBackgroundImageLarge.url}
 						/>
-					</ContactBodyMediaImagesLargeDevice>
-					<ContactBodyMediaVideosLargeDevice>
-						<VideoLargeDevice
+					</MediaImagesContainerFive>
+					<MediaVideosContainerFive>
+						<MediaVideoFive
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</VideoLargeDevice>
-						<VideoLargeDevice
+						</MediaVideoFive>
+						<MediaVideoFive
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</VideoLargeDevice>
-						<VideoLargeDevice
+						</MediaVideoFive>
+						<MediaVideoFive
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</VideoLargeDevice>
-						<VideoLargeDevice
+						</MediaVideoFive>
+						<MediaVideoFive
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</VideoLargeDevice>
-						<VideoLargeDevice
+						</MediaVideoFive>
+						<MediaVideoFive
 							poster={media.sampleBackgroundImageLarge.url}
 						>
 							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</VideoLargeDevice>
-					</ContactBodyMediaVideosLargeDevice>
-				</ContactBodyMediaLargeDevice>
-				<ContactBodyConstrainer>
-					<ContactBodyContainer>
-						<Copy
-							kind="contact--section-header"
-						>
-							{text.emailHeader}
-						</Copy>
-						<EmailOptionContainer>
-							<Button
-								text="hi@jbkr.me"
-								url="mailto:hi@jbkr.me"
-								iconBefore="email"
-								size="standard"
-								surfaceStyle="outlined"
-								contextColor="onDark"
-							/>
-						</EmailOptionContainer>
-						<Copy
-							kind="contact--section-header"
-						>
-							{text.channelsHeader}
-						</Copy>
-						<ChannelsContainer>
-							{
-								channels.map((channel) =>
-									<ChannelContainer
-										key={channel.key}
-									>
-										<Button
-											text={channel.anchorText}
-											url={channel.url}
-											iconBefore={channel.anchorIconBefore}
-											size="standard"
-											surfaceStyle="outlined"
-											contextColor="onDark"
-										/>
-									</ChannelContainer>
-								)
-							}
-						</ChannelsContainer>
-					</ContactBodyContainer>
-				</ContactBodyConstrainer>
+						</MediaVideoFive>
+					</MediaVideosContainerFive>
+				</MediaContainerFive>
+				<ContentContainer>
+					<ContentConstrainer>
+						<BrandingContainerBody>
+							<LogoContainerBody>
+								<Brand
+									includeWordmark={false}
+									contextColor="onDark"
+								/>
+							</LogoContainerBody>
+							<TaglineContainerBody>
+								<Copy
+									kind="contact--brand-tagline"
+								>
+									{text.brandTagline}
+								</Copy>
+							</TaglineContainerBody>
+						</BrandingContainerBody>
+						<ContactOptionsContent>
+							<EmailHeaderContainer>
+								<Copy
+									kind="contact--section-header"
+								>
+									{text.emailHeader}
+								</Copy>
+							</EmailHeaderContainer>
+							<EmailContainer>
+								<Button
+									text="hi@jbkr.me"
+									url="mailto:hi@jbkr.me"
+									iconBefore="email"
+									size="standard"
+									surfaceStyle="outlined"
+									contextColor="onDark"
+								/>
+							</EmailContainer>
+							<ChannelsHeaderContainer>
+								<Copy
+									kind="contact--section-header"
+								>
+									{text.channelsHeader}
+								</Copy>
+							</ChannelsHeaderContainer>
+							<ChannelsContainer>
+								{
+									channels.map((channel) =>
+										<ChannelContainer
+											key={channel.key}
+										>
+											<Button
+												text={channel.anchorText}
+												url={channel.url}
+												iconBefore={channel.anchorIconBefore}
+												size="standard"
+												surfaceStyle="outlined"
+												contextColor="onDark"
+											/>
+										</ChannelContainer>
+									)
+								}
+							</ChannelsContainer>
+						</ContactOptionsContent>
+					</ContentConstrainer>
+				</ContentContainer>
 			</ContactBody>
 		</MainContentContainer>
 	</ContactContainer>
