@@ -10,7 +10,6 @@ import { Button } from '../../core/Button/Button';
 
 const customBreakpointsInPixels = {
 	'one': 428,
-	'two': 550,
 	'three': 768,
 	'four': 1025,
 };
@@ -71,11 +70,8 @@ const MainContentContainer = styled.main.attrs(() => {
 			`
 		}
 		background-position: top 0 right 0;
-		background-size: 30.5rem 32rem;
+		background-size: 60% auto;
 		background-repeat: no-repeat;
-	}
-	@media (min-width: ${customBreakpointsInPixels.two}px) {
-		background-size: 61rem 64rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
@@ -83,6 +79,9 @@ const MainContentContainer = styled.main.attrs(() => {
 const ContactHeader = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 0 2rem 0 2rem;
+	}
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
+		padding-bottom: 10rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: calc(100% - 4rem);
@@ -113,83 +112,64 @@ const TaglineContainerHeader = styled.div`
 	margin: 3rem 0 3rem 2rem;
 `;
 const ContactBody = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		position: relative;
 		text-align: center;
 		width: 100%;
 	}
 `;
 const MediaContainerFive = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.four - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
 		display: none;
 	}
-	@media (min-width: ${customBreakpointsInPixels.four}px) {
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 	}
 `;
 const MediaImagesContainerFive = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		position: absolute;
-		top: 4rem;
-		left: 0;
-		width: 100%;
-		text-align: left;
-		z-index: ${zIndexNumber().contactBodyMediaImageLargeDevice};
-	}
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: absolute;
+	top: 4rem;
+	left: 0;
+	width: 100%;
+	text-align: left;
+	z-index: ${zIndexNumber().contactBodyMediaImageLargeDevice};
 `;
 const MediaImageFive = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+	${
+		({ $imageURL }) => `background-image: url("${$imageURL}");`
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		${
-			({ $imageURL }) => `background-image: url("${$imageURL}");`
-		}
-		width: calc((100% - 16rem) / 5);
-		height: 18rem;
-		background-size: cover;
-		background-repeat: no-repeat;
-	}
+	width: calc((100% - 16rem) / 5);
+	height: 18rem;
+	background-size: cover;
+	background-repeat: no-repeat;
 	/* @media (prefers-reduced-motion: no-preference) {
 		display: none;
 	} */
 `;
 const MediaVideosContainerFive = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		display: flex;
-		display: none;
-		flex-direction: row;
-		justify-content: space-between;
-		position: absolute;
-		top: 4rem;
-		left: 0;
-		width: 100%;
-		text-align: left;
-		z-index: ${zIndexNumber().contactBodyMediaVideoLargeDevice};
-	}
+	display: flex;
+	display: none;
+	flex-direction: row;
+	justify-content: space-between;
+	position: absolute;
+	top: 4rem;
+	left: 0;
+	width: 100%;
+	text-align: left;
+	z-index: ${zIndexNumber().contactBodyMediaVideoLargeDevice};
 `;
 const MediaVideoFive = styled.video.attrs(() => videoCommonAttributes)`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		display: none;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: calc((100% - 16rem) / 5);
-		height: 18rem;
-		object-fit: cover;
-	}
+	width: calc((100% - 16rem) / 5);
+	height: 18rem;
+	object-fit: cover;
 	@media (prefers-reduced-motion: reduce) {
 		display: none;
 	}
 `;
 const ContentContainer = styled.div`
-	${deviceWidthQuery.only({ 'width': 'l' })} {
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		max-width: 160rem;
 		width: 100%;
 		margin: 0 auto;
@@ -346,6 +326,52 @@ export const Contact = ({
 				</BrandingContainerHeader>
 			</ContactHeader>
 			<ContactBody>
+				<MediaContainerFive>
+					<MediaImagesContainerFive>
+						<MediaImageFive
+							$imageURL={media.sampleBackgroundImageLarge.url}
+						/>
+						<MediaImageFive
+							$imageURL={media.sampleBackgroundImageLarge.url}
+						/>
+						<MediaImageFive
+							$imageURL={media.sampleBackgroundImageLarge.url}
+						/>
+						<MediaImageFive
+							$imageURL={media.sampleBackgroundImageLarge.url}
+						/>
+						<MediaImageFive
+							$imageURL={media.sampleBackgroundImageLarge.url}
+						/>
+					</MediaImagesContainerFive>
+					<MediaVideosContainerFive>
+						<MediaVideoFive
+							poster={media.sampleBackgroundImageLarge.url}
+						>
+							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+						</MediaVideoFive>
+						<MediaVideoFive
+							poster={media.sampleBackgroundImageLarge.url}
+						>
+							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+						</MediaVideoFive>
+						<MediaVideoFive
+							poster={media.sampleBackgroundImageLarge.url}
+						>
+							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+						</MediaVideoFive>
+						<MediaVideoFive
+							poster={media.sampleBackgroundImageLarge.url}
+						>
+							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+						</MediaVideoFive>
+						<MediaVideoFive
+							poster={media.sampleBackgroundImageLarge.url}
+						>
+							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+						</MediaVideoFive>
+					</MediaVideosContainerFive>
+				</MediaContainerFive>
 				<MediaContainerFive>
 					<MediaImagesContainerFive>
 						<MediaImageFive
