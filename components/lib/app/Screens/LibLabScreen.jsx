@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
+import { Meta, Header, Footer } from '@jbkr/models-react';
 import { AppScaffold } from '../Layout/AppScaffold';
-import { MainContent } from '../Layout/MainContent';
-import { ArticleSummaries } from '../Articles/ArticleSummaries';
+import { LibLab } from '../LibLab/LibLab';
 
 
 export const LibLabScreen = ({
@@ -14,11 +15,19 @@ export const LibLabScreen = ({
 		header={header}
 		footer={footer}
 	>
-		<MainContent>
-			<ArticleSummaries
-				title={main.title}
-				articles={main.articles}
-			/>
-		</MainContent>
+		<LibLab
+			title={main.title}
+			articles={main.articles}
+		/>
 	</AppScaffold>
 );
+LibLabScreen.propTypes = {
+	/** Data for the app's `<head>`. */
+	'meta': Meta,
+	/** Data for AppHeader */
+	'header': Header,
+	/** Data for child(ren) of `<MainContent>`. */
+	'main': PropTypes.object,
+	/** Data for AppFooter */
+	'footer': Footer,
+};

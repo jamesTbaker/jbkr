@@ -494,23 +494,4 @@ export const Contact = ({
 
 Contact.propTypes = {
 	'title': PropTypes.string,
-
-	/* 'skills': PropTypes.shape({
-		'technical': PropTypes.shape({
-			'featured': PropTypes.arrayOf(SkillWithReactKey),
-			'standard': PropTypes.arrayOf(SkillWithReactKey),
-		}),
-
-		'business': PropTypes.shape({
-			'featured': PropTypes.arrayOf(SkillWithReactKey),
-			'standard': PropTypes.arrayOf(SkillWithReactKey),
-		}),
-		'design': PropTypes.shape({
-			'featured': PropTypes.arrayOf(SkillWithReactKey),
-			'standard': PropTypes.arrayOf(SkillWithReactKey),
-		}),
-	}),
-	'professionalExperiences': PropTypes.arrayOf(ProfessionalExperienceWithReactKey),
-	'educationCertifications': PropTypes.arrayOf(EducationCertificationWithReactKey),
-	'volunteerExperiences': PropTypes.arrayOf(VolunteerExperienceWithReactKey), */
 }
