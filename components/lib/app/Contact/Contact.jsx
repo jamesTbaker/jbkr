@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
+	deviceWidthQuery, color, zIndexNumber
 } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 import { Brand } from '../../..';
@@ -9,7 +9,7 @@ import { Button } from '../../core/Button/Button';
 
 
 const customBreakpointsInPixels = {
-	'one': 360,
+	'one': 400,
 	'three': 880,
 	'four': 1025,
 };
@@ -118,8 +118,6 @@ const ContactBody = styled.div`
 		width: 100%;
 	}
 `;
-
-
 const MediaContainerFive = styled.div`
 	@media (max-width: ${customBreakpointsInPixels.four - 1}px) {
 		display: none;
@@ -170,8 +168,6 @@ const MediaVideoFive = styled.video.attrs(() => videoCommonAttributes)`
 		display: none;
 	}
 `;
-
-
 const MediaContainerThree = styled.div`
 	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
 		display: none;
@@ -223,8 +219,6 @@ const MediaVideoThree = styled.video.attrs(() => videoCommonAttributes)`
 		display: none;
 	}
 `;
-
-
 const ContentContainer = styled.div`
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		max-width: 160rem;
@@ -311,12 +305,7 @@ const EmailContainer = styled.div`
 	display: grid;
 	grid-gap: 2rem;
 	padding-bottom: 5rem;
-	@media (min-width: ${customBreakpointsInPixels.one}px) and (max-width: ${customBreakpointsInPixels.three - 1}px) {
-		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-	}
-	@media (min-width: ${customBreakpointsInPixels.four}px) {
-		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-	}
+	grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
 	a {
 		width: 100%;
 		span {
@@ -334,12 +323,7 @@ const ChannelsContainer = styled.div`
 	}
 	display: grid;
 	grid-gap: 2rem;
-	@media (min-width: ${customBreakpointsInPixels.one}px) and (max-width: ${customBreakpointsInPixels.three - 1}px) {
-		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-	}
-	@media (min-width: ${customBreakpointsInPixels.four}px) {
-		grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-	}
+	grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
 `;
 const ChannelContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
