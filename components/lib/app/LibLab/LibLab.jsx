@@ -48,38 +48,23 @@ const LibLabBodyConstrainer = styled.div`
 	text-align: left;
 `;
 const TopAndFeaturedArticleSummariesContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* background-color: pink; */
 		display: grid;
 		grid-template-columns: calc(62% - 2rem) calc(38% - 2rem);
 		grid-column-gap: 4rem;
 	}
 `;
 const TopArticleSummariesContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* background-color: yellow; */
 		padding-top: 4rem;
 	}
 `;
-const FeaturedArticleSummaryContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* background-color: #5f5f52; */
-	}
-`;
+const FeaturedArticleSummaryContainer = styled.div``;
 const StandardArticleSummariesContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* background-color: orange; */
 		display: grid;
-		grid-gap: 4rem;
 		grid-template-columns: repeat(auto-fill, calc((100% - 8rem) / 3));
+		grid-gap: 4rem;
 		padding-top: 4rem;
 	}
 `;

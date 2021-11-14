@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -9,41 +8,35 @@ import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Line } from '../../..';
 
 const ArticleSummaryContainer = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	flex-direction: column;
-	padding: 7rem 6rem 0 0;
 	border-radius: .375rem;
 	background-size: cover;
 	background-repeat: no-repeat;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		margin-top: 4rem;
 		${
 			({ $images }) => `background-image: url('${$images.small.url}');`
 		}
-		margin-top: 4rem;
-	}
-	@media (min-width: 601px) and (max-width: 1024px) {
 		${
 			({ $type }) => {
-				if ($type === 'top') {
+				if ($type === 'top' || $type === 'standard') {
 					return `
 						max-width: 768px;
+						padding: 8rem 2rem 0 0;
 					`;
 				}
 				if ($type === 'featured') {
 					return `
 						max-width: 960px;
-					`;
-				}
-				if ($type === 'standard') {
-					return `
-						max-width: 768px;
+						padding: 12rem 2rem 0 0;
 					`;
 				}
 			}
 		}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
 		${
 			({ $images }) => `background-image: url('${$images.large.url}');`
 		}
@@ -51,16 +44,20 @@ const ArticleSummaryContainer = styled.div`
 			({ $type }) => {
 				if ($type === 'top') {
 					return `
+						height: calc(50% - 4rem);
 						margin-top: 4rem;
+						padding: 4rem 24rem 0 0;
 					`;
 				}
 				if ($type === 'featured') {
 					return `
 						height: 100%;
+						padding: 20rem 6rem 0 0;
 					`;
 				}
 				if ($type === 'standard') {
 					return `
+						padding: 7rem 3rem 0 0;
 					`;
 				}
 			}
@@ -68,7 +65,7 @@ const ArticleSummaryContainer = styled.div`
 	}
 `;
 const ContentContainer = styled.div`
-	padding: 8rem 6rem 4rem 6rem;
+	border-radius: .375rem;
 	background-image:
 		linear-gradient(
 			to bottom,
@@ -87,7 +84,43 @@ const ContentContainer = styled.div`
 				'format': 'string'
 			})}
 		);
-	border-radius: .375rem;
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		${
+			({ $type }) => {
+				if ($type === 'top' || $type === 'standard') {
+					return `
+						padding: 8rem 2rem 2rem 2rem;
+					`;
+				}
+				if ($type === 'featured') {
+					return `
+						padding: 8rem 2rem 2rem 2rem;
+					`;
+				}
+			}
+		}
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		${
+			({ $type }) => {
+				if ($type === 'top') {
+					return `
+						padding: 8rem 10rem 1rem 6rem;
+					`;
+				}
+				if ($type === 'featured') {
+					return `
+						padding: 8rem 6rem 1rem 6rem;
+					`;
+				}
+				if ($type === 'standard') {
+					return `
+						padding: 8rem 5rem 1rem 6rem;
+					`;
+				}
+			}
+		}
+	}
 `;
 const TitleContainer = styled.div`
 	padding-bottom: 3rem;
@@ -104,11 +137,9 @@ const MetaItemContainer = styled.div`
 		'level': 33,
 		'format': 'string',
 	})};
-
 `;
 export const ArticleSummary = ({
 	title,
-	tagline,
 	slug,
 	publicationDate,
 	updateDate,
@@ -120,7 +151,9 @@ export const ArticleSummary = ({
 		$type={type}
 		$images={teaserImages}
 	>
-		<ContentContainer>
+		<ContentContainer
+			$type={type}
+		>
 			<TitleContainer>
 				<Copy
 					kind="article-summary--title-anchor"
