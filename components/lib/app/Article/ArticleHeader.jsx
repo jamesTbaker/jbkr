@@ -23,7 +23,6 @@ const ArticleHeaderConstrainer = styled.div`
 		width: 100%;
 		max-width: 160rem;
 		margin: 0 auto;
-		text-align: left;
 		border-radius: .375rem .375rem 0 0;
 		background-image:
 			linear-gradient(
@@ -44,6 +43,37 @@ const ArticleHeaderConstrainer = styled.div`
 			);
 	}
 `;
+const ArticleHeaderContentConstrainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: 100%;
+		max-width: 150rem;
+		margin: 0 auto;
+		padding-top: 9rem;
+		text-align: left;
+		display: grid;
+		grid-template-columns: 65fr 35fr;
+		grid-template-areas: "main meta";
+	}
+`;
+const ArticleHeaderMain = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		grid-area: main;
+		padding: 0 4rem 4rem 0;
+	}
+`;
+const ArticleHeaderMeta = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		grid-area: meta;
+		padding: 0 0 4rem 9rem;
+		border-left: solid 1px aquamarine;
+	}
+`;
 const Sample = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
@@ -62,16 +92,16 @@ export const ArticleHeader = ({
 		$headImages={headImages}
 	>
 		<ArticleHeaderConstrainer>
-			Hello
+			<ArticleHeaderContentConstrainer>
+				<ArticleHeaderMain>
+					Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main
+				</ArticleHeaderMain>
+				<ArticleHeaderMeta>
+					Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta
+				</ArticleHeaderMeta>
+			</ArticleHeaderContentConstrainer>
 		</ArticleHeaderConstrainer>
 		{/* {
-			headImage &&
-			<MediaItem
-				type={headImage.type}
-				specs={headImage}
-			/>
-		}
-		{
 			headImage && headImage.credit &&
 			<Copy
 				kind="small"

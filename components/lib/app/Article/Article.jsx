@@ -4,6 +4,7 @@ import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
 import { ArticleHeader } from './ArticleHeader';
+import { ArticleBody } from './ArticleBody';
 
 
 const ArticleContainer = styled.article`
@@ -30,6 +31,10 @@ export const Article = ({
 			publicationDate={frontMatter.publicationDate}
 			stats={frontMatter.stats}
 			tagline={frontMatter.tagline}
+		/>
+		<ArticleBody
+			bodyContent={mainContent}
+			tableOfContents={frontMatter.tableOfContents}
 		/>
 	</ArticleContainer>
 );
