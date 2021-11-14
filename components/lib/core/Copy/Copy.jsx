@@ -433,7 +433,7 @@ const propsSpecifications = {
 	},
 	'article-summary--meta-item--label': {
 		'tag': 'div',
-		'size': 's',
+		'size': '1xs',
 		'weight': 'bold',
 		'usage': 'display',
 		'spaced': false,
@@ -445,7 +445,7 @@ const propsSpecifications = {
 	},
 	'article-summary--meta-item--value': {
 		'tag': 'div',
-		'size': 's',
+		'size': '1xs',
 		'weight': 'regular',
 		'usage': 'display',
 		'spaced': false,

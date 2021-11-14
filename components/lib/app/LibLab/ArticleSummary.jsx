@@ -12,19 +12,40 @@ const ArticleSummaryContainer = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
+	padding: 7rem 6rem 0 0;
 	border-radius: .375rem;
 	background-size: cover;
 	background-repeat: no-repeat;
-	padding: 7rem 6rem 0 0;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		${
-			({ $images }) => `background-image: url("${$images.small.url}");`
+			({ $images }) => `background-image: url('${$images.small.url}');`
 		}
 		margin-top: 4rem;
 	}
+	@media (min-width: 601px) and (max-width: 1024px) {
+		${
+			({ $type }) => {
+				if ($type === 'top') {
+					return `
+						max-width: 768px;
+					`;
+				}
+				if ($type === 'featured') {
+					return `
+						max-width: 960px;
+					`;
+				}
+				if ($type === 'standard') {
+					return `
+						max-width: 768px;
+					`;
+				}
+			}
+		}
+	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${
-			({ $images }) => `background-image: url("${$images.large.url}");`
+			({ $images }) => `background-image: url('${$images.large.url}');`
 		}
 		${
 			({ $type }) => {
@@ -47,7 +68,7 @@ const ArticleSummaryContainer = styled.div`
 	}
 `;
 const ContentContainer = styled.div`
-	padding: 8rem 6rem 2rem 2rem;
+	padding: 8rem 6rem 4rem 6rem;
 	background-image:
 		linear-gradient(
 			to bottom,
@@ -75,7 +96,15 @@ const DescriptionContainer = styled.div`
 	padding: 2rem 0 2rem;
 `;
 const MetaItemContainer = styled.div`
-	padding-bottom: 1rem;
+	max-width: 15rem;
+	padding: 2rem 0;
+	border-top: solid .125rem ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 33,
+		'format': 'string',
+	})};
+
 `;
 export const ArticleSummary = ({
 	title,

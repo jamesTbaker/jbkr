@@ -134,7 +134,7 @@ const MediaImagesContainerFive = styled.div`
 `;
 const MediaImageFive = styled.div`
 	${
-		({ $imageURL }) => `background-image: url("${$imageURL}");`
+		({ $imageURL }) => `background-image: url('${$imageURL}');`
 	}
 	width: calc((100% - 16rem) / 5);
 	height: 18rem;
@@ -184,7 +184,7 @@ const MediaImagesContainerThree = styled.div`
 `;
 const MediaImageThree = styled.div`
 	${
-		({ $imageURL }) => `background-image: url("${$imageURL}");`
+		({ $imageURL }) => `background-image: url('${$imageURL}');`
 	}
 	width: calc((100% - 8rem) / 3);
 	height: 18rem;

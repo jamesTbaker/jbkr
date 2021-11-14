@@ -209,7 +209,7 @@ const ImageLargeDevice = styled.div`
 		height: 100%;
 		z-index: ${zIndexNumber().profileSectionBackgroundImage};
 		${
-			({ $imageURL }) => `background-image: url("${$imageURL}");`
+			({ $imageURL }) => `background-image: url('${$imageURL}');`
 		}
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -227,7 +227,7 @@ const ImageNotLargeDevice = styled.div`
 		height: 100%;
 		z-index: ${zIndexNumber().profileSectionBackgroundImage};
 		${
-			({ $imageURL }) => `background-image: url("${$imageURL}");`
+			({ $imageURL }) => `background-image: url('${$imageURL}');`
 		}
 		background-size: cover;
 		background-repeat: no-repeat;
