@@ -369,6 +369,7 @@ export const returnAllPublishedArticlesFromDB = async () => {
 					'$project': {
 						'Featured': 1,
 						'PublicationDate': 1,
+						'UpdateDate': 1,
 						'Slug': 1,
 						'Title': 1,
 						'Subtitle': 1,

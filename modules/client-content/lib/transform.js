@@ -1211,7 +1211,10 @@ export const returnTransformedLibLabScreenContent = ({
 					articleRaw.Title.trim() + ': ' +
 					articleRaw.Subtitle :
 					articleRaw.Title,
-				'publicationDate': articleRaw.PublicationDate,
+				'publicationDate': returnFormattedDateString({
+					'incomingDate': articleRaw.PublicationDate,
+					'formatToken': 'standardLongDate',
+				}),
 				'teaserDescription': returnSimpleHTMLFromMarkdown({
 					'content': articleRaw.TeaserDescription,
 					'options': {
@@ -1254,10 +1257,21 @@ export const returnTransformedLibLabScreenContent = ({
 				},
 			};
 			if (articleRaw.Tagline) {
-				articleTransformed.tagline = articleRaw.Tagline;
+				articleTransformed.tagline = returnSimpleHTMLFromMarkdown({
+					'content': articleRaw.Tagline,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
 			}
 			if (articleRaw.Featured) {
 				articleTransformed.featured = true;
+			}
+			if (articleRaw.UpdateDate) {
+				articleTransformed.updateDate = returnFormattedDateString({
+					'incomingDate': articleRaw.PublicationDate,
+					'formatToken': 'standardLongDate',
+				});
 			}
 			articlesTransformed.push(articleTransformed);
 		}

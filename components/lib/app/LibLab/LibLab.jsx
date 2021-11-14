@@ -6,7 +6,7 @@ import {
 import { Copy } from '../../core/Copy/Copy';
 import { Brand } from '../../..';
 import { Button } from '../../core/Button/Button';
-import { LibLabItem } from './LibLabItem';
+import { ArticleSummary } from './ArticleSummary';
 
 
 const LibLabContainer = styled.div`
@@ -28,7 +28,7 @@ const MainContentContainer = styled.main.attrs(() => {
 })``;
 const LibLabHeader = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 0 2rem 8rem 2rem;
+		padding: 0 2rem 4rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: calc(100% - 4rem);
@@ -51,7 +51,7 @@ const TopAndFeaturedArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		background-color: pink;
+		/* background-color: pink; */
 		display: grid;
 		grid-template-columns: calc(62% - 2rem) calc(38% - 2rem);
 		grid-column-gap: 4rem;
@@ -61,7 +61,7 @@ const TopArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		background-color: yellow;
+		/* background-color: yellow; */
 		padding-top: 4rem;
 	}
 `;
@@ -69,14 +69,14 @@ const FeaturedArticleSummaryContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		background-color: #5f5f52;
+		/* background-color: #5f5f52; */
 	}
 `;
 const StandardArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		background-color: orange;
+		/* background-color: orange; */
 		display: grid;
 		grid-gap: 4rem;
 		grid-template-columns: repeat(auto-fill, calc((100% - 8rem) / 3));
@@ -105,17 +105,31 @@ export const LibLab = ({
 									(articleSummary, articleSummaryIndex) =>
 										articleSummaryIndex < 2
 								).map((articleSummary) =>
-									<LibLabItem
+									<ArticleSummary
+										title={articleSummary.title}
+										tagline={articleSummary.tagline}
+										slug={articleSummary.slug}
+										publicationDate={articleSummary.publicationDate}
+										updateDate={articleSummary.updateDate}
+										teaserDescription={articleSummary.teaserDescription}
+										teaserImages={articleSummary.teaserImages}
 										type="top"
-										content={articleSummary}
+										key={articleSummary.key}
 									/>
 								)
 							}
 						</TopArticleSummariesContainer>
 						<FeaturedArticleSummaryContainer>
-							<LibLabItem
+							<ArticleSummary
+								title={articles.featured[0].title}
+								tagline={articles.featured[0].tagline}
+								slug={articles.featured[0].slug}
+								publicationDate={articles.featured[0].publicationDate}
+								updateDate={articles.featured[0].updateDate}
+								teaserDescription={articles.featured[0].teaserDescription}
+								teaserImages={articles.featured[0].teaserImages}
 								type="featured"
-								content={articles.featured[0]}
+								key={articles.featured[0].key}
 							/>
 						</FeaturedArticleSummaryContainer>
 					</TopAndFeaturedArticleSummariesContainer>
@@ -125,9 +139,16 @@ export const LibLab = ({
 								(articleSummary, articleSummaryIndex) =>
 									articleSummaryIndex >= 2
 							).map((articleSummary) =>
-								<LibLabItem
+								<ArticleSummary
+									title={articleSummary.title}
+									tagline={articleSummary.tagline}
+									slug={articleSummary.slug}
+									publicationDate={articleSummary.publicationDate}
+									updateDate={articleSummary.updateDate}
+									teaserDescription={articleSummary.teaserDescription}
+									teaserImages={articleSummary.teaserImages}
 									type="standard"
-									content={articleSummary}
+									key={articleSummary.key}
 								/>
 							)
 						}
