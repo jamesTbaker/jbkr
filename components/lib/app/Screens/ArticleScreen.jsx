@@ -1,9 +1,5 @@
 import { AppScaffold } from '../Layout/AppScaffold';
-import { MainContent } from '../Layout/MainContent';
-import { Aside } from '../Layout/Aside';
-import { ArticleTableOfContents } from '../Articles/ArticleTableOfContents';
-import { ArticleDetail } from '../Articles/ArticleDetail';
-
+import { Article } from '../Article/Article';
 export const ArticleScreen = ({
 	meta,
 	header,
@@ -18,22 +14,10 @@ export const ArticleScreen = ({
 			main.article.frontMatter.tableOfContents ? true : false
 		}
 	>
-		<>
-			<MainContent>
-				<ArticleDetail
-					title={main.title}
-					frontMatter={main.article.frontMatter}
-					mainContent={main.article.mainContent}
-				/>
-			</MainContent>
-			{
-				main.article.frontMatter.tableOfContents &&
-				<Aside>
-					<ArticleTableOfContents
-						contents={main.article.frontMatter.tableOfContents}
-					/>
-				</Aside>
-			}
-		</>
+		<Article
+			title={main.title}
+			frontMatter={main.article.frontMatter}
+			mainContent={main.article.mainContent}
+		/>
 	</AppScaffold>
 );

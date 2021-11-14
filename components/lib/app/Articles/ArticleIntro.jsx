@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-
 import styled from 'styled-components';
 import { ArticleBriefStatements } from './ArticleBriefStatements';
 import { MediaItem } from '../Media/MediaItem';
@@ -25,7 +22,7 @@ export const ArticleIntro = ({
 			introText &&
 
 			<Copy
-				kind="body-container--enlarged"
+				kind="copy-container--enlarged"
 				htmlContent={introText}
 			/>
 		}
