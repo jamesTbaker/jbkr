@@ -571,12 +571,11 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
-	'article--table-of-contents-item--anchor': {
-		'tag': 'span',
+	'article--expanded-table-of-contents': {
+		'tag': 'div',
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',

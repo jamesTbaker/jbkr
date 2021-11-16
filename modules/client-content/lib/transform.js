@@ -646,39 +646,21 @@ const returnArticleIntermediate = ({
 			articleMainRaw.Images[0].height
 		) {
 			// transform the image properties
-			articleIntermedate.headImages = {
-				'small': {
-					'url': returnImageURI({
-						'imagePublicID':
-							articleMainRaw.Images[0].hash,
-						'imageExtension': articleMainRaw.Images[0].ext,
-						'typeToken': 'headerSmall',
-					}),
-					'alternativeText':
-						articleMainRaw.Images[0].alternativeText,
-					'width': articleMainRaw.Images[0].width,
-					'height': articleMainRaw.Images[0].height,
-					'type': returnMediaType({
-						'mime': articleMainRaw.Images[0].mime,
-					}),
-					'credit': articleMainRaw.Images[0].caption,
-				},
-				'large': {
-					'url': returnImageURI({
-						'imagePublicID':
-							articleMainRaw.Images[0].hash,
-						'imageExtension': articleMainRaw.Images[0].ext,
-						'typeToken': 'headerLarge',
-					}),
-					'alternativeText':
-						articleMainRaw.Images[0].alternativeText,
-					'width': articleMainRaw.Images[0].width,
-					'height': articleMainRaw.Images[0].height,
-					'type': returnMediaType({
-						'mime': articleMainRaw.Images[0].mime,
-					}),
-					'credit': articleMainRaw.Images[0].caption,
-				},
+			articleIntermedate.headImage = {
+				'url': returnImageURI({
+					'imagePublicID':
+						articleMainRaw.Images[0].hash,
+					'imageExtension': articleMainRaw.Images[0].ext,
+					'typeToken': 'header',
+				}),
+				'alternativeText':
+					articleMainRaw.Images[0].alternativeText,
+				'width': articleMainRaw.Images[0].width,
+				'height': articleMainRaw.Images[0].height,
+				'type': returnMediaType({
+					'mime': articleMainRaw.Images[0].mime,
+				}),
+				'credit': articleMainRaw.Images[0].caption,
 			};
 		}
 	}
@@ -809,36 +791,18 @@ const returnArticleRendered = ({ content }) => {
 		articleRendered.meta.socialDescription = content.socialDescription;
 	}
 	// collect and render the article's front matter content
-	if (content.headImages) {
-		articleRendered.frontMatter.headImages = {
-			'small': {
-				'url': content.headImages.small.url,
-				'alternativeText': content.headImages.small.alternativeText,
-				'width': content.headImages.small.width,
-				'height': content.headImages.small.height,
-				'type': content.headImages.small.type,
-			},
-			'large': {
-				'url': content.headImages.large.url,
-				'alternativeText': content.headImages.large.alternativeText,
-				'width': content.headImages.large.width,
-				'height': content.headImages.large.height,
-				'type': content.headImages.large.type,
-			},
+	if (content.headImage) {
+		articleRendered.frontMatter.headImage = {
+			'url': content.headImage.url,
+			'alternativeText': content.headImage.alternativeText,
+			'width': content.headImage.width,
+			'height': content.headImage.height,
+			'type': content.headImage.type,
 		};
-		if (content.headImages.small.credit) {
-			articleRendered.frontMatter.headImages.small.credit =
+		if (content.headImage.credit) {
+			articleRendered.frontMatter.headImage.credit =
 				returnSimpleHTMLFromMarkdown({
-					'content': content.headImages.small.credit,
-					'options': {
-						'removeEndCapTags': true,
-					},
-				});
-		}
-		if (content.headImages.large.credit) {
-			articleRendered.frontMatter.headImages.large.credit =
-				returnSimpleHTMLFromMarkdown({
-					'content': content.headImages.large.credit,
+					'content': content.headImage.credit,
 					'options': {
 						'removeEndCapTags': true,
 					},

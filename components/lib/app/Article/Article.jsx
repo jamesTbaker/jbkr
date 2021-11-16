@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
-// import { ArticleHeader } from './ArticleHeader';
-import { ArticleBody } from './ArticleBody';
+import { Copy } from '../../..';
 
 
 const ArticleContainer = styled.article`
@@ -12,9 +11,11 @@ const ArticleContainer = styled.article`
 		margin-top: 23rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		position: relative;
+		display: grid;
+		grid-template-columns: 4fr 1fr;
+		grid-template-areas: "main tableOfContents";
 		width: 100%;
-		max-width: 180rem;
+		max-width: 150rem;
 		margin: 14rem auto 0;
 	}
 `;
@@ -22,118 +23,90 @@ const MainContentContainer = styled.main.attrs(() => {
 	return {
 		'id': 'main-content',
 	};
-})``;
-const ArticleHeader = styled.header`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		padding-top: 15rem;
-		text-align: center;
-		${
-			({ $headImages }) => `background-image: url('${$headImages.large.url}');`
-		}
-	}
-`;
-const ArticleHeaderConstrainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 100%;
-		max-width: 160rem;
-		margin: 0 auto;
-		border-radius: .375rem .375rem 0 0;
-		background-image:
-			linear-gradient(
-				to bottom,
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 34,
-					'alpha': .9,
-					'format': 'string'
-				})},
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 37,
-					'format': 'string'
-				})}
-			);
-	}
-`;
-const ArticleHeaderContentConstrainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 100%;
-		max-width: 150rem;
-		margin: 0 auto;
-		padding-top: 9rem;
-		text-align: left;
-		display: grid;
-		grid-template-columns: 65fr 35fr;
-		grid-template-areas: "main meta";
-	}
-`;
-const ArticleHeaderMain = styled.div`
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
-		padding: 0 4rem 4rem 0;
+		background-color: aquamarine;
 	}
 `;
-const ArticleHeaderMeta = styled.div`
+const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
+	return {
+		'aria-label': 'Page Complimentary Information',
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		grid-area: meta;
-		padding: 0 0 4rem 9rem;
-		border-left: solid 1px aquamarine;
-	}
-`;
-const ArticleBodyContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		width: 100%;
-		text-align: center;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
-const ArticleBodyConstrainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 100%;
-		max-width: 150rem;
-		margin: 0 auto;
-		padding-top: 6rem;
-		text-align: left;
-		display: grid;
-		grid-template-columns: 65fr 35fr;
-		grid-template-areas: "main tableOfContents";
-	}
-`;
-const ArticleBodyMain = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		grid-area: main;
-		padding: 0 4rem 0 0;
-	}
-`;
-const ArticleBodyAside = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: tableOfContents;
-		padding: 0 0 0 9rem;
-		border-left: solid 1px aquamarine;
+		height: 100%;
+		padding-left: 4rem;
 	}
 `;
-const TableOfContentsContainer = styled.div`
+const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'expanded-table-of-contents',
+		'aria-label': 'Page Table of Contents',
+	};
+})`
 		position: sticky;
-		top: 20rem;
+		top: 29rem;
+		ol {
+			margin: 0;
+			padding: 0;
+			li {
+				list-style-type: none;
+				margin-bottom: 2rem;
+				a {
+					display: block;
+					text-decoration: none;
+					margin-bottom: 2rem;
+					color: ${color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 4,
+						'format': 'string'
+					})};
+					border-radius: .375rem;
+					transition: background 250ms ease;
+					&:hover {
+						color: ${color({
+							'kind': 'Brand',
+							'tone': 'Peony',
+							'level': 2,
+							'format': 'string'
+						})};
+						background-color: ${color({
+							'kind': 'Neutral',
+							'tone': 'Finch',
+							'level': 35,
+							'format': 'string'
+						})};
+					}
+					&:focus {
+						padding: 0 .5rem;
+						margin-right: 0 .25rem;
+						outline: none;
+						box-shadow: 0 0 0 .25rem ${color({
+							'kind': 'Neutral',
+							'tone': 'Finch',
+							'level': 41,
+							'format': 'string'
+						})}, 0 0 0 .5rem ${color({
+							'kind': 'Accent',
+							'tone': 'Finch',
+							'level': 1,
+							'format': 'string'
+						})};
+					}
+				}
+				ol {
+					padding-left: 2rem;
+				}
+			}
+		}
 `;
 const Sample = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -148,85 +121,33 @@ export const Article = ({
 }) => (
 	<ArticleContainer>
 		<MainContentContainer>
-			<ArticleHeader
-				$headImages={frontMatter.headImages}
-			>
-				<ArticleHeaderConstrainer>
-					<ArticleHeaderContentConstrainer>
-						<ArticleHeaderMain>
-							Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main
-						</ArticleHeaderMain>
-						<ArticleHeaderMeta>
-							Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta Meta
-						</ArticleHeaderMeta>
-					</ArticleHeaderContentConstrainer>
-				</ArticleHeaderConstrainer>
-				{
-					/*
-						{
-							headImage && headImage.credit &&
-							<Copy
-								kind="small"
-								htmlContent={headImage.credit}
-							/>
-						}
-						<Copy
-							kind="h1"
-							htmlContent={title}
-						/>
-						{
-							updateDate &&
-							<Copy kind="body--standard">
-								{`Updated: ${updateDate}`}
-							</Copy>
-						}
-						<Copy kind="body--standard">
-							{`Published: ${publicationDate}`}
-						</Copy>
-						<Copy kind="body--standard">
-							{stats}
-						</Copy>
-						{
-							tagline &&
-							<Copy
-								kind="body--standard"
-								htmlContent={tagline}
-							/>
-						}
-					*/
-				}
-			</ArticleHeader>
-
-
-
-			{/*
-				<ArticleHeader
-					headImages={frontMatter.headImages}
-					title={title}
-					updateDate={frontMatter.updateDate}
-					publicationDate={frontMatter.publicationDate}
-					stats={frontMatter.stats}
-					tagline={frontMatter.tagline}
-				/>
-				<ArticleBody
-					bodyContent={mainContent}
-					tableOfContents={frontMatter.tableOfContents}
-				/>
-			*/}
-
-
-			<ArticleBodyContainer>
-				<ArticleBodyConstrainer>
-					<ArticleBodyMain>
-						Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main
-					</ArticleBodyMain>
-					<ArticleBodyAside>
-						<TableOfContentsContainer>
-							Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside Aside
-						</TableOfContentsContainer>
-					</ArticleBodyAside>
-				</ArticleBodyConstrainer>
-			</ArticleBodyContainer>
+			Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main
 		</MainContentContainer>
+		{/* <CompressedTableOfContentsContainer>
+			<CompressedTableOfContentsCollapsibleContainer>
+				<Collapsible
+					button={{
+						'size': 'small',
+						'surfaceStyle': 'outlined',
+						'contextColor': 'onDark',
+						'text': 'Contents'
+					}}
+					internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
+					copyKind="profile--table-of-contents-item--anchor--not-large-device"
+				>
+					<CompressedTableOfContentsListContainer
+						sectionProperties={sectionProperties}
+					/>
+				</Collapsible>
+			</CompressedTableOfContentsCollapsibleContainer>
+		</CompressedTableOfContentsContainer> */}
+		<ExpandedTableOfContentsContainer>
+			<ExpandedTableOfContentsListContainer>
+				<Copy
+					kind="article--expanded-table-of-contents"
+					htmlContent={frontMatter.tableOfContents}
+				/>
+			</ExpandedTableOfContentsListContainer>
+		</ExpandedTableOfContentsContainer>
 	</ArticleContainer>
 );
