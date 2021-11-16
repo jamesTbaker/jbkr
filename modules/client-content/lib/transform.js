@@ -1,5 +1,3 @@
-/* eslint-disable no-multiple-empty-lines */
-/* eslint-disable no-unused-vars */
 import readingtime from 'reading-time';
 import GithubSlugger from 'github-slugger';
 import { unified } from 'unified';
@@ -865,7 +863,10 @@ const returnArticleRendered = ({ content }) => {
 		articleRendered.frontMatter.updateDate = content.updateDate;
 	}
 	if (content.stats) {
-		articleRendered.frontMatter.stats = content.stats.statement;
+		articleRendered.frontMatter.stats = {
+			'words': content.stats.words,
+			'minutes': content.stats.minutes,
+		};
 	}
 	// collect and render the article's main content
 	if (content.simpleBody) {

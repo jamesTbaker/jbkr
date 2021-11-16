@@ -160,44 +160,6 @@ const propsSpecifications = {
 		// 	'level': 3,
 		// },
 	},
-	'screen-title--standard': {
-		'tag': 'h1',
-		'size': '5xl',
-		'weight': 'bold',
-		'usage': 'display',
-		'spaced': true,
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
-		},
-	},
-	'screen-title--article': {
-		'tag': 'h1',
-		'size': '2xl',
-		'weight': 'bold',
-		'usage': 'display',
-		'spaced': true,
-		'gradient': {
-			'colors': [
-				{
-					'kind': 'Brand',
-					'tone': 'Spruce',
-					'level': 1,
-				},
-				{
-					'kind': 'Accent',
-					'tone': 'Iris',
-					'level': 1,
-				},
-			],
-			'fallbackColor': {
-				'kind': 'Neutral',
-				'tone': 'Base',
-				'level': 1,
-			},
-		},
-	},
 	'profile--section-title--preface': {
 		'tag': 'span',
 		'size': 'm',
@@ -467,16 +429,59 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
+	'article--title': {
+		'tag': 'h1',
+		'size': '2xl',
+		'weight': 'bold',
+		'usage': 'display',
+		'spaced': false,
+		'color': {
+			'kind': 'Accent',
+			'tone': 'Sunshine',
+			'level': 1,
+		},
+		/* 'gradient': {
+			'colors': [
+				{
+					'kind': 'Brand',
+					'tone': 'Spruce',
+					'level': 1,
+				},
+				{
+					'kind': 'Accent',
+					'tone': 'Iris',
+					'level': 1,
+				},
+			],
+			'fallbackColor': {
+				'kind': 'Neutral',
+				'tone': 'Base',
+				'level': 1,
+			},
+		}, */
+	},
 	'article--tagline': {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 7,
+		},
+	},
+	'article--faux-subheader': {
+		'tag': 'span',
+		'size': 's',
+		'weight': 'bold',
+		'usage': 'body',
+		'spaced': false,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 27,
 		},
 	},
 	'article--meta-item--small-device--date--primary': {
@@ -661,8 +666,6 @@ const copyKinds = [
 	'button-label--horizontal--small',
 	'announcement--preface',
 	'announcement--body',
-	'screen-title--standard',
-	'screen-title--article',
 	'profile--section-title--preface',
 	'profile--section-title--main',
 	'profile--skill-name--featured',
@@ -684,7 +687,10 @@ const copyKinds = [
 	'article-summary--meta-item--label',
 	'article-summary--meta-item--value',
 	'article-summary--teaser',
+
+	'article--title',
 	'article--tagline',
+	'article--faux-subheader',
 	'article--meta-item--small-device--date--primary',
 	'article--meta-item--small-device--date--secondary',
 	'article--meta-item--small-device--stats',
@@ -693,8 +699,9 @@ const copyKinds = [
 	'article--brief-statement',
 	'article--image-credit--main',
 	'article--image-credit--anchor',
-	'article--table-of-contents-item--anchor',
+	'article--expanded-table-of-contents',
 	'article--blockquote--large-device',
+
 	'contact--brand-tagline',
 	'contact--section-header',
 	'contact--item-anchor',
