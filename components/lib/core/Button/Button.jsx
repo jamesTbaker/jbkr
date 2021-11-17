@@ -221,7 +221,6 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'level': 1,
 			'format': 'string'
 		});
-
 	return colors;
 };
 const returnLabelCopyKind = ({ buttonSize }) => buttonSize === 'standard' ? 'button-label--horizontal--standard' : 'button-label--horizontal--small';

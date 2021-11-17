@@ -484,7 +484,7 @@ const propsSpecifications = {
 			'level': 27,
 		},
 	},
-	'article--meta-item--small-device--date--primary': {
+	'article--meta-item--not-large-device--date--primary': {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'bold',
@@ -496,7 +496,7 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
-	'article--meta-item--small-device--date--secondary': {
+	'article--meta-item--not-large-device--date--secondary': {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
@@ -508,7 +508,7 @@ const propsSpecifications = {
 			'level': 5,
 		},
 	},
-	'article--meta-item--small-device--stats': {
+	'article--meta-item--not-large-device--stats': {
 		'tag': 'span',
 		'size': 's',
 		'weight': 'regular',
@@ -561,6 +561,18 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
+		'color': {
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 3,
+		},
+	},
+	'article--compressed-table-of-contents': {
+		'tag': 'span',
+		'size': 's',
+		'weight': 'regular',
+		'usage': 'display',
+		'spaced': true,
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -671,14 +683,15 @@ const copyKinds = [
 	'article--title',
 	'article--tagline',
 	'article--faux-subheader',
-	'article--meta-item--small-device--date--primary',
-	'article--meta-item--small-device--date--secondary',
-	'article--meta-item--small-device--stats',
+	'article--meta-item--not-large-device--date--primary',
+	'article--meta-item--not-large-device--date--secondary',
+	'article--meta-item--not-large-device--stats',
 	'article--meta-item--large-device--label',
 	'article--meta-item--large-device--value',
 	'copy-container--article-image-credit',
 	'article--brief-statement',
 	'article--expanded-table-of-contents',
+	'article--compressed-table-of-contents',
 	'article--blockquote--large-device',
 
 	'contact--brand-tagline',

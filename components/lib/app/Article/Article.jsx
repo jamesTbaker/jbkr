@@ -5,6 +5,7 @@ import {
 } from '@jbkr/style-service';
 import { Copy } from '../../..';
 import { Button } from '../../..';
+import { Collapsible } from '../../..';
 
 
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -80,6 +81,39 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 			}
 		}
 `;
+
+const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
+	return {
+		'aria-label': 'Page Complimentary Information',
+	};
+})`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		position: fixed;
+		top: 13rem;
+		width: 100%;
+		padding: 3rem 2rem;
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 37,
+			'format': 'string',
+		})};
+		z-index: ${zIndexNumber().compressedTableOfContentsContainer};
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+`;
+const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
+	return {
+		'id': 'compressed-table-of-contents',
+		'aria-label': 'Page Table of Contents',
+	};
+})``;
+
+
+
+
 const ArticleTableOfContentsFauxHeader = styled.span`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -113,7 +147,7 @@ const ArticleContainer = styled.article`
 		display: grid;
 		grid-template-columns: 4fr 1fr;
 		grid-template-areas: "main tableOfContents";
-		width: 100%;
+		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 14rem auto 0;
 	}
@@ -130,19 +164,21 @@ const MainContentContainer = styled.main.attrs(() => {
 	}
 `;
 const ArticleHeader = styled.div`
+	${
+		({ $backgroundImage }) => `background-image: url('${$backgroundImage}');`
+	}
+	background-position: top 0 right 0;
+	background-repeat: no-repeat;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		background-size: 100% auto;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		${
-			({ $backgroundImage }) => `background-image: url('${$backgroundImage}');`
-		}
 		background-size: 50% auto;
-		background-position: top 0 right 0;
-		background-repeat: no-repeat;
 	}
 `;
 const ArticleTitleConstrainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding: 14rem 2rem 3rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: 75%;
@@ -150,32 +186,53 @@ const ArticleTitleConstrainer = styled.div`
 	}
 `;
 const ArticleTitle = styled.div`
+	h1 {
+		display: inline;
+		border-radius: .375rem;
+		background-image: linear-gradient(
+			to bottom,
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 31,
+				'format': 'string'
+			})} 0%,
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 31,
+				'format': 'string'
+			})} 100%
+		);
+	}
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		h1 {
-			display: inline;
-			border-radius: .375rem;
-			background-image: linear-gradient(
-				to bottom,
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 31,
-					'format': 'string'
-				})} 0%,
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 31,
-					'format': 'string'
-				})} 100%
-			);
-		}
 	}
 `;
 const ArticleTaglineAndMetaContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		width: calc(100% - 2rem);
+		margin: 0 2rem 0 0;
+		padding: 3rem 3rem 3rem 2rem;
+		background-image:
+			linear-gradient(
+				to bottom,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 34,
+					'alpha': .9,
+					'format': 'string'
+				})},
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 37,
+					'alpha': 1,
+					'format': 'string'
+				})}
+			);
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: 50%;
@@ -184,36 +241,40 @@ const ArticleTaglineAndMetaContainer = styled.div`
 `;
 const ArticleTagline = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding-bottom: 3rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding: 0 6rem 3rem 0;
 	}
 `;
 const ArticleBriefStatements = styled.ul`
+	margin: 0;
+	padding: 0 0 3rem;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin: 0;
-		padding: 0 0 3rem;
 	}
 `;
 const ArticleBriefStatement = styled.li`
+	list-style-type: none;
+	padding: 1rem 0;
+	background-size: 25% calc(100% + .125rem);
+	background-position-y: -.125rem;
+	background-image: linear-gradient(
+		transparent calc(100% - .25rem),
+		${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		})} calc(100% - .125rem)
+	);
+	&:last-child {
+		background-image: none;
+	}
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		list-style-type: none;
-		padding: 1rem 0;
-		/* background-size: auto calc(100% - .25rem);
-		background-position-y: -10%;
-		background-image: linear-gradient(
-			transparent 100%,
-			${color({
-				'kind': 'Accent',
-				'tone': 'Finch',
-				'level': 1,
-				'format': 'string'
-			})} calc(100% + .25rem)
-		); */
 	}
 `;
 const ArticleMetaContainer = styled.div`
@@ -266,22 +327,51 @@ const DateOrStatLargeDevice = styled.div`
 		padding-top: 2rem;
 	}
 `;
-const SharingOptions = styled.div`
+const DatesAndStatsNotLargeDevice = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		column-gap: 2rem;
+		display: none;
+	}
+`;
+const DateOrStatNotLargeDevice = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+	}
+`;
+const SharingOptions = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	column-gap: 2rem;
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding: 3rem 0 2rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding: 3rem 0;
 	}
 `;
 const ArticleBody = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding: 4rem 2rem 0;
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			scroll-margin-top: 23rem;
+		}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		padding-top: 6rem
+		padding-top: 6rem;
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			scroll-margin-top: 14rem;
+		}
 	}
 `;
 const Sample = styled.div`
@@ -407,25 +497,55 @@ export const Article = ({
 								</Copy>
 							</DateOrStatLargeDevice>
 						</DatesAndStatsLargeDevice>
+						<DatesAndStatsNotLargeDevice>
+							{
+								frontMatter.updateDate &&
+								<DateOrStatNotLargeDevice>
+									<Copy
+										kind="article--meta-item--not-large-device--date--primary"
+									>
+										Updated {frontMatter.updateDate}
+									</Copy>
+								</DateOrStatNotLargeDevice>
+							}
+							<DateOrStatNotLargeDevice>
+								<Copy
+									kind={
+										frontMatter.updateDate ?
+										'article--meta-item--not-large-device--date--secondary' :
+										'article--meta-item--not-large-device--date--primary'
+									}
+								>
+									{frontMatter.publicationDate}
+								</Copy>
+							</DateOrStatNotLargeDevice>
+							<DateOrStatNotLargeDevice>
+								<Copy
+									kind="article--meta-item--not-large-device--stats"
+								>
+									~{frontMatter.stats.words} words // ~{frontMatter.stats.minutes} minutes
+								</Copy>
+							</DateOrStatNotLargeDevice>
+						</DatesAndStatsNotLargeDevice>
 						<SharingOptions>
 							<Button
 								iconBefore="twitter"
 								text="Share on Twitter"
-								// surfaceStyle="transparent"
+								surfaceStyle="outlined"
 								textHidden={true}
 								url="https://google.com"
 							/>
 							<Button
 								iconBefore="linkedin"
 								text="Share on LinkedIn"
-								// surfaceStyle="transparent"
+								surfaceStyle="outlined"
 								textHidden={true}
 								url="https://google.com"
 							/>
 							<Button
 								iconBefore="link"
 								text="Copy this URL"
-								// surfaceStyle="transparent"
+								surfaceStyle="outlined"
 								textHidden={true}
 								url="https://google.com"
 							/>
@@ -438,30 +558,33 @@ export const Article = ({
 				</ArticleTaglineAndMetaContainer>
 			</ArticleHeader>
 			<ArticleBody>
-				<Copy
-					kind="copy-container--standard"
-					htmlContent={mainContent.simpleBody}
-				/>
+				{
+					mainContent.simpleBody &&
+					<Copy
+						kind="copy-container--standard"
+						htmlContent={mainContent.simpleBody}
+					/>
+				}
 			</ArticleBody>
 		</MainContentContainer>
-		{/* <CompressedTableOfContentsContainer>
+		<CompressedTableOfContentsContainer>
 			<CompressedTableOfContentsCollapsibleContainer>
-				<Collapsible
+				{/* <Collapsible
 					button={{
 						'size': 'small',
 						'surfaceStyle': 'outlined',
 						'contextColor': 'onDark',
 						'text': 'Contents'
 					}}
-					internalID="&ARrHqR&QJJVMLnA&3@rdsZN"
-					copyKind="profile--table-of-contents-item--anchor--not-large-device"
+					internalID="v3Wd49fpFK6x2jNkZ6qbmmDC"
+					copyKind="article--compressed-table-of-contents"
 				>
-					<CompressedTableOfContentsListContainer
-						sectionProperties={sectionProperties}
+					<div
+						dangerouslySetInnerHTML={{'__html': frontMatter.tableOfContents}}
 					/>
-				</Collapsible>
+				</Collapsible> */}
 			</CompressedTableOfContentsCollapsibleContainer>
-		</CompressedTableOfContentsContainer> */}
+		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>
 			<ExpandedTableOfContentsListContainer>
 				<Copy
