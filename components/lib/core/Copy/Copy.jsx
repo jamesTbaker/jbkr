@@ -521,11 +521,11 @@ const propsSpecifications = {
 		},
 	},
 	'article--meta-item--large-device--label': {
-		'tag': 'span',
+		'tag': 'div',
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -533,11 +533,11 @@ const propsSpecifications = {
 		},
 	},
 	'article--meta-item--large-device--value': {
-		'tag': 'span',
+		'tag': 'div',
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -554,26 +554,6 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 7,
-		},
-	},
-	'article--image-credit--main': {
-		'tag': 'small',
-		'size': '2xs',
-		'weight': 'regular',
-		'usage': 'display',
-		'spaced': true,
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
-		},
-	},
-	'article--image-credit--anchor': {
-		'tag': 'span',
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
 		},
 	},
 	'article--expanded-table-of-contents': {
@@ -696,9 +676,8 @@ const copyKinds = [
 	'article--meta-item--small-device--stats',
 	'article--meta-item--large-device--label',
 	'article--meta-item--large-device--value',
+	'copy-container--article-image-credit',
 	'article--brief-statement',
-	'article--image-credit--main',
-	'article--image-credit--anchor',
 	'article--expanded-table-of-contents',
 	'article--blockquote--large-device',
 
@@ -1023,6 +1002,69 @@ const EnlargedCopyContainer = styled.div`
 		}
 	}
 `;
+const ArticleImageCreditContainer = styled.div`
+	${returnStylesFromSpecifications({ 'specs': propsSpecifications['small'] })}
+	color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 7,
+		'format': 'string'
+	})};
+	a,
+	a:visited {
+		text-decoration: none;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		})};
+		background-image: linear-gradient(
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 33,
+				'format': 'string'
+			})} 50%,
+			${color({
+				'kind': 'Brand',
+				'tone': 'Peony',
+				'level': 3,
+				'format': 'string'
+			})} 50%
+		);
+		background-size: auto 200%;
+		background-position-y: 10%;
+		transition: all 250ms ease;
+		&:hover {
+			color: ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})};
+			background-position-y: 100%;
+			border-radius: .25rem;
+		}
+		&:focus {
+			outline: none;
+			padding: 0 .5rem;
+			margin: 0 .25rem;
+			border-radius: .25rem;
+			box-shadow: 0 0 0 .25rem ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})}, 0 0 0 .5rem ${color({
+				'kind': 'Accent',
+				'tone': 'Finch',
+				'level': 1,
+				'format': 'string'
+				})};
+		}
+	}
+`;
 
 /**
  * Wherever copy (text) appears on a screen, it should use this component.
@@ -1036,7 +1078,11 @@ export const Copy = ({
 	gradient,
 	tagOverride,
 }) => {
-	if (kind !== 'copy-container--standard' && kind !== 'copy-container--enlarged') {
+	if (
+		kind !== 'copy-container--standard' &&
+		kind !== 'copy-container--enlarged' &&
+		kind !== 'copy-container--article-image-credit'
+	) {
 		if (propsSpecifications[kind]) {
 			let tagThisCopy = propsSpecifications[kind].tag;
 			const propsThisCopy = propsSpecifications[kind];
@@ -1095,6 +1141,15 @@ export const Copy = ({
 		if (htmlContent) {
 			return(
 				<EnlargedCopyContainer
+					dangerouslySetInnerHTML={{ '__html': htmlContent }}
+				/>
+			);
+		}
+	}
+	if (kind === 'copy-container--article-image-credit') {
+		if (htmlContent) {
+			return(
+				<ArticleImageCreditContainer
 					dangerouslySetInnerHTML={{ '__html': htmlContent }}
 				/>
 			);

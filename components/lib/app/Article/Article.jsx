@@ -4,7 +4,7 @@ import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
 import { Copy } from '../../..';
-
+import { Button } from '../../..';
 
 
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -105,9 +105,6 @@ const ArticleTableOfContentsFauxHeader = styled.span`
 		}
 	}
 `;
-
-
-
 const ArticleContainer = styled.article`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 23rem;
@@ -182,7 +179,7 @@ const ArticleTaglineAndMetaContainer = styled.div`
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: 50%;
-		padding-right: 3rem;
+		padding-right: 4rem;
 	}
 `;
 const ArticleTagline = styled.div`
@@ -256,7 +253,7 @@ const DatesAndStatsLargeDevice = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 6rem 6rem;
+		/* grid-template-rows: 8rem 8rem; */
 		grid-template-areas:	"topLeft topRight"
 								"bottomLeft bottomRight";
 	}
@@ -265,7 +262,26 @@ const DateOrStatLargeDevice = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		${({ $gridArea }) => `grid-area: ${$gridArea}` }
+		${({ $gridArea }) => `grid-area: ${$gridArea};` }
+		padding-top: 2rem;
+	}
+`;
+const SharingOptions = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		column-gap: 2rem;
+		padding: 3rem 0;
+	}
+`;
+const ArticleBody = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		padding-top: 6rem
 	}
 `;
 const Sample = styled.div`
@@ -336,19 +352,97 @@ export const Article = ({
 								<DateOrStatLargeDevice
 									$gridArea="topLeft"
 								>
-									Updated: {frontMatter.updateDate}
+									<Copy
+										kind="article--meta-item--large-device--label"
+									>
+										Updated
+									</Copy>
+									<Copy
+										kind="article--meta-item--large-device--value"
+									>
+										{frontMatter.updateDate}
+									</Copy>
 								</DateOrStatLargeDevice>
 							}
-								<DateOrStatLargeDevice
-									$gridArea={frontMatter.updateDate ? 'topRight' : 'topLeft'}
+							<DateOrStatLargeDevice
+								$gridArea={frontMatter.updateDate ? 'topRight' : 'topLeft'}
+							>
+								<Copy
+									kind="article--meta-item--large-device--label"
 								>
-									Published: {frontMatter.publicationDate}
-								</DateOrStatLargeDevice>
-
+									Published
+								</Copy>
+								<Copy
+									kind="article--meta-item--large-device--value"
+								>
+									{frontMatter.publicationDate}
+								</Copy>
+							</DateOrStatLargeDevice>
+							<DateOrStatLargeDevice
+								$gridArea="bottomLeft"
+							>
+								<Copy
+									kind="article--meta-item--large-device--label"
+								>
+									Length
+								</Copy>
+								<Copy
+									kind="article--meta-item--large-device--value"
+								>
+									~{frontMatter.stats.words} words
+								</Copy>
+							</DateOrStatLargeDevice>
+							<DateOrStatLargeDevice
+								$gridArea="bottomRight"
+							>
+								<Copy
+									kind="article--meta-item--large-device--label"
+								>
+									Time
+								</Copy>
+								<Copy
+									kind="article--meta-item--large-device--value"
+								>
+									~{frontMatter.stats.minutes} minutes
+								</Copy>
+							</DateOrStatLargeDevice>
 						</DatesAndStatsLargeDevice>
+						<SharingOptions>
+							<Button
+								iconBefore="twitter"
+								text="Share on Twitter"
+								// surfaceStyle="transparent"
+								textHidden={true}
+								url="https://google.com"
+							/>
+							<Button
+								iconBefore="linkedin"
+								text="Share on LinkedIn"
+								// surfaceStyle="transparent"
+								textHidden={true}
+								url="https://google.com"
+							/>
+							<Button
+								iconBefore="link"
+								text="Copy this URL"
+								// surfaceStyle="transparent"
+								textHidden={true}
+								url="https://google.com"
+							/>
+						</SharingOptions>
+						<Copy
+							kind="copy-container--article-image-credit"
+							htmlContent={frontMatter.headImage.credit}
+						/>
 					</ArticleMetaContainer>
 				</ArticleTaglineAndMetaContainer>
 			</ArticleHeader>
+			<ArticleBody>
+				<Copy
+					kind="copy-container--standard"
+					htmlContent={mainContent.simpleBody}
+				/>
+			</ArticleBody>
 		</MainContentContainer>
 		{/* <CompressedTableOfContentsContainer>
 			<CompressedTableOfContentsCollapsibleContainer>
