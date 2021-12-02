@@ -5,7 +5,8 @@ import {
 } from '@jbkr/style-service';
 import { Copy } from '../../..';
 import { Button } from '../../..';
-import { Collapsible } from '../../..';
+import { Line } from '../../..';
+import { ArticleSections } from './ArticleSections';
 
 
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -81,7 +82,6 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 			}
 		}
 `;
-
 const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	return {
 		'aria-label': 'Page Complimentary Information',
@@ -110,10 +110,6 @@ const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 		'aria-label': 'Page Table of Contents',
 	};
 })``;
-
-
-
-
 const ArticleTableOfContentsFauxHeader = styled.span`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -133,7 +129,7 @@ const ArticleTableOfContentsFauxHeader = styled.span`
 			border-bottom: solid 0.125rem ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 31,
+				'level': 28,
 				'format': 'string',
 			})};
 		}
@@ -263,20 +259,6 @@ const ArticleBriefStatements = styled.ul`
 const ArticleBriefStatement = styled.li`
 	list-style-type: none;
 	padding: 1rem 0;
-	background-size: 25% calc(100% + .125rem);
-	background-position-y: -.125rem;
-	background-image: linear-gradient(
-		transparent calc(100% - .25rem),
-		${color({
-			'kind': 'Accent',
-			'tone': 'Finch',
-			'level': 1,
-			'format': 'string'
-		})} calc(100% - .125rem)
-	);
-	&:last-child {
-		background-image: none;
-	}
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -306,7 +288,7 @@ const ArticleMetaFauxHeader = styled.span`
 			border-bottom: solid 0.125rem ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 31,
+				'level': 28,
 				'format': 'string',
 			})};
 		}
@@ -379,6 +361,13 @@ const ArticleBody = styled.div`
 		}
 	}
 `;
+const SimpleBody = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: 75%;
+	}
+`;
 const Sample = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
@@ -423,14 +412,29 @@ export const Article = ({
 									briefStatement,
 									briefStatementIndex,
 								) =>
-									<ArticleBriefStatement
+									<div
 										key={briefStatement.key}
 									>
+									{
+										briefStatementIndex !== 0 &&
+										<Line
+											width={10}
+											height="s"
+											color={{
+												'kind': 'Neutral',
+												'tone': 'Finch',
+												'level': 28,
+												'format': 'string',
+											}}
+										/>
+									}
+									<ArticleBriefStatement>
 										<Copy
 											kind="article--tagline"
 											htmlContent={briefStatement.content}
 										/>
-									</ArticleBriefStatement>,
+									</ArticleBriefStatement>
+									</div>
 								)
 							}
 						</ArticleBriefStatements>
@@ -565,9 +569,17 @@ export const Article = ({
 			<ArticleBody>
 				{
 					mainContent.simpleBody &&
-					<Copy
-						kind="copy-container--standard"
-						htmlContent={mainContent.simpleBody}
+					<SimpleBody>
+						<Copy
+							kind="copy-container--standard"
+							htmlContent={mainContent.simpleBody}
+						/>
+					</SimpleBody>
+				}
+				{
+					mainContent.sections &&
+					<ArticleSections
+						sections={mainContent.sections}
 					/>
 				}
 			</ArticleBody>

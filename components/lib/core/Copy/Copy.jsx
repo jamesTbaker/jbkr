@@ -481,7 +481,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 27,
+			'level': 26,
 		},
 	},
 	'article--meta-item--not-large-device--date--primary': {
@@ -546,10 +546,10 @@ const propsSpecifications = {
 	},
 	'article--brief-statement': {
 		'tag': 'span',
-		'size': 's',
+		'size': '2xs',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
+		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
