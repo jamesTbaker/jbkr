@@ -188,7 +188,7 @@ const ArticleTitleConstrainer = styled.div`
 const ArticleTitle = styled.div`
 	h1 {
 		display: inline;
-		border-radius: .375rem;
+		border-radius: .375rem 0 .375rem 0;
 		background-image: linear-gradient(
 			to bottom,
 			${color({
@@ -204,10 +204,15 @@ const ArticleTitle = styled.div`
 				'format': 'string'
 			})} 100%
 		);
-	}
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
+		${deviceWidthQuery.only({ 'width': 's' })} {
+			line-height: 6rem;
+		}
+		${deviceWidthQuery.only({ 'width': 'm' })} {
+			line-height: 8rem;
+		}
+		${deviceWidthQuery.only({ 'width': 'l' })} {
+			line-height: 10rem;
+		}
 	}
 `;
 const ArticleTaglineAndMetaContainer = styled.div`

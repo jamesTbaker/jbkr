@@ -31,11 +31,11 @@ import {
 // const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
 
 // const result = await returnProfileScreenContent();
-const result = await returnLibLabScreenContent();
+// const result = await returnLibLabScreenContent();
 // const result = await returnArticleScreenContent({ 'slug': 'the-hub' });
-// const result = await returnArticleScreenContent({
-// 	'slug': 'i-could-reet-fancy-a-scrubber',
-// });
+const result = await returnArticleScreenContent({
+	'slug': 'scrote-ever-so-lovely',
+});
 
 // const result = await returnContactScreenContent();
 // const result = await returnMetaScreenContent();
