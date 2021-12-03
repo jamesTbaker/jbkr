@@ -9,7 +9,10 @@ import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
 
-const ReturnContainerHasColumnsOnLargeWidthDevices = (subsections) => {
+const ReturnContainerHasColumnsOnLargeWidthDevices = ({ subsections }) =>
+	subsections.length === 1 ? true : false;
+
+const ReturnContainerHasHorizontalGridOnLargeWidthDevices = ({ subsections }) => {
 	let hasColumns = false;
 	subsections.forEach((subsection) => {
 		if (
@@ -62,10 +65,36 @@ const SubsectionsContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-gap: 3rem;
-		grid-template-areas: "left right";
+		${
+			({ horizontalGrid }) => horizontalGrid && `
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				grid-gap: 3rem;
+				grid-template-areas: "left right";
+			`
+		}
+		${
+			({ columns }) => columns && `
+				column-count: 2;
+				column-gap: 3rem;
+				p {
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+			`
+		}
+	}
+`;
+const SubsectionMediaContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+	}
+`;
+const SubsectionTextContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
 `;
 const Sample = styled.div`
@@ -112,7 +141,12 @@ export const ArticleSection = ({ section }) => (
 		{
 			section.subsections &&
 			<SubsectionsContainer
-				columns={ReturnContainerHasColumnsOnLargeWidthDevices(section.subsections)}
+				columns={ReturnContainerHasColumnsOnLargeWidthDevices({
+					'subsections': section.subsections,
+				})}
+				horizontalGrid={ReturnContainerHasHorizontalGridOnLargeWidthDevices({
+					'subsections': section.subsections,
+				})}
 			>
 				{
 					section.subsections.map((subsection) =>
