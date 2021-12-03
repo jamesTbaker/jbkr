@@ -127,9 +127,9 @@ const ArticleTableOfContentsFauxHeader = styled.span`
 			margin-left: 1.5rem;
 			margin-bottom: 1.5rem;
 			border-bottom: solid 0.125rem ${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 28,
+				'kind': 'Accent',
+				'tone': 'Sunshine',
+				'level': 1,
 				'format': 'string',
 			})};
 		}
@@ -286,9 +286,9 @@ const ArticleMetaFauxHeader = styled.span`
 			margin-right: 1.5rem;
 			margin-bottom: 1.5rem;
 			border-bottom: solid 0.125rem ${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 28,
+				'kind': 'Accent',
+				'tone': 'Sunshine',
+				'level': 1,
 				'format': 'string',
 			})};
 		}
@@ -421,9 +421,9 @@ export const Article = ({
 											width={10}
 											height="s"
 											color={{
-												'kind': 'Neutral',
+												'kind': 'Accent',
 												'tone': 'Finch',
-												'level': 28,
+												'level': 2,
 												'format': 'string',
 											}}
 										/>
