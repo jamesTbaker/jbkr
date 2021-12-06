@@ -207,7 +207,7 @@ const returnFormattedDateString = ({
 	// return the container
 	return dateString;
 };
-const returnTableOfContentsContent = ({ headings }) => {
+/* const returnTableOfContentsContent = ({ headings }) => {
 	// construct markdown table of contents; it's easiest to do before
 	// transforming to html because markdown doesn't require us to close one
 	// tag, e.g., a nested </ol>, prior to creating another, e.g., a <li>
@@ -241,7 +241,7 @@ const returnTableOfContentsContent = ({ headings }) => {
 	});
 	// return the html version of the headings list
 	return htmlHeadingsList;
-};
+}; */
 const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	// set up container for the screen's rendered content and
 	// add properties to it as appropriate
@@ -479,7 +479,9 @@ const returnArticleIntermediate = ({
 	articleSectionsRaw.forEach((sectionObject) => {
 		// set up a new, single section container; add the
 		// corresponding properties from the raw section data
-		const sectionIntermediate = {};
+		const sectionIntermediate = {
+			'dataID': sectionObject._id,
+		};
 		if (sectionObject.SectionID) {
 			sectionIntermediate.sectionID = sectionObject.SectionID;
 		}
@@ -672,28 +674,57 @@ const returnArticleIntermediate = ({
 	}
 	if (
 		articleMainRaw.IntroVideos &&
-		articleMainRaw.IntroVideos[0]
+		articleMainRaw.IntroVideos[0] &&
+		articleMainRaw.IntroVideos[0].url &&
+		articleMainRaw.IntroVideos[0].alternativeText &&
+		articleMainRaw.IntroVideoPosters &&
+		articleMainRaw.IntroVideoPosters[0] &&
+		articleMainRaw.IntroVideoPosters[0].hash &&
+		articleMainRaw.IntroVideoPosters[0].ext &&
+		articleMainRaw.IntroVideoPosters[0].mime &&
+		articleMainRaw.IntroVideoPosters[0].alternativeText &&
+		articleMainRaw.IntroVideoPosters[0].width &&
+		articleMainRaw.IntroVideoPosters[0].height
 	) {
-		if (
-			articleMainRaw.IntroVideos[0].url &&
-			articleMainRaw.IntroVideos[0].alternativeText
-		) {
-			articleIntermedate.introVideo = {
-				'url': articleMainRaw.IntroVideos[0].url,
-				'alternativeText':
-					articleMainRaw.IntroVideos[0].alternativeText,
-				'type': returnMediaType({
-					'mime': articleMainRaw.IntroVideos[0].mime,
-				}),
-			};
-			if (articleMainRaw.IntroVideos[0].caption) {
-				articleIntermedate.introVideo.credit =
-					articleMainRaw.IntroVideos[0].caption;
-			}
+		articleIntermedate.introVideo = {
+			'url': articleMainRaw.IntroVideos[0].url,
+			'alternativeText':
+				articleMainRaw.IntroVideos[0].alternativeText,
+			'type': returnMediaType({
+				'mime': articleMainRaw.IntroVideos[0].mime,
+			}),
+		};
+		if (articleMainRaw.IntroVideos[0].caption) {
+			articleIntermedate.introVideo.credit =
+				articleMainRaw.IntroVideos[0].caption;
 		}
+		// transform the image properties
+		articleIntermedate.introVideoPoster = {
+			'url': returnImageURI({
+				'imagePublicID':
+					articleMainRaw.IntroVideoPosters[0].hash,
+				'imageExtension': articleMainRaw.IntroVideoPosters[0].ext,
+			}),
+			'alternativeText':
+				articleMainRaw.IntroVideoPosters[0].alternativeText,
+			'width': articleMainRaw.IntroVideoPosters[0].width,
+			'height': articleMainRaw.IntroVideoPosters[0].height,
+			'type': returnMediaType({
+				'mime': articleMainRaw.IntroVideoPosters[0].mime,
+			}),
+			'credit': articleMainRaw.IntroVideoPosters[0].caption,
+		};
 	}
 	if (sectionsIntermediate && sectionsIntermediate[0]) {
-		articleIntermedate.sections = sectionsIntermediate;
+		// articleIntermedate.sections = sectionsIntermediate;
+		articleIntermedate.sections = [];
+		articleMainRaw.Section.forEach((rawSection) => {
+			sectionsIntermediate.forEach((intermediateSection) => {
+				if (rawSection.ref === intermediateSection.dataID) {
+					articleIntermedate.sections.push(intermediateSection);
+				}
+			});
+		});
 	}
 	if (articleMainRaw.SimpleBody) {
 		articleIntermedate.simpleBody = articleMainRaw.SimpleBody;
@@ -850,11 +881,17 @@ const returnArticleRendered = ({ content }) => {
 				});
 		}
 	}
+	if (content.introVideoPoster) {
+		articleRendered.frontMatter.introVideoPoster =
+			content.introVideoPoster;
+	}
 	if (content.headingsWithMetadata) {
-		articleRendered.frontMatter.tableOfContents =
+		/* articleRendered.frontMatter.tableOfContents =
 			returnTableOfContentsContent({
 				'headings': content.headingsWithMetadata,
-			});
+			}); */
+		articleRendered.frontMatter.tableOfContents =
+			content.headingsWithMetadata;
 	}
 	if (content.publicationDate) {
 		articleRendered.frontMatter.publicationDate = content.publicationDate;

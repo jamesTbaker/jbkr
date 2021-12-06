@@ -431,6 +431,16 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					'$lookup':
 					{
 						'from': 'upload_file',
+						'localField': 'IntroVideoPoster',
+						'foreignField': '_id',
+						'as': 'IntroVideoPosters',
+					},
+				},
+				// look up the intro video poster image for this article
+				{
+					'$lookup':
+					{
+						'from': 'upload_file',
 						'localField': 'IntroVideo',
 						'foreignField': '_id',
 						'as': 'IntroVideos',
@@ -465,6 +475,13 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'IntroVideos.mime': 1,
 						'IntroVideos.alternativeText': 1,
 						'IntroVideos.caption': 1,
+						'IntroVideoPosters.alternativeText': 1,
+						'IntroVideoPosters.width': 1,
+						'IntroVideoPosters.height': 1,
+						'IntroVideoPosters.ext': 1,
+						'IntroVideoPosters.hash': 1,
+						'IntroVideoPosters.mime': 1,
+						'IntroVideoPosters.caption': 1,
 						'Section': 1,
 						'SimpleBody': 1,
 					},
@@ -513,7 +530,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 				// specify which fields to return
 				{
 					'$project': {
-						'_id': 0,
+						// '_id': 0,
 						'SectionID': 1,
 						'SectionTitle': 1,
 						'SectionPreface': 1,

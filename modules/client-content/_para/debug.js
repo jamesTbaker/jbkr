@@ -32,10 +32,10 @@ import {
 
 // const result = await returnProfileScreenContent();
 // const result = await returnLibLabScreenContent();
-// const result = await returnArticleScreenContent({ 'slug': 'the-hub' });
-const result = await returnArticleScreenContent({
-	'slug': 'scrote-ever-so-lovely',
-});
+const result = await returnArticleScreenContent({ 'slug': 'the-hub' });
+// const result = await returnArticleScreenContent({
+// 	'slug': 'scrote-ever-so-lovely',
+// });
 
 // const result = await returnContactScreenContent();
 // const result = await returnMetaScreenContent();
