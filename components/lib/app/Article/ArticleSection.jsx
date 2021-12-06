@@ -28,7 +28,7 @@ const ReturnContainerHasHorizontalGridOnLargeWidthDevices = ({ subsections }) =>
 	return hasColumns;
 };
 const ArticleSectionContainer = styled.div`
-	margin-top: 4rem;
+	margin-top: 1rem;
 	padding-top: 4rem;
 	border-top: solid .125rem ${color({
 		'kind': 'Accent',
@@ -111,6 +111,7 @@ const SubsectionsContainer = styled.div`
 			({ columns }) => columns && `
 				column-count: 2;
 				column-gap: 4rem;
+				margin-bottom: 4rem;
 				p {
 					break-inside: avoid;
 					page-break-inside: avoid;

@@ -16,6 +16,7 @@ const ArticleSubsectionContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		/* margin-bottom: 3rem; */
 		${
 			({ gridArea }) => gridArea && `grid-area: ${gridArea}`
 		}
@@ -61,8 +62,11 @@ const SubsectionMediaContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		margin-bottom: 3rem;
 		${
-			({ mediaGridArea }) => mediaGridArea && `grid-area: ${mediaGridArea}`
+			({ mediaGridArea }) => mediaGridArea && `
+				grid-area: ${mediaGridArea};
+			`
 		}
 	}
 `;
