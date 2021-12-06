@@ -6,6 +6,7 @@ import {
 import { Copy } from '../../..';
 import { Button } from '../../..';
 import { Line } from '../../..';
+import { ArticleIntroVideo } from './ArticleIntroVideo';
 import { ArticleSections } from './ArticleSections';
 
 
@@ -368,12 +369,6 @@ const SimpleBody = styled.div`
 		width: 75%;
 	}
 `;
-const Sample = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
 export const Article = ({
 	title,
 	frontMatter,
@@ -567,6 +562,13 @@ export const Article = ({
 				</ArticleTaglineAndMetaContainer>
 			</ArticleHeader>
 			<ArticleBody>
+				{
+					frontMatter.introVideo && frontMatter.introVideoPoster &&
+					<ArticleIntroVideo
+						video={frontMatter.introVideo}
+						image={frontMatter.introVideoPoster}
+					/>
+				}
 				{
 					mainContent.simpleBody &&
 					<SimpleBody>
