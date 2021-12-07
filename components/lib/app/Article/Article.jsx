@@ -577,8 +577,8 @@ export const Article = ({
 			</ArticleHeader> */}
 			<ArticleBody>
 				{
-					frontMatter.introVideo && frontMatter.introVideoPoster &&
-					{/* <ArticleIntroVideoContainer>
+					{/* frontMatter.introVideo && frontMatter.introVideoPoster &&
+					<ArticleIntroVideoContainer>
 						<MediaItem
 							type={frontMatter.introVideo.type}
 							specs={frontMatter.introVideo}

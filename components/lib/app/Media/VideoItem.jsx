@@ -23,8 +23,8 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 export const VideoItem = ( props ) => {
-
-	const videoRef = React.useRef(null);
+	return null;
+	/* const videoRef = React.useRef(null);
 	const playerRef = React.useRef(null);
 	const { options, onReady } = props;
 
@@ -62,5 +62,5 @@ export const VideoItem = ( props ) => {
 		<div data-vjs-player>
 			<video ref={videoRef} className="video-js vjs-big-play-centered" />
 		</div>
-	);
+	); */
 }
