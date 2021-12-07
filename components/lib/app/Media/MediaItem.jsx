@@ -28,13 +28,30 @@ export const MediaItem = ({
 			/>
 		}
 		{
-			['webm', 'mp4'].includes(type) &&
+			/* ['webm', 'mp4'].includes(type) &&
 			<VideoItem
 				video={{
 					'url': specs.url,
 					'alternativeText': specs.alternativeText,
+					'light': true,
 				}}
-			/>
+			/> */
+		}
+		{
+
+			/* ['webm', 'mp4'].includes(type) &&
+			<VideoItem
+				options={{
+					// 'autoplay': true,
+					'controls': true,
+					'responsive': true,
+					'fluid': true,
+					'sources': [{
+						'src': specs.url,
+						'type': 'video/mp4'
+					}]
+				}}
+			/> */
 		}
 		{
 			type === 'component' && specs === 'HubLogos' &&
@@ -49,8 +66,8 @@ export const MediaItem = ({
 			<HubColorPreview />
 		}
 		{
-			type === 'component' && specs === 'HubContacts' &&
-			<HubContacts />
+			/* type === 'component' && specs === 'HubContacts' &&
+			<HubContacts /> */
 		}
 	</MediaItemContainer>
 );

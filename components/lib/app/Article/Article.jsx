@@ -6,7 +6,7 @@ import {
 import { Copy } from '../../..';
 import { Button } from '../../..';
 import { Line } from '../../..';
-import { ArticleIntroVideo } from './ArticleIntroVideo';
+import { MediaItem } from '../../..';
 import { ArticleSections } from './ArticleSections';
 
 
@@ -362,6 +362,20 @@ const ArticleBody = styled.div`
 		}
 	}
 `;
+const ArticleIntroVideoContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		padding: 4rem 0 3rem;
+		border-top: solid .125rem ${color({
+			'kind': 'Accent',
+			'tone': 'Sunshine',
+			'level': 1,
+			'format': 'string',
+		})};
+	}
+`;
+
 const SimpleBody = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
@@ -376,7 +390,7 @@ export const Article = ({
 }) => (
 	<ArticleContainer>
 		<MainContentContainer>
-			<ArticleHeader
+			{/* <ArticleHeader
 				$backgroundImage={frontMatter.headImage.url}
 			>
 				<ArticleTitleConstrainer>
@@ -560,14 +574,18 @@ export const Article = ({
 						/>
 					</ArticleMetaContainer>
 				</ArticleTaglineAndMetaContainer>
-			</ArticleHeader>
+			</ArticleHeader> */}
 			<ArticleBody>
 				{
 					frontMatter.introVideo && frontMatter.introVideoPoster &&
-					<ArticleIntroVideo
-						video={frontMatter.introVideo}
-						image={frontMatter.introVideoPoster}
-					/>
+					{/* <ArticleIntroVideoContainer>
+						<MediaItem
+							type={frontMatter.introVideo.type}
+							specs={frontMatter.introVideo}
+							// image={frontMatter.introVideoPoster}
+							// htmlID={`media--${mediaItem.hash}`}
+						/>
+					</ArticleIntroVideoContainer> */}
 				}
 				{
 					mainContent.simpleBody &&
@@ -581,7 +599,7 @@ export const Article = ({
 				{
 					mainContent.sections &&
 					<ArticleSections
-						sections={mainContent.sections}
+						sections={[mainContent.sections[5]]}
 					/>
 				}
 			</ArticleBody>

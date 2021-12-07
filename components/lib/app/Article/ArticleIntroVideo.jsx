@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../../..';
 import { MediaItem } from '../../..';
@@ -20,61 +20,18 @@ const ArticleIntroVideoContainer = styled.div`
 		})};
 	}
 `;
-const VideoPreview = styled.button.attrs(({
-	$clickHandler,
-}) => {
-	return {
-		'onClick': $clickHandler,
-	};
-})`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 100%;
-		height: 40rem;
-		background-size: cover;
-		border: none;
-		border-radius: .375rem;
-		${
-			({ $image }) => `
-				background-image: url('${$image.url}');
-			`
-		}
-	}
-`;
 const Sample = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
 `;
-
-export const ArticleIntroVideo = ({ video, image }) => {
-	const [
-		videoVisible,
-		setVideoVisible,
-	] = useState(false);
-	return (
-		<ArticleIntroVideoContainer
-			videoVisible={videoVisible}
-		>
-			{
-				!videoVisible &&
-
-				<VideoPreview
-					$image={image}
-					$clickHandler={setVideoVisible}
-				/>
-			}
-			{
-				videoVisible &&
-
-				<MediaItem
-					type={video.type}
-					specs={video}
-					// htmlID={`media--${mediaItem.hash}`}
-				/>
-			}
-		</ArticleIntroVideoContainer>
-	);
-};
+export const ArticleIntroVideo = ({ video, image }) => (
+	<ArticleIntroVideoContainer>
+		<MediaItem
+			type={video.type}
+			specs={video}
+			// htmlID={`media--${mediaItem.hash}`}
+		/>
+	</ArticleIntroVideoContainer>
+);

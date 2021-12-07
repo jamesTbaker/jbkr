@@ -82,61 +82,65 @@ const SubsectionTextContainer = styled.div`
 
 export const ArticleSubsection = ({ subsection }) => {
 	const subsectionGrid = ReturnMediaAndTextGridDataOnLargeWidthDevices({ subsection });
-	return (
-		<ArticleSubsectionContainer
-			gridArea={subsection.subsectionGravity}
-		>
-			{
-				subsection.subsectionTitle &&
-				<div
-					dangerouslySetInnerHTML={{'__html': subsection.subsectionTitle}}
-				/>
-			}
-			<SubsectionBodyContainer
-				subsectionGrid={subsectionGrid}
+	if (subsection.subsectionID === 'branding--video-and-photography') {
+		return (
+			<ArticleSubsectionContainer
+				gridArea={subsection.subsectionGravity}
 			>
-					{
-						(subsection.subsectionMediaComponents ||
-						subsection.subsectionMedia) &&
-						<SubsectionMediaContainer
-							mediaGridArea={subsectionGrid.mediaGridArea}
-						>
-							{
-								subsection.subsectionMediaComponents &&
-								subsection.subsectionMediaComponents[0] &&
-								subsection.subsectionMediaComponents.map((mediaComponentItem) =>
-									<MediaItem
-										key={`media-component--${mediaComponentItem}`}
-										type="component"
-										specs={mediaComponentItem}
-										htmlID={`media--${mediaComponentItem}`}
-									/>,
-								)
-							}
-							{
-								subsection.subsectionMedia && subsection.subsectionMedia[0] &&
-								subsection.subsectionMedia.map((mediaItem) =>
-									<MediaItem
-										key={mediaItem.hash}
-										type={mediaItem.type}
-										specs={mediaItem}
-										htmlID={`media--${mediaItem.hash}`}
-									/>,
-								)
-							}
-						</SubsectionMediaContainer>
-					}
-					{
-						subsection.subsectionText &&
-						<SubsectionTextContainer
-							textGridArea={subsectionGrid.textGridArea}
-						>
-								<div
-									dangerouslySetInnerHTML={{'__html': subsection.subsectionText}}
-								/>
-						</SubsectionTextContainer>
-					}
-			</SubsectionBodyContainer>
-		</ArticleSubsectionContainer>
-	)
+				{
+					subsection.subsectionTitle &&
+					<div
+						dangerouslySetInnerHTML={{'__html': subsection.subsectionTitle}}
+					/>
+				}
+				<SubsectionBodyContainer
+					subsectionGrid={subsectionGrid}
+				>
+						{
+							(subsection.subsectionMediaComponents ||
+							subsection.subsectionMedia) &&
+							<SubsectionMediaContainer
+								mediaGridArea={subsectionGrid.mediaGridArea}
+							>
+								{
+									subsection.subsectionMediaComponents &&
+									subsection.subsectionMediaComponents[0] &&
+									subsection.subsectionMediaComponents.map((mediaComponentItem) =>
+										<MediaItem
+											key={`media-component--${mediaComponentItem}`}
+											type="component"
+											specs={mediaComponentItem}
+											htmlID={`media--${mediaComponentItem}`}
+										/>,
+									)
+								}
+								{
+									subsection.subsectionMedia && subsection.subsectionMedia[0] &&
+									subsection.subsectionMedia.map((mediaItem) =>
+										<MediaItem
+											key={mediaItem.hash}
+											type={mediaItem.type}
+											specs={mediaItem}
+											htmlID={`media--${mediaItem.hash}`}
+										/>,
+									)
+								}
+							</SubsectionMediaContainer>
+						}
+						{
+							subsection.subsectionText &&
+							<SubsectionTextContainer
+								textGridArea={subsectionGrid.textGridArea}
+							>
+									<div
+										dangerouslySetInnerHTML={{'__html': subsection.subsectionText}}
+									/>
+							</SubsectionTextContainer>
+						}
+				</SubsectionBodyContainer>
+			</ArticleSubsectionContainer>
+		);
+	} else {
+		return null;
+	}
 };
