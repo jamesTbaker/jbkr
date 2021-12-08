@@ -390,7 +390,7 @@ export const Article = ({
 }) => (
 	<ArticleContainer>
 		<MainContentContainer>
-			{/* <ArticleHeader
+			<ArticleHeader
 				$backgroundImage={frontMatter.headImage.url}
 			>
 				<ArticleTitleConstrainer>
@@ -574,7 +574,7 @@ export const Article = ({
 						/>
 					</ArticleMetaContainer>
 				</ArticleTaglineAndMetaContainer>
-			</ArticleHeader> */}
+			</ArticleHeader>
 			<ArticleBody>
 				{
 					frontMatter.introVideo && frontMatter.introVideoPoster &&
@@ -600,7 +600,7 @@ export const Article = ({
 				{
 					mainContent.sections &&
 					<ArticleSections
-						sections={[mainContent.sections[5]]}
+						sections={mainContent.sections}
 					/>
 				}
 			</ArticleBody>

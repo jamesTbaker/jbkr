@@ -82,86 +82,82 @@ const SubsectionTextContainer = styled.div`
 
 export const ArticleSubsection = ({ subsection }) => {
 	const subsectionGrid = ReturnMediaAndTextGridDataOnLargeWidthDevices({ subsection });
-	if (subsection.subsectionID === 'branding--video-and-photography') {
-		return (
-			<ArticleSubsectionContainer
-				gridArea={subsection.subsectionGravity}
+	return (
+		<ArticleSubsectionContainer
+			gridArea={subsection.subsectionGravity}
+		>
+			{
+				subsection.subsectionTitle &&
+				<div
+					dangerouslySetInnerHTML={{'__html': subsection.subsectionTitle}}
+				/>
+			}
+			<SubsectionBodyContainer
+				subsectionGrid={subsectionGrid}
 			>
-				{
-					subsection.subsectionTitle &&
-					<div
-						dangerouslySetInnerHTML={{'__html': subsection.subsectionTitle}}
-					/>
-				}
-				<SubsectionBodyContainer
-					subsectionGrid={subsectionGrid}
-				>
-						{
-							(subsection.subsectionMediaComponents ||
-							subsection.subsectionMedia) &&
-							<SubsectionMediaContainer
-								mediaGridArea={subsectionGrid.mediaGridArea}
-							>
-								{
-									subsection.subsectionMediaComponents &&
-									subsection.subsectionMediaComponents[0] &&
-									subsection.subsectionMediaComponents.map((mediaComponentItem) =>
-										<MediaItem
-											key={`media-component--${mediaComponentItem}`}
-											category="component"
-											specs={mediaComponentItem}
-										/>,
-									)
-								}
-								{
-									subsection.subsectionMedia && subsection.subsectionMedia[0] &&
-									subsection.subsectionMedia
-										.map((mediaItem) => {
-											if (
-												['webp', 'png', 'jpeg', 'gif']
-													.includes(mediaItem.type)
-											) {
-												return (
-													<MediaItem
-														key={mediaItem.hash}
-														category="image"
-														specs={mediaItem}
-													/>
-												);
-											}
-											if (
-												['webm', 'mp4']
-													.includes(mediaItem.type)
-											) {
-												return (
-													<MediaItem
-														key={mediaItem.hash}
-														category="video"
-														specs={{
-															'video': mediaItem,
-														}}
-													/>
-												);
-											}
+					{
+						(subsection.subsectionMediaComponents ||
+						subsection.subsectionMedia) &&
+						<SubsectionMediaContainer
+							mediaGridArea={subsectionGrid.mediaGridArea}
+						>
+							{
+								subsection.subsectionMediaComponents &&
+								subsection.subsectionMediaComponents[0] &&
+								subsection.subsectionMediaComponents.map((mediaComponentItem) =>
+									<MediaItem
+										key={`media-component--${mediaComponentItem}`}
+										category="component"
+										specs={mediaComponentItem}
+									/>,
+								)
+							}
+							{
+								subsection.subsectionMedia && subsection.subsectionMedia[0] &&
+								subsection.subsectionMedia
+									.map((mediaItem) => {
+										if (
+											['webp', 'png', 'jpeg', 'gif']
+												.includes(mediaItem.type)
+										) {
+											return (
+												<MediaItem
+													key={mediaItem.hash}
+													category="image"
+													specs={mediaItem}
+												/>
+											);
 										}
-									)
-								}
-							</SubsectionMediaContainer>
-						}
-						{
-							subsection.subsectionText &&
-							<SubsectionTextContainer
-								textGridArea={subsectionGrid.textGridArea}
-							>
-									<div
-										dangerouslySetInnerHTML={{'__html': subsection.subsectionText}}
-									/>
-							</SubsectionTextContainer>
-						}
-				</SubsectionBodyContainer>
-			</ArticleSubsectionContainer>
-		);
-	} else {
-		return null;
-	}
+										if (
+											['webm', 'mp4']
+												.includes(mediaItem.type)
+										) {
+											return (
+												<MediaItem
+													key={mediaItem.hash}
+													category="video"
+													specs={{
+														'video': mediaItem,
+													}}
+												/>
+											);
+										}
+									}
+								)
+							}
+						</SubsectionMediaContainer>
+					}
+					{
+						subsection.subsectionText &&
+						<SubsectionTextContainer
+							textGridArea={subsectionGrid.textGridArea}
+						>
+								<div
+									dangerouslySetInnerHTML={{'__html': subsection.subsectionText}}
+								/>
+						</SubsectionTextContainer>
+					}
+			</SubsectionBodyContainer>
+		</ArticleSubsectionContainer>
+	);
 };

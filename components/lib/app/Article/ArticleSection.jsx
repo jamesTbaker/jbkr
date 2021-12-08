@@ -148,7 +148,7 @@ export const ArticleSection = ({ section }) => (
 			/>
 		}
 		{
-			/* section.sectionBriefStatements && section.sectionBriefStatements[0] &&
+			section.sectionBriefStatements && section.sectionBriefStatements[0] &&
 
 			<SectionBriefStatementsContainer>
 				{
@@ -165,13 +165,13 @@ export const ArticleSection = ({ section }) => (
 						</SectionBriefStatementContainer>,
 					)
 				}
-			</SectionBriefStatementsContainer> */
+			</SectionBriefStatementsContainer>
 		}
 		{
-			/* section.sectionPreface &&
+			section.sectionPreface &&
 			<div
 				dangerouslySetInnerHTML={{'__html': section.sectionPreface}}
-			/> */
+			/>
 		}
 		{
 			section.subsections &&

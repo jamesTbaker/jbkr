@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
+	deviceWidthQuery, color, motion, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
@@ -13,44 +13,113 @@ import { HubContacts } from '../Hub/HubContacts';
 
 const MediaItemContainer = styled.div``;
 const VideoItemContainer = styled.div`
-	.video-js.vjs-big-play-button:focus,
-	.video-js:hover .vjs-big-play-button {
-		background-color: transparent;
-		background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' fill='%23fcd'%3E%3Cpath fill-rule='evenodd' d='M44 88C19.738 88 0 68.262 0 44S19.738 0 44 0s44 19.738 44 44-19.738 44-44 44zm0-85C21.393 3 3 21.393 3 44c0 22.608 18.393 41 41 41s41-18.392 41-41C85 21.393 66.607 3 44 3zm16.063 43.898L39.629 60.741a3.496 3.496 0 01-3.604.194 3.492 3.492 0 01-1.859-3.092V30.158c0-1.299.712-2.483 1.859-3.092a3.487 3.487 0 013.604.194l20.433 13.843a3.497 3.497 0 01.001 5.795zm-1.683-3.311L37.946 29.744a.49.49 0 00-.276-.09.51.51 0 00-.239.062.483.483 0 00-.265.442v27.685c0 .262.166.389.265.442.1.053.299.118.515-.028L58.38 44.414A.489.489 0 0058.6 44a.49.49 0 00-.22-.413z'/%3E%3C/svg%3E")
+	border-radius: .375rem;
+	overflow: hidden;
+	.video-js {
+		color: ${color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 3,
+			'format': 'string'
+		})};
 	}
 	.video-js .vjs-big-play-button {
-		width: 88px;
-		height: 88px;
-		background: none;
-		background-repeat: no-repeat;
-		background-position: 50%;
-		background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' fill='%23ff6699'%3E%3Cpath fill-rule='evenodd' d='M44 88C19.738 88 0 68.262 0 44S19.738 0 44 0s44 19.738 44 44-19.738 44-44 44zm0-85C21.393 3 3 21.393 3 44c0 22.608 18.393 41 41 41s41-18.392 41-41C85 21.393 66.607 3 44 3zm16.063 43.898L39.629 60.741a3.496 3.496 0 01-3.604.194 3.492 3.492 0 01-1.859-3.092V30.158c0-1.299.712-2.483 1.859-3.092a3.487 3.487 0 013.604.194l20.433 13.843a3.497 3.497 0 01.001 5.795zm-1.683-3.311L37.946 29.744a.49.49 0 00-.276-.09.51.51 0 00-.239.062.483.483 0 00-.265.442v27.685c0 .262.166.389.265.442.1.053.299.118.515-.028L58.38 44.414A.489.489 0 0058.6 44a.49.49 0 00-.22-.413z'/%3E%3C/svg%3E");
-		border: none;
 		top: 50%;
 		left: 50%;
-		margin-top: -44px;
-		margin-left: -44px;
-		color: purple
+		width: 10rem;
+		height: 8rem;
+		font-size: 5rem;
+		margin-top: -4rem;
+		margin-left: -5rem;
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 34,
+			'alpha': .9,
+			'format': 'string'
+		})};
+		border-radius: .375rem;
+		border: .25rem solid ${color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 3,
+			'format': 'string'
+		})};
+		transition: color 250ms ease, border-color 250ms ease, background-color 250ms ease;
 	}
-	.video-js .vjs-big-play-button .vjs-icon-placeholder {
-		display: none
+	.video-js.vjs-big-play-button:focus,
+	.video-js:hover .vjs-big-play-button {
+		color: ${color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 2,
+			'format': 'string'
+		})};
+		border-color: ${color({
+			'kind': 'Brand',
+			'tone': 'Peony',
+			'level': 2,
+			'format': 'string'
+		})};
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 37,
+			'alpha': .9,
+			'format': 'string'
+		})};
 	}
-	.video-js .vjs-button>.vjs-icon-placeholder:before {
-		line-height: 1.55
+	.video-js .vjs-control-bar {
+		height: 5rem;
+		padding: .5rem;
+		background: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 39,
+			'alpha': .9,
+			'format': 'string'
+		})};
 	}
-	.video-js .vjs-control:not(.vjs-disabled):not(.vjs-time-control):hover {
-		/* color: ${color({
+	.video-js .vjs-remaining-time {
+		color: ${color({
 			'kind': 'Neutral',
 			'tone': 'Base',
 			'level': 1,
 			'format': 'string'
 		})};
-		text-shadow: ${color({
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
+	}
+	.video-js .vjs-control {
+		height: 4rem;
+	}
+	.video-js .vjs-control:focus:before,
+	.video-js .vjs-control:hover:before,
+	.video-js .vjs-control:focus {
+		text-shadow: none;
+		outline: none;
+		padding: 0 .5rem;
+		margin: 0 .25rem;
+		border-radius: .25rem;
+		box-shadow: 0 0 0 .25rem ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 41,
 			'format': 'string'
-		})} 1px 0 10px; */
+		})}, 0 0 0 .5rem ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+			})};
+	}
+	.video-js .vjs-slider:focus {
+		text-shadow: none;
+		box-shadow: none;
+	}
+
+	/* .video-js .vjs-button>.vjs-icon-placeholder:before {
+		line-height: 1.55
+	}
+	.video-js .vjs-control:not(.vjs-disabled):not(.vjs-time-control):hover {
 		color: ${color({
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -195,7 +264,7 @@ const VideoItemContainer = styled.div`
 	.video-js .vjs-load-progress div,
 	.video-js .vjs-play-progress {
 		border-radius: .2em
-	}
+	} */
 `;
 export const MediaItem = ({
 	category,
@@ -244,8 +313,8 @@ export const MediaItem = ({
 			<HubColorPreview />
 		}
 		{
-			/* category === 'component' && specs === 'HubContacts' &&
-			<HubContacts /> */
+			category === 'component' && specs === 'HubContacts' &&
+			<HubContacts />
 		}
 	</MediaItemContainer>
 );

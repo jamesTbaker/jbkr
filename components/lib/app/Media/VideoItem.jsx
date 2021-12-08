@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 
-
-
 export const VideoItem = ({ options, onReady }) => {
 	// generate two refs
 	const videoRef = React.useRef(null);
