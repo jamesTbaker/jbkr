@@ -108,21 +108,42 @@ export const ArticleSubsection = ({ subsection }) => {
 									subsection.subsectionMediaComponents.map((mediaComponentItem) =>
 										<MediaItem
 											key={`media-component--${mediaComponentItem}`}
-											type="component"
+											category="component"
 											specs={mediaComponentItem}
-											htmlID={`media--${mediaComponentItem}`}
 										/>,
 									)
 								}
 								{
 									subsection.subsectionMedia && subsection.subsectionMedia[0] &&
-									subsection.subsectionMedia.map((mediaItem) =>
-										<MediaItem
-											key={mediaItem.hash}
-											type={mediaItem.type}
-											specs={mediaItem}
-											htmlID={`media--${mediaItem.hash}`}
-										/>,
+									subsection.subsectionMedia
+										.map((mediaItem) => {
+											if (
+												['webp', 'png', 'jpeg', 'gif']
+													.includes(mediaItem.type)
+											) {
+												return (
+													<MediaItem
+														key={mediaItem.hash}
+														category="image"
+														specs={mediaItem}
+													/>
+												);
+											}
+											if (
+												['webm', 'mp4']
+													.includes(mediaItem.type)
+											) {
+												return (
+													<MediaItem
+														key={mediaItem.hash}
+														category="video"
+														specs={{
+															'video': mediaItem,
+														}}
+													/>
+												);
+											}
+										}
 									)
 								}
 							</SubsectionMediaContainer>

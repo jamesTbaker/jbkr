@@ -577,15 +577,16 @@ export const Article = ({
 			</ArticleHeader> */}
 			<ArticleBody>
 				{
-					{/* frontMatter.introVideo && frontMatter.introVideoPoster &&
+					frontMatter.introVideo && frontMatter.introVideoPoster &&
 					<ArticleIntroVideoContainer>
 						<MediaItem
-							type={frontMatter.introVideo.type}
-							specs={frontMatter.introVideo}
-							// image={frontMatter.introVideoPoster}
-							// htmlID={`media--${mediaItem.hash}`}
+							category="video"
+							specs={{
+								'video': frontMatter.introVideo,
+								'poster': frontMatter.introVideoPoster,
+							}}
 						/>
-					</ArticleIntroVideoContainer> */}
+					</ArticleIntroVideoContainer>
 				}
 				{
 					mainContent.simpleBody &&

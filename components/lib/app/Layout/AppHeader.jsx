@@ -592,11 +592,11 @@ export const AppHeader = ({ content }) => {
 	};
 	const handleInternalLinkClick = (e) => {
 		e.preventDefault();
-		/* setSmallNavVisible(!smallNavVisible);
+		setSmallNavVisible(!smallNavVisible);
 		const urlWithDomain = e.target.closest('a').href.split('//')[1];
 		const positionFirstSlash = urlWithDomain.indexOf('/');
 		const urlWithoutDomain = urlWithDomain.slice(positionFirstSlash);
-		router.push(urlWithoutDomain); */
+		router.push(urlWithoutDomain);
 	};
 	const handleExternalLinkClick = (e) => {
 		e.preventDefault();
