@@ -5,7 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { VideoItem } from './VideoItem';
-import { HubLogotype } from '../Hub/HubLogotype';
+import { HubLogos } from '../Hub/HubLogos';
 import { HubColorPreview } from '../Hub/HubColorPreview';
 import { HubPrivate } from '../Hub/HubPrivate';
 import { HubContacts } from '../Hub/HubContacts';
@@ -115,156 +115,6 @@ const VideoItemContainer = styled.div`
 		text-shadow: none;
 		box-shadow: none;
 	}
-
-	/* .video-js .vjs-button>.vjs-icon-placeholder:before {
-		line-height: 1.55
-	}
-	.video-js .vjs-control:not(.vjs-disabled):not(.vjs-time-control):hover {
-		color: ${color({
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-			'format': 'string'
-		})};
-	}
-	.video-js .vjs-control-bar {
-		height: 6rem;
-		background: ${color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 34,
-			'format': 'string'
-		})};
-		padding: 1rem;
-	}
-	.video-js .vjs-play-control {
-		font-size: .8em
-	}
-	.video-js .vjs-play-control .vjs-icon-placeholder:before {
-		background-color: ${color({
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-			'format': 'string'
-		})};
-		height: 1.5em;
-		width: 1.5em;
-		margin-top: .2em;
-		border-radius: 1em;
-		color: ${color({
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-			'format': 'string'
-		})}
-	}
-	.video-js .vjs-play-control:hover .vjs-icon-placeholder:before {
-		background-color: ${color({
-			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
-			'format': 'string'
-		})};
-		color: ${color({
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-			'format': 'string'
-		})}
-	}
-	.video-js .vjs-mute-control {
-		display: none
-	}
-	.video-js .vjs-volume-panel {
-		margin-left: .5em;
-		margin-right: .5em;
-		padding-top: .3em
-	}
-	.video-js .vjs-volume-bar.vjs-slider-horizontal,
-	.video-js .vjs-volume-panel,
-	.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active,
-	.video-js .vjs-volume-panel.vjs-volume-panel-horizontal:hover,
-	.video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,
-	.video-js .vjs-volume-panel:hover,
-	.video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal {
-		width: 3em
-	}
-	.video-js .vjs-volume-level:before {
-		font-size: 1em
-	}
-	.video-js .vjs-volume-panel .vjs-volume-control {
-		opacity: 1;
-		width: 100%;
-		height: 100%
-	}
-	.video-js .vjs-volume-bar {
-		background-color: transparent;
-		margin: 0
-	}
-	.video-js .vjs-slider-horizontal .vjs-volume-level {
-		height: 100%
-	}
-	.video-js .vjs-volume-bar.vjs-slider-horizontal {
-		margin-top: 0;
-		margin-bottom: 0;
-		height: 100%
-	}
-	.video-js .vjs-volume-bar:before {
-		content: "";
-		z-index: 0;
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: 0;
-		border-left: 3em solid transparent;
-		border-bottom: 2em solid ${color({
-			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
-			'format': 'string'
-		})};
-		border-right: 0 solid transparent;
-		border-top: 0 solid transparent
-	}
-	.video-js .vjs-volume-level {
-		overflow: hidden;
-		background-color: transparent
-	}
-	.video-js .vjs-volume-level:before {
-		content: "";
-		z-index: 1;
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: 0;
-		border-left: 3em solid transparent;
-		border-bottom: 2em solid ${color({
-			'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3,
-			'format': 'string'
-		})};
-		border-right: 0 solid transparent;
-		border-top: 0 solid transparent
-	}
-	.video-js .vjs-progress-control:hover .vjs-progress-holder {
-		font-size: 1em
-	}
-	.video-js .vjs-play-progress:before {
-		display: none
-	}
-	.video-js .vjs-progress-holder {
-		border-radius: .2em;
-		height: .5em;
-		margin: 0
-	}
-	.video-js .vjs-load-progress,
-	.video-js .vjs-load-progress div,
-	.video-js .vjs-play-progress {
-		border-radius: .2em
-	} */
 `;
 export const MediaItem = ({
 	category,
@@ -302,7 +152,7 @@ export const MediaItem = ({
 		}
 		{
 			category === 'component' && specs === 'HubLogos' &&
-			<HubLogotype />
+			<HubLogos />
 		}
 		{
 			category === 'component' && specs === 'HubPrivate' &&
