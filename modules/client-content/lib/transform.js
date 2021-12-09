@@ -121,34 +121,83 @@ const returnContentStats = ({ content }) => {
 			`${estimatedMinutes} minutes to read`,
 	};
 };
+const returnTreeFromList = ({ list }) => {
+	var map = {}, node, roots = [], i;
+	for (i = 0; i < list.length; i += 1) {
+		// initialize the map
+		map[list[i].ID] = i;
+		// initialize the children
+		list[i].children = [];
+	}
+	for (i = 0; i < list.length; i += 1) {
+		node = list[i];
+		if (node.parentID !== null) {
+			// if you have dangling branches,
+			// check that map[node.parentId] exists
+			list[map[node.parentID]].children.push(node);
+		} else {
+			roots.push(node);
+		}
+	}
+	return roots;
+};
 const returnHeadingsWithMetadata = ({ content }) => {
 	// define regex for identifying headings
 	const headingRegex = /^###*\s/;
 	// get an array of the content lines that are headings
-	const headingLines = content.split('\n')
+	const headingsStageOne = content.split('\n')
 		.filter((line) => {
 			return line.match(headingRegex);
 		});
-	// set up a container for the heading objects to be generated
-	// from the heading lines
-	const headingObjects = [];
+
+	// set up a container for an intermediate set of heading objects
+	// to be generated from the heading lines
+	const headingsStageTwo = [];
+	// set up a reference to
 	// for each heading line
-	headingLines.forEach((line) => {
+	headingsStageOne.forEach((line) => {
 		// get the position of the first space in this heading line,
 		// which also corresponds to the semantic level of this header
 		const separatorPositionAndHeadingLevel = line.indexOf(' ');
 		// get the semantic content of this header
 		const lineContent = line.slice(separatorPositionAndHeadingLevel + 1);
 		// add to container an object specifying the header's
-		// semantic level, semantic content, and slug
-		headingObjects.push({
-			'level': separatorPositionAndHeadingLevel,
+		// semantic level, semantic content, and slug / id
+		headingsStageTwo.push({
+			'level': separatorPositionAndHeadingLevel - 1,
 			'content': lineContent,
-			'slug': GithubSlugger.slug(lineContent),
+			'ID': GithubSlugger.slug(lineContent),
 		});
 	});
-	// return the container of heading objects
-	return headingObjects;
+
+	headingsStageTwo.reverse();
+	const headingsStageThree = [];
+	headingsStageTwo.forEach((headingStageTwo, headingStageTwoIndex) => {
+		let parentID = null;
+		const remainingHeadings = headingsStageTwo.filter(
+			(remainingHeading, remainingHeadingIndex) =>
+				remainingHeadingIndex > headingStageTwoIndex,
+		);
+		remainingHeadings
+			.forEach((remainingHeading, remainingHeadingIndex) => {
+				if (
+					parentID === null &&
+					remainingHeading.level < headingStageTwo.level
+				) {
+					parentID = remainingHeading.ID;
+				}
+			});
+		headingsStageThree.push({
+			'ID': headingStageTwo.ID,
+			'content': headingStageTwo.content,
+			parentID,
+		});
+	});
+	headingsStageThree.reverse();
+	const headingsStageFour = returnTreeFromList({ 'list': headingsStageThree });
+
+	// return the tree
+	return headingsStageFour;
 };
 const returnExtractedBriefStatements = ({ briefStatementsRaw }) => {
 	// set up container for the statements we'll generate
