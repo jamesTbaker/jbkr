@@ -114,11 +114,27 @@ const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 		'aria-label': 'Page Table of Contents',
 	};
 })``;
+const CompressedTableOfContentsListItemContent = ({ item }) => {
+	let children = null;
+	if (item.children && item.children.length) {
+		children = (
+			<ul>
+				{
+					item.children.map(i => (
+						<CompressedTableOfContentsListItemContent item={i} key={i.ID} />
+					))
+				}
+			</ul>
+		);
+	}
 
-
-// ==============================
-
-
+	return (
+	<li>
+	{item.content}
+	{children}
+	</li>
+	);
+}
 const CompressedTableOfContentsListContainer = ({
 	contentVisible,
 	clickHandler,
@@ -128,43 +144,10 @@ const CompressedTableOfContentsListContainer = ({
 		contentVisible={contentVisible}
 	>
 		{
-			Object.keys(sectionProperties).map((sectionIndex) => {
-				const thisItemLevel = sectionProperties[sectionIndex].level;
-				const previousItemLevel = sectionProperties[sectionIndex - 1] &&
-					sectionProperties[sectionIndex - 1].level ?
-					sectionProperties[sectionIndex - 1].level : null;
-				let prefix;
-				let suffix;
-				if ((thisItemLevel - previousItemLevel) > 0) {
-					prefix = <ol>;
-				}
-				if ((previousItemLevel - thisItemLevel) === 1) {
-					format = 'endOneChild';
-				}
-				if ((previousItemLevel - thisItemLevel) === 2) {
-					format = 'endTwoChildren';
-				}
-				if ((previousItemLevel - thisItemLevel) === 3) {
-					format = 'endThreeChildren';
-				}
-				if ((previousItemLevel - thisItemLevel) === 4) {
-					format = 'endFourChildren';
-				}
-				if (condition) {
-
-				}
-				return (<CompressedTableOfContentsListItem
-					key={`compressed--${sectionProperties[sectionIndex].slug}`}
-				>
-						<CopyLink
-							url={`#${sectionProperties[sectionIndex].slug}`}
-							inline={false}
-							clickHandler={clickHandler}
-						>
-							{sectionProperties[sectionIndex].content}
-						</CopyLink>
-				</CompressedTableOfContentsListItem>);
-			})
+			sectionProperties.map(i => (
+					<CompressedTableOfContentsListItemContent item={i} key={i.ID} />
+				)
+			)
 		}
 	</CompressedTableOfContentsList>
 );
