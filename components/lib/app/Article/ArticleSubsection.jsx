@@ -62,12 +62,18 @@ const SubsectionMediaContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin-bottom: 3rem;
 		${
 			({ mediaGridArea }) => mediaGridArea && `
 				grid-area: ${mediaGridArea};
 			`
 		}
+	}
+`;
+const SubsectionMediaItemContainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		margin-bottom: 3rem;
 	}
 `;
 const SubsectionTextContainer = styled.div`
@@ -105,11 +111,13 @@ export const ArticleSubsection = ({ subsection }) => {
 								subsection.subsectionMediaComponents &&
 								subsection.subsectionMediaComponents[0] &&
 								subsection.subsectionMediaComponents.map((mediaComponentItem) =>
-									<MediaItem
-										key={`media-component--${mediaComponentItem}`}
-										category="component"
-										specs={mediaComponentItem}
-									/>,
+									<SubsectionMediaItemContainer>
+										<MediaItem
+											key={`media-component--${mediaComponentItem}`}
+											category="component"
+											specs={mediaComponentItem}
+										/>
+									</SubsectionMediaItemContainer>,
 								)
 							}
 							{
@@ -121,11 +129,13 @@ export const ArticleSubsection = ({ subsection }) => {
 												.includes(mediaItem.type)
 										) {
 											return (
-												<MediaItem
-													key={mediaItem.hash}
-													category="image"
-													specs={mediaItem}
-												/>
+												<SubsectionMediaItemContainer>
+													<MediaItem
+														key={mediaItem.hash}
+														category="image"
+														specs={mediaItem}
+													/>
+												</SubsectionMediaItemContainer>
 											);
 										}
 										if (
@@ -133,13 +143,15 @@ export const ArticleSubsection = ({ subsection }) => {
 												.includes(mediaItem.type)
 										) {
 											return (
-												<MediaItem
-													key={mediaItem.hash}
-													category="video"
-													specs={{
-														'video': mediaItem,
-													}}
-												/>
+												<SubsectionMediaItemContainer>
+													<MediaItem
+														key={mediaItem.hash}
+														category="video"
+														specs={{
+															'video': mediaItem,
+														}}
+													/>
+												</SubsectionMediaItemContainer>
 											);
 										}
 									}

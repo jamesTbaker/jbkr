@@ -205,29 +205,27 @@ const CompressedTableOfContentsListContainer = ({
 	contentVisible,
 	clickHandler,
 	sectionProperties,
-}) => {
-	return (
-		<CompressedTableOfContentsList
-			contentVisible={contentVisible}
-		>
-			{
-				Object.keys(sectionProperties).map((sectionKey) =>
-					<CompressedTableOfContentsListItem
-						key={`compressed--${sectionProperties[sectionKey].id}`}
-					>
-							<CopyLink
-								url={`#${sectionProperties[sectionKey].hash}`}
-								inline={false}
-								clickHandler={clickHandler}
-							>
-								{sectionProperties[sectionKey].anchor}
-							</CopyLink>
-					</CompressedTableOfContentsListItem>,
-				)
-			}
-		</CompressedTableOfContentsList>
-	);
-};
+}) => (
+	<CompressedTableOfContentsList
+		contentVisible={contentVisible}
+	>
+		{
+			Object.keys(sectionProperties).map((sectionIndex) =>
+				<CompressedTableOfContentsListItem
+					key={`compressed--${sectionProperties[sectionIndex].id}`}
+				>
+						<CopyLink
+							url={`#${sectionProperties[sectionIndex].hash}`}
+							inline={false}
+							clickHandler={clickHandler}
+						>
+							{sectionProperties[sectionIndex].anchor}
+						</CopyLink>
+				</CompressedTableOfContentsListItem>,
+			)
+		}
+	</CompressedTableOfContentsList>
+);
 const CompressedTableOfContentsList = styled.ol`
 	position: fixed;
 	top: 23rem;
@@ -303,6 +301,15 @@ const CompressedTableOfContentsListItem = styled.li`
 		}
 	}
 `;
+
+
+
+
+
+
+
+
+
 const HiddenH3 = styled.h3`
 	${hiddenBlock}
 	margin: 0;
@@ -682,18 +689,18 @@ export const Profile = ({
 				<ExpandedTableOfContentsListContainer>
 					<ExpandedTableOfContentsList>
 						{
-							Object.keys(sectionProperties).map((sectionKey) =>
+							Object.keys(sectionProperties).map((sectionIndex) =>
 								<ExpandedTableOfContentsListItem
-									key={`expanded--${sectionProperties[sectionKey].id}`}
+									key={`expanded--${sectionProperties[sectionIndex].id}`}
 								>
 									<Copy
 										kind="profile--table-of-contents-item--anchor--large-device"
 									>
 										<CopyLink
-											url={`#${sectionProperties[sectionKey].hash}`}
+											url={`#${sectionProperties[sectionIndex].hash}`}
 											inline={false}
 										>
-											{sectionProperties[sectionKey].anchor}
+											{sectionProperties[sectionIndex].anchor}
 										</CopyLink>
 									</Copy>
 								</ExpandedTableOfContentsListItem>,

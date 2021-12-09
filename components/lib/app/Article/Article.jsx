@@ -8,6 +8,9 @@ import { Button } from '../../..';
 import { Line } from '../../..';
 import { MediaItem } from '../../..';
 import { ArticleSections } from './ArticleSections';
+import { Collapsible } from '../../..';
+import { CopyLink } from '../../core/CopyLink/CopyLink';
+
 
 
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -111,6 +114,140 @@ const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 		'aria-label': 'Page Table of Contents',
 	};
 })``;
+
+
+// ==============================
+
+
+const CompressedTableOfContentsListContainer = ({
+	contentVisible,
+	clickHandler,
+	sectionProperties,
+}) => (
+	<CompressedTableOfContentsList
+		contentVisible={contentVisible}
+	>
+		{
+			Object.keys(sectionProperties).map((sectionIndex) => {
+				const thisItemLevel = sectionProperties[sectionIndex].level;
+				const previousItemLevel = sectionProperties[sectionIndex - 1] &&
+					sectionProperties[sectionIndex - 1].level ?
+					sectionProperties[sectionIndex - 1].level : null;
+				let prefix;
+				let suffix;
+				if ((thisItemLevel - previousItemLevel) > 0) {
+					prefix = <ol>;
+				}
+				if ((previousItemLevel - thisItemLevel) === 1) {
+					format = 'endOneChild';
+				}
+				if ((previousItemLevel - thisItemLevel) === 2) {
+					format = 'endTwoChildren';
+				}
+				if ((previousItemLevel - thisItemLevel) === 3) {
+					format = 'endThreeChildren';
+				}
+				if ((previousItemLevel - thisItemLevel) === 4) {
+					format = 'endFourChildren';
+				}
+				if (condition) {
+
+				}
+				return (<CompressedTableOfContentsListItem
+					key={`compressed--${sectionProperties[sectionIndex].slug}`}
+				>
+						<CopyLink
+							url={`#${sectionProperties[sectionIndex].slug}`}
+							inline={false}
+							clickHandler={clickHandler}
+						>
+							{sectionProperties[sectionIndex].content}
+						</CopyLink>
+				</CompressedTableOfContentsListItem>);
+			})
+		}
+	</CompressedTableOfContentsList>
+);
+const CompressedTableOfContentsList = styled.ol`
+	position: fixed;
+	top: 23rem;
+	left: 0;
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	margin: 0;
+	padding: 0 2rem;
+	background-color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 37,
+		'format': 'string',
+	})};
+	transition: height .5s, padding .5s;
+	z-index: ${zIndexNumber().compressedTableOfContentsContainer};
+	${
+		({ contentVisible}) => {
+			if (contentVisible) {
+				return `
+					height: 100%;
+					padding: 2rem;
+					li {
+						margin-top: 0;
+						margin-left: 0;
+						opacity: 1;
+					}
+				`;
+			}
+		}
+	}
+`;
+const CompressedTableOfContentsListItem = styled.li`
+	list-style-type: none;
+	margin-top: -1rem;
+	margin-left: -1rem;
+	padding-bottom: 1rem;
+	opacity: 0;
+	transition-property: opacity, margin-left, margin-top;
+	transition-duration: .5s;
+	&:nth-child(1) {
+		transition-delay: .2s;
+	}
+	&:nth-child(2) {
+		transition-delay: .225s;
+	}
+	&:nth-child(3) {
+		transition-delay: .25s;
+	}
+	&:nth-child(4) {
+		transition-delay: .275s;
+	}
+	&:nth-child(5) {
+		transition-delay: .3s;
+	}
+	&:nth-child(6) {
+		transition-delay: .325s;
+	}
+	&:nth-child(7) {
+		transition-delay: .35s;
+	}
+	&:nth-child(8) {
+		transition-delay: .375s;
+	}
+	&:nth-child(9) {
+		transition-delay: .4s;
+	}
+	a {
+		padding: 1rem 0;
+		:focus {
+			padding: 1rem .5rem;
+		}
+	}
+`;
+
+
+// ==============================
+
+
 const ArticleTableOfContentsFauxHeader = styled.span`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -607,7 +744,7 @@ export const Article = ({
 		</MainContentContainer>
 		<CompressedTableOfContentsContainer>
 			<CompressedTableOfContentsCollapsibleContainer>
-				{/* <Collapsible
+				<Collapsible
 					button={{
 						'size': 'small',
 						'surfaceStyle': 'outlined',
@@ -617,10 +754,10 @@ export const Article = ({
 					internalID="v3Wd49fpFK6x2jNkZ6qbmmDC"
 					copyKind="article--compressed-table-of-contents"
 				>
-					<div
-						dangerouslySetInnerHTML={{'__html': frontMatter.tableOfContents}}
+					<CompressedTableOfContentsListContainer
+						sectionProperties={frontMatter.tableOfContents}
 					/>
-				</Collapsible> */}
+				</Collapsible>
 			</CompressedTableOfContentsCollapsibleContainer>
 		</CompressedTableOfContentsContainer>
 		<ExpandedTableOfContentsContainer>

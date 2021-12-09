@@ -72,6 +72,7 @@ const VideoItemContainer = styled.div`
 	.video-js .vjs-control-bar {
 		height: 5rem;
 		padding: .5rem;
+		border-radius: .375rem;
 		background: ${color({
 			'kind': 'Neutral',
 			'tone': 'Finch',
