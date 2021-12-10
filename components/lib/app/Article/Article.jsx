@@ -86,6 +86,55 @@ const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
 			}
 		}
 `;
+const ExpandedTableOfContentsListContainerTwo = ({
+	contentVisible,
+	clickHandler,
+	sectionProperties,
+}) => (
+	<ExpandedTableOfContentsList>
+		{
+			sectionProperties.map(i =>
+				<ExpandedTableOfContentsListItemWithChildren
+					item={i}
+					key={i.ID}
+				/>
+			)
+		}
+	</ExpandedTableOfContentsList>
+);
+const ExpandedTableOfContentsList = styled.ol``;
+const ExpandedTableOfContentsListItemWithChildren = ({ item }) => {
+	let children = null;
+	if (item.children && item.children.length) {
+		children = (
+			<ol>
+				{
+					item.children.map(i => (
+						<ExpandedTableOfContentsListItemWithChildren item={i} key={i.ID} />
+					))
+				}
+			</ol>
+		);
+	}
+	return (
+		<ExpandedTableOfContentsListItemElement>
+			<CopyLink
+				url={`#${item.ID}`}
+				inline={false}
+			>
+				{item.content}
+			</CopyLink>
+			{children}
+		</ExpandedTableOfContentsListItemElement>
+	);
+}
+const ExpandedTableOfContentsListItemElement = styled.li``;
+
+
+
+
+
+
 const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	return {
 		'aria-label': 'Page Complimentary Information',
@@ -114,25 +163,30 @@ const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 		'aria-label': 'Page Table of Contents',
 	};
 })``;
-const CompressedTableOfContentsListItemContent = ({ item }) => {
+const CompressedTableOfContentsListItemWithChildren = ({ item, clickHandler }) => {
 	let children = null;
 	if (item.children && item.children.length) {
 		children = (
-			<ul>
+			<ol>
 				{
 					item.children.map(i => (
-						<CompressedTableOfContentsListItemContent item={i} key={i.ID} />
+						<CompressedTableOfContentsListItemWithChildren item={i} key={i.ID} />
 					))
 				}
-			</ul>
+			</ol>
 		);
 	}
-
 	return (
-	<li>
-	{item.content}
-	{children}
-	</li>
+		<CompressedTableOfContentsListItemElement>
+			<CopyLink
+				url={`#${item.ID}`}
+				inline={false}
+				clickHandler={clickHandler}
+			>
+				{item.content}
+			</CopyLink>
+			{children}
+		</CompressedTableOfContentsListItemElement>
 	);
 }
 const CompressedTableOfContentsListContainer = ({
@@ -144,9 +198,12 @@ const CompressedTableOfContentsListContainer = ({
 		contentVisible={contentVisible}
 	>
 		{
-			sectionProperties.map(i => (
-					<CompressedTableOfContentsListItemContent item={i} key={i.ID} />
-				)
+			sectionProperties.map(i =>
+				<CompressedTableOfContentsListItemWithChildren
+					item={i}
+					clickHandler={clickHandler}
+					key={i.ID}
+				/>
 			)
 		}
 	</CompressedTableOfContentsList>
@@ -184,11 +241,10 @@ const CompressedTableOfContentsList = styled.ol`
 		}
 	}
 `;
-const CompressedTableOfContentsListItem = styled.li`
+const CompressedTableOfContentsListItemElement = styled.li`
 	list-style-type: none;
 	margin-top: -1rem;
 	margin-left: -1rem;
-	padding-bottom: 1rem;
 	opacity: 0;
 	transition-property: opacity, margin-left, margin-top;
 	transition-duration: .5s;
@@ -220,17 +276,12 @@ const CompressedTableOfContentsListItem = styled.li`
 		transition-delay: .4s;
 	}
 	a {
-		padding: 1rem 0;
+		padding: 1rem 0 2rem;
 		:focus {
 			padding: 1rem .5rem;
 		}
 	}
 `;
-
-
-// ==============================
-
-
 const ArticleTableOfContentsFauxHeader = styled.span`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -750,10 +801,14 @@ export const Article = ({
 				>
 					<ArticleTableOfContentsFauxHeader />
 				</Copy>
-				<Copy
+				{/* <Copy
 					kind="article--expanded-table-of-contents"
 					htmlContent={frontMatter.tableOfContents}
+				/> */}
+				<ExpandedTableOfContentsListContainerTwo
+					sectionProperties={frontMatter.tableOfContents}
 				/>
+
 			</ExpandedTableOfContentsListContainer>
 		</ExpandedTableOfContentsContainer>
 	</ArticleContainer>
