@@ -70,10 +70,10 @@ const SubsectionMediaContainer = styled.div`
 	}
 `;
 const SubsectionMediaItemContainer = styled.div`
+	margin-bottom: 3rem;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin-bottom: 3rem;
 	}
 `;
 const SubsectionTextContainer = styled.div`

@@ -129,12 +129,6 @@ const ExpandedTableOfContentsListItemWithChildren = ({ item }) => {
 	);
 }
 const ExpandedTableOfContentsListItemElement = styled.li``;
-
-
-
-
-
-
 const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 	return {
 		'aria-label': 'Page Complimentary Information',
@@ -149,6 +143,7 @@ const CompressedTableOfContentsContainer = styled.aside.attrs(() => {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 37,
+			'alpha': 1,
 			'format': 'string',
 		})};
 		z-index: ${zIndexNumber().compressedTableOfContentsContainer};
@@ -163,19 +158,7 @@ const CompressedTableOfContentsCollapsibleContainer = styled.nav.attrs(() => {
 		'aria-label': 'Page Table of Contents',
 	};
 })``;
-const CompressedTableOfContentsListItemWithChildren = ({ item, clickHandler }) => {
-	let children = null;
-	if (item.children && item.children.length) {
-		children = (
-			<ol>
-				{
-					item.children.map(i => (
-						<CompressedTableOfContentsListItemWithChildren item={i} key={i.ID} />
-					))
-				}
-			</ol>
-		);
-	}
+const CompressedTableOfContentsListItem = ({ item, clickHandler }) => {
 	return (
 		<CompressedTableOfContentsListItemElement>
 			<CopyLink
@@ -185,7 +168,6 @@ const CompressedTableOfContentsListItemWithChildren = ({ item, clickHandler }) =
 			>
 				{item.content}
 			</CopyLink>
-			{children}
 		</CompressedTableOfContentsListItemElement>
 	);
 }
@@ -199,7 +181,7 @@ const CompressedTableOfContentsListContainer = ({
 	>
 		{
 			sectionProperties.map(i =>
-				<CompressedTableOfContentsListItemWithChildren
+				<CompressedTableOfContentsListItem
 					item={i}
 					clickHandler={clickHandler}
 					key={i.ID}
@@ -388,6 +370,7 @@ const ArticleTaglineAndMetaContainer = styled.div`
 		width: calc(100% - 2rem);
 		margin: 0 2rem 0 0;
 		padding: 3rem 3rem 3rem 2rem;
+		border-radius: 0 .375rem 0 0;
 		background-image:
 			linear-gradient(
 				to bottom,
@@ -534,16 +517,16 @@ const ArticleBody = styled.div`
 	}
 `;
 const ArticleIntroVideoContainer = styled.div`
+	padding: 4rem 0 3rem;
+	border-top: solid .125rem ${color({
+		'kind': 'Accent',
+		'tone': 'Sunshine',
+		'level': 1,
+		'format': 'string',
+	})};
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		padding: 4rem 0 3rem;
-		border-top: solid .125rem ${color({
-			'kind': 'Accent',
-			'tone': 'Sunshine',
-			'level': 1,
-			'format': 'string',
-		})};
 	}
 `;
 
@@ -705,7 +688,7 @@ export const Article = ({
 										'article--meta-item--not-large-device--date--primary'
 									}
 								>
-									{frontMatter.publicationDate}
+									Published {frontMatter.publicationDate}
 								</Copy>
 							</DateOrStatNotLargeDevice>
 							<DateOrStatNotLargeDevice>

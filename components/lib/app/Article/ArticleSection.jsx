@@ -3,7 +3,6 @@
 
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
-import { ArticleBriefStatement } from './ArticleBriefStatement';
 import { ArticleSubsection } from './ArticleSubsection';
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
@@ -28,34 +27,36 @@ const ReturnContainerHasHorizontalGridOnLargeWidthDevices = ({ subsections }) =>
 	return hasColumns;
 };
 const ArticleSectionContainer = styled.div`
-	margin-top: 1rem;
-	padding-top: 4rem;
-	border-top: solid .125rem ${color({
-		'kind': 'Accent',
-		'tone': 'Sunshine',
-		'level': 1,
-		'format': 'string',
-
-
-		// 'kind': 'Neutral',
-		// 'tone': 'Finch',
-		// 'level': 20,
-		// 'format': 'string',
-	})};
-
-	/* &:not(:first-child) {
-		margin-top: 4rem;
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding-top: 3rem;
+		border-top: solid .125rem ${color({
+			'kind': 'Accent',
+			'tone': 'Sunshine',
+			'level': 1,
+			'format': 'string',
+		})};
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		margin-top: 1rem;
 		padding-top: 4rem;
 		border-top: solid .125rem ${color({
 			'kind': 'Accent',
-			'tone': 'Peacock',
-			'level': 2,
+			'tone': 'Sunshine',
+			'level': 1,
 			'format': 'string',
 		})};
-	} */
+	}
 `;
 const SectionBriefStatementsContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding-left: 1rem;
+		margin-bottom: 4rem;
+		border-left: solid .125rem ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 2,
+			'format': 'string',
+		})};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		column-count: 4;
@@ -65,7 +66,9 @@ const SectionBriefStatementsContainer = styled.div`
 `;
 const SectionBriefStatementContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
+		&:not(:last-child) {
+			padding-bottom: 2rem;
+		}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding-bottom: 2rem;
 		break-inside: avoid;

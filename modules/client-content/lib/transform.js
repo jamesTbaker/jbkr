@@ -166,7 +166,7 @@ const returnHeadingsWithMetadata = ({ content }) => {
 		headingsStageTwo.push({
 			'level': separatorPositionAndHeadingLevel - 1,
 			'content': lineContent,
-			'ID': GithubSlugger.slug(lineContent),
+			'ID': GithubSlugger.slug(lineContent.trim()),
 		});
 	});
 

@@ -883,6 +883,11 @@ const StandardCopyContainer = styled.div`
 				}
 			}
 		}
+		${deviceWidthQuery.not({ 'width': 'l' })} {
+			a.header-anchor {
+				display: none;
+			}
+		}
 	}
 	div.header-container.level-1 a.header-anchor {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h1 })}
