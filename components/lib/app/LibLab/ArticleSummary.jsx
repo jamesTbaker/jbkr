@@ -7,10 +7,16 @@ import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Line } from '../../..';
 
-const ArticleSummaryContainer = styled.div`
+const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
+	return {
+		'href': `/library/${$slug}`,
+	};
+})`
+	display: block;
 	border-radius: .375rem;
 	background-size: cover;
 	background-repeat: no-repeat;
+	text-decoration: none;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 4rem;
 		${
@@ -65,7 +71,7 @@ const ArticleSummaryContainer = styled.div`
 	}
 `;
 const ContentContainer = styled.div`
-	border-radius: .375rem;
+	/* border-radius: .375rem;
 	background-image:
 		linear-gradient(
 			to bottom,
@@ -83,7 +89,7 @@ const ContentContainer = styled.div`
 				'alpha': 1,
 				'format': 'string'
 			})}
-		);
+		); */
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		${
 			({ $type }) => {
@@ -124,6 +130,33 @@ const ContentContainer = styled.div`
 `;
 const TitleContainer = styled.div`
 	padding-bottom: 3rem;
+	> span {
+		border-radius: .375rem;
+		background-image: linear-gradient(
+			to bottom,
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 31,
+				'format': 'string'
+			})} 0%,
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 31,
+				'format': 'string'
+			})} 100%
+		);
+		${deviceWidthQuery.only({ 'width': 's' })} {
+			line-height: 4rem;
+		}
+		${deviceWidthQuery.only({ 'width': 'm' })} {
+			line-height: 5rem;
+		}
+		${deviceWidthQuery.only({ 'width': 'l' })} {
+			line-height: 5rem;
+		}
+	}
 `;
 const DescriptionContainer = styled.div`
 	padding: 2rem 0 2rem;
@@ -150,6 +183,7 @@ export const ArticleSummary = ({
 	<ArticleSummaryContainer
 		$type={type}
 		$images={teaserImages}
+		$slug={slug}
 	>
 		<ContentContainer
 			$type={type}
@@ -158,15 +192,16 @@ export const ArticleSummary = ({
 				<Copy
 					kind="article-summary--title-anchor"
 				>
-					<CopyLink
+					{title}
+					{/* <CopyLink
 						url={`/library/${slug}`}
 						inline={false}
 					>
-						{title}
-					</CopyLink>
+
+					</CopyLink> */}
 				</Copy>
 			</TitleContainer>
-			<Line
+			{/* <Line
 				width={
 					type === 'standard' ? 33 :
 						type === 'top' ? 25 : 50
@@ -186,7 +221,7 @@ export const ArticleSummary = ({
 						'format': 'string'
 					}
 				}
-			/>
+			/> */}
 			{
 				teaserDescription &&
 				<DescriptionContainer>

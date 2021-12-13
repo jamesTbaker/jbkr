@@ -277,6 +277,7 @@ const TaglineContainerBody = styled.div`
 	width: 17rem;
 	height: 4rem;
 	margin: 0 auto;
+	text-align: center;
 `;
 const ContactOptionsContent = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {

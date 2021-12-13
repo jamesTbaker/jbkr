@@ -301,15 +301,6 @@ const CompressedTableOfContentsListItem = styled.li`
 		}
 	}
 `;
-
-
-
-
-
-
-
-
-
 const HiddenH3 = styled.h3`
 	${hiddenBlock}
 	margin: 0;
@@ -323,6 +314,7 @@ const FeaturedVisualizedSkillsContainer = styled.ul`
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		margin: 0;
 		padding: 0;
 	}

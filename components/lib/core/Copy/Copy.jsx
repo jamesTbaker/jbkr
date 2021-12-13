@@ -178,7 +178,12 @@ const propsSpecifications = {
 		'weight': 'bold',
 		'usage': 'display',
 		'spaced': false,
-		'gradient': {
+		'color': {
+			'kind': 'Accent',
+			'tone': 'Spruce',
+			'level': 2,
+		},
+		/* 'gradient': {
 			'colors': [
 				{
 					'kind': 'Brand',
@@ -197,7 +202,7 @@ const propsSpecifications = {
 				'level': 1,
 			},
 		},
-		'more': 'display: block; padding-bottom: 2rem;',
+		'more': 'display: block; padding-bottom: 2rem;', */
 	},
 	'profile--skill-name--featured': {
 		'tag': 'span',
@@ -437,8 +442,8 @@ const propsSpecifications = {
 		'spaced': false,
 		'color': {
 			'kind': 'Accent',
-			'tone': 'Sunshine',
-			'level': 1,
+			'tone': 'Spruce',
+			'level': 2,
 		},
 		/* 'gradient': {
 			'colors': [
