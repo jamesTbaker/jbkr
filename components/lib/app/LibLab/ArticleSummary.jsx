@@ -69,9 +69,45 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 			}
 		}
 	}
+	&:hover {
+		div.title-container span {
+			color: ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				/**
+				 * @todo alpha should not be required
+				 */
+				'alpha': 1,
+				'format': 'string'
+			})};
+			background-position-y: 100%;
+			border-radius: .25rem;
+		}
+	}
+	&:focus {
+		outline: none;
+		box-shadow: 0 0 0 .25rem ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})}, 0 0 0 .5rem ${color({
+				'kind': 'Accent',
+				'tone': 'Finch',
+				'level': 1,
+				'format': 'string'
+			})};
+	}
+	@media (max-width: 1304px) {
+		&:focus {
+			margin-left: .5rem;
+			margin-right: .5rem;
+		}
+	}
 `;
-const ContentContainer = styled.div`
-	/* border-radius: .375rem;
+const DescriptionAndMetaItemContainer = styled.div`
+	border-radius: .375rem;
 	background-image:
 		linear-gradient(
 			to bottom,
@@ -79,9 +115,16 @@ const ContentContainer = styled.div`
 				'kind': 'Neutral',
 				'tone': 'Finch',
 				'level': 34,
-				'alpha': .8,
+				'alpha': .85,
 				'format': 'string'
-			})},
+			})} 0,
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 37,
+				'alpha': .95,
+				'format': 'string'
+			})} 25%,
 			${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
@@ -89,64 +132,64 @@ const ContentContainer = styled.div`
 				'alpha': 1,
 				'format': 'string'
 			})}
-		); */
+		);
 	${deviceWidthQuery.only({ 'width': 's' })} {
-		${
-			({ $type }) => {
-				if ($type === 'top' || $type === 'standard') {
-					return `
-						padding: 8rem 2rem 2rem 2rem;
-					`;
-				}
-				if ($type === 'featured') {
-					return `
-						padding: 8rem 2rem 2rem 2rem;
-					`;
-				}
-			}
-		}
+		padding: 2rem;
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		${
 			({ $type }) => {
 				if ($type === 'top') {
 					return `
-						padding: 8rem 10rem 1rem 6rem;
+						padding: 4rem 10rem 1rem 6rem;
 					`;
 				}
 				if ($type === 'featured') {
 					return `
-						padding: 8rem 6rem 1rem 6rem;
+						padding: 4rem 6rem 1rem 6rem;
 					`;
 				}
 				if ($type === 'standard') {
 					return `
-						padding: 8rem 5rem 1rem 6rem;
+						padding: 4rem 5rem 1rem 6rem;
 					`;
 				}
 			}
 		}
 	}
 `;
-const TitleContainer = styled.div`
+const TitleContainer = styled.div.attrs(() => {
+	return {
+		'className': `title-container`,
+	};
+})`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		padding-left: 2rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		${
+			({ $type }) => {
+				if ($type === 'top') {
+					return `
+						padding: 0 0 3rem 6rem;
+					`;
+				}
+				if ($type === 'featured') {
+					return `
+						padding: 0 0 3rem 6rem;
+					`;
+				}
+				if ($type === 'standard') {
+					return `
+						padding: 0 0 3rem 6rem;
+					`;
+				}
+			}
+		}
+	}
 	padding-bottom: 3rem;
+
 	> span {
-		border-radius: .375rem;
-		background-image: linear-gradient(
-			to bottom,
-			${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 31,
-				'format': 'string'
-			})} 0%,
-			${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 31,
-				'format': 'string'
-			})} 100%
-		);
 		${deviceWidthQuery.only({ 'width': 's' })} {
 			line-height: 4rem;
 		}
@@ -156,6 +199,24 @@ const TitleContainer = styled.div`
 		${deviceWidthQuery.only({ 'width': 'l' })} {
 			line-height: 5rem;
 		}
+		transition: all 250ms ease;
+		background-position-y: 10%;
+		background-image: linear-gradient(
+			to bottom,
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 33,
+				'format': 'string'
+			})} 50%,
+			${color({
+				'kind': 'Brand',
+				'tone': 'Peony',
+				'level': 3,
+				'format': 'string'
+			})} 50%
+		);
+		background-size: auto 200%;
 	}
 `;
 const DescriptionContainer = styled.div`
@@ -185,53 +246,28 @@ export const ArticleSummary = ({
 		$images={teaserImages}
 		$slug={slug}
 	>
-		<ContentContainer
+		<TitleContainer
 			$type={type}
 		>
-			<TitleContainer>
-				<Copy
-					kind="article-summary--title-anchor"
-				>
-					{title}
-					{/* <CopyLink
-						url={`/library/${slug}`}
-						inline={false}
-					>
-
-					</CopyLink> */}
-				</Copy>
-			</TitleContainer>
-			{/* <Line
-				width={
-					type === 'standard' ? 33 :
-						type === 'top' ? 25 : 50
-				}
-				height="2xl"
-				alignment="center"
-				color={
-					type === 'standard' || type === 'top' ? {
-						'kind': 'Brand',
-						'tone': 'Spruce',
-						'level': 1,
-						'format': 'string'
-					} : {
-						'kind': 'Accent',
-						'tone': 'Peacock',
-						'level': 2,
-						'format': 'string'
-					}
-				}
-			/> */}
+			<Copy
+				kind="article-summary--title-anchor"
+			>
+				{title}
+			</Copy>
+		</TitleContainer>
+		<DescriptionAndMetaItemContainer
+			$type={type}
+		>
 			{
 				teaserDescription &&
 				<DescriptionContainer>
 					<Copy
 						kind="article-summary--teaser"
 						tagOverride={
-							teaserDescription.startsWith('\n<li>') ?
+							teaserDescription.trim().startsWith('<li>') ?
 							'ul' : undefined
 						}
-						htmlContent={teaserDescription}
+						htmlContent={teaserDescription.trim()}
 					/>
 				</DescriptionContainer>
 			}
@@ -267,6 +303,6 @@ export const ArticleSummary = ({
 					</>
 				}
 			</MetaItemContainer>
-		</ContentContainer>
+		</DescriptionAndMetaItemContainer>
 	</ArticleSummaryContainer>
 );

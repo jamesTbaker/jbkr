@@ -393,9 +393,12 @@ const propsSpecifications = {
 		'usage': 'display',
 		'spaced': false,
 		'color': {
-			'kind': 'Brand',
+			/* 'kind': 'Brand',
 			'tone': 'Peony',
-			'level': 3,
+			'level': 3, */
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 7,
 		},
 	},
 	'article-summary--meta-item--label': {
@@ -1124,14 +1127,37 @@ export const Copy = ({
 			if (tagOverride) {
 				tagThisCopy = tagOverride;
 			}
-			return (
-				<Text
-					tag={tagThisCopy}
-					{...propsThisCopy}
-				>
-					{children}
-				</Text>
-			);
+
+
+			/* if (kind === 'article-summary--teaser') {
+				console.log('tagOverride');
+				console.log(tagOverride);
+				console.log('tagThisCopy');
+				console.log(tagThisCopy);
+			} */
+
+
+
+
+
+			if (!htmlContent && children) {
+				return(
+					<Text
+						tag={tagThisCopy}
+						{...propsThisCopy}
+					>
+						{children}
+					</Text>
+				);
+			}
+			if (htmlContent) {
+				return(
+					<Text
+						tag={tagThisCopy} /* is p! */
+						{...propsThisCopy}
+					/>
+				);
+			}
 		} else {
 			console.log(kind);
 			return (null);

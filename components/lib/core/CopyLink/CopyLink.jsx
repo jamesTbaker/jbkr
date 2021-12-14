@@ -43,6 +43,10 @@ const CopyLinkContainer = styled.span`
 						'kind': 'Neutral',
 						'tone': 'Finch',
 						'level': 41,
+						/**
+						 * @todo alpha should not be required
+						 */
+						'alpha': 1,
 						'format': 'string'
 					}) :
 					color({
