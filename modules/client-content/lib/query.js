@@ -362,6 +362,16 @@ export const returnAllPublishedArticlesFromDB = async () => {
 						'as': 'Images',
 					},
 				},
+				// look up the intro video for this article
+				{
+					'$lookup':
+					{
+						'from': 'upload_file',
+						'localField': 'FeaturedArticleLargeTeaserVideo',
+						'foreignField': '_id',
+						'as': 'FeaturedTeaserVideos',
+					},
+				},
 				// specify which field to sort on and in which direction
 				{ '$sort': { 'PublicationDate': -1 } },
 				// specify which fields to return
@@ -381,6 +391,10 @@ export const returnAllPublishedArticlesFromDB = async () => {
 						'Images.ext': 1,
 						'Images.hash': 1,
 						'Images.mime': 1,
+						'FeaturedTeaserVideos.url': 1,
+						'FeaturedTeaserVideos.mime': 1,
+						'FeaturedTeaserVideos.alternativeText': 1,
+						'FeaturedTeaserVideos.caption': 1,
 					},
 				},
 			]).toArray();
@@ -426,7 +440,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'as': 'Images',
 					},
 				},
-				// look up the intro video for this article
+				// look up the intro video poster image for this article
 				{
 					'$lookup':
 					{
@@ -436,7 +450,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'as': 'IntroVideoPosters',
 					},
 				},
-				// look up the intro video poster image for this article
+				// look up the intro video for this article
 				{
 					'$lookup':
 					{

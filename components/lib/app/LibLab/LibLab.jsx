@@ -104,19 +104,22 @@ export const LibLab = ({
 								)
 							}
 						</TopArticleSummariesContainer>
-						<FeaturedArticleSummaryContainer>
-							<ArticleSummary
-								title={articles.featured[0].title}
-								tagline={articles.featured[0].tagline}
-								slug={articles.featured[0].slug}
-								publicationDate={articles.featured[0].publicationDate}
-								updateDate={articles.featured[0].updateDate}
-								teaserDescription={articles.featured[0].teaserDescription}
-								teaserImages={articles.featured[0].teaserImages}
-								type="featured"
-								key={articles.featured[0].key}
-							/>
-						</FeaturedArticleSummaryContainer>
+						{
+							articles.featured && articles.featured[0] &&
+							<FeaturedArticleSummaryContainer>
+								<ArticleSummary
+									title={articles.featured[0].title}
+									tagline={articles.featured[0].tagline}
+									slug={articles.featured[0].slug}
+									publicationDate={articles.featured[0].publicationDate}
+									updateDate={articles.featured[0].updateDate}
+									teaserDescription={articles.featured[0].teaserDescription}
+									teaserImages={articles.featured[0].teaserImages}
+									type="featured"
+									key={articles.featured[0].key}
+								/>
+							</FeaturedArticleSummaryContainer>
+						}
 					</TopAndFeaturedArticleSummariesContainer>
 					<StandardArticleSummariesContainer>
 						{

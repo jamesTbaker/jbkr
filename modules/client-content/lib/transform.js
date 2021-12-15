@@ -1268,9 +1268,6 @@ export const returnTransformedLibLabScreenContent = ({
 				}),
 				'teaserDescription': returnSimpleHTMLFromMarkdown({
 					'content': articleRaw.TeaserDescription,
-					'options': {
-						'removeEndCapTags': true,
-					},
 				}),
 				'teaserImages': {
 					'small': {
@@ -1278,7 +1275,7 @@ export const returnTransformedLibLabScreenContent = ({
 							'imagePublicID':
 								articleRaw.Images[0].hash,
 							'imageExtension': articleRaw.Images[0].ext,
-							'typeToken': 'headerSmall',
+							'typeToken': 'teaserStandardSmall',
 						}),
 						'alternativeText':
 							articleRaw.Images[0].alternativeText,
@@ -1294,7 +1291,7 @@ export const returnTransformedLibLabScreenContent = ({
 							'imagePublicID':
 								articleRaw.Images[0].hash,
 							'imageExtension': articleRaw.Images[0].ext,
-							'typeToken': 'headerLarge',
+							'typeToken': 'teaserStandardLarge',
 						}),
 						'alternativeText':
 							articleRaw.Images[0].alternativeText,
@@ -1323,6 +1320,27 @@ export const returnTransformedLibLabScreenContent = ({
 					'incomingDate': articleRaw.PublicationDate,
 					'formatToken': 'standardLongDate',
 				});
+			}
+			if (
+				articleRaw.FeaturedTeaserVideos &&
+				articleRaw.FeaturedTeaserVideos[0]
+			) {
+				articleTransformed.featuredTeaserVideo = {
+					'url': articleRaw.FeaturedTeaserVideos[0].url,
+					'alternativeText':
+						articleRaw.FeaturedTeaserVideos[0].alternativeText,
+					'type': returnMediaType({
+						'mime': articleRaw.FeaturedTeaserVideos[0].mime,
+					}),
+				};
+			}
+			if (
+				articleRaw.FeaturedTeaserVideos &&
+				articleRaw.FeaturedTeaserVideos[0] &&
+				articleRaw.FeaturedTeaserVideos[0].caption
+			) {
+				articleTransformed.featuredTeaserVideo.credit =
+					articleRaw.FeaturedTeaserVideos[0].caption;
 			}
 			articlesTransformed.push(articleTransformed);
 		}

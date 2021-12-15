@@ -52,7 +52,7 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 					return `
 						height: calc(50% - 4rem);
 						margin-top: 4rem;
-						padding: 4rem 24rem 0 0;
+						padding: 14rem 24rem 0 0;
 					`;
 				}
 				if ($type === 'featured') {
@@ -206,7 +206,7 @@ const TitleContainer = styled.div.attrs(() => {
 			${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 33,
+				'level': 35,
 				'format': 'string'
 			})} 50%,
 			${color({
@@ -219,9 +219,7 @@ const TitleContainer = styled.div.attrs(() => {
 		background-size: auto 200%;
 	}
 `;
-const DescriptionContainer = styled.div`
-	padding: 2rem 0 2rem;
-`;
+const DescriptionContainer = styled.div``;
 const MetaItemContainer = styled.div`
 	max-width: 15rem;
 	padding: 2rem 0;
@@ -262,12 +260,8 @@ export const ArticleSummary = ({
 				teaserDescription &&
 				<DescriptionContainer>
 					<Copy
-						kind="article-summary--teaser"
-						tagOverride={
-							teaserDescription.trim().startsWith('<li>') ?
-							'ul' : undefined
-						}
-						htmlContent={teaserDescription.trim()}
+						kind="copy-container--standard"
+						htmlContent={teaserDescription}
 					/>
 				</DescriptionContainer>
 			}

@@ -344,13 +344,13 @@ const ArticleTitle = styled.div`
 			${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 31,
+				'level': 39,
 				'format': 'string'
 			})} 0%,
 			${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 31,
+				'level': 39,
 				'format': 'string'
 			})} 100%
 		);
@@ -441,9 +441,9 @@ const ArticleMetaFauxHeader = styled.span`
 			margin-right: 1.5rem;
 			margin-bottom: 1.5rem;
 			border-bottom: solid 0.125rem ${color({
-				'kind': 'Accent',
-				'tone': 'Sunshine',
-				'level': 1,
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 10,
 				'format': 'string',
 			})};
 		}
@@ -519,9 +519,9 @@ const ArticleBody = styled.div`
 const ArticleIntroVideoContainer = styled.div`
 	padding: 4rem 0 3rem;
 	border-top: solid .125rem ${color({
-		'kind': 'Accent',
-		'tone': 'Sunshine',
-		'level': 1,
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 10,
 		'format': 'string',
 	})};
 	${deviceWidthQuery.not({ 'width': 'l' })} {

@@ -119,22 +119,12 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		// 'color': {
-		// 	'kind': 'Brand',
-		// 	'tone': 'Peony',
-		// 	'level': 3,
-		// },
 	},
 	'button-label--horizontal--small': {
 		'tag': 'span',
 		'size': '1xs',
 		'weight': 'regular',
 		'usage': 'display',
-		// 'color': {
-		// 	'kind': 'Brand',
-		// 	'tone': 'Peony',
-		// 	'level': 3,
-		// },
 	},
 	'announcement--preface': {
 		'tag': 'div',
@@ -153,12 +143,6 @@ const propsSpecifications = {
 		'size': '2xs',
 		'weight': 'regular',
 		'usage': 'display',
-		// 'spaced': false,
-		// 'color': {
-		// 	'kind': 'Brand',
-		// 	'tone': 'Peony',
-		// 	'level': 3,
-		// },
 	},
 	'profile--section-title--preface': {
 		'tag': 'span',
@@ -168,41 +152,21 @@ const propsSpecifications = {
 		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
-			'tone': 'Base',
-			'level': 1,
+			'tone': 'Finch',
+			'level': 7,
 		},
 	},
 	'profile--section-title--main': {
 		'tag': 'span',
-		'size': '3xl',
+		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
 		'spaced': false,
 		'color': {
-			'kind': 'Accent',
-			'tone': 'Spruce',
-			'level': 2,
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 10,
 		},
-		/* 'gradient': {
-			'colors': [
-				{
-					'kind': 'Brand',
-					'tone': 'Spruce',
-					'level': 1,
-				},
-				{
-					'kind': 'Accent',
-					'tone': 'Iris',
-					'level': 1,
-				},
-			],
-			'fallbackColor': {
-				'kind': 'Neutral',
-				'tone': 'Base',
-				'level': 1,
-			},
-		},
-		'more': 'display: block; padding-bottom: 2rem;', */
 	},
 	'profile--skill-name--featured': {
 		'tag': 'span',
@@ -393,9 +357,6 @@ const propsSpecifications = {
 		'usage': 'display',
 		'spaced': false,
 		'color': {
-			/* 'kind': 'Brand',
-			'tone': 'Peony',
-			'level': 3, */
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 7,
@@ -425,18 +386,6 @@ const propsSpecifications = {
 			'level': 11,
 		},
 	},
-	'article-summary--teaser': {
-		'tag': 'p',
-		'size': 's',
-		'weight': 'regular',
-		'usage': 'display',
-		'spaced': false,
-		'color': {
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 1,
-		},
-	},
 	'article--title': {
 		'tag': 'h1',
 		'size': '2xl',
@@ -444,29 +393,10 @@ const propsSpecifications = {
 		'usage': 'display',
 		'spaced': false,
 		'color': {
-			'kind': 'Accent',
-			'tone': 'Spruce',
-			'level': 2,
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 10,
 		},
-		/* 'gradient': {
-			'colors': [
-				{
-					'kind': 'Brand',
-					'tone': 'Spruce',
-					'level': 1,
-				},
-				{
-					'kind': 'Accent',
-					'tone': 'Iris',
-					'level': 1,
-				},
-			],
-			'fallbackColor': {
-				'kind': 'Neutral',
-				'tone': 'Base',
-				'level': 1,
-			},
-		}, */
 	},
 	'article--tagline': {
 		'tag': 'span',
@@ -686,8 +616,6 @@ const copyKinds = [
 	'article-summary--title-anchor',
 	'article-summary--meta-item--label',
 	'article-summary--meta-item--value',
-	'article-summary--teaser',
-
 	'article--title',
 	'article--tagline',
 	'article--faux-subheader',
@@ -701,7 +629,6 @@ const copyKinds = [
 	'article--expanded-table-of-contents',
 	'article--compressed-table-of-contents',
 	'article--blockquote--large-device',
-
 	'contact--brand-tagline',
 	'contact--section-header',
 	'contact--item-anchor',
@@ -1127,19 +1054,6 @@ export const Copy = ({
 			if (tagOverride) {
 				tagThisCopy = tagOverride;
 			}
-
-
-			/* if (kind === 'article-summary--teaser') {
-				console.log('tagOverride');
-				console.log(tagOverride);
-				console.log('tagThisCopy');
-				console.log(tagThisCopy);
-			} */
-
-
-
-
-
 			if (!htmlContent && children) {
 				return(
 					<Text

@@ -30,9 +30,9 @@ const ArticleSectionContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding-top: 3rem;
 		border-top: solid .125rem ${color({
-			'kind': 'Accent',
-			'tone': 'Sunshine',
-			'level': 1,
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 10,
 			'format': 'string',
 		})};
 	}
@@ -40,9 +40,9 @@ const ArticleSectionContainer = styled.div`
 		margin-top: 1rem;
 		padding-top: 4rem;
 		border-top: solid .125rem ${color({
-			'kind': 'Accent',
-			'tone': 'Sunshine',
-			'level': 1,
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 10,
 			'format': 'string',
 		})};
 	}

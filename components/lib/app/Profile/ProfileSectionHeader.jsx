@@ -11,21 +11,20 @@ const ProfileSectionTitle = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
 	> span {
-		line-height: 14rem;
-		margin-top: 2rem;
+		line-height: 10rem;
 		border-radius: .375rem;
 		background-image: linear-gradient(
 			to bottom,
 			${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 31,
+				'level': 39,
 				'format': 'string'
 			})} 0%,
 			${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 31,
+				'level': 39,
 				'format': 'string'
 			})} 100%
 		);
