@@ -103,7 +103,7 @@ const BackgroundOverlay = styled.div`
 					'level': 41,
 					'alpha': 1,
 					'format': 'string'
-				})} 90rem,
+				})} 70rem,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
@@ -242,7 +242,6 @@ const ImageNotLargeDevice = styled.div`
 		display: none;
 	}
 `;
-
 const ProfileSectionContainer = styled.section`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 7rem 2rem;

@@ -69,6 +69,7 @@ const SectionBriefStatementContainer = styled.div`
 		&:not(:last-child) {
 			padding-bottom: 2rem;
 		}
+	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding-bottom: 2rem;
 		break-inside: avoid;
@@ -85,16 +86,6 @@ const SectionBriefStatement = styled.div`
 			'tone': 'Finch',
 			'level': 2,
 			'format': 'string',
-
-			// 'kind': 'Accent',
-			// 'tone': 'Finch',
-			// 'level': 1,
-			// 'format': 'string',
-
-			// 'kind': 'Neutral',
-			// 'tone': 'Finch',
-			// 'level': 24,
-			// 'format': 'string',
 		})};
 	}
 `;
@@ -123,25 +114,6 @@ const SubsectionsContainer = styled.div`
 		}
 	}
 `;
-/* const SubsectionMediaContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
-const SubsectionTextContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
-const Sample = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`; */
-
 export const ArticleSection = ({ section }) => (
 	<ArticleSectionContainer>
 		{

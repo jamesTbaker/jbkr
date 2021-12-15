@@ -283,7 +283,7 @@ const ArticleTableOfContentsFauxHeader = styled.span`
 			border-bottom: solid 0.125rem ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 10,
+				'level': 26,
 				'format': 'string',
 			})};
 		}
@@ -443,7 +443,7 @@ const ArticleMetaFauxHeader = styled.span`
 			border-bottom: solid 0.125rem ${color({
 				'kind': 'Neutral',
 				'tone': 'Finch',
-				'level': 10,
+				'level': 26,
 				'format': 'string',
 			})};
 		}

@@ -269,13 +269,15 @@ const BrandingContainerBody = styled.div`
 	}
 `;
 const LogoContainerBody = styled.div`
-	width: 12.5rem;
-	height: 52.5rem;
+	/* width: 12.5rem;
+	height: 52.5rem; */
+	width: 8.375rem;
+	height: 35rem;
 	margin: 0 auto 4rem;
 `;
 const TaglineContainerBody = styled.div`
 	width: 17rem;
-	height: 4rem;
+	/* height: 4rem; */
 	margin: 0 auto;
 	text-align: center;
 `;
