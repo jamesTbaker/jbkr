@@ -148,6 +148,9 @@ export namespace foundation {
             const contactBodyContent: number;
             const contactBodyMediaImageLargeDevice: number;
             const contactBodyMediaVideoLargeDevice: number;
+            const articleSummaryContainer: number;
+            const articleSummaryBackgroundVideo: number;
+            const articleSummaryContent: number;
             const expandedNavigation: number;
         }
         const verticalAlignMiddle: string;

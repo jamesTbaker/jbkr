@@ -142,6 +142,9 @@ export declare const foundation: {
             contactBodyContent: number;
             contactBodyMediaImageLargeDevice: number;
             contactBodyMediaVideoLargeDevice: number;
+            articleSummaryContainer: number;
+            articleSummaryBackgroundVideo: number;
+            articleSummaryContent: number;
             expandedNavigation: number;
         };
         verticalAlignMiddle: string;

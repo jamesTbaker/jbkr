@@ -255,7 +255,7 @@ const ProfileSectionContainer = styled.section`
 		width: 100%;
 		max-width: 180rem;
 		margin: 0 auto;
-		padding: 7rem 0;
+		padding: 10rem 0 7rem;
 	}
 `;
 export const ProfileSection = ({

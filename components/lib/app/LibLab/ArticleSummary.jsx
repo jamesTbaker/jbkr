@@ -17,6 +17,7 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 	background-size: cover;
 	background-repeat: no-repeat;
 	text-decoration: none;
+	overflow: hidden;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 4rem;
 		${
@@ -43,6 +44,8 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+		position: relative;
+		z-index: ${zIndexNumber().articleSummaryContainer};
 		${
 			({ $images }) => `background-image: url('${$images.large.url}');`
 		}
@@ -106,8 +109,33 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 		}
 	}
 `;
+const VideoLargeDevice = styled.video.attrs(() => ({
+	'autoPlay': true,
+	'muted': true,
+	'loop': true,
+	'playsInline': true,
+	'tabIndex': '-1',
+	'aria-hidden': true,
+}))`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		/* height: 100%; */
+		object-position: center top;
+		object-fit: cover;
+		z-index: ${zIndexNumber().articleSummaryBackgroundVideo};
+	}
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
+	}
+`;
 const DescriptionAndMetaItemContainer = styled.div`
-	border-radius: .375rem;
+	border-radius: .375rem .375rem .375rem 0;
 	background-image:
 		linear-gradient(
 			to bottom,
@@ -133,6 +161,7 @@ const DescriptionAndMetaItemContainer = styled.div`
 				'format': 'string'
 			})}
 		);
+	z-index: ${zIndexNumber().articleSummaryContent};
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		padding: 2rem;
 	}
@@ -188,6 +217,7 @@ const TitleContainer = styled.div.attrs(() => {
 		}
 	}
 	padding-bottom: 3rem;
+	z-index: ${zIndexNumber().articleSummaryContent};
 
 	> span {
 		${deviceWidthQuery.only({ 'width': 's' })} {
@@ -237,6 +267,7 @@ export const ArticleSummary = ({
 	updateDate,
 	teaserDescription,
 	teaserImages,
+	featuredTeaserVideo,
 	type,
 }) => (
 	<ArticleSummaryContainer
@@ -244,6 +275,14 @@ export const ArticleSummary = ({
 		$images={teaserImages}
 		$slug={slug}
 	>
+		{
+			type === 'featured' &&
+			<VideoLargeDevice
+				poster={teaserImages.large.url}
+			>
+				<source src={featuredTeaserVideo.url} type="video/mp4" />
+			</VideoLargeDevice>
+		}
 		<TitleContainer
 			$type={type}
 		>

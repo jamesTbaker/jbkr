@@ -184,6 +184,14 @@ export const foundation = {
 			'contactBodyContent': 10,
 			'contactBodyMediaImageLargeDevice': 11,
 			'contactBodyMediaVideoLargeDevice': 12,
+
+			'articleSummaryContainer': 10,
+			// 'articleSummaryBackgroundImage': 11,
+			'articleSummaryBackgroundVideo': 12,
+			// 'articleSummaryBackgroundOverlay': 13,
+			// 'articleSummaryTitleUnderlay': 14,
+			'articleSummaryContent': 15,
+
 			'expandedNavigation': 100,
 		},
 		'verticalAlignMiddle': `position: relative;

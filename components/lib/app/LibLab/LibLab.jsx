@@ -115,6 +115,7 @@ export const LibLab = ({
 									updateDate={articles.featured[0].updateDate}
 									teaserDescription={articles.featured[0].teaserDescription}
 									teaserImages={articles.featured[0].teaserImages}
+									featuredTeaserVideo={articles.featured[0].featuredTeaserVideo}
 									type="featured"
 									key={articles.featured[0].key}
 								/>

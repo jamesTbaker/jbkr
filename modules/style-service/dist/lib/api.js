@@ -48,6 +48,9 @@ export const style = {
             color[kind][tone][level]) {
             colorObject = color[kind][tone][level];
         }
+        /**
+         * @todo sometimes, alpha is undefined and colorObject.a gets set to 0
+         */
         if (typeof (alpha) === 'number') {
             colorObject.a = alpha;
         }

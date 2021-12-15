@@ -281,9 +281,9 @@ const ArticleTableOfContentsFauxHeader = styled.span`
 			margin-left: 1.5rem;
 			margin-bottom: 1.5rem;
 			border-bottom: solid 0.125rem ${color({
-				'kind': 'Accent',
-				'tone': 'Sunshine',
-				'level': 1,
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 10,
 				'format': 'string',
 			})};
 		}
