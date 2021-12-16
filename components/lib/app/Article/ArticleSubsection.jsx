@@ -8,8 +8,10 @@ import {
 
 const ReturnMediaAndTextGridDataOnLargeWidthDevices = ({ subsection }) => ({
 	'horizontalGrid': subsection.subsectionMediaGravity ? true : false,
-	'mediaGridArea': subsection.subsectionMediaGravity ? subsection.subsectionMediaGravity : null,
-	'textGridArea': !subsection.subsectionMediaGravity ? null : subsection.subsectionMediaGravity === 'left' ? 'right' : 'left',
+	'mediaGridArea': subsection.subsectionMediaGravity ?
+		subsection.subsectionMediaGravity : null,
+	'textGridArea': !subsection.subsectionMediaGravity ? null :
+		subsection.subsectionMediaGravity === 'left' ? 'right' : 'left',
 });
 
 const ArticleSubsectionContainer = styled.div`
@@ -87,7 +89,8 @@ const SubsectionTextContainer = styled.div`
 `;
 
 export const ArticleSubsection = ({ subsection }) => {
-	const subsectionGrid = ReturnMediaAndTextGridDataOnLargeWidthDevices({ subsection });
+	const subsectionGrid =
+		ReturnMediaAndTextGridDataOnLargeWidthDevices({ subsection });
 	return (
 		<ArticleSubsectionContainer
 			gridArea={subsection.subsectionGravity}
@@ -95,7 +98,8 @@ export const ArticleSubsection = ({ subsection }) => {
 			{
 				subsection.subsectionTitle &&
 				<div
-					dangerouslySetInnerHTML={{'__html': subsection.subsectionTitle}}
+					dangerouslySetInnerHTML=
+						{{'__html': subsection.subsectionTitle}}
 				/>
 			}
 			<SubsectionBodyContainer
@@ -110,18 +114,21 @@ export const ArticleSubsection = ({ subsection }) => {
 							{
 								subsection.subsectionMediaComponents &&
 								subsection.subsectionMediaComponents[0] &&
-								subsection.subsectionMediaComponents.map((mediaComponentItem) =>
-									<SubsectionMediaItemContainer>
-										<MediaItem
+								subsection.subsectionMediaComponents
+									.map((mediaComponentItem) =>
+										<SubsectionMediaItemContainer
 											key={`media-component--${mediaComponentItem}`}
-											category="component"
-											specs={mediaComponentItem}
-										/>
-									</SubsectionMediaItemContainer>,
+										>
+											<MediaItem
+												category="component"
+												specs={mediaComponentItem}
+											/>
+										</SubsectionMediaItemContainer>,
 								)
 							}
 							{
-								subsection.subsectionMedia && subsection.subsectionMedia[0] &&
+								subsection.subsectionMedia &&
+								subsection.subsectionMedia[0] &&
 								subsection.subsectionMedia
 									.map((mediaItem) => {
 										if (
@@ -129,9 +136,10 @@ export const ArticleSubsection = ({ subsection }) => {
 												.includes(mediaItem.type)
 										) {
 											return (
-												<SubsectionMediaItemContainer>
+												<SubsectionMediaItemContainer
+													key={mediaItem.hash}
+												>
 													<MediaItem
-														key={mediaItem.hash}
 														category="image"
 														specs={mediaItem}
 													/>
@@ -143,9 +151,10 @@ export const ArticleSubsection = ({ subsection }) => {
 												.includes(mediaItem.type)
 										) {
 											return (
-												<SubsectionMediaItemContainer>
+												<SubsectionMediaItemContainer
+													key={mediaItem.hash}
+												>
 													<MediaItem
-														key={mediaItem.hash}
 														category="video"
 														specs={{
 															'video': mediaItem,
@@ -165,7 +174,8 @@ export const ArticleSubsection = ({ subsection }) => {
 							textGridArea={subsectionGrid.textGridArea}
 						>
 								<div
-									dangerouslySetInnerHTML={{'__html': subsection.subsectionText}}
+									dangerouslySetInnerHTML=
+										{{'__html': subsection.subsectionText}}
 								/>
 						</SubsectionTextContainer>
 					}

@@ -165,7 +165,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 10,
+			'level': 7,
 		},
 	},
 	'profile--skill-name--featured': {
@@ -395,7 +395,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 10,
+			'level': 7,
 		},
 	},
 	'article--tagline': {
