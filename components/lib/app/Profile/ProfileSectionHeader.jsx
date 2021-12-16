@@ -2,16 +2,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { color, deviceWidthQuery } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
-import { Line } from '../../..';
 
 
 const ProfileSectionTitle = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
 	> span {
-		line-height: 10rem;
 		border-radius: .375rem;
 		background-image: linear-gradient(
 			to bottom,
@@ -28,6 +22,15 @@ const ProfileSectionTitle = styled.div`
 				'format': 'string'
 			})} 100%
 		);
+	}
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		line-height: 6rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		line-height: 7rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		line-height: 10rem;
 	}
 `;
 const ProfileSectionTitleContainer = styled.h2`
