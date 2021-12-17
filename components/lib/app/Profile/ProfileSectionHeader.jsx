@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { color, deviceWidthQuery } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 
-
-const ProfileSectionTitle = styled.div`
+const ProfileSectionTitlePreface = styled.div`
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		line-height: 5rem;
+	}
+`;
+const ProfileSectionTitleMain = styled.div`
 	> span {
 		border-radius: .375rem;
 		background-image: linear-gradient(
@@ -63,19 +67,21 @@ export const ProfileSectionHeader = ({
 		>
 			{
 				title && title.preface &&
-				<Copy
-					kind="profile--section-title--preface"
-				>
-					{title.preface}&nbsp;
-				</Copy>
+				<ProfileSectionTitlePreface>
+					<Copy
+						kind="profile--section-title--preface"
+					>
+						{title.preface}&nbsp;
+					</Copy>
+				</ProfileSectionTitlePreface>
 			}
-			<ProfileSectionTitle>
+			<ProfileSectionTitleMain>
 				<Copy
 					kind="profile--section-title--main"
 				>
 					{title.main}
 				</Copy>
-			</ProfileSectionTitle>
+			</ProfileSectionTitleMain>
 		</ProfileSectionTitleContainer>
 	</ProfileSectionHeaderContainer>
 );

@@ -368,6 +368,7 @@ const ArticleTitle = styled.div`
 const ArticleTaglineAndMetaContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		width: calc(100% - 2rem);
+		max-width: 82rem;
 		margin: 0 2rem 0 0;
 		padding: 3rem 3rem 3rem 2rem;
 		border-radius: 0 .375rem 0 0;
@@ -532,6 +533,7 @@ const ArticleIntroVideoContainer = styled.div`
 
 const SimpleBody = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
+		max-width: 78rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: 75%;

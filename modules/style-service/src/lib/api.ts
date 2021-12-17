@@ -123,7 +123,7 @@ export const style: {[key:string]: any} = {
 				letter-spacing: ${typeObject.spacing}rem;
 			`;
 			if (spaced) {
-				typeString += `margin: 0 0 ${typeObject.height}rem 0;`;
+				typeString += `margin: ${typeObject.height / 2}rem 0;`;
 			}
 			return typeString;
 		},

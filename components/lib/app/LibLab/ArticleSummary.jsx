@@ -27,14 +27,14 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 			({ $type }) => {
 				if ($type === 'top' || $type === 'standard') {
 					return `
-						max-width: 768px;
+						max-width: 82rem;
 						padding: 8rem 2rem 0 0;
 					`;
 				}
 				if ($type === 'featured') {
 					return `
-						max-width: 960px;
-						padding: 12rem 2rem 0 0;
+						max-width: 96rem;
+						padding: 16rem 2rem 0 0;
 					`;
 				}
 			}
@@ -109,14 +109,16 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 		}
 	}
 `;
-const VideoLargeDevice = styled.video.attrs(() => ({
-	'autoPlay': true,
-	'muted': true,
-	'loop': true,
-	'playsInline': true,
-	'tabIndex': '-1',
-	'aria-hidden': true,
-}))`
+const VideoLargeDevice = styled.video.attrs(() => {
+	return {
+		'autoPlay': true,
+		'muted': true,
+		'loop': true,
+		'playsInline': true,
+		'tabIndex': '-1',
+		'aria-hidden': true,
+	};
+})`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
 	}
@@ -162,10 +164,10 @@ const DescriptionAndMetaItemContainer = styled.div`
 			})}
 		);
 	z-index: ${zIndexNumber().articleSummaryContent};
-	${deviceWidthQuery.only({ 'width': 's' })} {
+	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 2rem;
 	}
-	${deviceWidthQuery.not({ 'width': 's' })} {
+	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${
 			({ $type }) => {
 				if ($type === 'top') {

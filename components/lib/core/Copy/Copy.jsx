@@ -51,7 +51,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 14,
+			'level': 4,
 		},
 	},
 	'h4': {
@@ -63,7 +63,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 16,
+			'level': 4,
 		},
 	},
 	'h5': {
@@ -212,8 +212,8 @@ const propsSpecifications = {
 		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 15,
+			'tone': 'Base',
+			'level': 1,
 		},
 	},
 	'profile--experience--job-employer': {
@@ -225,7 +225,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 15,
+			'level': 3,
 		},
 	},
 	'profile--experience--job-dates': {
@@ -238,7 +238,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 15,
+			'level': 6,
 		},
 	},
 	'profile--education-certification--title': {
@@ -249,8 +249,8 @@ const propsSpecifications = {
 		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 15,
+			'tone': 'Base',
+			'level': 1,
 		},
 	},
 	'profile--education-certification--tagline': {
@@ -262,7 +262,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 15,
+			'level': 3,
 		},
 	},
 	'profile--education-certification--dates': {
@@ -274,7 +274,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 15,
+			'level': 6,
 		},
 	},
 	'profile--experience--volunteer-title': {
@@ -285,8 +285,8 @@ const propsSpecifications = {
 		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 15,
+			'tone': 'Base',
+			'level': 1,
 		},
 	},
 	'profile--experience--volunteer-for-whom': {
@@ -298,7 +298,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 15,
+			'level': 3,
 		},
 	},
 	'profile--experience--volunteer-dates': {
@@ -311,7 +311,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 15,
+			'level': 6,
 		},
 	},
 	'profile--experience--volunteer-description': {
@@ -323,7 +323,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 7,
+			'level': 8,
 		},
 	},
 	'profile--table-of-contents-item--anchor--large-device': {
