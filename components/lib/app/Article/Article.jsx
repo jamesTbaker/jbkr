@@ -319,8 +319,11 @@ const ArticleHeader = styled.div`
 	}
 	background-position: top 0 right 0;
 	background-repeat: no-repeat;
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+	${deviceWidthQuery.only({ 'width': 's' })} {
 		background-size: 100% auto;
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		background-size: 67% auto;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		background-size: 50% auto;

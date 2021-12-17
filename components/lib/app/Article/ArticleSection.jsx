@@ -35,6 +35,9 @@ const ArticleSectionContainer = styled.div`
 			'level': 10,
 			'format': 'string',
 		})};
+		div.header-container a.header-anchor[href] {
+			display: none;
+		}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		margin-top: 1rem;
@@ -50,7 +53,7 @@ const ArticleSectionContainer = styled.div`
 const SectionBriefStatementsContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding-left: 1rem;
-		margin-bottom: 4rem;
+		margin-bottom: 2rem;
 		border-left: solid .125rem ${color({
 			'kind': 'Accent',
 			'tone': 'Finch',
