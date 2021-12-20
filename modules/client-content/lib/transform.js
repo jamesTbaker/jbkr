@@ -1230,7 +1230,9 @@ export const returnTransformedLibLabScreenContent = ({
 	// add articles property to main container
 	allScreenProperties.main.articles = {
 		'featured': {},
-		'standard': {},
+		'primary': {},
+		'secondary': {},
+		'tertiary': {},
 	};
 	// set up an intermediate container for all articles, featured and standard
 	const articlesTransformed = [];
@@ -1349,8 +1351,18 @@ export const returnTransformedLibLabScreenContent = ({
 	allScreenProperties.main.articles.featured =
 		articlesTransformed.filter(article => article.featured);
 	// add the standard, transformed articles to the main container
-	allScreenProperties.main.articles.standard =
-		articlesTransformed.filter(article => !article.featured);
+	allScreenProperties.main.articles.primary =
+		articlesTransformed.filter((article, articleIndex) =>
+			!article.featured && [0, 1].includes(articleIndex),
+		);
+	allScreenProperties.main.articles.secondary =
+		articlesTransformed.filter((article, articleIndex) =>
+			!article.featured && [2, 3, 4].includes(articleIndex),
+		);
+	allScreenProperties.main.articles.tertiary =
+		articlesTransformed.filter((article, articleIndex) =>
+			!article.featured && articleIndex > 4,
+		);
 	// return the main container
 	return allScreenProperties;
 };

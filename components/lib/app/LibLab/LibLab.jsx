@@ -60,11 +60,18 @@ const TopArticleSummariesContainer = styled.div`
 	}
 `;
 const FeaturedArticleSummaryContainer = styled.div``;
-const StandardArticleSummariesContainer = styled.div`
+const SecondaryArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, calc((100% - 8rem) / 3));
 		grid-gap: 4rem;
+		padding-top: 4rem;
+	}
+`;
+const TertiaryArticleSummariesContainer = styled.div`
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		column-count: 2;
+		column-gap: 4rem;
 		padding-top: 4rem;
 	}
 `;
@@ -86,10 +93,7 @@ export const LibLab = ({
 					<TopAndFeaturedArticleSummariesContainer>
 						<TopArticleSummariesContainer>
 							{
-								articles.standard.filter(
-									(articleSummary, articleSummaryIndex) =>
-										articleSummaryIndex < 2
-								).map((articleSummary) =>
+								articles.primary.map((articleSummary) =>
 									<ArticleSummary
 										title={articleSummary.title}
 										tagline={articleSummary.tagline}
@@ -98,7 +102,7 @@ export const LibLab = ({
 										updateDate={articleSummary.updateDate}
 										teaserDescription={articleSummary.teaserDescription}
 										teaserImages={articleSummary.teaserImages}
-										type="top"
+										type="primary"
 										key={articleSummary.key}
 									/>
 								)
@@ -122,12 +126,9 @@ export const LibLab = ({
 							</FeaturedArticleSummaryContainer>
 						}
 					</TopAndFeaturedArticleSummariesContainer>
-					<StandardArticleSummariesContainer>
+					<SecondaryArticleSummariesContainer>
 						{
-							articles.standard.filter(
-								(articleSummary, articleSummaryIndex) =>
-									articleSummaryIndex >= 2
-							).map((articleSummary) =>
+							articles.secondary.map((articleSummary) =>
 								<ArticleSummary
 									title={articleSummary.title}
 									tagline={articleSummary.tagline}
@@ -136,12 +137,29 @@ export const LibLab = ({
 									updateDate={articleSummary.updateDate}
 									teaserDescription={articleSummary.teaserDescription}
 									teaserImages={articleSummary.teaserImages}
-									type="standard"
+									type="secondary"
 									key={articleSummary.key}
 								/>
 							)
 						}
-					</StandardArticleSummariesContainer>
+					</SecondaryArticleSummariesContainer>
+					<TertiaryArticleSummariesContainer>
+						{
+							articles.tertiary.map((articleSummary) =>
+								<ArticleSummary
+									title={articleSummary.title}
+									tagline={articleSummary.tagline}
+									slug={articleSummary.slug}
+									publicationDate={articleSummary.publicationDate}
+									updateDate={articleSummary.updateDate}
+									teaserDescription={articleSummary.teaserDescription}
+									teaserImages={articleSummary.teaserImages}
+									type="tertiary"
+									key={articleSummary.key}
+								/>
+							)
+						}
+					</TertiaryArticleSummariesContainer>
 				</LibLabBodyConstrainer>
 			</LibLabBody>
 		</MainContentContainer>
