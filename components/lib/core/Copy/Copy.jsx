@@ -11,7 +11,6 @@ const propsSpecifications = {
 		'size': '5xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -23,7 +22,6 @@ const propsSpecifications = {
 		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -35,7 +33,7 @@ const propsSpecifications = {
 		'size': '1xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spacedTopAndBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -47,7 +45,7 @@ const propsSpecifications = {
 		'size': 'l',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spacedTopAndBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -59,7 +57,7 @@ const propsSpecifications = {
 		'size': 'm',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spacedTopAndBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -71,7 +69,7 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spacedTopAndBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -83,7 +81,7 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': true,
+		'spacedBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -95,7 +93,7 @@ const propsSpecifications = {
 		'size': 'm',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': true,
+		'spacedBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -107,7 +105,7 @@ const propsSpecifications = {
 		'size': '2xs',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': true,
+		'spacedBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -131,7 +129,6 @@ const propsSpecifications = {
 		'size': '2xs',
 		'weight': 'bold',
 		'usage': 'display',
-		// 'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -149,7 +146,6 @@ const propsSpecifications = {
 		'size': 'm',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -161,11 +157,10 @@ const propsSpecifications = {
 		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
-			'kind': 'Neutral',
+			'kind': 'Accent',
 			'tone': 'Finch',
-			'level': 7,
+			'level': 1,
 		},
 	},
 	'profile--skill-name--featured': {
@@ -173,7 +168,6 @@ const propsSpecifications = {
 		'size': 'm',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -185,7 +179,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -197,7 +190,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -209,7 +201,7 @@ const propsSpecifications = {
 		'size': 'l',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
+		'spacedBottom': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -221,7 +213,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -234,7 +225,6 @@ const propsSpecifications = {
 		'weight': 'regular',
 		'slant': 'italic',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -246,7 +236,6 @@ const propsSpecifications = {
 		'size': 'l',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -258,7 +247,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -270,7 +258,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -282,7 +269,6 @@ const propsSpecifications = {
 		'size': 'l',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -294,7 +280,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -307,7 +292,6 @@ const propsSpecifications = {
 		'weight': 'regular',
 		'slant': 'italic',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -319,7 +303,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -331,7 +314,6 @@ const propsSpecifications = {
 		'size': 'm',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -343,7 +325,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -355,7 +336,6 @@ const propsSpecifications = {
 		'size': 'l',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -367,7 +347,6 @@ const propsSpecifications = {
 		'size': '1xs',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -379,7 +358,6 @@ const propsSpecifications = {
 		'size': '1xs',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -391,11 +369,10 @@ const propsSpecifications = {
 		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
-			'kind': 'Neutral',
+			'kind': 'Accent',
 			'tone': 'Finch',
-			'level': 7,
+			'level': 1,
 		},
 	},
 	'article--tagline': {
@@ -403,7 +380,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -415,11 +391,11 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'body',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 26,
+			'level': 24,
+			'alpha': .75,
 		},
 	},
 	'article--meta-item--not-large-device--date--primary': {
@@ -427,7 +403,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -439,7 +414,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -451,7 +425,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -463,7 +436,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'bold',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -475,7 +447,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -487,7 +458,6 @@ const propsSpecifications = {
 		'size': '2xs',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -510,7 +480,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': true,
 		'color': {
 			'kind': 'Brand',
 			'tone': 'Peony',
@@ -530,7 +499,6 @@ const propsSpecifications = {
 		'size': 's',
 		'weight': 'regular',
 		'usage': 'display',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -548,19 +516,11 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
-	'contact--item-anchor': {
-		'tag': 'span',
-		'size': 'm',
-		'weight': 'regular',
-		'usage': 'display',
-		'spaced': true,
-	},
 	'footer--copyright': {
 		'tag': 'p',
 		'size': '2xs',
 		'weight': 'regular',
 		'usage': 'body',
-		'spaced': false,
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
@@ -631,7 +591,6 @@ const copyKinds = [
 	'article--blockquote--large-device',
 	'contact--brand-tagline',
 	'contact--section-header',
-	'contact--item-anchor',
 	'footer--copyright',
 	'hidden-block',
 ];

@@ -30,9 +30,12 @@ const ArticleSectionContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding-top: 3rem;
 		border-top: solid .125rem ${color({
-			'kind': 'Neutral',
+			// 'kind': 'Neutral',
+			// 'tone': 'Finch',
+			// 'level': 10,
+			'kind': 'Accent',
 			'tone': 'Finch',
-			'level': 10,
+			'level': 1,
 			'format': 'string',
 		})};
 		div.header-container a.header-anchor[href] {
@@ -43,11 +46,19 @@ const ArticleSectionContainer = styled.div`
 		margin-top: 1rem;
 		padding-top: 4rem;
 		border-top: solid .125rem ${color({
-			'kind': 'Neutral',
+			// 'kind': 'Neutral',
+			// 'tone': 'Finch',
+			// 'level': 10,
+			'kind': 'Accent',
 			'tone': 'Finch',
-			'level': 10,
+			'level': 1,
 			'format': 'string',
 		})};
+	}
+`;
+const ArticleSectionConstrainer = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		max-width: 82rem;
 	}
 `;
 const SectionBriefStatementsContainer = styled.div`
@@ -119,69 +130,65 @@ const SubsectionsContainer = styled.div`
 `;
 export const ArticleSection = ({ section }) => (
 	<ArticleSectionContainer>
-		{
-			section.sectionTitle &&
-			<div
-				dangerouslySetInnerHTML={{'__html': section.sectionTitle}}
-			/>
-		}
-		{
-			section.sectionBriefStatements && section.sectionBriefStatements[0] &&
+		<ArticleSectionConstrainer>
+			{
+				section.sectionTitle &&
+				<div
+					dangerouslySetInnerHTML={{'__html': section.sectionTitle}}
+				/>
+			}
+			{
+				section.sectionBriefStatements && section.sectionBriefStatements[0] &&
 
-			<SectionBriefStatementsContainer>
-				{
-					section.sectionBriefStatements.map((briefStatement) =>
-						<SectionBriefStatementContainer
-							key={briefStatement.key}
-						>
-							<SectionBriefStatement>
-								<Copy
-									kind="article--brief-statement"
-									htmlContent={briefStatement.content}
-								/>
-							</SectionBriefStatement>
-						</SectionBriefStatementContainer>,
-					)
-				}
-			</SectionBriefStatementsContainer>
-		}
-		{
-			section.sectionPreface &&
-			<div
-				dangerouslySetInnerHTML={{'__html': section.sectionPreface}}
-			/>
-		}
-		{
-			section.subsections &&
-			<SubsectionsContainer
-				columns={ReturnContainerHasColumnsOnLargeWidthDevices({
-					'subsections': section.subsections,
-				})}
-				horizontalGrid={ReturnContainerHasHorizontalGridOnLargeWidthDevices({
-					'subsections': section.subsections,
-				})}
-			>
-				{
-					section.subsections.map((subsection) =>
-						<ArticleSubsection
-							key={subsection.subsectionID}
-							subsection={subsection}
-						/>,
-					)
-				}
-			</SubsectionsContainer>
-		}
-		{
-			/* section.sectionQuote &&
-			<div
-				dangerouslySetInnerHTML={{'__html': section.sectionQuote}}
-			/> */
-		}
-		{
-			section.sectionFooter &&
-			<div
-				dangerouslySetInnerHTML={{'__html': section.sectionFooter}}
-			/>
-		}
+				<SectionBriefStatementsContainer>
+					{
+						section.sectionBriefStatements.map((briefStatement) =>
+							<SectionBriefStatementContainer
+								key={briefStatement.key}
+							>
+								<SectionBriefStatement>
+									<Copy
+										kind="article--brief-statement"
+										htmlContent={briefStatement.content}
+									/>
+								</SectionBriefStatement>
+							</SectionBriefStatementContainer>,
+						)
+					}
+				</SectionBriefStatementsContainer>
+			}
+			{
+				section.sectionPreface &&
+				<div
+					dangerouslySetInnerHTML={{'__html': section.sectionPreface}}
+				/>
+			}
+			{
+				section.subsections &&
+				<SubsectionsContainer
+					columns={ReturnContainerHasColumnsOnLargeWidthDevices({
+						'subsections': section.subsections,
+					})}
+					horizontalGrid={ReturnContainerHasHorizontalGridOnLargeWidthDevices({
+						'subsections': section.subsections,
+					})}
+				>
+					{
+						section.subsections.map((subsection) =>
+							<ArticleSubsection
+								key={subsection.subsectionID}
+								subsection={subsection}
+							/>,
+						)
+					}
+				</SubsectionsContainer>
+			}
+			{
+				section.sectionFooter &&
+				<div
+					dangerouslySetInnerHTML={{'__html': section.sectionFooter}}
+				/>
+			}
+		</ArticleSectionConstrainer>
 	</ArticleSectionContainer>
 );

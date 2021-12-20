@@ -96,14 +96,16 @@ export const style: {[key:string]: any} = {
 			weight,
 			slant,
 			usage,
-			spaced,
+			spacedTopAndBottom,
+			spacedBottom,
 		}:{
 			deviceWidth: DeviceWidthToken,
 			size: TypeSizeKey,
 			weight?: TypeWeightKey,
 			slant?: TypeSlantKey,
 			usage?: TypeLineHeightKey,
-			spaced?: boolean,
+			spacedTopAndBottom?: boolean,
+			spacedBottom?: boolean,
 		}): string => {
 			const paramsClone = {
 				deviceWidth,
@@ -122,8 +124,11 @@ export const style: {[key:string]: any} = {
 				line-height: ${typeObject.height}rem;
 				letter-spacing: ${typeObject.spacing}rem;
 			`;
-			if (spaced) {
+			if (spacedTopAndBottom) {
 				typeString += `margin: ${typeObject.height / 2}rem 0;`;
+			}
+			if (spacedBottom) {
+				typeString += `margin: 0 0 ${typeObject.height}rem;`;
 			}
 			return typeString;
 		},

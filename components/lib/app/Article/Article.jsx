@@ -523,9 +523,12 @@ const ArticleBody = styled.div`
 const ArticleIntroVideoContainer = styled.div`
 	padding: 4rem 0 3rem;
 	border-top: solid .125rem ${color({
-		'kind': 'Neutral',
+		// 'kind': 'Neutral',
+		// 'tone': 'Finch',
+		// 'level': 10,
+		'kind': 'Accent',
 		'tone': 'Finch',
-		'level': 10,
+		'level': 1,
 		'format': 'string',
 	})};
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -589,9 +592,12 @@ export const Article = ({
 											width={10}
 											height="s"
 											color={{
-												'kind': 'Accent',
+												// 'kind': 'Accent',
+												// 'tone': 'Finch',
+												// 'level': 2,
+												'kind': 'Neutral',
 												'tone': 'Finch',
-												'level': 2,
+												'level': 30,
 												'format': 'string',
 											}}
 										/>

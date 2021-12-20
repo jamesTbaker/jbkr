@@ -71,7 +71,7 @@ export const style = {
          */
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         // 'foundation': (): { [key: string]: any} => foundation.type,
-        'style': ({ deviceWidth, size, weight, slant, usage, spaced, }) => {
+        'style': ({ deviceWidth, size, weight, slant, usage, spacedTopAndBottom, spacedBottom, }) => {
             const paramsClone = {
                 deviceWidth,
                 size,
@@ -87,8 +87,11 @@ export const style = {
 				line-height: ${typeObject.height}rem;
 				letter-spacing: ${typeObject.spacing}rem;
 			`;
-            if (spaced) {
+            if (spacedTopAndBottom) {
                 typeString += `margin: ${typeObject.height / 2}rem 0;`;
+            }
+            if (spacedBottom) {
+                typeString += `margin: 0 0 ${typeObject.height}rem;`;
             }
             return typeString;
         },
