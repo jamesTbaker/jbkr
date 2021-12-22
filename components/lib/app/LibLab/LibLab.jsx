@@ -28,7 +28,7 @@ const MainContentContainer = styled.main.attrs(() => {
 })``;
 const LibLabHeader = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 0 2rem 4rem 2rem;
+		padding: 0 2rem 0 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: calc(100% - 4rem);
@@ -54,11 +54,7 @@ const TopAndFeaturedArticleSummariesContainer = styled.div`
 		grid-column-gap: 4rem;
 	}
 `;
-const TopArticleSummariesContainer = styled.div`
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		padding-top: 4rem;
-	}
-`;
+const TopArticleSummariesContainer = styled.div``;
 const FeaturedArticleSummaryContainer = styled.div``;
 const SecondaryArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -70,9 +66,13 @@ const SecondaryArticleSummariesContainer = styled.div`
 `;
 const TertiaryArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		column-count: 2;
-		column-gap: 4rem;
-		padding-top: 4rem;
+		/* column-count: 2;
+		column-gap: 4rem; */
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
 	}
 `;
 export const LibLab = ({

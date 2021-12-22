@@ -331,9 +331,20 @@ const propsSpecifications = {
 			'level': 3,
 		},
 	},
-	'article-summary--title-anchor': {
+	'article-summary--title-anchor--enlarged': {
 		'tag': 'span',
 		'size': 'l',
+		'weight': 'bold',
+		'usage': 'display',
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 7,
+		},
+	},
+	'article-summary--title-anchor': {
+		'tag': 'span',
+		'size': 'm',
 		'weight': 'bold',
 		'usage': 'display',
 		'color': {
@@ -574,6 +585,7 @@ const copyKinds = [
 	'profile--table-of-contents-item--anchor--large-device',
 	'profile--table-of-contents-item--anchor--not-large-device',
 	'article-summary--title-anchor',
+	'article-summary--title-anchor--enlarged',
 	'article-summary--meta-item--label',
 	'article-summary--meta-item--value',
 	'article--title',
