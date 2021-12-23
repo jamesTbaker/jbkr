@@ -41,12 +41,14 @@ const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 				if ($type === 'primary' || $type === 'secondary') {
 					returnValue += `
 						max-width: 82rem;
-						padding: 8rem 2rem 0 0;
+						padding: 8rem 2rem 0 0;˜
 					`;
 				}
 				if ($type === 'tertiary') {
 					returnValue += `
 						max-width: 82rem;
+						padding: 7rem 0 0 0;
+						margin-top: 4rem;
 					`;
 				}
 				return returnValue;
@@ -188,7 +190,21 @@ const TitleContainer = styled.div.attrs(() => {
 	};
 })`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding-left: 2rem;
+		${
+			({ $type }) => {
+				if ($type !== 'tertiary') {
+					return `
+						padding-left: 2rem;
+					`;
+				}
+				if ($type === 'tertiary') {
+					return `
+						width: 80%;
+						padding: 0 0 1rem 6rem;
+					`;
+				}
+			}
+		}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${
@@ -210,7 +226,7 @@ const TitleContainer = styled.div.attrs(() => {
 				}
 				if ($type === 'tertiary') {
 					return `
-						width: 67%;
+						width: 80%;
 						padding: 0 0 1rem 6rem;
 					`;
 				}
@@ -220,15 +236,43 @@ const TitleContainer = styled.div.attrs(() => {
 	z-index: ${zIndexNumber().articleSummaryContent};
 
 	> span {
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			line-height: 4rem;
+		${
+			({ $type }) => {
+				if ($type !== 'tertiary') {
+					return `
+						${deviceWidthQuery.only({ 'width': 's' })} {
+							line-height: 4rem;
+						}
+						${deviceWidthQuery.only({ 'width': 'm' })} {
+							line-height: 5rem;
+						}
+						${deviceWidthQuery.only({ 'width': 'l' })} {
+							line-height: 5rem;
+						}
+					`;
+				}
+				if ($type === 'tertiary') {
+					return `
+						${deviceWidthQuery.only({ 'width': 's' })} {
+							line-height: 3rem;
+						}
+						${deviceWidthQuery.only({ 'width': 'm' })} {
+							line-height: 4rem;
+						}
+						${deviceWidthQuery.only({ 'width': 'l' })} {
+							line-height: 4rem;
+						}
+					`;
+				}
+			}
 		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			line-height: 5rem;
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			line-height: 5rem;
-		}
+
+
+
+
+
+
+
 		transition: all 250ms ease;
 		background-position-y: 10%;
 		background-image: linear-gradient(
@@ -290,7 +334,21 @@ const DescriptionAndMetaItemContainer = styled.div`
 		}
 	}
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 2rem;
+
+		${
+			({ $type }) => {
+				if ($type !== 'tertiary') {
+					return `
+						padding: 2rem;
+					`;
+				}
+				if ($type === 'tertiary') {
+					return `
+						padding: 0 0 0 17rem;
+					`;
+				}
+			}
+		}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${
@@ -319,16 +377,41 @@ const DescriptionAndMetaItemContainer = styled.div`
 		}
 	}
 `;
-const DescriptionContainer = styled.div``;
+const DescriptionContainer = styled.div`
+	${
+		({ $type }) => {
+			if ($type === 'tertiary') {
+				return `
+					p {
+						margin-bottom: 1rem;
+					}
+				`;
+			}
+		}
+	}
+`;
 const MetaItemContainer = styled.div`
 	max-width: 15rem;
-	padding: 2rem 0;
 	border-top: solid .125rem ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
 		'level': 33,
 		'format': 'string',
 	})};
+	${
+		({ $type }) => {
+			if ($type !== 'tertiary') {
+				return `
+					padding: 2rem 0;
+				`;
+			}
+			if ($type === 'tertiary') {
+				return `
+					padding: 1rem 0 2rem;
+				`;
+			}
+		}
+	}
 `;
 export const ArticleSummary = ({
 	title,
@@ -376,14 +459,18 @@ export const ArticleSummary = ({
 		>
 			{
 				teaserDescription &&
-				<DescriptionContainer>
+				<DescriptionContainer
+					$type={type}
+				>
 					<Copy
 						kind="copy-container--standard"
 						htmlContent={teaserDescription}
 					/>
 				</DescriptionContainer>
 			}
-			<MetaItemContainer>
+			<MetaItemContainer
+				$type={type}
+			>
 				{
 					updateDate &&
 					<>
