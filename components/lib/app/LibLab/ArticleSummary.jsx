@@ -194,7 +194,7 @@ const TitleContainer = styled.div.attrs(() => {
 			({ $type }) => {
 				if ($type !== 'tertiary') {
 					return `
-						padding-left: 2rem;
+						padding: 0 0 3rem 2rem;
 					`;
 				}
 				if ($type === 'tertiary') {
