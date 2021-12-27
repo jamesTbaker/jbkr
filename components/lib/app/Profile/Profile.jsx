@@ -1,6 +1,8 @@
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import useInView from 'react-cool-inview';
+import { gsap } from 'gsap';
 import {
 	SkillWithReactKey,
 	ProfessionalExperienceWithReactKey,
@@ -55,6 +57,7 @@ const ProfileHeaderContentConstrainer = styled.div`
 const LandmarkTitleAppendix = styled.span`
 	${hiddenInline}
 `;
+const LandmarkTitleContainer = styled.div``;
 const BrandContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -405,7 +408,7 @@ export const Profile = ({
 	sectionProperties,
 	media,
 }) => {
-	const { observe: observeSkillsBusiness, inView: inViewSkillsBusiness } = useInView({
+	/* const { observe: observeSkillsBusiness, inView: inViewSkillsBusiness } = useInView({
 		onEnter: ({ unobserve }) => unobserve(),
 	});
 	const { observe: observeSkillsDesign, inView: inViewSkillsDesign } = useInView({
@@ -419,7 +422,57 @@ export const Profile = ({
 	});
 	const { observe: observeVounteerExperiences, inView: inViewVounteerExperiences } = useInView({
 		onEnter: ({ unobserve }) => unobserve(),
-	});
+	}); */
+	const profileTimelineRef = useRef();
+	const profileHeaderLandmarkRef = useRef();
+	const profileHeaderBrandRef = useRef();
+	const profileSkillsTechnicalSectionRef = useRef();
+	const profileSkillsBusinessSectionRef = useRef();
+	const profileSkillsDesignSectionRef = useRef();
+	const profileProfessionalExperiencesSectionRef = useRef();
+	useEffect(() => {
+		profileTimelineRef.current = gsap.timeline({
+			defaults: {
+				duration: 1,
+				ease: 'power4.out',
+			},
+			scrollTrigger: {
+				trigger: profileSkillsBusinessSectionRef,
+				markers: true,
+				scrub: 1
+			},
+		})
+		.fromTo(
+			profileHeaderLandmarkRef.current,
+			{
+				opacity: 0,
+				y: 48,
+			}, {
+				opacity: 1,
+				y: 0,
+			}
+		)
+		.fromTo(
+			profileHeaderBrandRef.current,
+			{
+				opacity: 0,
+			}, {
+				opacity: 1,
+			},
+			'<75%'
+		)
+		.fromTo(
+			profileSkillsTechnicalSectionRef.current,
+			{
+				opacity: 0,
+				y: 48,
+			}, {
+				opacity: 1,
+				y: 0,
+			},
+			'<'
+		);
+	}, [])
 	return (
 		<ProfileContainer>
 			<MainContentContainer
@@ -427,117 +480,61 @@ export const Profile = ({
 			>
 				<ProfileHeader>
 					<ProfileHeaderContentConstrainer>
-						<BrandContainer>
+						<BrandContainer
+							ref={profileHeaderBrandRef}
+						>
 							<Brand
 								contextColor="onDark"
 							/>
 						</BrandContainer>
-						<Copy
-							kind="landmark-title"
+						<LandmarkTitleContainer
+							ref={profileHeaderLandmarkRef}
 						>
-							{title}<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
-						</Copy>
+							<Copy
+								kind="landmark-title"
+
+							>
+								{title}<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
+							</Copy>
+						</LandmarkTitleContainer>
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
-				<div>
-					<ProfileSection
-						videoLargeScreen={media.sampleBackgroundVideoLarge}
-						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-						imageLargeScreen={media.sampleBackgroundImageLarge}
-						imageNotLargeScreen={media.sampleBackgroundImageSmall}
-						inView={true}
-					>
-						<ProfileSectionHeader
-							content={sectionProperties.technicalSkills}
-						/>
-						{
-							skills.technical.featured && skills.technical.featured[0] &&
+				<ProfileSection
+					videoLargeScreen={media.sampleBackgroundVideoLarge}
+					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					ref={profileSkillsTechnicalSectionRef}
+				>
+					<ProfileSectionHeader
+						content={sectionProperties.technicalSkills}
+					/>
+					{
+						skills.technical.featured && skills.technical.featured[0] &&
 
-							<>
-								<HiddenH3>Featured</HiddenH3>
-								<FeaturedVisualizedSkillsContainer>
-									{
-										skills.technical.featured.map((skill) =>
-											<ProfileSkillVisualization
-												key={skill.key}
-												skill={skill}
-												featured
-											/>
-										)
-									}
-								</FeaturedVisualizedSkillsContainer>
-							</>
-						}
-						{
-							skills.technical.standard && skills.technical.standard[0] &&
+						<>
+							<HiddenH3>Featured</HiddenH3>
+							<FeaturedVisualizedSkillsContainer>
+								{
+									skills.technical.featured.map((skill) =>
+										<ProfileSkillVisualization
+											key={skill.key}
+											skill={skill}
+											featured
+										/>
+									)
+								}
+							</FeaturedVisualizedSkillsContainer>
+						</>
+					}
+					{
+						skills.technical.standard && skills.technical.standard[0] &&
 
-							<>
-								<HiddenH3>Standard</HiddenH3>
-								<StandardVisualizedSkillsContainer>
-									{
-										skills.technical.standard.map((skill) =>
-											<ProfileSkillVisualization
-												key={skill.key}
-												skill={skill}
-											/>
-										)
-									}
-								</StandardVisualizedSkillsContainer>
-							</>
-						}
-					</ProfileSection>
-				</div>
-				<div ref={observeSkillsBusiness}>
-					<ProfileSection
-						videoLargeScreen={media.sampleTwoBackgroundVideoLarge}
-						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-						imageLargeScreen={media.sampleBackgroundImageLarge}
-						imageNotLargeScreen={media.sampleBackgroundImageSmall}
-						inView={inViewSkillsBusiness}
-					>
-						<ProfileSectionHeader
-							content={sectionProperties.businessSkills}
-						/>
-						{
-							skills.business.standard && skills.business.standard[0] &&
-
-							<>
-								<SkillsStatementsList>
-									{
-										skills.business.standard.map((skill) =>
-											<SkillsStatementsListItem
-												key={skill.key}
-											>
-												<Copy
-													kind="profile--skill-statement"
-												>
-													{skill.name}
-												</Copy>
-											</SkillsStatementsListItem>
-										)
-									}
-								</SkillsStatementsList>
-							</>
-						}
-					</ProfileSection>
-				</div>
-				<div ref={observeSkillsDesign}>
-					<ProfileSection
-						videoLargeScreen={media.sampleBackgroundVideoLarge}
-						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-						imageLargeScreen={media.sampleBackgroundImageLarge}
-						imageNotLargeScreen={media.sampleBackgroundImageSmall}
-						inView={inViewSkillsDesign}
-					>
-						<ProfileSectionHeader
-							content={sectionProperties.designSkills}
-						/>
-						{
-							skills.design.standard && skills.design.standard[0] &&
-
+						<>
+							<HiddenH3>Standard</HiddenH3>
 							<StandardVisualizedSkillsContainer>
 								{
-									skills.design.standard.map((skill) =>
+									skills.technical.standard.map((skill) =>
 										<ProfileSkillVisualization
 											key={skill.key}
 											skill={skill}
@@ -545,10 +542,67 @@ export const Profile = ({
 									)
 								}
 							</StandardVisualizedSkillsContainer>
-						}
-					</ProfileSection>
-				</div>
-				<div ref={observeProfessionalExperiences}>
+						</>
+					}
+				</ProfileSection>
+				<ProfileSection
+					videoLargeScreen={media.sampleTwoBackgroundVideoLarge}
+					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					ref={profileSkillsBusinessSectionRef}
+				>
+					<ProfileSectionHeader
+						content={sectionProperties.businessSkills}
+					/>
+					{
+						skills.business.standard && skills.business.standard[0] &&
+
+						<>
+							<SkillsStatementsList>
+								{
+									skills.business.standard.map((skill) =>
+										<SkillsStatementsListItem
+											key={skill.key}
+										>
+											<Copy
+												kind="profile--skill-statement"
+											>
+												{skill.name}
+											</Copy>
+										</SkillsStatementsListItem>
+									)
+								}
+							</SkillsStatementsList>
+						</>
+					}
+				</ProfileSection>
+				<ProfileSection
+					videoLargeScreen={media.sampleBackgroundVideoLarge}
+					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					ref={profileSkillsDesignSectionRef}
+				>
+					<ProfileSectionHeader
+						content={sectionProperties.designSkills}
+					/>
+					{
+						skills.design.standard && skills.design.standard[0] &&
+
+						<StandardVisualizedSkillsContainer>
+							{
+								skills.design.standard.map((skill) =>
+									<ProfileSkillVisualization
+										key={skill.key}
+										skill={skill}
+									/>
+								)
+							}
+						</StandardVisualizedSkillsContainer>
+					}
+				</ProfileSection>
+				{/* <div ref={observeProfessionalExperiences}>
 					<ProfileSection
 						videoLargeScreen={media.sampleBackgroundVideoLarge}
 						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
@@ -657,7 +711,7 @@ export const Profile = ({
 						}
 						</VolunteerExperiencesContainer>
 					</ProfileSection>
-				</div>
+				</div> */}
 			</MainContentContainer>
 			<CompressedTableOfContentsContainer>
 				<CompressedTableOfContentsCollapsibleContainer>
@@ -677,7 +731,7 @@ export const Profile = ({
 					</Collapsible>
 				</CompressedTableOfContentsCollapsibleContainer>
 			</CompressedTableOfContentsContainer>
-			<ExpandedTableOfContentsContainer>
+			{/* <ExpandedTableOfContentsContainer>
 				<ExpandedTableOfContentsListContainer>
 					<ExpandedTableOfContentsList>
 						{
@@ -700,7 +754,7 @@ export const Profile = ({
 						}
 					</ExpandedTableOfContentsList>
 				</ExpandedTableOfContentsListContainer>
-			</ExpandedTableOfContentsContainer>
+			</ExpandedTableOfContentsContainer> */}
 		</ProfileContainer>
 	);
 };

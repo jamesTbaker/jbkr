@@ -1,3 +1,4 @@
+import { forwardRef, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Image, Video } from '@jbkr/models-react';
@@ -255,19 +256,40 @@ const ProfileSectionContainer = styled.section`
 		max-width: 180rem;
 		margin: 0 auto;
 		padding: 10rem 0 7rem;
+		&:nth-child(2) {
+			border-radius: .375rem .375rem 0 0;
+			overflow: hidden;
+		}
+		&:last-child {
+			border-radius: 0 0 .375rem .375rem;
+			overflow: hidden;
+		}
 	}
 `;
-export const ProfileSection = ({
+export const ProfileSection = forwardRef(({
 	videoLargeScreen,
 	videoNotLargeScreen,
 	imageLargeScreen,
 	imageNotLargeScreen,
 	inView,
 	children,
-}) => (
-	<ProfileSectionContainer>
+}, ref) => (
+	<ProfileSectionContainer
+		ref={ref}
+	>
+		<VideoLargeDevice
+			poster={imageLargeScreen.url}
+		>
+			<source src={videoLargeScreen.url} type="video/mp4" />
+		</VideoLargeDevice>
+		<VideoNotLargeDevice
+			poster={imageNotLargeScreen.url}
+		>
+			<source src={videoNotLargeScreen.url} type="video/mp4" />
+		</VideoNotLargeDevice>
+
 		{
-			inView &&
+			/* inView &&
 			<>
 				<VideoLargeDevice
 					poster={imageLargeScreen.url}
@@ -279,7 +301,7 @@ export const ProfileSection = ({
 				>
 					<source src={videoNotLargeScreen.url} type="video/mp4" />
 				</VideoNotLargeDevice>
-			</>
+			</> */
 		}
 		<ImageLargeDevice
 			$imageURL={imageLargeScreen.url}
@@ -295,7 +317,7 @@ export const ProfileSection = ({
 			</ContentConstrainer>
 		</ContentContainer>
 	</ProfileSectionContainer>
-);
+));
 
 ProfileSection.propTypes = {
 	'videoLargeScreen': Video,
