@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import useInView from 'react-cool-inview';
@@ -409,40 +409,36 @@ export const Profile = ({
 	sectionProperties,
 	media,
 }) => {
-	/* const { observe: observeSkillsBusiness, inView: inViewSkillsBusiness } = useInView({
-		onEnter: ({ unobserve }) => unobserve(),
-	});
-	const { observe: observeSkillsDesign, inView: inViewSkillsDesign } = useInView({
-		onEnter: ({ unobserve }) => unobserve(),
-	});
-	const { observe: observeProfessionalExperiences, inView: inViewProfessionalExperiences } = useInView({
-		onEnter: ({ unobserve }) => unobserve(),
-	});
-	const { observe: observeEducationCertifications, inView: inViewEducationCertifications } = useInView({
-		onEnter: ({ unobserve }) => unobserve(),
-	});
-	const { observe: observeVounteerExperiences, inView: inViewVounteerExperiences } = useInView({
-		onEnter: ({ unobserve }) => unobserve(),
-	}); */
-
-	const profileHeaderLandmarkRef = useRef();
+		const profileHeaderLandmarkRef = useRef();
 	const profileHeaderBrandRef = useRef();
-	const profileSkillsTechnicalSectionRef = useRef();
-	const profileSkillsBusinessSectionRef = useRef();
-	const profileSkillsDesignSectionRef = useRef();
-	const profileProfessionalExperiencesSectionRef = useRef();
+	const profileSkillsTechnicalRef = useRef();
+	const profileSkillsBusinessRef = useRef();
+	const profileSkillsDesignRef = useRef();
+	const profileProfessionalExperiencesRef = useRef();
+	const profileEducationAndCertificationsRef = useRef();
+	const profileVolunteerExperiencesRef = useRef();
+
+
+
+	const [profileSkillsBusinessViewed,
+			setProfileSkillsBusinessViewed] = useState(false);
+	const [profileSkillsDesignViewed,
+			setProfileSkillsDesignViewed] = useState(false);
+	const [profileProfessionalExperiencesViewed,
+			setProfileProfessionalExperiencesViewed] = useState(false);
+	const [profileEducationAndCertificationsViewed,
+			setProfileEducationAndCertificationsViewed] = useState(false);
+	const [profileVolunteerExperiencesViewed,
+			setProfileVolunteerExperiencesViewed] = useState(false);
+
+
+
+
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
 		gsap.defaults({
 			ease: 'power4.out',
 			duration: 1.5,
-			scrollTrigger: {
-			markers: {
-				startColor: 'yellow',
-				endColor: 'yellow',
-				fontSize: '2rem',
-			},
-			},
 		});
 
 		gsap.from(
@@ -460,7 +456,7 @@ export const Profile = ({
 			'<75%'
 		);
 		gsap.from(
-			profileSkillsTechnicalSectionRef.current,
+			profileSkillsTechnicalRef.current,
 			{
 				opacity: 0,
 				y: 48,
@@ -468,21 +464,82 @@ export const Profile = ({
 			'<'
 		);
 		gsap.from(
-			profileSkillsBusinessSectionRef.current,
+			profileSkillsBusinessRef.current,
 			{
 				opacity: 0,
 				y: 48,
 				scrollTrigger: {
-					trigger: profileSkillsBusinessSectionRef.current,
+					trigger: profileSkillsBusinessRef.current,
 					start: "top 90%",
-					end: "top 50%",
+					end: "top 60%",
 					scrub: 4,
-					// invalidateOnRefresh: true
-					/* markers: {
-						startColor: 'yellow',
-						endColor: 'yellow',
-						fontSize: '2rem',
-					}, */
+					onEnter() {
+						setProfileSkillsBusinessViewed(true)
+					},
+				},
+			},
+		);
+		gsap.from(
+			profileSkillsDesignRef.current,
+			{
+				opacity: 0,
+				y: 48,
+				scrollTrigger: {
+					trigger: profileSkillsDesignRef.current,
+					start: "top 90%",
+					end: "top 60%",
+					scrub: 4,
+					onEnter() {
+						setProfileSkillsDesignViewed(true)
+					},
+				},
+			},
+		);
+		gsap.from(
+			profileProfessionalExperiencesRef.current,
+			{
+				opacity: 0,
+				y: 48,
+				scrollTrigger: {
+					trigger: profileProfessionalExperiencesRef.current,
+					start: "top 90%",
+					end: "top 60%",
+					scrub: 4,
+					onEnter() {
+						setProfileProfessionalExperiencesViewed(true)
+					},
+				},
+			},
+		);
+		gsap.from(
+			profileEducationAndCertificationsRef.current,
+			{
+				opacity: 0,
+				y: 48,
+				scrollTrigger: {
+					trigger: profileEducationAndCertificationsRef.current,
+					start: "top 90%",
+					end: "top 60%",
+					scrub: 4,
+					onEnter() {
+						setProfileEducationAndCertificationsViewed(true)
+					},
+				},
+			},
+		);
+		gsap.from(
+			profileVolunteerExperiencesRef.current,
+			{
+				opacity: 0,
+				y: 48,
+				scrollTrigger: {
+					trigger: profileVolunteerExperiencesRef.current,
+					start: "top 90%",
+					end: "top 60%",
+					scrub: 4,
+					onEnter() {
+						setProfileVolunteerExperiencesViewed(true)
+					},
 				},
 			},
 		);
@@ -518,7 +575,8 @@ export const Profile = ({
 					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
 					imageLargeScreen={media.sampleBackgroundImageLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					ref={profileSkillsTechnicalSectionRef}
+					viewed={true}
+					ref={profileSkillsTechnicalRef}
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.technicalSkills}
@@ -564,7 +622,8 @@ export const Profile = ({
 					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
 					imageLargeScreen={media.sampleBackgroundImageLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					ref={profileSkillsBusinessSectionRef}
+					viewed={profileSkillsBusinessViewed}
+					ref={profileSkillsBusinessRef}
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.businessSkills}
@@ -596,7 +655,8 @@ export const Profile = ({
 					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
 					imageLargeScreen={media.sampleBackgroundImageLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					ref={profileSkillsDesignSectionRef}
+					viewed={profileSkillsDesignViewed}
+					ref={profileSkillsDesignRef}
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.designSkills}
@@ -616,116 +676,113 @@ export const Profile = ({
 						</StandardVisualizedSkillsContainer>
 					}
 				</ProfileSection>
-				{/* <div ref={observeProfessionalExperiences}>
-					<ProfileSection
-						videoLargeScreen={media.sampleBackgroundVideoLarge}
-						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-						imageLargeScreen={media.sampleBackgroundImageLarge}
-						imageNotLargeScreen={media.sampleBackgroundImageSmall}
-						inView={inViewProfessionalExperiences}
-					>
-						<ProfileSectionHeader
-							content={sectionProperties.professionalExperiences}
-						/>
-						<ProfessionalExperiencesContainer>
-						{
-							professionalExperiences.map((professionalExperience) =>
-								<ProfileProfessionalExperience
-									key={professionalExperience.key}
-									professionalExperience={professionalExperience}
-								/>
-							)
-						}
-						</ProfessionalExperiencesContainer>
-					</ProfileSection>
-				</div>
-				<div ref={observeEducationCertifications}>
-					<ProfileSection
-						videoLargeScreen={media.sampleBackgroundVideoLarge}
-						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-						imageLargeScreen={media.sampleBackgroundImageLarge}
-						imageNotLargeScreen={media.sampleBackgroundImageSmall}
-						inView={inViewEducationCertifications}
-					>
-						<ProfileSectionHeader
-							content={sectionProperties.educationAndCertifications}
-						/>
-						<EducationAndCertificationsContainer>
-							<EducationAndCertificationsSubset
-								gridArea="certification"
-							>
-								{
-									educationCertifications.filter(
-										educationCertification =>
-										educationCertification.type === 'certification'
-									).map(
-										educationCertification =>
-										<ProfileEducationCertification
-											key={educationCertification.key}
-											educationCertification={educationCertification}
-										/>
-									)
-								}
-							</EducationAndCertificationsSubset>
-							<EducationAndCertificationsSubset
-								gridArea="graduate"
-							>
-								{
-									educationCertifications.filter(
-										educationCertification =>
-										educationCertification.type === 'graduate'
-									).map(
-										educationCertification =>
-										<ProfileEducationCertification
-											key={educationCertification.key}
-											educationCertification={educationCertification}
-										/>
-									)
-								}
-							</EducationAndCertificationsSubset>
-							<EducationAndCertificationsSubset
-								gridArea="undergraduate"
-							>
-								{
-									educationCertifications.filter(
-										educationCertification =>
-										educationCertification.type === 'undergraduate'
-									).map(
-										educationCertification =>
-										<ProfileEducationCertification
-											key={educationCertification.key}
-											educationCertification={educationCertification}
-										/>
-									)
-								}
-							</EducationAndCertificationsSubset>
-						</EducationAndCertificationsContainer>
-					</ProfileSection>
-				</div>
-				<div ref={observeVounteerExperiences}>
-					<ProfileSection
-						videoLargeScreen={media.sampleBackgroundVideoLarge}
-						videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-						imageLargeScreen={media.sampleBackgroundImageLarge}
-						imageNotLargeScreen={media.sampleBackgroundImageSmall}
-						inView={inViewVounteerExperiences}
-					>
-						<ProfileSectionHeader
-							content={sectionProperties.volunteerExperiences}
-						/>
-						<VolunteerExperiencesContainer>
-						{
-							volunteerExperiences.map((volunteerExperience, volunteerExperienceIndex) =>
-								<ProfileVolunteerExperience
-									key={volunteerExperience.key}
-									volunteerExperience={volunteerExperience}
-									gridArea={`volunteerExperience${volunteerExperienceIndex}`}
-								/>
-							)
-						}
-						</VolunteerExperiencesContainer>
-					</ProfileSection>
-				</div> */}
+				<ProfileSection
+					videoLargeScreen={media.sampleBackgroundVideoLarge}
+					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					viewed={profileProfessionalExperiencesViewed}
+					ref={profileProfessionalExperiencesRef}
+				>
+					<ProfileSectionHeader
+						content={sectionProperties.professionalExperiences}
+					/>
+					<ProfessionalExperiencesContainer>
+					{
+						professionalExperiences.map((professionalExperience) =>
+							<ProfileProfessionalExperience
+								key={professionalExperience.key}
+								professionalExperience={professionalExperience}
+							/>
+						)
+					}
+					</ProfessionalExperiencesContainer>
+				</ProfileSection>
+				<ProfileSection
+					videoLargeScreen={media.sampleBackgroundVideoLarge}
+					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					viewed={profileEducationAndCertificationsViewed}
+					ref={profileEducationAndCertificationsRef}
+				>
+					<ProfileSectionHeader
+						content={sectionProperties.educationAndCertifications}
+					/>
+					<EducationAndCertificationsContainer>
+						<EducationAndCertificationsSubset
+							gridArea="certification"
+						>
+							{
+								educationCertifications.filter(
+									educationCertification =>
+									educationCertification.type === 'certification'
+								).map(
+									educationCertification =>
+									<ProfileEducationCertification
+										key={educationCertification.key}
+										educationCertification={educationCertification}
+									/>
+								)
+							}
+						</EducationAndCertificationsSubset>
+						<EducationAndCertificationsSubset
+							gridArea="graduate"
+						>
+							{
+								educationCertifications.filter(
+									educationCertification =>
+									educationCertification.type === 'graduate'
+								).map(
+									educationCertification =>
+									<ProfileEducationCertification
+										key={educationCertification.key}
+										educationCertification={educationCertification}
+									/>
+								)
+							}
+						</EducationAndCertificationsSubset>
+						<EducationAndCertificationsSubset
+							gridArea="undergraduate"
+						>
+							{
+								educationCertifications.filter(
+									educationCertification =>
+									educationCertification.type === 'undergraduate'
+								).map(
+									educationCertification =>
+									<ProfileEducationCertification
+										key={educationCertification.key}
+										educationCertification={educationCertification}
+									/>
+								)
+							}
+						</EducationAndCertificationsSubset>
+					</EducationAndCertificationsContainer>
+				</ProfileSection>
+				<ProfileSection
+					videoLargeScreen={media.sampleBackgroundVideoLarge}
+					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					viewed={profileVolunteerExperiencesViewed}
+					ref={profileVolunteerExperiencesRef}
+				>
+					<ProfileSectionHeader
+						content={sectionProperties.volunteerExperiences}
+					/>
+					<VolunteerExperiencesContainer>
+					{
+						volunteerExperiences.map((volunteerExperience, volunteerExperienceIndex) =>
+							<ProfileVolunteerExperience
+								key={volunteerExperience.key}
+								volunteerExperience={volunteerExperience}
+								gridArea={`volunteerExperience${volunteerExperienceIndex}`}
+							/>
+						)
+					}
+					</VolunteerExperiencesContainer>
+				</ProfileSection>
 			</MainContentContainer>
 			<CompressedTableOfContentsContainer>
 				<CompressedTableOfContentsCollapsibleContainer>
@@ -745,7 +802,7 @@ export const Profile = ({
 					</Collapsible>
 				</CompressedTableOfContentsCollapsibleContainer>
 			</CompressedTableOfContentsContainer>
-			{/* <ExpandedTableOfContentsContainer>
+			<ExpandedTableOfContentsContainer>
 				<ExpandedTableOfContentsListContainer>
 					<ExpandedTableOfContentsList>
 						{
@@ -768,7 +825,7 @@ export const Profile = ({
 						}
 					</ExpandedTableOfContentsList>
 				</ExpandedTableOfContentsListContainer>
-			</ExpandedTableOfContentsContainer> */}
+			</ExpandedTableOfContentsContainer>
 		</ProfileContainer>
 	);
 };

@@ -244,7 +244,7 @@ const ImageNotLargeDevice = styled.div`
 	}
 `;
 const ProfileSectionContainer = styled.section`
-	/* opacity: 0; */
+	overflow: hidden;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 7rem 2rem;
 		position: relative;
@@ -273,24 +273,14 @@ export const ProfileSection = forwardRef(({
 	imageLargeScreen,
 	imageNotLargeScreen,
 	inView,
+	viewed,
 	children,
 }, ref) => (
 	<ProfileSectionContainer
 		ref={ref}
 	>
-		<VideoLargeDevice
-			poster={imageLargeScreen.url}
-		>
-			<source src={videoLargeScreen.url} type="video/mp4" />
-		</VideoLargeDevice>
-		<VideoNotLargeDevice
-			poster={imageNotLargeScreen.url}
-		>
-			<source src={videoNotLargeScreen.url} type="video/mp4" />
-		</VideoNotLargeDevice>
-
 		{
-			/* inView &&
+			viewed &&
 			<>
 				<VideoLargeDevice
 					poster={imageLargeScreen.url}
@@ -302,7 +292,7 @@ export const ProfileSection = forwardRef(({
 				>
 					<source src={videoNotLargeScreen.url} type="video/mp4" />
 				</VideoNotLargeDevice>
-			</> */
+			</>
 		}
 		<ImageLargeDevice
 			$imageURL={imageLargeScreen.url}
