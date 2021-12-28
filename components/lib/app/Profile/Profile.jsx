@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import useInView from 'react-cool-inview';
 import { gsap } from 'gsap';
+import ScrollTrigger from "gsap/ScrollTrigger";
 import {
 	SkillWithReactKey,
 	ProfessionalExperienceWithReactKey,
@@ -423,7 +424,7 @@ export const Profile = ({
 	const { observe: observeVounteerExperiences, inView: inViewVounteerExperiences } = useInView({
 		onEnter: ({ unobserve }) => unobserve(),
 	}); */
-	const profileTimelineRef = useRef();
+
 	const profileHeaderLandmarkRef = useRef();
 	const profileHeaderBrandRef = useRef();
 	const profileSkillsTechnicalSectionRef = useRef();
@@ -431,48 +432,61 @@ export const Profile = ({
 	const profileSkillsDesignSectionRef = useRef();
 	const profileProfessionalExperiencesSectionRef = useRef();
 	useEffect(() => {
-		profileTimelineRef.current = gsap.timeline({
-			defaults: {
-				duration: 1,
-				ease: 'power4.out',
-			},
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.defaults({
+			ease: 'power4.out',
+			duration: 1.5,
 			scrollTrigger: {
-				trigger: profileSkillsBusinessSectionRef,
-				markers: true,
-				scrub: 1
+			markers: {
+				startColor: 'yellow',
+				endColor: 'yellow',
+				fontSize: '2rem',
 			},
-		})
-		.fromTo(
+			},
+		});
+
+		gsap.from(
 			profileHeaderLandmarkRef.current,
 			{
 				opacity: 0,
 				y: 48,
-			}, {
-				opacity: 1,
-				y: 0,
 			}
-		)
-		.fromTo(
+		);
+		gsap.from(
 			profileHeaderBrandRef.current,
 			{
 				opacity: 0,
-			}, {
-				opacity: 1,
 			},
 			'<75%'
-		)
-		.fromTo(
+		);
+		gsap.from(
 			profileSkillsTechnicalSectionRef.current,
 			{
 				opacity: 0,
 				y: 48,
-			}, {
-				opacity: 1,
-				y: 0,
 			},
 			'<'
 		);
-	}, [])
+		gsap.from(
+			profileSkillsBusinessSectionRef.current,
+			{
+				opacity: 0,
+				y: 48,
+				scrollTrigger: {
+					trigger: profileSkillsBusinessSectionRef.current,
+					start: "top 90%",
+					end: "top 50%",
+					scrub: 4,
+					// invalidateOnRefresh: true
+					/* markers: {
+						startColor: 'yellow',
+						endColor: 'yellow',
+						fontSize: '2rem',
+					}, */
+				},
+			},
+		);
+	}, []);
 	return (
 		<ProfileContainer>
 			<MainContentContainer

@@ -244,6 +244,7 @@ const ImageNotLargeDevice = styled.div`
 	}
 `;
 const ProfileSectionContainer = styled.section`
+	/* opacity: 0; */
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 7rem 2rem;
 		position: relative;

@@ -5,7 +5,10 @@ import { Copy } from '../../core/Copy/Copy';
 
 const ProfileSectionTitlePreface = styled.div`
 	${deviceWidthQuery.only({ 'width': 's' })} {
-		line-height: 5rem;
+		margin-bottom: 1rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		margin-bottom: 1rem;
 	}
 `;
 const ProfileSectionTitleMain = styled.div`
