@@ -1,5 +1,8 @@
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+// import { gsap } from 'gsap';
+// import ScrollTrigger from "gsap/ScrollTrigger";
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
@@ -10,6 +13,7 @@ import { MediaItem } from '../../..';
 import { ArticleSections } from './ArticleSections';
 import { Collapsible } from '../../..';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
+import { ScreenTitleSecondary } from '../Common/ScreenTitleSecondary';
 
 
 
@@ -339,7 +343,7 @@ const ArticleTitleConstrainer = styled.div`
 	}
 `;
 const ArticleTitle = styled.div`
-	h1 {
+	/* h1 {
 		display: inline;
 		border-radius: .375rem 0 .375rem 0;
 		background-image: linear-gradient(
@@ -366,7 +370,7 @@ const ArticleTitle = styled.div`
 		${deviceWidthQuery.only({ 'width': 'l' })} {
 			line-height: 10rem;
 		}
-	}
+	} */
 `;
 const ArticleTaglineAndMetaContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -523,9 +527,6 @@ const ArticleBody = styled.div`
 const ArticleIntroVideoContainer = styled.div`
 	padding: 4rem 0 3rem;
 	border-top: solid .125rem ${color({
-		// 'kind': 'Neutral',
-		// 'tone': 'Finch',
-		// 'level': 10,
 		'kind': 'Accent',
 		'tone': 'Finch',
 		'level': 1,
@@ -549,261 +550,295 @@ export const Article = ({
 	title,
 	frontMatter,
 	mainContent,
-}) => (
-	<ArticleContainer>
-		<MainContentContainer>
-			<ArticleHeader
-				$backgroundImage={frontMatter.headImage.url}
-			>
-				<ArticleTitleConstrainer>
-					<ArticleTitle>
-						<Copy
-							kind="article--title"
-							htmlContent={title}
+}) => {
+	/* const articleTitleRef = useRef();
+	useEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.defaults({
+			ease: 'power4.out',
+			duration: 1.5,
+		});
+
+		gsap.from(
+			articleTitleRef.current.firstChild,
+			{
+				height: 0
+			}
+		);
+	}, []); */
+	return (
+		<ArticleContainer>
+			<MainContentContainer>
+				<ArticleHeader
+					$backgroundImage={frontMatter.headImage.url}
+				>
+					<ArticleTitleConstrainer>
+						<ScreenTitleSecondary
+							use="articleTitle"
+							title={{
+								'main': title,
+								'preface': 'Hereknae',
+							}}
 						/>
-					</ArticleTitle>
-				</ArticleTitleConstrainer>
-				<ArticleTaglineAndMetaContainer>
-					{
-						frontMatter.briefStatements &&
-						frontMatter.briefStatements.length === 1 &&
-						<ArticleTagline>
+						{/* <ArticleTitle>
 							<Copy
-								kind="article--tagline"
-								htmlContent={frontMatter.briefStatements[0].content}
-							/>
-						</ArticleTagline>
-					}
-					{
-						frontMatter.briefStatements &&
-						frontMatter.briefStatements.length > 1 &&
-						<ArticleBriefStatements>
-							{
-								frontMatter.briefStatements.map((
-									briefStatement,
-									briefStatementIndex,
-								) =>
-									<div
-										key={briefStatement.key}
-									>
-									{
-										briefStatementIndex !== 0 &&
-										<Line
-											width={10}
-											height="s"
-											color={{
-												// 'kind': 'Accent',
-												// 'tone': 'Finch',
-												// 'level': 2,
-												'kind': 'Neutral',
-												'tone': 'Finch',
-												'level': 30,
-												'format': 'string',
-											}}
-										/>
-									}
-									<ArticleBriefStatement>
-										<Copy
-											kind="article--tagline"
-											htmlContent={briefStatement.content}
-										/>
-									</ArticleBriefStatement>
+								kind="article--title"
+								htmlContent={`
+									<div style="display: block; text-align: start; position: relative;">
+										Scrote Ever So Lovely:
 									</div>
-								)
-							}
-						</ArticleBriefStatements>
-					}
-					<ArticleMetaContainer>
-						<Copy
-							kind="article--faux-subheader"
-						>
-							<ArticleMetaFauxHeader />
-						</Copy>
-						<DatesAndStatsLargeDevice>
-							{
-								frontMatter.updateDate &&
+									<div style="display: block; text-align: start; position: relative;">
+										Throw a Spanner in the
+									</div>
+									<div style="display: block; text-align: start; position: relative;">
+										Works
+									</div>
+								`}
+							/>
+						</ArticleTitle> */}
+					</ArticleTitleConstrainer>
+					<ArticleTaglineAndMetaContainer>
+						{
+							frontMatter.briefStatements &&
+							frontMatter.briefStatements.length === 1 &&
+							<ArticleTagline>
+								<Copy
+									kind="article--tagline"
+									htmlContent={frontMatter.briefStatements[0].content}
+								/>
+							</ArticleTagline>
+						}
+						{
+							frontMatter.briefStatements &&
+							frontMatter.briefStatements.length > 1 &&
+							<ArticleBriefStatements>
+								{
+									frontMatter.briefStatements.map((
+										briefStatement,
+										briefStatementIndex,
+									) =>
+										<div
+											key={briefStatement.key}
+										>
+										{
+											briefStatementIndex !== 0 &&
+											<Line
+												width={10}
+												height="s"
+												color={{
+													// 'kind': 'Accent',
+													// 'tone': 'Finch',
+													// 'level': 2,
+													'kind': 'Neutral',
+													'tone': 'Finch',
+													'level': 30,
+													'format': 'string',
+												}}
+											/>
+										}
+										<ArticleBriefStatement>
+											<Copy
+												kind="article--tagline"
+												htmlContent={briefStatement.content}
+											/>
+										</ArticleBriefStatement>
+										</div>
+									)
+								}
+							</ArticleBriefStatements>
+						}
+						<ArticleMetaContainer>
+							<Copy
+								kind="article--faux-subheader"
+							>
+								<ArticleMetaFauxHeader />
+							</Copy>
+							<DatesAndStatsLargeDevice>
+								{
+									frontMatter.updateDate &&
+									<DateOrStatLargeDevice
+										$gridArea="topLeft"
+									>
+										<Copy
+											kind="article--meta-item--large-device--label"
+										>
+											Updated
+										</Copy>
+										<Copy
+											kind="article--meta-item--large-device--value"
+										>
+											{frontMatter.updateDate}
+										</Copy>
+									</DateOrStatLargeDevice>
+								}
 								<DateOrStatLargeDevice
-									$gridArea="topLeft"
+									$gridArea={frontMatter.updateDate ? 'topRight' : 'topLeft'}
 								>
 									<Copy
 										kind="article--meta-item--large-device--label"
 									>
-										Updated
+										Published
 									</Copy>
 									<Copy
 										kind="article--meta-item--large-device--value"
 									>
-										{frontMatter.updateDate}
+										{frontMatter.publicationDate}
 									</Copy>
 								</DateOrStatLargeDevice>
-							}
-							<DateOrStatLargeDevice
-								$gridArea={frontMatter.updateDate ? 'topRight' : 'topLeft'}
-							>
-								<Copy
-									kind="article--meta-item--large-device--label"
+								<DateOrStatLargeDevice
+									$gridArea="bottomLeft"
 								>
-									Published
-								</Copy>
-								<Copy
-									kind="article--meta-item--large-device--value"
+									<Copy
+										kind="article--meta-item--large-device--label"
+									>
+										Length
+									</Copy>
+									<Copy
+										kind="article--meta-item--large-device--value"
+									>
+										~{frontMatter.stats.words} words
+									</Copy>
+								</DateOrStatLargeDevice>
+								<DateOrStatLargeDevice
+									$gridArea="bottomRight"
 								>
-									{frontMatter.publicationDate}
-								</Copy>
-							</DateOrStatLargeDevice>
-							<DateOrStatLargeDevice
-								$gridArea="bottomLeft"
-							>
-								<Copy
-									kind="article--meta-item--large-device--label"
-								>
-									Length
-								</Copy>
-								<Copy
-									kind="article--meta-item--large-device--value"
-								>
-									~{frontMatter.stats.words} words
-								</Copy>
-							</DateOrStatLargeDevice>
-							<DateOrStatLargeDevice
-								$gridArea="bottomRight"
-							>
-								<Copy
-									kind="article--meta-item--large-device--label"
-								>
-									Time
-								</Copy>
-								<Copy
-									kind="article--meta-item--large-device--value"
-								>
-									~{frontMatter.stats.minutes} minutes
-								</Copy>
-							</DateOrStatLargeDevice>
-						</DatesAndStatsLargeDevice>
-						<DatesAndStatsNotLargeDevice>
-							{
-								frontMatter.updateDate &&
+									<Copy
+										kind="article--meta-item--large-device--label"
+									>
+										Time
+									</Copy>
+									<Copy
+										kind="article--meta-item--large-device--value"
+									>
+										~{frontMatter.stats.minutes} minutes
+									</Copy>
+								</DateOrStatLargeDevice>
+							</DatesAndStatsLargeDevice>
+							<DatesAndStatsNotLargeDevice>
+								{
+									frontMatter.updateDate &&
+									<DateOrStatNotLargeDevice>
+										<Copy
+											kind="article--meta-item--not-large-device--date--primary"
+										>
+											Updated {frontMatter.updateDate}
+										</Copy>
+									</DateOrStatNotLargeDevice>
+								}
 								<DateOrStatNotLargeDevice>
 									<Copy
-										kind="article--meta-item--not-large-device--date--primary"
+										kind={
+											frontMatter.updateDate ?
+											'article--meta-item--not-large-device--date--secondary' :
+											'article--meta-item--not-large-device--date--primary'
+										}
 									>
-										Updated {frontMatter.updateDate}
+										Published {frontMatter.publicationDate}
 									</Copy>
 								</DateOrStatNotLargeDevice>
-							}
-							<DateOrStatNotLargeDevice>
-								<Copy
-									kind={
-										frontMatter.updateDate ?
-										'article--meta-item--not-large-device--date--secondary' :
-										'article--meta-item--not-large-device--date--primary'
-									}
-								>
-									Published {frontMatter.publicationDate}
-								</Copy>
-							</DateOrStatNotLargeDevice>
-							<DateOrStatNotLargeDevice>
-								<Copy
-									kind="article--meta-item--not-large-device--stats"
-								>
-									~{frontMatter.stats.words} words // ~{frontMatter.stats.minutes} minutes
-								</Copy>
-							</DateOrStatNotLargeDevice>
-						</DatesAndStatsNotLargeDevice>
-						<SharingOptions>
-							<Button
-								iconBefore="twitter"
-								text="Share on Twitter"
-								surfaceStyle="outlined"
-								textHidden={true}
-								url="https://google.com"
+								<DateOrStatNotLargeDevice>
+									<Copy
+										kind="article--meta-item--not-large-device--stats"
+									>
+										~{frontMatter.stats.words} words // ~{frontMatter.stats.minutes} minutes
+									</Copy>
+								</DateOrStatNotLargeDevice>
+							</DatesAndStatsNotLargeDevice>
+							<SharingOptions>
+								<Button
+									iconBefore="twitter"
+									text="Share on Twitter"
+									surfaceStyle="outlined"
+									textHidden={true}
+									url="https://google.com"
+								/>
+								<Button
+									iconBefore="linkedin"
+									text="Share on LinkedIn"
+									surfaceStyle="outlined"
+									textHidden={true}
+									url="https://google.com"
+								/>
+								<Button
+									iconBefore="link"
+									text="Copy this URL"
+									surfaceStyle="outlined"
+									textHidden={true}
+									url="https://google.com"
+								/>
+							</SharingOptions>
+							<Copy
+								kind="copy-container--article-image-credit"
+								htmlContent={frontMatter.headImage.credit}
 							/>
-							<Button
-								iconBefore="linkedin"
-								text="Share on LinkedIn"
-								surfaceStyle="outlined"
-								textHidden={true}
-								url="https://google.com"
+						</ArticleMetaContainer>
+					</ArticleTaglineAndMetaContainer>
+				</ArticleHeader>
+				<ArticleBody>
+					{
+						frontMatter.introVideo && frontMatter.introVideoPoster &&
+						<ArticleIntroVideoContainer>
+							<MediaItem
+								category="video"
+								specs={{
+									'video': frontMatter.introVideo,
+									'poster': frontMatter.introVideoPoster,
+								}}
 							/>
-							<Button
-								iconBefore="link"
-								text="Copy this URL"
-								surfaceStyle="outlined"
-								textHidden={true}
-								url="https://google.com"
+						</ArticleIntroVideoContainer>
+					}
+					{
+						mainContent.simpleBody &&
+						<SimpleBody>
+							<Copy
+								kind="copy-container--standard"
+								htmlContent={mainContent.simpleBody}
 							/>
-						</SharingOptions>
-						<Copy
-							kind="copy-container--article-image-credit"
-							htmlContent={frontMatter.headImage.credit}
+						</SimpleBody>
+					}
+					{
+						mainContent.sections &&
+						<ArticleSections
+							sections={mainContent.sections}
 						/>
-					</ArticleMetaContainer>
-				</ArticleTaglineAndMetaContainer>
-			</ArticleHeader>
-			<ArticleBody>
-				{
-					frontMatter.introVideo && frontMatter.introVideoPoster &&
-					<ArticleIntroVideoContainer>
-						<MediaItem
-							category="video"
-							specs={{
-								'video': frontMatter.introVideo,
-								'poster': frontMatter.introVideoPoster,
-							}}
+					}
+				</ArticleBody>
+			</MainContentContainer>
+			<CompressedTableOfContentsContainer>
+				<CompressedTableOfContentsCollapsibleContainer>
+					<Collapsible
+						button={{
+							'size': 'small',
+							'surfaceStyle': 'outlined',
+							'contextColor': 'onDark',
+							'text': 'Contents'
+						}}
+						internalID="v3Wd49fpFK6x2jNkZ6qbmmDC"
+						copyKind="article--compressed-table-of-contents"
+					>
+						<CompressedTableOfContentsListContainer
+							sectionProperties={frontMatter.tableOfContents}
 						/>
-					</ArticleIntroVideoContainer>
-				}
-				{
-					mainContent.simpleBody &&
-					<SimpleBody>
-						<Copy
-							kind="copy-container--standard"
-							htmlContent={mainContent.simpleBody}
-						/>
-					</SimpleBody>
-				}
-				{
-					mainContent.sections &&
-					<ArticleSections
-						sections={mainContent.sections}
-					/>
-				}
-			</ArticleBody>
-		</MainContentContainer>
-		<CompressedTableOfContentsContainer>
-			<CompressedTableOfContentsCollapsibleContainer>
-				<Collapsible
-					button={{
-						'size': 'small',
-						'surfaceStyle': 'outlined',
-						'contextColor': 'onDark',
-						'text': 'Contents'
-					}}
-					internalID="v3Wd49fpFK6x2jNkZ6qbmmDC"
-					copyKind="article--compressed-table-of-contents"
-				>
-					<CompressedTableOfContentsListContainer
+					</Collapsible>
+				</CompressedTableOfContentsCollapsibleContainer>
+			</CompressedTableOfContentsContainer>
+			<ExpandedTableOfContentsContainer>
+				<ExpandedTableOfContentsListContainer>
+					<Copy
+						kind="article--faux-subheader"
+					>
+						<ArticleTableOfContentsFauxHeader />
+					</Copy>
+					{/* <Copy
+						kind="article--expanded-table-of-contents"
+						htmlContent={frontMatter.tableOfContents}
+					/> */}
+					<ExpandedTableOfContentsListContainerTwo
 						sectionProperties={frontMatter.tableOfContents}
 					/>
-				</Collapsible>
-			</CompressedTableOfContentsCollapsibleContainer>
-		</CompressedTableOfContentsContainer>
-		<ExpandedTableOfContentsContainer>
-			<ExpandedTableOfContentsListContainer>
-				<Copy
-					kind="article--faux-subheader"
-				>
-					<ArticleTableOfContentsFauxHeader />
-				</Copy>
-				{/* <Copy
-					kind="article--expanded-table-of-contents"
-					htmlContent={frontMatter.tableOfContents}
-				/> */}
-				<ExpandedTableOfContentsListContainerTwo
-					sectionProperties={frontMatter.tableOfContents}
-				/>
 
-			</ExpandedTableOfContentsListContainer>
-		</ExpandedTableOfContentsContainer>
-	</ArticleContainer>
-);
+				</ExpandedTableOfContentsListContainer>
+			</ExpandedTableOfContentsContainer>
+		</ArticleContainer>
+	);
+};

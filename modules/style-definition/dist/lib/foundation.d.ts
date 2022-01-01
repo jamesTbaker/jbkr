@@ -165,5 +165,6 @@ export declare const foundation: {
             s: number;
             ms: number;
         };
+        fadeUpKeyframes: string;
     };
 };

@@ -66,7 +66,7 @@ export const ProfileSectionHeader = ({
 }) => (
 	<ProfileSectionHeaderContainer>
 		<ProfileSectionTitleContainer
-			id={hash}
+			// id={hash}
 		>
 			{
 				title && title.preface &&

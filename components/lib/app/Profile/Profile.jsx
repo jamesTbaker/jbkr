@@ -409,7 +409,7 @@ export const Profile = ({
 	sectionProperties,
 	media,
 }) => {
-		const profileHeaderLandmarkRef = useRef();
+	const profileHeaderLandmarkRef = useRef();
 	const profileHeaderBrandRef = useRef();
 	const profileSkillsTechnicalRef = useRef();
 	const profileSkillsBusinessRef = useRef();

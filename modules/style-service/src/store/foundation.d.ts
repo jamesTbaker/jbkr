@@ -172,5 +172,6 @@ export namespace foundation {
             export { s_3 as s };
             export const ms: number;
         }
+        const fadeUpKeyframes: string;
     }
 }

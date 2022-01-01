@@ -376,7 +376,8 @@ const propsSpecifications = {
 		},
 	},
 	'article--title': {
-		'tag': 'h1',
+		'tag': 'div',
+		// 'tag': 'h1',
 		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
@@ -405,8 +406,7 @@ const propsSpecifications = {
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 24,
-			'alpha': .75,
+			'level': 27,
 		},
 	},
 	'article--meta-item--not-large-device--date--primary': {

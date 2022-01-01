@@ -28,7 +28,7 @@ export const ColorObjectBaseProps = {
 	'kind': string.isRequired,
 	'tone': string.isRequired,
 	'level': number.isRequired,
-	'alpha': string,
+	'alpha': number,
 	'format': string,
 };
 

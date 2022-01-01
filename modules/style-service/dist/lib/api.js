@@ -141,6 +141,7 @@ export const style = {
     },
     'motion': {
         'standardTime': () => foundation.motion.standardTime,
+        'fadeUpKeyframes': () => foundation.motion.fadeUpKeyframes,
     },
 };
 //# sourceMappingURL=api.js.map

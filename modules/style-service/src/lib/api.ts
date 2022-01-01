@@ -185,5 +185,6 @@ export const style: {[key:string]: any} = {
 	'motion': {
 		'standardTime': (): { 's': number, 'ms': number } =>
 			foundation.motion.standardTime,
+		'fadeUpKeyframes': (): string => foundation.motion.fadeUpKeyframes,
 	},
 };
