@@ -46,7 +46,7 @@ const ScreenTitleSecondaryContentMain = styled.div`
 		display: inline-block;
 		${hiddenInline}
 	}
-	span.word-container.state--final {
+	span.word-container.animation-state--final {
 		opacity: 1;
 	}
 `;
@@ -76,7 +76,7 @@ export const ScreenTitleSecondary = ({ use, title }) => {
 		let char = 0;
 		const onTick = () => {
 			const span = wordContainers[char];
-			span.classList.add('state--final');
+			span.classList.add('animation-state--final');
 			char++;
 			if (char === wordContainers.length) {
 				complete();

@@ -269,7 +269,7 @@ const ProfileSectionContainer = styled.section`
 	&.animated {
 		transform: translateY(6rem);
 		opacity: 0;
-		transition: all 1.5s 1.5s;
+		transition: all 1.5s 1s;
 	}
 	&.animation-state--final {
 		transform: translateY(0);

@@ -7,6 +7,7 @@ import { Copy } from '../../core/Copy/Copy';
 import { Brand } from '../../..';
 import { Button } from '../../core/Button/Button';
 import { ArticleSummary } from './ArticleSummary';
+import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 
 const LibLabContainer = styled.div`
@@ -82,11 +83,9 @@ export const LibLab = ({
 	<LibLabContainer>
 		<MainContentContainer>
 			<LibLabHeader>
-				<Copy
-					kind="landmark-title"
-				>
-					{title}
-				</Copy>
+				<ScreenTitlePrimary
+					titleVisible={title}
+				/>
 			</LibLabHeader>
 			<LibLabBody>
 				<LibLabBodyConstrainer>

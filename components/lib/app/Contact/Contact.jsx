@@ -6,6 +6,7 @@ import {
 import { Copy } from '../../core/Copy/Copy';
 import { Brand } from '../../..';
 import { Button } from '../../core/Button/Button';
+import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 
 const customBreakpointsInPixels = {
@@ -329,11 +330,9 @@ export const Contact = ({
 			$backgroundImageSmall={media.sampleBackgroundImageSmall.url}
 		>
 			<ContactHeader>
-				<Copy
-					kind="landmark-title"
-				>
-					{title}
-				</Copy>
+				<ScreenTitlePrimary
+					titleVisible={title}
+				/>
 				<BrandingContainerHeader>
 					<LogoContainerHeader>
 						<Brand

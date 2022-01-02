@@ -10,8 +10,8 @@ const ScreenTitlePrimaryAppendix = styled.span`
 const ScreenTitlePrimaryContainer = styled.div`
 	transform: translateY(6rem);
 	opacity: 0;
-	transition: all 1.5s .75s;
-	&.state--final {
+	transition: all 1.5s .5s;
+	&.animation-state--final {
 		transform: translateY(0);
 		opacity: 1;
 	}
@@ -26,7 +26,7 @@ const BrandContainer = styled.div`
 		transform: translateY(2rem);
 		opacity: 0;
 		transition: all .75s;
-		&.state--final {
+		&.animation-state--final {
 			transform: translateY(0);
 			opacity: 1;
 		}
@@ -42,8 +42,10 @@ export const ScreenTitlePrimary = ({
 	const brandContainerRef = useRef();
 	const screenTitleSecondaryContainerRef = useRef();
 	useEffect(() => {
-		brandContainerRef.current.classList.add('state--final');
-		screenTitleSecondaryContainerRef.current.classList.add('state--final');
+		if (includeBrand) {
+			brandContainerRef.current.classList.add('animation-state--final');
+		}
+		screenTitleSecondaryContainerRef.current.classList.add('animation-state--final');
 	});
 	return (
 		<>
@@ -65,9 +67,12 @@ export const ScreenTitlePrimary = ({
 
 				>
 					{titleVisible}
-					<ScreenTitlePrimaryAppendix>
-						{titleHiddenAppendix}
-					</ScreenTitlePrimaryAppendix>
+					{
+						titleHiddenAppendix &&
+						<ScreenTitlePrimaryAppendix>
+							{titleHiddenAppendix}
+						</ScreenTitlePrimaryAppendix>
+					}
 				</Copy>
 			</ScreenTitlePrimaryContainer>
 		</>

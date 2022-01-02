@@ -118,11 +118,17 @@ const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		position: absolute;
-		top: 0;
+		top: 6rem;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		text-align: center;
+		opacity: 0;
+		transition: all .5s;
+		&.animation-state--final {
+			top: 0;
+			opacity: 1;
+		}
 	}
 `;
 const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
@@ -402,6 +408,7 @@ export const Profile = ({
 	const profileProfessionalExperiencesRef = useRef();
 	const profileEducationAndCertificationsRef = useRef();
 	const profileVolunteerExperiencesRef = useRef();
+	const profileExpandedTableOfContentsRef = useRef();
 
 	const [profileSkillsBusinessViewed,
 			setProfileSkillsBusinessViewed] = useState(false);
@@ -416,6 +423,9 @@ export const Profile = ({
 
 	useEffect(() => {
 		profileSkillsTechnicalRef.current.classList.add(
+			'animation-state--final'
+		);
+		profileExpandedTableOfContentsRef.current.classList.add(
 			'animation-state--final'
 		);
 		gsap.registerPlugin(ScrollTrigger);
@@ -752,7 +762,9 @@ export const Profile = ({
 					</Collapsible>
 				</CompressedTableOfContentsCollapsibleContainer>
 			</CompressedTableOfContentsContainer>
-			<ExpandedTableOfContentsContainer>
+			<ExpandedTableOfContentsContainer
+				ref={profileExpandedTableOfContentsRef}
+			>
 				<ExpandedTableOfContentsListContainer>
 					<ExpandedTableOfContentsList>
 						{

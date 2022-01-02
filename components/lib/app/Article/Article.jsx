@@ -478,7 +478,7 @@ const ArticleBody = styled.div`
 		h4,
 		h5,
 		h6 {
-			scroll-margin-top: 23rem;
+			scroll-margin-top: 27rem;
 		}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -488,7 +488,7 @@ const ArticleBody = styled.div`
 		h4,
 		h5,
 		h6 {
-			scroll-margin-top: 14rem;
+			scroll-margin-top: 18rem;
 		}
 	}
 `;
