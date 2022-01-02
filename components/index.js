@@ -43,7 +43,6 @@ export { HubLogotype } from './lib/app/Hub/HubLogotype.jsx';
 export { HubPrivate } from './lib/app/Hub/HubPrivate.jsx';
 
 // Layout
-export { Aside } from './lib/app/Layout/Aside.jsx';
 export { Banner } from './lib/app/Layout/Banner.jsx';
 export { Footer } from './lib/app/Layout/Footer.jsx';
 export { MainContent } from './lib/app/Layout/MainContent.jsx';

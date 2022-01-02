@@ -1,11 +1,22 @@
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { deviceWidthQuery } from '@jbkr/style-service';
+import { deviceWidthQuery, verticalAlignMiddle } from '@jbkr/style-service';
 import { color, hiddenBlock } from '@jbkr/style-service';
 import { AppHeader } from '../Layout/AppHeader';
 import { AppFooter } from '../Layout/AppFooter';
+import { Spinner } from './Spinner';
 
+const RouteChangingContainer = styled.div`
+	height: 100vh;
+	width: 100vw;
+	text-align: center;
+	> span {
+		${verticalAlignMiddle}
+	}
+`;
 const SkipLinksContainer = styled.ul`
 	${hiddenBlock}
 `;
@@ -65,122 +76,145 @@ export const AppScaffold = ({
 	footer,
 	hasTableOfContents,
 	children,
-}) => (
-	<>
-		<Head>
-			{
-				slug &&
-				<meta property="og:url"
-					content={`https://jbkr.me${slug}`} />
-			}
-			{
-				slug &&
-				<meta property="twitter:url"
-					content={`https://jbkr.me${slug}`} />
-			}
-			{
-				metaTitle &&
-				<title>{`${metaTitle}`} | jbkr</title>
-			}
-			{
-				metaTitle &&
-				<meta property="og:metaTitle"
-					content={`${metaTitle}`} />
-			}
-			{
-				metaTitle &&
-				<meta name="twitter:metaTitle"
-					content={`${metaTitle}`} />
-			}
-			{
-				metaDescription &&
-				<meta name="description" content={metaDescription} />
-			}
-			{
-				socialDescription &&
-				<meta property="og:description"
-					content={socialDescription} />
-			}
-			{
-				socialDescription &&
-				<meta name="twitter:description"
-					content={socialDescription} />
-			}
-			{
-				openGraphType &&
-				<meta property="og:type" content={openGraphType} />
-			}
-			{
-				metaImage && metaImage.url &&
-				<meta property="og:image" content={metaImage.url} />
-			}
-			{
-				metaImage && metaImage.url &&
-				<meta name="twitter:image" content={metaImage.url} />
-			}
-			{
-				metaImage && metaImage.alternativeText &&
-				<meta name="twitter:image:alt"
-					content={metaImage.alternativeText} />
-			}
-			{
-				metaOther && metaOther[0] &&
-				metaOther.map((otherObject, otherObjectIndex) =>
-					// key is in `otherObject`
-					// eslint-disable-next-line react/jsx-key
-					<meta
-						{...otherObject}
-					/>,
-				)
-			}
-		</Head>
-		<SkipLinksContainer>
-			<SkipLinkListItemNotLargeDevice>
-				<a href="#compressed-navigation-container">
-					Skip to site's primary and secondary navigation.
-				</a>
-			</SkipLinkListItemNotLargeDevice>
-			{
-				hasTableOfContents &&
+}) => {
+	const [
+		routeChanging,
+		setRouteChanging,
+	] = useState(false);
+	const router = useRouter();
+	useEffect(() => {
+		router.events.on('routeChangeStart', () => setRouteChanging(true));
+		router.events.on('routeChangeComplete', () => setRouteChanging(false));
+		router.events.on('routeChangeError', () => setRouteChanging(false));
+	}, []);
+	return (
+		<>
+			<Head>
+				{
+					slug &&
+					<meta property="og:url"
+						content={`https://jbkr.me${slug}`} />
+				}
+				{
+					slug &&
+					<meta property="twitter:url"
+						content={`https://jbkr.me${slug}`} />
+				}
+				{
+					metaTitle &&
+					<title>{`${metaTitle}`} | jbkr</title>
+				}
+				{
+					metaTitle &&
+					<meta property="og:metaTitle"
+						content={`${metaTitle}`} />
+				}
+				{
+					metaTitle &&
+					<meta name="twitter:metaTitle"
+						content={`${metaTitle}`} />
+				}
+				{
+					metaDescription &&
+					<meta name="description" content={metaDescription} />
+				}
+				{
+					socialDescription &&
+					<meta property="og:description"
+						content={socialDescription} />
+				}
+				{
+					socialDescription &&
+					<meta name="twitter:description"
+						content={socialDescription} />
+				}
+				{
+					openGraphType &&
+					<meta property="og:type" content={openGraphType} />
+				}
+				{
+					metaImage && metaImage.url &&
+					<meta property="og:image" content={metaImage.url} />
+				}
+				{
+					metaImage && metaImage.url &&
+					<meta name="twitter:image" content={metaImage.url} />
+				}
+				{
+					metaImage && metaImage.alternativeText &&
+					<meta name="twitter:image:alt"
+						content={metaImage.alternativeText} />
+				}
+				{
+					metaOther && metaOther[0] &&
+					metaOther.map((otherObject, otherObjectIndex) =>
+						// key is in `otherObject`
+						// eslint-disable-next-line react/jsx-key
+						<meta
+							{...otherObject}
+						/>,
+					)
+				}
+			</Head>
+			<SkipLinksContainer>
 				<SkipLinkListItemNotLargeDevice>
-					<a href="#compressed-table-of-contents">
-						Skip to page's table of contents.
+					<a href="#compressed-navigation-container">
+						Skip to site's primary and secondary navigation.
 					</a>
 				</SkipLinkListItemNotLargeDevice>
-			}
-			<SkipLinkListItemLargeDevice>
-				<a href="#expanded-site-primary-navigation">
-					Skip to site's primary navigation.
-				</a>
-			</SkipLinkListItemLargeDevice>
-			<SkipLinkListItemLargeDevice>
-				<a href="#expanded-site-secondary-navigation">
-					Skip to site's secondary navigation.
-				</a>
-			</SkipLinkListItemLargeDevice>
-			{
-				hasTableOfContents &&
+				{
+					hasTableOfContents &&
+					<SkipLinkListItemNotLargeDevice>
+						<a href="#compressed-table-of-contents">
+							Skip to page's table of contents.
+						</a>
+					</SkipLinkListItemNotLargeDevice>
+				}
 				<SkipLinkListItemLargeDevice>
-					<a href="#expanded-table-of-contents">
-						Skip to page's table of contents.
+					<a href="#expanded-site-primary-navigation">
+						Skip to site's primary navigation.
 					</a>
 				</SkipLinkListItemLargeDevice>
+				<SkipLinkListItemLargeDevice>
+					<a href="#expanded-site-secondary-navigation">
+						Skip to site's secondary navigation.
+					</a>
+				</SkipLinkListItemLargeDevice>
+				{
+					hasTableOfContents &&
+					<SkipLinkListItemLargeDevice>
+						<a href="#expanded-table-of-contents">
+							Skip to page's table of contents.
+						</a>
+					</SkipLinkListItemLargeDevice>
+				}
+				<SkipLinkListItemAnyDevice>
+					<a href="#main-content">
+						Skip to this page's main content.
+					</a>
+				</SkipLinkListItemAnyDevice>
+			</SkipLinksContainer>
+			<AppHeader
+				content={header}
+			/>
+			{
+				!routeChanging &&
+				<>
+					{children}
+					<AppFooter
+						content={footer.copy}
+					/>
+				</>
 			}
-			<SkipLinkListItemAnyDevice>
-				<a href="#main-content">
-					Skip to this page's main content.
-				</a>
-			</SkipLinkListItemAnyDevice>
-		</SkipLinksContainer>
-		<AppHeader
-			content={header}
-		/>
-		{children}
-		<AppFooter
-			content={footer.copy}
-		/>
-	</>
-);
+			{
+				routeChanging &&
+				<RouteChangingContainer>
+					<Spinner />
+				</RouteChangingContainer>
+			}
+		</>
+	);
+};
 AppScaffold.propTypes = {
 	/** Data for the app's `<head>`. */
 	'meta': PropTypes.shape({
