@@ -5,7 +5,7 @@ import { Copy } from '../../core/Copy/Copy';
 import { ScreenTitleSecondary } from '../Common/ScreenTitleSecondary';
 
 
-const ProfileSectionTitleContainer = styled.h2`
+const ProfileSectionTitleContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin: 0 0 1rem;
 		scroll-margin-top: 30rem;

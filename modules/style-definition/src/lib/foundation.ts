@@ -238,15 +238,5 @@ export const foundation = {
 			's': 1.5,
 			'ms': 1500,
 		},
-		'fadeUpKeyframes': `
-			0% {
-				opacity: 0;
-				transform: translateY(6rem);
-			}
-			100% {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		`,
 	},
 };

@@ -11,7 +11,7 @@ import {
 	VolunteerExperienceWithReactKey,
 } from '@jbkr/models-react';
 import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
+	deviceWidthQuery, color, hiddenBlock, zIndexNumber, standardTime
 } from '@jbkr/style-service';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSection } from './ProfileSection';
@@ -22,8 +22,8 @@ import { ProfileVolunteerExperience } from './ProfileVolunteerExperience';
 import { ProfileSectionHeader } from './ProfileSectionHeader';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
-import { Brand } from '../../..';
 import { Collapsible } from '../../..';
+import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 
 const ProfileContainer = styled.div`
@@ -53,19 +53,6 @@ const ProfileHeader = styled.header`
 const ProfileHeaderContentConstrainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding-right: 36rem;
-	}
-`;
-const LandmarkTitleAppendix = styled.span`
-	${hiddenInline}
-`;
-const LandmarkTitleContainer = styled.div``;
-const BrandContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		display: none;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 13.125rem;
-		height: 8rem;
 	}
 `;
 const MainContentContainer = styled.main.attrs(() => {
@@ -409,8 +396,6 @@ export const Profile = ({
 	sectionProperties,
 	media,
 }) => {
-	const profileHeaderLandmarkRef = useRef();
-	const profileHeaderBrandRef = useRef();
 	const profileSkillsTechnicalRef = useRef();
 	const profileSkillsBusinessRef = useRef();
 	const profileSkillsDesignRef = useRef();
@@ -438,30 +423,15 @@ export const Profile = ({
 		gsap.registerPlugin(ScrollTrigger);
 		gsap.defaults({
 			ease: 'power4.out',
-			duration: 1.5,
+			duration: standardTime().s,
 		});
-
-		gsap.from(
-			profileHeaderLandmarkRef.current,
-			{
-				opacity: 0,
-				y: 48,
-			}
-		);
-		gsap.from(
-			profileHeaderBrandRef.current,
-			{
-				opacity: 0,
-			},
-			'<75%'
-		);
 		gsap.from(
 			profileSkillsTechnicalRef.current,
 			{
 				opacity: 0,
 				y: 48,
+				delay: standardTime().s,
 			},
-			'<'
 		);
 		gsap.from(
 			profileSkillsBusinessRef.current,
@@ -551,23 +521,12 @@ export const Profile = ({
 			>
 				<ProfileHeader>
 					<ProfileHeaderContentConstrainer>
-						<BrandContainer
-							ref={profileHeaderBrandRef}
-						>
-							<Brand
-								contextColor="onDark"
-							/>
-						</BrandContainer>
-						<LandmarkTitleContainer
-							ref={profileHeaderLandmarkRef}
-						>
-							<Copy
-								kind="landmark-title"
-
-							>
-								{title}<LandmarkTitleAppendix>&nbsp;of James T. Baker</LandmarkTitleAppendix>
-							</Copy>
-						</LandmarkTitleContainer>
+						<ScreenTitlePrimary
+							includeBrand={true}
+							contextColor="onDark"
+							titleVisible={title}
+							titleHiddenAppendix="&nbsp;of James T. Baker"
+						/>
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
 				<ProfileSection
