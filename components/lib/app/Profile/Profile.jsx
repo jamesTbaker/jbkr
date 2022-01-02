@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import useInView from 'react-cool-inview';
 import { gsap } from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import {
