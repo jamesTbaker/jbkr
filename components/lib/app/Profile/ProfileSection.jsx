@@ -266,18 +266,28 @@ const ProfileSectionContainer = styled.section`
 			overflow: hidden;
 		}
 	}
+	&.animated {
+		transform: translateY(6rem);
+		opacity: 0;
+		transition: all 1.5s 1.5s;
+	}
+	&.animation-state--final {
+		transform: translateY(0);
+		opacity: 1;
+	}
 `;
 export const ProfileSection = forwardRef(({
 	videoLargeScreen,
 	videoNotLargeScreen,
 	imageLargeScreen,
 	imageNotLargeScreen,
-	inView,
+	className,
 	viewed,
 	children,
 }, ref) => (
 	<ProfileSectionContainer
 		ref={ref}
+		className={className}
 	>
 		{
 			viewed &&

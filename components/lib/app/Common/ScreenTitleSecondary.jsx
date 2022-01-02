@@ -1,9 +1,7 @@
-import { useRef, useEffect, useState, useLayoutEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
-import {
-	deviceWidthQuery, color, standardTime, zIndexNumber, hiddenInline
-} from '@jbkr/style-service';
+import { color, zIndexNumber, hiddenInline } from '@jbkr/style-service';
 
 
 const ScreenTitleSecondaryContentPreface = styled.div``;

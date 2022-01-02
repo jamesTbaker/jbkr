@@ -403,8 +403,6 @@ export const Profile = ({
 	const profileEducationAndCertificationsRef = useRef();
 	const profileVolunteerExperiencesRef = useRef();
 
-
-
 	const [profileSkillsBusinessViewed,
 			setProfileSkillsBusinessViewed] = useState(false);
 	const [profileSkillsDesignViewed,
@@ -416,23 +414,15 @@ export const Profile = ({
 	const [profileVolunteerExperiencesViewed,
 			setProfileVolunteerExperiencesViewed] = useState(false);
 
-
-
-
 	useEffect(() => {
+		profileSkillsTechnicalRef.current.classList.add(
+			'animation-state--final'
+		);
 		gsap.registerPlugin(ScrollTrigger);
 		gsap.defaults({
 			ease: 'power4.out',
 			duration: standardTime().s,
 		});
-		gsap.from(
-			profileSkillsTechnicalRef.current,
-			{
-				opacity: 0,
-				y: 48,
-				delay: standardTime().s,
-			},
-		);
 		gsap.from(
 			profileSkillsBusinessRef.current,
 			{
@@ -534,6 +524,7 @@ export const Profile = ({
 					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
 					imageLargeScreen={media.sampleBackgroundImageLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					className="animated"
 					viewed={true}
 					ref={profileSkillsTechnicalRef}
 				>
