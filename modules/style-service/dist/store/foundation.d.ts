@@ -145,6 +145,8 @@ export namespace foundation {
             const profileSectionBackgroundOverlay: number;
             const profileSectionTitleUnderlay: number;
             const profileSectionContent: number;
+            const screenTitleBackground: number;
+            const screenTitle: number;
             const contactBodyContent: number;
             const contactBodyMediaImageLargeDevice: number;
             const contactBodyMediaVideoLargeDevice: number;

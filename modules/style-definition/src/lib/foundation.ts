@@ -181,6 +181,8 @@ export const foundation = {
 			'profileSectionBackgroundOverlay': 13,
 			'profileSectionTitleUnderlay': 14,
 			'profileSectionContent': 15,
+			'screenTitleBackground': 16,
+			'screenTitle': 17,
 			'contactBodyContent': 10,
 			'contactBodyMediaImageLargeDevice': 11,
 			'contactBodyMediaVideoLargeDevice': 12,

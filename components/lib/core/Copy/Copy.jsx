@@ -382,9 +382,9 @@ const propsSpecifications = {
 		'weight': 'bold',
 		'usage': 'display',
 		'color': {
-			'kind': 'Accent',
+			'kind': 'Neutral',
 			'tone': 'Finch',
-			'level': 1,
+			'level': 39,
 		},
 	},
 	'article--tagline': {

@@ -1,8 +1,6 @@
 import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// import { gsap } from 'gsap';
-// import ScrollTrigger from "gsap/ScrollTrigger";
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
@@ -342,36 +340,6 @@ const ArticleTitleConstrainer = styled.div`
 		padding: 15rem 0 3rem;
 	}
 `;
-const ArticleTitle = styled.div`
-	/* h1 {
-		display: inline;
-		border-radius: .375rem 0 .375rem 0;
-		background-image: linear-gradient(
-			to bottom,
-			${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 39,
-				'format': 'string'
-			})} 0%,
-			${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 39,
-				'format': 'string'
-			})} 100%
-		);
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			line-height: 6rem;
-		}
-		${deviceWidthQuery.only({ 'width': 'm' })} {
-			line-height: 8rem;
-		}
-		${deviceWidthQuery.only({ 'width': 'l' })} {
-			line-height: 10rem;
-		}
-	} */
-`;
 const ArticleTaglineAndMetaContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		width: calc(100% - 2rem);
@@ -551,21 +519,6 @@ export const Article = ({
 	frontMatter,
 	mainContent,
 }) => {
-	/* const articleTitleRef = useRef();
-	useEffect(() => {
-		gsap.registerPlugin(ScrollTrigger);
-		gsap.defaults({
-			ease: 'power4.out',
-			duration: 1.5,
-		});
-
-		gsap.from(
-			articleTitleRef.current.firstChild,
-			{
-				height: 0
-			}
-		);
-	}, []); */
 	return (
 		<ArticleContainer>
 			<MainContentContainer>
@@ -577,25 +530,8 @@ export const Article = ({
 							use="articleTitle"
 							title={{
 								'main': title,
-								'preface': 'Hereknae',
 							}}
 						/>
-						{/* <ArticleTitle>
-							<Copy
-								kind="article--title"
-								htmlContent={`
-									<div style="display: block; text-align: start; position: relative;">
-										Scrote Ever So Lovely:
-									</div>
-									<div style="display: block; text-align: start; position: relative;">
-										Throw a Spanner in the
-									</div>
-									<div style="display: block; text-align: start; position: relative;">
-										Works
-									</div>
-								`}
-							/>
-						</ArticleTitle> */}
 					</ArticleTitleConstrainer>
 					<ArticleTaglineAndMetaContainer>
 						{
@@ -626,9 +562,6 @@ export const Article = ({
 												width={10}
 												height="s"
 												color={{
-													// 'kind': 'Accent',
-													// 'tone': 'Finch',
-													// 'level': 2,
 													'kind': 'Neutral',
 													'tone': 'Finch',
 													'level': 30,

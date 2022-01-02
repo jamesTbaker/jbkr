@@ -139,6 +139,8 @@ export declare const foundation: {
             profileSectionBackgroundOverlay: number;
             profileSectionTitleUnderlay: number;
             profileSectionContent: number;
+            screenTitleBackground: number;
+            screenTitle: number;
             contactBodyContent: number;
             contactBodyMediaImageLargeDevice: number;
             contactBodyMediaVideoLargeDevice: number;

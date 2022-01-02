@@ -2,52 +2,85 @@ import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
 import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
+	deviceWidthQuery, color, standardTime, zIndexNumber, hiddenInline
 } from '@jbkr/style-service';
 
 
-const ScreenTitleSecondaryContentPreface = styled.div`
-	${deviceWidthQuery.only({ 'width': 's' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
-`;
+const ScreenTitleSecondaryContentPreface = styled.div``;
 const ScreenTitleSecondaryContentMain = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+	span.word-container {
+		position: relative;
+		display: inline-flex;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		opacity: 0;
+		overflow: hidden;
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: inline-flex;
+			width: 100%;
+			height: 100%;
+			background-color: ${color({
+				'kind': 'Accent',
+				'tone': 'Finch',
+				'format': 'string',
+				'level': 1,
+			})};
+			z-index: ${zIndexNumber().screenTitleBackground};
+		}
+		:first-child:before {
+			border-top-left-radius: .375rem;
+			border-bottom-left-radius: .375rem;
+		}
+		:last-child:before {
+			border-top-right-radius: .375rem;
+			border-bottom-right-radius: .375rem;
+		}
+		span.word-content {
+			position: relative;
+			z-index: ${zIndexNumber().screenTitle};
+		}
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
+	span.whitespace-character {
+		display: inline-block;
+		${hiddenInline}
 	}
-	.effect {
-		color: red;
+	span.word-container.state--final {
+		opacity: 1;
 	}
 `;
 
 const ScreenTitleSecondaryContainer = styled.div`
 	margin: 0;
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-	}
 `;
 
 export const ScreenTitleSecondary = ({ use, title }) => {
 	const screenTitleSecondaryContentMainRef = useRef();
-	let mainContentSplit = '';
+	let mainContentSplit = '<span class="word-container">' +
+		'<span class="word-content">';
 	title.main.split('').forEach((character) => {
-		mainContentSplit += `<span>${character}</span>`;
+		if (character === ' ') {
+			mainContentSplit += '</span></span>' +
+				'<span class="whitespace-character">&nbsp;</span>' +
+				'<span class="word-container"><span class="word-content">';
+		} else {
+			mainContentSplit +=
+				`<span class="visible-character">${character}</span>`;
+		}
 	});
+	mainContentSplit += '</span></span>';
 	useEffect(() => {
-		const characterElements = screenTitleSecondaryContentMainRef.current.firstChild.querySelector('span');
-		console.log('characterElements');
-		console.log(characterElements);
-		console.log(typeof(characterElements));
-
+		const wordContainers = screenTitleSecondaryContentMainRef
+			.current.firstChild.children;
 		let char = 0;
 		const onTick = () => {
-			const span = characterElements[char];
-			span.classList.add('effect');
+			const span = wordContainers[char];
+			span.classList.add('state--final');
 			char++;
-			if (char === characterElements.length) {
+			if (char === wordContainers.length) {
 				complete();
 				return;
 			}
@@ -78,17 +111,6 @@ export const ScreenTitleSecondary = ({ use, title }) => {
 				<Copy
 					kind="article--title"
 					htmlContent={mainContentSplit}
-					/* htmlContent={`
-						<div style="display: block; text-align: start; position: relative;">
-							Scrote Ever So Lovely:
-						</div>
-						<div style="display: block; text-align: start; position: relative;">
-							Throw a Spanner in the
-						</div>
-						<div style="display: block; text-align: start; position: relative;">
-							Works
-						</div>
-					`} */
 				/>
 			</ScreenTitleSecondaryContentMain>
 		</ScreenTitleSecondaryContainer>

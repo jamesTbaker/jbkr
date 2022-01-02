@@ -2,44 +2,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { color, deviceWidthQuery } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
+import { ScreenTitleSecondary } from '../Common/ScreenTitleSecondary';
 
-const ProfileSectionTitlePreface = styled.div`
-	${deviceWidthQuery.only({ 'width': 's' })} {
-		margin-bottom: 1rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin-bottom: 1rem;
-	}
-`;
-const ProfileSectionTitleMain = styled.div`
-	> span {
-		border-radius: .375rem;
-		background-image: linear-gradient(
-			to bottom,
-			${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 39,
-				'format': 'string'
-			})} 0%,
-			${color({
-				'kind': 'Neutral',
-				'tone': 'Finch',
-				'level': 39,
-				'format': 'string'
-			})} 100%
-		);
-	}
-	${deviceWidthQuery.only({ 'width': 's' })} {
-		line-height: 6rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'm' })} {
-		line-height: 7rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		line-height: 10rem;
-	}
-`;
+
 const ProfileSectionTitleContainer = styled.h2`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin: 0 0 1rem;
@@ -52,10 +17,10 @@ const ProfileSectionTitleContainer = styled.h2`
 `;
 const ProfileSectionHeaderContainer = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		margin-bottom: 4rem;
+		margin-bottom: 3rem;
 	}
 `;
 export const ProfileSectionHeader = ({
@@ -66,25 +31,12 @@ export const ProfileSectionHeader = ({
 }) => (
 	<ProfileSectionHeaderContainer>
 		<ProfileSectionTitleContainer
-			// id={hash}
+			id={hash}
 		>
-			{
-				title && title.preface &&
-				<ProfileSectionTitlePreface>
-					<Copy
-						kind="profile--section-title--preface"
-					>
-						{title.preface}&nbsp;
-					</Copy>
-				</ProfileSectionTitlePreface>
-			}
-			<ProfileSectionTitleMain>
-				<Copy
-					kind="profile--section-title--main"
-				>
-					{title.main}
-				</Copy>
-			</ProfileSectionTitleMain>
+			<ScreenTitleSecondary
+				use="profileSectionTitle"
+				title={title}
+			/>
 		</ProfileSectionTitleContainer>
 	</ProfileSectionHeaderContainer>
 );
