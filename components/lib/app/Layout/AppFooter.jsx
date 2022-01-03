@@ -5,6 +5,7 @@ import {
 } from '@jbkr/style-service';
 import { Brand } from '../../primitive/Brand/Brand';
 import { Copy } from '../../core/Copy/Copy';
+import { Button } from '../../core/Button/Button';
 
 const AppFooterContainer = styled.footer`
 	border-top: solid .125rem ${color({
@@ -110,8 +111,19 @@ const BrandLink = styled.a.attrs(() => {
 	}
 `;
 
-export const AppFooter = ({ content }) => (
+export const AppFooter = ({ content, includeContactLink }) => (
 	<AppFooterContainer>
+		{
+			includeContactLink &&
+			<Button
+				size="standard"
+				surfaceStyle="transparent"
+				contextColor="onDark"
+				text="Let's do something great together"
+				iconAfter="arrow-right"
+				url="/contact"
+			/>
+		}
 		<BrandContainer>
 			<BrandLink
 				href="/"

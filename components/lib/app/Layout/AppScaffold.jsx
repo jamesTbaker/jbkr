@@ -83,8 +83,10 @@ export const AppScaffold = ({
 	] = useState(false);
 	const router = useRouter();
 	useEffect(() => {
-		const handleStart = (url) => (url !== router.asPath) && setRouteChanging(true);
-        const handleComplete = (url) => (url === router.asPath) && setRouteChanging(false);
+		const handleStart = (url) =>
+			(url !== router.asPath) && setRouteChanging(true);
+        const handleComplete = (url) =>
+			(url === router.asPath) && setRouteChanging(false);
         router.events.on('routeChangeStart', handleStart)
         router.events.on('routeChangeComplete', handleComplete)
         router.events.on('routeChangeError', handleComplete)
@@ -210,6 +212,9 @@ export const AppScaffold = ({
 					{children}
 					<AppFooter
 						content={footer.copy}
+						includeContactLink={
+							router.pathname === '/contact' ? false : true
+						}
 					/>
 				</>
 			}
