@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useLayoutEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -27,6 +27,13 @@ const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
 		grid-area: tableOfContents;
 		height: 100%;
 		padding-left: 2rem;
+		transform: translateY(6rem);
+		opacity: 0;
+		transition: all 1.5s .5s;
+		&.animation-state--final {
+			transform: translateY(0);
+			opacity: 1;
+		}
 	}
 `;
 const ExpandedTableOfContentsListContainer = styled.nav.attrs(() => {
@@ -341,6 +348,13 @@ const ArticleTitleConstrainer = styled.div`
 	}
 `;
 const ArticleTaglineAndMetaContainer = styled.div`
+	transform: translateY(6rem);
+	opacity: 0;
+
+	&.animation-state--final {
+		transform: translateY(0);
+		opacity: 1;
+	}
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		width: calc(100% - 2rem);
 		max-width: 82rem;
@@ -365,10 +379,12 @@ const ArticleTaglineAndMetaContainer = styled.div`
 					'format': 'string'
 				})}
 			);
+		transition: all 1.5s .5s;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: 50%;
 		padding-right: 4rem;
+		transition: all 1.5s 1s;
 	}
 `;
 const ArticleTagline = styled.div`
@@ -519,6 +535,14 @@ export const Article = ({
 	frontMatter,
 	mainContent,
 }) => {
+	const articleTaglineAndMetaContainerRef = useRef();
+	const expandedTableOfContentsContainerRef = useRef();
+	useEffect(() => {
+		articleTaglineAndMetaContainerRef
+			.current.classList.add('animation-state--final');
+		expandedTableOfContentsContainerRef
+			.current.classList.add('animation-state--final');
+	});
 	return (
 		<ArticleContainer>
 			<MainContentContainer>
@@ -533,7 +557,9 @@ export const Article = ({
 							}}
 						/>
 					</ArticleTitleConstrainer>
-					<ArticleTaglineAndMetaContainer>
+					<ArticleTaglineAndMetaContainer
+						ref={articleTaglineAndMetaContainerRef}
+					>
 						{
 							frontMatter.briefStatements &&
 							frontMatter.briefStatements.length === 1 &&
@@ -755,17 +781,15 @@ export const Article = ({
 					</Collapsible>
 				</CompressedTableOfContentsCollapsibleContainer>
 			</CompressedTableOfContentsContainer>
-			<ExpandedTableOfContentsContainer>
+			<ExpandedTableOfContentsContainer
+				ref={expandedTableOfContentsContainerRef}
+			>
 				<ExpandedTableOfContentsListContainer>
 					<Copy
 						kind="article--faux-subheader"
 					>
 						<ArticleTableOfContentsFauxHeader />
 					</Copy>
-					{/* <Copy
-						kind="article--expanded-table-of-contents"
-						htmlContent={frontMatter.tableOfContents}
-					/> */}
 					<ExpandedTableOfContentsListContainerTwo
 						sectionProperties={frontMatter.tableOfContents}
 					/>

@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -111,6 +112,13 @@ const TaglineContainerHeader = styled.div`
 	margin: 3rem 0 3rem 2rem;
 `;
 const ContactBody = styled.div`
+	transform: translateY(6rem);
+	opacity: 0;
+	transition: all 1.5s .5s;
+	&.animation-state--final {
+		transform: translateY(0);
+		opacity: 1;
+	}
 	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		position: relative;
 		width: 100%;
@@ -219,6 +227,7 @@ const ContentContainer = styled.div`
 		max-width: 160rem;
 		width: 100%;
 		margin: 0 auto;
+		padding-bottom: 6rem;
 		text-align: left;
 		background-image:
 			linear-gradient(
@@ -233,11 +242,13 @@ const ContentContainer = styled.div`
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': 34,
-					'alpha': 0,
+					'level': 39,
+					'alpha': .8,
 					'format': 'string'
 				})}
-			);
+			),
+			url('https://res.cloudinary.com/jbkrcdn/image/upload/v1641226472/earth-from-space--contact_nx5riv.jpg');
+		background-position: center bottom;
 	}
 `;
 const ContentConstrainer = styled.div`
@@ -324,175 +335,183 @@ export const Contact = ({
 	media,
 	text,
 	channels,
-}) => (
-	<ContactContainer>
-		<MainContentContainer
-			$backgroundImageSmall={media.sampleBackgroundImageSmall.url}
-		>
-			<ContactHeader>
-				<ScreenTitlePrimary
-					titleVisible={title}
-				/>
-				<BrandingContainerHeader>
-					<LogoContainerHeader>
-						<Brand
-							includeWordmark={false}
-							contextColor="onDark"
-						/>
-					</LogoContainerHeader>
-					<TaglineContainerHeader>
-						<Copy
-							kind="contact--brand-tagline"
-						>
-							{text.brandTagline}
-						</Copy>
-					</TaglineContainerHeader>
-				</BrandingContainerHeader>
-			</ContactHeader>
-			<ContactBody>
-				<MediaContainerFive>
-					<MediaImagesContainerFive>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageFive
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-					</MediaImagesContainerFive>
-					<MediaVideosContainerFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-						<MediaVideoFive
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoFive>
-					</MediaVideosContainerFive>
-				</MediaContainerFive>
-				<MediaContainerThree>
-					<MediaImagesContainerThree>
-						<MediaImageThree
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageThree
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-						<MediaImageThree
-							$imageURL={media.sampleBackgroundImageLarge.url}
-						/>
-					</MediaImagesContainerThree>
-					<MediaVideosContainerThree>
-						<MediaVideoThree
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoThree>
-						<MediaVideoThree
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoThree>
-						<MediaVideoThree
-							poster={media.sampleBackgroundImageLarge.url}
-						>
-							<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
-						</MediaVideoThree>
-					</MediaVideosContainerThree>
-				</MediaContainerThree>
-				<ContentContainer>
-					<ContentConstrainer>
-						<BrandingContainerBody>
-							<LogoContainerBody>
-								<Brand
-									includeWordmark={false}
-									contextColor="onDark"
-								/>
-							</LogoContainerBody>
-							<TaglineContainerBody>
-								<Copy
-									kind="contact--brand-tagline"
-								>
-									{text.brandTagline}
-								</Copy>
-							</TaglineContainerBody>
-						</BrandingContainerBody>
-						<ContactOptionsContent>
-							<EmailHeaderContainer>
-								<Copy
-									kind="contact--section-header"
-								>
-									{text.emailHeader}
-								</Copy>
-							</EmailHeaderContainer>
-							<EmailContainer>
-								<Button
-									text="hi@jbkr.me"
-									url="mailto:hi@jbkr.me"
-									iconBefore="email"
-									size="standard"
-									surfaceStyle="outlined"
-									contextColor="onDark"
-								/>
-							</EmailContainer>
-							<ChannelsHeaderContainer>
-								<Copy
-									kind="contact--section-header"
-								>
-									{text.channelsHeader}
-								</Copy>
-							</ChannelsHeaderContainer>
-							<ChannelsContainer>
-								{
-									channels.map((channel) =>
-										<ChannelContainer
-											key={channel.key}
-										>
-											<Button
-												text={channel.anchorText}
-												url={channel.url}
-												iconBefore={channel.anchorIconBefore}
-												size="standard"
-												surfaceStyle="outlined"
-												contextColor="onDark"
-											/>
-										</ChannelContainer>
-									)
-								}
-							</ChannelsContainer>
-						</ContactOptionsContent>
-					</ContentConstrainer>
-				</ContentContainer>
-			</ContactBody>
-		</MainContentContainer>
-	</ContactContainer>
-);
+}) => {
+	const contactBodyRef = useRef();
+	useEffect(() => {
+		contactBodyRef.current.classList.add('animation-state--final');
+	});
+	return (
+		<ContactContainer>
+			<MainContentContainer
+				$backgroundImageSmall={media.sampleBackgroundImageSmall.url}
+			>
+				<ContactHeader>
+					<ScreenTitlePrimary
+						titleVisible={title}
+					/>
+					<BrandingContainerHeader>
+						<LogoContainerHeader>
+							<Brand
+								includeWordmark={false}
+								contextColor="onDark"
+							/>
+						</LogoContainerHeader>
+						<TaglineContainerHeader>
+							<Copy
+								kind="contact--brand-tagline"
+							>
+								{text.brandTagline}
+							</Copy>
+						</TaglineContainerHeader>
+					</BrandingContainerHeader>
+				</ContactHeader>
+				<ContactBody
+					ref={contactBodyRef}
+				>
+					<MediaContainerFive>
+						<MediaImagesContainerFive>
+							<MediaImageFive
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+							<MediaImageFive
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+							<MediaImageFive
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+							<MediaImageFive
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+							<MediaImageFive
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+						</MediaImagesContainerFive>
+						<MediaVideosContainerFive>
+							<MediaVideoFive
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoFive>
+							<MediaVideoFive
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoFive>
+							<MediaVideoFive
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoFive>
+							<MediaVideoFive
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoFive>
+							<MediaVideoFive
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoFive>
+						</MediaVideosContainerFive>
+					</MediaContainerFive>
+					<MediaContainerThree>
+						<MediaImagesContainerThree>
+							<MediaImageThree
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+							<MediaImageThree
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+							<MediaImageThree
+								$imageURL={media.sampleBackgroundImageLarge.url}
+							/>
+						</MediaImagesContainerThree>
+						<MediaVideosContainerThree>
+							<MediaVideoThree
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoThree>
+							<MediaVideoThree
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoThree>
+							<MediaVideoThree
+								poster={media.sampleBackgroundImageLarge.url}
+							>
+								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+							</MediaVideoThree>
+						</MediaVideosContainerThree>
+					</MediaContainerThree>
+					<ContentContainer>
+						<ContentConstrainer>
+							<BrandingContainerBody>
+								<LogoContainerBody>
+									<Brand
+										includeWordmark={false}
+										contextColor="onDark"
+									/>
+								</LogoContainerBody>
+								<TaglineContainerBody>
+									<Copy
+										kind="contact--brand-tagline"
+									>
+										{text.brandTagline}
+									</Copy>
+								</TaglineContainerBody>
+							</BrandingContainerBody>
+							<ContactOptionsContent>
+								<EmailHeaderContainer>
+									<Copy
+										kind="contact--section-header"
+									>
+										{text.emailHeader}
+									</Copy>
+								</EmailHeaderContainer>
+								<EmailContainer>
+									<Button
+										text="hi@jbkr.me"
+										url="mailto:hi@jbkr.me"
+										iconBefore="email"
+										size="standard"
+										surfaceStyle="outlined"
+										contextColor="onDark"
+									/>
+								</EmailContainer>
+								<ChannelsHeaderContainer>
+									<Copy
+										kind="contact--section-header"
+									>
+										{text.channelsHeader}
+									</Copy>
+								</ChannelsHeaderContainer>
+								<ChannelsContainer>
+									{
+										channels.map((channel) =>
+											<ChannelContainer
+												key={channel.key}
+											>
+												<Button
+													text={channel.anchorText}
+													url={channel.url}
+													iconBefore={channel.anchorIconBefore}
+													size="standard"
+													surfaceStyle="outlined"
+													contextColor="onDark"
+												/>
+											</ChannelContainer>
+										)
+									}
+								</ChannelsContainer>
+							</ContactOptionsContent>
+						</ContentConstrainer>
+					</ContentContainer>
+				</ContactBody>
+			</MainContentContainer>
+		</ContactContainer>
+	);
+};
 
 Contact.propTypes = {
 	'title': PropTypes.string,

@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -42,6 +43,13 @@ const LibLabHeader = styled.header`
 const LibLabBody = styled.div`
 	width: 100%;
 	text-align: center;
+	transform: translateY(6rem);
+	opacity: 0;
+	transition: all 1.5s .5s;
+	&.animation-state--final {
+		transform: translateY(0);
+		opacity: 1;
+	}
 `;
 const LibLabBodyConstrainer = styled.div`
 	max-width: 162rem;
@@ -67,8 +75,6 @@ const SecondaryArticleSummariesContainer = styled.div`
 `;
 const TertiaryArticleSummariesContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		/* column-count: 2;
-		column-gap: 4rem; */
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -79,20 +85,62 @@ const TertiaryArticleSummariesContainer = styled.div`
 export const LibLab = ({
 	title,
 	articles,
-}) => (
-	<LibLabContainer>
-		<MainContentContainer>
-			<LibLabHeader>
-				<ScreenTitlePrimary
-					titleVisible={title}
-				/>
-			</LibLabHeader>
-			<LibLabBody>
-				<LibLabBodyConstrainer>
-					<TopAndFeaturedArticleSummariesContainer>
-						<TopArticleSummariesContainer>
+}) => {
+	const libLabBodyRef = useRef();
+	useEffect(() => {
+		libLabBodyRef.current.classList.add('animation-state--final');
+	});
+	return (
+		<LibLabContainer>
+			<MainContentContainer>
+				<LibLabHeader>
+					<ScreenTitlePrimary
+						titleVisible={title}
+					/>
+				</LibLabHeader>
+				<LibLabBody
+					ref={libLabBodyRef}
+				>
+					<LibLabBodyConstrainer>
+						<TopAndFeaturedArticleSummariesContainer>
+							<TopArticleSummariesContainer>
+								{
+									articles.primary.map((articleSummary) =>
+										<ArticleSummary
+											title={articleSummary.title}
+											tagline={articleSummary.tagline}
+											slug={articleSummary.slug}
+											publicationDate={articleSummary.publicationDate}
+											updateDate={articleSummary.updateDate}
+											teaserDescription={articleSummary.teaserDescription}
+											teaserImages={articleSummary.teaserImages}
+											type="primary"
+											key={articleSummary.key}
+										/>
+									)
+								}
+							</TopArticleSummariesContainer>
 							{
-								articles.primary.map((articleSummary) =>
+								articles.featured && articles.featured[0] &&
+								<FeaturedArticleSummaryContainer>
+									<ArticleSummary
+										title={articles.featured[0].title}
+										tagline={articles.featured[0].tagline}
+										slug={articles.featured[0].slug}
+										publicationDate={articles.featured[0].publicationDate}
+										updateDate={articles.featured[0].updateDate}
+										teaserDescription={articles.featured[0].teaserDescription}
+										teaserImages={articles.featured[0].teaserImages}
+										featuredTeaserVideo={articles.featured[0].featuredTeaserVideo}
+										type="featured"
+										key={articles.featured[0].key}
+									/>
+								</FeaturedArticleSummaryContainer>
+							}
+						</TopAndFeaturedArticleSummariesContainer>
+						<SecondaryArticleSummariesContainer>
+							{
+								articles.secondary.map((articleSummary) =>
 									<ArticleSummary
 										title={articleSummary.title}
 										tagline={articleSummary.tagline}
@@ -101,69 +149,35 @@ export const LibLab = ({
 										updateDate={articleSummary.updateDate}
 										teaserDescription={articleSummary.teaserDescription}
 										teaserImages={articleSummary.teaserImages}
-										type="primary"
+										type="secondary"
 										key={articleSummary.key}
 									/>
 								)
 							}
-						</TopArticleSummariesContainer>
-						{
-							articles.featured && articles.featured[0] &&
-							<FeaturedArticleSummaryContainer>
-								<ArticleSummary
-									title={articles.featured[0].title}
-									tagline={articles.featured[0].tagline}
-									slug={articles.featured[0].slug}
-									publicationDate={articles.featured[0].publicationDate}
-									updateDate={articles.featured[0].updateDate}
-									teaserDescription={articles.featured[0].teaserDescription}
-									teaserImages={articles.featured[0].teaserImages}
-									featuredTeaserVideo={articles.featured[0].featuredTeaserVideo}
-									type="featured"
-									key={articles.featured[0].key}
-								/>
-							</FeaturedArticleSummaryContainer>
-						}
-					</TopAndFeaturedArticleSummariesContainer>
-					<SecondaryArticleSummariesContainer>
-						{
-							articles.secondary.map((articleSummary) =>
-								<ArticleSummary
-									title={articleSummary.title}
-									tagline={articleSummary.tagline}
-									slug={articleSummary.slug}
-									publicationDate={articleSummary.publicationDate}
-									updateDate={articleSummary.updateDate}
-									teaserDescription={articleSummary.teaserDescription}
-									teaserImages={articleSummary.teaserImages}
-									type="secondary"
-									key={articleSummary.key}
-								/>
-							)
-						}
-					</SecondaryArticleSummariesContainer>
-					<TertiaryArticleSummariesContainer>
-						{
-							articles.tertiary.map((articleSummary) =>
-								<ArticleSummary
-									title={articleSummary.title}
-									tagline={articleSummary.tagline}
-									slug={articleSummary.slug}
-									publicationDate={articleSummary.publicationDate}
-									updateDate={articleSummary.updateDate}
-									teaserDescription={articleSummary.teaserDescription}
-									teaserImages={articleSummary.teaserImages}
-									type="tertiary"
-									key={articleSummary.key}
-								/>
-							)
-						}
-					</TertiaryArticleSummariesContainer>
-				</LibLabBodyConstrainer>
-			</LibLabBody>
-		</MainContentContainer>
-	</LibLabContainer>
-);
+						</SecondaryArticleSummariesContainer>
+						<TertiaryArticleSummariesContainer>
+							{
+								articles.tertiary.map((articleSummary) =>
+									<ArticleSummary
+										title={articleSummary.title}
+										tagline={articleSummary.tagline}
+										slug={articleSummary.slug}
+										publicationDate={articleSummary.publicationDate}
+										updateDate={articleSummary.updateDate}
+										teaserDescription={articleSummary.teaserDescription}
+										teaserImages={articleSummary.teaserImages}
+										type="tertiary"
+										key={articleSummary.key}
+									/>
+								)
+							}
+						</TertiaryArticleSummariesContainer>
+					</LibLabBodyConstrainer>
+				</LibLabBody>
+			</MainContentContainer>
+		</LibLabContainer>
+	);
+};
 
 LibLab.propTypes = {
 	'title': PropTypes.string,

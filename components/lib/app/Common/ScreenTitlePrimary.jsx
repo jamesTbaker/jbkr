@@ -10,7 +10,9 @@ const ScreenTitlePrimaryAppendix = styled.span`
 const ScreenTitlePrimaryContainer = styled.div`
 	transform: translateY(6rem);
 	opacity: 0;
-	transition: all 1.5s .5s;
+	${
+		({ delay }) => `transition: all 1.5s ${delay};`
+	}
 	&.animation-state--final {
 		transform: translateY(0);
 		opacity: 1;
@@ -61,6 +63,7 @@ export const ScreenTitlePrimary = ({
 			}
 			<ScreenTitlePrimaryContainer
 				ref={screenTitleSecondaryContainerRef}
+				delay={includeBrand ? '.5s' : '0s'}
 			>
 				<Copy
 					kind="landmark-title"
