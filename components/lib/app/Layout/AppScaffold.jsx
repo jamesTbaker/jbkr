@@ -83,9 +83,16 @@ export const AppScaffold = ({
 	] = useState(false);
 	const router = useRouter();
 	useEffect(() => {
-		router.events.on('routeChangeStart', () => setRouteChanging(true));
-		router.events.on('routeChangeComplete', () => setRouteChanging(false));
-		router.events.on('routeChangeError', () => setRouteChanging(false));
+		const handleStart = (url) => (url !== router.asPath) && setRouteChanging(true);
+        const handleComplete = (url) => (url === router.asPath) && setRouteChanging(false);
+        router.events.on('routeChangeStart', handleStart)
+        router.events.on('routeChangeComplete', handleComplete)
+        router.events.on('routeChangeError', handleComplete)
+        return () => {
+            router.events.off('routeChangeStart', handleStart)
+            router.events.off('routeChangeComplete', handleComplete)
+            router.events.off('routeChangeError', handleComplete)
+        }
 	}, []);
 	return (
 		<>

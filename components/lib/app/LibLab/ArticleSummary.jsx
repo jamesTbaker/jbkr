@@ -6,6 +6,7 @@ import {
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Line } from '../../..';
+import { useRouter } from 'next/router';
 
 const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
 	return {
@@ -422,86 +423,90 @@ export const ArticleSummary = ({
 	teaserImages,
 	featuredTeaserVideo,
 	type,
-}) => (
-	<ArticleSummaryContainer
-		$type={type}
-		$images={teaserImages}
-		$slug={slug}
-	>
-		{
-			type === 'featured' &&
-			<VideoLargeDevice
-				poster={teaserImages.large.url}
-			>
-				<source src={featuredTeaserVideo.url} type="video/mp4" />
-			</VideoLargeDevice>
-		}
-		{
-			type === 'tertiary' &&
-			<TertiaryBackgroundImage
-				$images={teaserImages}
-			/>
-		}
-		<TitleContainer
+}) => {
+	const router = useRouter();
+	return (
+		<ArticleSummaryContainer
 			$type={type}
-		>
-			<Copy
-				kind={
-					type === 'tertiary' ? 'article-summary--title-anchor' :
-						'article-summary--title-anchor--enlarged'
-				}
-			>
-				{title}
-			</Copy>
-		</TitleContainer>
-		<DescriptionAndMetaItemContainer
-			$type={type}
+			$images={teaserImages}
+			$slug={slug}
+			onClick={(e) => {e.preventDefault(); router.push(`/library/${slug}`);}}
 		>
 			{
-				teaserDescription &&
-				<DescriptionContainer
-					$type={type}
+				type === 'featured' &&
+				<VideoLargeDevice
+					poster={teaserImages.large.url}
 				>
-					<Copy
-						kind="copy-container--standard"
-						htmlContent={teaserDescription}
-					/>
-				</DescriptionContainer>
+					<source src={featuredTeaserVideo.url} type="video/mp4" />
+				</VideoLargeDevice>
 			}
-			<MetaItemContainer
+			{
+				type === 'tertiary' &&
+				<TertiaryBackgroundImage
+					$images={teaserImages}
+				/>
+			}
+			<TitleContainer
+				$type={type}
+			>
+				<Copy
+					kind={
+						type === 'tertiary' ? 'article-summary--title-anchor' :
+							'article-summary--title-anchor--enlarged'
+					}
+				>
+					{title}
+				</Copy>
+			</TitleContainer>
+			<DescriptionAndMetaItemContainer
 				$type={type}
 			>
 				{
-					updateDate &&
-					<>
+					teaserDescription &&
+					<DescriptionContainer
+						$type={type}
+					>
 						<Copy
-							kind="article-summary--meta-item--label"
-						>
-							Updated
-						</Copy>
-						<Copy
-							kind="article-summary--meta-item--value"
-						>
-							{updateDate}
-						</Copy>
-					</>
+							kind="copy-container--standard"
+							htmlContent={teaserDescription}
+						/>
+					</DescriptionContainer>
 				}
-				{
-					!updateDate &&
-					<>
-						<Copy
-							kind="article-summary--meta-item--label"
-						>
-							Published
-						</Copy>
-						<Copy
-							kind="article-summary--meta-item--value"
-						>
-							{publicationDate}
-						</Copy>
-					</>
-				}
-			</MetaItemContainer>
-		</DescriptionAndMetaItemContainer>
-	</ArticleSummaryContainer>
-);
+				<MetaItemContainer
+					$type={type}
+				>
+					{
+						updateDate &&
+						<>
+							<Copy
+								kind="article-summary--meta-item--label"
+							>
+								Updated
+							</Copy>
+							<Copy
+								kind="article-summary--meta-item--value"
+							>
+								{updateDate}
+							</Copy>
+						</>
+					}
+					{
+						!updateDate &&
+						<>
+							<Copy
+								kind="article-summary--meta-item--label"
+							>
+								Published
+							</Copy>
+							<Copy
+								kind="article-summary--meta-item--value"
+							>
+								{publicationDate}
+							</Copy>
+						</>
+					}
+				</MetaItemContainer>
+			</DescriptionAndMetaItemContainer>
+		</ArticleSummaryContainer>
+	);
+};
