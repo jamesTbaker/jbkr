@@ -7,24 +7,22 @@ import { Brand } from '../../primitive/Brand/Brand';
 import { Copy } from '../../core/Copy/Copy';
 import { Button } from '../../core/Button/Button';
 
+
+
 const AppFooterContainer = styled.footer`
-	border-top: solid .125rem ${color({
-		'kind': 'Neutral',
-		'tone': 'Finch',
-		'level': 28,
-		'format': 'string',
-	})};
 	${deviceWidthQuery.only({ 'width': 's' })} {
-		margin: 5rem 2rem 0 2rem;
-		padding: 3rem 0;
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
-		padding: 2rem 0;
-		text-align: left;
-
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-areas: "footerLeft footerRight";
+		${
+			({ includeContactLink }) => includeContactLink && `
+				display: grid;
+				grid-template-areas: 	"contactLink"
+										"persistentContent";
+			`
+		}
+	}
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		margin: 5rem 2rem 0 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'm' })} {
 		margin: 5rem 2rem 0 2rem;
@@ -34,6 +32,49 @@ const AppFooterContainer = styled.footer`
 		max-width: 150rem;
 		margin: 5rem auto 0;
 	}
+`;
+const AppFooterPersistentContentContainer = styled.div`
+	border-top: solid .125rem ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 28,
+		'format': 'string',
+	})};
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		padding: 2rem 0;
+		text-align: left;
+		${
+			({ includeContactLink }) => includeContactLink && `
+				grid-area: persistentContent;
+			`
+		}
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas: "footerLeft footerRight";
+	}
+
+
+
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		padding: 3rem 0;
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+
+	}
+`;
+const ContactLinkContainer = styled.div`
+	grid-area: contactLink;
+	padding: 3rem 0;
+	border-radius: .375rem  .375rem 0 0;
+	background-color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 39,
+		'format': 'string',
+	})};
 `;
 const BrandContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 's' })} {
@@ -112,32 +153,38 @@ const BrandLink = styled.a.attrs(() => {
 `;
 
 export const AppFooter = ({ content, includeContactLink }) => (
-	<AppFooterContainer>
+	<AppFooterContainer
+		includeContactLink={includeContactLink}
+	>
 		{
 			includeContactLink &&
-			<Button
-				size="standard"
-				surfaceStyle="transparent"
-				contextColor="onDark"
-				text="Let's do something great together"
-				iconAfter="arrow-right"
-				url="/contact"
-			/>
+			<ContactLinkContainer>
+				<Button
+					size="standard"
+					surfaceStyle="transparent"
+					contextColor="onDark"
+					text="Let's create something beautiful together"
+					iconAfter="arrow-right"
+					url="/contact"
+				/>
+			</ContactLinkContainer>
 		}
-		<BrandContainer>
-			<BrandLink
-				href="/"
-				$contextColor="onDark"
-			>
-				<Brand />
-			</BrandLink>
-		</BrandContainer>
-		<CopyrightContainer>
-			<Copy
-				kind="footer--copyright"
-				htmlContent={content}
-			/>
-		</CopyrightContainer>
+		<AppFooterPersistentContentContainer>
+			<BrandContainer>
+				<BrandLink
+					href="/"
+					$contextColor="onDark"
+				>
+					<Brand />
+				</BrandLink>
+			</BrandContainer>
+			<CopyrightContainer>
+				<Copy
+					kind="footer--copyright"
+					htmlContent={content}
+				/>
+			</CopyrightContainer>
+		</AppFooterPersistentContentContainer>
 	</AppFooterContainer>
 );
 AppFooter.propTypes = {
