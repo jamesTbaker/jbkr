@@ -24,4 +24,3 @@ export const standardCorners = style.shape.standardCorners;
 export const straightCorners = style.shape.straightCorners;
 export const circular = style.shape.circular;
 export const standardTime = style.motion.standardTime;
-export const fadeUpKeyframes = style.motion.fadeUpKeyframes;

@@ -12,6 +12,114 @@ import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 
 
+const videoCommonAttributes = {
+	'autoPlay': true,
+	'muted': true,
+	'loop': true,
+	'playsInline': true,
+	'tabIndex': '-1',
+	'aria-hidden': true,
+};
+const BackgroundOverlay = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: ${zIndexNumber().fourOhFourBackgroundOverlay};
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		background-image:
+			linear-gradient(
+				175deg,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 41,
+					'alpha': .5,
+					'format': 'string'
+				})} 0,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 41,
+					'alpha': .6,
+					'format': 'string'
+				})} 5rem,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 41,
+					'alpha': .7,
+					'format': 'string'
+				})} 15rem,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 37,
+					'alpha': 1,
+					'format': 'string'
+				})} 70%
+			);
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		background-image:
+			radial-gradient(
+				ellipse at top right,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 35,
+					'alpha': 1,
+					'format': 'string'
+				})} 0%,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 35,
+					'alpha': .8,
+					'format': 'string'
+				})} 25%,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 35,
+					'alpha': 0,
+					'format': 'string'
+				})} 70%
+			),
+			linear-gradient(
+				to bottom,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 35,
+					'alpha': .1,
+					'format': 'string'
+				})} 0,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 36,
+					'alpha': .5,
+					'format': 'string'
+				})} 35%,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 37,
+					'alpha': .8,
+					'format': 'string'
+				})} 70%,
+				${color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 37,
+					'alpha': 1,
+					'format': 'string'
+				})} 99%
+			);
+	}
+`;
 const FourOhFourContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 23rem;
@@ -21,7 +129,6 @@ const FourOhFourContainer = styled.div`
 		width: 100%;
 		max-width: 180rem;
 		margin: 14rem auto 0;
-		text-align: center;
 	}
 `;
 const MainContentContainer = styled.main.attrs(() => {
@@ -43,20 +150,136 @@ const FourOhFourHeader = styled.header`
 `;
 const FourOhFourBody = styled.div`
 	width: 100%;
-	text-align: center;
+	height: 75rem;
 	transform: translateY(6rem);
 	opacity: 0;
+	overflow: hidden;
 	transition: all 1.5s .5s;
 	&.animation-state--final {
 		transform: translateY(0);
 		opacity: 1;
 	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		z-index: ${zIndexNumber().fourOhFourContainer};
+	}
 `;
-const ContentContainer = styled.div``;
+const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		border-radius: .375rem;
+		object-position: center top;
+		object-fit: cover;
+		z-index: ${zIndexNumber().fourOhFourBackgroundVideo};
+	}
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
+	}
+`;
+const VideoNotLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-position: center top;
+		object-fit: cover;
+		z-index: ${zIndexNumber().fourOhFourBackgroundVideo};
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
+	}
+`;
+const ImageLargeDevice = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: ${zIndexNumber().fourOhFourBackgroundImage};
+		${
+			({ $imageURL }) => `background-image: url('${$imageURL}');`
+		}
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		display: none;
+	}
+`;
+const ImageNotLargeDevice = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: ${zIndexNumber().fourOhFourBackgroundImage};
+		${
+			({ $imageURL }) => `background-image: url('${$imageURL}');`
+		}
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		display: none;
+	}
+`;
+const ContentContainer = styled.div`
+
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		width: 80rem;
+		padding: 3rem 3rem 3rem 15rem;
+		margin-top: 20rem;
+		border-radius: 0 .375rem .375rem 0;
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 39,
+			'alpha': 1,
+			'format': 'string'
+		})};
+		position: relative;
+		z-index: ${zIndexNumber().fourOhFourContent};
+	}
+`;
+const LinksContainer = styled.div`
+	a > span {
+		padding-left: 0;
+		padding-right: 0;
+		border-width: 0rem;
+		transition: all .5s;
+	}
+	a:focus > span {
+		padding-left: 1.875rem;
+		padding-right: 1.875rem;
+		border-width: .125rem;
+	}
+`;
 export const FourOhFour = ({
 	title,
 	media,
 	text,
+	links,
 }) => {
 	const fourOhFourBodyRef = useRef();
 	useEffect(() => {
@@ -72,18 +295,51 @@ export const FourOhFour = ({
 				</FourOhFourHeader>
 				<FourOhFourBody
 					ref={fourOhFourBodyRef}
+
 				>
+					<VideoLargeDevice
+						poster={media.backgroundImageLarge.url}
+					>
+						<source src={media.backgroundVideoLarge.url} type="video/mp4" />
+					</VideoLargeDevice>
+					<VideoNotLargeDevice
+						poster={media.backgroundImageSmall.url}
+					>
+						<source src={media.backgroundVideoSmall.url} type="video/mp4" />
+					</VideoNotLargeDevice>
+					<ImageLargeDevice
+						$imageURL={media.backgroundImageLarge.url}
+					/>
+					<ImageNotLargeDevice
+						$imageURL={media.backgroundImageSmall.url}
+					/>
+					<BackgroundOverlay />
 					<ContentContainer>
 						<Copy
-							kind="contact--section-header"
+							kind="four-oh-four--secondary-header"
 						>
 							{text.headerSecondary}
 						</Copy>
 						<Copy
-							kind="contact--brand-tagline"
+							kind="four-oh-four--paragraph"
 						>
 							{text.paragraph}
 						</Copy>
+						<LinksContainer>
+							{
+								links.map((link) =>
+									<Button
+										text={link.anchorText}
+										url={link.url}
+										iconAfter="arrow-right"
+										size="standard"
+										surfaceStyle="transparent"
+										contextColor="onDark"
+										key={link.key}
+									/>
+								)
+							}
+						</LinksContainer>
 					</ContentContainer>
 				</FourOhFourBody>
 			</MainContentContainer>

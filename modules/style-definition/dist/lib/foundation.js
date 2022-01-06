@@ -176,6 +176,11 @@ export const foundation = {
             'contactBodyContent': 10,
             'contactBodyMediaImageLargeDevice': 11,
             'contactBodyMediaVideoLargeDevice': 12,
+            'fourOhFourContainer': 10,
+            'fourOhFourBackgroundImage': 11,
+            'fourOhFourBackgroundVideo': 12,
+            'fourOhFourBackgroundOverlay': 13,
+            'fourOhFourContent': 14,
             'articleSummaryContainer': 10,
             // 'articleSummaryBackgroundImage': 11,
             'articleSummaryBackgroundVideo': 12,
@@ -226,16 +231,6 @@ export const foundation = {
             's': 1.5,
             'ms': 1500,
         },
-        'fadeUpKeyframes': `
-			0% {
-				opacity: 0;
-				transform: translateY(6rem);
-			}
-			100% {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		`,
     },
 };
 //# sourceMappingURL=foundation.js.map

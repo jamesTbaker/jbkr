@@ -527,6 +527,29 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
+	'four-oh-four--secondary-header': {
+		'tag': 'p',
+		'size': '1xl',
+		'weight': 'bold',
+		'usage': 'display',
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+		},
+	},
+	'four-oh-four--paragraph': {
+		'tag': 'p',
+		'size': 'm',
+		'weight': 'regular',
+		'usage': 'display',
+		'spacedBottom': true,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 7,
+		},
+	},
 	'footer--copyright': {
 		'tag': 'p',
 		'size': '2xs',
@@ -603,6 +626,8 @@ const copyKinds = [
 	'article--blockquote--large-device',
 	'contact--brand-tagline',
 	'contact--section-header',
+	'four-oh-four--secondary-header',
+	'four-oh-four--paragraph',
 	'footer--copyright',
 	'hidden-block',
 ];

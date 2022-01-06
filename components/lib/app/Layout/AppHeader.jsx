@@ -383,13 +383,13 @@ const ExpandedPrimaryNavigationListItem = styled.li`
 			a > span {
 				padding-left: 0;
 				padding-right: 0;
-				border-left: none;
+				border-width: 0rem;
 				transition: all .5s;
 			}
 			a:focus > span {
 				padding-left: 1.875rem;
 				padding-right: 1.875rem;
-				border-left: .125rem;
+				border-width: .125rem;
 			}
 		}
 	}

@@ -150,6 +150,11 @@ export namespace foundation {
             const contactBodyContent: number;
             const contactBodyMediaImageLargeDevice: number;
             const contactBodyMediaVideoLargeDevice: number;
+            const fourOhFourContainer: number;
+            const fourOhFourBackgroundImage: number;
+            const fourOhFourBackgroundVideo: number;
+            const fourOhFourBackgroundOverlay: number;
+            const fourOhFourContent: number;
             const articleSummaryContainer: number;
             const articleSummaryBackgroundVideo: number;
             const articleSummaryContent: number;
@@ -174,6 +179,5 @@ export namespace foundation {
             export { s_3 as s };
             export const ms: number;
         }
-        const fadeUpKeyframes: string;
     }
 }

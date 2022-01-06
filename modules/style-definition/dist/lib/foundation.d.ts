@@ -144,6 +144,11 @@ export declare const foundation: {
             contactBodyContent: number;
             contactBodyMediaImageLargeDevice: number;
             contactBodyMediaVideoLargeDevice: number;
+            fourOhFourContainer: number;
+            fourOhFourBackgroundImage: number;
+            fourOhFourBackgroundVideo: number;
+            fourOhFourBackgroundOverlay: number;
+            fourOhFourContent: number;
             articleSummaryContainer: number;
             articleSummaryBackgroundVideo: number;
             articleSummaryContent: number;
@@ -167,6 +172,5 @@ export declare const foundation: {
             s: number;
             ms: number;
         };
-        fadeUpKeyframes: string;
     };
 };

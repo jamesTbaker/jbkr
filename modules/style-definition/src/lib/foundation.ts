@@ -186,7 +186,11 @@ export const foundation = {
 			'contactBodyContent': 10,
 			'contactBodyMediaImageLargeDevice': 11,
 			'contactBodyMediaVideoLargeDevice': 12,
-
+			'fourOhFourContainer': 10,
+			'fourOhFourBackgroundImage': 11,
+			'fourOhFourBackgroundVideo': 12,
+			'fourOhFourBackgroundOverlay': 13,
+			'fourOhFourContent': 14,
 			'articleSummaryContainer': 10,
 			// 'articleSummaryBackgroundImage': 11,
 			'articleSummaryBackgroundVideo': 12,

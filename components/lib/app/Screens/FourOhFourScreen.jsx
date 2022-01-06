@@ -18,6 +18,10 @@ export const FourOhFourScreen = ({
 			title={main.title}
 			media={main.mediaContentItems}
 			text={main.textContentItems}
+			links={header.links.primary.filter(
+				link =>
+				link.url !== '/contact'
+			)}
 		/>
 	</AppScaffold>
 );

@@ -19,4 +19,3 @@ export declare const standardCorners: any;
 export declare const straightCorners: any;
 export declare const circular: any;
 export declare const standardTime: any;
-export declare const fadeUpKeyframes: any;
