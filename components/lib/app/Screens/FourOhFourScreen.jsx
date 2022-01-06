@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
+import { Meta, Header, Footer } from '@jbkr/models-react';
 import { AppScaffold } from '../Layout/AppScaffold';
-import { MainContent } from '../Layout/MainContent';
+import { FourOhFour } from '../FourOhFour/FourOhFour';
 
 export const FourOhFourScreen = ({
 	meta,
@@ -12,11 +14,10 @@ export const FourOhFourScreen = ({
 		header={header}
 		footer={footer}
 	>
-		{/* <MainContent>
-			<h1>{main.title}</h1>
-			<p
-				dangerouslySetInnerHTML={{ '__html': main.contentItems.main }}
-			/>
-		</MainContent> */}
+		<FourOhFour
+			title={main.title}
+			media={main.mediaContentItems}
+			text={main.textContentItems}
+		/>
 	</AppScaffold>
 );

@@ -370,7 +370,7 @@ const ExpandedPrimaryNavigationList = styled.ul`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	gap: 2rem;
+	gap: 4rem;
 	align-items: center;
 	margin: 0;
 	padding: 0;
@@ -382,7 +382,14 @@ const ExpandedPrimaryNavigationListItem = styled.li`
 		&:nth-child(2) {
 			a > span {
 				padding-left: 0;
+				padding-right: 0;
 				border-left: none;
+				transition: all .5s;
+			}
+			a:focus > span {
+				padding-left: 1.875rem;
+				padding-right: 1.875rem;
+				border-left: .125rem;
 			}
 		}
 	}

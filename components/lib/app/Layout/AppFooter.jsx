@@ -30,7 +30,15 @@ const AppFooterContainer = styled.footer`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: calc(100% - 4rem);
 		max-width: 150rem;
-		margin: 5rem auto 0;
+		${
+			({ includeContactLink }) => {
+				if (includeContactLink) {
+					return 'margin: 5rem auto 0;';
+				} else {
+					return 'margin: 0 auto;';
+				}
+			}
+		}
 	}
 `;
 const AppFooterPersistentContentContainer = styled.div`
@@ -67,7 +75,7 @@ const AppFooterPersistentContentContainer = styled.div`
 `;
 const ContactLinkContainer = styled.div`
 	grid-area: contactLink;
-	padding: 3rem 0;
+	padding: 3rem 0 3rem 3rem;
 	border-radius: .375rem  .375rem 0 0;
 	background-color: ${color({
 		'kind': 'Neutral',

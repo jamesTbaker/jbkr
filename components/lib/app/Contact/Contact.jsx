@@ -168,6 +168,7 @@ const MediaVideoFive = styled.video.attrs(() => videoCommonAttributes)`
 	width: calc((100% - 16rem) / 5);
 	height: 18rem;
 	object-fit: cover;
+	border-radius: .375rem;
 	@media (prefers-reduced-motion: reduce) {
 		display: none;
 	}
@@ -218,6 +219,7 @@ const MediaVideoThree = styled.video.attrs(() => videoCommonAttributes)`
 	width: calc((100% - 8rem) / 3);
 	height: 18rem;
 	object-fit: cover;
+	border-radius: .375rem;
 	@media (prefers-reduced-motion: reduce) {
 		display: none;
 	}
@@ -229,6 +231,7 @@ const ContentContainer = styled.div`
 		margin: 0 auto;
 		padding-bottom: 6rem;
 		text-align: left;
+		border-radius: .375rem;
 		background-image:
 			linear-gradient(
 				to bottom,
