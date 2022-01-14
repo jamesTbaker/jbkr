@@ -684,7 +684,6 @@ const returnArticleIntermediate = ({
 	) {
 		// if the image has all of the necessary properties
 		if (
-			articleMainRaw.ImageInHeader &&
 			articleMainRaw.Images &&
 			articleMainRaw.Images[0] &&
 			articleMainRaw.Images[0].hash &&

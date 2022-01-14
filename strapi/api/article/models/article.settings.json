@@ -89,10 +89,6 @@
       "required": false,
       "pluginOptions": {}
     },
-    "ImageInHeader": {
-      "type": "boolean",
-      "required": true
-    },
     "IntroVideoPoster": {
       "model": "file",
       "via": "related",
@@ -112,6 +108,12 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "TweetText": {
+      "type": "text"
+    },
+    "Distributed": {
+      "type": "boolean"
     }
   }
 }

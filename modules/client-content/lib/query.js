@@ -347,11 +347,30 @@ export const returnAllPublishedArticlesFromDB = async () => {
 		const dbConnection = await returnDatabaseConnection({
 			'dbName': process.env.mongoDbDbName,
 		});
+		// construct string representation of today's date
+		const todaysDateObject = new Date();
+		let todaysDateDateString = todaysDateObject.getDate().toString();
+		if (todaysDateDateString.length === 1) {
+			todaysDateDateString = '0' + todaysDateDateString;
+		}
+		let todaysDateMonthString = todaysDateObject.getMonth();
+		todaysDateMonthString = (todaysDateMonthString + 1).toString();
+		if (todaysDateMonthString.length === 1) {
+			todaysDateMonthString = '0' + todaysDateMonthString;
+		}
+
+		const todaysDateString = todaysDateObject.getFullYear() + '-' +
+			todaysDateMonthString + '-' + todaysDateDateString;
+		console.log(todaysDateString);
 		// assign query result to constant
 		let result =
 			await dbConnection.collection('articles').aggregate([
-				// match the documents whose published_at dates are not null
-				{ '$match': { 'published_at': { '$ne': null } } },
+				// match the documents whose PublicationDate is today or earlier
+				{
+					'$match': {
+						'PublicationDate': { '$lte': todaysDateString },
+					},
+				},
 				// look up the teaser image for this article
 				{
 					'$lookup':
@@ -481,7 +500,6 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'Images.hash': 1,
 						'Images.mime': 1,
 						'Images.caption': 1,
-						'ImageInHeader': 1,
 						'BriefStatements._id': 1,
 						'BriefStatements.Statement': 1,
 						'IntroText': 1,
