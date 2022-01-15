@@ -1,11 +1,10 @@
 {
 	"name": "@jbkr/db-client",
-	"version": "0.1.0",
+	"version": "0.1.103",
 	"description": "Return mongoDB client",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"private": true,
 	"type": "module",
 	"dependencies": {
 		"mongodb": "^4.1.1"

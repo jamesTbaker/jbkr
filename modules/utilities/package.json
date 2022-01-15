@@ -1,17 +1,16 @@
 {
 	"name": "@jbkr/utilities",
-	"version": "0.1.0",
+	"version": "0.1.103",
 	"description": "Miscellaneous functions.",
 	"main": "build/index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"private": true,
 	"type": "module",
 	"scripts": {
 		"build": "tsc --project ./tsconfig.json"
 	},
 	"devDependencies": {
-		"@jbkr/models-typescript": "file:../models-typescript",
+		"@jbkr/models-typescript": "0.1.103",
 		"typescript": "^4.3.5"
 	}
 }
