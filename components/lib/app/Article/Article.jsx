@@ -1,9 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
-} from '@jbkr/style-service';
+import { deviceWidthQuery, color, zIndexNumber } from '@jbkr/style-service';
 import { Copy } from '../../..';
 import { Button } from '../../..';
 import { Line } from '../../..';

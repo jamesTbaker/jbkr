@@ -5,6 +5,5 @@
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"private": true,
 	"type": "module"
 }

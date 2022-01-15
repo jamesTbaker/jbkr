@@ -5,10 +5,9 @@
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"private": true,
 	"type": "module",
 	"dependencies": {
-		"@jbkr/utilities": "file:../utilities",
+		"@jbkr/utilities": "0.1.0",
 		"luxon": "^2.0.2"
 	}
 }

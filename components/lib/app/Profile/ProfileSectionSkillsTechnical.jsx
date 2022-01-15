@@ -9,9 +9,6 @@ import {
 import { Copy } from '../../..';
 
 
-/* const HiddenH3 = styled.h3`
-	${hiddenBlock}
-`; */
 const FeaturedVisualizedSkillsContainer = styled.ul`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin: 0 0 3rem 0;
