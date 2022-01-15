@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { VolunteerExperience } from '@jbkr/models-react';
-import {
-	deviceWidthQuery, color, hiddenInline
-} from '@jbkr/style-service';
+import { deviceWidthQuery, color, hiddenInline } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 
 

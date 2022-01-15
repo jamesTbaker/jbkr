@@ -1,12 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
 import { ArticleSubsection } from './ArticleSubsection';
-import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
-} from '@jbkr/style-service';
+import { deviceWidthQuery, color } from '@jbkr/style-service';
 
 const ReturnContainerHasColumnsOnLargeWidthDevices = ({ subsections }) =>
 	subsections.length === 1 ? true : false;
@@ -30,9 +25,6 @@ const ArticleSectionContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding-top: 3rem;
 		border-top: solid .125rem ${color({
-			// 'kind': 'Neutral',
-			// 'tone': 'Finch',
-			// 'level': 10,
 			'kind': 'Accent',
 			'tone': 'Finch',
 			'level': 1,
@@ -46,9 +38,6 @@ const ArticleSectionContainer = styled.div`
 		margin-top: 1rem;
 		padding-top: 4rem;
 		border-top: solid .125rem ${color({
-			// 'kind': 'Neutral',
-			// 'tone': 'Finch',
-			// 'level': 10,
 			'kind': 'Accent',
 			'tone': 'Finch',
 			'level': 1,

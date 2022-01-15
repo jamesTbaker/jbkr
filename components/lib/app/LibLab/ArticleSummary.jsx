@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, color, zIndexNumber
-} from '@jbkr/style-service';
+import { deviceWidthQuery, color, zIndexNumber } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
-import { CopyLink } from '../../core/CopyLink/CopyLink';
-import { Line } from '../../..';
 import { useRouter } from 'next/router';
 
 const ArticleSummaryContainer = styled.a.attrs(({ $slug }) => {
@@ -267,13 +263,6 @@ const TitleContainer = styled.div.attrs(() => {
 				}
 			}
 		}
-
-
-
-
-
-
-
 		transition: all 250ms ease;
 		background-position-y: 10%;
 		background-image: linear-gradient(

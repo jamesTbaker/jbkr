@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Image, Video } from '@jbkr/models-react';

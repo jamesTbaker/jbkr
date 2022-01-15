@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Brand } from '../../..';
+import { Brand } from '../../primitive/Brand/Brand';
 import { Copy } from '../../core/Copy/Copy';
 import { deviceWidthQuery, hiddenInline } from '@jbkr/style-service';
 

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ContextColorKey } from '@jbkr/models-react';
 import Link from 'next/link';
-import { Icon, IconNames } from '../../primitive/Icon/Icon';
-import { deviceWidthQuery, color } from '@jbkr/style-service';
+import { color } from '@jbkr/style-service';
 
 const CopyLinkComplexAnchor = React.forwardRef(({ href, htmlContent }, ref) => (
 	<a

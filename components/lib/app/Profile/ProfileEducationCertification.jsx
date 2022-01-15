@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { EducationCertification } from '@jbkr/models-react';
-import {
-	deviceWidthQuery, color, hiddenBlock, hiddenInline
-} from '@jbkr/style-service';
+import { color, hiddenBlock, hiddenInline } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
 
 

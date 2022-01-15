@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useLayoutEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
@@ -14,14 +14,13 @@ import {
 } from '@jbkr/style-service';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSection } from './ProfileSection';
-import { ProfileSectionSkillsTechnical } from './ProfileSectionSkillsTechnical';
 import { ProfileProfessionalExperience } from './ProfileProfessionalExperience';
 import { ProfileEducationCertification } from './ProfileEducationCertification';
 import { ProfileVolunteerExperience } from './ProfileVolunteerExperience';
 import { ProfileSectionHeader } from './ProfileSectionHeader';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
-import { Collapsible } from '../../..';
+import { Collapsible } from '../../core/Collapsible/Collapsible';
 import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 

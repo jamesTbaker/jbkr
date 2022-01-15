@@ -1,18 +1,15 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
-} from '@jbkr/style-service';
-import { Copy } from '../../..';
-import { Button } from '../../..';
-import { Line } from '../../..';
-import { MediaItem } from '../../..';
-import { ArticleSections } from './ArticleSections';
-import { Collapsible } from '../../..';
+import { deviceWidthQuery, color, zIndexNumber } from '@jbkr/style-service';
+import { Copy } from '../../core/Copy/Copy';
+import { Button } from '../../core/Button/Button';
+import { Line } from '../../primitive/Line/Line';
+import { Collapsible } from '../../core/Collapsible/Collapsible';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
+import { MediaItem } from '../Common/MediaItem';
 import { ScreenTitleSecondary } from '../Common/ScreenTitleSecondary';
-
+import { ArticleSections } from './ArticleSections';
 
 
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {

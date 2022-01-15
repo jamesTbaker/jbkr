@@ -1,11 +1,9 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, color, zIndexNumber
-} from '@jbkr/style-service';
+import { deviceWidthQuery, color, zIndexNumber } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
-import { Brand } from '../../..';
+import { Brand } from '../../primitive/Brand/Brand';
 import { Button } from '../../core/Button/Button';
 import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
@@ -284,15 +282,12 @@ const BrandingContainerBody = styled.div`
 	}
 `;
 const LogoContainerBody = styled.div`
-	/* width: 12.5rem;
-	height: 52.5rem; */
 	width: 8.375rem;
 	height: 35rem;
 	margin: 0 auto 4rem;
 `;
 const TaglineContainerBody = styled.div`
 	width: 17rem;
-	/* height: 4rem; */
 	margin: 0 auto;
 	text-align: center;
 `;

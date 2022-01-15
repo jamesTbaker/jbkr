@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { color, deviceWidthQuery } from '@jbkr/style-service';
-import { Copy } from '../../core/Copy/Copy';
+import { deviceWidthQuery } from '@jbkr/style-service';
 import { ScreenTitleSecondary } from '../Common/ScreenTitleSecondary';
 
 

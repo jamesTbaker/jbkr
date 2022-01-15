@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Meta, Header, Footer } from '@jbkr/models-react';
-import { AppScaffold } from '../Layout/AppScaffold';
+import { AppScaffold } from '../Common/AppScaffold';
 import { Contact } from '../Contact/Contact';
 
 export const ContactScreen = ({

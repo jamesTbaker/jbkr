@@ -1,12 +1,7 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-	deviceWidthQuery, color, zIndexNumber
-} from '@jbkr/style-service';
-import { Copy } from '../../core/Copy/Copy';
-import { Brand } from '../../..';
-import { Button } from '../../core/Button/Button';
+import { deviceWidthQuery } from '@jbkr/style-service';
 import { ArticleSummary } from './ArticleSummary';
 import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 

@@ -244,5 +244,4 @@ Icon.defaultProps = {
 		'tone': 'Sunshine',
 		'level': 1,
 	},
-	// transform: 'rotate(90deg)',
 };

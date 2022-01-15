@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {
-	deviceWidthQuery, color, motion, hiddenBlock, zIndexNumber, hiddenInline
-} from '@jbkr/style-service';
+import { color } from '@jbkr/style-service';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { VideoItem } from './VideoItem';
