@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { MediaItem } from '../Media/MediaItem';
-import { deviceWidthQuery } from '@jbkr/style-service';
+import { Copy } from '../../core/Copy/Copy';
+import {
+	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
+} from '@jbkr/style-service';
 
 
 const ReturnMediaAndTextGridDataOnLargeWidthDevices = ({ subsection }) => ({
@@ -15,6 +18,7 @@ const ArticleSubsectionContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		/* margin-bottom: 3rem; */
 		${
 			({ gridArea }) => gridArea && `grid-area: ${gridArea}`
 		}
@@ -33,6 +37,23 @@ const SubsectionBodyContainer = styled.div`
 						grid-gap: 4rem;
 						grid-template-areas: "left right";
 					`;
+					/* const baseGridDeclarations = `
+						display: grid;
+						grid-gap: 4rem;
+						grid-template-areas: "left right";
+					`;
+					if (subsectionGrid.mediaGridArea === 'left') {
+						return `
+							${baseGridDeclarations}
+							grid-template-columns: 1fr 2fr;
+						`;
+					}
+					if (subsectionGrid.mediaGridArea === 'right') {
+						return `
+							${baseGridDeclarations}
+							grid-template-columns: 2fr 1fr;
+						`;
+					} */
 				}
 			}
 		}

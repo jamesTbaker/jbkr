@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Meta, Header, Footer } from '@jbkr/models-react';
-import { AppScaffold } from '../Common/AppScaffold';
+import { AppScaffold } from '../Layout/AppScaffold';
 import { LibLab } from '../LibLab/LibLab';
 
 

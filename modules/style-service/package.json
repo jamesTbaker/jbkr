@@ -5,13 +5,14 @@
 	"main": "dist/index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
+	"private": true,
 	"type": "module",
 	"scripts": {
 		"build": "tsc --project ./tsconfig.json"
 	},
 	"devDependencies": {
-		"@jbkr/models-typescript": "0.1.1",
-		"@jbkr/utilities": "0.1.0",
+		"@jbkr/models-typescript": "file:../models-typescript",
+		"@jbkr/utilities": "file:../utilities",
 		"typescript": "^4.3.5"
 	}
 }

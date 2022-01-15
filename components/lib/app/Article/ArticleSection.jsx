@@ -1,7 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
 import { ArticleSubsection } from './ArticleSubsection';
-import { deviceWidthQuery, color } from '@jbkr/style-service';
+import {
+	deviceWidthQuery, color, hiddenBlock, zIndexNumber, hiddenInline
+} from '@jbkr/style-service';
 
 const ReturnContainerHasColumnsOnLargeWidthDevices = ({ subsections }) =>
 	subsections.length === 1 ? true : false;

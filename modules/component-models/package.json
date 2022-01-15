@@ -1,7 +1,7 @@
 {
-	"name": "@jbkr/http-client",
+	"name": "@jbkr/component-models",
 	"version": "0.1.0",
-	"description": "http client",
+	"description": "component models",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",

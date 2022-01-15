@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery, verticalAlignMiddle } from '@jbkr/style-service';
 import { color, hiddenBlock } from '@jbkr/style-service';
-import { AppHeader } from './AppHeader';
-import { AppFooter } from './AppFooter';
+import { AppHeader } from '../Layout/AppHeader';
+import { AppFooter } from '../Layout/AppFooter';
 import { Spinner } from './Spinner';
 
 const RouteChangingContainer = styled.div`

@@ -1,13 +1,14 @@
 {
 	"name": "@jbkr/client-content",
-	"version": "0.1.1",
+	"version": "0.1.0",
 	"description": "Miscellaneous functions.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
+	"private": true,
 	"type": "module",
 	"dependencies": {
-		"@jbkr/db-client": "0.1.0",
+		"@jbkr/db-client": "file:../db-client",
 		"bson": "^4.5.1",
 		"github-slugger": "^1.4.0",
 		"hast-util-to-string": "^2.0.0",

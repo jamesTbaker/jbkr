@@ -4,6 +4,7 @@
 	"description": "Build the contents of the style service's store.",
 	"author": "James Baker",
 	"license": "UNLICENSED",
+	"private": true,
 	"type": "module",
 	"scripts": {
 		"compile-local": "tsc --project ./tsconfig.json",
@@ -16,8 +17,8 @@
 		"axios": "^0.21.1"
 	},
 	"devDependencies": {
-		"@jbkr/models-typescript": "0.1.1",
-		"@jbkr/utilities": "0.1.0",
+		"@jbkr/models-typescript": "file:../models-typescript",
+		"@jbkr/utilities": "file:../utilities",
 		"@types/fs-extra": "^9.0.12",
 		"@types/node": "^16.4.10",
 		"dotenv": "^10.0.0",

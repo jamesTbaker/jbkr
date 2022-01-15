@@ -1,4 +1,4 @@
-import { AppScaffold } from '../Common/AppScaffold';
+import { AppScaffold } from '../Layout/AppScaffold';
 import { Article } from '../Article/Article';
 export const ArticleScreen = ({
 	meta,

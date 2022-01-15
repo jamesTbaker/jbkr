@@ -1,5 +1,5 @@
-import { AppScaffold } from '../Common/AppScaffold';
-import { MainContent } from '../Common/MainContent';
+import { AppScaffold } from '../Layout/AppScaffold';
+import { MainContent } from '../Layout/MainContent';
 
 export const MetaScreen = ({
 	meta,
@@ -13,10 +13,10 @@ export const MetaScreen = ({
 		footer={footer}
 	>
 		<MainContent>
-			{/* <h1>{main.title}</h1>
+			<h1>{main.title}</h1>
 			<p
 				dangerouslySetInnerHTML={{ '__html': main.contentItems.main }}
-			/> */}
+			/>
 		</MainContent>
 	</AppScaffold>
 );
