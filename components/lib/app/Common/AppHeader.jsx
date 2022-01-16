@@ -162,6 +162,10 @@ const ExpandedSecondaryNavigationListItem = styled.li`
 			padding-left: 1.875rem;
 			padding-right: 0;
 			margin-left: 1rem;
+			transition: all .5s;
+		}
+		&:last-child a:focus > span {
+			padding-right: 1.875rem;
 		}
 	}
 `;

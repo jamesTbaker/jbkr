@@ -760,38 +760,44 @@ export const Article = ({
 					}
 				</ArticleBody>
 			</MainContentContainer>
-			<CompressedTableOfContentsContainer>
-				<CompressedTableOfContentsCollapsibleContainer>
-					<Collapsible
-						button={{
-							'size': 'small',
-							'surfaceStyle': 'outlined',
-							'contextColor': 'onDark',
-							'text': 'Contents'
-						}}
-						internalID="v3Wd49fpFK6x2jNkZ6qbmmDC"
-						copyKind="article--compressed-table-of-contents"
-					>
-						<CompressedTableOfContentsListContainer
-							sectionProperties={frontMatter.tableOfContents}
-						/>
-					</Collapsible>
-				</CompressedTableOfContentsCollapsibleContainer>
-			</CompressedTableOfContentsContainer>
+			{
+				frontMatter.tableOfContents && frontMatter.tableOfContents[0] &&
+				<CompressedTableOfContentsContainer>
+					<CompressedTableOfContentsCollapsibleContainer>
+						<Collapsible
+							button={{
+								'size': 'small',
+								'surfaceStyle': 'outlined',
+								'contextColor': 'onDark',
+								'text': 'Contents'
+							}}
+							internalID="v3Wd49fpFK6x2jNkZ6qbmmDC"
+							copyKind="article--compressed-table-of-contents"
+						>
+							<CompressedTableOfContentsListContainer
+								sectionProperties={frontMatter.tableOfContents}
+							/>
+						</Collapsible>
+					</CompressedTableOfContentsCollapsibleContainer>
+				</CompressedTableOfContentsContainer>
+			}
 			<ExpandedTableOfContentsContainer
 				ref={expandedTableOfContentsContainerRef}
 			>
-				<ExpandedTableOfContentsListContainer>
-					<Copy
-						kind="article--faux-subheader"
-					>
-						<ArticleTableOfContentsFauxHeader />
-					</Copy>
-					<ExpandedTableOfContentsListContainerTwo
-						sectionProperties={frontMatter.tableOfContents}
-					/>
+				{
+					frontMatter.tableOfContents && frontMatter.tableOfContents[0] &&
+					<ExpandedTableOfContentsListContainer>
+						<Copy
+							kind="article--faux-subheader"
+						>
+							<ArticleTableOfContentsFauxHeader />
+						</Copy>
+						<ExpandedTableOfContentsListContainerTwo
+							sectionProperties={frontMatter.tableOfContents}
+						/>
 
-				</ExpandedTableOfContentsListContainer>
+					</ExpandedTableOfContentsListContainer>
+				}
 			</ExpandedTableOfContentsContainer>
 		</ArticleContainer>
 	);

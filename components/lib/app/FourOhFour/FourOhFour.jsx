@@ -7,8 +7,6 @@ import { Button } from '../../core/Button/Button';
 import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 
-
-
 const videoCommonAttributes = {
 	'autoPlay': true,
 	'muted': true,
@@ -260,16 +258,17 @@ const ContentContainer = styled.div`
 	}
 `;
 const LinksContainer = styled.div`
+	padding-top: 2rem;
 	a > span {
 		padding-left: 0;
 		padding-right: 0;
-		border-width: 0rem;
+		/* border-width: 0rem; */
 		transition: all .5s;
 	}
 	a:focus > span {
 		padding-left: 1.875rem;
 		padding-right: 1.875rem;
-		border-width: .125rem;
+		/* border-width: .125rem; */
 	}
 `;
 export const FourOhFour = ({
