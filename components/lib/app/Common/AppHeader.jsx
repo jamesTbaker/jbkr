@@ -10,7 +10,7 @@ import { Brand } from '../../primitive/Brand/Brand';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
-
+import Link from 'next/link';
 
 const returnLibLabItemAnchorText = ({ rawtext }) => {
 	const breakPosition = rawtext.indexOf(':') > -1 ?
@@ -679,14 +679,15 @@ export const AppHeader = ({ content }) => {
 					</CompressedNavigationContainer>
 				</CompressedNavigationToggleContainer>
 				<BrandContainer>
-					<BrandLink
-						href="/"
-						$contextColor="onDark"
-					>
-						<Brand
-							contextColor="onDark"
-						/>
-					</BrandLink>
+					<Link href="/" passHref>
+						<BrandLink
+							$contextColor="onDark"
+						>
+							<Brand
+								contextColor="onDark"
+							/>
+						</BrandLink>
+					</Link>
 				</BrandContainer>
 				<ExpandedPrimaryNavigationContainer>
 					<ExpandedPrimaryNavigationList>
