@@ -8,6 +8,7 @@ import { color, hiddenBlock } from '@jbkr/style-service';
 import { AppHeader } from './AppHeader';
 import { AppFooter } from './AppFooter';
 import { Spinner } from './Spinner';
+import Prism from 'prismjs';
 
 const RouteChangingContainer = styled.div`
 	height: 100vh;
@@ -85,8 +86,12 @@ export const AppScaffold = ({
 	useEffect(() => {
 		const handleStart = (url) =>
 			(url !== router.asPath) && setRouteChanging(true);
-        const handleComplete = (url) =>
-			(url === router.asPath) && setRouteChanging(false);
+        const handleComplete = (url) => {
+			if (url === router.asPath) {
+				setRouteChanging(false);
+			}
+			Prism.highlightAll();
+		}
         router.events.on('routeChangeStart', handleStart)
         router.events.on('routeChangeComplete', handleComplete)
         router.events.on('routeChangeError', handleComplete)

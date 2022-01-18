@@ -7,7 +7,6 @@ import { createGlobalStyle } from 'styled-components';
 import {
 	gridBase, color, fontFilesImport, fontPrimaryName, fontFallbacksNames,
 } from '@jbkr/style-service';
-import Prism from 'prismjs';
 import { prismCSS } from '@jbkr/syntax-highlighting';
 
 
@@ -55,9 +54,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function App({ Component, pageProps }) {
-	useEffect(() => {
-		Prism.highlightAll();
-	}, []);
 	return (
 		<>
 			<Head>

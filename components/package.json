@@ -13,6 +13,7 @@
 		"@jbkr/utilities": "0.1.103",
 		"gsap": "^3.9.0",
 		"next": "^12.0.7",
+		"prismjs": "^1.26.0",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-player": "^2.9.0",
