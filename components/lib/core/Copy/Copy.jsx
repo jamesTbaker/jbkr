@@ -379,7 +379,6 @@ const propsSpecifications = {
 	},
 	'article--title': {
 		'tag': 'div',
-		// 'tag': 'h1',
 		'size': '2xl',
 		'weight': 'bold',
 		'usage': 'display',
@@ -533,7 +532,7 @@ const propsSpecifications = {
 		'tag': 'p',
 		'size': '1xl',
 		'weight': 'bold',
-		'usage': 'display',
+		'usage': 'body',
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Base',
@@ -544,8 +543,7 @@ const propsSpecifications = {
 		'tag': 'p',
 		'size': 'm',
 		'weight': 'regular',
-		'usage': 'display',
-		'spacedBottom': true,
+		'usage': 'body',
 		'color': {
 			'kind': 'Neutral',
 			'tone': 'Finch',

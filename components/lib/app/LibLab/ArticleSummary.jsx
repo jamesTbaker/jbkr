@@ -334,7 +334,7 @@ const DescriptionAndMetaItemContainer = styled.div`
 				}
 				if ($type === 'tertiary') {
 					return `
-						padding: 0 0 0 17rem;
+						padding: 0 2rem 0 17rem;
 					`;
 				}
 			}
@@ -360,7 +360,7 @@ const DescriptionAndMetaItemContainer = styled.div`
 				}
 				if ($type === 'tertiary') {
 					return `
-						padding: 0 0 0 22rem;
+						padding: 0 2rem 0 22rem;
 					`;
 				}
 			}

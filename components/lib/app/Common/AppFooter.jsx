@@ -71,7 +71,6 @@ const AppFooterPersistentContentContainer = styled.div`
 	}
 `;
 const ContactLinkContainer = styled.div`
-	grid-area: contactLink;
 	padding: 3rem 0 3rem 3rem;
 	border-radius: .375rem  .375rem 0 0;
 	background-color: ${color({
@@ -80,6 +79,14 @@ const ContactLinkContainer = styled.div`
 		'level': 39,
 		'format': 'string',
 	})};
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		> a {
+			width: auto;
+		}
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		grid-area: contactLink;
+	}
 `;
 const BrandContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 's' })} {

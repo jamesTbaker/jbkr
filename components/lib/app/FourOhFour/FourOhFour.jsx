@@ -133,7 +133,7 @@ const MainContentContainer = styled.main.attrs(() => {
 })``;
 const FourOhFourHeader = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 0 2rem 0 2rem;
+		padding: 0 2rem 8rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		width: calc(100% - 4rem);
@@ -236,39 +236,64 @@ const ImageNotLargeDevice = styled.div`
 		display: none;
 	}
 `;
-const ContentContainer = styled.div`
 
-	${deviceWidthQuery.not({ 'width': 'l' })} {
 
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 80rem;
-		padding: 3rem 3rem 3rem 15rem;
-		margin-top: 20rem;
+// ============
+
+
+const ContentConstrainer = styled.div`
+	position: relative;
+	margin-top: 20rem;
+	z-index: ${zIndexNumber().fourOhFourContent};
+`;
+const ContentBackground = styled.div`
+	background-color: ${color({
+		'kind': 'Neutral',
+		'tone': 'Finch',
+		'level': 39,
+		'alpha': 1,
+		'format': 'string'
+	})};
+	@media (min-width: 648px) {
+		width: 75%;
+		margin: 0 25% 0 0;
 		border-radius: 0 .375rem .375rem 0;
-		background-color: ${color({
-			'kind': 'Neutral',
-			'tone': 'Finch',
-			'level': 39,
-			'alpha': 1,
-			'format': 'string'
-		})};
-		position: relative;
-		z-index: ${zIndexNumber().fourOhFourContent};
+	}
+	@media (min-width: 896px) {
+		width: 50%;
+		margin: 0 50% 0 0;
+		border-radius: 0 .375rem .375rem 0;
 	}
 `;
+const ContentContainer = styled.div`
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		padding: 2rem;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		width: calc(100% - 2rem);
+		max-width: 75rem;
+		padding: 5rem 3rem 5rem 2rem;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		padding: 5rem 3rem 5rem 0;
+		margin: 0 0 0 auto;
+	}
+`;
+
+
+// ============
+
+
 const LinksContainer = styled.div`
 	padding-top: 2rem;
 	a > span {
 		padding-left: 0;
 		padding-right: 0;
-		/* border-width: 0rem; */
 		transition: all .5s;
 	}
 	a:focus > span {
 		padding-left: 1.875rem;
 		padding-right: 1.875rem;
-		/* border-width: .125rem; */
 	}
 `;
 export const FourOhFour = ({
@@ -310,33 +335,37 @@ export const FourOhFour = ({
 						$imageURL={media.backgroundImageSmall.url}
 					/>
 					<BackgroundOverlay />
-					<ContentContainer>
-						<Copy
-							kind="four-oh-four--secondary-header"
-						>
-							{text.headerSecondary}
-						</Copy>
-						<Copy
-							kind="four-oh-four--paragraph"
-						>
-							{text.paragraph}
-						</Copy>
-						<LinksContainer>
-							{
-								links.map((link) =>
-									<Button
-										text={link.anchorText}
-										url={link.url}
-										iconAfter="arrow-right"
-										size="standard"
-										surfaceStyle="transparent"
-										contextColor="onDark"
-										key={link.key}
-									/>
-								)
-							}
-						</LinksContainer>
-					</ContentContainer>
+					<ContentConstrainer>
+						<ContentBackground>
+							<ContentContainer>
+								<Copy
+									kind="four-oh-four--secondary-header"
+								>
+									{text.headerSecondary}
+								</Copy>
+								<Copy
+									kind="four-oh-four--paragraph"
+								>
+									{text.paragraph}
+								</Copy>
+								<LinksContainer>
+									{
+										links.map((link) =>
+											<Button
+												text={link.anchorText}
+												url={link.url}
+												iconAfter="arrow-right"
+												size="standard"
+												surfaceStyle="transparent"
+												contextColor="onDark"
+												key={link.key}
+											/>
+										)
+									}
+								</LinksContainer>
+							</ContentContainer>
+						</ContentBackground>
+					</ContentConstrainer>
 				</FourOhFourBody>
 			</MainContentContainer>
 		</FourOhFourContainer>
