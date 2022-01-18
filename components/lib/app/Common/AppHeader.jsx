@@ -9,7 +9,7 @@ import {
 import { Brand } from '../../primitive/Brand/Brand';
 import { Button } from '../../core/Button/Button';
 import { Copy } from '../../core/Copy/Copy';
-import { CopyLink } from '../../core/CopyLink/CopyLink';
+// import { CopyLink } from '../../core/CopyLink/CopyLink';
 import Link from 'next/link';
 
 const returnLibLabItemAnchorText = ({ rawtext }) => {
@@ -122,6 +122,78 @@ const AnnouncementBody = styled.span`
 		}
 		span.item-title-remainder-placeholder::before {
 			content: '...';
+		}
+	}
+`;
+const AnnouncementLink = styled.a`
+	${
+		() => {
+			const colors = {
+				'content': {
+					'default': color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 4,
+						'format': 'string'
+					}),
+					'hover': color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 2,
+						'format': 'string'
+					}),
+					'focus': color({
+						'kind': 'Brand',
+						'tone': 'Peony',
+						'level': 2,
+						'format': 'string'
+					}),
+				},
+				'background': {
+					'default': 'transparent',
+					'hover': color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 35,
+						'format': 'string'
+					}),
+					'focus': color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 35,
+						'format': 'string'
+					}),
+				},
+				'focusRing': color({
+					'kind': 'Accent',
+					'tone': 'Finch',
+					'level': 1,
+					'format': 'string'
+				}),
+				'focusRingSeparator': color({
+					'kind': 'Neutral',
+					'tone': 'Finch',
+					'level': 41,
+					'format': 'string'
+				}),
+			};
+			return `
+				display: block;
+				color: ${colors.content.default};
+				text-decoration: none;
+				transition: background 250ms ease;
+				border-radius: .375rem;
+				&:hover {
+					color: ${colors.content.hover};
+					background-color: ${colors.background.hover};
+				}
+				&:focus {
+					padding: 0 .5rem;
+					margin-right: 0 .25rem;
+					outline: none;
+					box-shadow: 0 0 0 .25rem ${colors.focusRingSeparator}, 0 0 0 .5rem ${colors.focusRing};
+				}
+			`;
 		}
 	}
 `;
@@ -725,7 +797,20 @@ export const AppHeader = ({ content }) => {
 						<Copy
 							kind="announcement--body"
 						>
-							<CopyLink
+							<Link href={content.announcement.bodyURL} passHref>
+								<AnnouncementLink
+									$contextColor="onDark"
+									dangerouslySetInnerHTML={{
+										'__html': returnLibLabItemAnchorText({
+											'rawtext': content.announcement.bodyAnchor
+										})
+									}}
+								/>
+							</Link>
+
+
+
+							{/* <CopyLink
 								url={content.announcement.bodyURL}
 								htmlContent={
 									returnLibLabItemAnchorText({
@@ -733,7 +818,7 @@ export const AppHeader = ({ content }) => {
 									})
 								}
 								inline={false}
-							/>
+							/> */}
 						</Copy>
 					</AnnouncementBody>
 				</AnnouncementContainer>
