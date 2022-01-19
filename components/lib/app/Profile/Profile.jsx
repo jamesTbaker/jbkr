@@ -528,10 +528,10 @@ export const Profile = ({
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
 				<ProfileSection
-					videoLargeScreen={media.sampleBackgroundVideoLarge}
-					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					videoNotLargeScreen={media.videoTechSkillsNotLarge}
+					videoLargeScreen={media.videoTechSkillsLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
 					className="animated"
 					viewed={true}
 					ref={profileSkillsTechnicalRef}
@@ -576,10 +576,10 @@ export const Profile = ({
 					}
 				</ProfileSection>
 				<ProfileSection
-					videoLargeScreen={media.sampleTwoBackgroundVideoLarge}
-					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					videoNotLargeScreen={media.videoBusinessSkillsNotLarge}
+					videoLargeScreen={media.videoBusinessSkillsLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
 					viewed={profileSkillsBusinessViewed}
 					ref={profileSkillsBusinessRef}
 				>
@@ -609,10 +609,10 @@ export const Profile = ({
 					}
 				</ProfileSection>
 				<ProfileSection
-					videoLargeScreen={media.sampleBackgroundVideoLarge}
-					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					videoNotLargeScreen={media.videoDesignSkillsNotLarge}
+					videoLargeScreen={media.videoDesignSkillsLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
 					viewed={profileSkillsDesignViewed}
 					ref={profileSkillsDesignRef}
 				>
@@ -635,10 +635,10 @@ export const Profile = ({
 					}
 				</ProfileSection>
 				<ProfileSection
-					videoLargeScreen={media.sampleBackgroundVideoLarge}
-					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					videoNotLargeScreen={media.videoProfessionalExperienceNotLarge}
+					videoLargeScreen={media.videoProfessionalExperienceLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
 					viewed={profileProfessionalExperiencesViewed}
 					ref={profileProfessionalExperiencesRef}
 				>
@@ -657,10 +657,10 @@ export const Profile = ({
 					</ProfessionalExperiencesContainer>
 				</ProfileSection>
 				<ProfileSection
-					videoLargeScreen={media.sampleBackgroundVideoLarge}
-					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					videoNotLargeScreen={media.videoEducationAndCertificationNotLarge}
+					videoLargeScreen={media.videoEducationAndCertificationLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
 					viewed={profileEducationAndCertificationsViewed}
 					ref={profileEducationAndCertificationsRef}
 				>
@@ -719,10 +719,10 @@ export const Profile = ({
 					</EducationAndCertificationsContainer>
 				</ProfileSection>
 				<ProfileSection
-					videoLargeScreen={media.sampleBackgroundVideoLarge}
-					videoNotLargeScreen={media.sampleBackgroundVideoSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					videoNotLargeScreen={media.videoVolunteerExperiencesNotLarge}
+					videoLargeScreen={media.videoVolunteerExperiencesLarge}
 					imageNotLargeScreen={media.sampleBackgroundImageSmall}
+					imageLargeScreen={media.sampleBackgroundImageLarge}
 					viewed={profileVolunteerExperiencesViewed}
 					ref={profileVolunteerExperiencesRef}
 				>
