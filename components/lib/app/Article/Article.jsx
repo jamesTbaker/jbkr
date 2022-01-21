@@ -99,10 +99,10 @@ const ExpandedTableOfContentsListContainerTwo = ({
 }) => (
 	<ExpandedTableOfContentsList>
 		{
-			sectionProperties.map(i =>
+			sectionProperties.map(item =>
 				<ExpandedTableOfContentsListItemWithChildren
-					item={i}
-					key={i.ID}
+					item={item}
+					key={item.ID}
 				/>
 			)
 		}

@@ -278,9 +278,9 @@ const ProfileSectionContainer = styled.section`
 `;
 export const ProfileSection = forwardRef(({
 	videoLargeScreen,
-	videoNotLargeScreen,
+	videoSmallScreen,
 	imageLargeScreen,
-	imageNotLargeScreen,
+	imageSmallScreen,
 	className,
 	viewed,
 	children,
@@ -298,9 +298,9 @@ export const ProfileSection = forwardRef(({
 					<source src={videoLargeScreen.url} type="video/mp4" />
 				</VideoLargeDevice>
 				<VideoNotLargeDevice
-					poster={imageNotLargeScreen.url}
+					poster={imageSmallScreen.url}
 				>
-					<source src={videoNotLargeScreen.url} type="video/mp4" />
+					<source src={videoSmallScreen.url} type="video/mp4" />
 				</VideoNotLargeDevice>
 			</>
 		}
@@ -308,7 +308,7 @@ export const ProfileSection = forwardRef(({
 			$imageURL={imageLargeScreen.url}
 		/>
 		<ImageNotLargeDevice
-			$imageURL={imageNotLargeScreen.url}
+			$imageURL={imageSmallScreen.url}
 		/>
 		<TitleUnderlay />
 		<BackgroundOverlay />
@@ -322,8 +322,8 @@ export const ProfileSection = forwardRef(({
 
 ProfileSection.propTypes = {
 	'videoLargeScreen': Video,
-	'videoNotLargeScreen': Video,
+	'videoSmallScreen': Video,
 	'imageLargeScreen': Image,
-	'imageNotLargeScreen': Image,
+	'imageSmallScreen': Image,
 	'children': PropTypes.any,
 }

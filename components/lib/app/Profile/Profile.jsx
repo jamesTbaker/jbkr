@@ -9,6 +9,7 @@ import {
 	EducationCertificationWithReactKey,
 	VolunteerExperienceWithReactKey,
 } from '@jbkr/models-react';
+import Head from 'next/head';
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, standardTime
 } from '@jbkr/style-service';
@@ -22,7 +23,6 @@ import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Collapsible } from '../../core/Collapsible/Collapsible';
 import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
-
 
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -514,8 +514,20 @@ export const Profile = ({
 	}, []);
 	return (
 		<ProfileContainer>
+			<Head>
+				{
+					Object.keys(media).map(itemKey =>
+						itemKey.startsWith('video') && <link
+							rel="preload"
+							as="video"
+							href={media[itemKey].url}
+							key={`video-preload--${itemKey}`}
+						></link>
+					)
+				}
+			</Head>
 			<MainContentContainer
-				$menuBackgroundImageLarge={media.menuBackgroundImageLarge.url}
+				$menuBackgroundImageLarge={media.imageMenuLarge.url}
 			>
 				<ProfileHeader>
 					<ProfileHeaderContentConstrainer>
@@ -528,10 +540,10 @@ export const Profile = ({
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
 				<ProfileSection
-					videoNotLargeScreen={media.videoTechSkillsNotLarge}
+					videoSmallScreen={media.videoTechSkillsSmall}
 					videoLargeScreen={media.videoTechSkillsLarge}
-					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageSmallScreen={media.imageTechSkillsSmall}
+					imageLargeScreen={media.imageTechSkillsLarge}
 					className="animated"
 					viewed={true}
 					ref={profileSkillsTechnicalRef}
@@ -576,10 +588,10 @@ export const Profile = ({
 					}
 				</ProfileSection>
 				<ProfileSection
-					videoNotLargeScreen={media.videoBusinessSkillsNotLarge}
+					videoSmallScreen={media.videoBusinessSkillsSmall}
 					videoLargeScreen={media.videoBusinessSkillsLarge}
-					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageSmallScreen={media.imageBusinessSkillsSmall}
+					imageLargeScreen={media.imageBusinessSkillsLarge}
 					viewed={profileSkillsBusinessViewed}
 					ref={profileSkillsBusinessRef}
 				>
@@ -609,10 +621,10 @@ export const Profile = ({
 					}
 				</ProfileSection>
 				<ProfileSection
-					videoNotLargeScreen={media.videoDesignSkillsNotLarge}
+					videoSmallScreen={media.videoDesignSkillsSmall}
 					videoLargeScreen={media.videoDesignSkillsLarge}
-					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageSmallScreen={media.imageDesignSkillsSmall}
+					imageLargeScreen={media.imageDesignSkillsLarge}
 					viewed={profileSkillsDesignViewed}
 					ref={profileSkillsDesignRef}
 				>
@@ -635,10 +647,10 @@ export const Profile = ({
 					}
 				</ProfileSection>
 				<ProfileSection
-					videoNotLargeScreen={media.videoProfessionalExperienceNotLarge}
+					videoSmallScreen={media.videoProfessionalExperienceSmall}
 					videoLargeScreen={media.videoProfessionalExperienceLarge}
-					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageSmallScreen={media.imageProfessionalExperienceSmall}
+					imageLargeScreen={media.imageProfessionalExperienceLarge}
 					viewed={profileProfessionalExperiencesViewed}
 					ref={profileProfessionalExperiencesRef}
 				>
@@ -657,10 +669,10 @@ export const Profile = ({
 					</ProfessionalExperiencesContainer>
 				</ProfileSection>
 				<ProfileSection
-					videoNotLargeScreen={media.videoEducationAndCertificationNotLarge}
+					videoSmallScreen={media.videoEducationAndCertificationSmall}
 					videoLargeScreen={media.videoEducationAndCertificationLarge}
-					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageSmallScreen={media.imageEducationAndCertificationSmall}
+					imageLargeScreen={media.imageEducationAndCertificationLarge}
 					viewed={profileEducationAndCertificationsViewed}
 					ref={profileEducationAndCertificationsRef}
 				>
@@ -719,10 +731,10 @@ export const Profile = ({
 					</EducationAndCertificationsContainer>
 				</ProfileSection>
 				<ProfileSection
-					videoNotLargeScreen={media.videoVolunteerExperiencesNotLarge}
+					videoSmallScreen={media.videoVolunteerExperiencesSmall}
 					videoLargeScreen={media.videoVolunteerExperiencesLarge}
-					imageNotLargeScreen={media.sampleBackgroundImageSmall}
-					imageLargeScreen={media.sampleBackgroundImageLarge}
+					imageSmallScreen={media.imageVolunteerExperiencesSmall}
+					imageLargeScreen={media.imageVolunteerExperiencesLarge}
 					viewed={profileVolunteerExperiencesViewed}
 					ref={profileVolunteerExperiencesRef}
 				>
