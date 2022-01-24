@@ -10,7 +10,8 @@ const ScreenTitleSecondaryContentMain = styled.div`
 		position: relative;
 		display: inline-flex;
 		margin-bottom: 1rem;
-		padding: 1rem;
+		margin-right: -.5rem;
+		padding: 1rem 1.5rem;
 		opacity: 0;
 		overflow: hidden;
 		&:before {

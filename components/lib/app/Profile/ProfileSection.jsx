@@ -267,12 +267,12 @@ const ProfileSectionContainer = styled.section`
 		}
 	}
 	&.animated {
-		transform: translateY(6rem);
+		transform: translateY(10rem) skewY(3deg);
 		opacity: 0;
 		transition: all 1.5s 1s;
 	}
 	&.animation-state--final {
-		transform: translateY(0);
+		transform: translateY(0) skewY(0deg);
 		opacity: 1;
 	}
 `;

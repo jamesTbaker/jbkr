@@ -428,14 +428,17 @@ export const Profile = ({
 		);
 		gsap.registerPlugin(ScrollTrigger);
 		gsap.defaults({
-			ease: 'power4.out',
+			ease: 'power4.inOut',
 			duration: standardTime().s,
+			skewType: 'simple',
 		});
 		gsap.from(
 			profileSkillsBusinessRef.current,
 			{
 				opacity: 0,
-				y: 48,
+				y: 72,
+				skewY: 3,
+				skewType: 'simple',
 				scrollTrigger: {
 					trigger: profileSkillsBusinessRef.current,
 					start: "top 90%",
@@ -451,7 +454,8 @@ export const Profile = ({
 			profileSkillsDesignRef.current,
 			{
 				opacity: 0,
-				y: 48,
+				y: 72,
+				skewY: 3,
 				scrollTrigger: {
 					trigger: profileSkillsDesignRef.current,
 					start: "top 90%",
@@ -467,7 +471,8 @@ export const Profile = ({
 			profileProfessionalExperiencesRef.current,
 			{
 				opacity: 0,
-				y: 48,
+				y: 72,
+				skewY: 3,
 				scrollTrigger: {
 					trigger: profileProfessionalExperiencesRef.current,
 					start: "top 90%",
@@ -483,7 +488,8 @@ export const Profile = ({
 			profileEducationAndCertificationsRef.current,
 			{
 				opacity: 0,
-				y: 48,
+				y: 72,
+				skewY: 3,
 				scrollTrigger: {
 					trigger: profileEducationAndCertificationsRef.current,
 					start: "top 90%",
@@ -499,7 +505,8 @@ export const Profile = ({
 			profileVolunteerExperiencesRef.current,
 			{
 				opacity: 0,
-				y: 48,
+				y: 72,
+				skewY: 3,
 				scrollTrigger: {
 					trigger: profileVolunteerExperiencesRef.current,
 					start: "top 90%",
