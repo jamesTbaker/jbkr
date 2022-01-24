@@ -21,6 +21,14 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Image",
+        "Video"
+      ],
+      "default": "Image"
     }
   }
 }
