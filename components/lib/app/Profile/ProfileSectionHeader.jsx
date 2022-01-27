@@ -26,11 +26,13 @@ export const ProfileSectionHeader = ({
 	content: {
 		hash,
 		title,
-	}
+	},
+	viewed,
 }) => (
 	<ProfileSectionHeaderContainer>
 		<ProfileSectionTitleContainer
 			id={hash}
+			viewed={viewed}
 		>
 			<ScreenTitleSecondary
 				use="profileSectionTitle"

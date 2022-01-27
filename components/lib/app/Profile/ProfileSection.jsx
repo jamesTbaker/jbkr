@@ -267,12 +267,12 @@ const ProfileSectionContainer = styled.section`
 		}
 	}
 	&.animated {
-		transform: translateY(10rem) skewY(3deg);
+		transform: translateY(10rem);
 		opacity: 0;
 		transition: all 1.5s 1s;
 	}
 	&.animation-state--final {
-		transform: translateY(0) skewY(0deg);
+		transform: translateY(0);
 		opacity: 1;
 	}
 `;
@@ -288,6 +288,7 @@ export const ProfileSection = forwardRef(({
 	<ProfileSectionContainer
 		ref={ref}
 		className={className}
+		viewed={viewed}
 	>
 		{
 			viewed &&

@@ -60,50 +60,60 @@ const MainContentContainer = styled.main.attrs(() => {
 })`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		grid-area: main;
-		${({ $menuBackgroundImageLarge }) => `
-			background-image:
-				linear-gradient(
-					to bottom,
-					${color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 2,
-						'alpha': .075,
-						'format': 'string'
-					})},
-					${color({
-						'kind': 'Accent',
-						'tone': 'Finch',
-						'level': 2,
-						'alpha': .075,
-						'format': 'string'
-					})} 20rem
-				),
-				linear-gradient(
-					to bottom,
-					${color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 41,
-						'alpha': .85,
-						'format': 'string'
-					})},
-					${color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 41,
-						'alpha': .85,
-						'format': 'string'
-					})} 20rem
-				),
-				url('${$menuBackgroundImageLarge}');
-		`}
-		background-position: top 15rem right 0;
-		background-size: 111rem 55rem;
-		background-repeat: no-repeat;
-		@media (min-width: 1321px) {
-			background-position: top 15rem right 7.5rem;
+		position: relative;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 15rem;
+			right: 7rem;
+			width: 110.5rem;
+			height: 55rem;
+			border-radius: .375rem;
+			${({ $menuBackgroundImageLarge }) => `
+				background-image:
+					linear-gradient(
+						to bottom,
+						${color({
+							'kind': 'Accent',
+							'tone': 'Finch',
+							'level': 2,
+							'alpha': .075,
+							'format': 'string'
+						})},
+						${color({
+							'kind': 'Accent',
+							'tone': 'Finch',
+							'level': 2,
+							'alpha': .075,
+							'format': 'string'
+						})} 20rem
+					),
+					linear-gradient(
+						to bottom,
+						${color({
+							'kind': 'Neutral',
+							'tone': 'Finch',
+							'level': 41,
+							'alpha': .65,
+							'format': 'string'
+						})},
+						${color({
+							'kind': 'Neutral',
+							'tone': 'Finch',
+							'level': 41,
+							'alpha': .85,
+							'format': 'string'
+						})} 20rem
+					),
+					url('${$menuBackgroundImageLarge}');
+			`}
+			/* background-position: top 15rem right 0;
+			background-size: 111rem 55rem; */
+			background-repeat: no-repeat;
 		}
+		/* @media (min-width: 1321px) {
+			background-position: top 15rem right 7.5rem;
+		} */
 	}
 `;
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -430,22 +440,23 @@ export const Profile = ({
 		gsap.defaults({
 			ease: 'power4.inOut',
 			duration: standardTime().s,
-			skewType: 'simple',
+		});
+		ScrollTrigger.defaults({
+			start: "top 100%",
+			end: "top 75%",
+			scrub: 4,
 		});
 		gsap.from(
 			profileSkillsBusinessRef.current,
 			{
 				opacity: 0,
-				y: 72,
-				skewY: 3,
-				skewType: 'simple',
 				scrollTrigger: {
 					trigger: profileSkillsBusinessRef.current,
-					start: "top 90%",
-					end: "top 60%",
-					scrub: 4,
 					onEnter() {
-						setProfileSkillsBusinessViewed(true)
+						setProfileSkillsBusinessViewed(true);
+					},
+					onLeaveBack() {
+						setProfileSkillsBusinessViewed(false);
 					},
 				},
 			},
@@ -454,15 +465,13 @@ export const Profile = ({
 			profileSkillsDesignRef.current,
 			{
 				opacity: 0,
-				y: 72,
-				skewY: 3,
 				scrollTrigger: {
 					trigger: profileSkillsDesignRef.current,
-					start: "top 90%",
-					end: "top 60%",
-					scrub: 4,
 					onEnter() {
-						setProfileSkillsDesignViewed(true)
+						setProfileSkillsDesignViewed(true);
+					},
+					onLeaveBack() {
+						setProfileSkillsDesignViewed(false);
 					},
 				},
 			},
@@ -471,15 +480,13 @@ export const Profile = ({
 			profileProfessionalExperiencesRef.current,
 			{
 				opacity: 0,
-				y: 72,
-				skewY: 3,
 				scrollTrigger: {
 					trigger: profileProfessionalExperiencesRef.current,
-					start: "top 90%",
-					end: "top 60%",
-					scrub: 4,
 					onEnter() {
-						setProfileProfessionalExperiencesViewed(true)
+						setProfileProfessionalExperiencesViewed(true);
+					},
+					onLeaveBack() {
+						setProfileProfessionalExperiencesViewed(false);
 					},
 				},
 			},
@@ -488,15 +495,13 @@ export const Profile = ({
 			profileEducationAndCertificationsRef.current,
 			{
 				opacity: 0,
-				y: 72,
-				skewY: 3,
 				scrollTrigger: {
 					trigger: profileEducationAndCertificationsRef.current,
-					start: "top 90%",
-					end: "top 60%",
-					scrub: 4,
 					onEnter() {
-						setProfileEducationAndCertificationsViewed(true)
+						setProfileEducationAndCertificationsViewed(true);
+					},
+					onLeaveBack() {
+						setProfileEducationAndCertificationsViewed(false);
 					},
 				},
 			},
@@ -505,15 +510,13 @@ export const Profile = ({
 			profileVolunteerExperiencesRef.current,
 			{
 				opacity: 0,
-				y: 72,
-				skewY: 3,
 				scrollTrigger: {
 					trigger: profileVolunteerExperiencesRef.current,
-					start: "top 90%",
-					end: "top 60%",
-					scrub: 4,
 					onEnter() {
-						setProfileVolunteerExperiencesViewed(true)
+						setProfileVolunteerExperiencesViewed(true);
+					},
+					onLeaveBack() {
+						setProfileVolunteerExperiencesViewed(false);
 					},
 				},
 			},
@@ -521,18 +524,6 @@ export const Profile = ({
 	}, []);
 	return (
 		<ProfileContainer>
-			<Head>
-				{
-					Object.keys(media).map(itemKey =>
-						itemKey.startsWith('video') && <link
-							rel="preload"
-							as="video"
-							href={media[itemKey].url}
-							key={`video-preload--${itemKey}`}
-						></link>
-					)
-				}
-			</Head>
 			<MainContentContainer
 				$menuBackgroundImageLarge={media.imageMenuLarge.url}
 			>
@@ -557,6 +548,7 @@ export const Profile = ({
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.technicalSkills}
+						viewed={true}
 					/>
 					{
 						skills.technical.featured && skills.technical.featured[0] &&
@@ -604,6 +596,7 @@ export const Profile = ({
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.businessSkills}
+						viewed={profileSkillsBusinessViewed}
 					/>
 					{
 						skills.business.standard && skills.business.standard[0] &&
@@ -637,6 +630,7 @@ export const Profile = ({
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.designSkills}
+						viewed={profileSkillsDesignViewed}
 					/>
 					{
 						skills.design.standard && skills.design.standard[0] &&
@@ -663,6 +657,7 @@ export const Profile = ({
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.professionalExperiences}
+						viewed={profileProfessionalExperiencesViewed}
 					/>
 					<ProfessionalExperiencesContainer>
 					{
@@ -685,6 +680,7 @@ export const Profile = ({
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.educationAndCertifications}
+						viewed={profileEducationAndCertificationsViewed}
 					/>
 					<EducationAndCertificationsContainer>
 						<EducationAndCertificationsSubset
@@ -747,6 +743,7 @@ export const Profile = ({
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.volunteerExperiences}
+						viewed={profileVolunteerExperiencesViewed}
 					/>
 					<VolunteerExperiencesContainer>
 					{
