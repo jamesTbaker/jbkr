@@ -30,21 +30,21 @@ const BackgroundOverlay = styled.div`
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 41,
-					'alpha': .5,
+					'alpha': .7,
 					'format': 'string'
 				})} 0,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 41,
-					'alpha': .6,
+					'alpha': .8,
 					'format': 'string'
 				})} 5rem,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 41,
-					'alpha': .7,
+					'alpha': .9,
 					'format': 'string'
 				})} 15rem,
 				${color({
@@ -53,7 +53,7 @@ const BackgroundOverlay = styled.div`
 					'level': 37,
 					'alpha': 1,
 					'format': 'string'
-				})} 70%
+				})} 114rem
 			);
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -174,9 +174,7 @@ const VideoLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		top: 0;
 		left: 0;
 		width: 100%;
-		/* height: 100%; */
 		object-position: center top;
-		object-fit: cover;
 		z-index: ${zIndexNumber().profileSectionBackgroundVideo};
 	}
 	@media (prefers-reduced-motion: reduce) {
@@ -189,9 +187,7 @@ const VideoNotLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
 		object-position: center top;
-		object-fit: cover;
 		z-index: ${zIndexNumber().profileSectionBackgroundVideo};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -246,7 +242,7 @@ const ImageNotLargeDevice = styled.div`
 const ProfileSectionContainer = styled.section`
 	overflow: hidden;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
-		padding: 7rem 2rem;
+		padding: 10rem 2rem;
 		position: relative;
 		z-index: ${zIndexNumber().profileSectionContainer};
 	}
@@ -256,7 +252,7 @@ const ProfileSectionContainer = styled.section`
 		width: 100%;
 		max-width: 180rem;
 		margin: 0 auto;
-		padding: 10rem 0 7rem;
+		padding: 15rem 0 7rem;
 		&:nth-child(2) {
 			border-radius: .375rem .375rem 0 0;
 			overflow: hidden;

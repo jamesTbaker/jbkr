@@ -11,7 +11,7 @@ const ProfileSectionTitleContainer = styled.div`
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		margin: 0;
-		scroll-margin-top: 24rem;
+		scroll-margin-top: 29rem;
 	}
 `;
 const ProfileSectionHeaderContainer = styled.header`
