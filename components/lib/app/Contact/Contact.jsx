@@ -40,7 +40,7 @@ const MainContentContainer = styled.main.attrs(() => {
 })`
 	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
 		${
-			({ $backgroundImageSmall }) => `
+			({ $backgroundSmall }) => `
 				background-image:
 					linear-gradient(
 						to bottom,
@@ -66,7 +66,7 @@ const MainContentContainer = styled.main.attrs(() => {
 							'format': 'string'
 						})} 100%
 					),
-					url('${$backgroundImageSmall}');
+					url('${$backgroundSmall}');
 			`
 		}
 		background-position: top 0 right 0;
@@ -230,26 +230,30 @@ const ContentContainer = styled.div`
 		padding-bottom: 6rem;
 		text-align: left;
 		border-radius: .375rem;
-		background-image:
-			linear-gradient(
-				to bottom,
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 34,
-					'alpha': 1,
-					'format': 'string'
-				})},
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 39,
-					'alpha': .8,
-					'format': 'string'
-				})}
-			),
-			url('https://res.cloudinary.com/jbkrcdn/image/upload/v1641226472/earth-from-space--contact_nx5riv.jpg');
 		background-position: center bottom;
+		${
+			({ $backgroundLarge }) => `
+				background-image:
+					linear-gradient(
+						to bottom,
+						${color({
+							'kind': 'Neutral',
+							'tone': 'Finch',
+							'level': 34,
+							'alpha': 1,
+							'format': 'string'
+						})},
+						${color({
+							'kind': 'Neutral',
+							'tone': 'Finch',
+							'level': 39,
+							'alpha': .8,
+							'format': 'string'
+						})}
+					),
+					url('${$backgroundLarge}');
+			`
+		}
 	}
 `;
 const ContentConstrainer = styled.div`
@@ -341,7 +345,7 @@ export const Contact = ({
 	return (
 		<ContactContainer>
 			<MainContentContainer
-				$backgroundImageSmall={media.sampleBackgroundImageSmall.url}
+				$backgroundSmall={media.backgroundSmall.url}
 			>
 				<ContactHeader>
 					<ScreenTitlePrimary
@@ -369,80 +373,82 @@ export const Contact = ({
 					<MediaContainerFive>
 						<MediaImagesContainerFive>
 							<MediaImageFive
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageOne.url}
 							/>
 							<MediaImageFive
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageTwo.url}
 							/>
 							<MediaImageFive
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageThree.url}
 							/>
 							<MediaImageFive
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageFour.url}
 							/>
 							<MediaImageFive
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageFive.url}
 							/>
 						</MediaImagesContainerFive>
 						<MediaVideosContainerFive>
 							<MediaVideoFive
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageOne.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoOne.url} type="video/mp4" />
 							</MediaVideoFive>
 							<MediaVideoFive
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageTwo.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoTwo.url} type="video/mp4" />
 							</MediaVideoFive>
 							<MediaVideoFive
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageThree.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoThree.url} type="video/mp4" />
 							</MediaVideoFive>
 							<MediaVideoFive
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageFour.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoFour.url} type="video/mp4" />
 							</MediaVideoFive>
 							<MediaVideoFive
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageFive.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoFive.url} type="video/mp4" />
 							</MediaVideoFive>
 						</MediaVideosContainerFive>
 					</MediaContainerFive>
 					<MediaContainerThree>
 						<MediaImagesContainerThree>
 							<MediaImageThree
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageTwo.url}
 							/>
 							<MediaImageThree
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageThree.url}
 							/>
 							<MediaImageThree
-								$imageURL={media.sampleBackgroundImageLarge.url}
+								$imageURL={media.imageFour.url}
 							/>
 						</MediaImagesContainerThree>
 						<MediaVideosContainerThree>
 							<MediaVideoThree
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageTwo.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoTwo.url} type="video/mp4" />
 							</MediaVideoThree>
 							<MediaVideoThree
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageThree.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoThree.url} type="video/mp4" />
 							</MediaVideoThree>
 							<MediaVideoThree
-								poster={media.sampleBackgroundImageLarge.url}
+								poster={media.imageFour.url}
 							>
-								<source src={media.sampleBackgroundVideoLarge.url} type="video/mp4" />
+								<source src={media.videoFour.url} type="video/mp4" />
 							</MediaVideoThree>
 						</MediaVideosContainerThree>
 					</MediaContainerThree>
-					<ContentContainer>
+					<ContentContainer
+						$backgroundLarge={media.backgroundLarge.url}
+					>
 						<ContentConstrainer>
 							<BrandingContainerBody>
 								<LogoContainerBody>

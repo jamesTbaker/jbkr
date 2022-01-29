@@ -39,12 +39,6 @@ const AppFooterContainer = styled.footer`
 	}
 `;
 const AppFooterPersistentContentContainer = styled.div`
-	border-top: solid .125rem ${color({
-		'kind': 'Neutral',
-		'tone': 'Finch',
-		'level': 28,
-		'format': 'string',
-	})};
 	${deviceWidthQuery.not({ 'width': 's' })} {
 		padding: 2rem 0;
 		text-align: left;
