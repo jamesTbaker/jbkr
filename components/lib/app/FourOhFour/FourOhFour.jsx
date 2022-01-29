@@ -25,26 +25,19 @@ const BackgroundOverlay = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		background-image:
 			linear-gradient(
-				175deg,
+				to bottom,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': 41,
-					'alpha': .5,
+					'level': 35,
+					'alpha': .75,
 					'format': 'string'
 				})} 0,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
-					'level': 41,
-					'alpha': .6,
-					'format': 'string'
-				})} 5rem,
-				${color({
-					'kind': 'Neutral',
-					'tone': 'Finch',
-					'level': 41,
-					'alpha': .7,
+					'level': 37,
+					'alpha': .85,
 					'format': 'string'
 				})} 15rem,
 				${color({
@@ -53,7 +46,7 @@ const BackgroundOverlay = styled.div`
 					'level': 37,
 					'alpha': 1,
 					'format': 'string'
-				})} 70%
+				})} 90%
 			);
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -88,21 +81,21 @@ const BackgroundOverlay = styled.div`
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 35,
-					'alpha': .1,
+					'alpha': .6,
 					'format': 'string'
 				})} 0,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 36,
-					'alpha': .5,
+					'alpha': .8,
 					'format': 'string'
 				})} 35%,
 				${color({
 					'kind': 'Neutral',
 					'tone': 'Finch',
 					'level': 37,
-					'alpha': .8,
+					'alpha': .9,
 					'format': 'string'
 				})} 70%,
 				${color({
@@ -243,7 +236,7 @@ const ImageNotLargeDevice = styled.div`
 
 const ContentConstrainer = styled.div`
 	position: relative;
-	margin-top: 20rem;
+	margin-top: 40rem;
 	z-index: ${zIndexNumber().fourOhFourContent};
 `;
 const ContentBackground = styled.div`
@@ -319,20 +312,20 @@ export const FourOhFour = ({
 
 				>
 					<VideoLargeDevice
-						poster={media.backgroundImageLarge.url}
+						poster={media.imageLarge.url}
 					>
-						<source src={media.backgroundVideoLarge.url} type="video/mp4" />
+						<source src={media.videoLarge.url} type="video/mp4" />
 					</VideoLargeDevice>
 					<VideoNotLargeDevice
-						poster={media.backgroundImageSmall.url}
+						poster={media.imageSmall.url}
 					>
-						<source src={media.backgroundVideoSmall.url} type="video/mp4" />
+						<source src={media.videoSmall.url} type="video/mp4" />
 					</VideoNotLargeDevice>
 					<ImageLargeDevice
-						$imageURL={media.backgroundImageLarge.url}
+						$imageURL={media.imageLarge.url}
 					/>
 					<ImageNotLargeDevice
-						$imageURL={media.backgroundImageSmall.url}
+						$imageURL={media.imageSmall.url}
 					/>
 					<BackgroundOverlay />
 					<ContentConstrainer>
