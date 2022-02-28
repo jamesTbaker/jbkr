@@ -68,7 +68,10 @@ export const Meta = ({
 				<MetaBody
 					ref={metaBodyRef}
 				>
-					{mainContent}
+					<Copy
+						kind="copy-container--standard"
+						htmlContent={mainContent}
+					/>
 				</MetaBody>
 			</MainContentContainer>
 		</MetaContainer>

@@ -111,11 +111,11 @@ export const returnMetaScreenContent = async () => {
 	const screenRaw =
 		await returnOneScreenFromDB({ screenID });
 	// get a transformed version of the data
-	const libLabScreenContent = returnTransformedMetaScreenContent({
+	const metaScreenContent = returnTransformedMetaScreenContent({
 		screenID, defaultsRaw, screenRaw,
 	});
 	// return the transformed data
-	return libLabScreenContent;
+	return metaScreenContent;
 };
 export const return404ScreenContent = async () => {
 	// define screen ID

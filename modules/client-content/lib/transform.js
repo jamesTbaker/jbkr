@@ -1458,6 +1458,8 @@ export const returnTransformedMetaScreenContent = ({
 					},
 				});
 		});
+	allScreenProperties.main.textContentItems =
+		textContentItemsTransformed;
 	// return the main container
 	return allScreenProperties;
 };
