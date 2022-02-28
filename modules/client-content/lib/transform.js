@@ -81,6 +81,8 @@ const returnSluggifiedHTMLFromMarkdown = ({ content }) => {
 			.use(remarkParse)
 			.use(remarkRehype, { 'allowDangerousHtml': true })
 			.use(rehypeRaw)
+			.use(rehypeExternalLinks)
+			.use(rehypeSlug)
 			.use(rehypeAutolinkHeadings, {
 				'behavior': 'after',
 				'properties': {
@@ -1421,6 +1423,34 @@ export const returnTransformedSimpleScreenContent = ({
 		.forEach((contentItemKey) => {
 			textContentItemsTransformed[contentItemKey] =
 				returnSimpleHTMLFromMarkdown({
+					'content': allScreenProperties.main
+						.textContentItems[contentItemKey],
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+		});
+	// return the main container
+	return allScreenProperties;
+};
+export const returnTransformedMetaScreenContent = ({
+	screenID,
+	defaultsRaw,
+	screenRaw,
+}) => {
+	// get a transformed version of defaults
+	const defaults = returnDefaultValuesObject({ defaultsRaw });
+	// set up container for all of this screen's properties
+	const allScreenProperties = returnBasicScreenObject(
+		{ defaults, screenID, screenRaw },
+	);
+	// if there are text content items, replace them with transformed versions
+	// of themselves
+	const textContentItemsTransformed = {};
+	Object.keys(allScreenProperties.main.textContentItems)
+		.forEach((contentItemKey) => {
+			textContentItemsTransformed[contentItemKey] =
+				returnSluggifiedHTMLFromMarkdown({
 					'content': allScreenProperties.main
 						.textContentItems[contentItemKey],
 					'options': {

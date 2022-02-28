@@ -14,6 +14,7 @@ import {
 	returnTransformedLibLabScreenContent,
 	returnTransformedArticleScreenContent,
 	returnTransformedSimpleScreenContent,
+	returnTransformedMetaScreenContent,
 } from './transform.js';
 
 export const returnProfileScreenContent = async () => {
@@ -110,14 +111,11 @@ export const returnMetaScreenContent = async () => {
 	const screenRaw =
 		await returnOneScreenFromDB({ screenID });
 	// get a transformed version of the data
-	const simpleScreenContent =
-		returnTransformedSimpleScreenContent({
-			screenID,
-			defaultsRaw,
-			screenRaw,
-		});
+	const libLabScreenContent = returnTransformedMetaScreenContent({
+		screenID, defaultsRaw, screenRaw,
+	});
 	// return the transformed data
-	return simpleScreenContent;
+	return libLabScreenContent;
 };
 export const return404ScreenContent = async () => {
 	// define screen ID
