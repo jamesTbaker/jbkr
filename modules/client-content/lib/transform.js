@@ -3,6 +3,7 @@ import GithubSlugger from 'github-slugger';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -53,7 +54,8 @@ const returnSimpleHTMLFromMarkdown = ({ content, options }) => {
 		// get an initial render using a simple plugin stack
 		renderedContent = unified()
 			.use(remarkParse)
-			.use(remarkRehype)
+			.use(remarkRehype, { 'allowDangerousHtml': true })
+			.use(rehypeRaw)
 			.use(rehypeExternalLinks)
 			.use(rehypeStringify)
 			.processSync(content).value;
@@ -77,8 +79,8 @@ const returnSluggifiedHTMLFromMarkdown = ({ content }) => {
 		// and linking to slugs
 		renderedContent = unified()
 			.use(remarkParse)
-			.use(remarkRehype)
-			.use(rehypeSlug)
+			.use(remarkRehype, { 'allowDangerousHtml': true })
+			.use(rehypeRaw)
 			.use(rehypeAutolinkHeadings, {
 				'behavior': 'after',
 				'properties': {
