@@ -77,22 +77,15 @@ export default function App({ Component, pageProps }) {
 					}
 				/>
 				{/* favicon */}
-				<link rel="icon"
-					href="/favicon/brands.svg" type="image/svg+xml" />
 				<link rel="shortcut icon"
 					href="/favicon.ico" type="image/x-icon" />
-				<link rel="icon" type="image/png" sizes="16x16"
-					href="/favicon/16px.png" />
-				<link rel="icon" type="image/png" sizes="32x32"
-					href="/favicon/32px.png" />
-				<link rel="apple-touch-icon" sizes="180x180"
-					href="/favicon/180px.png" />
-				<link rel="icon" type="image/png" sizes="192x192"
-					href="/favicon/192px.png" />
-				<link rel="icon" type="image/png" sizes="194x194"
-					href="/favicon/194px.png" />
+				<link rel="icon"
+					href="/favicon/brand.svg" type="image/svg+xml" />
+				<link rel="mask-icon"
+					href="/favicon/brand.svg" color="#ff0055" />
+				<link rel="apple-touch-icon" href="/favicon/180px.png" />
 				<link rel="manifest" href="/favicon/site.webmanifest" />
-				<meta name="theme-color" content="#60709f" />
+				<meta name="theme-color" content="#2e354c" />
 
 				{/* default - should be replaced per page */}
 				<meta name="description"
