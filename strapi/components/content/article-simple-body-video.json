@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_content_article_simple_body_videos",
+  "info": {
+    "name": "AUBVideo",
+    "icon": "ambulance",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Videos": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "Caption": {
+      "type": "string"
+    }
+  }
+}

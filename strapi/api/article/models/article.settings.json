@@ -114,6 +114,15 @@
     },
     "Distributed": {
       "type": "boolean"
+    },
+    "UnifiedBody": {
+      "type": "dynamiczone",
+      "components": [
+        "content.article-simple-body-text",
+        "content.article-simple-body-code-embed",
+        "content.article-simple-body-image",
+        "content.article-simple-body-video"
+      ]
     }
   }
 }

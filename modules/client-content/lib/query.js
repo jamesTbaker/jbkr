@@ -479,6 +479,37 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'as': 'IntroVideos',
 					},
 				},
+				// look up the unified body texts for this article
+				{
+					'$lookup':
+					{
+						'from': 'components_content_article_brief_statements',
+						'localField': 'BriefStatements.ref',
+						'foreignField': '_id',
+						'as': 'BriefStatements',
+					},
+				},
+				// look up the unified body texts for this article
+				{
+					'$lookup':
+					{
+						'from': 'components_content_article_simple_body_texts',
+						'localField': 'UnifiedBody.ref',
+						'foreignField': '_id',
+						'as': 'UnifiedBodyTexts',
+					},
+				},
+				// look up the unified body code embeds for this article
+				{
+					'$lookup':
+					{
+						'from':
+							'components_content_article_simple_body_code_embeds',
+						'localField': 'UnifiedBody.ref',
+						'foreignField': '_id',
+						'as': 'UnifiedBodyCodeEmbeds',
+					},
+				},
 				// specify which fields to return
 				{
 					'$project': {
@@ -516,6 +547,9 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'IntroVideoPosters.caption': 1,
 						'Section': 1,
 						'SimpleBody': 1,
+						'UnifiedBody': 1,
+						'UnifiedBodyTexts': 1,
+						'UnifiedBodyCodeEmbeds': 1,
 					},
 				},
 			]).toArray();

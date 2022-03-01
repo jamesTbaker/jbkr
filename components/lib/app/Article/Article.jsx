@@ -10,6 +10,7 @@ import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { MediaItem } from '../Common/MediaItem';
 import { ScreenTitleSecondary } from '../Common/ScreenTitleSecondary';
 import { ArticleSections } from './ArticleSections';
+import { ArticleUnifiedBody } from './ArticleUnifiedBody';
 
 
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -504,6 +505,20 @@ const ArticleBody = styled.div`
 			scroll-margin-top: 18rem;
 		}
 	}
+	figure.cbs-embed-container {
+		${deviceWidthQuery.only({ 'width': 's' })} {
+			display: none;
+		}
+		${deviceWidthQuery.not({ 'width': 's' })} {
+			margin: 0 0 3rem;
+			iframe.cbs-embed {
+				margin-bottom: 1rem;
+			}
+			figcaption {
+				font-size: 1.375rem;
+			}
+		}
+	}
 `;
 const ArticleIntroVideoContainer = styled.div`
 	padding: 4rem 0 3rem;
@@ -744,13 +759,10 @@ export const Article = ({
 						</ArticleIntroVideoContainer>
 					}
 					{
-						mainContent.simpleBody &&
-						<SimpleBody>
-							<Copy
-								kind="copy-container--standard"
-								htmlContent={mainContent.simpleBody}
-							/>
-						</SimpleBody>
+						mainContent.unifiedBody &&
+						<UnifiedBody
+							parts={mainContent.unifiedBody}
+						/>
 					}
 					{
 						mainContent.sections &&

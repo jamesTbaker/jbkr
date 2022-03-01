@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_article_simple_body_texts",
+  "info": {
+    "name": "AUBText",
+    "icon": "american-sign-language-interpreting",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "richtext"
+    }
+  }
+}

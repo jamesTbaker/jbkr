@@ -183,7 +183,7 @@ const returnHeadingsWithMetadata = ({ content }) => {
 				remainingHeadingIndex > headingStageTwoIndex,
 		);
 		remainingHeadings
-			.forEach((remainingHeading, remainingHeadingIndex) => {
+			.forEach((remainingHeading) => {
 				if (
 					parentID === null &&
 					remainingHeading.level < headingStageTwo.level
@@ -198,7 +198,8 @@ const returnHeadingsWithMetadata = ({ content }) => {
 		});
 	});
 	headingsStageThree.reverse();
-	const headingsStageFour = returnTreeFromList({ 'list': headingsStageThree });
+	const headingsStageFour =
+		returnTreeFromList({ 'list': headingsStageThree });
 
 	// return the tree
 	return headingsStageFour;
@@ -778,8 +779,38 @@ const returnArticleIntermediate = ({
 			});
 		});
 	}
-	if (articleMainRaw.SimpleBody) {
-		articleIntermedate.simpleBody = articleMainRaw.SimpleBody;
+	if (articleMainRaw.UnifiedBody && articleMainRaw.UnifiedBody[0]) {
+		articleIntermedate.unifiedBody = [];
+		articleMainRaw.UnifiedBody.forEach((unifiedBodyPart) => {
+			const thisPartID = unifiedBodyPart.ref;
+			if (
+				unifiedBodyPart.kind === 'ComponentContentArticleSimpleBodyText'
+			) {
+				articleMainRaw.UnifiedBodyTexts.forEach((unifiedBodyText) => {
+					if (unifiedBodyText._id === thisPartID) {
+						articleIntermedate.unifiedBody.push({
+							'type': 'text',
+							'text': unifiedBodyText.Text,
+						});
+					}
+				});
+			}
+			if (
+				unifiedBodyPart.kind ===
+				'ComponentContentArticleSimpleBodyCodeEmbed'
+			) {
+				articleMainRaw.UnifiedBodyCodeEmbeds
+					.forEach((unifiedBodyCodeEmbed) => {
+						if (unifiedBodyCodeEmbed._id === thisPartID) {
+							articleIntermedate.unifiedBody.push({
+								'type': 'codeEmbed',
+								'url': unifiedBodyCodeEmbed.URL,
+								'caption': unifiedBodyCodeEmbed.Caption,
+							});
+						}
+					});
+			}
+		});
 	}
 	// collect the text from simple body, the various sections and subsections,
 	// and brief statements; will be used to determine stats for the content and
@@ -790,8 +821,15 @@ ${articleIntermedate.publicationDate}
 `,
 		'briefStatements': '',
 	};
-	if (articleIntermedate.simpleBody) {
-		textCollection.approximateMain += articleIntermedate.simpleBody + '\n';
+
+
+	if (articleIntermedate.unifiedBody && articleIntermedate.unifiedBody[0]) {
+		articleIntermedate.unifiedBody.forEach((unifiedBodyPart) => {
+			if (unifiedBodyPart.type === 'text') {
+				textCollection.approximateMain +=
+					unifiedBodyPart.text + '\n';
+			}
+		});
 	}
 	if (
 		articleIntermedate &&
@@ -957,12 +995,21 @@ const returnArticleRendered = ({ content }) => {
 			'minutes': content.stats.minutes,
 		};
 	}
-	// collect and render the article's main content
-	if (content.simpleBody) {
-		articleRendered.mainContent.simpleBody =
-			returnSluggifiedHTMLFromMarkdown({
-				'content': content.simpleBody,
-			});
+	if (content.unifiedBody) {
+		articleRendered.mainContent.unifiedBody = [];
+		content.unifiedBody.forEach((unifiedBodyPart) => {
+			if (unifiedBodyPart.type === 'text') {
+				articleRendered.mainContent.unifiedBody.push({
+					'type': 'text',
+					'text': returnSluggifiedHTMLFromMarkdown({
+						'content': unifiedBodyPart.text,
+					}),
+				});
+			}
+			if (unifiedBodyPart.type === 'codeEmbed') {
+				articleRendered.mainContent.unifiedBody.push(unifiedBodyPart);
+			}
+		});
 	}
 	if (content.sections) {
 		// set up container for all sections
