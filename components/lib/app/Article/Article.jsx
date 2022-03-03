@@ -505,20 +505,6 @@ const ArticleBody = styled.div`
 			scroll-margin-top: 18rem;
 		}
 	}
-	figure.cbs-embed-container {
-		${deviceWidthQuery.only({ 'width': 's' })} {
-			display: none;
-		}
-		${deviceWidthQuery.not({ 'width': 's' })} {
-			margin: 0 0 3rem;
-			iframe.cbs-embed {
-				margin-bottom: 1rem;
-			}
-			figcaption {
-				font-size: 1.375rem;
-			}
-		}
-	}
 `;
 const ArticleIntroVideoContainer = styled.div`
 	padding: 4rem 0 3rem;
@@ -760,7 +746,7 @@ export const Article = ({
 					}
 					{
 						mainContent.unifiedBody &&
-						<UnifiedBody
+						<ArticleUnifiedBody
 							parts={mainContent.unifiedBody}
 						/>
 					}

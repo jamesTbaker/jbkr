@@ -30,7 +30,7 @@ export const HubLogos = () => (
 			/>
 		</HubLogoContainer>
 		<HubLogoContainer
-			backgroundImage="https://res.cloudinary.com/jbkrcdn/image/upload/v1638993824/The-Hub--Stars_ebavny.jpg"
+			backgroundImage="https://res.cloudinary.com/jbkrcdn/image/upload/v1645975956/article--the-hub--branding--component-background_zplddt.jpg"
 		>
 			<HubLogotype
 				greyscale={false}

@@ -483,20 +483,20 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 				{
 					'$lookup':
 					{
-						'from': 'components_content_article_brief_statements',
-						'localField': 'BriefStatements.ref',
-						'foreignField': '_id',
-						'as': 'BriefStatements',
-					},
-				},
-				// look up the unified body texts for this article
-				{
-					'$lookup':
-					{
-						'from': 'components_content_article_simple_body_texts',
+						'from': 'components_content_aub_texts',
 						'localField': 'UnifiedBody.ref',
 						'foreignField': '_id',
 						'as': 'UnifiedBodyTexts',
+					},
+				},
+				// look up the unified body media items for this article
+				{
+					'$lookup':
+					{
+						'from': 'components_content_aub_medias',
+						'localField': 'UnifiedBody.ref',
+						'foreignField': '_id',
+						'as': 'UnifiedBodyMediaItems',
 					},
 				},
 				// look up the unified body code embeds for this article
@@ -504,7 +504,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					'$lookup':
 					{
 						'from':
-							'components_content_article_simple_body_code_embeds',
+							'components_content_aub_code_embeds',
 						'localField': 'UnifiedBody.ref',
 						'foreignField': '_id',
 						'as': 'UnifiedBodyCodeEmbeds',
@@ -549,6 +549,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'SimpleBody': 1,
 						'UnifiedBody': 1,
 						'UnifiedBodyTexts': 1,
+						'UnifiedBodyMediaItems': 1,
 						'UnifiedBodyCodeEmbeds': 1,
 					},
 				},
@@ -626,6 +627,13 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 							new ObjectID(articleMediaIDString),
 						);
 					});
+			});
+		});
+		articleMainRaw.UnifiedBodyMediaItems.forEach((mediaItemSet) => {
+			mediaItemSet.Files.forEach((fileIDString) => {
+				articleMediaIDs.push(
+					new ObjectID(fileIDString),
+				);
 			});
 		});
 		// get the raw data for this article's sections's

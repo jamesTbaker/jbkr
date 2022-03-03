@@ -784,7 +784,7 @@ const returnArticleIntermediate = ({
 		articleMainRaw.UnifiedBody.forEach((unifiedBodyPart) => {
 			const thisPartID = unifiedBodyPart.ref;
 			if (
-				unifiedBodyPart.kind === 'ComponentContentArticleSimpleBodyText'
+				unifiedBodyPart.kind === 'ComponentContentAubText'
 			) {
 				articleMainRaw.UnifiedBodyTexts.forEach((unifiedBodyText) => {
 					if (unifiedBodyText._id === thisPartID) {
@@ -797,16 +797,60 @@ const returnArticleIntermediate = ({
 			}
 			if (
 				unifiedBodyPart.kind ===
-				'ComponentContentArticleSimpleBodyCodeEmbed'
+				'ComponentContentAubCodeEmbed'
 			) {
 				articleMainRaw.UnifiedBodyCodeEmbeds
 					.forEach((unifiedBodyCodeEmbed) => {
 						if (unifiedBodyCodeEmbed._id === thisPartID) {
 							articleIntermedate.unifiedBody.push({
 								'type': 'codeEmbed',
+								'accessibilityTitle':
+									unifiedBodyCodeEmbed.AccessibilityTitle,
 								'url': unifiedBodyCodeEmbed.URL,
+								'file': unifiedBodyCodeEmbed.File,
 								'caption': unifiedBodyCodeEmbed.Caption,
 							});
+						}
+					});
+			}
+			if (
+				unifiedBodyPart.kind ===
+				'ComponentContentAubMedia'
+			) {
+				articleMainRaw.UnifiedBodyMediaItems
+					.forEach((unifiedBodyMediaItemSet) => {
+						if (unifiedBodyMediaItemSet._id === thisPartID) {
+							const mediaItemIDsThisPart = [];
+							unifiedBodyMediaItemSet.Files.
+								forEach((mediaItemID) => {
+									mediaItemIDsThisPart.push(mediaItemID);
+								});
+							const mediaItemsThisPart = [];
+							mediaItemIDsThisPart.forEach((mediaItemID) => {
+								articleMediaRaw.forEach((mediaItem) => {
+									if (mediaItem._id === mediaItemID) {
+										mediaItemsThisPart.push({
+											'ext': mediaItem.ext,
+											'hash': mediaItem.hash,
+											'url': mediaItem.url,
+											'type': returnMediaType({
+												'mime': mediaItem.mime,
+											}),
+											'alternativeText':
+												mediaItem.alternativeText,
+											'credit': mediaItem.caption,
+											'width': mediaItem.width,
+											'height': mediaItem.height,
+										});
+									}
+								});
+							});
+							articleIntermedate.unifiedBody.push({
+								'type': 'media',
+								'media': mediaItemsThisPart,
+								'caption': unifiedBodyMediaItemSet.Caption,
+							});
+
 						}
 					});
 			}
@@ -1007,7 +1051,30 @@ const returnArticleRendered = ({ content }) => {
 				});
 			}
 			if (unifiedBodyPart.type === 'codeEmbed') {
-				articleRendered.mainContent.unifiedBody.push(unifiedBodyPart);
+				articleRendered.mainContent.unifiedBody.push({
+					'type': 'codeEmbed',
+					'accessibilityTitle': unifiedBodyPart.accessibilityTitle,
+					'url': unifiedBodyPart.url,
+					'file': unifiedBodyPart.file,
+					'caption': returnSimpleHTMLFromMarkdown({
+						'content': unifiedBodyPart.caption,
+						'options': {
+							'removeEndCapTags': true,
+						},
+					}),
+				});
+			}
+			if (unifiedBodyPart.type === 'media') {
+				articleRendered.mainContent.unifiedBody.push({
+					'type': 'media',
+					'media': unifiedBodyPart.media,
+					'caption': returnSimpleHTMLFromMarkdown({
+						'content': unifiedBodyPart.caption,
+						'options': {
+							'removeEndCapTags': true,
+						},
+					}),
+				});
 			}
 		});
 	}

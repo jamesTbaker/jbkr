@@ -15,6 +15,9 @@
     },
     "Caption": {
       "type": "string"
+    },
+    "AccessibilityTitle": {
+      "type": "string"
     }
   }
 }
