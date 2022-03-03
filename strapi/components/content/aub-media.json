@@ -1,13 +1,13 @@
 {
-  "collectionName": "components_content_article_simple_body_videos",
+  "collectionName": "components_content_aub_medias",
   "info": {
-    "name": "AUBVideo",
-    "icon": "ambulance",
+    "name": "AUBMedia",
+    "icon": "allergies",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "Videos": {
+    "Files": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [

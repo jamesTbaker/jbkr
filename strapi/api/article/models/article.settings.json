@@ -118,10 +118,9 @@
     "UnifiedBody": {
       "type": "dynamiczone",
       "components": [
-        "content.article-simple-body-text",
-        "content.article-simple-body-code-embed",
-        "content.article-simple-body-image",
-        "content.article-simple-body-video"
+        "content.aub-text",
+        "content.aub-code-embed",
+        "content.aub-media"
       ]
     }
   }

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_content_aub_texts",
+  "info": {
+    "name": "AUBText",
+    "icon": "ambulance"
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "richtext"
+    }
+  }
+}

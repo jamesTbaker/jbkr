@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_content_article_simple_body_code_embeds",
+  "collectionName": "components_content_aub_code_embeds",
   "info": {
-    "name": "AUBCode",
+    "name": "AUBCodeEmbed",
     "icon": "align-right",
     "description": ""
   },
@@ -10,7 +10,7 @@
     "URL": {
       "type": "string"
     },
-    "EditorFile": {
+    "File": {
       "type": "string"
     },
     "Caption": {
