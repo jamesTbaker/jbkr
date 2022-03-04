@@ -725,7 +725,7 @@ export const Article = ({
 								/>
 							</SharingOptions>
 							<Copy
-								kind="copy-container--article-image-credit"
+								kind="copy-container--article--header--image-credit"
 								htmlContent={frontMatter.headImage.credit}
 							/>
 						</ArticleMetaContainer>

@@ -114,6 +114,18 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
+	'small-bold': {
+		'tag': 'small',
+		'size': '2xs',
+		'weight': 'bold',
+		'usage': 'body',
+		'spacedBottom': true,
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+		},
+	},
 	'button-label--horizontal--standard': {
 		'tag': 'span',
 		'size': 's',
@@ -619,7 +631,8 @@ const copyKinds = [
 	'article--meta-item--not-large-device--stats',
 	'article--meta-item--large-device--label',
 	'article--meta-item--large-device--value',
-	'copy-container--article-image-credit',
+	'copy-container--article--header--image-credit',
+	'copy-container--article--body--image-caption',
 	'article--brief-statement',
 	'article--expanded-table-of-contents',
 	'article--compressed-table-of-contents',
@@ -951,8 +964,8 @@ const EnlargedCopyContainer = styled.div`
 		}
 	}
 `;
-const ArticleImageCreditContainer = styled.div`
-	${returnStylesFromSpecifications({ 'specs': propsSpecifications['small'] })}
+const ArticleHeaderImageCreditContainer = styled.div`
+	${returnStylesFromSpecifications({ 'specs': propsSpecifications['small-bold'] })}
 	color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -1030,7 +1043,8 @@ export const Copy = ({
 	if (
 		kind !== 'copy-container--standard' &&
 		kind !== 'copy-container--enlarged' &&
-		kind !== 'copy-container--article-image-credit'
+		kind !== 'copy-container--article--header--image-credit' &&
+		kind !== 'copy-container--article--body--image-caption'
 	) {
 		if (propsSpecifications[kind]) {
 			let tagThisCopy = propsSpecifications[kind].tag;
@@ -1063,13 +1077,12 @@ export const Copy = ({
 			if (htmlContent) {
 				return(
 					<Text
-						tag={tagThisCopy} /* is p! */
+						tag={tagThisCopy}
 						{...propsThisCopy}
 					/>
 				);
 			}
 		} else {
-			console.log(kind);
 			return (null);
 		}
 	}
@@ -1105,12 +1118,21 @@ export const Copy = ({
 			);
 		}
 	}
-	if (kind === 'copy-container--article-image-credit') {
+	if (
+		kind === 'copy-container--article--header--image-credit' ||
+		kind === 'copy-container--article--body--image-caption'
+	) {
 		if (htmlContent) {
 			return(
-				<ArticleImageCreditContainer
+				<ArticleHeaderImageCreditContainer
 					dangerouslySetInnerHTML={{ '__html': htmlContent }}
 				/>
+			);
+		} else {
+			return (
+				<ArticleHeaderImageCreditContainer>
+					{children}
+				</ArticleHeaderImageCreditContainer>
 			);
 		}
 	}

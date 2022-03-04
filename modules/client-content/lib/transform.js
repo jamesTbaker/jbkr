@@ -790,6 +790,7 @@ const returnArticleIntermediate = ({
 					if (unifiedBodyText._id === thisPartID) {
 						articleIntermedate.unifiedBody.push({
 							'type': 'text',
+							'key': unifiedBodyText._id,
 							'text': unifiedBodyText.Text,
 						});
 					}
@@ -804,6 +805,7 @@ const returnArticleIntermediate = ({
 						if (unifiedBodyCodeEmbed._id === thisPartID) {
 							articleIntermedate.unifiedBody.push({
 								'type': 'codeEmbed',
+								'key': unifiedBodyCodeEmbed._id,
 								'accessibilityTitle':
 									unifiedBodyCodeEmbed.AccessibilityTitle,
 								'url': unifiedBodyCodeEmbed.URL,
@@ -826,10 +828,15 @@ const returnArticleIntermediate = ({
 									mediaItemIDsThisPart.push(mediaItemID);
 								});
 							const mediaItemsThisPart = [];
+							const mediaItemCreditsThisPart = [];
 							mediaItemIDsThisPart.forEach((mediaItemID) => {
 								articleMediaRaw.forEach((mediaItem) => {
 									if (mediaItem._id === mediaItemID) {
+										mediaItemCreditsThisPart.push(
+											mediaItem.caption,
+										);
 										mediaItemsThisPart.push({
+											'key': mediaItem._id,
 											'ext': mediaItem.ext,
 											'hash': mediaItem.hash,
 											'url': mediaItem.url,
@@ -847,8 +854,10 @@ const returnArticleIntermediate = ({
 							});
 							articleIntermedate.unifiedBody.push({
 								'type': 'media',
+								'key': unifiedBodyMediaItemSet._id,
 								'media': mediaItemsThisPart,
 								'caption': unifiedBodyMediaItemSet.Caption,
+								'credits': mediaItemCreditsThisPart,
 							});
 
 						}
@@ -1044,7 +1053,8 @@ const returnArticleRendered = ({ content }) => {
 		content.unifiedBody.forEach((unifiedBodyPart) => {
 			if (unifiedBodyPart.type === 'text') {
 				articleRendered.mainContent.unifiedBody.push({
-					'type': 'text',
+					'type': unifiedBodyPart.type,
+					'key': unifiedBodyPart.key,
 					'text': returnSluggifiedHTMLFromMarkdown({
 						'content': unifiedBodyPart.text,
 					}),
@@ -1052,7 +1062,8 @@ const returnArticleRendered = ({ content }) => {
 			}
 			if (unifiedBodyPart.type === 'codeEmbed') {
 				articleRendered.mainContent.unifiedBody.push({
-					'type': 'codeEmbed',
+					'type': unifiedBodyPart.type,
+					'key': unifiedBodyPart.key,
 					'accessibilityTitle': unifiedBodyPart.accessibilityTitle,
 					'url': unifiedBodyPart.url,
 					'file': unifiedBodyPart.file,
@@ -1065,8 +1076,18 @@ const returnArticleRendered = ({ content }) => {
 				});
 			}
 			if (unifiedBodyPart.type === 'media') {
+				const renderedCaptions = [];
+				unifiedBodyPart.credits.forEach((credit) => {
+					renderedCaptions.push(returnSimpleHTMLFromMarkdown({
+						'content': credit,
+						'options': {
+							'removeEndCapTags': true,
+						},
+					}));
+				});
 				articleRendered.mainContent.unifiedBody.push({
-					'type': 'media',
+					'type': unifiedBodyPart.type,
+					'key': unifiedBodyPart.key,
 					'media': unifiedBodyPart.media,
 					'caption': returnSimpleHTMLFromMarkdown({
 						'content': unifiedBodyPart.caption,
@@ -1074,6 +1095,7 @@ const returnArticleRendered = ({ content }) => {
 							'removeEndCapTags': true,
 						},
 					}),
+					'credits': renderedCaptions,
 				});
 			}
 		});

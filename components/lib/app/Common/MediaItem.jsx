@@ -10,6 +10,12 @@ import { HubContacts } from '../Hub/HubContacts';
 
 
 const MediaItemContainer = styled.div``;
+const ImageItemContainer = styled.div`
+	img {
+		border-radius: .375rem;
+		overflow: hidden;
+	}
+`;
 const VideoItemContainer = styled.div`
 	border-radius: .375rem;
 	overflow: hidden;
@@ -122,13 +128,15 @@ export const MediaItem = ({
 	<MediaItemContainer>
 		{
 			category === 'image' &&
-			<Image
-				src={specs.url}
-				alt={specs.alternativeText}
-				width={specs.width}
-				height={specs.height}
-				quality={100}
-			/>
+			<ImageItemContainer>
+				<Image
+					src={specs.url}
+					alt={specs.alternativeText}
+					width={specs.width}
+					height={specs.height}
+					quality={100}
+				/>
+			</ImageItemContainer>
 		}
 		{
 
