@@ -510,6 +510,26 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'as': 'UnifiedBodyCodeEmbeds',
 					},
 				},
+				// look up the brief statements for this article
+				{
+					'$lookup':
+					{
+						'from': 'internal_tags',
+						'localField': 'InternalTags',
+						'foreignField': '_id',
+						'as': 'InternalTags',
+					},
+				},
+				// look up the brief statements for this article
+				{
+					'$lookup':
+					{
+						'from': 'twitter_hashtags',
+						'localField': 'TwitterHashtags',
+						'foreignField': '_id',
+						'as': 'TwitterHashtags',
+					},
+				},
 				// specify which fields to return
 				{
 					'$project': {
@@ -546,11 +566,12 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'IntroVideoPosters.mime': 1,
 						'IntroVideoPosters.caption': 1,
 						'Section': 1,
-						'SimpleBody': 1,
 						'UnifiedBody': 1,
 						'UnifiedBodyTexts': 1,
 						'UnifiedBodyMediaItems': 1,
 						'UnifiedBodyCodeEmbeds': 1,
+						'InternalTags.HashtagText': 1,
+						'TwitterHashtags.HashtagText': 1,
 					},
 				},
 			]).toArray();

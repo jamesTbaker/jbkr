@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/twitter-hashtags",
+      "handler": "twitter-hashtags.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/twitter-hashtags/count",
+      "handler": "twitter-hashtags.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/twitter-hashtags/:id",
+      "handler": "twitter-hashtags.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/twitter-hashtags",
+      "handler": "twitter-hashtags.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/twitter-hashtags/:id",
+      "handler": "twitter-hashtags.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/twitter-hashtags/:id",
+      "handler": "twitter-hashtags.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

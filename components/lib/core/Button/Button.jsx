@@ -437,6 +437,7 @@ const ButtonElement = styled.span.attrs(({
 	$ariaDisabled,
 	$ariaExpanded,
 	$ariaControls,
+	$dataAttributes,
 }) => {
 	const returnValue = {};
 	if ($url && !$url.startsWith('http')) {
@@ -468,6 +469,12 @@ const ButtonElement = styled.span.attrs(({
 		if ($ariaControls) {
 			returnValue['aria-controls'] = $ariaControls;
 		}
+	}
+	if ($dataAttributes && Object.keys($dataAttributes)[0]) {
+		Object.keys($dataAttributes).forEach((dataAttributeKey) => {
+			returnValue[`data-${dataAttributeKey}`] =
+				$dataAttributes[dataAttributeKey];
+		});
 	}
 	return returnValue;
 })`
@@ -534,6 +541,7 @@ export const Button = ({
 	iconAfter,
 	iconBeforeTransform,
 	iconAfterTransform,
+	dataAttributes,
 	clickHandler,
 	url,
 	ariaDisabled,
@@ -547,6 +555,7 @@ export const Button = ({
 		$ariaDisabled={ariaDisabled}
 		$ariaExpanded={ariaExpanded}
 		$ariaControls={ariaControls}
+		$dataAttributes={dataAttributes}
 	>
 		<ButtonRefForwarder
 			size={size}
@@ -601,6 +610,10 @@ Button.propTypes = {
 	 * CSS transform, applied to icon before the text.
 	 */
 	'iconAfterTransform': PropTypes.string,
+	/**
+	 * Keys and values, applied as 'data-' attributes.
+	 */
+	'dataAttributes': PropTypes.object,
 	/** Function executed when button is clicked.
 	 * E.g., () => { // do something }.
 	 */

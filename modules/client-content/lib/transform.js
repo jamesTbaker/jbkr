@@ -769,7 +769,6 @@ const returnArticleIntermediate = ({
 		};
 	}
 	if (sectionsIntermediate && sectionsIntermediate[0]) {
-		// articleIntermedate.sections = sectionsIntermediate;
 		articleIntermedate.sections = [];
 		articleMainRaw.Section.forEach((rawSection) => {
 			sectionsIntermediate.forEach((intermediateSection) => {
@@ -865,6 +864,16 @@ const returnArticleIntermediate = ({
 			}
 		});
 	}
+	articleIntermedate.internalTags = [];
+	articleMainRaw.InternalTags.forEach((internalTagObject) => {
+		articleIntermedate.internalTags.push(internalTagObject.HashtagText);
+	});
+	articleIntermedate.twitterTags = [];
+	articleMainRaw.TwitterHashtags.forEach((twitterTagObject) => {
+		articleIntermedate.twitterTags.push(twitterTagObject.HashtagText);
+	});
+
+
 	// collect the text from simple body, the various sections and subsections,
 	// and brief statements; will be used to determine stats for the content and
 	// develop a table of contents
@@ -1029,10 +1038,6 @@ const returnArticleRendered = ({ content }) => {
 			content.introVideoPoster;
 	}
 	if (content.headingsWithMetadata) {
-		/* articleRendered.frontMatter.tableOfContents =
-			returnTableOfContentsContent({
-				'headings': content.headingsWithMetadata,
-			}); */
 		articleRendered.frontMatter.tableOfContents =
 			content.headingsWithMetadata;
 	}
@@ -1221,7 +1226,12 @@ const returnArticleRendered = ({ content }) => {
 		// add the container for all sections to the article's other content
 		articleRendered.mainContent.sections = sectionsRendered;
 	}
-
+	if (content.internalTags) {
+		articleRendered.frontMatter.internalTags = content.internalTags;
+	}
+	if (content.twitterTags) {
+		articleRendered.frontMatter.twitterTags = content.twitterTags;
+	}
 	// return the container of the article's rendered content
 	return articleRendered;
 };

@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "twitter_hashtags",
+  "info": {
+    "name": "TwitterHashtags"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HashtagText": {
+      "type": "string"
+    },
+    "articles": {
+      "via": "TwitterHashtags",
+      "collection": "article"
+    }
+  }
+}

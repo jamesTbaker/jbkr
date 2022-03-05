@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "internal_tags",
+  "info": {
+    "name": "InternalTags"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HashtagText": {
+      "type": "string"
+    },
+    "articles": {
+      "via": "InternalTags",
+      "collection": "article"
+    }
+  }
+}

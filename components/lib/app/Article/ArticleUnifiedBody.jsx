@@ -89,7 +89,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 						<div
 							key={part.key}
 						>
-							<CodeEmbedContainer>
+							{/* <CodeEmbedContainer>
 								<CodeEmbedIframe
 									src={constructedURL}
 									title={part.accessibilityTitle}
@@ -102,7 +102,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 										htmlContent={part.caption}
 									/>
 								</CodeEmbedCaption>
-							</CodeEmbedContainer>
+							</CodeEmbedContainer> */}
 							<CodeEditButtonContainer>
 								<Button
 									size="standard"

@@ -519,20 +519,12 @@ const ArticleIntroVideoContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 	}
 `;
-
-const SimpleBody = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		max-width: 78rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 75%;
-	}
-`;
 export const Article = ({
 	title,
 	frontMatter,
 	mainContent,
 }) => {
+	const tweetURL = `https://twitter.com/intent/tweet?text=${title}&hashtags=js,css&url=https%3A%2F%2Fjbkr.me%2Flibrary%2Fcustom-cursors--part-one`;
 	const articleTaglineAndMetaContainerRef = useRef();
 	const expandedTableOfContentsContainerRef = useRef();
 	useEffect(() => {
@@ -541,6 +533,33 @@ export const Article = ({
 		expandedTableOfContentsContainerRef
 			.current.classList.add('animation-state--final');
 	});
+	const handleTwitterButtonClickLargeScreen = (e) => {
+		e.preventDefault();
+		const w = 600;
+		const h = 300;
+		const url = tweetURL;
+		const title = 'Compose new Tweet / Twitter';
+		const dualScreenLeft = window.screenLeft != undefined ?
+			window.screenLeft : screen.left;
+		const dualScreenTop = window.screenTop != undefined ?
+			window.screenTop : screen.top;
+		const width = window.innerWidth ? window.innerWidth :
+			document.documentElement.clientWidth ?
+			document.documentElement.clientWidth : screen.width;
+		const height = window.innerHeight ? window.innerHeight :
+			document.documentElement.clientHeight ?
+			document.documentElement.clientHeight : screen.height;
+		const left = ((width / 2) - (w / 2)) + dualScreenLeft;
+		const top = ((height / 2) - (h / 2)) + dualScreenTop;
+		const newWindow = window.open(
+			url,
+			title,
+			`toolbar=0,width=${w},height=${h},top=${top},left=${left}`
+		);
+		if (window.focus) {
+			newWindow.focus();
+		}
+	};
 	return (
 		<ArticleContainer>
 			<MainContentContainer>
@@ -707,15 +726,20 @@ export const Article = ({
 									text="Share on Twitter"
 									surfaceStyle="outlined"
 									textHidden={true}
-									url="https://google.com"
+									clickHandler={handleTwitterButtonClickLargeScreen}
+									/* url="https://twitter.com/intent/tweet?text=Conor%20Lamb%E2%80%99s%20new%20Senate%20strategy%3A%20I%E2%80%99m%20not%20Joe%20Manchin&hashtags=js,css&url=https%3A%2F%2Fjbkr.me%2Flibrary%2Fcustom-cursors--part-one"
+									dataAttributes={{
+										'hashtags': 'ux, ui, css',
+										'url': 'https://jbkr.me/library/custom-cursors--part-one',
+									}} */
 								/>
-								<Button
+								{/* <Button
 									iconBefore="linkedin"
 									text="Share on LinkedIn"
 									surfaceStyle="outlined"
 									textHidden={true}
 									url="https://google.com"
-								/>
+								/> */}
 								<Button
 									iconBefore="link"
 									text="Copy this URL"

@@ -109,12 +109,6 @@
       "required": false,
       "pluginOptions": {}
     },
-    "TweetText": {
-      "type": "text"
-    },
-    "Distributed": {
-      "type": "boolean"
-    },
     "UnifiedBody": {
       "type": "dynamiczone",
       "components": [
@@ -122,6 +116,16 @@
         "content.aub-code-embed",
         "content.aub-media"
       ]
+    },
+    "TwitterHashtags": {
+      "collection": "twitter-hashtags",
+      "via": "articles",
+      "dominant": true
+    },
+    "InternalTags": {
+      "collection": "internal-tags",
+      "via": "articles",
+      "dominant": true
     }
   }
 }
