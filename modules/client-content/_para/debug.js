@@ -30,12 +30,12 @@ import {
 // const result = await returnAllPublishedArticlesFromDB();
 // const result = await returnOneArticleFromDB({ 'slug': 'the-hub' });
 
-// const result = await returnProfileScreenContent();
+const result = await returnProfileScreenContent();
 // const result = await returnLibLabScreenContent();
 // const result = await returnArticleScreenContent({ 'slug': 'the-hub' });
-const result = await returnArticleScreenContent({
-	'slug': 'custom-cursors--part-one',
-});
+// const result = await returnArticleScreenContent({
+// 	'slug': 'custom-cursors--part-one',
+// });
 
 // const result = await returnContactScreenContent();
 // const result = await returnMetaScreenContent();

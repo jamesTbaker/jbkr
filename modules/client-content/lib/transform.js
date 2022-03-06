@@ -415,8 +415,12 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 			screenRendered.main.textContentItems[
 				contentItemRaw.Key.charAt(0).toLowerCase() +
 				contentItemRaw.Key.slice(1)
-			] =
-				contentItemRaw.Value;
+			] = returnSimpleHTMLFromMarkdown({
+				'content': contentItemRaw.Value,
+				'options': {
+					'removeEndCapTags': true,
+				},
+			});
 		});
 	}
 	if (

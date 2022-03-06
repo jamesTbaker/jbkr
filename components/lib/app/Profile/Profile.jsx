@@ -53,6 +53,10 @@ const ProfileHeaderContentConstrainer = styled.div`
 		padding-right: 36rem;
 	}
 `;
+const ProfileValuePropositionContainer = styled.div`
+	padding: 8rem;
+	background-color: yellow;
+`;
 const MainContentContainer = styled.main.attrs(() => {
 	return {
 		'id': 'main-content',
@@ -409,6 +413,7 @@ export const Profile = ({
 	volunteerExperiences,
 	sectionProperties,
 	media,
+	text,
 }) => {
 	const profileSkillsTechnicalRef = useRef();
 	const profileSkillsBusinessRef = useRef();
@@ -537,6 +542,9 @@ export const Profile = ({
 						/>
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
+				<ProfileValuePropositionContainer>
+
+				</ProfileValuePropositionContainer>
 				<ProfileSection
 					videoSmallScreen={media.videoTechSkillsSmall}
 					videoLargeScreen={media.videoTechSkillsLarge}
