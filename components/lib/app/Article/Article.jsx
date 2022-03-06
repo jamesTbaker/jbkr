@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery, color, zIndexNumber } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
@@ -483,6 +484,19 @@ const SharingOptions = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		padding: 3rem 0;
 	}
+	.__react_component_tooltip.show {
+		opacity: 1;
+	}
+`;
+const ShareButtonContainerLargeScreen = styled.span`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+`;
+const ShareButtonContainerNotLargeScreen = styled.span`
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
 `;
 const ArticleBody = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
@@ -520,11 +534,20 @@ const ArticleIntroVideoContainer = styled.div`
 	}
 `;
 export const Article = ({
-	title,
+	meta,
 	frontMatter,
 	mainContent,
 }) => {
-	const tweetURL = `https://twitter.com/intent/tweet?text=${title}&hashtags=js,css&url=https%3A%2F%2Fjbkr.me%2Flibrary%2Fcustom-cursors--part-one`;
+	let tweetURL = `https://twitter.com/intent/tweet?text=${frontMatter.title}` +
+		` — ${meta.metaDescription}` +
+		`&url=${encodeURIComponent(`http://www.jbkr.me/library/${meta.slug}`)}`;
+	frontMatter.twitterTags.forEach((twitterTagValue, twitterTagIndex) => {
+		if (twitterTagIndex === 0) {
+			tweetURL += `&hashtags=${twitterTagValue}`;
+		} else {
+			tweetURL += `,${twitterTagValue}`;
+		}
+	});
 	const articleTaglineAndMetaContainerRef = useRef();
 	const expandedTableOfContentsContainerRef = useRef();
 	useEffect(() => {
@@ -533,32 +556,42 @@ export const Article = ({
 		expandedTableOfContentsContainerRef
 			.current.classList.add('animation-state--final');
 	});
-	const handleTwitterButtonClickLargeScreen = (e) => {
-		e.preventDefault();
-		const w = 600;
-		const h = 300;
-		const url = tweetURL;
-		const title = 'Compose new Tweet / Twitter';
-		const dualScreenLeft = window.screenLeft != undefined ?
+	const handleTwitterButtonClickLargeScreen = () => {
+		const newWindowWidth = 600;
+		const newWindowHeight = 300;
+		const newWindowTitle = 'Compose new Tweet / Twitter';
+		const distanceFromViewportLeftToDisplayLeft = window.screenLeft != undefined ?
 			window.screenLeft : screen.left;
-		const dualScreenTop = window.screenTop != undefined ?
+		const distanceFromViewportLeftToDisplayTop = window.screenTop != undefined ?
 			window.screenTop : screen.top;
-		const width = window.innerWidth ? window.innerWidth :
+		const currentWindowWidth = window.innerWidth ? window.innerWidth :
 			document.documentElement.clientWidth ?
 			document.documentElement.clientWidth : screen.width;
-		const height = window.innerHeight ? window.innerHeight :
+		const currentWindowHeight = window.innerHeight ? window.innerHeight :
 			document.documentElement.clientHeight ?
 			document.documentElement.clientHeight : screen.height;
-		const left = ((width / 2) - (w / 2)) + dualScreenLeft;
-		const top = ((height / 2) - (h / 2)) + dualScreenTop;
+		const currentWindowLeft = ((currentWindowWidth / 2) - (newWindowWidth / 2)) + distanceFromViewportLeftToDisplayLeft;
+		const currentWindowTop = ((currentWindowHeight / 2) - (newWindowHeight / 2)) + distanceFromViewportLeftToDisplayTop;
 		const newWindow = window.open(
-			url,
-			title,
-			`toolbar=0,width=${w},height=${h},top=${top},left=${left}`
+			tweetURL,
+			newWindowTitle,
+			`toolbar=0,width=${newWindowWidth},height=${newWindowHeight},top=${currentWindowTop},left=${currentWindowLeft}`
 		);
 		if (window.focus) {
 			newWindow.focus();
 		}
+	};
+	const handleLinkButtonClickLargeScreen = () => {
+		console.log('func fired L');
+		navigator.clipboard.writeText(
+			`http://www.jbkr.me/library/${meta.slug}`,
+		);
+	};
+	const handleLinkButtonClickNotLargeScreen = () => {
+		console.log('func fired NL');
+		navigator.clipboard.writeText(
+			`http://www.jbkr.me/library/${meta.slug}`,
+		);
 	};
 	return (
 		<ArticleContainer>
@@ -570,7 +603,7 @@ export const Article = ({
 						<ScreenTitleSecondary
 							use="articleTitle"
 							title={{
-								'main': title,
+								'main': frontMatter.title,
 							}}
 						/>
 					</ArticleTitleConstrainer>
@@ -721,32 +754,98 @@ export const Article = ({
 								</DateOrStatNotLargeDevice>
 							</DatesAndStatsNotLargeDevice>
 							<SharingOptions>
-								<Button
-									iconBefore="twitter"
-									text="Share on Twitter"
-									surfaceStyle="outlined"
-									textHidden={true}
-									clickHandler={handleTwitterButtonClickLargeScreen}
-									/* url="https://twitter.com/intent/tweet?text=Conor%20Lamb%E2%80%99s%20new%20Senate%20strategy%3A%20I%E2%80%99m%20not%20Joe%20Manchin&hashtags=js,css&url=https%3A%2F%2Fjbkr.me%2Flibrary%2Fcustom-cursors--part-one"
-									dataAttributes={{
-										'hashtags': 'ux, ui, css',
-										'url': 'https://jbkr.me/library/custom-cursors--part-one',
-									}} */
-								/>
-								{/* <Button
-									iconBefore="linkedin"
-									text="Share on LinkedIn"
-									surfaceStyle="outlined"
-									textHidden={true}
-									url="https://google.com"
-								/> */}
-								<Button
-									iconBefore="link"
-									text="Copy this URL"
-									surfaceStyle="outlined"
-									textHidden={true}
-									url="https://google.com"
-								/>
+								<ShareButtonContainerLargeScreen>
+									<Button
+										iconBefore="twitter"
+										text="Share on Twitter"
+										surfaceStyle="outlined"
+										textHidden={true}
+										clickHandler=
+											{handleTwitterButtonClickLargeScreen}
+									/>
+								</ShareButtonContainerLargeScreen>
+								<ShareButtonContainerNotLargeScreen>
+									<Button
+										iconBefore="twitter"
+										text="Share on Twitter"
+										surfaceStyle="outlined"
+										textHidden={true}
+										url={tweetURL}
+									/>
+								</ShareButtonContainerNotLargeScreen>
+								<ShareButtonContainerLargeScreen>
+									<Button
+										iconBefore="link"
+										text="Copy this article's URL"
+										surfaceStyle="outlined"
+										textHidden={true}
+										dataAttributes={{
+											'tip': 'true',
+											'for': 'copyLinkButtonTooltipLargeScreen',
+											'event': 'click',
+											'event-off': 'mouseout',
+											'type': 'dark',
+											'text-color': color({
+												'kind': 'Neutral',
+												'tone': 'Finch',
+												'level': 41,
+												'alpha': 1,
+												'format': 'string'
+											}),
+											'background-color': color({
+												'kind': 'Accent',
+												'tone': 'Finch',
+												'level': 1,
+												'alpha': 1,
+												'format': 'string'
+											}),
+										}}
+										clickHandler={handleLinkButtonClickLargeScreen}
+									/>
+								</ShareButtonContainerLargeScreen>
+								<ShareButtonContainerNotLargeScreen>
+									<Button
+										iconBefore="link"
+										text="Copy this article's URL"
+										surfaceStyle="outlined"
+										textHidden={true}
+										dataAttributes={{
+											'tip': 'true',
+											'for': 'copyLinkButtonTooltipNotLargeScreen',
+											'event': 'click',
+											'type': 'dark',
+											'text-color': color({
+												'kind': 'Neutral',
+												'tone': 'Finch',
+												'level': 41,
+												'alpha': 1,
+												'format': 'string'
+											}),
+											'background-color': color({
+												'kind': 'Accent',
+												'tone': 'Finch',
+												'level': 1,
+												'alpha': 1,
+												'format': 'string'
+											}),
+										}}
+										clickHandler={handleLinkButtonClickNotLargeScreen}
+									/>
+								</ShareButtonContainerNotLargeScreen>
+								<ReactTooltip
+									id="copyLinkButtonTooltipLargeScreen"
+									place="top"
+									effect="solid"
+								>
+									URL Copied!
+								</ReactTooltip>
+								<ReactTooltip
+									id="copyLinkButtonTooltipNotLargeScreen"
+									place="top"
+									effect="solid"
+								>
+									URL Copied!
+								</ReactTooltip>
 							</SharingOptions>
 							<Copy
 								kind="copy-container--article--header--image-credit"

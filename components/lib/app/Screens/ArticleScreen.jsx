@@ -15,8 +15,14 @@ export const ArticleScreen = ({
 		}
 	>
 		<Article
-			title={main.title}
-			frontMatter={main.article.frontMatter}
+			meta={{
+				'slug': meta.slug,
+				'metaDescription': meta.metaDescription,
+			}}
+			frontMatter={{
+				'title': main.title,
+				...main.article.frontMatter,
+			}}
 			mainContent={main.article.mainContent}
 		/>
 	</AppScaffold>
