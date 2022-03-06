@@ -90,16 +90,6 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 						'as': 'MetaImages',
 					},
 				},
-				// look up the meta image for this screen
-				{
-					'$lookup':
-					{
-						'from': 'upload_file',
-						'localField': 'MetaImage',
-						'foreignField': '_id',
-						'as': 'MetaImages',
-					},
-				},
 				// specify which fields to return
 				{
 					'$project': {
