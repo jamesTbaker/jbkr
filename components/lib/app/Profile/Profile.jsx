@@ -13,6 +13,7 @@ import Head from 'next/head';
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, standardTime
 } from '@jbkr/style-service';
+import { ProfileValuePropositionOne } from './ProfileValuePropositionOne';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSection } from './ProfileSection';
 import { ProfileProfessionalExperience } from './ProfileProfessionalExperience';
@@ -55,7 +56,7 @@ const ProfileHeaderContentConstrainer = styled.div`
 		padding-right: 36rem;
 	}
 `;
-const ProfileValuePropositionContainer = styled.section`
+const ProfileValuePropositionsContainer = styled.section`
 	z-index: ${zIndexNumber().profileSectionContainer};
 	position: relative;
 	width: calc(100% - 4rem);
@@ -63,6 +64,11 @@ const ProfileValuePropositionContainer = styled.section`
 	margin: 0 auto;
 	text-align: left;
 `;
+const ProfileValuePropositionOneContainer = styled.p`
+	margin: 0;
+	margin-bottom: 20rem;
+`;
+const ProfileValuePropositionTwoContainer = styled.p``;
 const MainContentContainer = styled.main.attrs(() => {
 	return {
 		'id': 'main-content',
@@ -568,22 +574,24 @@ export const Profile = ({
 						/>
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
-				<ProfileValuePropositionContainer>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-					<p>Hereknae</p>
-				</ProfileValuePropositionContainer>
+				<ProfileValuePropositionsContainer>
+					<ProfileValuePropositionOneContainer>
+						<ProfileValuePropositionOne
+							content={{
+								'lineOne': text.valuePropOneLineOne,
+								'lineTwo': text.valuePropOneLineTwo,
+							}}
+						/>
+					</ProfileValuePropositionOneContainer>
+					<ProfileValuePropositionTwoContainer>
+
+					</ProfileValuePropositionTwoContainer>
+				</ProfileValuePropositionsContainer>
 				<ProfileSection
 					videoSmallScreen={media.videoTechSkillsSmall}
 					videoLargeScreen={media.videoTechSkillsLarge}
 					imageSmallScreen={media.imageTechSkillsSmall}
 					imageLargeScreen={media.imageTechSkillsLarge}
-					// className="animated"
 					viewed={profileSkillsTechnicalViewed}
 					ref={profileSkillsTechnicalRef}
 				>

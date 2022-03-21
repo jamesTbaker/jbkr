@@ -602,6 +602,7 @@ const copyKinds = [
 	'button-label--horizontal--small',
 	'announcement--preface',
 	'announcement--body',
+	'profile--value-proposition--one',
 	'profile--section-title--preface',
 	'profile--section-title--main',
 	'profile--skill-name--featured',
@@ -849,6 +850,72 @@ const StandardCopyContainer = styled.div`
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h5 })}
 	}
 `;
+const ProfileValuePropositionOneContainer = styled.span`
+	span.word-container {
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 34,
+			'format': 'string'
+		})};
+		${deviceWidthQuery.only({ 'width': 's' })} {
+			${typeStyle({
+				'deviceWidth': 's',
+				'size': '2xl',
+				'weight': 'regular',
+				'usage': 'display',
+			})}
+		}
+		${deviceWidthQuery.only({ 'width': 'm' })} {
+			${typeStyle({
+				'deviceWidth': 'm',
+				'size': '2xl',
+				'weight': 'regular',
+				'usage': 'display',
+			})}
+		}
+		${deviceWidthQuery.only({ 'width': 'l' })} {
+			${typeStyle({
+				'deviceWidth': 'l',
+				'size': '2xl',
+				'weight': 'regular',
+				'usage': 'display',
+			})}
+		}
+		em {
+			color: ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})};
+			${deviceWidthQuery.only({ 'width': 's' })} {
+				${typeStyle({
+					'deviceWidth': 's',
+					'size': '2xl',
+					'weight': 'bold',
+					'usage': 'display',
+				})}
+			}
+			${deviceWidthQuery.only({ 'width': 'm' })} {
+				${typeStyle({
+					'deviceWidth': 'm',
+					'size': '2xl',
+					'weight': 'bold',
+					'usage': 'display',
+				})}
+			}
+			${deviceWidthQuery.only({ 'width': 'l' })} {
+				${typeStyle({
+					'deviceWidth': 'l',
+					'size': '2xl',
+					'weight': 'bold',
+					'usage': 'display',
+				})}
+			}
+		}
+	}
+`;
 const EnlargedCopyContainer = styled.div`
 	color: ${color({
 		'kind': 'Neutral',
@@ -1044,7 +1111,8 @@ export const Copy = ({
 		kind !== 'copy-container--standard' &&
 		kind !== 'copy-container--enlarged' &&
 		kind !== 'copy-container--article--header--image-credit' &&
-		kind !== 'copy-container--article--body--image-caption'
+		kind !== 'copy-container--article--body--image-caption'  &&
+		kind !== 'profile--value-proposition--one'
 	) {
 		if (propsSpecifications[kind]) {
 			let tagThisCopy = propsSpecifications[kind].tag;
@@ -1133,6 +1201,22 @@ export const Copy = ({
 				<ArticleHeaderImageCreditContainer>
 					{children}
 				</ArticleHeaderImageCreditContainer>
+			);
+		}
+	}
+	if (kind === 'profile--value-proposition--one') {
+		if (!htmlContent && children) {
+			return(
+				<ProfileValuePropositionOneContainer>
+					{children}
+				</ProfileValuePropositionOneContainer>
+			);
+		}
+		if (htmlContent) {
+			return(
+				<ProfileValuePropositionOneContainer
+					dangerouslySetInnerHTML={{ '__html': htmlContent }}
+				/>
 			);
 		}
 	}
