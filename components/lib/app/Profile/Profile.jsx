@@ -41,6 +41,8 @@ const ProfileHeader = styled.header`
 		padding: 0 2rem 8rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		z-index: ${zIndexNumber().profileSectionContainer};
+		position: relative;
 		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 0 auto;
@@ -53,9 +55,13 @@ const ProfileHeaderContentConstrainer = styled.div`
 		padding-right: 36rem;
 	}
 `;
-const ProfileValuePropositionContainer = styled.div`
-	padding: 8rem;
-	background-color: yellow;
+const ProfileValuePropositionContainer = styled.section`
+	z-index: ${zIndexNumber().profileSectionContainer};
+	position: relative;
+	width: calc(100% - 4rem);
+	max-width: 150rem;
+	margin: 0 auto;
+	text-align: left;
 `;
 const MainContentContainer = styled.main.attrs(() => {
 	return {
@@ -70,54 +76,59 @@ const MainContentContainer = styled.main.attrs(() => {
 			position: absolute;
 			top: 15rem;
 			right: 7rem;
-			width: 110.5rem;
-			height: 55rem;
+			width: 79rem;
+			height: 100rem;
 			border-radius: .375rem;
-			${({ $menuBackgroundImageLarge }) => `
+			${({ $menuBackgroundImageLargeOne }) => `
 				background-image:
-					linear-gradient(
-						to bottom,
-						${color({
-							'kind': 'Accent',
-							'tone': 'Finch',
-							'level': 2,
-							'alpha': .075,
-							'format': 'string'
-						})},
-						${color({
-							'kind': 'Accent',
-							'tone': 'Finch',
-							'level': 2,
-							'alpha': .075,
-							'format': 'string'
-						})} 20rem
-					),
-					linear-gradient(
-						to bottom,
-						${color({
-							'kind': 'Neutral',
-							'tone': 'Finch',
-							'level': 41,
-							'alpha': .65,
-							'format': 'string'
-						})},
-						${color({
-							'kind': 'Neutral',
-							'tone': 'Finch',
-							'level': 41,
-							'alpha': .85,
-							'format': 'string'
-						})} 20rem
-					),
-					url('${$menuBackgroundImageLarge}');
+					url('${$menuBackgroundImageLargeOne}');
 			`}
-			/* background-position: top 15rem right 0;
-			background-size: 111rem 55rem; */
 			background-repeat: no-repeat;
+			transition: right 1s;
+			@media (max-width: 1440px) {
+				right: 0;
+			}
 		}
-		/* @media (min-width: 1321px) {
-			background-position: top 15rem right 7.5rem;
-		} */
+		&:after {
+			content: '';
+			position: absolute;
+			top: 15rem;
+			right: 7rem;
+			width: 79rem;
+			height: 100rem;
+			border-radius: .375rem;
+			${({ $menuBackgroundImageLargeTwo }) => `
+				background-image:
+					url('${$menuBackgroundImageLargeTwo}');
+			`}
+			background-repeat: no-repeat;
+			transition: right 1s;
+			@media (max-width: 1440px) {
+				right: 0;
+			}
+			opacity: 0;
+			animation: fadeInOut 5s linear infinite;
+		}
+		@keyframes fadeInOut {
+			0% {
+				opacity: 0;
+			}
+			15% {
+				opacity: 0;
+			}
+			35% {
+				opacity: 1;
+			}
+			65% {
+				opacity: 1;
+			}
+			85% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 0;
+			}
+		}
 	}
 `;
 const ExpandedTableOfContentsContainer = styled.aside.attrs(() => {
@@ -423,6 +434,8 @@ export const Profile = ({
 	const profileVolunteerExperiencesRef = useRef();
 	const profileExpandedTableOfContentsRef = useRef();
 
+	const [profileSkillsTechnicalViewed,
+			setProfileSkillsTechnicalViewed] = useState(false);
 	const [profileSkillsBusinessViewed,
 			setProfileSkillsBusinessViewed] = useState(false);
 	const [profileSkillsDesignViewed,
@@ -435,9 +448,6 @@ export const Profile = ({
 			setProfileVolunteerExperiencesViewed] = useState(false);
 
 	useEffect(() => {
-		profileSkillsTechnicalRef.current.classList.add(
-			'animation-state--final'
-		);
 		profileExpandedTableOfContentsRef.current.classList.add(
 			'animation-state--final'
 		);
@@ -451,6 +461,21 @@ export const Profile = ({
 			end: "top 75%",
 			scrub: 4,
 		});
+		gsap.from(
+			profileSkillsTechnicalRef.current,
+			{
+				opacity: 0,
+				scrollTrigger: {
+					trigger: profileSkillsTechnicalRef.current,
+					onEnter() {
+						setProfileSkillsTechnicalViewed(true);
+					},
+					onLeaveBack() {
+						setProfileSkillsTechnicalViewed(false);
+					},
+				},
+			},
+		);
 		gsap.from(
 			profileSkillsBusinessRef.current,
 			{
@@ -530,7 +555,8 @@ export const Profile = ({
 	return (
 		<ProfileContainer>
 			<MainContentContainer
-				$menuBackgroundImageLarge={media.imageMenuLarge.url}
+				$menuBackgroundImageLargeOne={media.imageMenuLargeOne.url}
+				$menuBackgroundImageLargeTwo={media.imageMenuLargeTwo.url}
 			>
 				<ProfileHeader>
 					<ProfileHeaderContentConstrainer>
@@ -543,20 +569,27 @@ export const Profile = ({
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
 				<ProfileValuePropositionContainer>
-
+					<p>Hereknae</p>
+					<p>Hereknae</p>
+					<p>Hereknae</p>
+					<p>Hereknae</p>
+					<p>Hereknae</p>
+					<p>Hereknae</p>
+					<p>Hereknae</p>
+					<p>Hereknae</p>
 				</ProfileValuePropositionContainer>
 				<ProfileSection
 					videoSmallScreen={media.videoTechSkillsSmall}
 					videoLargeScreen={media.videoTechSkillsLarge}
 					imageSmallScreen={media.imageTechSkillsSmall}
 					imageLargeScreen={media.imageTechSkillsLarge}
-					className="animated"
-					viewed={true}
+					// className="animated"
+					viewed={profileSkillsTechnicalViewed}
 					ref={profileSkillsTechnicalRef}
 				>
 					<ProfileSectionHeader
 						content={sectionProperties.technicalSkills}
-						viewed={true}
+						viewed={profileSkillsTechnicalViewed}
 					/>
 					{
 						skills.technical.featured && skills.technical.featured[0] &&
