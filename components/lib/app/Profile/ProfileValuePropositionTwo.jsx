@@ -9,10 +9,24 @@ const ContentContainer = styled.span`
 `;
 const ProfileValuePropositionTwoContainer = styled.span`
 	display: block;
-	margin: 0 0 15rem 0;
 	transform: translateY(2rem);
 	opacity: 0;
 	transition: all 1s 2.5s;
+
+
+	margin: 0 0 15rem 0;
+
+	@media (min-width: 480px) {
+		margin: 0 0 15rem 0;
+	}
+	@media (min-width: 480px) {
+		margin: 0 0 15rem 0;
+	}
+
+
+
+
+
 	&.animation-state--final {
 		transform: translateY(0);
 		opacity: 1;

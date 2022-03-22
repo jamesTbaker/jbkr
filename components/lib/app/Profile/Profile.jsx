@@ -38,12 +38,12 @@ const ProfileContainer = styled.div`
 	}
 `;
 const ProfileHeader = styled.header`
+	position: relative;
+	z-index: ${zIndexNumber().profileSectionContainer};
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 0 2rem 8rem 2rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		z-index: ${zIndexNumber().profileSectionContainer};
-		position: relative;
 		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 0 auto;
@@ -65,20 +65,20 @@ const ProfileValuePropositionsContainer = styled.section`
 	text-align: left;
 `;
 const ProfileValuePropositionTwoContainerSmallScreen = styled.div`
-	@media (min-width: 502px) {
+	@media (min-width: 480px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionTwoContainerMediumScreen = styled.div`
-	@media (max-width: 501px) {
+	@media (max-width: 479px) {
 		display: none;
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
+	@media (min-width: 951px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionTwoContainerLargeScreen = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
+	@media (max-width: 950px) {
 		display: none;
 	}
 `;
@@ -112,9 +112,9 @@ const MainContentContainer = styled.main.attrs(() => {
 	&:after {
 		content: '';
 		position: absolute;
-		top: 15rem;
+		top: 0;
 		right: 0;
-		width: 50rem;
+		width: 35rem;
 		height: 67rem;
 		border-radius: .375rem;
 		background-size: cover;
@@ -135,36 +135,72 @@ const MainContentContainer = styled.main.attrs(() => {
 		opacity: 0;
 		animation: fadeInOut 5s linear infinite;
 	}
-	@media (min-width: 960px) {
+	@media (min-width: 500px) {
 		&:before,
 		&:after {
-			width: 71rem;
-			height: 67rem;
+			height: 82rem;
+		}
+	}
+	@media (min-width: 700px) {
+		&:before,
+		&:after {
+			width: 45rem;
+		}
+	}
+	@media (min-width: 800px) {
+		&:before,
+		&:after {
+			width: 53rem;
+		}
+	}
+	@media (min-width: 880px) {
+		&:before,
+		&:after {
+			width: 60rem;
+		}
+	}
+	@media (min-width: 910px) {
+		&:before,
+		&:after {
+			width: 64rem;
+		}
+	}
+	@media (min-width: 951px) {
+		&:before,
+		&:after {
+			width: 55rem;
+		}
+	}
+	@media (min-width: 1025px) {
+		&:before,
+		&:after {
+			top: 15rem;
+			width: 65rem;
+			height: 100rem;
+		}
+	}
+	@media (min-width: 1100px) {
+		&:before,
+		&:after {
+			width: 68rem;
 		}
 	}
 	@media (min-width: 1150px) {
 		&:before,
 		&:after {
-			width: 65rem;
-			height: 100rem;
-		}
-	}
-	@media (min-width: 1088px) {
-		&:before,
-		&:after {
 			width: 70rem;
 		}
 	}
-	/* @media (min-width: 1152px) {
+	@media (min-width: 1200px) {
 		&:before,
 		&:after {
-			width: 79rem;
+			width: 75rem;
 		}
-	} */
+	}
 	@media (min-width: 1312px) and (max-width: 1439px) {
 		&:before,
 		&:after {
-			width: 79rem;
+			width: 80rem;
 			top: 15rem;
 			right: 7rem;
 		}
@@ -172,7 +208,7 @@ const MainContentContainer = styled.main.attrs(() => {
 	@media (min-width: 1440px) {
 		&:before,
 		&:after {
-			width: 94rem;
+			width: 90rem;
 			top: 15rem;
 			right: 7rem;
 		}
