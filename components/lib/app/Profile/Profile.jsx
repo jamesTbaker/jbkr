@@ -114,8 +114,8 @@ const MainContentContainer = styled.main.attrs(() => {
 		position: absolute;
 		top: 15rem;
 		right: 0;
-		width: 79rem;
-		height: 100rem;
+		width: 50rem;
+		height: 67rem;
 		border-radius: .375rem;
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -124,80 +124,47 @@ const MainContentContainer = styled.main.attrs(() => {
 	&:before {
 		${({ $menuBackgroundImageLargeOne }) => `
 			background-image:
-				linear-gradient(
-					to bottom,
-					${color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 21,
-						'format': 'string'
-					})} 0,
-					${color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 21,
-						'format': 'string'
-					})} 100%
-				),
 				url('${$menuBackgroundImageLargeOne}');
 		`}
 	}
 	&:after {
 		${({ $menuBackgroundImageLargeTwo }) => `
 			background-image:
-				linear-gradient(
-					to bottom,
-					${color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 21,
-						'format': 'string'
-					})} 0,
-					${color({
-						'kind': 'Neutral',
-						'tone': 'Finch',
-						'level': 21,
-						'format': 'string'
-					})} 100%
-				),
 				url('${$menuBackgroundImageLargeTwo}');
 		`}
 		opacity: 0;
 		animation: fadeInOut 5s linear infinite;
 	}
-	@media (min-width: 920px) {
+	@media (min-width: 960px) {
 		&:before,
 		&:after {
-			width: 64rem;
-			height: 81rem;
+			width: 71rem;
+			height: 67rem;
 		}
 	}
-	/* @media (min-width: 920px) {
+	@media (min-width: 1150px) {
 		&:before,
 		&:after {
-			width: 64rem;
-			height: 81rem;
-		}
-	} */
-	@media (min-width: 1136px) {
-		&:before,
-		&:after {
-			width: 68rem;
-			height: 86rem;
-		}
-	}
-	@media (min-width: 1025px) and (max-width: 1311px) {
-		&:before,
-		&:after {
-			width: 79rem;
+			width: 65rem;
 			height: 100rem;
 		}
 	}
+	@media (min-width: 1088px) {
+		&:before,
+		&:after {
+			width: 70rem;
+		}
+	}
+	/* @media (min-width: 1152px) {
+		&:before,
+		&:after {
+			width: 79rem;
+		}
+	} */
 	@media (min-width: 1312px) and (max-width: 1439px) {
 		&:before,
 		&:after {
 			width: 79rem;
-			height: 100rem;
 			top: 15rem;
 			right: 7rem;
 		}
@@ -206,7 +173,6 @@ const MainContentContainer = styled.main.attrs(() => {
 		&:before,
 		&:after {
 			width: 94rem;
-			height: 119rem;
 			top: 15rem;
 			right: 7rem;
 		}
