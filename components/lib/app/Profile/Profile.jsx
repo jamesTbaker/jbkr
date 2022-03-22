@@ -9,11 +9,11 @@ import {
 	EducationCertificationWithReactKey,
 	VolunteerExperienceWithReactKey,
 } from '@jbkr/models-react';
-import Head from 'next/head';
 import {
 	deviceWidthQuery, color, hiddenBlock, zIndexNumber, standardTime
 } from '@jbkr/style-service';
 import { ProfileValuePropositionOne } from './ProfileValuePropositionOne';
+import { ProfileValuePropositionTwo } from './ProfileValuePropositionTwo';
 import { ProfileSkillVisualization } from './ProfileSkillVisualization';
 import { ProfileSection } from './ProfileSection';
 import { ProfileProfessionalExperience } from './ProfileProfessionalExperience';
@@ -64,76 +64,151 @@ const ProfileValuePropositionsContainer = styled.section`
 	margin: 0 auto;
 	text-align: left;
 `;
-const ProfileValuePropositionOneContainer = styled.p`
-	margin: 0;
-	margin-bottom: 20rem;
+const ProfileValuePropositionTwoContainerSmallScreen = styled.div`
+	@media (min-width: 502px) {
+		display: none;
+	}
 `;
-const ProfileValuePropositionTwoContainer = styled.p``;
+const ProfileValuePropositionTwoContainerMediumScreen = styled.div`
+	@media (max-width: 501px) {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+`;
+const ProfileValuePropositionTwoContainerLargeScreen = styled.div`
+	${deviceWidthQuery.not({ 'width': 'l' })} {
+		display: none;
+	}
+`;
 const MainContentContainer = styled.main.attrs(() => {
 	return {
 		'id': 'main-content',
 	};
 })`
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		grid-area: main;
-		position: relative;
-		&:before {
-			content: '';
-			position: absolute;
-			top: 15rem;
-			right: 7rem;
-			width: 79rem;
-			height: 100rem;
-			border-radius: .375rem;
-			${({ $menuBackgroundImageLargeOne }) => `
-				background-image:
-					url('${$menuBackgroundImageLargeOne}');
-			`}
-			background-repeat: no-repeat;
-			transition: right 1s;
-			@media (max-width: 1440px) {
-				right: 0;
-			}
-		}
-		&:after {
-			content: '';
-			position: absolute;
-			top: 15rem;
-			right: 7rem;
-			width: 79rem;
-			height: 100rem;
-			border-radius: .375rem;
-			${({ $menuBackgroundImageLargeTwo }) => `
-				background-image:
-					url('${$menuBackgroundImageLargeTwo}');
-			`}
-			background-repeat: no-repeat;
-			transition: right 1s;
-			@media (max-width: 1440px) {
-				right: 0;
-			}
+	@keyframes fadeInOut {
+		0% {
 			opacity: 0;
-			animation: fadeInOut 5s linear infinite;
 		}
-		@keyframes fadeInOut {
-			0% {
-				opacity: 0;
-			}
-			15% {
-				opacity: 0;
-			}
-			35% {
-				opacity: 1;
-			}
-			65% {
-				opacity: 1;
-			}
-			85% {
-				opacity: 0;
-			}
-			100% {
-				opacity: 0;
-			}
+		15% {
+			opacity: 0;
+		}
+		35% {
+			opacity: 1;
+		}
+		65% {
+			opacity: 1;
+		}
+		85% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+	position: relative;
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		top: 15rem;
+		right: 0;
+		width: 79rem;
+		height: 100rem;
+		border-radius: .375rem;
+		background-size: cover;
+		background-repeat: no-repeat;
+		transition: all 1s;
+	}
+	&:before {
+		${({ $menuBackgroundImageLargeOne }) => `
+			background-image:
+				linear-gradient(
+					to bottom,
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 21,
+						'format': 'string'
+					})} 0,
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 21,
+						'format': 'string'
+					})} 100%
+				),
+				url('${$menuBackgroundImageLargeOne}');
+		`}
+	}
+	&:after {
+		${({ $menuBackgroundImageLargeTwo }) => `
+			background-image:
+				linear-gradient(
+					to bottom,
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 21,
+						'format': 'string'
+					})} 0,
+					${color({
+						'kind': 'Neutral',
+						'tone': 'Finch',
+						'level': 21,
+						'format': 'string'
+					})} 100%
+				),
+				url('${$menuBackgroundImageLargeTwo}');
+		`}
+		opacity: 0;
+		animation: fadeInOut 5s linear infinite;
+	}
+	@media (min-width: 920px) {
+		&:before,
+		&:after {
+			width: 64rem;
+			height: 81rem;
+		}
+	}
+	/* @media (min-width: 920px) {
+		&:before,
+		&:after {
+			width: 64rem;
+			height: 81rem;
+		}
+	} */
+	@media (min-width: 1136px) {
+		&:before,
+		&:after {
+			width: 68rem;
+			height: 86rem;
+		}
+	}
+	@media (min-width: 1025px) and (max-width: 1311px) {
+		&:before,
+		&:after {
+			width: 79rem;
+			height: 100rem;
+		}
+	}
+	@media (min-width: 1312px) and (max-width: 1439px) {
+		&:before,
+		&:after {
+			width: 79rem;
+			height: 100rem;
+			top: 15rem;
+			right: 7rem;
+		}
+	}
+	@media (min-width: 1440px) {
+		&:before,
+		&:after {
+			width: 94rem;
+			height: 119rem;
+			top: 15rem;
+			right: 7rem;
 		}
 	}
 `;
@@ -453,6 +528,27 @@ export const Profile = ({
 	const [profileVolunteerExperiencesViewed,
 			setProfileVolunteerExperiencesViewed] = useState(false);
 
+	const profileValuePropositionTwoContents = {
+		'smallScreen': [],
+		'mediumScreen': [],
+		'largeScreen': [],
+	};
+	Object.keys(text).forEach((lineKey) => {
+		if (lineKey.includes('valuePropTwo')) {
+			if (lineKey.includes('Small')) {
+				profileValuePropositionTwoContents.smallScreen.
+					push(text[lineKey]);
+			}
+			if (lineKey.includes('Medium')) {
+				profileValuePropositionTwoContents.mediumScreen.
+					push(text[lineKey]);
+			}
+			if (lineKey.includes('Large')) {
+				profileValuePropositionTwoContents.largeScreen.
+					push(text[lineKey]);
+			}
+		}
+	});
 	useEffect(() => {
 		profileExpandedTableOfContentsRef.current.classList.add(
 			'animation-state--final'
@@ -575,17 +671,36 @@ export const Profile = ({
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
 				<ProfileValuePropositionsContainer>
-					<ProfileValuePropositionOneContainer>
-						<ProfileValuePropositionOne
-							content={{
-								'lineOne': text.valuePropOneLineOne,
-								'lineTwo': text.valuePropOneLineTwo,
-							}}
+					<ProfileValuePropositionOne
+						content={{
+							'lineOne': text.valuePropOneLineOne,
+							'lineTwo': text.valuePropOneLineTwo,
+						}}
+					/>
+					<ProfileValuePropositionTwoContainerSmallScreen>
+						<ProfileValuePropositionTwo
+							content={
+								profileValuePropositionTwoContents.smallScreen
+							}
+							screenSize="small"
 						/>
-					</ProfileValuePropositionOneContainer>
-					<ProfileValuePropositionTwoContainer>
-
-					</ProfileValuePropositionTwoContainer>
+					</ProfileValuePropositionTwoContainerSmallScreen>
+					<ProfileValuePropositionTwoContainerMediumScreen>
+						<ProfileValuePropositionTwo
+							content={
+								profileValuePropositionTwoContents.mediumScreen
+							}
+							screenSize="medium"
+						/>
+					</ProfileValuePropositionTwoContainerMediumScreen>
+					<ProfileValuePropositionTwoContainerLargeScreen>
+						<ProfileValuePropositionTwo
+							content={
+								profileValuePropositionTwoContents.largeScreen
+							}
+							screenSize="large"
+						/>
+					</ProfileValuePropositionTwoContainerLargeScreen>
 				</ProfileValuePropositionsContainer>
 				<ProfileSection
 					videoSmallScreen={media.videoTechSkillsSmall}

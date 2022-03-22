@@ -73,7 +73,7 @@ const ContentContainer = styled.div`
 `;
 const ProfileValuePropositionOneContainer = styled.span`
 	display: block;
-	margin: 0;
+	margin: 0 0 2rem 0;
 `;
 export const ProfileValuePropositionOne = ({ content }) => {
 	const profileValuePropositionOneContentLineOneRef = useRef();
