@@ -107,38 +107,33 @@ const MainContentContainer = styled.main.attrs(() => {
 			opacity: 0;
 		}
 	}
-	position: relative;
-	&:before,
-	&:after {
-		content: '';
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 35rem;
-		height: 67rem;
-		border-radius: .375rem;
-		background-size: cover;
-		background-repeat: no-repeat;
-		transition: all 1s;
-	}
-	&:before {
-		${({ $menuBackgroundImageLargeOne }) => `
-			background-image:
-				url('${$menuBackgroundImageLargeOne}');
-		`}
-	}
-	&:after {
-		${({ $menuBackgroundImageLargeTwo }) => `
-			background-image:
-				url('${$menuBackgroundImageLargeTwo}');
-		`}
-		opacity: 0;
-		animation: fadeInOut 5s linear infinite;
-	}
-	@media (min-width: 500px) {
+	@media (min-width: 580px) {
 		&:before,
 		&:after {
-			height: 82rem;
+			content: '';
+			position: absolute;
+			top: 15rem;
+			right: 0;
+			width: 35rem;
+			height: 90rem;
+			border-radius: .375rem;
+			background-size: cover;
+			background-repeat: no-repeat;
+			transition: all 1s;
+		}
+		&:before {
+			${({ $menuBackgroundImageLargeOne }) => `
+				background-image:
+					url('${$menuBackgroundImageLargeOne}');
+			`}
+		}
+		&:after {
+			${({ $menuBackgroundImageLargeTwo }) => `
+				background-image:
+					url('${$menuBackgroundImageLargeTwo}');
+			`}
+			opacity: 0;
+			animation: fadeInOut 5s linear infinite;
 		}
 	}
 	@media (min-width: 700px) {
@@ -169,12 +164,12 @@ const MainContentContainer = styled.main.attrs(() => {
 		&:before,
 		&:after {
 			width: 55rem;
+			height: 86rem;
 		}
 	}
 	@media (min-width: 1025px) {
 		&:before,
 		&:after {
-			top: 15rem;
 			width: 65rem;
 			height: 100rem;
 		}
@@ -201,7 +196,6 @@ const MainContentContainer = styled.main.attrs(() => {
 		&:before,
 		&:after {
 			width: 80rem;
-			top: 15rem;
 			right: 7rem;
 		}
 	}
@@ -209,7 +203,6 @@ const MainContentContainer = styled.main.attrs(() => {
 		&:before,
 		&:after {
 			width: 90rem;
-			top: 15rem;
 			right: 7rem;
 		}
 	}
