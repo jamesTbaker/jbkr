@@ -75,33 +75,26 @@ const ProfileValuePropositionOneContainer = styled.span`
 	display: block;
 	margin: 0 0 2rem 0;
 `;
-export const ProfileValuePropositionOne = ({ content }) => {
+export const ProfileValuePropositionOne = ({ content, screenSize }) => {
+	const profileValuePropositionOneContents = [];
 	const profileValuePropositionOneContentLineOneRef = useRef();
 	const profileValuePropositionOneContentLineTwoRef = useRef();
-	let lineOneContentSplit = '<span class="word-container">' +
+	const profileValuePropositionOneContentLineThreeRef = useRef();
+	content.forEach((lineContent) => {
+		let markedUpLine = '<span class="word-container">' +
 		'<span class="word-content">';
-	content.lineOne.split('').forEach((character) => {
-		if (character === ' ') {
-			lineOneContentSplit += '</span></span>' +
-				'<span class="whitespace-character">&nbsp;</span>' +
-				'<span class="word-container"><span class="word-content">';
-		} else {
-			lineOneContentSplit += character;
-		}
+		lineContent.split('').forEach((character) => {
+			if (character === ' ') {
+				markedUpLine += '</span></span>' +
+					'<span class="whitespace-character">&nbsp;</span>' +
+					'<span class="word-container"><span class="word-content">';
+			} else {
+				markedUpLine += character;
+			}
+		});
+		markedUpLine += '</span></span>';
+		profileValuePropositionOneContents.push(markedUpLine);
 	});
-	lineOneContentSplit += '</span></span>';
-	let lineTwoContentSplit = '<span class="word-container">' +
-		'<span class="word-content">';
-	content.lineTwo.split('').forEach((character) => {
-		if (character === ' ') {
-			lineTwoContentSplit += '</span></span>' +
-				'<span class="whitespace-character">&nbsp;</span>' +
-				'<span class="word-container"><span class="word-content">';
-		} else {
-			lineTwoContentSplit += character;
-		}
-	});
-	lineTwoContentSplit += '</span></span>';
 	useEffect(() => {
 		FlashOnSelectedWords({
 			'delayMilliseconds': 1500,
@@ -113,25 +106,43 @@ export const ProfileValuePropositionOne = ({ content }) => {
 			'words': profileValuePropositionOneContentLineTwoRef
 			.current.firstChild.children,
 		});
+		if (screenSize === 'extraSmall') {
+			FlashOnSelectedWords({
+				'delayMilliseconds': 2000,
+				'words': profileValuePropositionOneContentLineThreeRef
+				.current.firstChild.children,
+			});
+		}
 	});
 	return (
 		<ProfileValuePropositionOneContainer>
-			<ContentContainer
-				ref={profileValuePropositionOneContentLineOneRef}
-			>
-				<Copy
-					kind="profile--value-proposition--one"
-					htmlContent={lineOneContentSplit}
-				/>
-			</ContentContainer>
-			<ContentContainer
-				ref={profileValuePropositionOneContentLineTwoRef}
-			>
-				<Copy
-					kind="profile--value-proposition--one"
-					htmlContent={lineTwoContentSplit}
-				/>
-			</ContentContainer>
+			{
+				profileValuePropositionOneContents.map((lineValue, lineIndex) => {
+					let thisLineRef = profileValuePropositionOneContentLineOneRef;
+					if (lineIndex === 1) {
+						thisLineRef = profileValuePropositionOneContentLineTwoRef;
+					}
+					if (
+						lineIndex === 2 &&
+						screenSize === 'extraSmall'
+					) {
+						thisLineRef = profileValuePropositionOneContentLineThreeRef;
+					}
+					return (
+						<ContentContainer
+							ref={thisLineRef}
+							key={'profile--value-proposition-two--content-' +
+									`container--${screenSize}-screen--${lineIndex}`
+								}
+						>
+							<Copy
+								kind="profile--value-proposition--one"
+								htmlContent={lineValue}
+							/>
+						</ContentContainer>
+					);
+				})
+			}
 		</ProfileValuePropositionOneContainer>
 	);
 };

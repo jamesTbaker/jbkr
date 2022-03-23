@@ -64,13 +64,31 @@ const ProfileValuePropositionsContainer = styled.section`
 	margin: 0 auto;
 	text-align: left;
 `;
-const ProfileValuePropositionTwoContainerSmallScreen = styled.div`
-	@media (min-width: 480px) {
+const ProfileValuePropositionOneContainerExtraSmallScreen = styled.div`
+	@media (min-width: 386px) {
 		display: none;
 	}
 `;
-const ProfileValuePropositionTwoContainerMediumScreen = styled.div`
-	@media (max-width: 479px) {
+const ProfileValuePropositionOneContainerSmallToLargeScreen = styled.div`
+	@media (max-width: 385px) {
+		display: none;
+	}
+`;
+const ProfileValuePropositionTwoContainerExtraSmallToSmallSmaller = styled.div`
+	@media (min-width: 369px) {
+		display: none;
+	}
+`;
+const ProfileValuePropositionTwoContainerExtraSmallToSmallLarger = styled.div`
+	@media (max-width: 368px) {
+		display: none;
+	}
+	@media (min-width: 503px) {
+		display: none;
+	}
+`;
+const ProfileValuePropositionTwoContainerSmallToMedium = styled.div`
+	@media (max-width: 502px) {
 		display: none;
 	}
 	@media (min-width: 951px) {
@@ -500,7 +518,7 @@ export const Profile = ({
 	volunteerExperiences,
 	sectionProperties,
 	media,
-	text,
+	valuePropositions,
 }) => {
 	const profileSkillsTechnicalRef = useRef();
 	const profileSkillsBusinessRef = useRef();
@@ -522,28 +540,6 @@ export const Profile = ({
 			setProfileEducationAndCertificationsViewed] = useState(false);
 	const [profileVolunteerExperiencesViewed,
 			setProfileVolunteerExperiencesViewed] = useState(false);
-
-	const profileValuePropositionTwoContents = {
-		'smallScreen': [],
-		'mediumScreen': [],
-		'largeScreen': [],
-	};
-	Object.keys(text).forEach((lineKey) => {
-		if (lineKey.includes('valuePropTwo')) {
-			if (lineKey.includes('Small')) {
-				profileValuePropositionTwoContents.smallScreen.
-					push(text[lineKey]);
-			}
-			if (lineKey.includes('Medium')) {
-				profileValuePropositionTwoContents.mediumScreen.
-					push(text[lineKey]);
-			}
-			if (lineKey.includes('Large')) {
-				profileValuePropositionTwoContents.largeScreen.
-					push(text[lineKey]);
-			}
-		}
-	});
 	useEffect(() => {
 		profileExpandedTableOfContentsRef.current.classList.add(
 			'animation-state--final'
@@ -666,32 +662,46 @@ export const Profile = ({
 					</ProfileHeaderContentConstrainer>
 				</ProfileHeader>
 				<ProfileValuePropositionsContainer>
-					<ProfileValuePropositionOne
-						content={{
-							'lineOne': text.valuePropOneLineOne,
-							'lineTwo': text.valuePropOneLineTwo,
-						}}
-					/>
-					<ProfileValuePropositionTwoContainerSmallScreen>
+					<ProfileValuePropositionOneContainerExtraSmallScreen>
+						<ProfileValuePropositionOne
+							content={valuePropositions.one.extraSmall}
+							screenSize="extraSmall"
+						/>
+					</ProfileValuePropositionOneContainerExtraSmallScreen>
+					<ProfileValuePropositionOneContainerSmallToLargeScreen>
+						<ProfileValuePropositionOne
+							content={valuePropositions.one.smallToLarge}
+							screenSize="smallToLarge"
+						/>
+					</ProfileValuePropositionOneContainerSmallToLargeScreen>
+					<ProfileValuePropositionTwoContainerExtraSmallToSmallSmaller>
 						<ProfileValuePropositionTwo
 							content={
-								profileValuePropositionTwoContents.smallScreen
+								valuePropositions.two.extraSmallToSmall
 							}
-							screenSize="small"
+							screenSize="extraSmallToSmallSmaller"
 						/>
-					</ProfileValuePropositionTwoContainerSmallScreen>
-					<ProfileValuePropositionTwoContainerMediumScreen>
+					</ProfileValuePropositionTwoContainerExtraSmallToSmallSmaller>
+					<ProfileValuePropositionTwoContainerExtraSmallToSmallLarger>
 						<ProfileValuePropositionTwo
 							content={
-								profileValuePropositionTwoContents.mediumScreen
+								valuePropositions.two.extraSmallToSmall
 							}
-							screenSize="medium"
+							screenSize="extraSmallToSmallLarger"
 						/>
-					</ProfileValuePropositionTwoContainerMediumScreen>
+					</ProfileValuePropositionTwoContainerExtraSmallToSmallLarger>
+					<ProfileValuePropositionTwoContainerSmallToMedium>
+						<ProfileValuePropositionTwo
+							content={
+								valuePropositions.two.smallToMedium
+							}
+							screenSize="smallToMedium"
+						/>
+					</ProfileValuePropositionTwoContainerSmallToMedium>
 					<ProfileValuePropositionTwoContainerLargeScreen>
 						<ProfileValuePropositionTwo
 							content={
-								profileValuePropositionTwoContents.largeScreen
+								valuePropositions.two.large
 							}
 							screenSize="large"
 						/>

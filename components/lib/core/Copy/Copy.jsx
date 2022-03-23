@@ -603,8 +603,12 @@ const copyKinds = [
 	'announcement--preface',
 	'announcement--body',
 	'profile--value-proposition--one',
-	'profile--value-proposition--two--small',
-	'profile--value-proposition--two--not-small',
+
+
+
+
+	'profile--value-proposition--two--extra-small-to-large',
+	'profile--value-proposition--two--extra-small-to-small--smaller',
 	'profile--section-title--preface',
 	'profile--section-title--main',
 	'profile--skill-name--featured',
@@ -918,7 +922,7 @@ const ProfileValuePropositionOneContainer = styled.span`
 		}
 	}
 `;
-const ProfileValuePropositionTwoNotSmallContainer = styled.span`
+const ProfileValuePropositionTwoExtraSmallToSmallerContainer = styled.span`
 	color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -928,7 +932,7 @@ const ProfileValuePropositionTwoNotSmallContainer = styled.span`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		${typeStyle({
 			'deviceWidth': 's',
-			'size': 'm',
+			'size': 's',
 			'weight': 'regular',
 			'usage': 'display',
 		})}
@@ -936,7 +940,7 @@ const ProfileValuePropositionTwoNotSmallContainer = styled.span`
 	${deviceWidthQuery.only({ 'width': 'm' })} {
 		${typeStyle({
 			'deviceWidth': 'm',
-			'size': 'm',
+			'size': 's',
 			'weight': 'regular',
 			'usage': 'display',
 		})}
@@ -944,7 +948,7 @@ const ProfileValuePropositionTwoNotSmallContainer = styled.span`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${typeStyle({
 			'deviceWidth': 'l',
-			'size': 'm',
+			'size': 's',
 			'weight': 'regular',
 			'usage': 'display',
 		})}
@@ -959,7 +963,7 @@ const ProfileValuePropositionTwoNotSmallContainer = styled.span`
 		${deviceWidthQuery.only({ 'width': 's' })} {
 			${typeStyle({
 				'deviceWidth': 's',
-				'size': 'm',
+				'size': 's',
 				'weight': 'bold',
 				'usage': 'display',
 			})}
@@ -967,7 +971,7 @@ const ProfileValuePropositionTwoNotSmallContainer = styled.span`
 		${deviceWidthQuery.only({ 'width': 'm' })} {
 			${typeStyle({
 				'deviceWidth': 'm',
-				'size': 'm',
+				'size': 's',
 				'weight': 'bold',
 				'usage': 'display',
 			})}
@@ -975,14 +979,14 @@ const ProfileValuePropositionTwoNotSmallContainer = styled.span`
 		${deviceWidthQuery.only({ 'width': 'l' })} {
 			${typeStyle({
 				'deviceWidth': 'l',
-				'size': 'm',
+				'size': 's',
 				'weight': 'bold',
 				'usage': 'display',
 			})}
 		}
 	}
 `;
-const ProfileValuePropositionTwoSmallContainer = styled.span`
+const ProfileValuePropositionTwoExtraSmallToLargeContainer = styled.span`
 	color: ${color({
 		'kind': 'Neutral',
 		'tone': 'Finch',
@@ -992,25 +996,25 @@ const ProfileValuePropositionTwoSmallContainer = styled.span`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		${typeStyle({
 			'deviceWidth': 's',
-			'size': 's',
+			'size': 'm',
 			'weight': 'regular',
-			'usage': 'display',
+			'usage': 'body',
 		})}
 	}
 	${deviceWidthQuery.only({ 'width': 'm' })} {
 		${typeStyle({
 			'deviceWidth': 'm',
-			'size': 's',
+			'size': 'm',
 			'weight': 'regular',
-			'usage': 'display',
+			'usage': 'body',
 		})}
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		${typeStyle({
 			'deviceWidth': 'l',
-			'size': 's',
+			'size': 'm',
 			'weight': 'regular',
-			'usage': 'display',
+			'usage': 'body',
 		})}
 	}
 	em {
@@ -1023,25 +1027,25 @@ const ProfileValuePropositionTwoSmallContainer = styled.span`
 		${deviceWidthQuery.only({ 'width': 's' })} {
 			${typeStyle({
 				'deviceWidth': 's',
-				'size': 's',
+				'size': 'm',
 				'weight': 'bold',
-				'usage': 'display',
+				'usage': 'body',
 			})}
 		}
 		${deviceWidthQuery.only({ 'width': 'm' })} {
 			${typeStyle({
 				'deviceWidth': 'm',
-				'size': 's',
+				'size': 'm',
 				'weight': 'bold',
-				'usage': 'display',
+				'usage': 'body',
 			})}
 		}
 		${deviceWidthQuery.only({ 'width': 'l' })} {
 			${typeStyle({
 				'deviceWidth': 'l',
-				'size': 's',
+				'size': 'm',
 				'weight': 'bold',
-				'usage': 'display',
+				'usage': 'body',
 			})}
 		}
 	}
@@ -1244,8 +1248,8 @@ export const Copy = ({
 		kind !== 'copy-container--article--header--image-credit' &&
 		kind !== 'copy-container--article--body--image-caption'  &&
 		kind !== 'profile--value-proposition--one'  &&
-		kind !== 'profile--value-proposition--two--small'  &&
-		kind !== 'profile--value-proposition--two--not-small'
+		kind !== 'profile--value-proposition--two--extra-small-to-large'  &&
+		kind !== 'profile--value-proposition--two--extra-small-to-small--smaller'
 	) {
 		if (propsSpecifications[kind]) {
 			let tagThisCopy = propsSpecifications[kind].tag;
@@ -1353,33 +1357,33 @@ export const Copy = ({
 			);
 		}
 	}
-	if (kind === 'profile--value-proposition--two--not-small') {
+	if (kind === 'profile--value-proposition--two--extra-small-to-small--smaller') {
 		if (!htmlContent && children) {
 			return(
-				<ProfileValuePropositionTwoNotSmallContainer>
+				<ProfileValuePropositionTwoExtraSmallToSmallerContainer>
 					{children}
-				</ProfileValuePropositionTwoNotSmallContainer>
+				</ProfileValuePropositionTwoExtraSmallToSmallerContainer>
 			);
 		}
 		if (htmlContent) {
 			return(
-				<ProfileValuePropositionTwoNotSmallContainer
+				<ProfileValuePropositionTwoExtraSmallToSmallerContainer
 					dangerouslySetInnerHTML={{ '__html': htmlContent }}
 				/>
 			);
 		}
 	}
-	if (kind === 'profile--value-proposition--two--small') {
+	if (kind === 'profile--value-proposition--two--extra-small-to-large') {
 		if (!htmlContent && children) {
 			return(
-				<ProfileValuePropositionTwoSmallContainer>
+				<ProfileValuePropositionTwoExtraSmallToLargeContainer>
 					{children}
-				</ProfileValuePropositionTwoSmallContainer>
+				</ProfileValuePropositionTwoExtraSmallToLargeContainer>
 			);
 		}
 		if (htmlContent) {
 			return(
-				<ProfileValuePropositionTwoSmallContainer
+				<ProfileValuePropositionTwoExtraSmallToLargeContainer
 					dangerouslySetInnerHTML={{ '__html': htmlContent }}
 				/>
 			);

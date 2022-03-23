@@ -1287,6 +1287,65 @@ export const returnTransformedProfileScreenContent = ({
 	const allScreenProperties = returnBasicScreenObject(
 		{ defaults, screenID, screenRaw },
 	);
+	// set up value propositions structure inside main container
+	allScreenProperties.main.valuePropositions = {
+		'one': {
+			'smallToLarge': [],
+			'extraSmall': [],
+		},
+		'two': {
+			'large': [],
+			'smallToMedium': [],
+			'extraSmallToSmall': [],
+		},
+	};
+	// for each key in textContentItems
+	Object.keys(allScreenProperties.main.textContentItems)
+		.forEach((contentItemKey) => {
+			// add this content item to the appropriate part of the
+			// 		value propositions structure
+			if (contentItemKey.includes('valuePropOne')) {
+				if (contentItemKey.includes('ExtraSmall')) {
+					allScreenProperties.main.valuePropositions.
+						one.extraSmall.push(
+							allScreenProperties.main.
+								textContentItems[contentItemKey],
+						);
+				}
+				if (contentItemKey.includes('SmallToLarge')) {
+					allScreenProperties.main.valuePropositions.
+						one.smallToLarge.push(
+							allScreenProperties.main.
+								textContentItems[contentItemKey],
+						);
+				}
+			}
+			if (contentItemKey.includes('valuePropTwo')) {
+				if (contentItemKey.includes('ExtraSmallToSmall')) {
+					allScreenProperties.main.valuePropositions.
+						two.extraSmallToSmall.push(
+							allScreenProperties.main.
+								textContentItems[contentItemKey],
+						);
+				}
+				if (contentItemKey.includes('SmallToMedium')) {
+					allScreenProperties.main.valuePropositions.
+						two.smallToMedium.push(
+							allScreenProperties.main.
+								textContentItems[contentItemKey],
+						);
+				}
+				if (contentItemKey.includes('Large')) {
+					allScreenProperties.main.valuePropositions.
+						two.large.push(
+							allScreenProperties.main.
+								textContentItems[contentItemKey],
+						);
+				}
+			}
+		});
+	// delete now-extranneous data so we're not sending more than needed
+	delete allScreenProperties.main.textContentItems;
 	// set up skills structure inside main container
 	allScreenProperties.main.skills = {
 		'technical': {
