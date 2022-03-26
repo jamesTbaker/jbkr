@@ -240,6 +240,12 @@ const ImageNotLargeDevice = styled.div`
 	}
 `;
 const ProfileSectionContainer = styled.section`
+	@supports (overflow: clip) {
+		overflow: clip;
+	}
+	@supports not (overflow: clip) {
+		overflow: hidden;
+	}
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 10rem 2rem;
 		position: relative;
