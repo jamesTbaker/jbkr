@@ -240,7 +240,6 @@ const ImageNotLargeDevice = styled.div`
 	}
 `;
 const ProfileSectionContainer = styled.section`
-	overflow: hidden;
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 10rem 2rem;
 		position: relative;
