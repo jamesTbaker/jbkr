@@ -10,8 +10,8 @@ import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
 
 const customBreakpointsInPixels = {
 	'one': 400,
-	'three': 880,
-	'four': 1025,
+	'two': 880,
+	'three': 1025,
 };
 const videoCommonAttributes = {
 	'autoPlay': true,
@@ -38,7 +38,7 @@ const MainContentContainer = styled.main.attrs(() => {
 		'id': 'main-content',
 	};
 })`
-	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.two - 1}px) {
 		${
 			({ $backgroundSmall }) => `
 				background-image:
@@ -78,7 +78,7 @@ const ContactHeader = styled.header`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		padding: 0 2rem 0 2rem;
 	}
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		padding-bottom: 8rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
@@ -90,13 +90,13 @@ const ContactHeader = styled.header`
 	}
 `;
 const BrandingContainerHeader = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.two - 1}px) {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
 		padding: 2rem 0 2rem 5rem;
 	}
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		display: none;
 	}
 `;
@@ -117,14 +117,14 @@ const ContactBody = styled.div`
 		transform: translateY(0);
 		opacity: 1;
 	}
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		position: relative;
 		width: 100%;
 		text-align: center;
 	}
 `;
 const MediaContainerFive = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.four - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
 		display: none;
 	}
 `;
@@ -172,10 +172,10 @@ const MediaVideoFive = styled.video.attrs(() => videoCommonAttributes)`
 	}
 `;
 const MediaContainerThree = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.two - 1}px) {
 		display: none;
 	}
-	@media (min-width: ${customBreakpointsInPixels.four}px) {
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		display: none;
 	}
 `;
@@ -223,7 +223,7 @@ const MediaVideoThree = styled.video.attrs(() => videoCommonAttributes)`
 	}
 `;
 const ContentContainer = styled.div`
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		max-width: 160rem;
 		width: 100%;
 		margin: 0 auto;
@@ -257,10 +257,10 @@ const ContentContainer = styled.div`
 	}
 `;
 const ContentConstrainer = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.two - 1}px) {
 		padding: 0 2rem;
 	}
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		position: relative;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -273,15 +273,15 @@ const ContentConstrainer = styled.div`
 		text-align: left;
 		z-index: ${zIndexNumber().contactBodyContent};
 	}
-	@media (min-width: ${customBreakpointsInPixels.four}px) {
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		padding: 37rem 0 0 0;
 	}
 `;
 const BrandingContainerBody = styled.div`
-	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
+	@media (max-width: ${customBreakpointsInPixels.two - 1}px) {
 		display: none;
 	}
-	@media (min-width: ${customBreakpointsInPixels.three}px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		grid-area: brand;
 	}
 `;

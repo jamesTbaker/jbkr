@@ -24,7 +24,26 @@ import { Copy } from '../../core/Copy/Copy';
 import { CopyLink } from '../../core/CopyLink/CopyLink';
 import { Collapsible } from '../../core/Collapsible/Collapsible';
 import { ScreenTitlePrimary } from '../Common/ScreenTitlePrimary';
-
+127
+const customBreakpointsInPixels = {
+	'one': 369,
+	'two': 386,
+	'three': 503,
+	'four': 580,
+	'five': 660,
+	'six': 700,
+	'seven': 760,
+	'eight': 800,
+	'nine': 880,
+	'ten': 910,
+	'eleven': 951,
+	'twelve': 1025,
+	'thirteen': 1100,
+	'fourteen': 1150,
+	'fifteen': 1200,
+	'sixteen': 1312,
+	'seventeen': 1440,
+};
 const ProfileContainer = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		margin-top: 23rem;
@@ -65,38 +84,38 @@ const ProfileValuePropositionsContainer = styled.section`
 	text-align: left;
 `;
 const ProfileValuePropositionOneContainerExtraSmallScreen = styled.div`
-	@media (min-width: 386px) {
+	@media (min-width: ${customBreakpointsInPixels.two}px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionOneContainerSmallToLargeScreen = styled.div`
-	@media (max-width: 385px) {
+	@media (max-width: ${customBreakpointsInPixels.two - 1}px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionTwoContainerExtraSmallToSmallSmaller = styled.div`
-	@media (min-width: 369px) {
+	@media (min-width: ${customBreakpointsInPixels.one}px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionTwoContainerExtraSmallToSmallLarger = styled.div`
-	@media (max-width: 368px) {
+	@media (max-width: ${customBreakpointsInPixels.one - 1}px) {
 		display: none;
 	}
-	@media (min-width: 503px) {
+	@media (min-width: ${customBreakpointsInPixels.three}px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionTwoContainerSmallToMedium = styled.div`
-	@media (max-width: 502px) {
+	@media (max-width: ${customBreakpointsInPixels.three - 1}px) {
 		display: none;
 	}
-	@media (min-width: 951px) {
+	@media (min-width: ${customBreakpointsInPixels.eleven}px) {
 		display: none;
 	}
 `;
 const ProfileValuePropositionTwoContainerLargeScreen = styled.div`
-	@media (max-width: 950px) {
+	@media (max-width: ${customBreakpointsInPixels.eleven - 1}px) {
 		display: none;
 	}
 `;
@@ -125,7 +144,7 @@ const MainContentContainer = styled.main.attrs(() => {
 			opacity: 0;
 		}
 	}
-	@media (min-width: 580px) {
+	@media (min-width: ${customBreakpointsInPixels.four}px) {
 		&:before,
 		&:after {
 			content: '';
@@ -154,70 +173,70 @@ const MainContentContainer = styled.main.attrs(() => {
 			animation: fadeInOut 5s linear infinite;
 		}
 	}
-	@media (min-width: 700px) {
+	@media (min-width: ${customBreakpointsInPixels.six}px) {
 		&:before,
 		&:after {
 			width: 45rem;
 		}
 	}
-	@media (min-width: 800px) {
+	@media (min-width: ${customBreakpointsInPixels.eight}px) {
 		&:before,
 		&:after {
 			width: 53rem;
 		}
 	}
-	@media (min-width: 880px) {
+	@media (min-width: ${customBreakpointsInPixels.nine}px) {
 		&:before,
 		&:after {
 			width: 60rem;
 		}
 	}
-	@media (min-width: 910px) {
+	@media (min-width: ${customBreakpointsInPixels.ten}px) {
 		&:before,
 		&:after {
 			width: 64rem;
 		}
 	}
-	@media (min-width: 951px) {
+	@media (min-width: ${customBreakpointsInPixels.eleven}px) {
 		&:before,
 		&:after {
 			width: 55rem;
 			height: 86rem;
 		}
 	}
-	@media (min-width: 1025px) {
+	@media (min-width: ${customBreakpointsInPixels.twelve}px) {
 		&:before,
 		&:after {
 			width: 65rem;
 			height: 100rem;
 		}
 	}
-	@media (min-width: 1100px) {
+	@media (min-width: ${customBreakpointsInPixels.thirteen}px) {
 		&:before,
 		&:after {
 			width: 68rem;
 		}
 	}
-	@media (min-width: 1150px) {
+	@media (min-width: ${customBreakpointsInPixels.fourteen}px) {
 		&:before,
 		&:after {
 			width: 70rem;
 		}
 	}
-	@media (min-width: 1200px) {
+	@media (min-width: ${customBreakpointsInPixels.fifteen}px) {
 		&:before,
 		&:after {
 			width: 75rem;
 		}
 	}
-	@media (min-width: 1312px) and (max-width: 1439px) {
+	@media (min-width: ${customBreakpointsInPixels.sixteen}px) {
 		&:before,
 		&:after {
 			width: 80rem;
 			right: 7rem;
 		}
 	}
-	@media (min-width: 1440px) {
+	@media (min-width: ${customBreakpointsInPixels.seventeen}px) {
 		&:before,
 		&:after {
 			width: 90rem;
@@ -268,20 +287,20 @@ const ExpandedTableOfContentsList = styled.ol`
 	padding: 0;
 	z-index: ${zIndexNumber().expandedNavigation};
 	text-align: left;
-	@media (max-height: 660px) {
+	@media (max-height: ${customBreakpointsInPixels.five}px) {
 		top: 25rem;
 	}
-	@media (max-height: 580px) {
+	@media (max-height: ${customBreakpointsInPixels.four}px) {
 		top: 20rem;
 	}
 `;
 const ExpandedTableOfContentsListItem = styled.li`
 	list-style-type: none;
 	margin-bottom: 4rem;
-	@media (max-height: 800px) {
+	@media (max-height: ${customBreakpointsInPixels.eight}px) {
 		margin-bottom: 3rem;
 	}
-	@media (max-height: 760px) {
+	@media (max-height: ${customBreakpointsInPixels.seven}px) {
 		a {
 			font-size: 80%;
 		}
