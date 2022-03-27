@@ -70,7 +70,7 @@ module.exports = {
 		},
 		'footer': {
 			'copyright':
-				`Copyright &copy; 1999&mdash;${new Date().getFullYear()}`,
+				`Copyright &copy; 1999 &ndash; ${new Date().getFullYear()}`,
 		},
 		'prism': {
 			'theme': codeThemes.prismReactRendererTheme,

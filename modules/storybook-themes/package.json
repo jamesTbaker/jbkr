@@ -7,6 +7,7 @@
 	"license": "UNLICENSED",
 	"type": "module",
 	"dependencies": {
-		"@jbkr/style-service": "0.1.103"
+		"@jbkr/style-service": "0.1.103",
+		"@jbkr/utilities": "0.1.103"
 	}
 }

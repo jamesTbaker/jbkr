@@ -54,7 +54,7 @@ export { ProfileProfessionalExperience } from './lib/app/Profile/ProfileProfessi
 export { ProfileSection } from './lib/app/Profile/ProfileSection.jsx';
 export { ProfileSectionHeader } from './lib/app/Profile/ProfileSectionHeader.jsx';
 export { ProfileSkillRating } from './lib/app/Profile/ProfileSkillRating.jsx';
-export { PrProfileSkillVisualizationofile } from './lib/app/Profile/ProfileSkillVisualization.jsx';
+export { ProfileSkillVisualization } from './lib/app/Profile/ProfileSkillVisualization.jsx';
 export { ProfileValuePropositionOne } from './lib/app/Profile/ProfileValuePropositionOne.jsx';
 export { ProfileValuePropositionTwo } from './lib/app/Profile/ProfileValuePropositionTwo.jsx';
 export { ProfileVolunteerExperience } from './lib/app/Profile/ProfileVolunteerExperience.jsx';

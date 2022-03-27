@@ -28,9 +28,9 @@
 		}
 	},
 	"scripts": {
-		"docusaurus": "docusaurus",
+		"docusaurus": "docusaurus start",
 		"dev": "docusaurus start --no-open",
-		"prebuild": "generate",
+		"prebuild": "g:build-all",
 		"build": "docusaurus build",
 		"swizzle": "docusaurus swizzle",
 		"deploy": "docusaurus deploy",
