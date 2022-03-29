@@ -256,10 +256,10 @@
 
 	/* sidebar + toc */
 
-	--ifm-menu-color:					var(--jbkr-neutral-finch-23);
-	--ifm-menu-color-active:			var(--jbkr-neutral-finch-37);
-	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-06);
-	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-04);
+	--ifm-menu-color:					var(--jbkr-brand-peony-07);
+	--ifm-menu-color-active:			var(--jbkr-brand-peony-08);
+	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-03);
+	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-01);
 	--ifm-toc-link-color:				var(--jbkr-neutral-finch-22);
 
 	/* blockquote */
@@ -358,12 +358,11 @@ html[data-theme="dark"] {
 
 	/* sidebar + toc */
 
-	--ifm-menu-color:					var(--jbkr-neutral-finch-15);
-	--ifm-menu-color-active:			var(--jbkr-neutral-finch-01);
+	--ifm-menu-color:					var(--jbkr-brand-peony-03);
+	--ifm-menu-color-active:			var(--jbkr-brand-peony-02);
 	--ifm-menu-color-background-active:	var(--jbkr-neutral-finch-35);
 	--ifm-menu-color-background-hover:	var(--jbkr-neutral-finch-39);
 	--ifm-toc-link-color:				var(--jbkr-neutral-finch-03);
-	--ifm-toc-padding-vertical:			1.25rem;
 
 	/* blockquote */
 
@@ -429,6 +428,7 @@ main {
 	-moz-letter-spacing: -.005rem;
 	-ms-letter-spacing: -.005rem;
 	letter-spacing: -.005rem;
+	text-rendering: optimizeLegibility;
 }
 main div.row article div.markdown div[class^="codeBlockTitle"] {
 	background-color: 				var(--jbkr-neutral-finch-39) !important;
@@ -440,11 +440,20 @@ code {
 	color: 							var(--jbkr-inline-code-characters);
 	border: 0.1rem solid var(--jbkr-inline-code-border);
 }
-ul.menu__list li.menu__list-item:nth-child(n+2) {
+ul.menu__list li.menu__list-item a {
 	padding-left: 1rem;
 }
 div.navbar__items.navbar__items--right a.navbar__item.navbar__link {
 	font-size: 80%;
+}
+.table-of-contents__link {
+	color: var(--ifm-menu-color);
+}
+.table-of-contents__link:hover,
+.table-of-contents__link:hover code,
+.table-of-contents__link--active,
+.table-of-contents__link--active code {
+	color: var(--ifm-menu-color-active);
 }
 div.generate-docs.module-name {
 	display: inline-block;

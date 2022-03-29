@@ -9,7 +9,7 @@ module.exports = {
 	'baseUrl': '/jbkr/',
 	'onBrokenLinks': 'error',
 	'onBrokenMarkdownLinks': 'error',
-	'favicon': 'img/favicon.ico',
+	'favicon': 'img/brand.svg',
 	'organizationName': 'jamesTbaker',
 	'projectName': 'jbkr',
 	'trailingSlash': false,
