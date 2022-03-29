@@ -95,22 +95,21 @@
 	--jbkr-brand-finch-03: hsla(225, 25%, 17%, 1);
 	--jbkr-brand-finch-02: hsla(225, 25%, 50%, 1);
 	--jbkr-brand-finch-01: hsla(225, 25%, 95%, 1);
-	--jbkr-brand-spruce-01: hsla(190, 100%, 70%, 1);
-	--jbkr-accent-onDark-primary-peacock: hsla(101, 100%, 50%, 1);
-	--jbkr-accent-onDark-primary-seafoam: hsla(175, 100%, 50%, 1);
-	--jbkr-accent-onDark-primary-finch: hsla(225, 100%, 60%, 1);
-	--jbkr-accent-onDark-secondary-iris: hsla(270, 100%, 70%, 1);
-	--jbkr-accent-onDark-tertiary-tiger: hsla(30, 100%, 50%, 1);
-	--jbkr-accent-onDark-tertiary-sunshine: hsla(50, 100%, 50%, 1);
-	--jbkr-accent-onDark-quarternary-flamingo: hsla(325, 100%, 50%, 1);
-	--jbkr-accent-onDark-quarternary-spruce: hsla(190, 100%, 50%, 1);
-	--jbkr-accent-onMedium-primary-peacock: hsla(100, 99%, 66%, 1);
-	--jbkr-accent-onMedium-primary-seafoam: hsla(175, 100%, 70%, 1);
-	--jbkr-accent-onMedium-tertiary-sunshine: hsla(50, 100%, 50%, 1);
-	--jbkr-accent-onMedium-quarternary-spruce: hsla(190, 100%, 60%, 1);
-	--jbkr-accent-onLight-primary-finch:		hsla(225, 100%, 50%, 1);
-	--jbkr-accent-onLight-secondary-iris:		hsla(275, 100%, 50%, 1);
-	--jbkr-accent-onLight-quarternary-flamingo:	hsla(325, 100%, 50%, 1);
+
+	--jbkr-accent-peacock-02: hsla(101, 100%, 50%, 1);
+	--jbkr-accent-seafoam-02: hsla(175, 100%, 50%, 1);
+	--jbkr-accent-finch-01: hsla(225, 100%, 70%, 1);
+	--jbkr-accent-iris-01: hsla(270, 100%, 70%, 1);
+	--jbkr-accent-tiger-01: hsla(30, 100%, 50%, 1);
+	--jbkr-accent-sunshine-01: hsla(50, 100%, 50%, 1);
+	--jbkr-accent-flamingo-01: hsla(325, 100%, 60%, 1);
+	--jbkr-accent-spruce-02: hsla(190, 100%, 50%, 1);
+
+	--jbkr-accent-finch-02: hsla(225, 100%, 47%, 1);
+	--jbkr-accent-iris-02: hsla(275, 100%, 43%, 1);
+	--jbkr-accent-flamingo-02: hsla(325, 100%, 32%, 1);
+
+
 	--jbkr-state-positive-09: hsla(150, 50%, 10%, 1);
 	--jbkr-state-positive-08: hsla(150, 50%, 15%, 1);
 	--jbkr-state-positive-07: hsla(150, 50%, 23%, 1);
@@ -283,8 +282,6 @@
 	--ifm-color-info-contrast-background: var(--jbkr-neutral-finch-01);
 	--jbkr-doc-section-border:			var(--jbkr-neutral-finch-05);
 
-
-
 	/*
 	--ifm-code-background:
 
@@ -385,7 +382,6 @@ html[data-theme="dark"] {
 
 	--ifm-color-info-contrast-background: var(--jbkr-neutral-finch-37);
 	--jbkr-doc-section-border:			var(--jbkr-neutral-finch-32);
-
 }
 
 .docusaurus-highlight-code-line {
@@ -419,6 +415,12 @@ nav.navbar div.navbar__items--right div[class^="toggle_node_modules"] {
 nav.navbar div.navbar__items--right div[class^="toggle_node_modules"] button svg path {
 	fill: 							var(--ifm-navbar-link-color);
 }
+nav.navbar div.navbar-sidebar div[class^="toggle_node_modules"] button svg path {
+	fill: 							var(--ifm-navbar-link-color);
+}
+nav.navbar div.navbar-sidebar button.navbar-sidebar__close svg g {
+	stroke: 							var(--ifm-navbar-link-color);
+}
 main {
 	font-size: 1rem;
 	font-weight: 320;
@@ -438,7 +440,7 @@ main div.row article div.markdown div[class^="codeBlockContent"] pre.prism-code 
 }
 code {
 	color: 							var(--jbkr-inline-code-characters);
-	border: 0.1rem solid var(--jbkr-inline-code-border);
+	border: 0.1rem solid			var(--jbkr-inline-code-border);
 }
 ul.menu__list li.menu__list-item a {
 	padding-left: 1rem;
@@ -447,22 +449,20 @@ div.navbar__items.navbar__items--right a.navbar__item.navbar__link {
 	font-size: 80%;
 }
 .table-of-contents__link {
-	color: var(--ifm-menu-color);
+	color:							var(--ifm-menu-color);
 }
 .table-of-contents__link:hover,
 .table-of-contents__link:hover code,
 .table-of-contents__link--active,
 .table-of-contents__link--active code {
-	color: var(--ifm-menu-color-active);
+	color:							var(--ifm-menu-color-active);
 }
 div.generate-docs.module-name {
-	display: inline-block;
-	margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
-	background-color: #696;
+	display: flex;
+	margin:							var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
 }
 div.generate-docs.module-name span.identifier {
 	display: inline-block;
-	background-color: #966;
 }
 div.generate-docs.module-name span.identifier svg {
 	height: 1.875rem;
@@ -471,12 +471,12 @@ div.generate-docs.module-name span.identifier svg path#container {
 	fill: none;
 }
 div.generate-docs.module-name span.identifier svg path#content {
-	fill: white;
+	fill: var(--jbkr-accent-finch-02);
 }
 div.generate-docs.module-name h2 {
 	display: inline-block;
-	background-color: #669;
 	margin: 0;
+	padding-left: .5rem;
 }
 section.generate-docs details {
 	padding: 0;
@@ -488,9 +488,18 @@ section.generate-docs details summary {
 	margin-left: 1.25rem;
 	border: none;
 }
+section.generate-docs details summary::before {
+	border-color: transparent transparent transparent var(--jbkr-accent-finch-02);
+}
 section.generate-docs details summary h4 {
 	margin-bottom: 0;
 }
 section.generate-docs details div[class^="collapsibleContent_node_modules"] {
 	border-top: none;
+}
+html[data-theme="dark"] div.generate-docs.module-name span.identifier svg path#content {
+	fill: var(--jbkr-accent-finch-01);
+}
+html[data-theme="dark"] section.generate-docs details summary::before {
+	border-color: transparent transparent transparent var(--jbkr-accent-finch-01);
 }
