@@ -389,13 +389,15 @@ html[data-theme="dark"] {
 	margin: 0 calc(-1 * var(--ifm-pre-padding));
 	padding: 0 var(--ifm-pre-padding);
 }
-
 html[data-theme='dark'] .docusaurus-highlight-code-line {
 	background-color:  					var(--jbkr-neutral-finch-37);
 }
-
+nav.navbar.navbar--fixed-top {
+	padding: .5rem 2rem;
+}
 nav.navbar a.navbar__brand img.navbar__logo {
-	height: 26.4px; /* match line height of siblings */
+	height: 34.4px; /* match line height of siblings */
+	margin-top: .25rem;
 	margin-right: 2rem;
 }
 nav.navbar a.navbar__brand b.navbar__title,
@@ -415,16 +417,13 @@ main div.row article div.markdown div[class^="codeBlockTitle"] {
 main div.row article div.markdown div[class^="codeBlockContent"] pre.prism-code {
 	background-color: 				var(--jbkr-neutral-finch-41) !important;
 }
-
 code {
 	color: 							var(--jbkr-inline-code-characters);
 	border: 0.1rem solid var(--jbkr-inline-code-border);
 }
-
 ul.menu__list li.menu__list-item:nth-child(n+2) {
 	padding-left: 1rem;
 }
-
 div.navbar__items.navbar__items--right a.navbar__item.navbar__link {
 	font-size: 80%;
 }
@@ -433,7 +432,6 @@ div.generate-docs.module-name {
 	margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
 	background-color: #696;
 }
-
 div.generate-docs.module-name span.identifier {
 	display: inline-block;
 	background-color: #966;
@@ -452,7 +450,6 @@ div.generate-docs.module-name h2 {
 	background-color: #669;
 	margin: 0;
 }
-
 section.generate-docs details {
 	padding: 0;
 	border-radius: 0;

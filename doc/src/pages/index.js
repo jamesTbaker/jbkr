@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { deviceWidthQuery, color } from '@jbkr/style-service';
 
 
-const Header = styled.header`
+/* const Header = styled.header`
 	background: url('/jbkr/img/party.jpg');
 	background-size: cover;
 	background-position: center bottom;
@@ -90,8 +90,8 @@ const HeaderTagline = styled.p`
 	a {
 		color: white;
 	}
-`;
-const Main = styled.main`
+`; */
+const Main = styled.div`
 	padding: 2rem;
 	margin: 0;
 	font-size: 1rem;
@@ -108,12 +108,6 @@ const Main = styled.main`
 		margin: 2.5rem 0 1.5rem;
 	}
 `;
-const PhotoCredit = styled.p`
-	margin-top: 3rem;
-	font-size: .6875rem;
-	line-height: 1rem;
-	font-weight: 400;
-`;
 export default () => {
 	const { siteConfig } = useDocusaurusContext();
 	return (
@@ -121,7 +115,9 @@ export default () => {
 			title={siteConfig.title}
 			description={siteConfig.tagline}
 		>
-			<Header>
+			<main>
+				Docs
+				{/* <Header>
 				<HeaderContentContainer>
 					<HeaderTitle>
 						<HeaderTitlePreface>
@@ -138,52 +134,46 @@ export default () => {
 							target="_blank">documentation</a>?
 					</HeaderTagline>
 				</HeaderContentContainer>
-			</Header>
+			</Header> */}
 
-			<Main>
-				<h2>About</h2>
-				<p>
-					<a href="https://jbkr.me">jbkr</a> is the core
-					of James Baker's professional online presence.
-				</p>
-				<h2>Tech Stack Overview</h2>
-				<ul>
-					<li>
-						<b>Figma</b>: Colors are defined in Figma and fetched
-						from its API.
-					</li>
-					<li>
-						<b>ES6 + TypeScript</b>: Styles and other modules.
-					</li>
-					<li>
-						<b>Strapi</b>: Content.
-					</li>
-					<li>
-						<b>Next</b>: Client.
-					</li>
-					<li>
-						<b>MongoDB Atlas</b>: Strapi is configured to save its
-						data to MongoDB in the cloud, and the Next client
-						retrieves its content from Mongo.
-					</li>
-					{/* <li>
+				<Main>
+					<h2>About</h2>
+					<p>
+						<a href="https://jbkr.me">jbkr</a> is the core
+						of James Baker's professional online presence.
+					</p>
+					<h2>Tech Stack Overview</h2>
+					<ul>
+						<li>
+							<b>Figma</b>: Colors are defined in Figma and fetched
+							from its API.
+						</li>
+						<li>
+							<b>ES6 + TypeScript</b>: Styles and other modules.
+						</li>
+						<li>
+							<b>Strapi</b>: Content.
+						</li>
+						<li>
+							<b>Next</b>: Client.
+						</li>
+						<li>
+							<b>MongoDB Atlas</b>: Strapi is configured to save its
+							data to MongoDB in the cloud, and the Next client
+							retrieves its content from Mongo.
+						</li>
+						{/* <li>
 
-					</li>
-					<li>
+						</li>
+						<li>
 
-					</li>
-					<li>
+						</li>
+						<li>
 
-					</li> */}
-				</ul>
-				<PhotoCredit>
-					Top photo by&nbsp;
-					<a href="https://unsplash.com/@adam_whitlock"
-						target="_blank">Adam Whitlock</a>, on&nbsp;
-					<a href="https://unsplash.com/@adam_whitlock"
-						target="_blank">Unsplash</a>.
-				</PhotoCredit>
-			</Main>
+						</li> */}
+					</ul>
+				</Main>
+			</main>
 		</Layout>
 	);
 };

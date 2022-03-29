@@ -28,8 +28,8 @@
 		}
 	},
 	"scripts": {
-		"docusaurus": "docusaurus start",
-		"dev": "docusaurus start --no-open",
+		"docusaurus": "docusaurus start --port 3001",
+		"dev": "docusaurus start --no-open --port 3001",
 		"prebuild": "g:build-all",
 		"build": "docusaurus build",
 		"swizzle": "docusaurus swizzle",
