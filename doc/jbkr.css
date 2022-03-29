@@ -8,7 +8,7 @@
 /* You can override the default Infima variables here. */
 
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://rsms.me/inter/inter.css');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 
@@ -162,6 +162,12 @@
 
 	--ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	--ifm-font-family-monospace: 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	--ifm-font-weight-light: 300;
+	--ifm-font-weight-normal: 320;
+	--ifm-font-weight-semibold: 500;
+	--ifm-font-weight-bold: 570;
+	--ifm-font-weight-base: var(--ifm-font-weight-normal);
+	--ifm-heading-font-weight: var(--ifm-font-weight-semibold);
 	--ifm-code-font-size: 				80%;
 	--ifm-global-radius:				3px;
 
@@ -395,9 +401,9 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 nav.navbar.navbar--fixed-top {
 	padding: .5rem 2rem;
 }
-nav.navbar a.navbar__brand img.navbar__logo {
+nav.navbar a.navbar__brand div.navbar__logo {
 	height: 34.4px; /* match line height of siblings */
-	margin-top: .25rem;
+	margin-top: .5rem;
 	margin-right: 2rem;
 }
 nav.navbar a.navbar__brand b.navbar__title,
@@ -408,8 +414,21 @@ nav.navbar div.navbar__items--right a[href="https://github.com/jamesTbaker/jbkr"
 	white-space: nowrap;
 	overflow: hidden;
 }
-nav.navbar div.navbar__items--right div.react-toggle-track {
-	background-color: 				var(--jbkr-neutral-finch-28);
+nav.navbar div.navbar__items--right div[class^="toggle_node_modules"] {
+	margin-left: 1rem;
+}
+nav.navbar div.navbar__items--right div[class^="toggle_node_modules"] button svg path {
+	fill: 							var(--ifm-navbar-link-color);
+}
+main {
+	font-size: 1rem;
+	font-weight: 320;
+	font-style: normal;
+	line-height: 1.5rem;
+	-webkit-letter-spacing: -.005rem;
+	-moz-letter-spacing: -.005rem;
+	-ms-letter-spacing: -.005rem;
+	letter-spacing: -.005rem;
 }
 main div.row article div.markdown div[class^="codeBlockTitle"] {
 	background-color: 				var(--jbkr-neutral-finch-39) !important;

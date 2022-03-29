@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { deviceWidthQuery, color } from '@jbkr/style-service';
 
 
-/* const Header = styled.header`
+const Header = styled.header`
 	background: url('/jbkr/img/party.jpg');
 	background-size: cover;
 	background-position: center bottom;
@@ -13,10 +13,9 @@ import { deviceWidthQuery, color } from '@jbkr/style-service';
 	background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': 35,
+	'level': 37,
 	'format': 'string',
 })};
-	padding: 18rem 0 6rem;
 `;
 
 const HeaderContentContainer = styled.div`
@@ -24,38 +23,41 @@ const HeaderContentContainer = styled.div`
 		padding: 2rem;
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
-		display: inline-block;
+		/* display: inline-block;
 		padding: 2rem 4rem 2rem 6rem;
-		border-radius: 0 3px 3px 0;
+		border-radius: 0 3px 3px 0; */
 	}
-	background-color: ${color({
+	/* background-color: ${color({
 	'kind': 'Neutral',
 	'tone': 'Finch',
-	'level': 35,
+	'level': 37,
 	'alpha': .93,
 	'format': 'string',
-})};
+})}; */
 `;
 const HeaderTitle = styled.h1`
 	color: white;
 	${deviceWidthQuery.only({ 'width': 's' })} {
-		font-size: 3.0625rem;
-		line-height: 3.5rem;
-		font-weight: 600;
+		font-size: 4.8125rem;
+		line-height: 5rem;
+		font-weight: 700;
+		letter-spacing: -.11580078125;
 	}
 	${deviceWidthQuery.only({ 'width': 'm' })} {
-		font-size: 4.1875rem;
-		line-height: 4.5rem;
-		font-weight: 600;
+		font-size: 7.5rem;
+		line-height: 7.5rem;
+		font-weight: 700;
+		letter-spacing: -.28125;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
-		font-size: 5.675rem;
-		line-height: 5rem;
-		font-weight: 600;
-		padding-bottom: .5rem;
+		font-size: 11.3125rem;
+		line-height: 11.5rem;
+		font-weight: 700;
+		letter-spacing: -.63986328125rem;
+		padding: 7.5rem 5rem;
 	}
 `;
-const HeaderTitlePreface = styled.div`
+/* const HeaderTitlePreface = styled.div`
 	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
@@ -91,7 +93,7 @@ const HeaderTagline = styled.p`
 		color: white;
 	}
 `; */
-const Main = styled.div`
+const BodyContentContainer = styled.div`
 	padding: 2rem;
 	margin: 0;
 	font-size: 1rem;
@@ -116,27 +118,30 @@ export default () => {
 			description={siteConfig.tagline}
 		>
 			<main>
-				Docs
-				{/* <Header>
-				<HeaderContentContainer>
-					<HeaderTitle>
-						<HeaderTitlePreface>
-							Welcome to the
-						</HeaderTitlePreface>
-						Doc Party
-					</HeaderTitle>
-					<HeaderEmphasisLine />
-					<HeaderTagline>
-						Because who doesn't love&nbsp;
-						<a href={`
-							https://en.wikipedia.org/wiki/Software_documentation
-						`}
-							target="_blank">documentation</a>?
-					</HeaderTagline>
-				</HeaderContentContainer>
-			</Header> */}
 
-				<Main>
+				<Header>
+					<HeaderContentContainer>
+						<HeaderTitle>
+							Docs
+						</HeaderTitle>
+						{/* <HeaderTitle>
+							<HeaderTitlePreface>
+								Welcome to the
+							</HeaderTitlePreface>
+							Doc Party
+						</HeaderTitle>
+						<HeaderEmphasisLine />
+						<HeaderTagline>
+							Because who doesn't love&nbsp;
+							<a href={`
+								https://en.wikipedia.org/wiki/Software_documentation
+							`}
+								target="_blank">documentation</a>?
+						</HeaderTagline> */}
+					</HeaderContentContainer>
+				</Header>
+
+				<BodyContentContainer>
 					<h2>About</h2>
 					<p>
 						<a href="https://jbkr.me">jbkr</a> is the core
@@ -145,8 +150,8 @@ export default () => {
 					<h2>Tech Stack Overview</h2>
 					<ul>
 						<li>
-							<b>Figma</b>: Colors are defined in Figma and fetched
-							from its API.
+							<b>Figma</b>: Colors are defined in Figma
+							and fetched from its API.
 						</li>
 						<li>
 							<b>ES6 + TypeScript</b>: Styles and other modules.
@@ -172,7 +177,7 @@ export default () => {
 
 						</li> */}
 					</ul>
-				</Main>
+				</BodyContentContainer>
 			</main>
 		</Layout>
 	);

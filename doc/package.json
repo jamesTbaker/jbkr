@@ -44,8 +44,8 @@
 		"g:dev-auto": "npm-watch g:build-auto"
 	},
 	"dependencies": {
-		"@docusaurus/core": "2.0.0-beta.4",
-		"@docusaurus/preset-classic": "2.0.0-beta.4",
+		"@docusaurus/core": "^2.0.0-beta.18",
+		"@docusaurus/preset-classic": "^2.0.0-beta.18",
 		"@jbkr/docusaurus-plugin-doc": "file:../modules/docusaurus-plugin-doc",
 		"@jbkr/generate-docs": "file:../modules/generate-docs",
 		"@jbkr/style-service": "file:../modules/style-service",
