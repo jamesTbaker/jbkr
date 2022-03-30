@@ -1,11 +1,12 @@
 {
 	"name": "@jbkr/syntax-highlighting",
-	"version": "0.1.104",
-	"description": "Miscellaneous functions.",
+	"version": "0.1.106",
+	"description": "Highlight code syntax in both the client and the documentation. © 2022 James Baker. All rights reserved.",
 	"main": "./index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"dependencies": {
-		"@jbkr/style-service": "0.1.103"
+		"@jbkr/style-service": "0.1.106",
+		"@jbkr/utilities": "0.1.106"
 	}
 }

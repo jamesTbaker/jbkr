@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/http-client",
-	"version": "0.1.104",
-	"description": "http client",
+	"version": "0.1.106",
+	"description": "Collect data from AWS Lambda and deliver it as React props. © 2022 James Baker. All rights reserved.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",

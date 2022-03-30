@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/storybook",
-	"version": "0.1.0",
-	"description": "client",
+	"version": "0.1.106",
+	"description": "Space for developing and demoing React UI / UX components. © 2022 James Baker. All rights reserved.",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"private": true,
@@ -15,12 +15,12 @@
 		"styled-normalize": "^8.0.7"
 	},
 	"devDependencies": {
-		"@jbkr/components": "file:../components",
-		"@jbkr/models-react": "file:../modules/models-react",
-		"@jbkr/storybook-themes": "file:../modules/storybook-themes",
-		"@jbkr/style-service": "file:../modules/style-service",
-		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
-		"@jbkr/utilities": "file:../modules/utilities",
+		"@jbkr/components": "0.1.106",
+		"@jbkr/models-react": "0.1.106",
+		"@jbkr/storybook-themes": "0.1.106",
+		"@jbkr/style-service": "0.1.106",
+		"@jbkr/syntax-highlighting": "0.1.106",
+		"@jbkr/utilities": "0.1.106",
 		"@storybook/addon-actions": "^6.3.8",
 		"@storybook/addon-essentials": "^6.3.8",
 		"@storybook/addon-links": "^6.3.8",

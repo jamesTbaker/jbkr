@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/utilities",
-	"version": "0.1.104",
-	"description": "Miscellaneous functions.",
+	"version": "0.1.106",
+	"description": "Define generic functions that don't fit into other categories. © 2022 James Baker. All rights reserved.",
 	"main": "build/index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
@@ -10,7 +10,7 @@
 		"build": "tsc --project ./tsconfig.json"
 	},
 	"devDependencies": {
-		"@jbkr/models-typescript": "0.1.103",
+		"@jbkr/models-typescript": "0.1.106",
 		"typescript": "^4.3.5"
 	}
 }

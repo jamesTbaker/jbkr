@@ -1,13 +1,13 @@
 {
 	"name": "@jbkr/storybook-themes",
-	"version": "0.1.104",
-	"description": "Light and dark themes for the Storybook UI",
+	"version": "0.1.106",
+	"description": "Define light and dark themes for the Storybook UI. © 2022 James Baker. All rights reserved.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"type": "module",
 	"dependencies": {
-		"@jbkr/style-service": "0.1.103",
-		"@jbkr/utilities": "0.1.103"
+		"@jbkr/style-service": "0.1.106",
+		"@jbkr/utilities": "0.1.106"
 	}
 }

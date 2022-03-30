@@ -1,8 +1,8 @@
 {
 	"name": "strapi",
 	"private": true,
-	"version": "0.1.0",
-	"description": "A Strapi application",
+	"version": "0.1.106",
+	"description": "Strapi application for developing and managing content in MongoDB Atlas.",
 	"scripts": {
 		"dev": "strapi develop",
 		"start": "strapi start",

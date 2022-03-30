@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/style-service",
-	"version": "0.1.104",
-	"description": "Serve style data from an internal store. Store contents are built by the 'style-definition' module",
+	"version": "0.1.106",
+	"description": "Serve style data from an internal store. Store contents are built by the 'style-definition' module. © 2022 James Baker. All rights reserved.",
 	"main": "dist/index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
@@ -10,8 +10,8 @@
 		"build": "tsc --project ./tsconfig.json"
 	},
 	"devDependencies": {
-		"@jbkr/models-typescript": "0.1.103",
-		"@jbkr/utilities": "0.1.103",
+		"@jbkr/models-typescript": "0.1.106",
+		"@jbkr/utilities": "0.1.106",
 		"typescript": "^4.3.5"
 	}
 }

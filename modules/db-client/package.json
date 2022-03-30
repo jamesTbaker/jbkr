@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/db-client",
-	"version": "0.1.104",
-	"description": "Return mongoDB client",
+	"version": "0.1.106",
+	"description": "Return a connected MongoDB client. © 2022 James Baker. All rights reserved.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",

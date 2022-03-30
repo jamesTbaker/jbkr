@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/style-definition",
-	"version": "0.1.104",
-	"description": "Build the contents of the style service's store.",
+	"version": "0.1.106",
+	"description": "Build the contents of the style service's store. © 2022 James Baker. All rights reserved.",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"type": "module",
@@ -16,8 +16,8 @@
 		"axios": "^0.21.1"
 	},
 	"devDependencies": {
-		"@jbkr/models-typescript": "0.1.103",
-		"@jbkr/utilities": "0.1.103",
+		"@jbkr/models-typescript": "0.1.106",
+		"@jbkr/utilities": "0.1.106",
 		"@types/fs-extra": "^9.0.12",
 		"@types/node": "^16.4.10",
 		"dotenv": "^10.0.0",

@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/doc",
-	"version": "0.1.0",
+	"version": "0.1.105",
 	"description": "The nucleus and bulk of all documentation.",
 	"author": "James Baker",
 	"license": "UNLICENSED",
@@ -45,10 +45,10 @@
 	"dependencies": {
 		"@docusaurus/core": "^2.0.0-beta.18",
 		"@docusaurus/preset-classic": "^2.0.0-beta.18",
-		"@jbkr/docusaurus-plugin-doc": "file:../modules/docusaurus-plugin-doc",
-		"@jbkr/generate-docs": "file:../modules/generate-docs",
-		"@jbkr/style-service": "file:../modules/style-service",
-		"@jbkr/syntax-highlighting": "file:../modules/syntax-highlighting",
+		"@jbkr/generate-docs": "0.1.105",
+		"@jbkr/style-service": "0.1.105",
+		"@jbkr/syntax-highlighting": "0.1.105",
+		"@jbkr/utilities": "0.1.105",
 		"@mdx-js/react": "^1.6.21",
 		"@svgr/webpack": "^5.5.0",
 		"clsx": "^1.1.1",

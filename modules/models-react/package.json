@@ -1,7 +1,7 @@
 {
 	"name": "@jbkr/models-react",
-	"version": "0.1.104",
-	"description": "PropType definitions for React components.",
+	"version": "0.1.106",
+	"description": "Define PropType definitions for React components. © 2022 James Baker. All rights reserved.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",

@@ -1,13 +1,13 @@
 {
 	"name": "@jbkr/client-content",
-	"version": "0.1.104",
-	"description": "Miscellaneous functions.",
+	"version": "0.1.106",
+	"description": "Transform MongoDB content prior to delivering it via AWS Lambda. © 2022 James Baker. All rights reserved.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"type": "module",
 	"dependencies": {
-		"@jbkr/db-client": "0.1.103",
+		"@jbkr/db-client": "0.1.106",
 		"bson": "^4.5.1",
 		"github-slugger": "^1.4.0",
 		"hast-util-to-string": "^2.0.0",
