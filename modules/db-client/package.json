@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/db-client",
-	"version": "0.1.103",
+	"version": "0.1.104",
 	"description": "Return mongoDB client",
 	"main": "index.js",
 	"author": "James Baker",

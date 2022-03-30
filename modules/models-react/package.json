@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/models-react",
-	"version": "0.1.103",
+	"version": "0.1.104",
 	"description": "PropType definitions for React components.",
 	"main": "index.js",
 	"author": "James Baker",

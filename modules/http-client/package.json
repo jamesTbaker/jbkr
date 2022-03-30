@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/http-client",
-	"version": "0.1.103",
+	"version": "0.1.104",
 	"description": "http client",
 	"main": "index.js",
 	"author": "James Baker",

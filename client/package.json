@@ -6,10 +6,10 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@jbkr/components": "file:../components",
-		"@jbkr/http-client": "0.1.103",
-		"@jbkr/style-service": "file:../modules/style-service",
-		"@jbkr/syntax-highlighting": "0.1.103",
+		"@jbkr/components": "0.1.104",
+		"@jbkr/http-client": "0.1.104",
+		"@jbkr/style-service": "0.1.104",
+		"@jbkr/syntax-highlighting": "0.1.104",
 		"next": "^12.0.7",
 		"next-transpile-modules": "^8.0.0",
 		"prismjs": "^1.24.1",

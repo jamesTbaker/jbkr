@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/utilities",
-	"version": "0.1.103",
+	"version": "0.1.104",
 	"description": "Miscellaneous functions.",
 	"main": "build/index.js",
 	"author": "James Baker",

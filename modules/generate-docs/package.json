@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/generate-docs",
-	"version": "0.1.103",
+	"version": "0.1.104",
 	"description": "Parse specified code files and generate documentation from comments.",
 	"main": "index.js",
 	"author": "James Baker",

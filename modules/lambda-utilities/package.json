@@ -1,6 +1,6 @@
 {
 	"name": "@jbkr/lambda-utilities",
-	"version": "0.1.103",
+	"version": "0.1.104",
 	"description": "Various ancillary functions particular to running operations on AWS Lambda.",
 	"main": "index.js",
 	"author": "James Baker",

@@ -1,11 +1,10 @@
 {
 	"name": "@jbkr/components",
-	"version": "0.1.0",
+	"version": "0.1.104",
 	"description": "React components",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
-	"private": true,
 	"type": "module",
 	"dependencies": {
 		"@jbkr/models-react": "0.1.103",
