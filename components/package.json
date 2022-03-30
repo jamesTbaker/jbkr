@@ -1,15 +1,15 @@
 {
 	"name": "@jbkr/components",
-	"version": "0.1.105",
-	"description": "React components",
+	"version": "0.1.106",
+	"description": "React UI / UX components. © 2022 James Baker. All rights reserved.",
 	"main": "index.js",
 	"author": "James Baker",
 	"license": "UNLICENSED",
 	"type": "module",
 	"dependencies": {
-		"@jbkr/models-react": "0.1.105",
-		"@jbkr/style-service": "0.1.105",
-		"@jbkr/utilities": "0.1.105",
+		"@jbkr/models-react": "0.1.106",
+		"@jbkr/style-service": "0.1.106",
+		"@jbkr/utilities": "0.1.106",
 		"gsap": "^3.9.0",
 		"next": "^12.0.7",
 		"prismjs": "^1.26.0",
@@ -17,9 +17,7 @@
 		"react": "^17.0.2",
 		"react-player": "^2.9.0",
 		"react-tooltip": "^4.2.21",
-		"styled-components": "^5.3.1"
-	},
-	"devDependencies": {
-		"video.js": "^7.17.0"
+		"styled-components": "^5.3.1",
+		"video.js": "^7.18.1"
 	}
 }

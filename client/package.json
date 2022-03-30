@@ -1,4 +1,9 @@
 {
+	"name": "client",
+	"version": "0.1.106",
+	"description": "Next.js client and website root. © 2022 James Baker. All rights reserved.",
+	"author": "James Baker",
+	"license": "UNLICENSED",
 	"private": true,
 	"scripts": {
 		"dev": "next",
@@ -6,10 +11,11 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@jbkr/components": "0.1.104",
-		"@jbkr/http-client": "0.1.104",
-		"@jbkr/style-service": "0.1.104",
-		"@jbkr/syntax-highlighting": "0.1.104",
+		"@jbkr/components": "0.1.106",
+		"@jbkr/http-client": "0.1.106",
+		"@jbkr/style-service": "0.1.106",
+		"@jbkr/syntax-highlighting": "0.1.106",
+		"@jbkr/utilities": "0.1.106",
 		"next": "^12.0.7",
 		"next-transpile-modules": "^8.0.0",
 		"prismjs": "^1.24.1",
