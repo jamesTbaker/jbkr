@@ -1,5 +1,15 @@
-const withTM = require('next-transpile-modules')(['@jbkr/components']);
-const path = require('path');
+const withTM = require('next-transpile-modules')([
+	'@jbkr/components',
+	'@jbkr/models-react',
+	'gsap',
+	'prop-types',
+]);
+
+module.exports = withTM({
+	// 'debug': true,
+});
+
+/* const path = require('path');
 
 module.exports = withTM({
 	'webpack': (config, options) => {
@@ -11,7 +21,7 @@ module.exports = withTM({
 
 		return config;
 	},
-});
+}); */
 module.exports.images = {
 	'domains': ['res.cloudinary.com'],
 };
