@@ -5,8 +5,8 @@ const codeThemes = require('@jbkr/syntax-highlighting');
 module.exports = {
 	'title': 'Docs',
 	'tagline': 'Because who doesn\'t love documentation?',
-	'url': 'https://jamestbaker.github.io/',
-	'baseUrl': '/jbkr/',
+	'url': 'https://jbkr-doc.netlify.app',
+	'baseUrl': '/',
 	'onBrokenLinks': 'error',
 	'onBrokenMarkdownLinks': 'error',
 	'favicon': 'img/favicon.svg',
