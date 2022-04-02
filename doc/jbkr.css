@@ -252,6 +252,7 @@
 	--ifm-navbar-link-hover-color:		var(--jbkr-brand-peony-07);
 	--ifm-navbar-background-color:		var(--ifm-color-white);
 	--ifm-footer-background-color:		var(--ifm-color-white);
+	--ifm-footer-padding-vertical:		1rem;
 
 	/* sidebar + toc */
 
@@ -502,4 +503,8 @@ html[data-theme="dark"] div.generate-docs.module-name span.identifier svg path#c
 }
 html[data-theme="dark"] section.generate-docs details summary::before {
 	border-color: transparent transparent transparent var(--jbkr-accent-finch-01);
+}
+footer div.footer__copyright {
+	font-size: .6875rem;
+	line-height: 1rem;
 }

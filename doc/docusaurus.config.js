@@ -9,7 +9,7 @@ module.exports = {
 	'baseUrl': '/jbkr/',
 	'onBrokenLinks': 'error',
 	'onBrokenMarkdownLinks': 'error',
-	'favicon': 'img/brand.svg',
+	'favicon': 'img/favicon.svg',
 	'organizationName': 'jamesTbaker',
 	'projectName': 'jbkr',
 	'trailingSlash': false,
@@ -60,9 +60,8 @@ module.exports = {
 					'label': 'Lambdas',
 				},
 				{
-					'type': 'doc',
+					'to': 'Components',
 					'position': 'right',
-					'docId': 'Components/Components-Intro',
 					'label': 'Components',
 				},
 
@@ -70,7 +69,8 @@ module.exports = {
 		},
 		'footer': {
 			'copyright':
-				`Copyright &copy; 1999 &ndash; ${new Date().getFullYear()}`,
+				`&copy; 1999 &ndash; ${new Date().getFullYear()},` +
+				` James T. Baker. All rights reserved.`,
 		},
 		'prism': {
 			'theme': codeThemes.prismReactRendererTheme,
