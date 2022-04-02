@@ -44,30 +44,35 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 8,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.border.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 9,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.background.default = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 8,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.background.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 9,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.content.default = color({
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 1,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.content.active = colors.content.default;
@@ -80,30 +85,35 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 4,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.border.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 3,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.background.default = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 4,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.background.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 2,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.content.default = color({
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 41,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.content.active = colors.content.default;
@@ -126,12 +136,14 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 4,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.content.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 2,
+			'alpha': 1,
 			'format': 'string'
 		});
 	}
@@ -146,12 +158,14 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 7,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.content.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 8,
+			'alpha': 1,
 			'format': 'string'
 		});
 	}
@@ -163,12 +177,14 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 3,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.border.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 1,
+			'alpha': 1,
 			'format': 'string'
 		});
 	}
@@ -180,12 +196,14 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 6,
+			'alpha': 1,
 			'format': 'string'
 		});
 		colors.border.active = color({
 			'kind': 'Brand',
 			'tone': 'Peony',
 			'level': 7,
+			'alpha': 1,
 			'format': 'string'
 		});
 	}
@@ -200,12 +218,14 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Accent',
 			'tone': 'Finch',
 			'level': 1,
+			'alpha': 1,
 			'format': 'string'
 		}) :
 		color({
 			'kind': 'Accent',
 			'tone': 'Finch',
 			'level': 2,
+			'alpha': 1,
 			'format': 'string'
 			});
 	colors.focusRingSeparator = contextColor === 'onDark' ?
@@ -213,12 +233,14 @@ const returnColors = ({ surfaceStyle, contextColor }) => {
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 41,
+			'alpha': 1,
 			'format': 'string'
 		}) :
 		color({
 			'kind': 'Neutral',
 			'tone': 'Finch',
 			'level': 1,
+			'alpha': 1,
 			'format': 'string'
 		});
 	return colors;
