@@ -1,3 +1,3 @@
 # jbkr Monorepo
 
-[Documentation](https://jamestbaker.github.io/jbkr/)
+[Documentation](https://jbkr-doc.netlify.app/)
