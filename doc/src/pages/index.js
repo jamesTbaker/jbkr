@@ -4,31 +4,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styled from 'styled-components';
 import { deviceWidthQuery } from '@jbkr/style-service';
 
-const Header = styled.header`
-	padding: 5rem 2rem 2rem;
-`;
-const HeaderTitle = styled.h1`
-	color: white;
-	${deviceWidthQuery.only({ 'width': 's' })} {
-		font-size: 4.8125rem;
-		line-height: 5rem;
-		font-weight: 700;
-		letter-spacing: -.11580078125rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'm' })} {
-		font-size: 7.5rem;
-		line-height: 7.5rem;
-		font-weight: 700;
-		letter-spacing: -.28125rem;
-	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		font-size: 11.3125rem;
-		line-height: 11.5rem;
-		font-weight: 700;
-		letter-spacing: -.63986328125rem;
-		margin-bottom: 0;
-	}
-`;
 const HeaderTagline = styled.p`
 	margin-bottom: 0;
 	padding: 0 0 2rem;
@@ -64,11 +39,11 @@ export default () => {
 			title={siteConfig.title}
 			description={siteConfig.tagline}
 		>
-			<main>
-				<Header>
-					<HeaderTitle>
+			<main id="index-main-content">
+				<header>
+					<h1>
 						Docs
-					</HeaderTitle>
+					</h1>
 					<HeaderTagline>
 						Welcome to the doc party. Because who doesn't love&nbsp;
 						<a
@@ -76,7 +51,7 @@ export default () => {
 							target="_blank">documentation
 						</a>?
 					</HeaderTagline>
-				</Header>
+				</header>
 
 				<BodyContentContainer>
 					<h2>About</h2>
