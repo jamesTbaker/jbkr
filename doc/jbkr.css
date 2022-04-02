@@ -518,7 +518,18 @@ main#index-main-content header h1 {
 	font-weight: 700;
 	letter-spacing: -.11580078125rem;
 }
-
+main#index-main-content header p {
+	margin-bottom: 0;
+	padding: 0 0 2rem;
+	font-size: 1.25rem;
+	font-weight: 342;
+	font-style: normal;
+	line-height: 2rem;
+	letter-spacing: -.0078125rem;
+}
+div#body-container {
+	padding: 0 2rem 2rem;
+}
 /* MEDIUM */
 @media (min-width: 480px) and (max-width: 1024px) {
 	main#index-main-content header h1 {
@@ -527,9 +538,14 @@ main#index-main-content header h1 {
 		font-weight: 700;
 		letter-spacing: -.28125rem;
 	}
+	main#index-main-content header p {
+		font-size: 1.4375rem;
+		font-weight: 342;
+		font-style: normal;
+		line-height: 2.5rem;
+		letter-spacing: -.009453125rem;
+	}
 }
-
-
 /* LARGE */
 @media (min-width: 1025px) {
 	main#index-main-content header h1 {
@@ -538,5 +554,12 @@ main#index-main-content header h1 {
 		font-weight: 700;
 		letter-spacing: -.63986328125rem;
 		margin-bottom: 0;
+	}
+	main#index-main-content header p {
+		font-size: 1.375rem;
+		font-weight: 342;
+		font-style: normal;
+		line-height: 2rem;
+		letter-spacing: -.01033203125rem;
 	}
 }
