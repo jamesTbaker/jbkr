@@ -412,15 +412,24 @@ const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	) {
 		screenRendered.main.textContentItems = {};
 		screenRaw.main.TextContentItems.forEach((contentItemRaw) => {
-			screenRendered.main.textContentItems[
-				contentItemRaw.Key.charAt(0).toLowerCase() +
-				contentItemRaw.Key.slice(1)
-			] = returnSimpleHTMLFromMarkdown({
-				'content': contentItemRaw.Value,
-				'options': {
-					'removeEndCapTags': true,
-				},
-			});
+			if (contentItemRaw.PreserveMarkdown) {
+				screenRendered.main.textContentItems[
+					contentItemRaw.Key.charAt(0).toLowerCase() +
+					contentItemRaw.Key.slice(1)
+				] = returnSimpleHTMLFromMarkdown({
+					'content': contentItemRaw.Value,
+				});
+			} else {
+				screenRendered.main.textContentItems[
+					contentItemRaw.Key.charAt(0).toLowerCase() +
+					contentItemRaw.Key.slice(1)
+				] = returnSimpleHTMLFromMarkdown({
+					'content': contentItemRaw.Value,
+					'options': {
+						'removeEndCapTags': true,
+					},
+				});
+			}
 		});
 	}
 	if (
@@ -1662,9 +1671,6 @@ export const returnTransformedMetaScreenContent = ({
 				returnSluggifiedHTMLFromMarkdown({
 					'content': allScreenProperties.main
 						.textContentItems[contentItemKey],
-					'options': {
-						'removeEndCapTags': true,
-					},
 				});
 		});
 	allScreenProperties.main.textContentItems =

@@ -107,6 +107,7 @@ export const returnOneScreenFromDB = async ({ screenID }) => {
 						'MetaImages.mime': 1,
 						'TextContentItems.Key': 1,
 						'TextContentItems.Value': 1,
+						'TextContentItems.PreserveMarkdown': 1,
 						'DataContentItems.Key': 1,
 						'DataContentItems.Value': 1,
 						'MediaContentItemIDs.Key': 1,
