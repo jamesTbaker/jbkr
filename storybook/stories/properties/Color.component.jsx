@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
-import { H2, H3, Code } from '@storybook/components';
+import { Code } from '@storybook/components';
 import { colors, standardCorners } from '@jbkr/style-service';
 import { returnHSLAStringFromHSLAObject } from '@jbkr/utilities';
 
@@ -38,6 +38,20 @@ const ColorLevelContainer = styled.li`
 	border: 1px solid hsla(225,61%,23%,1);
 	${standardCorners()}
 `;
+const H2 = styled.h2`
+	font-size: 2rem;
+	line-height: 2.5rem;
+	font-weight: 500;
+	letter-spacing: -.005rem;
+	color: white;
+`;
+const H3 = styled.h3`
+	font-size: 1.5rem;
+	line-height: 1.875rem;
+	font-weight: 500;
+	letter-spacing: -.005rem;
+	color: white;
+`;
 
 const ColorKind = ({ kindName, kindContent }) => {
 	return(
@@ -45,8 +59,6 @@ const ColorKind = ({ kindName, kindContent }) => {
 			<H2>Kind: <Code>{kindName}</Code></H2>
 			{
 				Object.keys(kindContent).map((key, index) => {
-					// console.log('key');
-					// console.log(key);
 					return (<ColorTone
 						key={`${key}-${index}`}
 						kindName={kindName}

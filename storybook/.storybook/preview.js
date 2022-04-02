@@ -1,10 +1,9 @@
 import React from 'react';
 import { Normalize } from 'styled-normalize';
-import { darkTheme, lightTheme } from '@jbkr/storybook-themes';
+import { darkTheme } from '@jbkr/storybook-themes';
 import { createGlobalStyle } from 'styled-components';
 import {
-	gridBase, color, fontFilesImport, fontPrimaryName, fontFallbacksNames,
-	zIndexNumber,
+	gridBase, color, fontPrimaryName, fontFallbacksNames
 } from '@jbkr/style-service';
 
 const GlobalStyle = createGlobalStyle`
