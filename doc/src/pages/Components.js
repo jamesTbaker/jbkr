@@ -25,7 +25,7 @@ export default () => {
 		>
 			<Main>
 				<iframe src={
-					'https://62474889a7abe6004a5d45e9-lrociryjhv.' +
+					'https://main--62474889a7abe6004a5d45e9.' +
 					'chromatic.com/?path=/story/introduction--page'
 				} />
 			</Main>
