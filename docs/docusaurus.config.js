@@ -12,6 +12,7 @@ module.exports = {
 	'favicon': 'img/favicon.svg',
 	'organizationName': 'jamesTbaker',
 	'projectName': 'jbkr',
+	'deploymentBranch': 'main',
 	'trailingSlash': false,
 	'themeConfig': {
 		'navbar': {
