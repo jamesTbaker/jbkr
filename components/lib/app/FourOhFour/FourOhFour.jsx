@@ -138,7 +138,7 @@ const FourOhFourHeader = styled.header`
 `;
 const FourOhFourBody = styled.div`
 	width: 100%;
-	height: 75rem;
+	min-height: calc(100vh - 71rem);
 	transform: translateY(6rem);
 	opacity: 0;
 	overflow: hidden;
@@ -146,6 +146,9 @@ const FourOhFourBody = styled.div`
 	&.animation-state--final {
 		transform: translateY(0);
 		opacity: 1;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		height: 75rem;
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		z-index: ${zIndexNumber().fourOhFourContainer};
@@ -181,6 +184,9 @@ const VideoNotLargeDevice = styled.video.attrs(() => videoCommonAttributes)`
 		z-index: ${zIndexNumber().fourOhFourBackgroundVideo};
 	}
 	${deviceWidthQuery.only({ 'width': 'l' })} {
+		display: none;
+	}
+	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: none;
 	}
 	@media (prefers-reduced-motion: reduce) {
@@ -236,8 +242,11 @@ const ImageNotLargeDevice = styled.div`
 
 const ContentConstrainer = styled.div`
 	position: relative;
-	margin-top: 40rem;
+	margin-top: 0;
 	z-index: ${zIndexNumber().fourOhFourContent};
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		margin-top: 40rem;
+	}
 `;
 const ContentBackground = styled.div`
 	background-color: ${color({
