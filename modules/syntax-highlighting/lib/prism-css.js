@@ -72,17 +72,21 @@ module.exports = `
 		font-family: 'Roboto Mono', monospace;
 	}
 
-	.token.comment,
 	.token.prolog,
 	.token.doctype,
 	.token.cdata,
-	div.os-host.os-host-foreign.os-theme-dark .token.comment,
 	div.os-host.os-host-foreign.os-theme-dark .token.prolog,
 	div.os-host.os-host-foreign.os-theme-dark .token.doctype,
 	div.os-host.os-host-foreign.os-theme-dark .token.cdata {
 		font-family: 'Roboto Mono', monospace;
 		color: ${syntaxColors.Neutral[1]};
 	}
+	.token.comment,
+	div.os-host.os-host-foreign.os-theme-dark .token.comment {
+		font-family: 'Roboto Mono', monospace;
+		color: ${syntaxColors.Neutral[3]};
+	}
+
 
 	.token.punctuation,
 	div.os-host.os-host-foreign.os-theme-dark .token.punctuation {

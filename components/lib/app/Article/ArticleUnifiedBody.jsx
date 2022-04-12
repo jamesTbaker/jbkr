@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
-import { ArticleSection } from './ArticleSection';
 import { deviceWidthQuery, color } from '@jbkr/style-service';
 import { Button } from '../../core/Button/Button';
 import { MediaItem } from '../Common/MediaItem';
@@ -89,11 +88,11 @@ export const ArticleUnifiedBody = ({ parts }) => (
 						<div
 							key={part.key}
 						>
-							{/* <CodeEmbedContainer>
+							<CodeEmbedContainer>
 								<CodeEmbedIframe
 									src={constructedURL}
 									title={part.accessibilityTitle}
-									// allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+									allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
 									sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 								/>
 								<CodeEmbedCaption>
@@ -102,7 +101,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 										htmlContent={part.caption}
 									/>
 								</CodeEmbedCaption>
-							</CodeEmbedContainer> */}
+							</CodeEmbedContainer>
 							<CodeEditButtonContainer>
 								<Button
 									size="standard"

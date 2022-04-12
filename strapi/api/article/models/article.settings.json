@@ -76,9 +76,6 @@
       "repeatable": true,
       "component": "content.article-section"
     },
-    "SimpleBody": {
-      "type": "richtext"
-    },
     "Image": {
       "model": "file",
       "via": "related",
