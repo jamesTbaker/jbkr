@@ -5,7 +5,16 @@ import { Button } from '../../core/Button/Button';
 import { MediaItem } from '../Common/MediaItem';
 
 
-const ArticleUnifiedBodyContainer = styled.div``;
+const ArticleUnifiedBodyContainer = styled.div`
+	pre[class^="language"] {
+		margin-bottom: 3rem;
+	}
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		pre[class^="language"] {
+			font-size: 80%;
+		}
+	}
+`;
 const CodeEmbedContainer = styled.figure`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 		display: none;

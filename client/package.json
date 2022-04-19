@@ -11,10 +11,10 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@jbkr/components": "0.1.109",
+		"@jbkr/components": "0.1.110",
 		"@jbkr/http-client": "0.1.106",
 		"@jbkr/style-service": "0.1.106",
-		"@jbkr/syntax-highlighting": "0.1.106",
+		"@jbkr/syntax-highlighting": "0.1.107",
 		"@jbkr/utilities": "0.1.106",
 		"next": "^12.0.7",
 		"next-transpile-modules": "^9.0.0",

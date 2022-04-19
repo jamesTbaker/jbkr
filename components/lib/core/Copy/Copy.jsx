@@ -805,16 +805,16 @@ const StandardCopyContainer = styled.div`
 		}
 	}
 	div.header-container {
+		padding: 1.5rem 0;
 		h1[id],
 		h2[id],
 		h3[id],
 		h4[id],
 		h5[id] {
-			display: inline-block;
-			margin-right: 1rem;
+			display: inline;
+			margin: 0 1rem 0 0;
 		}
 		a.header-anchor[href] {
-			display: inline-block;
 			padding: 0 2rem;
 			opacity: 0;
 			span.machines-only {
@@ -842,18 +842,47 @@ const StandardCopyContainer = styled.div`
 	}
 	div.header-container.level-1 a.header-anchor {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h1 })}
+		margin: 0;
 	}
 	div.header-container.level-2 a.header-anchor {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h2 })}
+		margin: 0;
 	}
 	div.header-container.level-3 a.header-anchor {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h3 })}
+		margin: 0;
 	}
 	div.header-container.level-4 a.header-anchor {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h4 })}
+		margin: 0;
 	}
 	div.header-container.level-5 a.header-anchor {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.h5 })}
+		margin: 0;
+	}
+	${deviceWidthQuery.only({ 'width': 'm' })} {
+		div.header-container.level-2,
+		div.header-container.level-3 {
+			padding: 2.5rem 0;
+		}
+		div.header-container.level-4 {
+			padding: 2rem 0;
+		}
+		div.header-container.level-5 {
+			padding: 1.5rem 0;
+		}
+	}
+	${deviceWidthQuery.only({ 'width': 'l' })} {
+		div.header-container.level-2 {
+			padding: 3rem 0;
+		}
+		div.header-container.level-3,
+		div.header-container.level-4 {
+			padding: 2rem 0;
+		}
+		div.header-container.level-5 {
+			padding: 1.5rem 0;
+		}
 	}
 `;
 const ProfileValuePropositionOneContainer = styled.span`
