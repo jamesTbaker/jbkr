@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Brand } from '../../primitive/Brand/Brand';
 import { Copy } from '../../core/Copy/Copy';
 import { deviceWidthQuery, hiddenInline } from '@jbkr/style-service';
 
@@ -17,57 +16,61 @@ const ScreenTitlePrimaryContainer = styled.div`
 		transform: translateY(0);
 		opacity: 1;
 	}
-`;
-const BrandContainer = styled.div`
-	${deviceWidthQuery.not({ 'width': 'l' })} {
-		display: none;
+	${deviceWidthQuery.only({ 'width': 's' })} {
+		margin-left: -.5rem;
 	}
-	${deviceWidthQuery.only({ 'width': 'l' })} {
-		width: 13.125rem;
-		height: 8rem;
-		transform: translateY(2rem);
-		opacity: 0;
-		transition: all .75s;
-		&.animation-state--final {
-			transform: translateY(0);
-			opacity: 1;
-		}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		margin-left: -1rem;
+	}
+`;
+const NameContainer = styled.div`
+	height: 4rem;
+	transform: translateY(2rem);
+	opacity: 0;
+	transition: all .75s;
+	&.animation-state--final {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		height: 5rem;
 	}
 `;
 
 export const ScreenTitlePrimary = ({
-	includeBrand,
-	contextColor,
+	includeName,
 	titleVisible,
 	titleHiddenAppendix,
 }) => {
-	const brandContainerRef = useRef();
+	const nameContainerRef = useRef();
 	const screenTitleSecondaryContainerRef = useRef();
 	useEffect(() => {
-		if (includeBrand) {
-			brandContainerRef.current.classList.add('animation-state--final');
+		if (includeName) {
+			nameContainerRef.current.classList.add('animation-state--final');
 		}
 		screenTitleSecondaryContainerRef.current.classList.add('animation-state--final');
 	});
 	return (
 		<>
 			{
-				includeBrand &&
-				<BrandContainer
-					ref={brandContainerRef}
+				includeName &&
+				<NameContainer
+					ref={nameContainerRef}
+					aria-hidden
 				>
-					<Brand
-						contextColor={contextColor}
-					/>
-				</BrandContainer>
+					<Copy
+						kind="landmark-title--preface"
+					>
+						James Baker
+					</Copy>
+				</NameContainer>
 			}
 			<ScreenTitlePrimaryContainer
 				ref={screenTitleSecondaryContainerRef}
-				delay={includeBrand ? '.5s' : '0s'}
+				delay={includeName ? '.5s' : '0s'}
 			>
 				<Copy
 					kind="landmark-title"
-
 				>
 					{titleVisible}
 					{

@@ -31,7 +31,7 @@ const LibLabHeader = styled.header`
 		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 0 auto;
-		padding: 15rem 0 0 0;
+		padding: 15rem 0 8rem 0;
 		text-align: left;
 	}
 `;

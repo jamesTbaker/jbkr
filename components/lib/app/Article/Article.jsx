@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { deviceWidthQuery, color, zIndexNumber } from '@jbkr/style-service';
 import { Copy } from '../../core/Copy/Copy';
@@ -440,6 +439,42 @@ const ArticleMetaFauxHeader = styled.span`
 		}
 	}
 `;
+const ArticleMetaTooltip = styled.span`
+	display: block;
+	position: relative;
+	left: 0;
+	top: 0;
+	padding: 1rem;
+	color blue;
+	background-color: ${color({
+		'kind': 'Accent',
+		'tone': 'Finch',
+		'level': 1,
+		'format': 'string',
+	})};
+	border-radius: .325rem;
+	opacity: 0;
+	transition: .3s opacity;
+	&:after {
+		content: '';
+		position: absolute;
+		left: 50%;
+		margin-left: -1rem;
+		top: 100%;
+		border: 1rem solid ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string',
+		})};
+		border-color: ${color({
+			'kind': 'Accent',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string',
+		})} transparent transparent transparent;
+	}
+`;
 const DatesAndStatsLargeDevice = styled.div`
 	${deviceWidthQuery.not({ 'width': 'l' })} {
 		display: none;
@@ -447,7 +482,6 @@ const DatesAndStatsLargeDevice = styled.div`
 	${deviceWidthQuery.only({ 'width': 'l' })} {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		/* grid-template-rows: 8rem 8rem; */
 		grid-template-areas:	"topLeft topRight"
 								"bottomLeft bottomRight";
 	}
@@ -549,6 +583,7 @@ export const Article = ({
 		}
 	});
 	const articleTaglineAndMetaContainerRef = useRef();
+	const articleLinkCopyTooltipRef = useRef();
 	const expandedTableOfContentsContainerRef = useRef();
 	useEffect(() => {
 		articleTaglineAndMetaContainerRef
@@ -581,17 +616,27 @@ export const Article = ({
 			newWindow.focus();
 		}
 	};
-	const handleLinkButtonClickLargeScreen = () => {
-		console.log('func fired L');
-		navigator.clipboard.writeText(
-			`http://www.jbkr.me/library/${meta.slug}`,
-		);
+	const handleLinkButtonMouseLeaveLargeScreen = (event) => {
+		articleLinkCopyTooltipRef.current.style.opacity = 0;
+		articleLinkCopyTooltipRef.current.setAttribute('aria-hidden', 'true');
+		event.currentTarget.removeAttribute('aria-describedby');
 	};
-	const handleLinkButtonClickNotLargeScreen = () => {
-		console.log('func fired NL');
+	const handleLinkButtonClickLargeScreen = (event) => {
 		navigator.clipboard.writeText(
 			`http://www.jbkr.me/library/${meta.slug}`,
 		);
+		const buttonElementBox = event.currentTarget.getBoundingClientRect();
+		const tooltipElementBox = articleLinkCopyTooltipRef.current.getBoundingClientRect();
+		const positionX = Math.round(
+			(buttonElementBox.width / 2) + (tooltipElementBox.width / 2) + 16
+		);
+		const positionY = Math.round(
+			tooltipElementBox.height + 16
+		);
+		articleLinkCopyTooltipRef.current.style.cssText = `opacity: 1; left: -${positionX}px; top: -${positionY}px;`;
+		articleLinkCopyTooltipRef.current.setAttribute('aria-hidden', 'false');
+		event.currentTarget.setAttribute('aria-describedby', articleLinkCopyTooltipRef.current.id);
+		event.currentTarget.addEventListener('mouseleave', handleLinkButtonMouseLeaveLargeScreen);
 	};
 	return (
 		<ArticleContainer>
@@ -779,27 +824,6 @@ export const Article = ({
 										text="Copy this article's URL"
 										surfaceStyle="outlined"
 										textHidden={true}
-										dataAttributes={{
-											'tip': 'true',
-											'for': 'copyLinkButtonTooltipLargeScreen',
-											'event': 'click',
-											'event-off': 'mouseout',
-											'type': 'dark',
-											'text-color': color({
-												'kind': 'Neutral',
-												'tone': 'Finch',
-												'level': 41,
-												'alpha': 1,
-												'format': 'string'
-											}),
-											'background-color': color({
-												'kind': 'Accent',
-												'tone': 'Finch',
-												'level': 1,
-												'alpha': 1,
-												'format': 'string'
-											}),
-										}}
 										clickHandler={handleLinkButtonClickLargeScreen}
 									/>
 								</ShareButtonContainerLargeScreen>
@@ -809,43 +833,20 @@ export const Article = ({
 										text="Copy this article's URL"
 										surfaceStyle="outlined"
 										textHidden={true}
-										dataAttributes={{
-											'tip': 'true',
-											'for': 'copyLinkButtonTooltipNotLargeScreen',
-											'event': 'click',
-											'type': 'dark',
-											'text-color': color({
-												'kind': 'Neutral',
-												'tone': 'Finch',
-												'level': 41,
-												'alpha': 1,
-												'format': 'string'
-											}),
-											'background-color': color({
-												'kind': 'Accent',
-												'tone': 'Finch',
-												'level': 1,
-												'alpha': 1,
-												'format': 'string'
-											}),
-										}}
-										clickHandler={handleLinkButtonClickNotLargeScreen}
+										clickHandler={handleLinkButtonClickLargeScreen}
 									/>
 								</ShareButtonContainerNotLargeScreen>
-								<ReactTooltip
-									id="copyLinkButtonTooltipLargeScreen"
-									place="top"
-									effect="solid"
+								<ArticleMetaTooltip
+									ref={articleLinkCopyTooltipRef}
+									id="woTVtpHL2kmeAgh2rBQpjfMx"
+									aria-hidden
 								>
-									URL Copied!
-								</ReactTooltip>
-								<ReactTooltip
-									id="copyLinkButtonTooltipNotLargeScreen"
-									place="top"
-									effect="solid"
-								>
-									URL Copied!
-								</ReactTooltip>
+									<Copy
+										kind="tooltip"
+									>
+										Copied URL!
+									</Copy>
+								</ArticleMetaTooltip>
 							</SharingOptions>
 							<Copy
 								kind="copy-container--article--header--image-credit"

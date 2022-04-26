@@ -66,7 +66,7 @@ const ProfileHeader = styled.header`
 		width: calc(100% - 4rem);
 		max-width: 150rem;
 		margin: 0 auto;
-		padding: 15rem 0 10rem 0;
+		padding: 15rem 0 8rem 0;
 		text-align: left;
 	}
 `;
@@ -673,7 +673,7 @@ export const Profile = ({
 				<ProfileHeader>
 					<ProfileHeaderContentConstrainer>
 						<ScreenTitlePrimary
-							includeBrand={true}
+							includeName={true}
 							contextColor="onDark"
 							titleVisible={title}
 							titleHiddenAppendix="&nbsp;of James T. Baker"

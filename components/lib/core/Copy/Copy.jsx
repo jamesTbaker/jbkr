@@ -19,6 +19,17 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
+	'landmark-title--preface': {
+		'tag': 'span',
+		'size': 'm',
+		'weight': 'bold',
+		'usage': 'display',
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 18,
+		},
+	},
 	'h1': {
 		'tag': 'h1',
 		'size': '2xl',
@@ -124,6 +135,17 @@ const propsSpecifications = {
 			'kind': 'Neutral',
 			'tone': 'Base',
 			'level': 1,
+		},
+	},
+	'tooltip': {
+		'tag': 'span',
+		'size': '1xs',
+		'weight': 'bold',
+		'usage': 'body',
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 41,
 		},
 	},
 	'button-label--horizontal--standard': {
@@ -590,6 +612,7 @@ const copyKinds = [
 	'copy-container--standard',
 	'copy-container--enlarged',
 	'landmark-title',
+	'landmark-title--preface',
 	'h1',
 	'h2',
 	'h3',
@@ -598,15 +621,13 @@ const copyKinds = [
 	'body--standard',
 	'body--enlarged',
 	'small',
+	'small-bold',
+	'tooltip',
 	'button-label--horizontal--standard',
 	'button-label--horizontal--small',
 	'announcement--preface',
 	'announcement--body',
 	'profile--value-proposition--one',
-
-
-
-
 	'profile--value-proposition--two--extra-small-to-large',
 	'profile--value-proposition--two--extra-small-to-small--smaller',
 	'profile--section-title--preface',

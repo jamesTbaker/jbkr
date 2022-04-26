@@ -390,9 +390,9 @@ const ButtonContentComponentFacilitator = styled.span.attrs(({
 	if ($url && !$url.startsWith('http')) {
 		returnValue.as = 'a';
 	}
-	if ($clickHandler) {
+	/* if ($clickHandler) {
 		returnValue.onClick = $clickHandler;
-	}
+	} */
 	return returnValue;
 })`
 	display: block; width: max-content;
