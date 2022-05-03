@@ -111,7 +111,8 @@
       "components": [
         "content.aub-text",
         "content.aub-code-embed",
-        "content.aub-media"
+        "content.aub-media",
+        "content.aub-media-set"
       ]
     },
     "TwitterHashtags": {

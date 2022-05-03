@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_aub_media_sets",
+  "info": {
+    "name": "AUBMediaSet",
+    "icon": "anchor"
+  },
+  "options": {},
+  "attributes": {
+    "Item": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.aub-media-item"
+    },
+    "Caption": {
+      "type": "string"
+    }
+  }
+}

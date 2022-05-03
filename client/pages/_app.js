@@ -92,6 +92,11 @@ export default function App({ Component, pageProps }) {
 					20+ years' experience in business, technology, and design."
 				/>
 				<style>{prismCSS}</style>
+				<script
+					async
+					src="https://platform.twitter.com/widgets.js"
+					charSet="utf-8"
+				/>
 			</Head>
 			<GlobalStyle />
 			<Component {...pageProps} />

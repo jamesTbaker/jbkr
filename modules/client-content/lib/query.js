@@ -481,7 +481,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					},
 				},
 				// look up the unified body media items for this article
-				{
+				/* {
 					'$lookup':
 					{
 						'from': 'components_content_aub_medias',
@@ -489,9 +489,19 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'foreignField': '_id',
 						'as': 'UnifiedBodyMediaItems',
 					},
+				}, */
+				// look up the unified body media items for this article
+				{
+					'$lookup':
+					{
+						'from': 'components_content_aub_media_sets',
+						'localField': 'UnifiedBody.ref',
+						'foreignField': '_id',
+						'as': 'UnifiedBodyMediaSets',
+					},
 				},
 				// look up the unified body code embeds for this article
-				{
+				/* {
 					'$lookup':
 					{
 						'from':
@@ -500,7 +510,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'foreignField': '_id',
 						'as': 'UnifiedBodyCodeEmbeds',
 					},
-				},
+				}, */
 				// look up the brief statements for this article
 				{
 					'$lookup':
@@ -559,8 +569,8 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'Section': 1,
 						'UnifiedBody': 1,
 						'UnifiedBodyTexts': 1,
-						'UnifiedBodyMediaItems': 1,
-						'UnifiedBodyCodeEmbeds': 1,
+						'UnifiedBodyMediaSets': 1,
+						// 'UnifiedBodyCodeEmbeds': 1,
 						'InternalTags.HashtagText': 1,
 						'TwitterHashtags.HashtagText': 1,
 					},
@@ -628,8 +638,40 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 			]).toArray();
 		// serialize and deserialize returned data, converting BSON to JSON
 		articleSectionsRaw = JSON.parse(JSON.stringify(articleSectionsRaw));
-		// get the IDs of any media items in
-		// this article's sections' subsections
+
+
+		const articleUnifiedBodyMediaSetItemIDs = [];
+		articleMainRaw.UnifiedBodyMediaSets.forEach((mediaSet) => {
+			mediaSet.Item.forEach((mediaSetItem) => {
+				articleUnifiedBodyMediaSetItemIDs.push(
+					new ObjectID(mediaSetItem.ref),
+				);
+			});
+		});
+
+		let articleUnifiedBodyMediaSetItemsRaw =
+			await dbConnection.collection('components_content_aub_media_items')
+				.find(
+					// find the documents whose IDs are in the collection of IDs
+					{ '_id': { '$in': articleUnifiedBodyMediaSetItemIDs } },
+					// specify which fields to return
+					{
+						'_id': 0,
+						'Type': 1,
+						'EmbedURLFragment': 1,
+						'EmbedCodeFile': 1,
+						'EmbedAccessibilityTitle': 1,
+						'EmbedCaption': 1,
+						'Upload': 1,
+						'UploadVideoPosterImage': 1,
+					},
+				).toArray();
+		// serialize and deserialize returned data, converting BSON to JSON
+		articleUnifiedBodyMediaSetItemsRaw = JSON.parse(
+			JSON.stringify(articleUnifiedBodyMediaSetItemsRaw),
+		);
+		// get the IDs of any uploaded media items in this
+		//		article's sections' subsections
 		const articleMediaIDs = [];
 		articleSectionsRaw.forEach((sectionObject) => {
 			sectionObject.Subsections.forEach((subsectionObject) => {
@@ -641,12 +683,22 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					});
 			});
 		});
-		articleMainRaw.UnifiedBodyMediaItems.forEach((mediaItemSet) => {
-			mediaItemSet.Files.forEach((fileIDString) => {
+		// get the IDs of any uploaded media items in this
+		//		article's unified body
+		articleUnifiedBodyMediaSetItemsRaw.forEach((mediaItemRaw) => {
+			if (
+				mediaItemRaw.Type === 'UploadedImage' ||
+				mediaItemRaw.Type === 'UploadedVideo'
+			) {
 				articleMediaIDs.push(
-					new ObjectID(fileIDString),
+					new ObjectID(mediaItemRaw.Upload),
 				);
-			});
+				if (mediaItemRaw.UploadVideoPosterImage) {
+					articleMediaIDs.push(
+						new ObjectID(mediaItemRaw.UploadVideoPosterImage),
+					);
+				}
+			}
 		});
 		// get the raw data for this article's sections's
 		// subsection media items from the database
@@ -673,6 +725,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 		return {
 			articleMainRaw,
 			articleSectionsRaw,
+			articleUnifiedBodyMediaSetItemsRaw,
 			articleMediaRaw,
 		};
 		// if an error occurred

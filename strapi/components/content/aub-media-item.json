@@ -1,0 +1,57 @@
+{
+  "collectionName": "components_content_aub_media_items",
+  "info": {
+    "name": "AUBMediaItem",
+    "icon": "american-sign-language-interpreting",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "UploadedImage",
+        "UploadedVideo",
+        "YouTube",
+        "Twitter",
+        "CodeSandbox"
+      ]
+    },
+    "Upload": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "EmbedURLFragment": {
+      "type": "string"
+    },
+    "EmbedCodeFile": {
+      "type": "string"
+    },
+    "EmbedAccessibilityTitle": {
+      "type": "string"
+    },
+    "EmbedCaption": {
+      "type": "string"
+    },
+    "UploadVideoPosterImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

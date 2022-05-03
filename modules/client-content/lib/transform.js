@@ -538,7 +538,11 @@ const returnBasicScreenObject = ({ defaults, screenID, screenRaw }) => {
 	return allScreenProperties;
 };
 const returnArticleIntermediate = ({
-	defaults, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+	defaults,
+	articleMainRaw,
+	articleSectionsRaw,
+	articleUnifiedBodyMediaSetItemsRaw,
+	articleMediaRaw,
 }) => {
 	// set up container for all sections
 	const sectionsIntermediate = [];
@@ -808,7 +812,7 @@ const returnArticleIntermediate = ({
 					}
 				});
 			}
-			if (
+			/* if (
 				unifiedBodyPart.kind ===
 				'ComponentContentAubCodeEmbed'
 			) {
@@ -871,9 +875,226 @@ const returnArticleIntermediate = ({
 								'caption': unifiedBodyMediaItemSet.Caption,
 								'credits': mediaItemCreditsThisPart,
 							});
-
 						}
 					});
+			} */
+			if (
+				unifiedBodyPart.kind === 'ComponentContentAubMediaSet'
+			) {
+				const thisIntermediateMediaSet = {
+					'items': [],
+				};
+				let thisMediaSetRaw;
+				articleMainRaw.UnifiedBodyMediaSets.forEach((mediaSetRaw) => {
+					if (unifiedBodyPart.ref === mediaSetRaw._id) {
+						thisMediaSetRaw = mediaSetRaw;
+					}
+				});
+				// if there are items in this raw media set
+				if (
+					thisMediaSetRaw &&
+					thisMediaSetRaw.Item &&
+					thisMediaSetRaw.Item[0]
+				) {
+					if (thisMediaSetRaw.Caption) {
+						thisIntermediateMediaSet.caption =
+							thisMediaSetRaw.Caption;
+						thisMediaSetRaw.Item
+							.forEach((mediaSetItemReference) => {
+								articleUnifiedBodyMediaSetItemsRaw
+									.forEach((mediaSetItemRaw) => {
+										if (
+											mediaSetItemReference.ref ===
+											mediaSetItemRaw._id
+										) {
+											if (
+												mediaSetItemRaw.Type ===
+												'CodeSandbox' ||
+												mediaSetItemRaw.Type ===
+												'YouTube' ||
+												mediaSetItemRaw.Type ===
+												'Twitter'
+											) {
+												const thisMediaItem = {
+													'objectType':
+														mediaSetItemRaw
+															.Type,
+													'key':
+														mediaSetItemRaw._id,
+													'accessibilityTitle':
+														mediaSetItemRaw
+															.EmbedAccessibilityTitle,
+													'urlFragment':
+														mediaSetItemRaw
+															.EmbedURLFragment,
+													'credit':
+														mediaSetItemRaw
+															.EmbedCaption,
+												};
+												if (
+													mediaSetItemRaw.Type ===
+													'CodeSandbox' &&
+													mediaSetItemRaw
+														.EmbedCodeFile
+												) {
+													thisMediaItem.file =
+														mediaSetItemRaw
+															.EmbedCodeFile;
+												}
+												thisIntermediateMediaSet.items
+													.push(thisMediaItem);
+											}
+											if (
+												mediaSetItemRaw.Type ===
+												'UploadedImage'
+											) {
+												articleMediaRaw.forEach((uploadedItem) => {
+													if (
+														mediaSetItemRaw.Upload ===
+														uploadedItem._id &&
+														uploadedItem.url &&
+														uploadedItem.ext &&
+														uploadedItem.hash &&
+														uploadedItem.mime &&
+														uploadedItem
+															.alternativeText &&
+														uploadedItem.caption &&
+														uploadedItem.width &&
+														uploadedItem.height
+													) {
+														thisIntermediateMediaSet.items
+															.push({
+																'objectType':
+																	'image',
+																'key':
+																	uploadedItem._id,
+																'ext':
+																	uploadedItem.ext,
+																'hash':
+																	uploadedItem
+																		.hash,
+																'url':
+																	uploadedItem.url,
+																'type':
+																	returnMediaType({
+																		'mime':
+																			uploadedItem
+																				.mime,
+																	}),
+																'alternativeText':
+																	uploadedItem
+																		.alternativeText,
+																'credit':
+																	uploadedItem
+																		.caption,
+																'width':
+																	uploadedItem
+																		.width,
+																'height':
+																	uploadedItem
+																		.height,
+															});
+													}
+												});
+											}
+											if (
+												mediaSetItemRaw.Type ===
+												'UploadedVideo'
+											) {
+												articleMediaRaw.forEach((uploadedItem) => {
+													if (
+														mediaSetItemRaw.Upload ===
+														uploadedItem._id &&
+														mediaSetItemRaw.UploadVideoPosterImage &&
+														uploadedItem.url &&
+														uploadedItem.mime &&
+														uploadedItem
+															.alternativeText &&
+														uploadedItem.caption
+													) {
+														const thisMediaItem = {
+															'objectType':
+																'video',
+															'key':
+																uploadedItem._id,
+															'url':
+																uploadedItem.url,
+															'type':
+																returnMediaType({
+																	'mime':
+																		uploadedItem
+																			.mime,
+																}),
+															'alternativeText':
+																uploadedItem
+																	.alternativeText,
+															'credit':
+																uploadedItem
+																	.caption,
+															'poster': {},
+														};
+														articleMediaRaw.forEach((uploadedItemTwo) => {
+															if (
+																mediaSetItemRaw.UploadVideoPosterImage ===
+																uploadedItemTwo._id &&
+																uploadedItemTwo.url &&
+																uploadedItemTwo.ext &&
+																uploadedItemTwo.hash &&
+																uploadedItemTwo.mime &&
+																uploadedItemTwo
+																	.alternativeText &&
+																uploadedItemTwo.caption &&
+																uploadedItemTwo.width &&
+																uploadedItemTwo.height
+															) {
+																thisMediaItem.poster = {
+																	'objectType':
+																		'image',
+																	'key':
+																		uploadedItemTwo._id,
+																	'ext':
+																		uploadedItemTwo.ext,
+																	'hash':
+																		uploadedItemTwo
+																			.hash,
+																	'url':
+																		uploadedItemTwo.url,
+																	'type':
+																		returnMediaType({
+																			'mime':
+																				uploadedItemTwo
+																					.mime,
+																		}),
+																	'alternativeText':
+																		uploadedItemTwo
+																			.alternativeText,
+																	'credit':
+																		uploadedItemTwo
+																			.caption,
+																	'width':
+																		uploadedItemTwo
+																			.width,
+																	'height':
+																		uploadedItemTwo
+																			.height,
+																};
+															}
+														});
+														thisIntermediateMediaSet.items
+															.push(thisMediaItem);
+													}
+												});
+											}
+										}
+									});
+							});
+					}
+				}
+				articleIntermedate.unifiedBody.push({
+					'type': 'mediaSet',
+					'key': thisMediaSetRaw._id,
+					'mediaSet': thisIntermediateMediaSet,
+				});
 			}
 		});
 	}
@@ -1115,6 +1336,32 @@ const returnArticleRendered = ({ content }) => {
 					}),
 					'credits': renderedCaptions,
 				});
+			}
+			if (unifiedBodyPart.type === 'mediaSet') {
+				const renderedCredits = [];
+				unifiedBodyPart.mediaSet.items.forEach((item) => {
+					renderedCredits.push(returnSimpleHTMLFromMarkdown({
+						'content': item.credit,
+						'options': {
+							'removeEndCapTags': true,
+						},
+					}));
+				});
+				const thisBodyPart = {
+					'type': unifiedBodyPart.type,
+					'key': unifiedBodyPart.key,
+					'credits': renderedCredits,
+					'items': unifiedBodyPart.mediaSet.items,
+				};
+				if (unifiedBodyPart.mediaSet.caption) {
+					thisBodyPart.caption = returnSimpleHTMLFromMarkdown({
+						'content': unifiedBodyPart.mediaSet.caption,
+						'options': {
+							'removeEndCapTags': true,
+						},
+					});
+				}
+				articleRendered.mainContent.unifiedBody.push(thisBodyPart);
 			}
 		});
 	}
@@ -1595,6 +1842,7 @@ export const returnTransformedArticleScreenContent = ({
 	screenRaw,
 	articleMainRaw,
 	articleSectionsRaw,
+	articleUnifiedBodyMediaSetItemsRaw,
 	articleMediaRaw,
 }) => {
 	// get a transformed version of defaults
@@ -1605,7 +1853,11 @@ export const returnTransformedArticleScreenContent = ({
 	);
 	// get the first, intermediate version of the article's content
 	const articleIntermedate = returnArticleIntermediate({
-		defaults, articleMainRaw, articleSectionsRaw, articleMediaRaw,
+		defaults,
+		articleMainRaw,
+		articleSectionsRaw,
+		articleUnifiedBodyMediaSetItemsRaw,
+		articleMediaRaw,
 	});
 	// get the rendered version of the article's content
 	const articleRendered = returnArticleRendered({

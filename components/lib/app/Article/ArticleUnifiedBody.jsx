@@ -4,7 +4,6 @@ import { deviceWidthQuery, color } from '@jbkr/style-service';
 import { Button } from '../../core/Button/Button';
 import { MediaItem } from '../Common/MediaItem';
 
-
 const ArticleUnifiedBodyContainer = styled.div`
 	pre[class^="language"] {
 		margin-bottom: 3rem;
@@ -54,6 +53,26 @@ const MediaItemContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
+	}
+	iframe {
+		width: 100%;
+		height: 100%;
+	}
+`;
+const YouTubeContainer = styled.div`
+	position: relative;
+	max-width: 100%;
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	iframe,
+	object,
+	embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 `;
 const MediaSetCaptionContainer = styled.figcaption`
@@ -161,6 +180,140 @@ export const ArticleUnifiedBody = ({ parts }) => (
 															'video': mediaItem,
 														}}
 													/>
+												</MediaItemContainer>
+											);
+										}
+									}
+								)
+							}
+							<MediaSetCaptionContainer>
+								<Copy
+									kind="copy-container--article--body--image-caption"
+								>
+									<MediaSetCaptionTextContainer
+										dangerouslySetInnerHTML={{
+											'__html': part.caption
+										}}
+									/>&nbsp;&mdash;&nbsp;
+									{
+										part.credits.map((
+											creditValue,
+											creditIndex
+										) =>
+											<MediaSetCaptionCreditContainer
+												key={`media-credit-${creditIndex}`}
+												dangerouslySetInnerHTML={{
+													'__html':
+														creditIndex + 1 <
+														part.credits.length ?
+														creditValue + '&nbsp;' :
+														creditValue
+												}}
+											/>
+										)
+									}
+								</Copy>
+							</MediaSetCaptionContainer>
+						</MediaSetContainer>
+					);
+				}
+				if (part.type === 'mediaSet') {
+					return (
+						<MediaSetContainer
+							key={part.key}
+						>
+							{
+								part.items
+									.map((mediaItem) => {
+										if (mediaItem.objectType === 'image') {
+											return (
+												<MediaItemContainer
+													key={mediaItem.key}
+												>
+													<MediaItem
+														category="image"
+														specs={mediaItem}
+													/>
+												</MediaItemContainer>
+											);
+										}
+										/* if (mediaItem.objectType === 'video') {
+											return (
+												<MediaItemContainer
+													key={mediaItem.key}
+												>
+													<MediaItem
+														category="video"
+														specs={{
+															'video': mediaItem,
+														}}
+													/>
+												</MediaItemContainer>
+											);
+										}
+										if (mediaItem.objectType === 'CodeSandbox') {
+											let constructedURL = `https://codesandbox.io/embed/${mediaItem.urlFragment}?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&hidedevtools=1`;
+											if (mediaItem.file) {
+												constructedURL += `&module=${encodeURIComponent(mediaItem.file)}`;
+											} else {
+												constructedURL += '&view=preview';
+											}
+											return (
+												<MediaItemContainer
+													key={mediaItem.key}
+												>
+													<CodeEmbedContainer>
+														<CodeEmbedIframe
+															src={constructedURL}
+															title={part.accessibilityTitle}
+															allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+															sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+														/>
+													</CodeEmbedContainer>
+													<CodeEditButtonContainer>
+														<Button
+															size="standard"
+															surfaceStyle="filled"
+															contextColor="onDark"
+															text="Edit on CodeSandbox"
+															iconAfter="open-new-tab"
+															url={constructedURL}
+														/>
+													</CodeEditButtonContainer>
+												</MediaItemContainer>
+											);
+										} */
+										if (mediaItem.objectType === 'YouTube') {
+											return (
+												<MediaItemContainer
+													key={mediaItem.key}
+												>
+													<YouTubeContainer>
+														<iframe
+															src={`https://www.youtube.com/embed/${mediaItem.urlFragment}`}
+															title={mediaItem.accessibilityTitle}
+															frameborder="0"
+															allowfullscreen
+														></iframe>
+													</YouTubeContainer>
+												</MediaItemContainer>
+											);
+										}
+										if (mediaItem.objectType === 'Twitter') {
+											return (
+												<MediaItemContainer
+													key={mediaItem.key}
+												>
+													<blockquote
+														className="twitter-tweet"
+													>
+														<a
+															href={
+																`https://twitter.com/x/status/${mediaItem.urlFragment}`
+															}
+														/>
+													</blockquote>
+
 												</MediaItemContainer>
 											);
 										}
