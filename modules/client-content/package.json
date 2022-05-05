@@ -8,6 +8,7 @@
 	"type": "module",
 	"dependencies": {
 		"@jbkr/db-client": "0.1.106",
+		"@jbkr/twitter-client": "0.1.0",
 		"bson": "^4.5.1",
 		"github-slugger": "^1.4.0",
 		"hast-util-to-string": "^2.0.0",

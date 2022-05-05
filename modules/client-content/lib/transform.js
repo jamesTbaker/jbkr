@@ -543,6 +543,7 @@ const returnArticleIntermediate = ({
 	articleSectionsRaw,
 	articleUnifiedBodyMediaSetItemsRaw,
 	articleMediaRaw,
+	articleTweetsRaw,
 }) => {
 	// set up container for all sections
 	const sectionsIntermediate = [];
@@ -940,6 +941,19 @@ const returnArticleIntermediate = ({
 													thisMediaItem.file =
 														mediaSetItemRaw
 															.EmbedCodeFile;
+												}
+												if (
+													mediaSetItemRaw.Type ===
+													'Twitter'
+												) {
+													thisMediaItem.tweetData =
+														articleTweetsRaw.find(
+															(articleTweetRaw) =>
+																articleTweetRaw
+																	.id ===
+																thisMediaItem
+																	.urlFragment,
+														);
 												}
 												thisIntermediateMediaSet.items
 													.push(thisMediaItem);
@@ -1844,6 +1858,7 @@ export const returnTransformedArticleScreenContent = ({
 	articleSectionsRaw,
 	articleUnifiedBodyMediaSetItemsRaw,
 	articleMediaRaw,
+	articleTweetsRaw,
 }) => {
 	// get a transformed version of defaults
 	const defaults = returnDefaultValuesObject({ defaultsRaw });
@@ -1858,6 +1873,7 @@ export const returnTransformedArticleScreenContent = ({
 		articleSectionsRaw,
 		articleUnifiedBodyMediaSetItemsRaw,
 		articleMediaRaw,
+		articleTweetsRaw,
 	});
 	// get the rendered version of the article's content
 	const articleRendered = returnArticleRendered({

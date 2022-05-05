@@ -82,6 +82,7 @@ export const returnArticleScreenContent = async ({ slug }) => {
 			'articleUnifiedBodyMediaSetItemsRaw':
 				articlePartsRaw.articleUnifiedBodyMediaSetItemsRaw,
 			'articleMediaRaw': articlePartsRaw.articleMediaRaw,
+			'articleTweetsRaw': articlePartsRaw.articleTweetsRaw,
 		});
 	// return the transformed data
 	return articleScreenContent;

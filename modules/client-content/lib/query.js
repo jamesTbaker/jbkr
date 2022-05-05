@@ -1,5 +1,6 @@
 import { ObjectID } from 'bson';
 import { returnDatabaseConnection } from '@jbkr/db-client';
+import { returnAllTweets } from '@jbkr/twitter-client';
 
 export const returnDefaultValuesFromDB = async () => {
 	// attempt to get the data
@@ -670,9 +671,11 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 		articleUnifiedBodyMediaSetItemsRaw = JSON.parse(
 			JSON.stringify(articleUnifiedBodyMediaSetItemsRaw),
 		);
+		// set up containers for media item IDs
+		const articleMediaIDs = [];
+		const articleTweetIDs = [];
 		// get the IDs of any uploaded media items in this
 		//		article's sections' subsections
-		const articleMediaIDs = [];
 		articleSectionsRaw.forEach((sectionObject) => {
 			sectionObject.Subsections.forEach((subsectionObject) => {
 				subsectionObject.SubsectionMedia
@@ -683,6 +686,7 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					});
 			});
 		});
+
 		// get the IDs of any uploaded media items in this
 		//		article's unified body
 		articleUnifiedBodyMediaSetItemsRaw.forEach((mediaItemRaw) => {
@@ -698,6 +702,9 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						new ObjectID(mediaItemRaw.UploadVideoPosterImage),
 					);
 				}
+			}
+			if (mediaItemRaw.Type === 'Twitter') {
+				articleTweetIDs.push(mediaItemRaw.EmbedURLFragment);
 			}
 		});
 		// get the raw data for this article's sections's
@@ -721,12 +728,16 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 			).toArray();
 		// serialize and deserialize returned data, converting BSON to JSON
 		articleMediaRaw = JSON.parse(JSON.stringify(articleMediaRaw));
+		let articleTweetsRaw = await returnAllTweets({
+			'tweetsIDs': articleTweetIDs,
+		});
 		// return result all 3 results
 		return {
 			articleMainRaw,
 			articleSectionsRaw,
 			articleUnifiedBodyMediaSetItemsRaw,
 			articleMediaRaw,
+			articleTweetsRaw,
 		};
 		// if an error occurred
 	} catch (error) {
