@@ -3,17 +3,36 @@ import { deviceWidthQuery, color } from '@jbkr/style-service';
 import { TwitterItem } from '@jbkr/components';
 
 
+const BodyEmulation = styled.div`
+	/* ${deviceWidthQuery.only({ 'width': 's' })} {
+		height: 812px;
+	}
+	${deviceWidthQuery.not({ 'width': 's' })} {
+		text-align: center;
+		height: 1024px;
+	} */
+	padding: 4rem;
+	background-color: ${color({
+	'kind': 'Neutral',
+	'tone': 'Finch',
+	'level': 37,
+	'format': 'string',
+})
+	};
+`;
 export default {
 	'title': 'App / TwitterItem',
 	'component': TwitterItem,
 	'parameters': {
-		'layout': 'padded',
+		'layout': 'fullscreen',
 	},
 };
 const Template = (args) => (
-	<TwitterItem
-		{...args}
-	/>
+	<BodyEmulation>
+		<TwitterItem
+			{...args}
+		/>
+	</BodyEmulation>
 );
 export const General = Template.bind({});
 General.args = {
