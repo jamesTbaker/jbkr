@@ -26,6 +26,7 @@ export { ScreenTitlePrimary } from './lib/app/Common/ScreenTitlePrimary.jsx';
 export { ScreenTitleSecondary } from './lib/app/Common/ScreenTitleSecondary.jsx';
 export { Spinner } from './lib/app/Common/Spinner.jsx';
 export { VideoItem } from './lib/app/Common/VideoItem.jsx';
+export { TwitterItem } from './lib/app/Common/TwitterItem.jsx';
 
 // App - Contact
 export { Contact } from './lib/app/Contact/Contact.jsx';

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Copy } from '../../core/Copy/Copy';
 import { deviceWidthQuery, color } from '@jbkr/style-service';
-import { Button } from '../../core/Button/Button';
 import { MediaItem } from '../Common/MediaItem';
 
 const ArticleUnifiedBodyContainer = styled.div`
@@ -12,33 +11,6 @@ const ArticleUnifiedBodyContainer = styled.div`
 		pre[class^="language"] {
 			font-size: 80%;
 		}
-	}
-`;
-const CodeEmbedContainer = styled.figure`
-	${deviceWidthQuery.only({ 'width': 's' })} {
-		display: none;
-	}
-	${deviceWidthQuery.not({ 'width': 's' })} {
-		margin: 0 0 3rem;
-	}
-`;
-const CodeEmbedIframe = styled.iframe`
-	width: 100%;
-	height: 62rem;
-	border: 0;
-	border-radius: .375rem;
-	overflow:hidden;
-	margin-bottom: 1rem;
-`;
-const CodeEmbedCaption = styled.figcaption`
-	font-size: 1.375rem;
-`;
-const CodeEditButtonContainer = styled.div`
-	${deviceWidthQuery.only({ 'width': 's' })} {
-		margin: 0 0 3rem;
-	}
-	${deviceWidthQuery.not({ 'width': 's' })} {
-		display: none;
 	}
 `;
 const MediaSetContainer = styled.figure`
@@ -53,26 +25,6 @@ const MediaItemContainer = styled.div`
 	${deviceWidthQuery.only({ 'width': 's' })} {
 	}
 	${deviceWidthQuery.not({ 'width': 's' })} {
-	}
-	iframe {
-		width: 100%;
-		height: 100%;
-	}
-`;
-const YouTubeContainer = styled.div`
-	position: relative;
-	max-width: 100%;
-	height: 0;
-	overflow: hidden;
-	padding-bottom: 56.25%;
-	iframe,
-	object,
-	embed {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
 	}
 `;
 const MediaSetCaptionContainer = styled.figcaption`
@@ -96,7 +48,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 	<ArticleUnifiedBodyContainer>
 		{
 			parts.map((part) => {
-				if (part.type === 'text') {
+				/* if (part.type === 'text') {
 					return (
 						<Copy
 							kind="copy-container--standard"
@@ -104,119 +56,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 							key={part.key}
 						/>
 					);
-				}
-				if (part.type === 'codeEmbed') {
-					let constructedURL = `${part.url}?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&hidedevtools=1`;
-					if (part.file) {
-						constructedURL += `&module=${encodeURIComponent(part.file)}`;
-					} else {
-						constructedURL += '&view=preview';
-					}
-					return (
-						<div
-							key={part.key}
-						>
-							<CodeEmbedContainer>
-								<CodeEmbedIframe
-									src={constructedURL}
-									title={part.accessibilityTitle}
-									allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-									sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-								/>
-								<CodeEmbedCaption>
-									<Copy
-										kind="copy-container--standard"
-										htmlContent={part.caption}
-									/>
-								</CodeEmbedCaption>
-							</CodeEmbedContainer>
-							<CodeEditButtonContainer>
-								<Button
-									size="standard"
-									surfaceStyle="filled"
-									contextColor="onDark"
-									text="Edit on CodeSandbox"
-									iconAfter="open-new-tab"
-									url={constructedURL}
-								/>
-							</CodeEditButtonContainer>
-						</div>
-					);
-				}
-				if (part.type === 'media') {
-					return (
-						<MediaSetContainer
-							key={part.key}
-						>
-							{
-								part.media
-									.map((mediaItem) => {
-										if (
-											['webp', 'png', 'jpeg', 'gif']
-												.includes(mediaItem.type)
-										) {
-											return (
-												<MediaItemContainer
-													key={mediaItem.key}
-												>
-													<MediaItem
-														category="image"
-														specs={mediaItem}
-													/>
-												</MediaItemContainer>
-											);
-										}
-										if (
-											['webm', 'mp4']
-												.includes(mediaItem.type)
-										) {
-											return (
-												<MediaItemContainer
-													key={mediaItem.key}
-												>
-													<MediaItem
-														category="video"
-														specs={{
-															'video': mediaItem,
-														}}
-													/>
-												</MediaItemContainer>
-											);
-										}
-									}
-								)
-							}
-							<MediaSetCaptionContainer>
-								<Copy
-									kind="copy-container--article--body--image-caption"
-								>
-									<MediaSetCaptionTextContainer
-										dangerouslySetInnerHTML={{
-											'__html': part.caption
-										}}
-									/>&nbsp;&mdash;&nbsp;
-									{
-										part.credits.map((
-											creditValue,
-											creditIndex
-										) =>
-											<MediaSetCaptionCreditContainer
-												key={`media-credit-${creditIndex}`}
-												dangerouslySetInnerHTML={{
-													'__html':
-														creditIndex + 1 <
-														part.credits.length ?
-														creditValue + '&nbsp;' :
-														creditValue
-												}}
-											/>
-										)
-									}
-								</Copy>
-							</MediaSetCaptionContainer>
-						</MediaSetContainer>
-					);
-				}
+				} */
 				if (part.type === 'mediaSet') {
 					return (
 						<MediaSetContainer
@@ -225,7 +65,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 							{
 								part.items
 									.map((mediaItem) => {
-										if (mediaItem.objectType === 'image') {
+										/* if (mediaItem.objectType === 'image') {
 											return (
 												<MediaItemContainer
 													key={mediaItem.key}
@@ -237,7 +77,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 												</MediaItemContainer>
 											);
 										}
-										/* if (mediaItem.objectType === 'video') {
+										if (mediaItem.objectType === 'video') {
 											return (
 												<MediaItemContainer
 													key={mediaItem.key}
@@ -251,69 +91,49 @@ export const ArticleUnifiedBody = ({ parts }) => (
 												</MediaItemContainer>
 											);
 										}
-										if (mediaItem.objectType === 'CodeSandbox') {
-											let constructedURL = `https://codesandbox.io/embed/${mediaItem.urlFragment}?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&hidedevtools=1`;
-											if (mediaItem.file) {
-												constructedURL += `&module=${encodeURIComponent(mediaItem.file)}`;
-											} else {
-												constructedURL += '&view=preview';
-											}
-											return (
-												<MediaItemContainer
-													key={mediaItem.key}
-												>
-													<CodeEmbedContainer>
-														<CodeEmbedIframe
-															src={constructedURL}
-															title={part.accessibilityTitle}
-															allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-															sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-														/>
-													</CodeEmbedContainer>
-													<CodeEditButtonContainer>
-														<Button
-															size="standard"
-															surfaceStyle="filled"
-															contextColor="onDark"
-															text="Edit on CodeSandbox"
-															iconAfter="open-new-tab"
-															url={constructedURL}
-														/>
-													</CodeEditButtonContainer>
-												</MediaItemContainer>
-											);
-										} */
 										if (mediaItem.objectType === 'YouTube') {
 											return (
 												<MediaItemContainer
 													key={mediaItem.key}
 												>
-													<YouTubeContainer>
-														<iframe
-															src={`https://www.youtube.com/embed/${mediaItem.urlFragment}`}
-															title={mediaItem.accessibilityTitle}
-															frameborder="0"
-															allowfullscreen
-														></iframe>
-													</YouTubeContainer>
+													<MediaItem
+														category="youtube"
+														specs={{
+															'id': mediaItem.urlFragment,
+															'title': mediaItem.accessibilityTitle,
+														}}
+													/>
 												</MediaItemContainer>
 											);
 										}
+										if (mediaItem.objectType === 'CodeSandbox') {
+											return (
+												<MediaItemContainer
+													key={mediaItem.key}
+												>
+													<MediaItem
+														category="codesandbox"
+														specs={{
+															'id': mediaItem.urlFragment,
+															'file': mediaItem.file,
+															'title': mediaItem.accessibilityTitle,
+														}}
+													/>
+												</MediaItemContainer>
+											);
+										} */
 										if (mediaItem.objectType === 'Twitter') {
 											return (
 												<MediaItemContainer
 													key={mediaItem.key}
 												>
-													<blockquote
-														className="twitter-tweet"
-													>
-														<a
-															href={
-																`https://twitter.com/x/status/${mediaItem.urlFragment}`
-															}
-														/>
-													</blockquote>
-
+													<MediaItem
+														category="twitter"
+														specs={{
+															'title': mediaItem.accessibilityTitle,
+															...mediaItem.tweetData,
+														}}
+													/>
 												</MediaItemContainer>
 											);
 										}
