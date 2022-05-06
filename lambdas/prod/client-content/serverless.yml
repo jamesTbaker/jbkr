@@ -68,7 +68,7 @@ org: ${self:custom.file.custom.config.org}
 app: ${self:custom.config.app}
 service: ${self:custom.config.service}
 provider:
-  name: ${self:custom.file.provider.name}
+  name: aws
   runtime: ${self:custom.file.provider.runtime}
   stage: ${self:custom.file.custom.config.stage}
   lambdaHashingVersion: '20201221'
@@ -85,6 +85,11 @@ provider:
     mongoDbPass: ${self:custom.file.mongoDbPass}
     mongoDbUser: ${self:custom.file.mongoDbUser}
     mongoDbDbName: ${self:custom.file.mongoDbDbName}
+    twitterConsumerKey: ${self.custom.file.twitterConsumerKey}
+    twitterConsumerSecret: ${self.custom.file.twitterConsumerSecret}
+    twitterAccessToken: ${self.custom.file.twitterAccessToken}
+    twitterTokenSecret: ${self.custom.file.twitterTokenSecret}
+    twitterBearerToken: ${self:custom.file.twitterBearerToken}
     simpleAuthKey: ${self:custom.file.simpleAuthKey}
 package:
   individually: true

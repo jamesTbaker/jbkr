@@ -15,6 +15,11 @@ mongoDbHost: ${ssm:mongodb-host}
 mongoDbPass: ${ssm:mongodb-pass}
 mongoDbUser: ${ssm:mongodb-user}
 mongoDbDbName: ${ssm:mongodb-db-name}
+twitterConsumerKey: ${ssm:twitter-consumer-key}
+twitterConsumerSecret: ${ssm:twitter-consumer-secret}
+twitterAccessToken: ${ssm:twitter-access-token}
+twitterTokenSecret: ${ssm:twitter-token-secret}
+twitterBearerToken: ${ssm:twitter-bearer-token}
 simpleAuthKey: ${ssm:simple-auth-key}
 endpoints:
   content:

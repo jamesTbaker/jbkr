@@ -3,9 +3,11 @@ import { format } from 'date-fns';
 
 
 export const returnAllTweets = async ({ tweetsIDs }) => {
-	if (tweetsIDs.length === 0) {
+	if (tweetsIDs && tweetsIDs.length === 0) {
 		return [];
 	}
+	console.log(`------------- ${process.env.twitterBearerToken}`);
+	console.log(`------------- ${process.env.mongoDbPass}`);
 	const urlSearchParamaters = new URLSearchParams({
 		'ids': tweetsIDs.join(','),
 		'tweet.fields': 'attachments,author_id,public_metrics,created_at,' +
