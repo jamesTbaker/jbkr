@@ -261,41 +261,6 @@ const returnFormattedDateString = ({
 	// return the container
 	return dateString;
 };
-/* const returnTableOfContentsContent = ({ headings }) => {
-	// construct markdown table of contents; it's easiest to do before
-	// transforming to html because markdown doesn't require us to close one
-	// tag, e.g., a nested </ol>, prior to creating another, e.g., a <li>
-	// set up container for markdown content
-	let markdownHeadingsList = '';
-	// for each heading
-	headings.forEach((heading) => {
-		// set a default list item preface for this heading, and indent it more
-		// for lower level headings
-		let listItemPreface = `1. `;
-		if (heading.level === 3) {
-			listItemPreface = `    ${listItemPreface}`;
-		}
-		if (heading.level === 4) {
-			listItemPreface = `        ${listItemPreface}`;
-		}
-		if (heading.level === 5) {
-			listItemPreface = `            ${listItemPreface}`;
-		}
-		if (heading.level === 6) {
-			listItemPreface = `                ${listItemPreface}`;
-		}
-		// add to the container of markdown content a slug-linked heading as
-		// a list item
-		markdownHeadingsList +=
-			`${listItemPreface}[${heading.content}](#${heading.slug})\n`;
-	});
-	// get an html version of the markdown headings list
-	const htmlHeadingsList = returnSimpleHTMLFromMarkdown({
-		'content': markdownHeadingsList,
-	});
-	// return the html version of the headings list
-	return htmlHeadingsList;
-}; */
 const returnTransformedScreenContent = ({ defaults, screenID, screenRaw }) => {
 	// set up container for the screen's rendered content and
 	// add properties to it as appropriate
@@ -813,72 +778,6 @@ const returnArticleIntermediate = ({
 					}
 				});
 			}
-			/* if (
-				unifiedBodyPart.kind ===
-				'ComponentContentAubCodeEmbed'
-			) {
-				articleMainRaw.UnifiedBodyCodeEmbeds
-					.forEach((unifiedBodyCodeEmbed) => {
-						if (unifiedBodyCodeEmbed._id === thisPartID) {
-							articleIntermedate.unifiedBody.push({
-								'type': 'codeEmbed',
-								'key': unifiedBodyCodeEmbed._id,
-								'accessibilityTitle':
-									unifiedBodyCodeEmbed.AccessibilityTitle,
-								'url': unifiedBodyCodeEmbed.URL,
-								'file': unifiedBodyCodeEmbed.File,
-								'caption': unifiedBodyCodeEmbed.Caption,
-							});
-						}
-					});
-			}
-			if (
-				unifiedBodyPart.kind ===
-				'ComponentContentAubMedia'
-			) {
-				articleMainRaw.UnifiedBodyMediaItems
-					.forEach((unifiedBodyMediaItemSet) => {
-						if (unifiedBodyMediaItemSet._id === thisPartID) {
-							const mediaItemIDsThisPart = [];
-							unifiedBodyMediaItemSet.Files.
-								forEach((mediaItemID) => {
-									mediaItemIDsThisPart.push(mediaItemID);
-								});
-							const mediaItemsThisPart = [];
-							const mediaItemCreditsThisPart = [];
-							mediaItemIDsThisPart.forEach((mediaItemID) => {
-								articleMediaRaw.forEach((mediaItem) => {
-									if (mediaItem._id === mediaItemID) {
-										mediaItemCreditsThisPart.push(
-											mediaItem.caption,
-										);
-										mediaItemsThisPart.push({
-											'key': mediaItem._id,
-											'ext': mediaItem.ext,
-											'hash': mediaItem.hash,
-											'url': mediaItem.url,
-											'type': returnMediaType({
-												'mime': mediaItem.mime,
-											}),
-											'alternativeText':
-												mediaItem.alternativeText,
-											'credit': mediaItem.caption,
-											'width': mediaItem.width,
-											'height': mediaItem.height,
-										});
-									}
-								});
-							});
-							articleIntermedate.unifiedBody.push({
-								'type': 'media',
-								'key': unifiedBodyMediaItemSet._id,
-								'media': mediaItemsThisPart,
-								'caption': unifiedBodyMediaItemSet.Caption,
-								'credits': mediaItemCreditsThisPart,
-							});
-						}
-					});
-			} */
 			if (
 				unifiedBodyPart.kind === 'ComponentContentAubMediaSet'
 			) {
@@ -1311,44 +1210,6 @@ const returnArticleRendered = ({ content }) => {
 					'text': returnSluggifiedHTMLFromMarkdown({
 						'content': unifiedBodyPart.text,
 					}),
-				});
-			}
-			if (unifiedBodyPart.type === 'codeEmbed') {
-				articleRendered.mainContent.unifiedBody.push({
-					'type': unifiedBodyPart.type,
-					'key': unifiedBodyPart.key,
-					'accessibilityTitle': unifiedBodyPart.accessibilityTitle,
-					'url': unifiedBodyPart.url,
-					'file': unifiedBodyPart.file,
-					'caption': returnSimpleHTMLFromMarkdown({
-						'content': unifiedBodyPart.caption,
-						'options': {
-							'removeEndCapTags': true,
-						},
-					}),
-				});
-			}
-			if (unifiedBodyPart.type === 'media') {
-				const renderedCaptions = [];
-				unifiedBodyPart.credits.forEach((credit) => {
-					renderedCaptions.push(returnSimpleHTMLFromMarkdown({
-						'content': credit,
-						'options': {
-							'removeEndCapTags': true,
-						},
-					}));
-				});
-				articleRendered.mainContent.unifiedBody.push({
-					'type': unifiedBodyPart.type,
-					'key': unifiedBodyPart.key,
-					'media': unifiedBodyPart.media,
-					'caption': returnSimpleHTMLFromMarkdown({
-						'content': unifiedBodyPart.caption,
-						'options': {
-							'removeEndCapTags': true,
-						},
-					}),
-					'credits': renderedCaptions,
 				});
 			}
 			if (unifiedBodyPart.type === 'mediaSet') {

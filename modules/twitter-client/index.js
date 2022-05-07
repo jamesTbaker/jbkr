@@ -80,8 +80,12 @@ export const returnAllTweets = async ({ tweetsIDs }) => {
 			);
 			const authorformatted = {
 				'name': authorRaw.name,
-				'pic': authorRaw.profile_image_url,
+				'pic': authorRaw.profile_image_url.replace(
+					'_normal.jpg',
+					'_x96.jpg',
+				),
 				'username': authorRaw.username,
+				'url': `https://twitter.com/${authorRaw.username}`,
 			};
 			if (authorRaw.verified) {
 				authorformatted.verified = true;
@@ -107,12 +111,22 @@ export const returnAllTweets = async ({ tweetsIDs }) => {
 					'authorID': tweetRaw.author_id,
 				}),
 				'stats': {
-					'likes': tweetRaw.public_metrics.like_count,
-					'quotes': tweetRaw.public_metrics.quote_count,
-					'retweets': tweetRaw.public_metrics.retweet_count,
+					'counts': {
+						'likes': tweetRaw.public_metrics.like_count,
+						'replies': tweetRaw.public_metrics.reply_count,
+						'retweets': tweetRaw.public_metrics.retweet_count,
+					},
+					'urls': {
+						'likes': `https://twitter.com/intent/like?tweet_id=${tweetRaw.id}`,
+						'replies': `https://twitter.com/intent/tweet?in_reply_to=${tweetRaw.id}`,
+						'retweets': `https://twitter.com/intent/retweet?tweet_id=${tweetRaw.id}`,
+					},
 				},
-				'text': tweetRaw.text,
+				'text': tweetRaw.text
+					.replace(/https:\/\/[\n\S]+/g, '')
+					.replace('\n', '<br />'),
 			};
+			formattedTweet.url = `https://twitter.com/${formattedTweet.author.username}/status/${tweetRaw.id}`;
 			if (
 				tweetRaw.attachments?.media_keys
 			) {
