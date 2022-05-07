@@ -6,8 +6,6 @@ export const returnAllTweets = async ({ tweetsIDs }) => {
 	if (tweetsIDs && tweetsIDs.length === 0) {
 		return [];
 	}
-	console.log(`------------- ${process.env.twitterBearerToken}`);
-	console.log(`------------- ${process.env.mongoDbPass}`);
 	const urlSearchParamaters = new URLSearchParams({
 		'ids': tweetsIDs.join(','),
 		'tweet.fields': 'attachments,author_id,public_metrics,created_at,' +
@@ -41,6 +39,10 @@ export const returnAllTweets = async ({ tweetsIDs }) => {
 					'width': tweetMediaItemRaw.width,
 					'height': tweetMediaItemRaw.height,
 				};
+				if (tweetMediaItemRaw.alt_text) {
+					tweetMediaItemFormatted.alternativeText =
+						tweetMediaItemRaw.alt_text;
+				}
 			} else if (tweetMediaItemRaw.type === 'video') {
 				const videoRaw = tweetMediaItemRaw.variants.find(
 					(variant) => variant.bit_rate === 1280000,

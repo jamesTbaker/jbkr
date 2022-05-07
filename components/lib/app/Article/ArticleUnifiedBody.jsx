@@ -121,7 +121,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 													/>
 												</MediaItemContainer>
 											);
-										} */
+										}
 										if (mediaItem.objectType === 'Twitter') {
 											return (
 												<MediaItemContainer
@@ -136,7 +136,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 													/>
 												</MediaItemContainer>
 											);
-										}
+										} */
 									}
 								)
 							}
