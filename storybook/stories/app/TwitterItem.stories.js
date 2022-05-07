@@ -55,9 +55,12 @@ TextOnly.args = {
 			'retweets': 18623,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1521611729095983104',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1521611729095983104',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1521611729095983104',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1521611729095983104',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1521611729095983104',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1521611729095983104',
 		},
 	},
 	'text': 'It is no coincidence that the same people who overturn Roe also ' +
@@ -84,9 +87,12 @@ OneImage.args = {
 			'retweets': 2393,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1521791056085680128',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1521791056085680128',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1521791056085680128',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1521791056085680128',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1521791056085680128',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1521791056085680128',
 		},
 	},
 	'text': 'The aircraft carrier USS Gerald R Ford in drydock ' +
@@ -122,9 +128,12 @@ TwoImages.args = {
 			'retweets': 2139,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1521854203483860992',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1521854203483860992',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1521854203483860992',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1521854203483860992',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1521854203483860992',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1521854203483860992',
 		},
 	},
 	'text': 'I joined activists on the steps of the Supreme Court yesterday ' +
@@ -137,6 +146,8 @@ TwoImages.args = {
 			'url': 'https://pbs.twimg.com/media/FR62VQnWUAACgZH.jpg',
 			'width': 900,
 			'height': 1200,
+			'alternativeText': 'Elizabeth Warren wearing a pink jacket while ' +
+				'speaking out for abortion rights at the U.S. Supreme Court.',
 		},
 		{
 			'type': 'photo',
@@ -144,6 +155,9 @@ TwoImages.args = {
 			'url': 'https://pbs.twimg.com/media/FR62VQiXMAA4P3J.jpg',
 			'width': 900,
 			'height': 1200,
+			'alternativeText': 'Elizabeth Warren wearing a pink jacket while ' +
+				'taking a photo with abortion rights protesters at the U.S. ' +
+				'Supreme Court.',
 		},
 	],
 };
@@ -167,9 +181,12 @@ ThreeImages.args = {
 			'retweets': 12,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1522831096181837824',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1522831096181837824',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1522831096181837824',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1522831096181837824',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1522831096181837824',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1522831096181837824',
 		},
 	},
 	'text': 'The ancient castle of Wartburg!\n\nThis Thuringian castle was ' +
@@ -222,9 +239,12 @@ FourImages.args = {
 			'retweets': 9403,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1522641878155468800',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1522641878155468800',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1522641878155468800',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1522641878155468800',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1522641878155468800',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1522641878155468800',
 		},
 	},
 	'text': 'Starbucks is running a scorched earth union busting campaign ' +
@@ -281,9 +301,12 @@ Video.args = {
 			'retweets': 3556,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1522860333853036544',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1522860333853036544',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1522860333853036544',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1522860333853036544',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1522860333853036544',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1522860333853036544',
 		},
 	},
 	'text': 'Kitten realizing it has paws.. 😅\n\n#Caturday',
@@ -321,9 +344,12 @@ GIF.args = {
 			'retweets': 4,
 		},
 		'urls': {
-			'likes': 'https://twitter.com/intent/like?tweet_id=1521748566338940933',
-			'replies': 'https://twitter.com/intent/tweet?in_reply_to=1521748566338940933',
-			'retweets': 'https://twitter.com/intent/retweet?tweet_id=1521748566338940933',
+			'likes': 'https://twitter.com/intent/like?tweet_id=' +
+				'1521748566338940933',
+			'replies': 'https://twitter.com/intent/tweet?in_reply_to=' +
+				'1521748566338940933',
+			'retweets': 'https://twitter.com/intent/retweet?tweet_id=' +
+				'1521748566338940933',
 		},
 	},
 	'text': 'A veces, se nos puede olvidar que todos estos memes que ' +

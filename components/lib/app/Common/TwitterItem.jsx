@@ -150,241 +150,264 @@ const StatsContainer = styled.div`
 `;
 export const TwitterItem = ({
 	id,
+	url,
 	author,
 	createdDate,
 	createdTime,
 	stats,
 	text,
 	media,
-}) => {
-	const authorURL = `https://twitter.com/${author.username}`;
-	const likeURL = `https://twitter.com/intent/like?tweet_id=${id}`;
-	const retweetURL = `https://twitter.com/intent/retweet?tweet_id=${id}`;
-	const tweetURL = `https://twitter.com/${author.username}/status/${id}`;
-	const formattedText = text
-		.replace(/https:\/\/[\n\S]+/g, '')
-		.replace('\n', '<br />');
-	return (
-		<TwitterItemContainer>
-			<Header>
-				<AvatarLinkContainer>
-					<a
-						href={authorURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<img
-							alt={author.username}
-							height={48}
-							width={48}
-							src={author.pic}
-						/>
-					</a>
-				</AvatarLinkContainer>
-				<AccountTextLinkContainer>
-					<AccountTextLink
-						href={authorURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<AccountNameContainer>
-							<Copy
-								kind="twitter--account-name"
-							>
-								{author.name}
-							</Copy>
-							{
-								author.verified &&
-								<AccountVerifiedIconContainer>
-									<Icon
-										size="s"
-										content="twitter-verified"
-										color={color({
-											'kind': 'Brand',
-											'tone': 'Peony',
-											'level': 3,
-											'format': 'string',
-										})}
-										aria-label="Verified account"
-									/>
-								</AccountVerifiedIconContainer>
-							}
-						</AccountNameContainer>
-						<Copy
-							kind="twitter--account-username"
-						>
-							@{author.username}
-						</Copy>
-					</AccountTextLink>
-				</AccountTextLinkContainer>
-				<TwitterLinkContainer>
-					<Button
-						text="View on Twitter"
-						url={tweetURL}
-						surfaceStyle="transparent"
-						iconBefore="twitter"
-						textHidden
-					/>
-				</TwitterLinkContainer>
-			</Header>
-			<Body>
-				{
-					text &&
-					<Copy
-						kind="twitter--body-text"
-						htmlContent={formattedText}
-					/>
-				}
-				{
-					media && media.length === 1 &&
-					media[0].type === 'photo' &&
-					<FullSizeImageContainer
-						images={media}
-						href={tweetURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					/>
-				}
-				{
-					media && media.length === 2 &&
-					<MultipleImagesContainer
-						href={tweetURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<ImageHalfSize
-							image={media[0]}
-							horizontalPosition="left"
-						/>
-						<ImageHalfSize
-							image={media[1]}
-							horizontalPosition="right"
-						/>
-					</MultipleImagesContainer>
-				}
-				{
-					media && media.length === 3 &&
-					<MultipleImagesContainer
-						href={tweetURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<ImageHalfSize
-							image={media[0]}
-							horizontalPosition="left"
-						/>
-						<ImageQuarterSize
-							image={media[1]}
-							horizontalPosition="right"
-							verticalPosition="top"
-						/>
-						<ImageQuarterSize
-							image={media[2]}
-							horizontalPosition="right"
-							verticalPosition="bottom"
-						/>
-					</MultipleImagesContainer>
-				}
-				{
-					media && media.length === 4 &&
-					<MultipleImagesContainer
-						href={tweetURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<ImageQuarterSize
-							image={media[0]}
-							horizontalPosition="left"
-							verticalPosition="top"
-						/>
-						<ImageQuarterSize
-							image={media[1]}
-							horizontalPosition="left"
-							verticalPosition="bottom"
-						/>
-						<ImageQuarterSize
-							image={media[2]}
-							horizontalPosition="right"
-							verticalPosition="top"
-						/>
-						<ImageQuarterSize
-							image={media[3]}
-							horizontalPosition="right"
-							verticalPosition="bottom"
-						/>
-					</MultipleImagesContainer>
-				}
-				{
-					media && media.length === 1 &&
-					media[0].type === 'video' &&
-					<VideoContainer>
-						<MediaItem
-							category="video"
-							specs={{
-								'video': {
-									'url': media[0].url,
-									'type': media[0].mimeTye.replace('video/', ''),
-								},
-								'poster': {
-									'url': media[0].posterImage,
-								}
-							}}
-						/>
-					</VideoContainer>
-				}
-				{
-					media && media.length === 1 &&
-					media[0].type === 'animated_gif' &&
-					<GIFContainer
-						href={tweetURL}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<video
-							autoplay="true"
-							muted="true"
-							disablepictureinpicture="true"
-							loop="true"
-							preload="auto"
-							playsinline="true"
-							src={media[0].url}
-							poster={media[0].posterImage}
-							type={media[0].mimeTye}
-						></video>
-					</GIFContainer>
-				}
-			</Body>
-			<Footer>
-				<Copy
-					kind="twitter--date-time"
+}) => (
+	<TwitterItemContainer>
+		<Header>
+			<AvatarLinkContainer>
+				<a
+					href={author.url}
+					target="_blank"
+					rel="noopener noreferrer"
 				>
-					{createdDate} &bull; {createdTime}
-				</Copy>
-				<StatsContainer>
-					<Button
-						text={stats.retweets}
-						url={retweetURL}
-						surfaceStyle="transparent"
-						iconBefore="twitter-retweet"
-						size="small"
+					<img
+						alt={author.username}
+						height={48}
+						width={48}
+						src={author.pic}
 					/>
-					<Button
-						text={stats.likes}
-						url={likeURL}
-						surfaceStyle="transparent"
-						iconBefore="twitter-like"
-						size="small"
+				</a>
+			</AvatarLinkContainer>
+			<AccountTextLinkContainer>
+				<AccountTextLink
+					href={author.url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<AccountNameContainer>
+						<Copy
+							kind="twitter--account-name"
+						>
+							{author.name}
+						</Copy>
+						{
+							author.verified &&
+							<AccountVerifiedIconContainer>
+								<Icon
+									size="s"
+									content="twitter-verified"
+									color={color({
+										'kind': 'Brand',
+										'tone': 'Peony',
+										'level': 3,
+										'format': 'string',
+									})}
+									aria-label="Verified account"
+								/>
+							</AccountVerifiedIconContainer>
+						}
+					</AccountNameContainer>
+					<Copy
+						kind="twitter--account-username"
+					>
+						@{author.username}
+					</Copy>
+				</AccountTextLink>
+			</AccountTextLinkContainer>
+			<TwitterLinkContainer>
+				<Button
+					text="View on Twitter"
+					url={url}
+					surfaceStyle="transparent"
+					iconBefore="twitter"
+					textHidden
+				/>
+			</TwitterLinkContainer>
+		</Header>
+		<Body>
+			{
+				text &&
+				<Copy
+					kind="twitter--body-text"
+					htmlContent={text}
+				/>
+			}
+			{
+				media && media.length === 1 &&
+				media[0].type === 'photo' &&
+				<FullSizeImageContainer
+					images={media}
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label={media[0].alternativeText ?
+					media[0].alternativeText : 'Image'}
+				/>
+			}
+			{
+				media && media.length === 2 &&
+				<MultipleImagesContainer
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<ImageHalfSize
+						image={media[0]}
+						horizontalPosition="left"
+						aria-label={media[0].alternativeText ?
+						media[0].alternativeText : 'Image'}
 					/>
-				</StatsContainer>
-			</Footer>
-		</TwitterItemContainer>
-	);
-};
+					<ImageHalfSize
+						image={media[1]}
+						horizontalPosition="right"
+						aria-label={media[1].alternativeText ?
+						media[1].alternativeText : 'Image'}
+					/>
+				</MultipleImagesContainer>
+			}
+			{
+				media && media.length === 3 &&
+				<MultipleImagesContainer
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<ImageHalfSize
+						image={media[0]}
+						horizontalPosition="left"
+						aria-label={media[0].alternativeText ?
+						media[0].alternativeText : 'Image'}
+					/>
+					<ImageQuarterSize
+						image={media[1]}
+						horizontalPosition="right"
+						verticalPosition="top"
+						aria-label={media[1].alternativeText ?
+						media[1].alternativeText : 'Image'}
+					/>
+					<ImageQuarterSize
+						image={media[2]}
+						horizontalPosition="right"
+						verticalPosition="bottom"
+						aria-label={media[2].alternativeText ?
+						media[2].alternativeText : 'Image'}
+					/>
+				</MultipleImagesContainer>
+			}
+			{
+				media && media.length === 4 &&
+				<MultipleImagesContainer
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<ImageQuarterSize
+						image={media[0]}
+						horizontalPosition="left"
+						verticalPosition="top"
+						aria-label={media[0].alternativeText ?
+						media[0].alternativeText : 'Image'}
+					/>
+					<ImageQuarterSize
+						image={media[1]}
+						horizontalPosition="left"
+						verticalPosition="bottom"
+						aria-label={media[1].alternativeText ?
+						media[1].alternativeText : 'Image'}
+					/>
+					<ImageQuarterSize
+						image={media[2]}
+						horizontalPosition="right"
+						verticalPosition="top"
+						aria-label={media[2].alternativeText ?
+						media[2].alternativeText : 'Image'}
+					/>
+					<ImageQuarterSize
+						image={media[3]}
+						horizontalPosition="right"
+						verticalPosition="bottom"
+						aria-label={media[3].alternativeText ?
+						media[3].alternativeText : 'Image'}
+					/>
+				</MultipleImagesContainer>
+			}
+			{
+				media && media.length === 1 &&
+				media[0].type === 'video' &&
+				<VideoContainer>
+					<MediaItem
+						category="video"
+						specs={{
+							'video': {
+								'url': media[0].url,
+								'type': media[0].mimeTye.replace('video/', ''),
+							},
+							'poster': {
+								'url': media[0].posterImage,
+							}
+						}}
+					/>
+				</VideoContainer>
+			}
+			{
+				media && media.length === 1 &&
+				media[0].type === 'animated_gif' &&
+				<GIFContainer
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<video
+						autoplay="true"
+						muted="true"
+						disablepictureinpicture="true"
+						loop="true"
+						preload="auto"
+						playsinline="true"
+						src={media[0].url}
+						poster={media[0].posterImage}
+						type={media[0].mimeTye}
+					></video>
+				</GIFContainer>
+			}
+		</Body>
+		<Footer>
+			<Copy
+				kind="twitter--date-time"
+			>
+				{createdDate} &bull; {createdTime}
+			</Copy>
+			<StatsContainer>
+				<Button
+					text={stats.counts.retweets.toString()}
+					url={stats.urls.retweets}
+					surfaceStyle="transparent"
+					iconBefore="twitter-retweet"
+					size="small"
+				/>
+				<Button
+					text={stats.counts.replies.toString()}
+					url={stats.urls.replies}
+					surfaceStyle="transparent"
+					iconBefore="twitter-retweet"
+					size="small"
+				/>
+				<Button
+					text={stats.counts.likes.toString()}
+					url={stats.urls.likes}
+					surfaceStyle="transparent"
+					iconBefore="twitter-like"
+					size="small"
+				/>
+			</StatsContainer>
+		</Footer>
+	</TwitterItemContainer>
+);
 TwitterItem.propTypes = {
 	/**
 	 * Tweet's ID.
 	 */
 	'id': PropTypes.string.isRequired,
+	/**
+	 * Tweet's URL.
+	 */
+	'url': PropTypes.string.isRequired,
 	/**
 	 * Tweet's author.
 	 */
@@ -392,6 +415,7 @@ TwitterItem.propTypes = {
 		'name': PropTypes.string.isRequired,
 		'pic': PropTypes.string.isRequired,
 		'username': PropTypes.string.isRequired,
+		'url': PropTypes.string.isRequired,
 		'verified': PropTypes.bool,
 	}).isRequired,
 	/**
@@ -406,9 +430,16 @@ TwitterItem.propTypes = {
 	 * Tweet's stats.
 	 */
 	'stats': PropTypes.shape({
-		'likes': PropTypes.number.isRequired,
-		'quotes': PropTypes.number.isRequired,
-		'retweets': PropTypes.number.isRequired,
+		'counts': PropTypes.shape({
+			'likes': PropTypes.number.isRequired,
+			'replies': PropTypes.number.isRequired,
+			'retweets': PropTypes.number.isRequired,
+		}),
+		'urls': PropTypes.shape({
+			'likes': PropTypes.string.isRequired,
+			'replies': PropTypes.string.isRequired,
+			'retweets': PropTypes.string.isRequired,
+		}),
 	}).isRequired,
 	/**
 	 * The Tweet's text.
