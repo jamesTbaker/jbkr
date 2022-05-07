@@ -204,6 +204,17 @@ const propsSpecifications = {
 			'level': 1,
 		},
 	},
+	'twitter--date-time': {
+		'tag': 'div',
+		'size': '1xs',
+		'weight': 'regular',
+		'usage': 'display',
+		'color': {
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 12,
+		},
+	},
 	'announcement--body': {
 		'tag': 'div',
 		'size': '2xs',
@@ -663,6 +674,7 @@ const copyKinds = [
 	'twitter--account-name',
 	'twitter--account-username',
 	'twitter--body-text',
+	'twitter--date-time',
 	'profile--value-proposition--one',
 	'profile--value-proposition--two--extra-small-to-large',
 	'profile--value-proposition--two--extra-small-to-small--smaller',
