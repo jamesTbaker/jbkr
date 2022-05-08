@@ -585,12 +585,12 @@ export const Article = ({
 	const articleTaglineAndMetaContainerRef = useRef();
 	const articleLinkCopyTooltipRef = useRef();
 	const expandedTableOfContentsContainerRef = useRef();
-	/* useEffect(() => {
+	useEffect(() => {
 		articleTaglineAndMetaContainerRef
 			.current.classList.add('animation-state--final');
 		expandedTableOfContentsContainerRef
 			.current.classList.add('animation-state--final');
-	}); */
+	});
 	const handleTwitterButtonClickLargeScreen = () => {
 		const newWindowWidth = 600;
 		const newWindowHeight = 300;
@@ -641,7 +641,7 @@ export const Article = ({
 	return (
 		<ArticleContainer>
 			<MainContentContainer>
-				{/* <ArticleHeader
+				<ArticleHeader
 					$backgroundImage={frontMatter.headImage.url}
 				>
 					<ArticleTitleConstrainer>
@@ -854,7 +854,7 @@ export const Article = ({
 							/>
 						</ArticleMetaContainer>
 					</ArticleTaglineAndMetaContainer>
-				</ArticleHeader> */}
+				</ArticleHeader>
 				<ArticleBody>
 					{
 						frontMatter.introVideo && frontMatter.introVideoPoster &&
