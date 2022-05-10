@@ -65,7 +65,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 							{
 								part.items
 									.map((mediaItem) => {
-										/* if (mediaItem.objectType === 'image') {
+										if (mediaItem.objectType === 'image') {
 											return (
 												<MediaItemContainer
 													key={mediaItem.key}
@@ -77,30 +77,18 @@ export const ArticleUnifiedBody = ({ parts }) => (
 												</MediaItemContainer>
 											);
 										}
-										if (mediaItem.objectType === 'video') {
+										if (
+											mediaItem.objectType === 'video' ||
+											mediaItem.objectType === 'YouTube'
+										) {
 											return (
 												<MediaItemContainer
 													key={mediaItem.key}
 												>
 													<MediaItem
-														category="video"
+														category={mediaItem.objectType.toLowerCase()}
 														specs={{
 															'video': mediaItem,
-														}}
-													/>
-												</MediaItemContainer>
-											);
-										}
-										if (mediaItem.objectType === 'YouTube') {
-											return (
-												<MediaItemContainer
-													key={mediaItem.key}
-												>
-													<MediaItem
-														category="youtube"
-														specs={{
-															'id': mediaItem.urlFragment,
-															'title': mediaItem.accessibilityTitle,
 														}}
 													/>
 												</MediaItemContainer>
@@ -136,7 +124,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 													/>
 												</MediaItemContainer>
 											);
-										} */
+										}
 									}
 								)
 							}

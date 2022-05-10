@@ -482,16 +482,6 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 					},
 				},
 				// look up the unified body media items for this article
-				/* {
-					'$lookup':
-					{
-						'from': 'components_content_aub_medias',
-						'localField': 'UnifiedBody.ref',
-						'foreignField': '_id',
-						'as': 'UnifiedBodyMediaItems',
-					},
-				}, */
-				// look up the unified body media items for this article
 				{
 					'$lookup':
 					{
@@ -501,17 +491,6 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						'as': 'UnifiedBodyMediaSets',
 					},
 				},
-				// look up the unified body code embeds for this article
-				/* {
-					'$lookup':
-					{
-						'from':
-							'components_content_aub_code_embeds',
-						'localField': 'UnifiedBody.ref',
-						'foreignField': '_id',
-						'as': 'UnifiedBodyCodeEmbeds',
-					},
-				}, */
 				// look up the brief statements for this article
 				{
 					'$lookup':
@@ -702,6 +681,14 @@ export const returnOneArticleFromDB = async ({ slug }) => {
 						new ObjectID(mediaItemRaw.UploadVideoPosterImage),
 					);
 				}
+			}
+			if (
+				mediaItemRaw.Type === 'YouTube' &&
+				mediaItemRaw.UploadVideoPosterImage
+			) {
+				articleMediaIDs.push(
+					new ObjectID(mediaItemRaw.UploadVideoPosterImage),
+				);
 			}
 			if (mediaItemRaw.Type === 'Twitter') {
 				articleTweetIDs.push(mediaItemRaw.EmbedURLFragment);

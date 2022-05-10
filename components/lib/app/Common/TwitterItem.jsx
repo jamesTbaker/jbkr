@@ -354,12 +354,12 @@ export const TwitterItem = ({
 					rel="noopener noreferrer"
 				>
 					<video
-						autoplay="true"
-						muted="true"
-						disablepictureinpicture="true"
-						loop="true"
+						autoPlay={true}
+						muted={true}
+						disablePictureInPicture={true}
+						loop={true}
 						preload="auto"
-						playsinline="true"
+						playsInline={true}
 						src={media[0].url}
 						poster={media[0].posterImage}
 						type={media[0].mimeTye}
@@ -385,7 +385,7 @@ export const TwitterItem = ({
 					text={stats.counts.replies.toString()}
 					url={stats.urls.replies}
 					surfaceStyle="transparent"
-					iconBefore="twitter-retweet"
+					iconBefore="twitter-reply"
 					size="small"
 				/>
 				<Button

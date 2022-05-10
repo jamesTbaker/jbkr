@@ -1,6 +1,7 @@
 import React from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import 'videojs-youtube';
 import styled from 'styled-components';
 import { color } from '@jbkr/style-service';
 import PropTypes from 'prop-types';
@@ -123,10 +124,19 @@ export const VideoItem = ({
 		'controls': true,
 		'sources': [{
 			'src': videoURL,
-			'type': `video/${videoType}`
 		}],
 		'poster': posterURL,
 	};
+	if (videoType === 'video/youtube') {
+		options.sources[0].type = videoType;
+		options.techOrder = ['youtube'];
+		options.youtube = {
+			'ytControls': 0,
+			'modestbranding': 1,
+		};
+	} else {
+		options.sources[0].type = `video/${videoType}`;
+	}
 	// generate two refs
 	const videoRef = React.useRef(null);
 	const playerRef = React.useRef(null);
@@ -170,7 +180,10 @@ export const VideoItem = ({
 	}, [playerRef]);
 	return (
 		<VideoItemContainer>
-			<video ref={videoRef} className="video-js" />
+			<video
+				ref={videoRef}
+				className="video-js"
+			/>
 		</VideoItemContainer>
 	);
 }

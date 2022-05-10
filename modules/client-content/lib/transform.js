@@ -811,8 +811,6 @@ const returnArticleIntermediate = ({
 												mediaSetItemRaw.Type ===
 												'CodeSandbox' ||
 												mediaSetItemRaw.Type ===
-												'YouTube' ||
-												mediaSetItemRaw.Type ===
 												'Twitter'
 											) {
 												const thisMediaItem = {
@@ -821,6 +819,8 @@ const returnArticleIntermediate = ({
 															.Type,
 													'key':
 														mediaSetItemRaw._id,
+
+
 													'accessibilityTitle':
 														mediaSetItemRaw
 															.EmbedAccessibilityTitle,
@@ -854,6 +854,58 @@ const returnArticleIntermediate = ({
 																	.urlFragment,
 														);
 												}
+												/* if (
+													mediaSetItemRaw.Type ===
+													'YouTube'
+												) {
+													articleMediaRaw.forEach((uploadedItem) => {
+														if (
+															mediaSetItemRaw.UploadVideoPosterImage ===
+															uploadedItem._id &&
+															uploadedItem.url &&
+															uploadedItem.ext &&
+															uploadedItem.hash &&
+															uploadedItem.mime &&
+															uploadedItem
+																.alternativeText &&
+															uploadedItem.caption &&
+															uploadedItem.width &&
+															uploadedItem.height
+														) {
+															thisMediaItem.poster = {
+																'objectType':
+																	'image',
+																'key':
+																	uploadedItem._id,
+																'ext':
+																	uploadedItem.ext,
+																'hash':
+																	uploadedItem
+																		.hash,
+																'url':
+																	uploadedItem.url,
+																'type':
+																	returnMediaType({
+																		'mime':
+																			uploadedItem
+																				.mime,
+																	}),
+																'alternativeText':
+																	uploadedItem
+																		.alternativeText,
+																'credit':
+																	uploadedItem
+																		.caption,
+																'width':
+																	uploadedItem
+																		.width,
+																'height':
+																	uploadedItem
+																		.height,
+															};
+														}
+													});
+												} */
 												thisIntermediateMediaSet.items
 													.push(thisMediaItem);
 											}
@@ -997,6 +1049,75 @@ const returnArticleIntermediate = ({
 															.push(thisMediaItem);
 													}
 												});
+											}
+											if (
+												mediaSetItemRaw.Type ===
+												'YouTube'
+											) {
+												const thisMediaItem = {
+													'objectType':
+														'YouTube',
+													'key':
+														mediaSetItemRaw._id,
+													'url':
+														`https://www.youtube.com/watch?v=${mediaSetItemRaw
+															.EmbedURLFragment}`,
+													'type':
+														'video/youtube',
+													'credit':
+														mediaSetItemRaw
+															.EmbedCaption,
+													'poster': {},
+												};
+												articleMediaRaw.forEach((uploadedItem) => {
+													if (
+														mediaSetItemRaw.UploadVideoPosterImage ===
+														uploadedItem._id &&
+														uploadedItem.url &&
+														uploadedItem.ext &&
+														uploadedItem.hash &&
+														uploadedItem.mime &&
+														uploadedItem
+															.alternativeText &&
+														uploadedItem.caption &&
+														uploadedItem.width &&
+														uploadedItem.height
+													) {
+														thisMediaItem.poster = {
+															'objectType':
+																'image',
+															'key':
+																uploadedItem._id,
+															'ext':
+																uploadedItem.ext,
+															'hash':
+																uploadedItem
+																	.hash,
+															'url':
+																uploadedItem.url,
+															'type':
+																returnMediaType({
+																	'mime':
+																		uploadedItem
+																			.mime,
+																}),
+															'alternativeText':
+																uploadedItem
+																	.alternativeText,
+															'credit':
+																uploadedItem
+																	.caption,
+															'width':
+																uploadedItem
+																	.width,
+															'height':
+																uploadedItem
+																	.height,
+														};
+													}
+												});
+												thisIntermediateMediaSet.items
+													.push(thisMediaItem);
 											}
 										}
 									});

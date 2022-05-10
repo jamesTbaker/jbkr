@@ -3,7 +3,6 @@ import { color } from '@jbkr/style-service';
 import PropTypes from 'prop-types';
 import { VideoItem } from './VideoItem';
 import { ImageItem } from './ImageItem';
-import { YouTubeItem } from './YouTubeItem';
 import { CodeSandboxItem } from './CodeSandboxItem';
 import { TwitterItem } from './TwitterItem';
 import { HubLogos } from '../Hub/HubLogos';
@@ -28,19 +27,12 @@ export const MediaItem = ({
 			/>
 		}
 		{
-			category === 'video' &&
+			(category === 'video' || category === 'youtube') &&
 			<VideoItem
 				videoURL={specs.video.url}
 				videoType={specs.video.type}
-				posterURL={specs.poster && specs.poster.url ?
-					specs.poster.url : null}
-			/>
-		}
-		{
-			category === 'youtube' &&
-			<YouTubeItem
-				id={specs.id}
-				title={specs.title}
+				posterURL={specs.video.poster && specs.video.poster.url ?
+					specs.video.poster.url : null}
 			/>
 		}
 		{
