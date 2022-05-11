@@ -47,6 +47,7 @@ export const MediaItem = ({
 			category === 'twitter' &&
 			<TwitterItem
 				id={specs.id}
+				url={specs.url}
 				title={specs.title}
 				author={specs.author}
 				createdDate={specs.createdDate}

@@ -111,6 +111,20 @@ const returnSluggifiedHTMLFromMarkdown = ({ content }) => {
 	}
 	return renderedContent;
 };
+const returnFormattedTweetText = ({ content }) => {
+	const usernameRegex = /(^|[^@\w])@(\w{1,25})\b/g;
+	const hashtagRegex = /(^|[^#\w])#(\w{1,25})/g;
+	const formattedContent = content
+		.replace(
+			usernameRegex,
+			'$1<a href="http://twitter.com/$2">@$2</a>',
+		)
+		.replace(
+			hashtagRegex,
+			'$1<a href="https://twitter.com/hashtag/$2">#$2</a>',
+		);
+	return formattedContent;
+};
 const returnContentStats = ({ content }) => {
 	// get the raw stats from the plugin
 	const statsRaw = readingtime(content);
@@ -1347,8 +1361,21 @@ const returnArticleRendered = ({ content }) => {
 					'type': unifiedBodyPart.type,
 					'key': unifiedBodyPart.key,
 					'credits': renderedCredits,
-					'items': unifiedBodyPart.mediaSet.items,
 				};
+				const itemsFormatted = [];
+				unifiedBodyPart.mediaSet.items.forEach((itemRaw) => {
+					if (itemRaw.objectType === 'Twitter') {
+						if (itemRaw.tweetData.text) {
+							itemRaw.tweetData.text = returnFormattedTweetText({
+								'content': itemRaw.tweetData.text,
+							});
+						}
+						itemsFormatted.push(itemRaw);
+					} else {
+						itemsFormatted.push(itemRaw);
+					}
+				});
+				thisBodyPart.items = itemsFormatted;
 				if (unifiedBodyPart.mediaSet.caption) {
 					thisBodyPart.caption = returnSimpleHTMLFromMarkdown({
 						'content': unifiedBodyPart.mediaSet.caption,
