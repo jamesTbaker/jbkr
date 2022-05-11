@@ -117,11 +117,14 @@ const returnFormattedTweetText = ({ content }) => {
 	const formattedContent = content
 		.replace(
 			usernameRegex,
-			'$1<a href="http://twitter.com/$2">@$2</a>',
+			'$1<a class="tweet--username" href="http://twitter.com/$2" ' +
+			'target="_blank" rel="noopener noreferrer">@$2</a>',
 		)
 		.replace(
 			hashtagRegex,
-			'$1<a href="https://twitter.com/hashtag/$2">#$2</a>',
+			'$1<a class="tweet--hashtag" href="https://twitter.com/' +
+			'hashtag/$2" target="_blank" rel="noopener noreferrer">#$2' +
+			'</a>',
 		);
 	return formattedContent;
 };

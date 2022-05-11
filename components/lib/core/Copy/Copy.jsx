@@ -1148,7 +1148,6 @@ const ProfileValuePropositionTwoExtraSmallToLargeContainer = styled.span`
 		}
 	}
 `;
-
 const EnlargedCopyContainer = styled.div`
 	color: ${color({
 		'kind': 'Neutral',
@@ -1264,6 +1263,113 @@ const EnlargedCopyContainer = styled.div`
 		}
 	}
 `;
+const TweetBodyTextContainer = styled.div`
+	${returnStylesFromSpecifications({ 'specs': propsSpecifications['twitter--body-text'] })}
+	p, ul, ol {
+		margin: 0;
+		padding: 0;
+	}
+	ul ul,
+	ol ol {
+		padding: 0;
+		margin: 0;
+	}
+	ul li,
+	ol li {
+		list-style-position: outside;
+		vertical-align: text-top;
+	}
+	ol li {
+		margin: 0 0 0 2rem;
+	}
+	ul li {
+		margin: 0 0 0 2.2rem;
+	}
+	li::marker {
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 17,
+		})};
+	}
+	ol li::marker {
+		font-size: 80%;
+	}
+	b,
+	strong {
+		font-weight: 560;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+		})};
+	}
+	i,
+	em,
+	cite {
+		font-style: italic;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Base',
+			'level': 1,
+		})};
+	}
+	a,
+	a:visited {
+		text-decoration: none;
+		color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 1,
+			'format': 'string'
+		})};
+		background-image: linear-gradient(
+			${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 33,
+				'format': 'string'
+			})} 50%,
+			${color({
+				'kind': 'Brand',
+				'tone': 'Peony',
+				'level': 3,
+				'format': 'string'
+			})} 50%
+		);
+		background-size: auto 200%;
+		background-position-y: 10%;
+		transition: all 250ms ease;
+		&:hover {
+			color: ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})};
+			background-position-y: 100%;
+			border-radius: .25rem;
+		}
+		&:focus {
+			outline: none;
+			padding: 0 .5rem;
+			margin: 0 .25rem;
+			border-radius: .25rem;
+			box-shadow: 0 0 0 .25rem ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 41,
+				'format': 'string'
+			})}, 0 0 0 .5rem ${color({
+				'kind': 'Accent',
+				'tone': 'Finch',
+				'level': 1,
+				'format': 'string'
+				})};
+		}
+	}
+`;
+
 const ArticleHeaderImageCreditContainer = styled.div`
 	${returnStylesFromSpecifications({ 'specs': propsSpecifications['small-bold'] })}
 	color: ${color({
@@ -1341,6 +1447,7 @@ export const Copy = ({
 	tagOverride,
 }) => {
 	if (
+		kind !== 'twitter--body-text' &&
 		kind !== 'copy-container--standard' &&
 		kind !== 'copy-container--enlarged' &&
 		kind !== 'copy-container--article--header--image-credit' &&
@@ -1387,6 +1494,22 @@ export const Copy = ({
 			}
 		} else {
 			return (null);
+		}
+	}
+	if (kind === 'twitter--body-text') {
+		if (!htmlContent && children) {
+			return(
+				<TweetBodyTextContainer>
+					{children}
+				</TweetBodyTextContainer>
+			);
+		}
+		if (htmlContent) {
+			return(
+				<TweetBodyTextContainer
+					dangerouslySetInnerHTML={{ '__html': htmlContent }}
+				/>
+			);
 		}
 	}
 	if (kind === 'copy-container--standard') {
