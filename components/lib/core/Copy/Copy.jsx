@@ -816,6 +816,43 @@ const StandardCopyContainer = styled.div`
 			'level': 1,
 		})};
 	}
+	figure.blockquote-container {
+		margin: 0 0 3rem 0;
+		padding: 4rem;
+		background-color: ${color({
+			'kind': 'Neutral',
+			'tone': 'Finch',
+			'level': 33,
+			'format': 'string'
+		})};
+		border-radius: .325rem;
+		blockquote {
+			margin: 0;
+			&:before {
+				content: '\\201C';
+				font-size: 12rem;
+				line-height: 12rem;
+			}
+			p {
+				color: ${color({
+					'kind': 'Neutral',
+					'tone': 'Base',
+					'level': 1,
+					'format': 'string'
+				})};
+			}
+		}
+		figcaption {
+			margin-top: 4rem;
+			padding-top: 4rem;
+			border-top: .125rem solid ${color({
+				'kind': 'Neutral',
+				'tone': 'Finch',
+				'level': 23,
+				'format': 'string'
+			})};
+		}
+	}
 	small {
 		${returnStylesFromSpecifications({ 'specs': propsSpecifications.small })}
 	}

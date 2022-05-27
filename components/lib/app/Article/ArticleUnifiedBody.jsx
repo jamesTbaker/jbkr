@@ -48,7 +48,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 	<ArticleUnifiedBodyContainer>
 		{
 			parts.map((part) => {
-				/* if (part.type === 'text') {
+				if (part.type === 'text') {
 					return (
 						<Copy
 							kind="copy-container--standard"
@@ -56,7 +56,7 @@ export const ArticleUnifiedBody = ({ parts }) => (
 							key={part.key}
 						/>
 					);
-				} */
+				}
 				if (part.type === 'mediaSet') {
 					return (
 						<MediaSetContainer

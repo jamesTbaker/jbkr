@@ -123,8 +123,8 @@ const returnFormattedTweetText = ({ content }) => {
 		.replace(
 			hashtagRegex,
 			'$1<a class="tweet--hashtag" href="https://twitter.com/' +
-			'hashtag/$2" target="_blank" rel="noopener noreferrer">#$2' +
-			'</a>',
+			'hashtag/$2?src=hashtag_click" target="_blank" rel="noopener ' +
+			'noreferrer">#$2</a>',
 		);
 	return formattedContent;
 };
