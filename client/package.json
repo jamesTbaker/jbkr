@@ -11,7 +11,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@jbkr/components": "0.1.110",
+		"@jbkr/components": "0.1.111",
 		"@jbkr/http-client": "0.1.106",
 		"@jbkr/style-service": "0.1.106",
 		"@jbkr/syntax-highlighting": "0.1.107",
